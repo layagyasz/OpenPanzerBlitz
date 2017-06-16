@@ -1,0 +1,128 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{DC414547-13D1-4D91-BA4E-C814862EFF3F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PanzerBlitz</RootNamespace>
+    <AssemblyName>PanzerBlitz</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="sfmlnet-audio-2">
+      <HintPath>..\..\..\Code\ROTNS\ROTNS\sfmlnet-audio-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-graphics-2">
+      <HintPath>..\..\..\Code\ROTNS\ROTNS\sfmlnet-graphics-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-window-2">
+      <HintPath>..\..\..\Code\ROTNS\ROTNS\sfmlnet-window-2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\Tile.cs" />
+    <Compile Include="Model\TileConfiguration.cs" />
+    <Compile Include="Model\Unit.cs" />
+    <Compile Include="Model\UnitClass.cs" />
+    <Compile Include="Model\UnitConfiguration.cs" />
+    <Compile Include="Model\WeaponClass.cs" />
+    <Compile Include="Model\CombatResult.cs" />
+    <Compile Include="Model\NoSingleAttackReason.cs" />
+    <Compile Include="Model\LineOfSight.cs" />
+    <Compile Include="Model\NoLineOfSightReason.cs" />
+    <Compile Include="Model\AttackMethod.cs" />
+    <Compile Include="Model\OddsCalculation.cs" />
+    <Compile Include="Model\OddsCalculationFactor.cs" />
+    <Compile Include="Model\AttackFactorCalculation.cs" />
+    <Compile Include="Model\AttackFactorCalculationFactor.cs" />
+    <Compile Include="Model\Map.cs" />
+    <Compile Include="Model\AttackTarget.cs" />
+    <Compile Include="Model\Edge.cs" />
+    <Compile Include="View\MapView.cs" />
+    <Compile Include="View\TileView.cs" />
+    <Compile Include="View\GameScreen.cs" />
+    <Compile Include="Controller\GameScreenController.cs" />
+    <Compile Include="View\UnitView.cs" />
+    <Compile Include="Model\Faction.cs" />
+    <Compile Include="View\HighlightLayer.cs" />
+    <Compile Include="View\Highlight.cs" />
+    <Compile Include="Model\Army.cs" />
+    <Compile Include="Model\TurnComponent.cs" />
+    <Compile Include="Model\MovementEventArgs.cs" />
+    <Compile Include="View\ArmyView.cs" />
+    <Compile Include="Model\ArmyConfiguration.cs" />
+    <Compile Include="View\Panes\DeploymentPane.cs" />
+    <Compile Include="View\Panes\DeploymentSelectionOption.cs" />
+    <Compile Include="Model\DeploymentConfiguration.cs" />
+    <Compile Include="Model\Deployment.cs" />
+    <Compile Include="Model\Scenario.cs" />
+    <Compile Include="GameData.cs" />
+    <Compile Include="Model\Match.cs" />
+    <Compile Include="Model\StartTurnComponentEventArgs.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\NoAttackReason.cs" />
+    <Compile Include="Model\AttackOrder.cs" />
+    <Compile Include="Model\DeployOrder.cs" />
+    <Compile Include="Model\NoDeployReason.cs" />
+    <Compile Include="View\Camera.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
+    <Folder Include="Controller\" />
+    <Folder Include="View\Panes\" />
+    <Folder Include="BLKConfigurations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
+      <Project>{A416D343-545A-40B0-9AE3-A5AAA9D47E79}</Project>
+      <Name>Cardamom</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="csfml-audio-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="csfml-graphics-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="csfml-window-2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\02_Scenarios.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\01_UnitConfigurations.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\00_Factions.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

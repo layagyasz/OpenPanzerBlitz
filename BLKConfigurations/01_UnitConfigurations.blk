@@ -1,0 +1,13 @@
+﻿unit-configuration<>:unit-configurations {
+	unit-configuration:127mm {
+		string:name { 12.7mm }
+		unit-class:unit-class { towed-gun }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 6 }
+		byte:range { 6 }
+		byte:defense { 2 }
+		byte:movement { 0 }
+		bool:can-anti-aircraft { true }
+	}
+}

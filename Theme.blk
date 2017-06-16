@@ -1,0 +1,28 @@
+﻿class<>:classes {
+	class:deployment-pane {
+		mode:default {
+			int:height { 768 }
+			int:width { 128 }
+			int[]:padding { 14 14 14 14 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+		}
+	}
+	class:deployment-select {
+		mode:default {
+			int:height { 740 }
+			int:width { 100 }
+			color[]:background-color { #444444 #444444 #444444 #444444 }
+		}
+	}
+	class:deployment-selection-option {
+		mode:default {
+			int:height { 100 }
+			int:width { 100 }
+			int[]:margin { 0 3 0 3 }
+			color[]:background-color { #888888 #888888 #888888 #888888 }
+		}
+		mode:selected {
+			color[]:background-color { #AAAA88 #AAAA88 #AAAA88 #AAAA88 }
+		}
+	}
+}
