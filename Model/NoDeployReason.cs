@@ -5,7 +5,7 @@ namespace PanzerBlitz
 	{
 		NONE,
 		STACK_LIMIT,
-		SCENARIO_DEPLOYMENT,
+		DEPLOYMENT_RULE,
 		IMPOSSIBLE
 	}
 }

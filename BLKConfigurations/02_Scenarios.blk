@@ -3,14 +3,17 @@
 		army-configuration[]:army-configurations {
 			army-configuration:_ {
 				!faction:faction { factions.finnish }
-				deployment-configuration[]:deployment-configurations {
-					deployment-configuration:_ {
+				var[]:deployment-configurations {
+					zone-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {
 							!unit-configuration:_ { unit-configurations.127mm }
 						}
+						zone:zone { 0,0 10,0 10,10 0,10 }
 					}
 				}
 			}
 		}
+		byte[]:deployment-order { 0 }
+		byte:turns { 10 }
 	}
 }

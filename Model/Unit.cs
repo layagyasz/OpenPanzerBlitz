@@ -73,7 +73,7 @@ namespace PanzerBlitz
 		public void Remove()
 		{
 			_Position.Exit(this);
-			_Deployed = false;
+			_Position = null;
 			if (OnRemove != null) OnRemove(this, EventArgs.Empty);
 		}
 
@@ -82,8 +82,12 @@ namespace PanzerBlitz
 			if (_Position != null) _Position.Exit(this);
 			_Position = Tile;
 			_Position.Enter(this);
-			_Deployed = true;
 			if (OnMove != null) OnMove(this, new MovementEventArgs());
+		}
+
+		public void Deploy()
+		{
+			_Deployed = true;
 		}
 
 		public IEnumerable<LineOfSight> GetFieldOfSight()

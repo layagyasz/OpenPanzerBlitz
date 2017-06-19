@@ -87,6 +87,11 @@
     <Compile Include="Model\DeployOrder.cs" />
     <Compile Include="Model\NoDeployReason.cs" />
     <Compile Include="View\Camera.cs" />
+    <Compile Include="Controller\DeploymentController.cs" />
+    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Model\ZoneDeployment.cs" />
+    <Compile Include="Model\ZoneDeploymentConfiguration.cs" />
+    <Compile Include="Model\NextPhaseOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

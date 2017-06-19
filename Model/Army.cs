@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		{
 			this.ArmyConfiguration = ArmyConfiguration;
 			this.Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
-				i => new Deployment(this, i)).ToList();
+				i => i.GenerateDeployment(this)).ToList();
 		}
 
 		public void StartPhase(TurnComponent TurnComponent)

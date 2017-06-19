@@ -16,12 +16,7 @@ namespace PanzerBlitz
 
 		public NoDeployReason Validate()
 		{
-			if (Tile == null) return NoDeployReason.NONE;
-
-			if (Tile.Units.Count() >= Unit.Army.ArmyConfiguration.Faction.StackLimit) return NoDeployReason.STACK_LIMIT;
-			if (!Unit.Army.Deployments.Find(i => i.Units.Contains(Unit)).Validate(Unit, Tile))
-				return NoDeployReason.SCENARIO_DEPLOYMENT;
-			return NoDeployReason.NONE;
+			return Unit.Army.Deployments.Find(i => i.Units.Contains(Unit)).Validate(Unit, Tile);
 		}
 
 		public bool Execute(Random Random)

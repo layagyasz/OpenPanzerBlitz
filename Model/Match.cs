@@ -11,52 +11,38 @@ namespace PanzerBlitz
 
 		private IEnumerator<Tuple<Army, TurnComponent>> _TurnOrder;
 
-		private Tuple<Army, TurnComponent> _CurrentPhase;
-		private bool _Started;
-
 		private Random _Random = new Random();
+
+		public Tuple<Army, TurnComponent> CurrentPhase
+		{
+			get
+			{
+				return _TurnOrder.Current;
+			}
+		}
 
 		public Match(Scenario Scenario)
 		{
 			this.Scenario = Scenario;
 			Armies = Scenario.ArmyConfigurations.Select(i => new Army(i)).ToList();
-			_TurnOrder = Enumerable.Repeat(
-				StandardTurnOrder(Armies), Scenario.Turns).SelectMany(i => i).GetEnumerator();
+			_TurnOrder = Scenario.DeploymentOrder.Select(
+				i => new Tuple<Army, TurnComponent>(
+					Armies.Find(j => j.ArmyConfiguration == i), TurnComponent.DEPLOYMENT)).Union(
+						Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
+						.SelectMany(i => i)).GetEnumerator();
 		}
 
 		public void Start()
 		{
-			NextPhase();
+			_TurnOrder.MoveNext();
+			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
 		}
 
-		public Tuple<Army, TurnComponent> GetCurrentPhase()
+		private void NextPhase()
 		{
-			return _CurrentPhase;
-		}
-
-		public bool NextPhase()
-		{
-			if (!_Started)
-			{
-				Army deploying = DeploymentPhase();
-				if (_Started)
-				{
-					foreach (Army a in Armies) a.EndPhase(TurnComponent.DEPLOYMENT);
-					_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
-					_CurrentPhase = _TurnOrder.Current;
-				}
-				else
-					_CurrentPhase = new Tuple<Army, TurnComponent>(deploying, TurnComponent.DEPLOYMENT);
-				return _Started;
-			}
-			else
-			{
-				_TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
-				_TurnOrder.MoveNext();
-				_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
-				_CurrentPhase = _TurnOrder.Current;
-				return true;
-			}
+			_TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
+			_TurnOrder.MoveNext();
+			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
 		}
 
 		public bool ExecuteOrder(Order Order)
@@ -65,35 +51,48 @@ namespace PanzerBlitz
 			{
 				if (!ValidateAttackOrder((AttackOrder)Order)) return false;
 			}
+			if (Order is DeployOrder)
+			{
+				if (!ValidateDeployOrder((DeployOrder)Order)) return false;
+			}
+			if (Order is NextPhaseOrder)
+			{
+				if (!ValidateNextPhaseOrder()) return false;
+				else
+				{
+					NextPhase();
+				}
+			}
 			return Order.Execute(_Random);
+		}
+
+		private bool ValidateNextPhaseOrder()
+		{
+			if (CurrentPhase.Item2 == TurnComponent.DEPLOYMENT) return CurrentPhase.Item1.IsDeployed();
+			return true;
+
 		}
 
 		private bool ValidateAttackOrder(AttackOrder Order)
 		{
-			if (Order.AttackingArmy != _CurrentPhase.Item1)
-			{
-				if (Order.AttackMethod == AttackMethod.OVERRUN
-					&& _CurrentPhase.Item2 != TurnComponent.ATTACK_MOVEMENT)
-					return false;
-				if (Order.AttackMethod == AttackMethod.NORMAL_FIRE
-					&& _CurrentPhase.Item2 != TurnComponent.ATTACK)
-					return false;
-				if (Order.AttackMethod == AttackMethod.CLOSE_ASSAULT
-					&& _CurrentPhase.Item2 != TurnComponent.CLOSE_ASSAULT)
-					return false;
-			}
+			if (Order.AttackingArmy != CurrentPhase.Item1)
+				return false;
+			if (Order.AttackMethod == AttackMethod.OVERRUN
+				&& CurrentPhase.Item2 != TurnComponent.ATTACK_MOVEMENT)
+				return false;
+			if (Order.AttackMethod == AttackMethod.NORMAL_FIRE
+				&& CurrentPhase.Item2 != TurnComponent.ATTACK)
+				return false;
+			if (Order.AttackMethod == AttackMethod.CLOSE_ASSAULT
+				&& CurrentPhase.Item2 != TurnComponent.CLOSE_ASSAULT)
+				return false;
 			return true;
 		}
 
-		private Army DeploymentPhase()
+		private bool ValidateDeployOrder(DeployOrder Order)
 		{
-			IEnumerable<Army> undeployed = Armies.Where(i => !i.IsDeployed());
-			foreach (Army a in undeployed)
-			{
-				a.Deploy();
-				if (!Scenario.SimultaneousDeployment) return a;
-			}
-			return null;
+			return (Order.Unit.Army == CurrentPhase.Item1 || CurrentPhase.Item1 == null)
+				&& CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
 		}
 
 		private static IEnumerable<Tuple<Army, TurnComponent>> StandardTurnOrder(IEnumerable<Army> Armies)

@@ -8,10 +8,10 @@ namespace PanzerBlitz
 {
 	public class Scenario
 	{
-		private enum Attribute { ARMY_CONFIGURATIONS };
+		private enum Attribute { ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURNS };
 
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
-		public readonly bool SimultaneousDeployment;
+		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly byte Turns;
 		public readonly Map Map;
 
@@ -24,6 +24,10 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
+
+			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
+			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
+
 			Map = new Map(100, 100);
 		}
 	}

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using Cardamom.Interface;
+using Cardamom.Planar;
 using Cardamom.Serialization;
 
 using SFML.Graphics;
@@ -27,12 +28,14 @@ namespace PanzerBlitz
 			Block.AddParser<Color>("color", i => ClassLibrary.Instance.ParseColor(i.String), false);
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
+			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
-			Block.AddParser<DeploymentConfiguration>("deployment-configuration", i => new DeploymentConfiguration(i));
+			Block.AddParser<DeploymentConfiguration>(
+				"zone-deployment-configuration", i => new ZoneDeploymentConfiguration(i));
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
 

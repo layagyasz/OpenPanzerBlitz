@@ -25,7 +25,7 @@ namespace PanzerBlitz
 		public void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			foreach (UnitView u in UnitViews.Where(i => i.Unit.Deployed))
+			foreach (UnitView u in UnitViews.Where(i => i.Unit.Position != null))
 			{
 				u.Update(MouseController, KeyController, DeltaT, Transform);
 			}
@@ -33,7 +33,7 @@ namespace PanzerBlitz
 
 		public void Draw(RenderTarget Target, Transform Transform)
 		{
-			foreach (UnitView u in UnitViews.Where(i => i.Unit.Deployed))
+			foreach (UnitView u in UnitViews.Where(i => i.Unit.Position != null))
 			{
 				u.Draw(Target, Transform);
 			}

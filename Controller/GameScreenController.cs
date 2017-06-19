@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Graphing;
@@ -15,16 +16,25 @@ namespace PanzerBlitz
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
 
-		DeploymentPane _DeploymentPane;
+		Dictionary<TurnComponent, Controller> _Controllers;
 
 		public readonly Match Match;
 
 		public GameScreenController(Match Match, GameScreen GameScreen)
 		{
 			this.Match = Match;
-
 			_GameScreen = GameScreen;
-			foreach (TileView t in GameScreen.MapView.TilesEnumerable) t.OnClick += OnTileClick;
+
+			_Controllers = new Dictionary<TurnComponent, Controller>()
+			{
+				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, GameScreen) }
+			};
+
+			foreach (TileView t in GameScreen.MapView.TilesEnumerable)
+			{
+				t.OnClick += OnTileClick;
+				t.OnRightClick += OnTileRightClick;
+			}
 			foreach (ArmyView a in GameScreen.ArmyViews)
 			{
 				foreach (UnitView u in a.UnitViews)
@@ -42,65 +52,31 @@ namespace PanzerBlitz
 
 		private void HandleTurn(object sender, StartTurnComponentEventArgs e)
 		{
-			switch (e.TurnComponent)
-			{
-				case TurnComponent.DEPLOYMENT:
-					DoDeployPhase((Army)sender);
-					break;
-				default:
-					break;
-			}
-		}
-
-		private void DoDeployPhase(Army Army)
-		{
-			_DeploymentPane = new DeploymentPane(Army);
-			_GameScreen.AddPane(_DeploymentPane);
+			_Controllers[e.TurnComponent].Begin((Army)sender);
 		}
 
 		private void OnTileClick(object sender, MouseEventArgs e)
 		{
-			Tuple<Army, TurnComponent> phase = Match.GetCurrentPhase();
-			if (_DeploymentPane != null
-				&& phase.Item2 == TurnComponent.DEPLOYMENT
-				&& (phase.Item1 == null || phase.Item1 == _DeploymentPane.Army))
-				DeployUnit(_DeploymentPane.SelectedUnit, ((TileView)sender).Tile);
+			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
+			_Controllers[phase.Item2].HandleTileLeftClick(((TileView)sender).Tile);
+		}
+
+		private void OnTileRightClick(object sender, MouseEventArgs e)
+		{
+			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
+			_Controllers[phase.Item2].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
 		private void OnUnitClick(object sender, MouseEventArgs e)
 		{
-			Unit unit = ((UnitView)sender).Unit;
-			_GameScreen.HighlightLayer.RemoveHighlight(_MovementHighlight);
-
-			_MovementHighlight = new Highlight(
-				unit.GetFieldOfSight()
-				.Select(
-					i => new Tuple<Tile, Color>(
-						i.Final, LOS_COLORS[(int)Math.Min(1, i.Range * 2 / unit.UnitConfiguration.Range)])));
-			_GameScreen.HighlightLayer.AddHighlight(_MovementHighlight);
+			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
+			_Controllers[phase.Item2].HandleUnitLeftClick(((UnitView)sender).Unit);
 		}
 
 		private void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
-			Unit unit = ((UnitView)sender).Unit;
-			Tuple<Army, TurnComponent> phase = Match.GetCurrentPhase();
-			if (_DeploymentPane != null
-				&& phase.Item2 == TurnComponent.DEPLOYMENT
-				&& (phase.Item1 == null || phase.Item1 == _DeploymentPane.Army))
-			{
-				DeployOrder o = new DeployOrder(unit, null);
-				if (Match.ExecuteOrder(o)) _DeploymentPane.Add(unit);
-			}
-
-		}
-
-		private void DeployUnit(Unit Unit, Tile Tile)
-		{
-			if (Unit != null)
-			{
-				DeployOrder o = new DeployOrder(Unit, Tile);
-				if (Match.ExecuteOrder(o)) _DeploymentPane.Remove(Unit);
-			}
+			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
+			_Controllers[phase.Item2].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 	}
 }

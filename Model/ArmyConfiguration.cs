@@ -23,8 +23,8 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
-			DeploymentConfigurations = (List<DeploymentConfiguration>)attributes[
-				(int)Attribute.DEPLOYMENT_CONFIGURATIONS];
+			DeploymentConfigurations = ((List<object>)attributes[
+				(int)Attribute.DEPLOYMENT_CONFIGURATIONS]).Select(i => (DeploymentConfiguration)i).ToList();
 		}
 	}
 }
