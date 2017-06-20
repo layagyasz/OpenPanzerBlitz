@@ -24,6 +24,7 @@ namespace PanzerBlitz
 		}
 
 		public abstract void AutomateDeployment(Match Match);
+		public abstract bool IsConfigured();
 
 		public virtual NoDeployReason Validate(Unit Unit, Tile Tile)
 		{

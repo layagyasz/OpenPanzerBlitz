@@ -1,12 +1,18 @@
 ﻿faction<>:factions {
+	faction:german {
+		string:name { German }
+		color[]:colors { 146,136,127 }
+		byte:stack-limit { 3 }
+		bool:half-price-trucks { false }
+	}
 	faction:russian { 
-		string:name { "Russia" }
+		string:name { Russia }
 		color[]:colors { 153,108,29 }
 		byte:stack-limit { 2 }
 		bool:half-price-trucks { false }
 	}
 	faction:finnish {
-		string:name { "Finland" }
+		string:name { Finland }
 		color[]:colors { 255,255,255 131,166,220 255,255,255 }
 		byte:stack-limit { 3 }
 		bool:half-price-trucks { false }

@@ -3,6 +3,8 @@
 using Cardamom.Interface;
 using Cardamom.Planar;
 
+using Cence;
+
 using SFML.Graphics;
 using SFML.Window;
 
@@ -37,10 +39,18 @@ namespace PanzerBlitz
 			_Texture.CopyToImage().SaveToFile("out0.png");
 			for (int i = 0; i < colors.Length; ++i)
 			{
-				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
+				Color color = colors[i];
+				if (!Unit.UnitConfiguration.IsArmored)
+				{
+					FloatingColor f = new FloatingColor(color);
+					f = f.MakeHSL();
+					f.B = (float)Math.Max(0, f.B + .1);
+					color = f.MakeRGB().ConvertToColor();
+				}
+				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, color);
+				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Size, color);
+				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, color);
+				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, color);
 			}
 			_ImageVertices = new Vertex[4];
 			_ImageVertices[0] = new Vertex(

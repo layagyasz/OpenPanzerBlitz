@@ -93,6 +93,7 @@
     <Compile Include="Model\ZoneDeploymentConfiguration.cs" />
     <Compile Include="Model\NextPhaseOrder.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
+    <Compile Include="Controller\AttackController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -106,6 +107,10 @@
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
       <Project>{A416D343-545A-40B0-9AE3-A5AAA9D47E79}</Project>
       <Name>Cardamom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Code\ROTNS\Cence\Cence\Cence.csproj">
+      <Project>{18A58E4F-942D-4D1A-BCFC-6D0E64473555}</Project>
+      <Name>Cence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +142,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\anti-armor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Univers-light-normal.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

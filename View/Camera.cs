@@ -38,10 +38,10 @@ namespace PanzerBlitz
 			if (Keyboard.IsKeyPressed(Keyboard.Key.Up)) _Center += new Vector2f(0, -step);
 			if (Keyboard.IsKeyPressed(Keyboard.Key.Down)) _Center += new Vector2f(0, step);
 
-			if (Keyboard.IsKeyPressed(Keyboard.Key.PageUp)) _Zoom -= 2 * step;
-			if (Keyboard.IsKeyPressed(Keyboard.Key.PageDown)) _Zoom += 2 * step;
+			if (Keyboard.IsKeyPressed(Keyboard.Key.PageUp)) _Zoom += 5 * step;
+			if (Keyboard.IsKeyPressed(Keyboard.Key.PageDown)) _Zoom -= 5 * step;
 
-			_Zoom += MouseController.WheelDelta * 10 * step;
+			_Zoom += MouseController.WheelDelta * 20 * step;
 		}
 	}
 }

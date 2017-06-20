@@ -2,7 +2,18 @@
 	scenario:_ {
 		army-configuration[]:army-configurations {
 			army-configuration:_ {
-				!faction:faction { factions.finnish }
+				!faction:faction { factions.russian }
+				var[]:deployment-configurations {
+					zone-deployment-configuration:_ {
+						unit-configuration[]:unit-configurations {
+							!unit-configuration:_ { unit-configurations.127mm }
+						}
+						zone:zone { 0,0 10,0 10,10 0,10 }
+					}
+				}
+			}
+			army-configuration:_ {
+				!faction:faction { factions.german }
 				var[]:deployment-configurations {
 					zone-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {
@@ -13,7 +24,7 @@
 				}
 			}
 		}
-		byte[]:deployment-order { 0 }
+		byte[]:deployment-order { 0 1 }
 		byte:turns { 10 }
 	}
 }

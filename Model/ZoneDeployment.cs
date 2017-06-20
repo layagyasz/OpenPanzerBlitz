@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using SFML.Window;
 
@@ -16,6 +17,11 @@ namespace PanzerBlitz
 		}
 
 		public override void AutomateDeployment(Match Match) { }
+
+		public override bool IsConfigured()
+		{
+			return Units.All(i => i.Position != null && Validate(i, i.Position) == NoDeployReason.NONE);
+		}
 
 		public override NoDeployReason Validate(Unit Unit, Tile Tile)
 		{

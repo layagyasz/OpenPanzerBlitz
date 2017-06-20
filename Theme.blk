@@ -1,4 +1,7 @@
-﻿class<>:classes {
+﻿font<>:fonts {
+	font:compacta { Compacta Std Regular.otf }
+}
+class<>:classes {
 	class:deployment-pane {
 		mode:default {
 			int:height { 768 }
@@ -23,6 +26,20 @@
 		}
 		mode:selected {
 			color[]:background-color { #AAAA88 #AAAA88 #AAAA88 #AAAA88 }
+		}
+	}
+	class:large-button {
+		mode:default {
+			int:height { 64 }
+			int:width { 128 }
+			!font:font-face { fonts.compacta }
+			color:font-color { #FFFFFF }
+			int:font-size { 32 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+			int[]:padding { 32 10 32 10 }
+		}
+		mode:hover {
+			color[]:background-color { #BCBC00 #BCBC00 #BCBC00 #BCBC00 }
 		}
 	}
 }

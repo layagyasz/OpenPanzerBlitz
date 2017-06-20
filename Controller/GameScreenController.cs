@@ -4,8 +4,10 @@ using System.Linq;
 
 using Cardamom.Graphing;
 using Cardamom.Interface;
+using Cardamom.Interface.Items;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -25,9 +27,15 @@ namespace PanzerBlitz
 			this.Match = Match;
 			_GameScreen = GameScreen;
 
+			Button finishButton = new Button("large-button") { DisplayedString = "Finish" };
+			finishButton.Position = GameScreen.Size - finishButton.Size - new Vector2f(32, 32);
+			finishButton.OnClick += (s, e) => Match.ExecuteOrder(new NextPhaseOrder());
+			GameScreen.AddItem(finishButton);
+
 			_Controllers = new Dictionary<TurnComponent, Controller>()
 			{
-				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) }
+				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
+				{ TurnComponent.ATTACK, new AttackController(Match, Renderer, GameScreen) }
 			};
 
 			foreach (TileView t in GameScreen.MapView.TilesEnumerable)
@@ -46,6 +54,7 @@ namespace PanzerBlitz
 			foreach (Army a in Match.Armies)
 			{
 				a.OnStartPhase += HandleTurn;
+				a.OnEndPhase += HandleEndTurn;
 			}
 			Match.Start();
 		}
@@ -53,6 +62,11 @@ namespace PanzerBlitz
 		private void HandleTurn(object sender, StartTurnComponentEventArgs e)
 		{
 			_Controllers[e.TurnComponent].Begin((Army)sender);
+		}
+
+		private void HandleEndTurn(object sender, StartTurnComponentEventArgs e)
+		{
+			_Controllers[e.TurnComponent].End();
 		}
 
 		private void OnTileClick(object sender, MouseEventArgs e)

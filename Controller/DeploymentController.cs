@@ -27,6 +27,11 @@ namespace PanzerBlitz
 			_GameScreen.AddPane(_DeploymentPane);
 		}
 
+		public void End()
+		{
+			_GameScreen.RemovePane(_DeploymentPane);
+		}
+
 		public void HandleTileLeftClick(Tile Tile)
 		{
 			if (_DeploymentPane.SelectedUnit != null)

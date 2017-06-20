@@ -26,6 +26,7 @@ namespace PanzerBlitz
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
 			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
+			Turns = (byte)attributes[(int)Attribute.TURNS];
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
 			Map = new Map(10, 10);

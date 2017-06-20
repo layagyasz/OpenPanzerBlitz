@@ -4,6 +4,7 @@ namespace PanzerBlitz
 	public interface Controller
 	{
 		void Begin(Army Army);
+		void End();
 		void HandleTileLeftClick(Tile Tile);
 		void HandleTileRightClick(Tile Tile);
 		void HandleUnitLeftClick(Unit Unit);

@@ -27,7 +27,7 @@ namespace PanzerBlitz
 			Armies = Scenario.ArmyConfigurations.Select(i => new Army(i)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
 				i => new Tuple<Army, TurnComponent>(
-					Armies.Find(j => j.ArmyConfiguration == i), TurnComponent.DEPLOYMENT)).Union(
+					Armies.Find(j => j.ArmyConfiguration == i), TurnComponent.DEPLOYMENT)).Concat(
 						Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 						.SelectMany(i => i)).GetEnumerator();
 		}
@@ -42,6 +42,7 @@ namespace PanzerBlitz
 		{
 			_TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
 			_TurnOrder.MoveNext();
+			Console.WriteLine(_TurnOrder.Current.Item2);
 			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
 		}
 
@@ -57,18 +58,16 @@ namespace PanzerBlitz
 			}
 			if (Order is NextPhaseOrder)
 			{
+				Console.WriteLine(ValidateNextPhaseOrder());
 				if (!ValidateNextPhaseOrder()) return false;
-				else
-				{
-					NextPhase();
-				}
+				else NextPhase();
 			}
 			return Order.Execute(_Random);
 		}
 
 		private bool ValidateNextPhaseOrder()
 		{
-			if (CurrentPhase.Item2 == TurnComponent.DEPLOYMENT) return CurrentPhase.Item1.IsDeployed();
+			if (CurrentPhase.Item2 == TurnComponent.DEPLOYMENT) return CurrentPhase.Item1.IsDeploymentConfigured();
 			return true;
 
 		}
