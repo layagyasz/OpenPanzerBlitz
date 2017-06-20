@@ -28,7 +28,7 @@ namespace PanzerBlitz
 			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
-			Map = new Map(100, 100);
+			Map = new Map(10, 10);
 		}
 	}
 }

@@ -1,7 +1,9 @@
 ﻿unit-configuration<>:unit-configurations {
 	unit-configuration:127mm {
-		string:name { 12.7mm }
+		string:name { 12.7 mm }
 		unit-class:unit-class { towed-gun }
+		string:image-name { anti-aircraft.png }
+		bool:vertical-split-image { true }
 
 		weapon-class:weapon-class { infantry }
 		byte:attack { 6 }

@@ -20,14 +20,14 @@ namespace PanzerBlitz
 
 		public readonly Match Match;
 
-		public GameScreenController(Match Match, GameScreen GameScreen)
+		public GameScreenController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
 		{
 			this.Match = Match;
 			_GameScreen = GameScreen;
 
 			_Controllers = new Dictionary<TurnComponent, Controller>()
 			{
-				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, GameScreen) }
+				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) }
 			};
 
 			foreach (TileView t in GameScreen.MapView.TilesEnumerable)

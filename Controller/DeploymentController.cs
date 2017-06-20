@@ -1,4 +1,7 @@
 ﻿using System;
+
+using SFML.Graphics;
+
 namespace PanzerBlitz
 {
 	public class DeploymentController : Controller
@@ -8,16 +11,19 @@ namespace PanzerBlitz
 		Match _Match;
 		GameScreen _GameScreen;
 
-		public DeploymentController(Match Match, GameScreen GameScreen)
+		UnitConfigurationRenderer _Renderer;
+
+		public DeploymentController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
 		{
 			_Match = Match;
 			_GameScreen = GameScreen;
+			_Renderer = Renderer;
 		}
 
 		public void Begin(Army Army)
 		{
 			_Army = Army;
-			_DeploymentPane = new DeploymentPane(Army);
+			_DeploymentPane = new DeploymentPane(Army, _Renderer);
 			_GameScreen.AddPane(_DeploymentPane);
 		}
 

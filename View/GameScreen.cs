@@ -19,11 +19,11 @@ namespace PanzerBlitz
 
 		private PaneLayer _PaneLayer = new PaneLayer();
 
-		public GameScreen(Vector2f WindowSize, Map Map, IEnumerable<Army> Armies)
+		public GameScreen(Vector2f WindowSize, Map Map, IEnumerable<ArmyView> ArmyViews)
 		{
 			Camera = new Camera(WindowSize, new Vector2f((float)Map.Width, (float)Map.Height) * .5f, 64);
 			MapView = new MapView(Map);
-			ArmyViews = Armies.Select(i => new ArmyView(i)).ToList();
+			this.ArmyViews = ArmyViews.ToList();
 		}
 
 		public void AddPane(Pane Pane)

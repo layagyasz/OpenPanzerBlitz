@@ -11,10 +11,10 @@ namespace PanzerBlitz
 	{
 		UnitView _UnitView;
 
-		public DeploymentSelectionOption(Unit Unit)
+		public DeploymentSelectionOption(Unit Unit, UnitConfigurationRenderer Renderer)
 			: base("deployment-selection-option")
 		{
-			_UnitView = new UnitView(Unit, 64);
+			_UnitView = new UnitView(Unit, Renderer, 64);
 			_UnitView.Position = Size / 2;
 			_UnitView.Parent = this;
 			Value = _UnitView.Unit;

@@ -10,6 +10,8 @@ namespace PanzerBlitz
 {
 	public class UnitView : Interactive
 	{
+		Texture _Texture;
+		Vertex[] _ImageVertices;
 		Vertex[] _Vertices;
 		Rectangle _Bounds;
 
@@ -23,12 +25,16 @@ namespace PanzerBlitz
 			}
 		}
 
-		public UnitView(Unit Unit, float Size)
+		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Size)
 		{
 			this.Unit = Unit;
 			Color[] colors = Unit.Army.ArmyConfiguration.Faction.Colors;
 			_Vertices = new Vertex[colors.Length * 4];
 			float barHeight = 1f / colors.Length;
+
+			var renderInfo = Renderer.GetRenderInfo(Unit.UnitConfiguration);
+			_Texture = renderInfo.Item1;
+			_Texture.CopyToImage().SaveToFile("out0.png");
 			for (int i = 0; i < colors.Length; ++i)
 			{
 				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, colors[i]);
@@ -36,6 +42,16 @@ namespace PanzerBlitz
 				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
 				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
 			}
+			_ImageVertices = new Vertex[4];
+			_ImageVertices[0] = new Vertex(
+				new Vector2f(-.5f, -.5f) * Size, Color.White, renderInfo.Item2[0]);
+			_ImageVertices[1] = new Vertex(
+				new Vector2f(.5f, -.5f) * Size, Color.White, renderInfo.Item2[1]);
+			_ImageVertices[2] = new Vertex(
+				new Vector2f(.5f, .5f) * Size, Color.White, renderInfo.Item2[2]);
+			_ImageVertices[3] = new Vertex(
+				new Vector2f(-.5f, .5f) * Size, Color.White, renderInfo.Item2[3]);
+
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Size, new Vector2f(1, 1) * Size);
 		}
 
@@ -57,7 +73,13 @@ namespace PanzerBlitz
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
 			Transform.Translate(Position);
-			Target.Draw(_Vertices, PrimitiveType.Quads, new RenderStates(Transform));
+			RenderStates r = new RenderStates();
+			r.Transform = Transform;
+
+			Target.Draw(_Vertices, PrimitiveType.Quads, r);
+
+			r.Texture = _Texture;
+			Target.Draw(_ImageVertices, PrimitiveType.Quads, r);
 		}
 	}
 }

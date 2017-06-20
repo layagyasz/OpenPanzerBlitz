@@ -15,10 +15,10 @@ namespace PanzerBlitz
 
 		private List<UnitView> _DeployedUnits = new List<UnitView>();
 
-		public ArmyView(Army Army)
+		public ArmyView(Army Army, UnitConfigurationRenderer Renderer)
 		{
 			this.Army = Army;
-			UnitViews = Army.Units.Select(i => new UnitView(i, .5f)).ToList();
+			UnitViews = Army.Units.Select(i => new UnitView(i, Renderer, .5f)).ToList();
 			foreach (UnitView u in UnitViews) u.Unit.OnMove += (s, e) => u.Position = ((Unit)s).Position.Center;
 		}
 

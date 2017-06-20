@@ -13,6 +13,8 @@ namespace PanzerBlitz
 	{
 		public readonly Army Army;
 
+		UnitConfigurationRenderer _Renderer;
+
 		ScrollCollection<Unit> _Selection;
 
 		public Unit SelectedUnit
@@ -23,10 +25,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public DeploymentPane(Army Army)
+		public DeploymentPane(Army Army, UnitConfigurationRenderer Renderer)
 			: base("deployment-pane")
 		{
 			this.Army = Army;
+			_Renderer = Renderer;
+
 			_Selection = new ScrollCollection<Unit>("deployment-select");
 			foreach (Unit u in Army.Units) Add(u);
 			Add(_Selection);
@@ -34,7 +38,7 @@ namespace PanzerBlitz
 
 		public void Add(Unit Unit)
 		{
-			_Selection.Add(new DeploymentSelectionOption(Unit));
+			_Selection.Add(new DeploymentSelectionOption(Unit, _Renderer));
 		}
 
 		public void Remove(Unit Unit)

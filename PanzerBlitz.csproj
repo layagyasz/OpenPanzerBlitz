@@ -92,6 +92,7 @@
     <Compile Include="Model\ZoneDeployment.cs" />
     <Compile Include="Model\ZoneDeploymentConfiguration.cs" />
     <Compile Include="Model\NextPhaseOrder.cs" />
+    <Compile Include="View\UnitConfigurationRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -99,6 +100,7 @@
     <Folder Include="Controller\" />
     <Folder Include="View\Panes\" />
     <Folder Include="BLKConfigurations\" />
+    <Folder Include="UnitSprites\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -126,6 +128,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Compacta Std Regular.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\anti-aircraft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\anti-armor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
