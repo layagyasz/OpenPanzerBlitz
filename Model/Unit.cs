@@ -90,15 +90,25 @@ namespace PanzerBlitz
 			_Deployed = true;
 		}
 
+		private void CalculateFieldOfSight()
+		{
+			Field<Tile> f = new Field<Tile>(_Position, UnitConfiguration.Range, (i, j) => 1);
+			_FieldOfSight = f.GetReachableNodes()
+											 .Select(i => new LineOfSight(f.GetNodesTo(i.Item1)))
+											 .Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);
+		}
+
+		public LineOfSight GetLineOfSight(Tile Tile)
+		{
+			if (_FieldOfSight == null) CalculateFieldOfSight();
+
+			return _FieldOfSight.FirstOrDefault(i => i.Final == Tile);
+		}
+
 		public IEnumerable<LineOfSight> GetFieldOfSight()
 		{
-			if (_FieldOfSight == null)
-			{
-				Field<Tile> f = new Field<Tile>(_Position, UnitConfiguration.Range, (i, j) => 1);
-				_FieldOfSight = f.GetReachableNodes()
-						.Select(i => _Position.CalculateLineOfSight(i.Item1))
-						.Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);
-			}
+			if (_FieldOfSight == null) CalculateFieldOfSight();
+
 			return _FieldOfSight;
 		}
 

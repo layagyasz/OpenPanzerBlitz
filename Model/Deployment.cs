@@ -23,7 +23,7 @@ namespace PanzerBlitz
 			this.Units = DeploymentConfiguration.UnitConfigurations.Select(i => new Unit(Army, i)).ToList();
 		}
 
-		public abstract void AutomateDeployment(Match Match);
+		public abstract bool AutomateDeployment(Match Match);
 		public abstract bool IsConfigured();
 
 		public virtual NoDeployReason Validate(Unit Unit, Tile Tile)

@@ -32,7 +32,7 @@ namespace PanzerBlitz
 			_Renderer = Renderer;
 
 			_Selection = new ScrollCollection<Unit>("deployment-select");
-			foreach (Unit u in Army.Units) Add(u);
+			foreach (Unit u in Army.Units.Where(i => i.Position == null)) Add(u);
 			Add(_Selection);
 		}
 

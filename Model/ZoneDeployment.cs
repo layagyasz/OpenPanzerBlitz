@@ -16,7 +16,10 @@ namespace PanzerBlitz
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
-		public override void AutomateDeployment(Match Match) { }
+		public override bool AutomateDeployment(Match Match)
+		{
+			return false;
+		}
 
 		public override bool IsConfigured()
 		{

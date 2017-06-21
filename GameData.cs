@@ -29,11 +29,14 @@ namespace PanzerBlitz
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
+			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
 
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
+			Block.AddParser<DeploymentConfiguration>(
+				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(
 				"zone-deployment-configuration", i => new ZoneDeploymentConfiguration(i));
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));

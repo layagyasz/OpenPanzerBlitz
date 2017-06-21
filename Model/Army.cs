@@ -27,6 +27,13 @@ namespace PanzerBlitz
 				i => i.GenerateDeployment(this)).ToList();
 		}
 
+		public bool AutomatePhase(Match Match, TurnComponent TurnComponent)
+		{
+			if (TurnComponent == TurnComponent.DEPLOYMENT)
+				return Deployments.All(i => i.AutomateDeployment(Match));
+			return false;
+		}
+
 		public void StartPhase(TurnComponent TurnComponent)
 		{
 			if (OnStartPhase != null) OnStartPhase(this, new StartTurnComponentEventArgs(TurnComponent));

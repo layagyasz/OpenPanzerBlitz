@@ -29,11 +29,11 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return _LineOfSight.Length;
+				return _LineOfSight.Length - 1;
 			}
 		}
 
-		public LineOfSight(List<Tile> LineOfSight)
+		public LineOfSight(IEnumerable<Tile> LineOfSight)
 		{
 			_LineOfSight = LineOfSight.ToArray();
 			_CrossedEdges = new Edge[_LineOfSight.Length - 1];

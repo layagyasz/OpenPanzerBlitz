@@ -34,16 +34,20 @@ namespace PanzerBlitz
 
 		public void Start()
 		{
-			_TurnOrder.MoveNext();
-			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
+			NextPhase();
 		}
 
 		private void NextPhase()
 		{
-			_TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
+			if (_TurnOrder.Current != null) _TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
 			_TurnOrder.MoveNext();
-			Console.WriteLine(_TurnOrder.Current.Item2);
+			while (Automate()) _TurnOrder.MoveNext();
 			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
+		}
+
+		private bool Automate()
+		{
+			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2);
 		}
 
 		public bool ExecuteOrder(Order Order)
@@ -58,7 +62,6 @@ namespace PanzerBlitz
 			}
 			if (Order is NextPhaseOrder)
 			{
-				Console.WriteLine(ValidateNextPhaseOrder());
 				if (!ValidateNextPhaseOrder()) return false;
 				else NextPhase();
 			}

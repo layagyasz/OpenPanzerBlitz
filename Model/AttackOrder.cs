@@ -94,10 +94,10 @@ namespace PanzerBlitz
 		public readonly Tile AttackAt;
 		public readonly AttackMethod AttackMethod;
 
-		AttackTarget _AttackTarget;
+		AttackTarget _AttackTarget = AttackTarget.ALL;
 		List<Unit> _Attackers = new List<Unit>();
 
-		List<OddsCalculation> _OddsCalculation = new List<OddsCalculation>();
+		List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
 
 		public AttackTarget AttackTarget
 		{
@@ -106,11 +106,11 @@ namespace PanzerBlitz
 				return _AttackTarget;
 			}
 		}
-		public IEnumerable<OddsCalculation> OddsCalculation
+		public IEnumerable<OddsCalculation> OddsCalculations
 		{
 			get
 			{
-				return _OddsCalculation;
+				return _OddsCalculations;
 			}
 		}
 
@@ -128,6 +128,12 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason AddAttacker(Unit Attacker)
 		{
+			NoSingleAttackReason canAttack = Attacker.UnitConfiguration.CanAttack(
+				AttackMethod, AttackAt.Units.Count(
+					i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored),
+				Attacker.GetLineOfSight(AttackAt));
+			if (canAttack != NoSingleAttackReason.NONE) return canAttack;
+
 			_Attackers.Add(Attacker);
 			Recalculate();
 			return NoSingleAttackReason.NONE;
@@ -141,24 +147,30 @@ namespace PanzerBlitz
 
 		private void Recalculate()
 		{
+			if (_Attackers.Count == 0)
+			{
+				_OddsCalculations.Clear();
+				return;
+			}
+
 			if (AttackTarget == AttackTarget.ALL)
 			{
-				_OddsCalculation.Clear();
-				_OddsCalculation.Add(
+				_OddsCalculations.Clear();
+				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers.Select(
-							i => new Tuple<Unit, LineOfSight>(i, i.Position.CalculateLineOfSight(AttackAt))),
+							i => new Tuple<Unit, LineOfSight>(i, i.GetLineOfSight(AttackAt))),
 						AttackAt.Units,
 						AttackMethod,
 						AttackAt));
 			}
 			else if (AttackTarget == AttackTarget.WEAKEST)
 			{
-				_OddsCalculation.Clear();
-				_OddsCalculation.Add(AttackAt.Units.Select(i =>
+				_OddsCalculations.Clear();
+				_OddsCalculations.Add(AttackAt.Units.Select(i =>
 					new OddsCalculation(
 						_Attackers.Select(
-							j => new Tuple<Unit, LineOfSight>(j, j.Position.CalculateLineOfSight(AttackAt))),
+					   		j => new Tuple<Unit, LineOfSight>(j, j.GetLineOfSight(AttackAt))),
 										   new Unit[] { i },
 											AttackMethod,
 											AttackAt))
@@ -176,7 +188,7 @@ namespace PanzerBlitz
 			if (Validate() != NoAttackReason.NONE) return false;
 
 			_Attackers.ForEach(i => i.Fire());
-			foreach (OddsCalculation c in _OddsCalculation)
+			foreach (OddsCalculation c in _OddsCalculations)
 			{
 				CombatResult Result = COMBAT_RESULTS[
 					OddsIndex(c.Odds, c.OddsAgainst),

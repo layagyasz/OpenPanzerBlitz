@@ -13,8 +13,6 @@ namespace PanzerBlitz
 {
 	public class GameScreenController
 	{
-		static readonly Color[] LOS_COLORS = new Color[] { new Color(255, 0, 0, 120), new Color(0, 255, 0, 120) };
-
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
 

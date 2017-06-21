@@ -113,7 +113,7 @@ namespace PanzerBlitz
 			if (_Odds > 4) _Odds = 4;
 		}
 
-		private static bool TreatStackAsArmored(
+		public static bool TreatStackAsArmored(
 			IEnumerable<Tuple<Unit, LineOfSight>> Attackers,
 			IEnumerable<Unit> Defenders,
 			AttackMethod AttackMethod)

@@ -143,21 +143,6 @@ namespace PanzerBlitz
 		}
 		// Pathable
 
-		public LineOfSight CalculateLineOfSight(Tile Tile)
-		{
-			Segment los = new Segment(Center, Tile.Center);
-			Tile current = this;
-			List<Tile> path = new List<Tile>();
-			path.Add(current);
-			while (current != Tile)
-			{
-				Tile n = Array.Find(current.NeighborTiles, i => i.Bounds.Intersects(los));
-				current = n;
-				path.Add(n);
-			}
-			return new LineOfSight(path);
-		}
-
 		public void Reconfigure(TileConfiguration TileConfiguration)
 		{
 			_TileConfiguration = TileConfiguration;

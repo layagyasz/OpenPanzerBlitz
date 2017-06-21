@@ -94,6 +94,10 @@
     <Compile Include="Model\NextPhaseOrder.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
     <Compile Include="Controller\AttackController.cs" />
+    <Compile Include="View\Panes\AttackPane.cs" />
+    <Compile Include="Model\TileDeploymentConfiguration.cs" />
+    <Compile Include="Model\Coordinate.cs" />
+    <Compile Include="Model\TileDeployment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

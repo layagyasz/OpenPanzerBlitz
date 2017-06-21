@@ -1,5 +1,6 @@
 ﻿font<>:fonts {
 	font:compacta { Compacta Std Regular.otf }
+	font:univers { Univers-light-normal.ttf }
 }
 class<>:classes {
 	class:deployment-pane {
@@ -26,6 +27,24 @@ class<>:classes {
 		}
 		mode:selected {
 			color[]:background-color { #AAAA88 #AAAA88 #AAAA88 #AAAA88 }
+		}
+	}
+	class:attack-pane {
+		mode:default {
+			int:height { 512 }
+			int:width { 512 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+		}
+	}
+	class:attack-text-box {
+		mode:default {
+			int:height { 480 }
+			int:width { 480 }
+			!font:font-face { fonts.compacta }
+			color:font-color { #FFFFFF }
+			int:font-size { 32 }
+			int[]:padding { 16 16 16 16 }
+			int[]:margin { 16 16 16 16 }
 		}
 	}
 	class:large-button {
