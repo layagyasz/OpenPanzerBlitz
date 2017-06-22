@@ -103,6 +103,35 @@ class<>:classes {
 			int[]:margin { 0 1 0 1 }
 		}
 	}
+	class:select {
+		mode:default {
+			color[]:background-color { #484848 #484848 #484848 #484848 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 12 }
+			int:height { 24 }
+			int:width { 288 }
+			int[]:padding { 0 0 0 0 }
+			int[]:margin { 0 0 0 0 }
+		}
+		mode:hover {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		}
+		mode:selected {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		}
+		mode:selected-hover {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		}
+	}
+	class:select-option
+	{
+		!class:parent { select }
+		mode:default {
+			int[]:padding { 8 2 8 2 }
+			int[]:margin { 0 0 0 2 }
+		}
+	}
 	class:large-button {
 		mode:default {
 			int:height { 32 }

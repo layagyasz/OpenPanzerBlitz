@@ -2,6 +2,7 @@
 
 using Cardamom.Interface;
 using Cardamom.Planar;
+using Cardamom.Utilities;
 
 using Cence;
 
@@ -53,14 +54,17 @@ namespace PanzerBlitz
 				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, color);
 			}
 			_ImageVertices = new Vertex[4];
+			Color c = Unit.UnitConfiguration.OverrideColor;
+			if (c.R == 0 && c.G == 0 && c.B == 0)
+				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
 			_ImageVertices[0] = new Vertex(
-				new Vector2f(-.5f, -.5f) * Size, Color.White, renderInfo.Item2[0]);
+				new Vector2f(-.5f, -.5f) * Size, c, renderInfo.Item2[0]);
 			_ImageVertices[1] = new Vertex(
-				new Vector2f(.5f, -.5f) * Size, Color.White, renderInfo.Item2[1]);
+				new Vector2f(.5f, -.5f) * Size, c, renderInfo.Item2[1]);
 			_ImageVertices[2] = new Vertex(
-				new Vector2f(.5f, .5f) * Size, Color.White, renderInfo.Item2[2]);
+				new Vector2f(.5f, .5f) * Size, c, renderInfo.Item2[2]);
 			_ImageVertices[3] = new Vertex(
-				new Vector2f(-.5f, .5f) * Size, Color.White, renderInfo.Item2[3]);
+				new Vector2f(-.5f, .5f) * Size, c, renderInfo.Item2[3]);
 
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Size, new Vector2f(1, 1) * Size);
 		}

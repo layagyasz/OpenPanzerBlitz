@@ -76,7 +76,7 @@ namespace PanzerBlitz
 				if (Attackers
 					.Select(i => i.Item1)
 					.GroupBy(i => i.Position)
-					.Any(i => i.Count(j => j.UnitConfiguration.UnitClass == UnitClass.ENGINEER) > 0 && i.Count() > 1))
+					.Any(i => i.Count(j => j.UnitConfiguration.CanEngineer) > 0 && i.Count() > 1))
 				{
 					OddsCalculationFactors.Add(OddsCalculationFactor.CLOSE_ASSAULT_ENGINEERS);
 					IncreaseOdds();

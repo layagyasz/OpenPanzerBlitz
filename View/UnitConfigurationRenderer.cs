@@ -103,9 +103,9 @@ namespace PanzerBlitz
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
-			Text nameText = new Text(UnitConfiguration.Name, Font, 18);
+			Text nameText = new Text(UnitConfiguration.Name, Font, 24);
 			nameText.Color = Color.Black;
-			nameText.Position = SpriteSize * new Vector2f(.5f, 5f / 6) - GetCenter(nameText);
+			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 
 			Sprite image = new Sprite(new Texture("./UnitSprites/" + UnitConfiguration.ImageName));
 

@@ -16,6 +16,18 @@
 						}
 						coordinate:coordinate { 8,5 }
 					}
+					tile-deployment-configuration:_ {
+						unit-configuration[]:unit-configurations {
+							!unit-configuration:_ { unit-configurations.engineer-company }
+						}
+						coordinate:coordinate { 9,5 }
+					}
+					tile-deployment-configuration:_ {
+						unit-configuration[]:unit-configurations {
+							!unit-configuration:_ { unit-configurations.guards-company }
+						}
+						coordinate:coordinate { 8,6 }
+					}
 				}
 			}
 			army-configuration:_ {

@@ -1,4 +1,16 @@
 ﻿unit-configuration<>:unit-configurations {
+	unit-configuration:command-post {
+		string:name { }
+		unit-class:unit-class { command-post }
+		string:image-name { command-post.png }
+
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+		byte:defense { 0 }
+		byte:movement { 0 }
+	}
+
 	unit-configuration:127mm {
 		string:name { 12.7 mm }
 		unit-class:unit-class { towed-gun }
@@ -67,5 +79,109 @@
 		byte:defense { 1 }
 		byte:movement { 0 }
 		bool:can-indirect-fire { true }
+	}
+	unit-configuration:82mm-mot {
+		string:name { 82 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { mortar-motorized.png }
+
+		weapon-class:weapon-class { mortar }
+		byte:attack { 2 }
+		byte:range { 12 }
+		byte:defense { 3 }
+		byte:movement { 1 }
+		bool:can-indirect-fire { true }
+	}
+	unit-configuration:82mm {
+		string:name { 82 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { mortar.png }
+
+		weapon-class:weapon-class { mortar}
+		byte:attack { 3 }
+		byte:range { 12 }
+		byte:defense { 3 }
+		byte:movement { 1 }
+		bool:can-indirect-fire { true }
+	}
+	unit-configuration:122mm_mortar {
+		string:name { 122 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { mortar.png }
+
+		weapon-class:weapon-class { mortar }
+		byte:attack { 24 }
+		byte:range { 20 }
+		byte:defense { 2 }
+		byte:movement { 0 }
+		bool:can-indirect-fire { true }
+	}
+	unit-configuration:engineer-company {
+		string:name { }
+		unit-class:unit-class { infantry }
+		string:image-name { engineer-company.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 2 }
+		byte:defense { 8 }
+		byte:movement { 1 }
+		bool:can-engineer { true }
+	}
+	unit-configuration:recon-company {
+		string:name { Recon }
+		unit-class:unit-class { infantry }
+		string:image-name { infantry-company.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+		byte:defense { 4 }
+		byte:movement { 1 }
+	}
+	unit-configuration:rifle-company {
+		string:name { Rifle }
+		unit-class:unit-class { infantry }
+		string:image-name { infantry-company.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 5 }
+		byte:range { 4 }
+		byte:defense { 16 }
+		byte:movement { 1 }
+	}
+	unit-configuration:guards-company {
+		string:name { Guards }
+		unit-class:unit-class { infantry }
+		string:image-name { infantry-company.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 6 }
+		byte:range { 5 }
+		byte:defense { 18 }
+		byte:movement { 1 }
+		color:override-color { #E24B20 }
+	}
+	unit-configuration:smg-company {
+		string:name { Rifle }
+		unit-class:unit-class { infantry }
+		string:image-name { infantry-company.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 5 }
+		byte:range { 4 }
+		byte:defense { 16 }
+		byte:movement { 1 }
+	}
+	unit-configuration:cavalry {
+		string:name { Rifle }
+		unit-class:unit-class { cavalry }
+		string:image-name { cavalry.png }
+
+		weapon-class:weapon-class { infantry }
+		byte:attack { 10 }
+		byte:range { 3 }
+		byte:defense { 8 }
+		byte:movement { 3 }
 	}
 }

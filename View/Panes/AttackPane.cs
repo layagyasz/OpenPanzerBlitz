@@ -10,6 +10,10 @@ namespace PanzerBlitz
 	public class AttackPane : Pane
 	{
 		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
+		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select")
+		{
+			Position = new Vector2f(16, 16)
+		};
 		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
 
 		public readonly AttackOrder Attack;
@@ -18,9 +22,29 @@ namespace PanzerBlitz
 			: base("attack-pane")
 		{
 			this.Attack = Attack;
+			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+			{
+				DisplayedString = AttackTarget.ALL.ToString(),
+				Value = AttackTarget.ALL
+			});
+			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+			{
+				DisplayedString = AttackTarget.WEAKEST.ToString(),
+				Value = AttackTarget.WEAKEST
+			});
+			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+			{
+				DisplayedString = AttackTarget.EACH.ToString(),
+				Value = AttackTarget.EACH
+			});
 			_OrderButton.Position = Size - _OrderButton.Size - new Vector2f(16, 16);
+			_Description.Position = new Vector2f(0, _AttackTargetSelect.Size.Y + 24);
 			Add(_Description);
+			Add(_AttackTargetSelect);
 			Add(_OrderButton);
+
+			_AttackTargetSelect.OnMouseOver += (sender, e) => Console.WriteLine("mouseover");
+			_AttackTargetSelect.OnMouseOut += (sender, e) => Console.WriteLine("mouseout");
 		}
 
 		public void UpdateDescription()

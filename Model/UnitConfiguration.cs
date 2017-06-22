@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
+using SFML.Graphics;
+
 namespace PanzerBlitz
 {
 	public class UnitConfiguration
@@ -18,7 +20,9 @@ namespace PanzerBlitz
 			MOVEMENT,
 
 			IMAGE_NAME,
+			OVERRIDE_COLOR,
 
+			CAN_ENGINEER,
 			CAN_DIRECT_FIRE,
 			CAN_INDIRECT_FIRE,
 			CAN_OVERRUN,
@@ -43,7 +47,9 @@ namespace PanzerBlitz
 		public readonly byte Movement;
 
 		public readonly string ImageName;
+		public readonly Color OverrideColor;
 
+		public readonly bool CanEngineer;
 		public readonly bool CanDirectFire;
 		public readonly bool CanIndirectFire;
 		public readonly bool CanOverrun;
@@ -69,23 +75,23 @@ namespace PanzerBlitz
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
 			Movement = (byte)attributes[(int)Attribute.MOVEMENT];
 			ImageName = (string)attributes[(int)Attribute.IMAGE_NAME];
+			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
 			IsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ARMORED], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(attributes[(int)Attribute.IS_CARRIER], false);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], false);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
-											  || UnitClass == UnitClass.ENGINEER
 											  || UnitClass == UnitClass.PARATROOP
 											  || UnitClass == UnitClass.COMMANDO
 											  || UnitClass == UnitClass.TOWED_GUN);
 
+			CanEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
 			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE], false);
 			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN], IsArmored && CanOnlyCarryInfantry);
 			CanCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_CLOSE_ASSAULT], UnitClass == UnitClass.INFANTRY
-											  || UnitClass == UnitClass.ENGINEER
 											  || UnitClass == UnitClass.PARATROOP
 											  || UnitClass == UnitClass.COMMANDO);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
