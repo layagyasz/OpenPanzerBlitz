@@ -99,17 +99,13 @@ namespace PanzerBlitz
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 
-			Text weaponClassText = new Text(WeaponClassString(UnitConfiguration), Font, 36);
+			Text weaponClassText = new Text(WeaponClassString(UnitConfiguration), Font, 28);
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
-			Text nameText = new Text(
-				UnitConfiguration.VerticalSplitImage ?
-				UnitConfiguration.Name.Replace(" ", "   ") : UnitConfiguration.Name, Font, 18);
+			Text nameText = new Text(UnitConfiguration.Name, Font, 18);
 			nameText.Color = Color.Black;
-			if (UnitConfiguration.VerticalSplitImage)
-				nameText.Position = SpriteSize * new Vector2f(.5f, 7f / 12) - GetCenter(nameText);
-			else nameText.Position = SpriteSize * new Vector2f(.5f, 3f / 4) - GetCenter(nameText);
+			nameText.Position = SpriteSize * new Vector2f(.5f, 5f / 6) - GetCenter(nameText);
 
 			Sprite image = new Sprite(new Texture("./UnitSprites/" + UnitConfiguration.ImageName));
 

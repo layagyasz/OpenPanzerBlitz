@@ -9,6 +9,9 @@ namespace PanzerBlitz
 		public readonly IEnumerable<Tuple<Unit, AttackFactorCalculation>> AttackFactorCalculations;
 		public readonly IEnumerable<Unit> Defenders;
 		public readonly List<OddsCalculationFactor> OddsCalculationFactors;
+		public readonly bool StackArmored;
+		public readonly int TotalAttack;
+		public readonly int TotalDefense;
 
 		private bool _OddsAgainst;
 		private int _Odds;
@@ -42,24 +45,24 @@ namespace PanzerBlitz
 			AttackMethod AttackMethod,
 			Tile Tile)
 		{
-			bool stackArmored = TreatStackAsArmored(Attackers, Defenders, AttackMethod);
+			StackArmored = TreatStackAsArmored(Attackers, Defenders, AttackMethod);
 			AttackFactorCalculations = Attackers.Select(
 				i => new Tuple<Unit, AttackFactorCalculation>(
-					i.Item1, i.Item1.UnitConfiguration.GetAttack(AttackMethod, stackArmored, i.Item2)));
+					i.Item1, i.Item1.UnitConfiguration.GetAttack(AttackMethod, StackArmored, i.Item2)));
 			this.Defenders = Defenders;
 
 			OddsCalculationFactors = new List<OddsCalculationFactor>();
 
 			// Calculate Initial Odds
-			int totalAttack = AttackFactorCalculations.Sum(i => i.Item2.Attack);
-			int totalDefense = Defenders.Sum(i => i.UnitConfiguration.Defense);
-			if (totalAttack > totalDefense)
+			TotalAttack = AttackFactorCalculations.Sum(i => i.Item2.Attack);
+			TotalDefense = Defenders.Sum(i => i.UnitConfiguration.Defense);
+			if (TotalAttack > TotalDefense)
 			{
-				_Odds = totalAttack / totalDefense;
+				_Odds = TotalAttack / TotalDefense;
 			}
 			else
 			{
-				_Odds = totalDefense / totalAttack + 1;
+				_Odds = TotalDefense / TotalAttack + 1;
 				_OddsAgainst = true;
 			}
 

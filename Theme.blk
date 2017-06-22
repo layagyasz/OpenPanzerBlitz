@@ -31,34 +31,90 @@ class<>:classes {
 	}
 	class:attack-pane {
 		mode:default {
-			int:height { 512 }
-			int:width { 512 }
+			int:height { 768 }
+			int:width { 320 }
 			color[]:background-color { #000000 #000000 #000000 #000000 }
 		}
 	}
-	class:attack-text-box {
+	class:attack-display {
 		mode:default {
-			int:height { 480 }
-			int:width { 480 }
-			!font:font-face { fonts.compacta }
-			color:font-color { #FFFFFF }
-			int:font-size { 32 }
+			int:height { 736 }
+			int:width { 288 }
 			int[]:padding { 16 16 16 16 }
-			int[]:margin { 16 16 16 16 }
+		}
+	}
+	class:attack-odds-box {
+		mode:default {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 18 }
+			int:height { 40 }
+			int:width { 288 }
+			int[]:padding { 8 6 8 6 }
+			int[]:margin { 0 1 0 1 }
+		}
+	}
+	class:attack-odds-section {
+		mode:default {
+			color[]:background-color { #484848 #484848 #484848 #484848 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 12 }
+			int:height { 24 }
+			int:width { 288 }
+			int[]:padding { 8 2 8 2 }
+			int[]:margin { 0 8 0 1 }
+		}
+	}
+	class:attack-part-box {
+		mode:default {
+			color[]:background-color { #626262 #626262 #626262 #626262 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 14 }
+			int:height { 32 }
+			int:width { 288 }
+			int[]:padding { 8 5 8 5 }
+			int[]:margin { 0 1 0 1 }
+		}
+	}
+	class:attack-factor-box {
+		mode:default {
+			color[]:background-color { #969696 #969696 #969696 #969696 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 12 }
+			int:height { 24 }
+			int:width { 288 }
+			int[]:padding { 8 3 8 3 }
+			int[]:margin { 0 1 0 1 }
+		}
+	}
+	class:odds-factor-box {
+		mode:default {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 12 }
+			int:height { 24 }
+			int:width { 288 }
+			int[]:padding { 8 3 8 3 }
+			int[]:margin { 0 1 0 1 }
 		}
 	}
 	class:large-button {
 		mode:default {
-			int:height { 64 }
-			int:width { 128 }
-			!font:font-face { fonts.compacta }
+			int:height { 32 }
+			int:width { 288 }
+			!font:font-face { fonts.univers }
 			color:font-color { #FFFFFF }
-			int:font-size { 32 }
-			color[]:background-color { #000000 #000000 #000000 #000000 }
-			int[]:padding { 32 10 32 10 }
+			int:font-size { 18 }
+			color[]:background-color { #484848 #484848 #484848 #484848 }
+			int[]:padding { 128 2 128 2 }
 		}
 		mode:hover {
-			color[]:background-color { #BCBC00 #BCBC00 #BCBC00 #BCBC00 }
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
 	}
 }

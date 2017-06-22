@@ -18,7 +18,6 @@ namespace PanzerBlitz
 			MOVEMENT,
 
 			IMAGE_NAME,
-			VERTICAL_SPLIT_IMAGE,
 
 			CAN_DIRECT_FIRE,
 			CAN_INDIRECT_FIRE,
@@ -44,7 +43,6 @@ namespace PanzerBlitz
 		public readonly byte Movement;
 
 		public readonly string ImageName;
-		public readonly bool VerticalSplitImage;
 
 		public readonly bool CanDirectFire;
 		public readonly bool CanIndirectFire;
@@ -71,7 +69,6 @@ namespace PanzerBlitz
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
 			Movement = (byte)attributes[(int)Attribute.MOVEMENT];
 			ImageName = (string)attributes[(int)Attribute.IMAGE_NAME];
-			VerticalSplitImage = Parse.DefaultIfNull(attributes[(int)Attribute.VERTICAL_SPLIT_IMAGE], false);
 			IsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ARMORED], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(attributes[(int)Attribute.IS_CARRIER], false);

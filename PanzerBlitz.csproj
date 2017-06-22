@@ -98,6 +98,7 @@
     <Compile Include="Model\TileDeploymentConfiguration.cs" />
     <Compile Include="Model\Coordinate.cs" />
     <Compile Include="Model\TileDeployment.cs" />
+    <Compile Include="View\StackView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -149,6 +150,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Univers-light-normal.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\artillery-heavy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\artillery-heavy-company.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\engineer-platoon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\infantry-platoon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\mortar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

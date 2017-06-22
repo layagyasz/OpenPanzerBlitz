@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		NONE,
 		TEAM,
+		DUPLICATE,
 		NO_DIRECT_FIRE,
 		NO_INDIRECT_FIRE,
 		NO_AA_FIRE,

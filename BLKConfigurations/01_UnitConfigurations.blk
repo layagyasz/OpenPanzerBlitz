@@ -3,7 +3,6 @@
 		string:name { 12.7 mm }
 		unit-class:unit-class { towed-gun }
 		string:image-name { anti-aircraft.png }
-		bool:vertical-split-image { true }
 
 		weapon-class:weapon-class { infantry }
 		byte:attack { 6 }
@@ -11,5 +10,62 @@
 		byte:defense { 2 }
 		byte:movement { 0 }
 		bool:can-anti-aircraft { true }
+	}
+	unit-configuration:45mm {
+		string:name { 45 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { anti-armor.png }
+
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 7 }
+		byte:range { 3 }
+		byte:defense { 3 }
+		byte:movement { 0 }
+	}
+	unit-configuration:57mm {
+		string:name { 57 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { anti-armor.png }
+
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 9 }
+		byte:range { 4 }
+		byte:defense { 3 }
+		byte:movement { 0 }
+	}
+	unit-configuration:762mm {
+		string:name { 76.2 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { anti-armor.png }
+
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 12 }
+		byte:range { 5 }
+		byte:defense { 2 }
+		byte:movement { 0 }
+	}
+	unit-configuration:762mm_how {
+		string:name { 76.2 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { artillery-heavy.png }
+
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 3 }
+		byte:range { 10 }
+		byte:defense { 2 }
+		byte:movement { 0 }
+		bool:can-indirect-fire { true }
+	}
+	unit-configuration:122mm {
+		string:name { 122 mm }
+		unit-class:unit-class { towed-gun }
+		string:image-name { artillery-heavy.png }
+
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 40 }
+		byte:range { 20 }
+		byte:defense { 1 }
+		byte:movement { 0 }
+		bool:can-indirect-fire { true }
 	}
 }

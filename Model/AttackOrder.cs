@@ -128,15 +128,19 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason AddAttacker(Unit Attacker)
 		{
-			NoSingleAttackReason canAttack = Attacker.UnitConfiguration.CanAttack(
-				AttackMethod, AttackAt.Units.Count(
-					i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored),
-				Attacker.GetLineOfSight(AttackAt));
-			if (canAttack != NoSingleAttackReason.NONE) return canAttack;
+			if (!_Attackers.Contains(Attacker))
+			{
+				NoSingleAttackReason canAttack = Attacker.UnitConfiguration.CanAttack(
+					AttackMethod, AttackAt.Units.Count(
+						i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored),
+					Attacker.GetLineOfSight(AttackAt));
+				if (canAttack != NoSingleAttackReason.NONE) return canAttack;
 
-			_Attackers.Add(Attacker);
-			Recalculate();
-			return NoSingleAttackReason.NONE;
+				_Attackers.Add(Attacker);
+				Recalculate();
+				return NoSingleAttackReason.NONE;
+			}
+			return NoSingleAttackReason.DUPLICATE;
 		}
 
 		public void RemoveAttacker(Unit Attacker)

@@ -3,43 +3,77 @@ using System.Linq;
 
 using Cardamom.Interface.Items;
 
+using SFML.Window;
+
 namespace PanzerBlitz
 {
 	public class AttackPane : Pane
 	{
-		TextBox _TextBox = new TextBox("attack-text-box");
+		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
+		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
+
 		public readonly AttackOrder Attack;
 
 		public AttackPane(AttackOrder Attack)
 			: base("attack-pane")
 		{
 			this.Attack = Attack;
-			Add(_TextBox);
+			_OrderButton.Position = Size - _OrderButton.Size - new Vector2f(16, 16);
+			Add(_Description);
+			Add(_OrderButton);
 		}
 
 		public void UpdateDescription()
 		{
-			_TextBox.DisplayedString = string.Join(
-				"\n\n", Attack.OddsCalculations.Select(i => DescribeOddsCalculation(i)));
+			_Description.Clear();
+			foreach (OddsCalculation o in Attack.OddsCalculations) DescribeOddsCalculation(o);
 		}
 
-		private string DescribeOddsCalculation(OddsCalculation OddsCalulation)
+		private void DescribeOddsCalculation(OddsCalculation OddsCalculation)
 		{
-			return string.Format(
-				"Odds: {0}-1 {1}\n\n{2}\n\n{3}",
-				OddsCalulation.Odds,
-				OddsCalulation.OddsAgainst ? "against" : "for",
-				string.Join("\n", OddsCalulation.AttackFactorCalculations.Select(
-					i => DescribeAttackFactorCalculation(i.Item2))),
-				string.Join("\n", OddsCalulation.OddsCalculationFactors));
+			_Description.Add(new Button("attack-odds-box") { DisplayedString = OddsString(OddsCalculation) });
+			_Description.Add(new Button("attack-odds-section")
+			{
+				DisplayedString = string.Format("{0} Total Attack Factor", OddsCalculation.TotalAttack)
+			});
+			foreach (var a in OddsCalculation.AttackFactorCalculations)
+				DescribeAttackFactorCalculation(a.Item1, a.Item2);
+			_Description.Add(new Button("attack-odds-section")
+			{
+				DisplayedString = string.Format("{0} Total Defense Factor", OddsCalculation.TotalDefense)
+			});
+			foreach (Unit d in OddsCalculation.Defenders)
+				_Description.Add(new Button("attack-part-box")
+				{
+					DisplayedString = string.Format("+{0} {1}", d.UnitConfiguration.Defense, d.UnitConfiguration.Name)
+				});
+			_Description.Add(new Button("odds-factor-box")
+			{
+				DisplayedString = OddsCalculation.StackArmored ? "Armored Target" : "Unarmored Target"
+			});
+			foreach (OddsCalculationFactor o in OddsCalculation.OddsCalculationFactors)
+				_Description.Add(new Button("odds-factor-box") { DisplayedString = o.ToString() });
 		}
 
-		private string DescribeAttackFactorCalculation(AttackFactorCalculation AttackFactorCalculation)
+		private void DescribeAttackFactorCalculation(Unit Unit, AttackFactorCalculation AttackFactorCalculation)
 		{
-			return string.Format(
-				"Attack {0}\n{1}",
-				AttackFactorCalculation.Attack,
-				string.Join("\n", AttackFactorCalculation.Factors.Select(i => "\t" + i.ToString())));
+			_Description.Add(new Button("attack-part-box")
+			{
+				DisplayedString = string.Format(
+					"+{0} {1}", AttackFactorCalculation.Attack, Unit.UnitConfiguration.Name)
+			});
+			_Description.Add(new Button("attack-factor-box")
+			{
+				DisplayedString = string.Format("{0} Base Attack Factor", Unit.UnitConfiguration.Attack)
+			});
+			foreach (AttackFactorCalculationFactor a in AttackFactorCalculation.Factors)
+				_Description.Add(new Button("attack-factor-box") { DisplayedString = a.ToString() });
+		}
+
+		private string OddsString(OddsCalculation OddsCalculation)
+		{
+			if (OddsCalculation.OddsAgainst) return string.Format("Attack at 1-{0} against", OddsCalculation.Odds);
+			else return string.Format("Attack at {0}-1 for", OddsCalculation.Odds);
 		}
 	}
 }
