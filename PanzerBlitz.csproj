@@ -99,6 +99,9 @@
     <Compile Include="Model\Coordinate.cs" />
     <Compile Include="Model\TileDeployment.cs" />
     <Compile Include="View\StackView.cs" />
+    <Compile Include="Controller\EditController.cs" />
+    <Compile Include="View\Panes\EditPane.cs" />
+    <Compile Include="Model\TileOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

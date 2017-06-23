@@ -42,9 +42,6 @@ namespace PanzerBlitz
 			Add(_Description);
 			Add(_AttackTargetSelect);
 			Add(_OrderButton);
-
-			_AttackTargetSelect.OnMouseOver += (sender, e) => Console.WriteLine("mouseover");
-			_AttackTargetSelect.OnMouseOut += (sender, e) => Console.WriteLine("mouseout");
 		}
 
 		public void UpdateDescription()

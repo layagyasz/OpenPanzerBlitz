@@ -30,7 +30,7 @@ namespace PanzerBlitz
 				for (int j = 0; j < Height; ++j)
 				{
 					Tiles[i, j] = new Tile(i, j);
-					Tiles[i, j].Reconfigure(TileConfiguration.OPEN);
+					Tiles[i, j].Reconfigure(TileConfiguration.CLEAR);
 				}
 			}
 			SetupNeighbors();

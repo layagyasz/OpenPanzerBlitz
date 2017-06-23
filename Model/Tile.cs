@@ -10,6 +10,8 @@ namespace PanzerBlitz
 {
 	public class Tile : Pathable<Tile>
 	{
+		public EventHandler<EventArgs> OnReconfigure;
+
 		private bool _FiredAt;
 		private bool _CanIndirectFireAt;
 		private List<Unit> _Units = new List<Unit>();
@@ -146,6 +148,7 @@ namespace PanzerBlitz
 		public void Reconfigure(TileConfiguration TileConfiguration)
 		{
 			_TileConfiguration = TileConfiguration;
+			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 		}
 
 		public void SetNeighbor(int Index, Tile Neighbor)
@@ -153,9 +156,22 @@ namespace PanzerBlitz
 			NeighborTiles[Index] = Neighbor;
 		}
 
+		public Edge GetEdge(int Index)
+		{
+			return _Edges[Index];
+		}
+
 		public Edge GetEdge(Tile Neighbor)
 		{
 			return _Edges[Array.IndexOf(NeighborTiles, Neighbor)];
+		}
+
+		public void SetEdge(int Index, Edge Edge)
+		{
+			_Edges[Index] = Edge;
+			if (NeighborTiles[Index] != null && NeighborTiles[Index]._Edges[(Index + 3) % 6] != Edge)
+				NeighborTiles[Index].SetEdge((Index + 3) % 6, Edge);
+			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 		}
 
 		public void Enter(Unit Unit)

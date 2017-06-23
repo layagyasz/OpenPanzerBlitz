@@ -34,13 +34,13 @@ class<>:classes {
 			int:height { 768 }
 			int:width { 320 }
 			color[]:background-color { #000000 #000000 #000000 #000000 }
+			int[]:padding { 16 16 16 16 }
 		}
 	}
 	class:attack-display {
 		mode:default {
 			int:height { 736 }
 			int:width { 288 }
-			int[]:padding { 16 16 16 16 }
 		}
 	}
 	class:attack-odds-box {
@@ -117,6 +117,9 @@ class<>:classes {
 		mode:hover {
 			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
+		mode:focus {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		}
 		mode:selected {
 			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
@@ -130,6 +133,24 @@ class<>:classes {
 		mode:default {
 			int[]:padding { 8 2 8 2 }
 			int[]:margin { 0 0 0 2 }
+		}
+	}
+	class:edit-pane {
+		!class:parent { attack-pane }
+		mode:default {
+			int:height { 84 }
+		}
+	}
+	class:edit-display {
+		mode:default {
+			int:height { 78 }
+			int:width { 288 }
+		}
+	}
+	class:normal-button {
+		!class:parent { select }
+		mode:default {
+			int[]:margin { 0 1 0 1 }
 		}
 	}
 	class:large-button {

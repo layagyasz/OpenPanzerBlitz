@@ -66,7 +66,7 @@ namespace PanzerBlitz
 							i.Final,
 							HIGHLIGHT_COLORS[
 								Math.Min(
-									(i.Range - 1) * 2 / Unit.UnitConfiguration.Range,
+									i.Range * 2 / (Unit.UnitConfiguration.Range + 1),
 									HIGHLIGHT_COLORS.Length - 1)])));
 				_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
 			}
