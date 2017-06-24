@@ -10,10 +10,7 @@ namespace PanzerBlitz
 	public class AttackPane : Pane
 	{
 		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
-		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select")
-		{
-			Position = new Vector2f(16, 16)
-		};
+		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select");
 		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
 
 		public readonly AttackOrder Attack;
@@ -37,7 +34,7 @@ namespace PanzerBlitz
 				DisplayedString = AttackTarget.EACH.ToString(),
 				Value = AttackTarget.EACH
 			});
-			_OrderButton.Position = Size - _OrderButton.Size - new Vector2f(16, 16);
+			_OrderButton.Position = new Vector2f(0, Size.Y - _OrderButton.Size.Y - 32);
 			_Description.Position = new Vector2f(0, _AttackTargetSelect.Size.Y + 24);
 			Add(_Description);
 			Add(_AttackTargetSelect);

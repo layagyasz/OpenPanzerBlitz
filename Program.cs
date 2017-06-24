@@ -21,7 +21,7 @@ namespace PanzerBlitz
 			bool edit = true;
 			if (edit)
 			{
-				GameScreen screen = new GameScreen(I.WindowBounds[2], new Map(10, 10), new ArmyView[] { });
+				GameScreen screen = new GameScreen(I.WindowBounds[2], new Map(11, 33), new ArmyView[] { });
 				EditController controller = new EditController(screen);
 
 				I.Screen.Add(screen);

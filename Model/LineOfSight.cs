@@ -63,18 +63,11 @@ namespace PanzerBlitz
 			}
 
 			// Check for blocks.
-			if (GullyBlocks(los, edges)) return NoLineOfSightReason.GULLY;
+			// if (GullyBlocks(los, edges)) return NoLineOfSightReason.GULLY;
 			if (EdgeBlocks(los, edges, Edge.FOREST)) return NoLineOfSightReason.FOREST;
 			if (EdgeBlocks(los, edges, Edge.TOWN)) return NoLineOfSightReason.TOWN;
 			if (EdgeBlocks(los, edges, Edge.SLOPE)) return NoLineOfSightReason.SLOPE;
 			return NoLineOfSightReason.NONE;
-		}
-
-		public static bool GullyBlocks(Tile[] LineOfSight, Edge[] Edges)
-		{
-			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
-				return LineOfSight[0].River || LineOfSight[LineOfSight.Length - 1].River;
-			else return LineOfSight[LineOfSight.Length - 1].River;
 		}
 
 		public static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges, Edge EdgeType)

@@ -13,8 +13,9 @@ namespace PanzerBlitz
 	{
 		Select<GuiItem> _ModeSelect = new Select<GuiItem>("select");
 
-		Select<TileConfiguration> _TileConfigurationSelect = new Select<TileConfiguration>("select");
+		Select<TileBase> _TileBaseSelect = new Select<TileBase>("select");
 		Select<Edge> _EdgeSelect = new Select<Edge>("select");
+		Button _Elevation = new Button("select-option") { DisplayedString = "Left/Right Click" };
 
 		public EditPane()
 			: base("edit-pane")
@@ -23,33 +24,36 @@ namespace PanzerBlitz
 			_ModeSelect.Add(
 				new SelectionOption<GuiItem>("select-option")
 				{
-					DisplayedString = "Base Tile",
-					Value = _TileConfigurationSelect
+					DisplayedString = "Base",
+					Value = _TileBaseSelect
 				});
-			// _ModeSelect.Add(new SelectionOption<object>("select-option") { DisplayedString = "Overlay" });
 			_ModeSelect.Add(
 				new SelectionOption<GuiItem>("select-option") { DisplayedString = "Edge", Value = _EdgeSelect });
+			_ModeSelect.Add(
+				new SelectionOption<GuiItem>("select-option") { DisplayedString = "Elevation", Value = _Elevation });
 
-			_TileConfigurationSelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
+			_TileBaseSelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
 			_EdgeSelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
+			_Elevation.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
 
-			foreach (TileConfiguration t in
-					 new TileConfiguration[]
+			foreach (TileBase t in
+					 new TileBase[]
 			{
-				TileConfiguration.CLEAR,
-				TileConfiguration.SLOPE,
-				TileConfiguration.SWAMP,
-				TileConfiguration.WATER
+				TileBase.CLEAR,
+				TileBase.SLOPE,
+				TileBase.SWAMP,
+				TileBase.WATER
 			})
-				_TileConfigurationSelect.Add(
-					new SelectionOption<TileConfiguration>("select-option") { DisplayedString = t.Name, Value = t });
+				_TileBaseSelect.Add(
+					new SelectionOption<TileBase>("select-option") { DisplayedString = t.Name, Value = t });
 
 			foreach (Edge e in new Edge[] { Edge.NONE, Edge.TOWN, Edge.SLOPE, Edge.FOREST })
 				_EdgeSelect.Add(
 					new SelectionOption<Edge>("select-option") { DisplayedString = e.ToString(), Value = e });
 
+			Add(_Elevation);
 			Add(_EdgeSelect);
-			Add(_TileConfigurationSelect);
+			Add(_TileBaseSelect);
 			Add(_ModeSelect);
 		}
 
@@ -57,8 +61,9 @@ namespace PanzerBlitz
 		{
 			GuiItem select = ((Select<GuiItem>)Sender).Value.Value;
 
-			_TileConfigurationSelect.Visible = false;
+			_TileBaseSelect.Visible = false;
 			_EdgeSelect.Visible = false;
+			_Elevation.Visible = false;
 
 			select.Visible = true;
 		}
@@ -70,9 +75,30 @@ namespace PanzerBlitz
 				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
 				Tile.SetEdge(index, _EdgeSelect.Value.Value);
 			}
-			else if (_ModeSelect.Value.Value == _TileConfigurationSelect)
+			else if (_ModeSelect.Value.Value == _TileBaseSelect)
 			{
-				Tile.Reconfigure(_TileConfigurationSelect.Value.Value);
+				Tile.TileBase = _TileBaseSelect.Value.Value;
+			}
+			else if (_ModeSelect.Value.Value == _Elevation)
+			{
+				Tile.Elevation++;
+			}
+		}
+
+		public void RightEditTile(Tile Tile, Vector2f Point)
+		{
+			if (_ModeSelect.Value.Value == _EdgeSelect)
+			{
+				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
+				Tile.SetEdge(index, Edge.NONE);
+			}
+			else if (_ModeSelect.Value.Value == _TileBaseSelect)
+			{
+				Tile.TileBase = TileBase.CLEAR;
+			}
+			else if (_ModeSelect.Value.Value == _Elevation)
+			{
+				Tile.Elevation--;
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Planar;
@@ -32,6 +33,18 @@ namespace PanzerBlitz
 		{
 			this.Unit = Unit;
 			Color[] colors = Unit.Army.ArmyConfiguration.Faction.Colors;
+			if (!Unit.UnitConfiguration.IsArmored)
+			{
+				colors = colors.ToArray();
+				for (int i = 0; i < colors.Length; ++i)
+				{
+					FloatingColor f = new FloatingColor(colors[i]);
+					f = f.MakeHSL();
+					f.B = (float)Math.Max(0, f.B + .1);
+					colors[i] = f.MakeRGB().ConvertToColor();
+				}
+			}
+
 			_Vertices = new Vertex[colors.Length * 4];
 			float barHeight = 1f / colors.Length;
 
@@ -40,18 +53,10 @@ namespace PanzerBlitz
 			_Texture.CopyToImage().SaveToFile("out0.png");
 			for (int i = 0; i < colors.Length; ++i)
 			{
-				Color color = colors[i];
-				if (!Unit.UnitConfiguration.IsArmored)
-				{
-					FloatingColor f = new FloatingColor(color);
-					f = f.MakeHSL();
-					f.B = (float)Math.Max(0, f.B + .1);
-					color = f.MakeRGB().ConvertToColor();
-				}
-				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, color);
-				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Size, color);
-				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, color);
-				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, color);
+				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, colors[i]);
+				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Size, colors[i]);
+				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
+				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
 			}
 			_ImageVertices = new Vertex[4];
 			Color c = Unit.UnitConfiguration.OverrideColor;

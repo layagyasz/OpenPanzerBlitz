@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Graphing;
 using Cardamom.Planar;
@@ -12,12 +13,13 @@ namespace PanzerBlitz
 	{
 		public EventHandler<EventArgs> OnReconfigure;
 
-		private bool _FiredAt;
-		private bool _CanIndirectFireAt;
-		private List<Unit> _Units = new List<Unit>();
+		bool _FiredAt;
+		bool _CanIndirectFireAt;
+		List<Unit> _Units = new List<Unit>();
 
-		public readonly int Elevation;
-		private TileConfiguration _TileConfiguration;
+		int _Elevation;
+		TileBase _TileBase;
+		List<TilePathOverlay> _PathOverlays;
 
 		public readonly int X;
 		public readonly int Y;
@@ -25,12 +27,6 @@ namespace PanzerBlitz
 
 		public readonly Tile[] NeighborTiles = new Tile[6];
 		private Edge[] _Edges = new Edge[6];
-
-		// Overlays
-		private bool _River;
-		private bool _RiverFord;
-		private bool _Road;
-		private bool _Forest;
 
 		public bool FiredAt
 		{
@@ -46,60 +42,49 @@ namespace PanzerBlitz
 				return _CanIndirectFireAt;
 			}
 		}
-		public bool River
-		{
-			get
-			{
-				return _River;
-			}
-		}
-		public bool RiverFord
-		{
-			get
-			{
-				return _RiverFord;
-			}
-		}
-		public bool Road
-		{
-			get
-			{
-				return _Road;
-			}
-		}
-		public bool Forest
-		{
-			get
-			{
-				return _Forest;
-			}
-		}
 		public Vector2f Center
 		{
 			get
 			{
-				return new Vector2f(OffsetX, OffsetY);
+				return new Vector2f(RealX, RealY);
 			}
 		}
-		public float OffsetY
+		public float RealY
 		{
 			get
 			{
 				return Y * .75f;
 			}
 		}
-		public float OffsetX
+		public float RealX
 		{
 			get
 			{
-				return X + (Y % 2 == 0 ? 0 : .5f);
+				return X - (Y % 2 == 0 ? 0 : .5f);
 			}
 		}
-		public TileConfiguration TileConfiguration
+		public int Elevation
 		{
 			get
 			{
-				return _TileConfiguration;
+				return _Elevation;
+			}
+			set
+			{
+				_Elevation = value;
+				if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
+			}
+		}
+		public TileBase TileBase
+		{
+			get
+			{
+				return _TileBase;
+			}
+			set
+			{
+				_TileBase = value;
+				if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 			}
 		}
 		public IEnumerable<Unit> Units
@@ -117,12 +102,12 @@ namespace PanzerBlitz
 			Bounds = new CollisionPolygon(
 				new Vector2f[]
 			{
-				new Vector2f(OffsetX - .5f, OffsetY + .25f),
-				new Vector2f(OffsetX - .5f, OffsetY - .25f),
-				new Vector2f(OffsetX, OffsetY - .5f),
-				new Vector2f(OffsetX + .5f, OffsetY - .25f),
-				new Vector2f(OffsetX + .5f, OffsetY + .25f),
-				new Vector2f(OffsetX, OffsetY + .5f)
+				new Vector2f(RealX - .5f, RealY + .25f),
+				new Vector2f(RealX - .5f, RealY - .25f),
+				new Vector2f(RealX, RealY - .5f),
+				new Vector2f(RealX + .5f, RealY - .25f),
+				new Vector2f(RealX + .5f, RealY + .25f),
+				new Vector2f(RealX, RealY + .5f)
 			});
 		}
 
@@ -136,7 +121,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return Math.Abs(Node.OffsetX - OffsetX) + Math.Abs(Node.OffsetY - OffsetY);
+			return Math.Abs(Node.RealX - RealX) + Math.Abs(Node.RealY - RealY);
 		}
 
 		public IEnumerable<Tile> Neighbors()
@@ -144,12 +129,6 @@ namespace PanzerBlitz
 			foreach (Tile T in NeighborTiles) yield return T;
 		}
 		// Pathable
-
-		public void Reconfigure(TileConfiguration TileConfiguration)
-		{
-			_TileConfiguration = TileConfiguration;
-			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
-		}
 
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
@@ -172,6 +151,11 @@ namespace PanzerBlitz
 			if (NeighborTiles[Index] != null && NeighborTiles[Index]._Edges[(Index + 3) % 6] != Edge)
 				NeighborTiles[Index].SetEdge((Index + 3) % 6, Edge);
 			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
+		}
+
+		public bool HasEdge(Edge Edge)
+		{
+			return _Edges.Any(i => i == Edge);
 		}
 
 		public void Enter(Unit Unit)

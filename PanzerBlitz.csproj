@@ -43,7 +43,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Tile.cs" />
-    <Compile Include="Model\TileConfiguration.cs" />
+    <Compile Include="Model\TileBase.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitClass.cs" />
     <Compile Include="Model\UnitConfiguration.cs" />
@@ -101,7 +101,9 @@
     <Compile Include="View\StackView.cs" />
     <Compile Include="Controller\EditController.cs" />
     <Compile Include="View\Panes\EditPane.cs" />
-    <Compile Include="Model\TileOverlay.cs" />
+    <Compile Include="View\TileRenderer.cs" />
+    <Compile Include="Model\TileComponent.cs" />
+    <Compile Include="Model\TilePathOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

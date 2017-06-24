@@ -17,12 +17,18 @@ namespace PanzerBlitz
 			foreach (TileView t in _GameScreen.MapView.TilesEnumerable)
 			{
 				t.OnClick += OnTileClick;
+				t.OnRightClick += OnTileRightClick;
 			}
 		}
 
 		private void OnTileClick(object sender, MouseEventArgs e)
 		{
 			_EditPane.EditTile(((TileView)sender).Tile, e.Position);
+		}
+
+		private void OnTileRightClick(object sender, MouseEventArgs e)
+		{
+			_EditPane.RightEditTile(((TileView)sender).Tile, e.Position);
 		}
 	}
 }

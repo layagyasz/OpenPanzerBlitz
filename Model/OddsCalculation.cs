@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -90,9 +90,9 @@ namespace PanzerBlitz
 			}
 
 			// Terrain modifiers.
-			if (Defenders.First().Position.TileConfiguration.DieModifier != 0)
+			if (Defenders.First().Position.TileBase.DieModifier != 0)
 			{
-				_DieModifier += Defenders.First().Position.TileConfiguration.DieModifier;
+				_DieModifier += Defenders.First().Position.TileBase.DieModifier;
 				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
 			}
 

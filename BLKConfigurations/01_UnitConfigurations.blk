@@ -163,7 +163,7 @@
 		color:override-color { #E24B20 }
 	}
 	unit-configuration:smg-company {
-		string:name { Rifle }
+		string:name { SMG }
 		unit-class:unit-class { infantry }
 		string:image-name { infantry-company.png }
 
@@ -174,7 +174,7 @@
 		byte:movement { 1 }
 	}
 	unit-configuration:cavalry {
-		string:name { Rifle }
+		string:name { Cavalry }
 		unit-class:unit-class { cavalry }
 		string:image-name { cavalry.png }
 
