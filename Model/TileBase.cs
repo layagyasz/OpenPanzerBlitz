@@ -12,6 +12,8 @@ namespace PanzerBlitz
 		public static readonly TileBase SLOPE =
 			new TileBase("Slope", 0, 3, 4, false, false, false, false);
 
+		public static readonly TileBase[] TILE_BASES = { CLEAR, SWAMP, WATER, SLOPE };
+
 		public TileBase(
 			string Name,
 			int DieModifier,

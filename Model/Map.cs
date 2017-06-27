@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
-	public class Map
+	public class Map : Serializable
 	{
 		public readonly Tile[,] Tiles;
 
@@ -22,6 +24,20 @@ namespace PanzerBlitz
 			}
 		}
 
+		public IEnumerable<Tile> TilesEnumerable
+		{
+			get
+			{
+				for (int i = 0; i < Tiles.GetLength(0); ++i)
+				{
+					for (int j = 0; j < Tiles.GetLength(1); ++j)
+					{
+						yield return Tiles[i, j];
+					}
+				}
+			}
+		}
+
 		public Map(int Width, int Height)
 		{
 			Tiles = new Tile[Width, Height];
@@ -34,6 +50,31 @@ namespace PanzerBlitz
 				}
 			}
 			SetupNeighbors();
+		}
+
+		public Map(SerializationInputStream Stream)
+		{
+			int width = Stream.ReadInt32();
+			int height = Stream.ReadInt32();
+			Tiles = new Tile[width, height];
+			IEnumerator<Tile> tiles = Stream.ReadEnumerable(i => new Tile(i)).GetEnumerator();
+
+			for (int i = 0; i < width; ++i)
+			{
+				for (int j = 0; j < height; ++j)
+				{
+					tiles.MoveNext();
+					Tiles[i, j] = tiles.Current;
+				}
+			}
+			SetupNeighbors();
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Width);
+			Stream.Write(Height);
+			Stream.Write(TilesEnumerable);
 		}
 
 		private void SetupNeighbors()

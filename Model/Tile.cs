@@ -4,29 +4,30 @@ using System.Linq;
 
 using Cardamom.Graphing;
 using Cardamom.Planar;
+using Cardamom.Serialization;
 
 using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class Tile : Pathable<Tile>
+	public class Tile : Pathable<Tile>, Serializable
 	{
 		public EventHandler<EventArgs> OnReconfigure;
-
-		bool _FiredAt;
-		bool _CanIndirectFireAt;
 		List<Unit> _Units = new List<Unit>();
 
 		int _Elevation;
 		TileBase _TileBase;
-		List<TilePathOverlay> _PathOverlays;
 
 		public readonly int X;
 		public readonly int Y;
 		public readonly CollisionPolygon Bounds;
 
 		public readonly Tile[] NeighborTiles = new Tile[6];
-		private Edge[] _Edges = new Edge[6];
+		Edge[] _Edges = new Edge[6];
+		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
+
+		bool _FiredAt;
+		bool _CanIndirectFireAt;
 
 		public bool FiredAt
 		{
@@ -87,6 +88,13 @@ namespace PanzerBlitz
 				if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 			}
 		}
+		public IEnumerable<TilePathOverlay> PathOverlays
+		{
+			get
+			{
+				return _PathOverlays;
+			}
+		}
 		public IEnumerable<Unit> Units
 		{
 			get
@@ -99,7 +107,33 @@ namespace PanzerBlitz
 		{
 			this.X = X;
 			this.Y = Y;
-			Bounds = new CollisionPolygon(
+			Bounds = CalculateBounds();
+		}
+
+		public Tile(SerializationInputStream Stream)
+		{
+			X = Stream.ReadInt32();
+			Y = Stream.ReadInt32();
+			_Elevation = Stream.ReadByte();
+			_TileBase = TileBase.TILE_BASES[Stream.ReadByte()];
+			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
+			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
+			Bounds = CalculateBounds();
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(X);
+			Stream.Write(Y);
+			Stream.Write((byte)_Elevation);
+			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
+			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, i)));
+			Stream.Write(_PathOverlays, i => Stream.Write((byte)Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, i)));
+		}
+
+		private CollisionPolygon CalculateBounds()
+		{
+			return new CollisionPolygon(
 				new Vector2f[]
 			{
 				new Vector2f(RealX - .5f, RealY + .25f),
@@ -133,6 +167,24 @@ namespace PanzerBlitz
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
 			NeighborTiles[Index] = Neighbor;
+		}
+
+		public void SetPathOverlay(int Index, TilePathOverlay PathOverlay)
+		{
+			_PathOverlays[Index] = PathOverlay;
+			if (NeighborTiles[Index] != null && NeighborTiles[Index]._PathOverlays[(Index + 3) % 6] != PathOverlay)
+				NeighborTiles[Index].SetPathOverlay((Index + 3) % 6, PathOverlay);
+			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
+		}
+
+		public TilePathOverlay GetPathOverlay(int Index)
+		{
+			return _PathOverlays[Index];
+		}
+
+		public TilePathOverlay GetPathOverlay(Tile Neighbor)
+		{
+			return _PathOverlays[Array.IndexOf(NeighborTiles, Neighbor)];
 		}
 
 		public Edge GetEdge(int Index)

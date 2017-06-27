@@ -13,6 +13,9 @@ namespace PanzerBlitz
 		{
 			_GameScreen = GameScreen;
 			_GameScreen.AddPane(_EditPane);
+			IOPane p = new IOPane("Save");
+			p.SetDirectory("./");
+			_GameScreen.AddPane(p);
 
 			foreach (TileView t in _GameScreen.MapView.TilesEnumerable)
 			{

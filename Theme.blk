@@ -3,6 +3,7 @@
 	font:univers { Univers-light-normal.ttf }
 }
 class<>:classes {
+
 	class:deployment-pane {
 		mode:default {
 			int:height { 768 }
@@ -148,9 +149,15 @@ class<>:classes {
 		}
 	}
 	class:normal-button {
-		!class:parent { select }
+		!class:parent { select-option }
 		mode:default {
 			int[]:margin { 0 1 0 1 }
+		}
+	}
+	class:small-button {
+		!class:parent { normal-button }
+		mode:default {
+			int:width { 144 }
 		}
 	}
 	class:large-button {
@@ -165,6 +172,28 @@ class<>:classes {
 		}
 		mode:hover {
 			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		}
+	}
+
+	class:io-pane {
+		mode:default {
+			int:height { 768 }
+			int:width { 512 }
+			int[]:padding { 16 16 16 16 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+		}
+	}
+	class:io-select {
+		mode:default {
+			int:height { 716 }
+			int:width { 480 }
+			color[]:background-color { #969696 #969696 #969696 #969696 }
+		}
+	}
+	class:io-select-option {
+		!class:parent { select-option }
+		mode:default {
+			int:width { 480 }
 		}
 	}
 }
