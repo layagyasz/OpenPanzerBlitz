@@ -7,6 +7,7 @@ namespace PanzerBlitz
 	public class Match
 	{
 		public readonly Scenario Scenario;
+		public readonly Map Map;
 		public readonly List<Army> Armies;
 
 		private IEnumerator<Tuple<Army, TurnComponent>> _TurnOrder;
@@ -24,6 +25,8 @@ namespace PanzerBlitz
 		public Match(Scenario Scenario)
 		{
 			this.Scenario = Scenario;
+			this.Map = new Map(Scenario.MapConfiguration);
+
 			Armies = Scenario.ArmyConfigurations.Select(i => new Army(i)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
 				i => new Tuple<Army, TurnComponent>(

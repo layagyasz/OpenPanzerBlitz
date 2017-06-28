@@ -185,7 +185,7 @@ class<>:classes {
 	}
 	class:io-select {
 		mode:default {
-			int:height { 716 }
+			int:height { 688 }
 			int:width { 480 }
 			color[]:background-color { #969696 #969696 #969696 #969696 }
 		}
@@ -194,6 +194,18 @@ class<>:classes {
 		!class:parent { select-option }
 		mode:default {
 			int:width { 480 }
+		}
+	}
+	class:io-text-input {
+		!class:parent { io-select-option }
+		mode:default {
+			color[]:background-color { #969696 #969696 #969696 #969696 }
+		}
+		mode:hover {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+		}
+		mode:focus {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
 		}
 	}
 }

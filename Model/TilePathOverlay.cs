@@ -7,10 +7,8 @@ namespace PanzerBlitz
 			new TilePathOverlay("Road", 0, .5f, .5f, false, false, false, false);
 		public static readonly TilePathOverlay STREAM =
 			new TilePathOverlay("Stream", 0, 3, 5, false, false, false, false);
-		public static readonly TilePathOverlay STREAM_FORD =
-			new TilePathOverlay("Stream Ford", 0, 1, 1, false, false, false, false);
 
-		public static TilePathOverlay[] PATH_OVERLAYS = { null, ROAD, STREAM, STREAM_FORD };
+		public static TilePathOverlay[] PATH_OVERLAYS = { null, ROAD, STREAM };
 
 		public TilePathOverlay(
 			string Name,

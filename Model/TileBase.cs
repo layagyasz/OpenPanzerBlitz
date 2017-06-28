@@ -11,8 +11,10 @@ namespace PanzerBlitz
 			new TileBase("Water", 0, 1, 1, true, true, false, false);
 		public static readonly TileBase SLOPE =
 			new TileBase("Slope", 0, 3, 4, false, false, false, false);
+		public static readonly TileBase STREAM_FORD =
+			new TileBase("Stream Ford", 0, 1, 1, false, false, false, false);
 
-		public static readonly TileBase[] TILE_BASES = { CLEAR, SWAMP, WATER, SLOPE };
+		public static readonly TileBase[] TILE_BASES = { CLEAR, SWAMP, WATER, SLOPE, STREAM_FORD };
 
 		public TileBase(
 			string Name,

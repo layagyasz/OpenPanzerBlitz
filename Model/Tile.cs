@@ -103,6 +103,30 @@ namespace PanzerBlitz
 			}
 		}
 
+		public Tile(int X, int Y, Tile Copy, bool Invert = false)
+		{
+			this.X = X;
+			this.Y = Y;
+			Bounds = CalculateBounds();
+
+			_Elevation = Copy.Elevation;
+			_TileBase = Copy.TileBase;
+
+			if (Invert)
+			{
+				for (int i = 0; i < 6; ++i)
+				{
+					_Edges[i] = Copy._Edges[(i + 3) % 6];
+					_PathOverlays[i] = Copy._PathOverlays[(i + 3) % 6];
+				}
+			}
+			else
+			{
+				_Edges = Copy._Edges.ToArray();
+				_PathOverlays = Copy._PathOverlays.ToArray();
+			}
+		}
+
 		public Tile(int X, int Y)
 		{
 			this.X = X;
@@ -127,7 +151,7 @@ namespace PanzerBlitz
 			Stream.Write(Y);
 			Stream.Write((byte)_Elevation);
 			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
-			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, i)));
+			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(Edge.EDGES, i)));
 			Stream.Write(_PathOverlays, i => Stream.Write((byte)Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, i)));
 		}
 

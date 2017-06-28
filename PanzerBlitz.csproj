@@ -57,6 +57,7 @@
     <Compile Include="Model\OddsCalculationFactor.cs" />
     <Compile Include="Model\AttackFactorCalculation.cs" />
     <Compile Include="Model\AttackFactorCalculationFactor.cs" />
+    <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\AttackTarget.cs" />
     <Compile Include="Model\Edge.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Model\TurnComponent.cs" />
     <Compile Include="Model\MovementEventArgs.cs" />
     <Compile Include="View\ArmyView.cs" />
-    <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="View\Panes\DeploymentPane.cs" />
     <Compile Include="View\Panes\DeploymentSelectionOption.cs" />
     <Compile Include="Model\DeploymentConfiguration.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Model\TileComponent.cs" />
     <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="View\Panes\IOPane.cs" />
+    <Compile Include="Model\MapConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -113,6 +114,8 @@
     <Folder Include="View\Panes\" />
     <Folder Include="BLKConfigurations\" />
     <Folder Include="UnitSprites\" />
+    <Folder Include="Maps\" />
+    <Folder Include="Screenshots\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -258,6 +261,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\wagon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-01.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Screenshots\screen.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -69,6 +69,14 @@ namespace PanzerBlitz
 					(i, j) => j != null && i.GetEdge(j) == Edge.SLOPE,
 					vertices, OverlayColor(Edge.SLOPE));
 
+			// Stream Gully.
+			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM) && Tile.TileBase != TileBase.STREAM_FORD)
+				RenderPath(
+					Tile,
+					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
+					vertices,
+					new Color(150, 150, 150),
+					.3f);
 
 			// Stream.
 			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM))
@@ -76,15 +84,25 @@ namespace PanzerBlitz
 					Tile,
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
 					vertices,
-					PathColor(TilePathOverlay.STREAM));
+					PathColor(TilePathOverlay.STREAM),
+					.15f);
 
 			// Road.
 			if (Tile.PathOverlays.Contains(TilePathOverlay.ROAD))
+			{
 				RenderPath(
 					Tile,
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
 					vertices,
-					PathColor(TilePathOverlay.ROAD));
+					new Color(0, 0, 0),
+					.2f);
+				RenderPath(
+					Tile,
+					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
+					vertices,
+					PathColor(TilePathOverlay.ROAD),
+					.15f);
+			}
 
 			// IsHilltop.
 			bool isHilltop = Tile.NeighborTiles.Any(i => i != null && i.Elevation < Tile.Elevation);
@@ -194,8 +212,11 @@ namespace PanzerBlitz
 			return Distance * Towards + (1 - Distance) * new Segment(Point1, Point2).Project(Towards);
 		}
 
-		static void RenderPath(Tile Tile, Func<Tile, int, bool> Matched, List<Vertex> Vertices, Color Color)
+		static void RenderPath(
+			Tile Tile, Func<Tile, int, bool> Matched, List<Vertex> Vertices, Color Color, float Width)
 		{
+			float width = .5f * (1 - Width);
+
 			List<Segment> segments = new List<Segment>();
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
@@ -206,25 +227,27 @@ namespace PanzerBlitz
 			{
 				for (int i = 0; i < Tile.Bounds.Length; ++i)
 				{
-					Vertices.Add(new Vertex(Tile.Bounds[i].Point * .2f + Tile.Center * .8f, Color));
-					Vertices.Add(new Vertex(Tile.Bounds[i].End * .2f + Tile.Center * .8f, Color));
+					Vertices.Add(
+						new Vertex(Tile.Bounds[i].Point * Width + Tile.Center * (1 - Width), Color));
+					Vertices.Add(
+						new Vertex(Tile.Bounds[i].End * Width + Tile.Center * (1 - Width), Color));
 					Vertices.Add(new Vertex(Tile.Center, Color));
 				}
 			}
 			else if (segments.Count == 1)
 			{
-				Vector2f p1 = OnSegment(segments[0], .4f);
-				Vector2f p2 = OnSegment(segments[0], .6f);
+				Vector2f p1 = OnSegment(segments[0], width);
+				Vector2f p2 = OnSegment(segments[0], 1 - width);
 				Vertices.Add(new Vertex(p1, Color));
 				Vertices.Add(new Vertex(p2, Color));
 				Vertices.Add(new Vertex(Tile.Center, Color));
 			}
 			else if (segments.Count == 2)
 			{
-				Vector2f p1 = OnSegment(segments[1], .4f);
-				Vector2f p2 = OnSegment(segments[1], .6f);
-				Vector2f p3 = OnSegment(segments[0], .4f);
-				Vector2f p4 = OnSegment(segments[0], .6f);
+				Vector2f p1 = OnSegment(segments[1], width);
+				Vector2f p2 = OnSegment(segments[1], 1 - width);
+				Vector2f p3 = OnSegment(segments[0], width);
+				Vector2f p4 = OnSegment(segments[0], 1 - width);
 				Vertices.Add(new Vertex(p1, Color));
 				Vertices.Add(new Vertex(p2, Color));
 				Vertices.Add(new Vertex(p3, Color));
@@ -236,10 +259,10 @@ namespace PanzerBlitz
 			{
 				foreach (Segment s in segments)
 				{
-					Vector2f p1 = OnSegment(s, .4f);
-					Vector2f p2 = OnSegment(s, .6f);
-					Vector2f p3 = s.Point * .2f + Tile.Center * .8f;
-					Vector2f p4 = s.End * .2f + Tile.Center * .8f;
+					Vector2f p1 = OnSegment(s, width);
+					Vector2f p2 = OnSegment(s, 1 - width);
+					Vector2f p3 = s.Point * Width + Tile.Center * (1 - Width);
+					Vector2f p4 = s.End * Width + Tile.Center * (1 - Width);
 					Vertices.Add(new Vertex(p1, Color));
 					Vertices.Add(new Vertex(p2, Color));
 					Vertices.Add(new Vertex(p3, Color));
@@ -286,7 +309,7 @@ namespace PanzerBlitz
 
 		static Color PathColor(TilePathOverlay PathOverlay)
 		{
-			if (PathOverlay == TilePathOverlay.ROAD) return new Color(105, 93, 43);
+			if (PathOverlay == TilePathOverlay.ROAD) return new Color(220, 220, 220);
 			else if (PathOverlay == TilePathOverlay.STREAM) return new Color(43, 122, 119);
 			else return new Color(0, 0, 0, 0);
 		}

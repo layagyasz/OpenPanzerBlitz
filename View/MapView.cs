@@ -13,6 +13,14 @@ namespace PanzerBlitz
 		private Map _Map;
 		public readonly TileView[,] Tiles;
 
+		public Map Map
+		{
+			get
+			{
+				return _Map;
+			}
+		}
+
 		public IEnumerable<TileView> TilesEnumerable
 		{
 			get

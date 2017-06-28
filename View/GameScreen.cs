@@ -13,20 +13,33 @@ namespace PanzerBlitz
 	public class GameScreen : Pod
 	{
 		public readonly Camera Camera;
-		public readonly MapView MapView;
 		public readonly HighlightLayer HighlightLayer = new HighlightLayer();
 		public readonly List<ArmyView> ArmyViews;
 		public readonly Vector2f Size;
 
+		MapView _MapView;
 		private PaneLayer _PaneLayer = new PaneLayer();
 		private List<Pod> _Items = new List<Pod>();
+
+		public MapView MapView
+		{
+			get
+			{
+				return _MapView;
+			}
+		}
 
 		public GameScreen(Vector2f WindowSize, Map Map, IEnumerable<ArmyView> ArmyViews)
 		{
 			Size = WindowSize;
 			Camera = new Camera(WindowSize, new Vector2f((float)Map.Width, (float)Map.Height) * .5f, 64);
-			MapView = new MapView(Map);
+			_MapView = new MapView(Map);
 			this.ArmyViews = ArmyViews.ToList();
+		}
+
+		public void SetMapView(MapView MapView)
+		{
+			_MapView = MapView;
 		}
 
 		public void AddItem(Pod Pod)

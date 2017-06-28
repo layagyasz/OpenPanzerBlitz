@@ -18,7 +18,7 @@ namespace PanzerBlitz
 			bool done = Units.All(i => Match.ExecuteOrder(
 				new DeployOrder(
 					i,
-					Match.Scenario.Map.Tiles[
+					Match.Map.Tiles[
 						DeploymentConfiguration.Coordinate.X, DeploymentConfiguration.Coordinate.Y])));
 			if (!done) throw new Exception("Deployment order rejected for TileDeployment.");
 			return done;

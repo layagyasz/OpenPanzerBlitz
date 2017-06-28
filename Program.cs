@@ -18,7 +18,7 @@ namespace PanzerBlitz
 			Interface I = new Interface(VideoMode.DesktopMode, "PanzerBlitz", Styles.Default);
 			I.Screen = new Screen();
 
-			bool edit = true;
+			bool edit = false;
 			if (edit)
 			{
 				GameScreen screen = new GameScreen(I.WindowBounds[2], new Map(11, 33), new ArmyView[] { });
@@ -34,7 +34,9 @@ namespace PanzerBlitz
 				UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
 					gameData.Scenarios[0], 1024, 128, new Font("Compacta Std Regular.otf"));
 				GameScreen screen = new GameScreen(
-					I.WindowBounds[2], match.Scenario.Map, match.Armies.Select(i => new ArmyView(i, renderer)));
+					I.WindowBounds[2],
+					match.Map,
+					match.Armies.Select(i => new ArmyView(i, renderer)));
 				GameScreenController controller = new GameScreenController(match, renderer, screen);
 				I.Screen.Add(screen);
 			}

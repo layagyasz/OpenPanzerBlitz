@@ -1,5 +1,17 @@
 ﻿scenario[]:scenarios {
 	scenario:_ {
+		map-configuration:map-configuration {
+			2-tuple[]:_ {
+				2-tuple:_ {
+					string:_ { Maps/board-01.map }
+					bool:_ { false }
+				}
+				2-tuple:_ {
+					string:_ { Maps/board-01.map }
+					bool:_ { true }
+				}
+			}
+		}
 		army-configuration[]:army-configurations {
 			army-configuration:_ {
 				!faction:faction { factions.russian }
