@@ -10,6 +10,10 @@
 					string:_ { Maps/board-01.map }
 					bool:_ { true }
 				}
+				2-tuple:_ {
+					string:_ { Maps/board-01.map }
+					bool:_ { false }
+				}
 			}
 		}
 		army-configuration[]:army-configurations {

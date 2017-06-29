@@ -63,6 +63,7 @@ namespace PanzerBlitz
 			}
 
 			// Check for blocks.
+			if (ElevationBlocks(los)) return NoLineOfSightReason.SLOPE;
 			// if (GullyBlocks(los, edges)) return NoLineOfSightReason.GULLY;
 			if (EdgeBlocks(los, edges, Edge.FOREST)) return NoLineOfSightReason.FOREST;
 			if (EdgeBlocks(los, edges, Edge.TOWN)) return NoLineOfSightReason.TOWN;
@@ -81,6 +82,22 @@ namespace PanzerBlitz
 					if (Edges[0] == EdgeType) return true;
 					if (LineOfSight[i + 1].Elevation > LineOfSight[0].Elevation && Edges[i] == EdgeType)
 						return true;
+				}
+			}
+			return false;
+		}
+
+		public static bool ElevationBlocks(Tile[] LineOfSight)
+		{
+			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
+			{
+				return LineOfSight.Any(i => i.Elevation > LineOfSight[0].Elevation);
+			}
+			else
+			{
+				for (int i = 1; i < Math.Min(LineOfSight.Length - 2, LineOfSight.Length / 2 + 2); ++i)
+				{
+					if (LineOfSight[i].Elevation > LineOfSight[0].Elevation) return true;
 				}
 			}
 			return false;

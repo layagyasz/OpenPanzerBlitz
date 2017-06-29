@@ -29,11 +29,13 @@ namespace PanzerBlitz
 			CAN_CLOSE_ASSAULT,
 			CAN_ANTI_AIRCRAFT,
 
+			IS_VEHICLE,
 			IS_ARMORED,
 
 			TRUCK_MOVEMENT,
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
+			CAN_ONLY_OVERRUN_UNARMORED,
 			IS_PASSENGER
 		};
 
@@ -56,12 +58,14 @@ namespace PanzerBlitz
 		public readonly bool CanCloseAssault;
 		public readonly bool CanAntiAircraft;
 
+		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
 
 		public readonly bool TruckMovement;
 
 		public readonly bool IsCarrier;
 		public readonly bool CanOnlyCarryInfantry;
+		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool IsPassenger;
 
 		public UnitConfiguration(ParseBlock Block)
@@ -76,10 +80,21 @@ namespace PanzerBlitz
 			Movement = (byte)attributes[(int)Attribute.MOVEMENT];
 			ImageName = (string)attributes[(int)Attribute.IMAGE_NAME];
 			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
-			IsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ARMORED], false);
+			IsVehicle = Parse.DefaultIfNull(attributes[(int)Attribute.IS_VEHICLE],
+											UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
+											|| UnitClass == UnitClass.ASSAULT_GUN
+											|| UnitClass == UnitClass.ENGINEER_VEHICLE
+											|| UnitClass == UnitClass.FLAME_TANK
+											|| UnitClass == UnitClass.RECONNAISSANCE_VEHICLE
+											|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
+											|| UnitClass == UnitClass.TANK
+											|| UnitClass == UnitClass.TRANSPORT);
+			IsArmored = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_ARMORED], IsVehicle && UnitClass != UnitClass.TRANSPORT);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(attributes[(int)Attribute.IS_CARRIER], false);
-			CanOnlyCarryInfantry = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], false);
+			CanOnlyCarryInfantry = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsArmored && UnitClass != UnitClass.TRANSPORT);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
 											  || UnitClass == UnitClass.PARATROOP
@@ -89,7 +104,8 @@ namespace PanzerBlitz
 			CanEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
 			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE], false);
-			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN], IsArmored && CanOnlyCarryInfantry);
+			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN], IsVehicle && IsArmored);
+			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED], false);
 			CanCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_CLOSE_ASSAULT], UnitClass == UnitClass.INFANTRY
 											  || UnitClass == UnitClass.PARATROOP
