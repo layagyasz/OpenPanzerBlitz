@@ -40,7 +40,7 @@ namespace PanzerBlitz
 
 		public void HandleTileLeftClick(Tile Tile)
 		{
-			if (Tile.Units.All(i => i.Army != _Army)) StartAttack(Tile);
+			if (Tile.Units.All(i => i.Army != _Army) && Tile.Units.Count() > 0) StartAttack(Tile);
 		}
 
 		public void HandleTileRightClick(Tile Tile)
@@ -88,6 +88,14 @@ namespace PanzerBlitz
 			_AttackPane = new AttackPane(_AttackBuilder);
 			_GameScreen.AddPane(_AttackPane);
 			_AttackPane.UpdateDescription();
+			_AttackPane.OnExecute += ExecuteAttack;
+		}
+
+		private void ExecuteAttack(object sender, EventArgs e)
+		{
+			Console.WriteLine("ATTACK");
+			if (_Match.ExecuteOrder(_AttackBuilder)) _GameScreen.RemovePane(_AttackPane);
+			else _AttackPane.UpdateDescription();
 		}
 	}
 }

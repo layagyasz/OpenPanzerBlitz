@@ -74,12 +74,19 @@ namespace PanzerBlitz
 		public static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges, Edge EdgeType)
 		{
 			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
-				return Edges.Any(i => i == EdgeType);
-			else
 			{
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (Edges[0] == EdgeType) return true;
+					if (Edges[i] == EdgeType && (LineOfSight[0].Elevation == LineOfSight[i].Elevation
+												 || LineOfSight[0].Elevation == LineOfSight[i + 1].Elevation))
+						return true;
+				}
+			}
+			else
+			{
+				if (Edges[0] == EdgeType) return true;
+				for (int i = 0; i < LineOfSight.Length - 1; ++i)
+				{
 					if (LineOfSight[i + 1].Elevation > LineOfSight[0].Elevation && Edges[i] == EdgeType)
 						return true;
 				}
@@ -95,7 +102,7 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				for (int i = 1; i < Math.Min(LineOfSight.Length - 2, LineOfSight.Length / 2 + 2); ++i)
+				for (int i = 1; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 2); ++i)
 				{
 					if (LineOfSight[i].Elevation > LineOfSight[0].Elevation) return true;
 				}

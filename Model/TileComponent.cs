@@ -7,6 +7,7 @@ namespace PanzerBlitz
 		public readonly int DieModifier;
 		public readonly float MoveCost;
 		public readonly float TruckMoveCost;
+		public readonly bool RoadMove;
 		public readonly bool NoCrossing;
 		public readonly bool NoVehicleCrossing;
 		public readonly bool TreatUnitsAsArmored;
@@ -17,6 +18,7 @@ namespace PanzerBlitz
 			int DieModifier,
 			float MoveCost,
 			float TruckMoveCost,
+			bool RoadMove,
 			bool NoCrossing,
 			bool NoVehicleCrossing,
 			bool TreatUnitsAsArmored,
@@ -26,6 +28,7 @@ namespace PanzerBlitz
 			this.DieModifier = DieModifier;
 			this.MoveCost = MoveCost;
 			this.TruckMoveCost = TruckMoveCost;
+			this.RoadMove = RoadMove;
 			this.NoCrossing = NoCrossing;
 			this.NoVehicleCrossing = NoVehicleCrossing;
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;

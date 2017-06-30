@@ -97,8 +97,11 @@ namespace PanzerBlitz
 
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);
 
-			r.Texture = _Texture;
-			Target.Draw(_ImageVertices, PrimitiveType.Quads, r);
+			if (!Unit.Disrupted)
+			{
+				r.Texture = _Texture;
+				Target.Draw(_ImageVertices, PrimitiveType.Quads, r);
+			}
 		}
 	}
 }

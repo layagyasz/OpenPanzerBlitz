@@ -38,16 +38,6 @@ namespace PanzerBlitz
 					(i, j) => j != null && j.TileBase == TileBase.SWAMP,
 					vertices,
 					TopColor(Tile.TileBase));
-			// Shore.
-			if (Tile.NeighborTiles.Count(i => i != null && i.TileBase == TileBase.WATER) > 0)
-				RenderTile(
-					Tile,
-					(i, j) => j != null && j.TileBase == TileBase.WATER,
-					vertices,
-					TopColor(TileBase.WATER));
-			// Water.
-			if (Tile.TileBase == TileBase.WATER)
-				RenderTile(Tile, (i, j) => true, vertices, TopColor(Tile.TileBase));
 
 			// Forest.
 			if (Tile.HasEdge(Edge.FOREST))
@@ -86,6 +76,17 @@ namespace PanzerBlitz
 					vertices,
 					PathColor(TilePathOverlay.STREAM),
 					.15f);
+
+			// Shore.
+			if (Tile.NeighborTiles.Count(i => i != null && i.TileBase == TileBase.WATER) > 0)
+				RenderTile(
+					Tile,
+					(i, j) => j != null && j.TileBase == TileBase.WATER,
+					vertices,
+					TopColor(TileBase.WATER));
+			// Water.
+			if (Tile.TileBase == TileBase.WATER)
+				RenderTile(Tile, (i, j) => true, vertices, TopColor(Tile.TileBase));
 
 			// Road.
 			if (Tile.PathOverlays.Contains(TilePathOverlay.ROAD))

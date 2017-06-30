@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		private bool _Fired;
 		private bool _Moved;
-		private bool _Dispersed;
+		private bool _Disrupted;
 
 		private Tile _Position;
 
@@ -48,11 +48,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public bool Dispersed
+		public bool Disrupted
 		{
 			get
 			{
-				return _Dispersed;
+				return _Disrupted;
 			}
 		}
 
@@ -68,6 +68,30 @@ namespace PanzerBlitz
 		{
 			this.Army = Army;
 			this.UnitConfiguration = UnitConfiguration;
+		}
+
+		public void HandleCombatResult(CombatResult CombatResult)
+		{
+			switch (CombatResult)
+			{
+				case CombatResult.MISS:
+					return;
+				case CombatResult.DESTROY:
+					Remove();
+					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+					return;
+				case CombatResult.DISRUPT:
+					_Disrupted = true;
+					return;
+				case CombatResult.DOUBLE_DISRUPT:
+					if (_Disrupted)
+					{
+						Remove();
+						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+					}
+					else _Disrupted = true;
+					return;
+			}
 		}
 
 		public void Remove()
@@ -121,7 +145,7 @@ namespace PanzerBlitz
 		{
 			_Fired = false;
 			_Moved = false;
-			_Dispersed = false;
+			_Disrupted = false;
 		}
 	}
 }

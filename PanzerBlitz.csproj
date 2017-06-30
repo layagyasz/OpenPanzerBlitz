@@ -106,6 +106,7 @@
     <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
+    <Compile Include="Model\MovementProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -320,6 +321,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\t-35.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-02.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-03.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -9,6 +9,8 @@ namespace PanzerBlitz
 {
 	public class AttackPane : Pane
 	{
+		public EventHandler<EventArgs> OnExecute;
+
 		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
 		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select");
 		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
@@ -35,6 +37,7 @@ namespace PanzerBlitz
 				Value = AttackTarget.EACH
 			});
 			_OrderButton.Position = new Vector2f(0, Size.Y - _OrderButton.Size.Y - 32);
+			_OrderButton.OnClick += (sender, e) => { if (OnExecute != null) OnExecute(this, EventArgs.Empty); };
 			_Description.Position = new Vector2f(0, _AttackTargetSelect.Size.Y + 24);
 			Add(_Description);
 			Add(_AttackTargetSelect);

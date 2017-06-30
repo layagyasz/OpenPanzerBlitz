@@ -7,11 +7,11 @@
 					bool:_ { false }
 				}
 				2-tuple:_ {
-					string:_ { Maps/board-01.map }
-					bool:_ { true }
+					string:_ { Maps/board-02.map }
+					bool:_ { false }
 				}
 				2-tuple:_ {
-					string:_ { Maps/board-01.map }
+					string:_ { Maps/board-03.map }
 					bool:_ { false }
 				}
 			}
@@ -43,6 +43,12 @@
 							!unit-configuration:_ { unit-configurations.guards-company }
 						}
 						coordinate:coordinate { 8,6 }
+					}
+					tile-deployment-configuration:_ {
+						unit-configuration[]:unit-configurations {
+							!unit-configuration:_ { unit-configurations.jsu-122 }
+						}
+						coordinate:coordinate { 6,4 }
 					}
 				}
 			}

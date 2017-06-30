@@ -11,82 +11,82 @@ namespace PanzerBlitz
 		private static readonly CombatResult[,] COMBAT_RESULTS =
 		{
 			{
-				CombatResult.Disperse,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS
 			},
 			{
-				CombatResult.DoubleDisperse,
-				CombatResult.Disperse,
-				CombatResult.Disperse,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS
 			},
 			{
-				CombatResult.Destroy,
-				CombatResult.DoubleDisperse,
-				CombatResult.Disperse,
-				CombatResult.Disperse,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DESTROY,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS
 			},
 			{
-				CombatResult.Destroy,
-				CombatResult.DoubleDisperse,
-				CombatResult.DoubleDisperse,
-				CombatResult.Disperse,
-				CombatResult.Disperse,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DESTROY,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS,
+				CombatResult.MISS
 
 			},
 			{
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.DoubleDisperse,
-				CombatResult.DoubleDisperse,
-				CombatResult.Disperse,
-				CombatResult.Disperse,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS
 			},
 			{
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.DoubleDisperse,
-				CombatResult.DoubleDisperse,
-				CombatResult.Miss,
-				CombatResult.Miss
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.DOUBLE_DISRUPT,
+				CombatResult.MISS,
+				CombatResult.MISS
 			},
 			{
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Destroy,
-				CombatResult.Miss
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.DESTROY,
+				CombatResult.MISS
 			},
 		};
 
@@ -116,6 +116,7 @@ namespace PanzerBlitz
 
 		public AttackOrder(Army AttackingArmy, Tile AttackAt, AttackMethod AttackMethod)
 		{
+			this.AttackingArmy = AttackingArmy;
 			this.AttackAt = AttackAt;
 			this.AttackMethod = AttackMethod;
 		}
@@ -164,7 +165,7 @@ namespace PanzerBlitz
 					new OddsCalculation(
 						_Attackers.Select(
 							i => new Tuple<Unit, LineOfSight>(i, i.GetLineOfSight(AttackAt))),
-						AttackAt.Units,
+						AttackAt.Units.ToList(),
 						AttackMethod,
 						AttackAt));
 			}
@@ -194,9 +195,10 @@ namespace PanzerBlitz
 			_Attackers.ForEach(i => i.Fire());
 			foreach (OddsCalculation c in _OddsCalculations)
 			{
-				CombatResult Result = COMBAT_RESULTS[
+				CombatResult result = COMBAT_RESULTS[
 					OddsIndex(c.Odds, c.OddsAgainst),
 					Random.Next(2, 7) + c.DieModifier];
+				foreach (Unit u in c.Defenders) u.HandleCombatResult(result);
 			}
 			AttackAt.FireAt();
 			return true;

@@ -92,7 +92,8 @@ namespace PanzerBlitz
 			IsArmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_ARMORED], IsVehicle && UnitClass != UnitClass.TRANSPORT);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
-			IsCarrier = Parse.DefaultIfNull(attributes[(int)Attribute.IS_CARRIER], false);
+			IsCarrier = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_CARRIER], IsArmored && UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsArmored && UnitClass != UnitClass.TRANSPORT);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
