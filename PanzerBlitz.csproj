@@ -107,6 +107,10 @@
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
     <Compile Include="Model\MovementProfile.cs" />
+    <Compile Include="Controller\CombatMoveController.cs" />
+    <Compile Include="Model\OverrunMoveOrder.cs" />
+    <Compile Include="Model\OverrunAttackOrder.cs" />
+    <Compile Include="Model\ExecuteOrderEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

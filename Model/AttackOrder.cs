@@ -127,7 +127,7 @@ namespace PanzerBlitz
 			Recalculate();
 		}
 
-		public NoSingleAttackReason AddAttacker(Unit Attacker)
+		public virtual NoSingleAttackReason AddAttacker(Unit Attacker)
 		{
 			if (!_Attackers.Contains(Attacker))
 			{
@@ -144,7 +144,7 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.DUPLICATE;
 		}
 
-		public void RemoveAttacker(Unit Attacker)
+		public virtual void RemoveAttacker(Unit Attacker)
 		{
 			_Attackers.Remove(Attacker);
 			Recalculate();
@@ -183,12 +183,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public NoAttackReason Validate()
+		public virtual NoAttackReason Validate()
 		{
 			return NoAttackReason.NONE;
 		}
 
-		public bool Execute(Random Random)
+		public virtual bool Execute(Random Random)
 		{
 			if (Validate() != NoAttackReason.NONE) return false;
 

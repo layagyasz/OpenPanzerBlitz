@@ -6,9 +6,12 @@ namespace PanzerBlitz
 {
 	public class Match
 	{
+		public EventHandler<ExecuteOrderEventArgs> OnExecuteOrder;
+
 		public readonly Scenario Scenario;
 		public readonly Map Map;
 		public readonly List<Army> Armies;
+		public readonly List<Order> ExecutedOrders = new List<Order>();
 
 		private IEnumerator<Tuple<Army, TurnComponent>> _TurnOrder;
 
@@ -68,7 +71,13 @@ namespace PanzerBlitz
 				if (!ValidateNextPhaseOrder()) return false;
 				else NextPhase();
 			}
-			return Order.Execute(_Random);
+			bool executed = Order.Execute(_Random);
+			if (executed)
+			{
+				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
+				ExecutedOrders.Add(Order);
+			}
+			return executed;
 		}
 
 		private bool ValidateNextPhaseOrder()

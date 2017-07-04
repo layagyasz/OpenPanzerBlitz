@@ -86,7 +86,8 @@ namespace PanzerBlitz
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))
 				{
 					_GameScreen.SetMapView(
-						new MapView(new Map(new SerializationInputStream(compressionStream))));
+						new MapView(
+							new Map(new SerializationInputStream(compressionStream)), TileRenderer.SUMMER_STEPPE));
 					foreach (TileView t in _GameScreen.MapView.TilesEnumerable)
 					{
 						t.OnClick += OnTileClick;

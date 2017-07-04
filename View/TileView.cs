@@ -23,13 +23,13 @@ namespace PanzerBlitz
 			}
 		}
 
-		public TileView(Tile Tile)
+		public TileView(Tile Tile, TileRenderer TileRenderer)
 		{
 			this.Tile = Tile;
-			Tile.OnReconfigure += (sender, e) => Render();
+			Tile.OnReconfigure += (sender, e) => Render(TileRenderer);
 			foreach (Tile t in Tile.NeighborTiles)
 			{
-				if (t != null) t.OnReconfigure += (sender, e) => Render();
+				if (t != null) t.OnReconfigure += (sender, e) => Render(TileRenderer);
 			}
 
 			_BorderVertices = new Vertex[Tile.Bounds.Length + 1];
@@ -38,10 +38,10 @@ namespace PanzerBlitz
 				_BorderVertices[i] = new Vertex(Tile.Bounds[i % Tile.Bounds.Length].Point, Color.Black);
 			}
 
-			Render();
+			Render(TileRenderer);
 		}
 
-		void Render()
+		void Render(TileRenderer TileRenderer)
 		{
 			_Vertices = TileRenderer.Render(Tile);
 		}

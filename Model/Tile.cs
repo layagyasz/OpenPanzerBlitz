@@ -26,6 +26,8 @@ namespace PanzerBlitz
 		Edge[] _Edges = new Edge[6];
 		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
+		public readonly MovementProfile MovementProfile;
+
 		bool _FiredAt;
 		bool _CanIndirectFireAt;
 
@@ -103,12 +105,19 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Tile(int X, int Y, Tile Copy, bool Invert = false)
+		public Tile(int X, int Y)
 		{
 			this.X = X;
 			this.Y = Y;
 			Bounds = CalculateBounds();
 
+			MovementProfile = new MovementProfile(this);
+			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
+		}
+
+		public Tile(int X, int Y, Tile Copy, bool Invert = false)
+				: this(X, Y)
+		{
 			_Elevation = Copy.Elevation;
 			_TileBase = Copy.TileBase;
 
@@ -125,13 +134,8 @@ namespace PanzerBlitz
 				_Edges = Copy._Edges.ToArray();
 				_PathOverlays = Copy._PathOverlays.ToArray();
 			}
-		}
 
-		public Tile(int X, int Y)
-		{
-			this.X = X;
-			this.Y = Y;
-			Bounds = CalculateBounds();
+			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
 		}
 
 		public Tile(SerializationInputStream Stream)
@@ -143,6 +147,9 @@ namespace PanzerBlitz
 			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
 			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
 			Bounds = CalculateBounds();
+
+			MovementProfile = new MovementProfile(this);
+			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -191,6 +198,8 @@ namespace PanzerBlitz
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
 			NeighborTiles[Index] = Neighbor;
+			if (_Edges[Index] != null) SetEdge(Index, _Edges[Index]);
+			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 		}
 
 		public void SetPathOverlay(int Index, TilePathOverlay PathOverlay)

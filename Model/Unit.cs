@@ -16,6 +16,7 @@ namespace PanzerBlitz
 		public readonly UnitConfiguration UnitConfiguration;
 
 		private IEnumerable<LineOfSight> _FieldOfSight;
+		private IEnumerable<Tuple<Tile, Tile, double>> _FieldOfMovement;
 
 		private bool _Deployed;
 
@@ -117,9 +118,18 @@ namespace PanzerBlitz
 		private void CalculateFieldOfSight()
 		{
 			Field<Tile> f = new Field<Tile>(_Position, UnitConfiguration.Range, (i, j) => 1);
-			_FieldOfSight = f.GetReachableNodes()
-											 .Select(i => new LineOfSight(f.GetNodesTo(i.Item1)))
-											 .Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);
+			_FieldOfSight = f
+				.GetReachableNodes()
+				.Select(i => new LineOfSight(f.GetNodesTo(i.Item1)))
+				.Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);
+		}
+
+		private void CalculateFieldOfMovement(bool Combat)
+		{
+			_FieldOfMovement = new Field<Tile>(
+				_Position,
+				UnitConfiguration.Movement,
+				(i, j) => i.MovementProfile.GetMoveCost(this, j, !Combat)).GetReachableNodes();
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)
@@ -134,6 +144,13 @@ namespace PanzerBlitz
 			if (_FieldOfSight == null) CalculateFieldOfSight();
 
 			return _FieldOfSight;
+		}
+
+		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)
+		{
+			if (_FieldOfMovement == null) CalculateFieldOfMovement(Combat);
+
+			return _FieldOfMovement;
 		}
 
 		public void Fire()

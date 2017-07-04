@@ -11,7 +11,102 @@ namespace PanzerBlitz
 {
 	public class TileRenderer
 	{
-		public static Vertex[] Render(Tile Tile)
+		public static readonly TileRenderer SUMMER_STEPPE = new TileRenderer(
+				new Color(205, 194, 149),
+				new Color[] { Color.Black, new Color(235, 37, 26) },
+				new Color[]
+				{
+					Color.White,
+					new Color(145, 155, 130),
+					new Color(43, 122, 119),
+					new Color(169, 150, 71),
+					Color.White
+				},
+				new Color[]
+				{
+					new Color(0, 0, 0, 0),
+					new Color(115, 112, 103),
+					new Color(94, 111, 56),
+					new Color(188, 126, 53)
+				},
+				new Color[]
+				{
+					new Color(0, 0, 0, 0),
+					new Color(138, 134, 122),
+					new Color(125, 150, 72),
+					new Color(169, 150, 71)
+				},
+				new Color[] { new Color(0, 0, 0, 0), new Color(220, 220, 220), new Color(43, 122, 119) },
+				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160) },
+				new float[] { 0, .15f, .15f },
+				new float[] { 0, .2f, .3f }
+		);
+
+		public static readonly TileRenderer WINTER_STEPPE = new TileRenderer(
+				new Color(217, 211, 195),
+				new Color[] { Color.Black, new Color(235, 37, 26) },
+				new Color[]
+				{
+							Color.White,
+							new Color(145, 155, 130),
+							new Color(43, 122, 119),
+							new Color(160, 160, 160),
+							Color.White
+				},
+				new Color[]
+				{
+							new Color(0, 0, 0, 0),
+							new Color(115, 112, 103),
+							new Color(94, 111, 56),
+							new Color(188, 126, 53)
+				},
+				new Color[]
+				{
+							new Color(0, 0, 0, 0),
+							new Color(138, 134, 122),
+							new Color(125, 150, 72),
+							new Color(160, 160, 160)
+				},
+				new Color[] { new Color(0, 0, 0, 0), new Color(195, 159, 109), new Color(140, 200, 200) },
+				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160) },
+				new float[] { 0, .15f, .15f },
+				new float[] { 0, .2f, .3f }
+		);
+
+
+		Color _BaseColor;
+		Color[] _ElevationColors;
+		Color[] _TopColors;
+		Color[] _EdgeColors;
+		Color[] _OverlayColors;
+		Color[] _PathColors;
+		Color[] _PathBorderColors;
+		float[] _PathWidths;
+		float[] _PathBorderWidths;
+
+		public TileRenderer(
+			Color BaseColor,
+			Color[] ElevationColors,
+			Color[] TopColors,
+			Color[] EdgeColors,
+			Color[] OverlayColors,
+			Color[] PathColors,
+			Color[] PathBorderColors,
+			float[] PathWidths,
+			float[] PathBorderWidths)
+		{
+			_BaseColor = BaseColor;
+			_ElevationColors = ElevationColors;
+			_TopColors = TopColors;
+			_EdgeColors = EdgeColors;
+			_OverlayColors = OverlayColors;
+			_PathColors = PathColors;
+			_PathBorderColors = PathBorderColors;
+			_PathWidths = PathWidths;
+			_PathBorderWidths = PathBorderWidths;
+		}
+
+		public Vertex[] Render(Tile Tile)
 		{
 			List<Vertex> vertices = new List<Vertex>();
 
@@ -65,8 +160,8 @@ namespace PanzerBlitz
 					Tile,
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
 					vertices,
-					new Color(150, 150, 150),
-					.3f);
+					PathBorderColor(TilePathOverlay.STREAM),
+					PathBorderWidth(TilePathOverlay.STREAM));
 
 			// Stream.
 			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM))
@@ -75,7 +170,7 @@ namespace PanzerBlitz
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
 					vertices,
 					PathColor(TilePathOverlay.STREAM),
-					.15f);
+					PathWidth(TilePathOverlay.STREAM));
 
 			// Shore.
 			if (Tile.NeighborTiles.Count(i => i != null && i.TileBase == TileBase.WATER) > 0)
@@ -95,14 +190,14 @@ namespace PanzerBlitz
 					Tile,
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
 					vertices,
-					new Color(0, 0, 0),
-					.2f);
+					PathBorderColor(TilePathOverlay.ROAD),
+					PathBorderWidth(TilePathOverlay.ROAD));
 				RenderPath(
 					Tile,
 					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
 					vertices,
 					PathColor(TilePathOverlay.ROAD),
-					.15f);
+					PathWidth(TilePathOverlay.ROAD));
 			}
 
 			// IsHilltop.
@@ -111,7 +206,7 @@ namespace PanzerBlitz
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{
 				// Border.
-				Color edgeColor = EdgeColor(Tile.GetEdge(i), isHilltop);
+				Color edgeColor = EdgeColor(Tile.GetEdge(i), isHilltop, Tile.Elevation);
 				Segment left = Tile.Bounds[Mod(i - 1, Tile.Bounds.Length)];
 				Segment right = Tile.Bounds[Mod(i + 1, Tile.Bounds.Length)];
 				Vector2f internalLeft =
@@ -279,40 +374,47 @@ namespace PanzerBlitz
 			return Segment.Point + Distance * Segment.Length * Segment.Direction;
 		}
 
-		static Color BaseColor(TileBase TileConfiguration)
+		Color BaseColor(TileBase TileConfiguration)
 		{
-			return new Color(205, 194, 149);
+			return _BaseColor;
 		}
 
-		static Color TopColor(TileBase TileConfiguration)
+		Color TopColor(TileBase TileBase)
 		{
-			if (TileConfiguration == TileBase.SLOPE) return new Color(169, 150, 71);
-			else if (TileConfiguration == TileBase.SWAMP) return new Color(145, 155, 130);
-			else if (TileConfiguration == TileBase.WATER) return new Color(43, 122, 119);
-			else return new Color(255, 255, 255, 0);
+			return _TopColors[Array.IndexOf(TileBase.TILE_BASES, TileBase)];
 		}
 
-		static Color EdgeColor(Edge Edge, bool Higher)
+		Color EdgeColor(Edge Edge, bool Higher, int Elevation)
 		{
-			if (Edge == Edge.FOREST) return new Color(94, 111, 56);
-			else if (Edge == Edge.TOWN) return new Color(115, 112, 103);
-			else if (Edge == Edge.SLOPE) return new Color(188, 126, 53);
-			else return Higher ? new Color(235, 37, 26) : new Color(0, 0, 0, 0);
+			Color c = _EdgeColors[Array.IndexOf(Edge.EDGES, Edge)];
+			if (c.A > 0) return c;
+			else return Higher ? _ElevationColors[Math.Min(_ElevationColors.Length - 1, Math.Max(0, Elevation))] : c;
 		}
 
-		static Color OverlayColor(Edge Edge)
+		Color OverlayColor(Edge Edge)
 		{
-			if (Edge == Edge.FOREST) return new Color(125, 150, 72);
-			else if (Edge == Edge.TOWN) return new Color(138, 134, 122);
-			else if (Edge == Edge.SLOPE) return new Color(169, 150, 71);
-			else return new Color(0, 0, 0, 0);
+			return _OverlayColors[Array.IndexOf(Edge.EDGES, Edge)];
 		}
 
-		static Color PathColor(TilePathOverlay PathOverlay)
+		Color PathColor(TilePathOverlay PathOverlay)
 		{
-			if (PathOverlay == TilePathOverlay.ROAD) return new Color(220, 220, 220);
-			else if (PathOverlay == TilePathOverlay.STREAM) return new Color(43, 122, 119);
-			else return new Color(0, 0, 0, 0);
+			return _PathColors[Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, PathOverlay)];
+		}
+
+		Color PathBorderColor(TilePathOverlay PathOverlay)
+		{
+			return _PathBorderColors[Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, PathOverlay)];
+		}
+
+		float PathWidth(TilePathOverlay PathOverlay)
+		{
+			return _PathWidths[Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, PathOverlay)];
+
+		}
+
+		float PathBorderWidth(TilePathOverlay PathOverlay)
+		{
+			return _PathBorderWidths[Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, PathOverlay)];
 		}
 
 		static int Mod(int x, int m)

@@ -117,7 +117,7 @@ namespace PanzerBlitz
 
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
-			if (!CanDirectFire) return NoSingleAttackReason.NO_DIRECT_FIRE;
+			if (!CanDirectFire) return NoSingleAttackReason.UNABLE;
 			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
 			if (WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
 				return NoSingleAttackReason.NO_ARMOR_ATTACK;
@@ -126,7 +126,7 @@ namespace PanzerBlitz
 
 		private NoSingleAttackReason CanIndirectFireAt(LineOfSight LineOfSight)
 		{
-			if (!CanIndirectFire) return NoSingleAttackReason.NO_INDIRECT_FIRE;
+			if (!CanIndirectFire) return NoSingleAttackReason.UNABLE;
 			if (!LineOfSight.Final.CanIndirectFireAt) return NoSingleAttackReason.NO_INDIRECT_FIRE_SPOTTER;
 			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
 			return NoSingleAttackReason.NONE;
@@ -140,6 +140,10 @@ namespace PanzerBlitz
 					if (CanDirectFireAt(EnemyArmored, LineOfSight) == NoSingleAttackReason.NONE)
 						return NoSingleAttackReason.NONE;
 					return CanIndirectFireAt(LineOfSight);
+				case AttackMethod.OVERRUN:
+					if (!CanOverrun) return NoSingleAttackReason.UNABLE;
+					if (CanOnlyOverrunUnarmored && EnemyArmored) return NoSingleAttackReason.NO_ARMOR_ATTACK;
+					return NoSingleAttackReason.NONE;
 			}
 			return NoSingleAttackReason.NONE;
 		}
@@ -150,6 +154,14 @@ namespace PanzerBlitz
 			{
 				case AttackMethod.NORMAL_FIRE:
 					return GetNormalAttack(EnemyArmored, LineOfSight);
+				case AttackMethod.OVERRUN:
+					if (CanAttack(AttackMethod, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
+						return new AttackFactorCalculation(
+							0, new List<AttackFactorCalculationFactor>()
+							{
+								AttackFactorCalculationFactor.CANNOT_ATTACK
+							});
+					return new AttackFactorCalculation(Attack, new List<AttackFactorCalculationFactor>());
 			}
 			return null;
 		}

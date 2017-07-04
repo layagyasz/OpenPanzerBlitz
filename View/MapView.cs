@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MapView(Map Map)
+		public MapView(Map Map, TileRenderer TileRenderer)
 		{
 			_Map = Map;
 			Tiles = new TileView[_Map.Tiles.GetLength(0), _Map.Tiles.GetLength(1)];
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 			{
 				for (int j = 0; j < _Map.Tiles.GetLength(1); ++j)
 				{
-					Tiles[i, j] = new TileView(_Map.Tiles[i, j]);
+					Tiles[i, j] = new TileView(_Map.Tiles[i, j], TileRenderer);
 				}
 			}
 		}

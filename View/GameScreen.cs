@@ -29,11 +29,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public GameScreen(Vector2f WindowSize, Map Map, IEnumerable<ArmyView> ArmyViews)
+		public GameScreen(Vector2f WindowSize, MapView MapView, IEnumerable<ArmyView> ArmyViews)
 		{
 			Size = WindowSize;
-			Camera = new Camera(WindowSize, new Vector2f((float)Map.Width, (float)Map.Height) * .5f, 64);
-			_MapView = new MapView(Map);
+			Camera = new Camera(
+				WindowSize, new Vector2f((float)MapView.Map.Width, (float)MapView.Map.Height) * .5f, 64);
+			_MapView = MapView;
 			this.ArmyViews = ArmyViews.ToList();
 		}
 

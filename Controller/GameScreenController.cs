@@ -33,7 +33,8 @@ namespace PanzerBlitz
 			_Controllers = new Dictionary<TurnComponent, Controller>()
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
-				{ TurnComponent.ATTACK, new AttackController(Match, Renderer, GameScreen) }
+				{ TurnComponent.ATTACK, new AttackController(Match, Renderer, GameScreen) },
+				{ TurnComponent.ATTACK_MOVEMENT, new CombatMoveController(Match, GameScreen) }
 			};
 
 			foreach (TileView t in GameScreen.MapView.TilesEnumerable)
