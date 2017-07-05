@@ -126,7 +126,7 @@
 		byte:range { 2 }
 		byte:defense { 8 }
 		byte:movement { 1 }
-		bool:can-engineer { true }
+		bool:is-engineer { true }
 	}
 	unit-configuration:recon-company {
 		string:name { Recon }

@@ -1,16 +1,14 @@
 ﻿using System;
 
-using Cardamom.Graphing;
-
 namespace PanzerBlitz
 {
 	public class OverrunMoveOrder : Order
 	{
-		Path<Tile> _InitialMovement;
+		MovementOrder _InitialMovement;
 		Tile _AttackTile;
 		Tile _ExitTile;
 
-		public OverrunMoveOrder(Path<Tile> InitialMovement, Tile AttackTile, Tile ExitTile)
+		public OverrunMoveOrder(MovementOrder InitialMovement, Tile AttackTile, Tile ExitTile)
 		{
 			_InitialMovement = InitialMovement;
 			_AttackTile = AttackTile;

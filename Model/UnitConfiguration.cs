@@ -22,7 +22,6 @@ namespace PanzerBlitz
 			IMAGE_NAME,
 			OVERRIDE_COLOR,
 
-			CAN_ENGINEER,
 			CAN_DIRECT_FIRE,
 			CAN_INDIRECT_FIRE,
 			CAN_OVERRUN,
@@ -31,12 +30,17 @@ namespace PanzerBlitz
 
 			IS_VEHICLE,
 			IS_ARMORED,
+			IS_ENGINEER,
+			IS_PARATROOP,
+			IS_COMMANDO,
 
 			TRUCK_MOVEMENT,
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
 			CAN_ONLY_OVERRUN_UNARMORED,
-			IS_PASSENGER
+			IS_PASSENGER,
+
+			IS_COMMAND_POST
 		};
 
 		public readonly string Name;
@@ -51,7 +55,6 @@ namespace PanzerBlitz
 		public readonly string ImageName;
 		public readonly Color OverrideColor;
 
-		public readonly bool CanEngineer;
 		public readonly bool CanDirectFire;
 		public readonly bool CanIndirectFire;
 		public readonly bool CanOverrun;
@@ -60,6 +63,9 @@ namespace PanzerBlitz
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
+		public readonly bool IsEngineer;
+		public readonly bool IsParatroop;
+		public readonly bool IsCommando;
 
 		public readonly bool TruckMovement;
 
@@ -67,6 +73,8 @@ namespace PanzerBlitz
 		public readonly bool CanOnlyCarryInfantry;
 		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool IsPassenger;
+
+		public readonly bool IsCommandPost;
 
 		public UnitConfiguration(ParseBlock Block)
 		{
@@ -91,6 +99,8 @@ namespace PanzerBlitz
 											|| UnitClass == UnitClass.TRANSPORT);
 			IsArmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_ARMORED], IsVehicle && UnitClass != UnitClass.TRANSPORT);
+			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
+			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_CARRIER], IsArmored && UnitClass == UnitClass.TRANSPORT);
@@ -98,21 +108,20 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsArmored && UnitClass != UnitClass.TRANSPORT);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
-											  || UnitClass == UnitClass.PARATROOP
-											  || UnitClass == UnitClass.COMMANDO
 											  || UnitClass == UnitClass.TOWED_GUN);
 
-			CanEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ENGINEER], false);
+			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
 			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE], false);
 			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN], IsVehicle && IsArmored);
 			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED], false);
 			CanCloseAssault = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_CLOSE_ASSAULT], UnitClass == UnitClass.INFANTRY
-											  || UnitClass == UnitClass.PARATROOP
-											  || UnitClass == UnitClass.COMMANDO);
+				attributes[(int)Attribute.CAN_CLOSE_ASSAULT],
+				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 
+			IsCommandPost = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_COMMAND_POST], UnitClass == UnitClass.COMMAND_POST);
 		}
 
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
@@ -209,6 +218,84 @@ namespace PanzerBlitz
 			}
 
 			return new AttackFactorCalculation(attack, factors);
+		}
+
+		public float GetPointValue()
+		{
+			switch (UnitClass)
+			{
+				case UnitClass.TANK:
+					if (WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
+					else return Attack + Range + Defense + Movement;
+				case UnitClass.ASSAULT_GUN:
+					if (CanAntiAircraft)
+					{
+						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f * Range + Defense + Movement;
+						else return 1.5f * Attack + .5f * Range + Defense + Movement;
+					}
+					else return Attack + Math.Min((int)Defense, 6) + Defense + Movement;
+				case UnitClass.FLAME_TANK:
+					return .5f * Attack + Range + Defense + Movement;
+				case UnitClass.SELF_PROPELLED_ARTILLERY:
+					if (Range > 16) return Attack + .25f * Range + Defense + Movement;
+					else return Attack + 4 + Defense + Movement;
+				case UnitClass.RECONNAISSANCE_VEHICLE:
+					if (IsCommandPost) return 5 + Defense + Movement;
+					if (CanAntiAircraft)
+					{
+						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f * Range + Defense + Movement;
+						else return 1.5f * Attack + .5f * Range + Defense + Movement;
+					}
+					else
+					{
+						if (WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
+						else if (WeaponClass == WeaponClass.ANTI_ARMOR) return Attack + Range + Defense + Movement;
+						else return Attack + Math.Min((int)Range, 6) + Defense + Movement;
+					}
+				case UnitClass.TRANSPORT:
+					if (IsVehicle)
+					{
+						if (IsArmored) return Attack + Range + Defense + Movement;
+						else return Attack + Range + Defense + .5f * Movement;
+					}
+					else return Attack + Range + Defense + Movement;
+				case UnitClass.TOWED_GUN:
+					if (CanIndirectFire && WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+						return .5f * Attack + .25f * Range + Defense + Movement;
+					else if (CanAntiAircraft)
+					{
+						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f + Range + Defense + Movement;
+						else return Attack + .5f * Range + Defense + Movement;
+					}
+					else if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+						return .5f * Attack + Math.Min((int)Range, 6) + Defense + Movement;
+					else return .5f * Attack + .5f * Range + Defense + Movement;
+				case UnitClass.INFANTRY:
+					if (IsEngineer) return 2 * Attack + 1 + Defense + Movement;
+					else if (IsCommando) return 2 * Attack + 1 + Defense + 2 * Movement;
+					else return Attack + 1 + Defense + Movement;
+				case UnitClass.CAVALRY:
+					return Attack + 1 + Defense + 1;
+				case UnitClass.COMMAND_POST:
+					return 5;
+				case UnitClass.AMPHIBIOUS_VEHICLE:
+					if (IsCarrier || WeaponClass == WeaponClass.INFANTRY) return Defense + 1.5f * Movement;
+					else if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+						return Attack + Math.Min((int)Range, 6) + Defense + 1.5f * Movement;
+					else return Attack + Range + Defense + 1.5f * Movement;
+				case UnitClass.ENGINEER_VEHICLE:
+					return Attack + Range + Defense + 1.5f * Movement;
+				case UnitClass.BRIDGE:
+					return Defense;
+				case UnitClass.FORT:
+					return 10 + .5f * Defense;
+				case UnitClass.BLOCK:
+					return 12;
+				case UnitClass.MINEFIELD:
+					return 10 * Attack + 15;
+				default:
+					return Attack + Range + Defense + Movement;
+			}
 		}
 	}
 }
