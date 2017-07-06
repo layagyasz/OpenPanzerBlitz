@@ -6,6 +6,7 @@ namespace PanzerBlitz
 		NONE,
 		MUST_ATTACK_ALL,
 		ILLEGAL_EACH,
-		NOT_SPOTTED
+		NOT_SPOTTED,
+		ILLEGAL
 	}
 }

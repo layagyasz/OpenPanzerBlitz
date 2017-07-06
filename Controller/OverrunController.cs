@@ -71,9 +71,5 @@ namespace PanzerBlitz
 		public void HandleUnitRightClick(Unit Unit)
 		{
 		}
-
-		private void StartAttack(Tile Tile)
-		{
-		}
 	}
 }

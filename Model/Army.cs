@@ -31,6 +31,12 @@ namespace PanzerBlitz
 		{
 			if (TurnComponent == TurnComponent.DEPLOYMENT)
 				return Deployments.All(i => i.AutomateDeployment(Match));
+			else if (TurnComponent == TurnComponent.RESET)
+			{
+				foreach (Deployment d in Deployments)
+					foreach (Unit u in d.Units) u.Reset();
+				return true;
+			}
 			return false;
 		}
 

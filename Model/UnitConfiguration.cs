@@ -157,6 +157,18 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
+		public int GetRange(AttackMethod AttackMethod)
+		{
+			switch (AttackMethod)
+			{
+				case AttackMethod.OVERRUN: return 0;
+				case AttackMethod.NORMAL_FIRE: return Range;
+				case AttackMethod.CLOSE_ASSAULT: return CanCloseAssault ? 1 : 0;
+			}
+			// Should not end up here.
+			return 0;
+		}
+
 		public AttackFactorCalculation GetAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			switch (AttackMethod)

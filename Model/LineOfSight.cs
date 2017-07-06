@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Graphing;
+
 namespace PanzerBlitz
 {
 	public class LineOfSight
 	{
 		Tile[] _LineOfSight;
 		Edge[] _CrossedEdges;
+
+		NoLineOfSightReason _Verified;
 
 		public Tile Initial
 		{
@@ -33,33 +37,86 @@ namespace PanzerBlitz
 			}
 		}
 
-		public LineOfSight(IEnumerable<Tile> LineOfSight)
+		public LineOfSight(Tile From, Tile To)
 		{
-			_LineOfSight = LineOfSight.ToArray();
-			_CrossedEdges = new Edge[_LineOfSight.Length - 1];
-			for (int i = 0; i < _LineOfSight.Length - 1; ++i)
+			// We calculate lines of sight to and from to make sure sighting is symmetrical.
+			Tile[] losA = new Path<Tile>(
+				From,
+				To,
+				i => true,
+				(i, j) => 1,
+				(i, j) => i.HeuristicDistanceTo(j),
+				i => i.Neighbors(),
+				(i, j) => i == j).Nodes.ToArray();
+			Edge[] crossedEdgesA = new Edge[losA.Length - 1];
+
+			for (int i = 0; i < losA.Length - 1; ++i)
 			{
-				_CrossedEdges[i] = _LineOfSight[i].GetEdge(_LineOfSight[i + 1]);
+				crossedEdgesA[i] = losA[i].GetEdge(losA[i + 1]);
+			}
+
+			Tile[] losB = new Path<Tile>(
+				To,
+				From,
+				i => true,
+				(i, j) => 1,
+				(i, j) => i.HeuristicDistanceTo(j),
+				i => i.Neighbors(),
+				(i, j) => i == j).Nodes.Reverse().ToArray();
+			Edge[] crossedEdgesB = new Edge[losB.Length - 1];
+
+			for (int i = 0; i < losA.Length - 1; ++i)
+			{
+				crossedEdgesB[i] = losB[i].GetEdge(losB[i + 1]);
+			}
+
+			NoLineOfSightReason losAVerify = Verify(losA, crossedEdgesA);
+			if (losAVerify != NoLineOfSightReason.NONE)
+			{
+				_Verified = losAVerify;
+				_LineOfSight = losA;
+				_CrossedEdges = crossedEdgesA;
+			}
+			else
+			{
+				NoLineOfSightReason losBVerify = Verify(losB, crossedEdgesB);
+				if (losBVerify == NoLineOfSightReason.NONE)
+				{
+					_Verified = losBVerify;
+					_LineOfSight = losB;
+					_CrossedEdges = crossedEdgesB;
+				}
+				else
+				{
+					_Verified = losAVerify;
+					_LineOfSight = losA;
+					_CrossedEdges = crossedEdgesA;
+				}
 			}
 		}
 
 		public NoLineOfSightReason Verify()
 		{
+			return _Verified;
+		}
+
+		static NoLineOfSightReason Verify(Tile[] LineOfSight, Edge[] CrossedEdges)
+		{
 			// Always LOS if adjacent.
-			if (_CrossedEdges.Length == 1) return NoLineOfSightReason.NONE;
+			if (CrossedEdges.Length == 1) return NoLineOfSightReason.NONE;
 
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;
 			Edge[] edges = null;
-			if (Initial.Elevation > Final.Elevation)
+			if (LineOfSight[0].Elevation > LineOfSight[LineOfSight.Length - 1].Elevation)
 			{
-				los = _LineOfSight.Reverse().ToArray();
-				edges = _CrossedEdges.Reverse().ToArray();
+				los = LineOfSight.Reverse().ToArray();
+				edges = CrossedEdges.Reverse().ToArray();
 			}
 			else
 			{
-				los = _LineOfSight.ToArray();
-				edges = _CrossedEdges.ToArray();
+				los = LineOfSight.ToArray();
+				edges = CrossedEdges.ToArray();
 			}
 
 			// Check for blocks.
@@ -71,7 +128,7 @@ namespace PanzerBlitz
 			return NoLineOfSightReason.NONE;
 		}
 
-		public static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges, Edge EdgeType)
+		static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges, Edge EdgeType)
 		{
 			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
 			{
@@ -94,7 +151,7 @@ namespace PanzerBlitz
 			return false;
 		}
 
-		public static bool ElevationBlocks(Tile[] LineOfSight)
+		static bool ElevationBlocks(Tile[] LineOfSight)
 		{
 			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
 			{

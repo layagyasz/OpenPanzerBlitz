@@ -9,6 +9,8 @@ namespace PanzerBlitz
 	{
 		static readonly Color[] HIGHLIGHT_COLORS = new Color[] { new Color(255, 0, 0, 120), new Color(0, 255, 0, 120) };
 
+		public AttackMethod AttackMethod;
+
 		Army _Army;
 		Match _Match;
 		GameScreen _GameScreen;
@@ -20,8 +22,10 @@ namespace PanzerBlitz
 		AttackPane _AttackPane;
 		Unit _SelectedUnit;
 
-		public AttackController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+		public AttackController(AttackMethod AttackMethod, Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
 		{
+			this.AttackMethod = AttackMethod;
+
 			_Match = Match;
 			_GameScreen = GameScreen;
 			_Renderer = Renderer;
@@ -66,7 +70,7 @@ namespace PanzerBlitz
 							i.Final,
 							HIGHLIGHT_COLORS[
 								Math.Min(
-									i.Range * 2 / (Unit.UnitConfiguration.Range + 1),
+									i.Range * 2 / (Unit.UnitConfiguration.GetRange(AttackMethod) + 1),
 									HIGHLIGHT_COLORS.Length - 1)])));
 				_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
 			}
@@ -81,7 +85,7 @@ namespace PanzerBlitz
 		{
 			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
 
-			_AttackBuilder = new AttackOrder(_Army, Tile, AttackMethod.NORMAL_FIRE);
+			_AttackBuilder = new AttackOrder(_Army, Tile, AttackMethod);
 			if (_SelectedUnit != null) _AttackBuilder.AddAttacker(_SelectedUnit);
 			_SelectedUnit = null;
 
@@ -93,7 +97,6 @@ namespace PanzerBlitz
 
 		private void ExecuteAttack(object sender, EventArgs e)
 		{
-			Console.WriteLine("ATTACK");
 			if (_Match.ExecuteOrder(_AttackBuilder)) _GameScreen.RemovePane(_AttackPane);
 			else _AttackPane.UpdateDescription();
 		}
