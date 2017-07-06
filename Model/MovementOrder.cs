@@ -31,9 +31,6 @@ namespace PanzerBlitz
 
 		public bool Execute(Random Random)
 		{
-			Console.WriteLine(Validate());
-			Console.WriteLine(Path.Distance);
-
 			if (Validate() == NoMoveReason.NONE)
 			{
 				Unit.MoveTo(Path.Destination, (float)Path.Distance);
