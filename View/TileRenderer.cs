@@ -47,25 +47,25 @@ namespace PanzerBlitz
 				new Color[] { Color.Black, new Color(235, 37, 26) },
 				new Color[]
 				{
-							Color.White,
-							new Color(145, 155, 130),
-							new Color(43, 122, 119),
-							new Color(160, 160, 160),
-							Color.White
+					Color.White,
+					new Color(145, 155, 130),
+					new Color(43, 122, 119),
+					new Color(160, 160, 160),
+					Color.White
 				},
 				new Color[]
 				{
-							new Color(0, 0, 0, 0),
-							new Color(115, 112, 103),
-							new Color(94, 111, 56),
-							new Color(188, 126, 53)
+					new Color(0, 0, 0, 0),
+					new Color(115, 112, 103),
+					new Color(94, 111, 56),
+					new Color(188, 126, 53)
 				},
 				new Color[]
 				{
-							new Color(0, 0, 0, 0),
-							new Color(138, 134, 122),
-							new Color(125, 150, 72),
-							new Color(160, 160, 160)
+					new Color(0, 0, 0, 0),
+					new Color(138, 134, 122),
+					new Color(125, 150, 72),
+					new Color(160, 160, 160)
 				},
 				new Color[] { new Color(0, 0, 0, 0), new Color(195, 159, 109), new Color(140, 200, 200) },
 				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160) },

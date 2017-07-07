@@ -175,6 +175,18 @@ class<>:classes {
 		}
 	}
 
+	class:info-display {
+		mode:default {
+			int:height { 96 }
+			int:width { 288 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+			!font:font-face { fonts.univers }
+			color:font-color { #FFFFFF }
+			int:font-size { 12 }
+			int[]:padding { 8 8 8 8 }
+		}
+	}
+
 	class:io-pane {
 		mode:default {
 			int:height { 768 }

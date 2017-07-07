@@ -18,6 +18,8 @@ namespace PanzerBlitz
 
 		Dictionary<TurnComponent, Controller> _Controllers;
 
+		TextBox _InfoDisplay = new TextBox("info-display");
+
 		public readonly Match Match;
 
 		public GameScreenController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
@@ -30,13 +32,16 @@ namespace PanzerBlitz
 			finishButton.OnClick += (s, e) => Match.ExecuteOrder(new NextPhaseOrder());
 			GameScreen.AddItem(finishButton);
 
+			_InfoDisplay.Position = finishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
+			GameScreen.AddItem(_InfoDisplay);
+
 			_Controllers = new Dictionary<TurnComponent, Controller>()
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
 				{ TurnComponent.ATTACK, new AttackController(AttackMethod.NORMAL_FIRE, Match, Renderer, GameScreen) },
-				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new CombatMoveController(Match, GameScreen) },
+				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(Match, GameScreen) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(true, Match, GameScreen) },
-								{
+				{
 					TurnComponent.CLOSE_ASSAULT,
 					new AttackController(AttackMethod.CLOSE_ASSAULT, Match, Renderer, GameScreen)
 				},
@@ -66,6 +71,8 @@ namespace PanzerBlitz
 
 		private void HandleTurn(object sender, StartTurnComponentEventArgs e)
 		{
+			_InfoDisplay.DisplayedString =
+				string.Format("{0}\n{1}", ((Army)sender).ArmyConfiguration.Faction.Name, e.TurnComponent);
 			_Controllers[e.TurnComponent].Begin((Army)sender);
 		}
 

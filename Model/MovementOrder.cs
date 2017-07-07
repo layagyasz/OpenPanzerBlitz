@@ -19,6 +19,8 @@ namespace PanzerBlitz
 
 		public NoMoveReason Validate()
 		{
+			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
+
 			for (int i = 0; i < Path.Count - 1; ++i)
 			{
 				double d = Path[i].MovementProfile.GetMoveCost(Unit, Path[i + 1], !Combat);

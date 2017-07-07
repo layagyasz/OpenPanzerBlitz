@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -20,7 +21,7 @@ namespace PanzerBlitz
 		public NoSingleAttackReason AddAttacker(Unit Attacker, OverrunMoveOrder MoveOrder)
 		{
 			NoSingleAttackReason r = base.AddAttacker(Attacker);
-			if (r != NoSingleAttackReason.NONE) _Moves.Add(MoveOrder);
+			if (r == NoSingleAttackReason.NONE) _Moves.Add(MoveOrder);
 			return r;
 		}
 
@@ -31,7 +32,9 @@ namespace PanzerBlitz
 
 		public override bool Execute(Random Random)
 		{
-			return base.Execute(Random);
+			if (Validate() != NoAttackReason.NONE) return false;
+
+			return _Moves.All(i => i.Execute(Random)) && base.Execute(Random);
 		}
 	}
 }

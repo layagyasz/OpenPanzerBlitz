@@ -76,6 +76,32 @@ namespace PanzerBlitz
 			this.UnitConfiguration = UnitConfiguration;
 		}
 
+		public NoMoveReason CanMove(bool Combat)
+		{
+			if (Fired) return NoMoveReason.NO_MOVE;
+			if (RemainingMovement > 0)
+			{
+				if (Combat)
+					return UnitConfiguration.CanOverrun || UnitConfiguration.CanCloseAssault
+											? NoMoveReason.NONE : NoMoveReason.NO_MOVE;
+				else return NoMoveReason.NONE;
+			}
+			else return NoMoveReason.NO_MOVE;
+		}
+
+		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
+		{
+			if (Fired) return NoSingleAttackReason.UNABLE;
+			return UnitConfiguration.CanAttack(AttackMethod);
+		}
+
+		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
+		{
+			NoSingleAttackReason r = CanAttack(AttackMethod);
+			if (r != NoSingleAttackReason.NONE) return r;
+			return UnitConfiguration.CanAttack(AttackMethod, EnemyArmored, LineOfSight);
+		}
+
 		public void HandleCombatResult(CombatResult CombatResult)
 		{
 			switch (CombatResult)

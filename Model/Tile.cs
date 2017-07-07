@@ -195,6 +195,11 @@ namespace PanzerBlitz
 		}
 		// Pathable
 
+		public Tile GetOppositeNeighbor(Tile Neighbor)
+		{
+			return NeighborTiles[(Array.IndexOf(NeighborTiles, Neighbor) + 3) % 6];
+		}
+
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
 			NeighborTiles[Index] = Neighbor;

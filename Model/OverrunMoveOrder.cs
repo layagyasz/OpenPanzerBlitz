@@ -8,16 +8,21 @@ namespace PanzerBlitz
 		Tile _AttackTile;
 		Tile _ExitTile;
 
-		public OverrunMoveOrder(MovementOrder InitialMovement, Tile AttackTile, Tile ExitTile)
+		public OverrunMoveOrder(MovementOrder InitialMovement, Tile AttackTile)
 		{
 			_InitialMovement = InitialMovement;
 			_AttackTile = AttackTile;
-			_ExitTile = ExitTile;
+			_ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.Path.Destination);
+		}
+
+		public NoMoveReason Validate()
+		{
+			return NoMoveReason.NONE;
 		}
 
 		public bool Execute(Random Random)
 		{
-			return true;
+			return _InitialMovement.Execute(Random);
 		}
 	}
 }

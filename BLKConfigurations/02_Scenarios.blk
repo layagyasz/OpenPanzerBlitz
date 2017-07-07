@@ -59,7 +59,7 @@
 						unit-configuration[]:unit-configurations {
 							!unit-configuration:_ { unit-configurations.127mm }
 						}
-						coordinate:coordinate { 7,7 }
+						coordinate:coordinate { 7,6 }
 					}
 				}
 			}

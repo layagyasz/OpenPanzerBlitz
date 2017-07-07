@@ -141,8 +141,25 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
+		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
+		{
+			switch (AttackMethod)
+			{
+				case AttackMethod.OVERRUN:
+					return CanOverrun ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
+				case AttackMethod.NORMAL_FIRE:
+					return CanDirectFire || CanIndirectFire ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
+				case AttackMethod.CLOSE_ASSAULT:
+					return CanCloseAssault ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
+				default: return NoSingleAttackReason.NONE;
+			}
+		}
+
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
+			NoSingleAttackReason r = CanAttack(AttackMethod);
+			if (r != NoSingleAttackReason.NONE) return r;
+
 			switch (AttackMethod)
 			{
 				case AttackMethod.NORMAL_FIRE:
@@ -150,7 +167,6 @@ namespace PanzerBlitz
 						return NoSingleAttackReason.NONE;
 					return CanIndirectFireAt(LineOfSight);
 				case AttackMethod.OVERRUN:
-					if (!CanOverrun) return NoSingleAttackReason.UNABLE;
 					if (CanOnlyOverrunUnarmored && EnemyArmored) return NoSingleAttackReason.NO_ARMOR_ATTACK;
 					return NoSingleAttackReason.NONE;
 			}

@@ -80,7 +80,7 @@ namespace PanzerBlitz
 			else
 			{
 				NoLineOfSightReason losBVerify = Verify(losB, crossedEdgesB);
-				if (losBVerify == NoLineOfSightReason.NONE)
+				if (losBVerify != NoLineOfSightReason.NONE)
 				{
 					_Verified = losBVerify;
 					_LineOfSight = losB;

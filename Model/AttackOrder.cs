@@ -131,7 +131,7 @@ namespace PanzerBlitz
 		{
 			if (!_Attackers.Contains(Attacker))
 			{
-				NoSingleAttackReason canAttack = Attacker.UnitConfiguration.CanAttack(
+				NoSingleAttackReason canAttack = Attacker.CanAttack(
 					AttackMethod, AttackAt.Units.Count(
 						i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored),
 					Attacker.GetLineOfSight(AttackAt));

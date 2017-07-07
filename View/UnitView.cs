@@ -14,11 +14,15 @@ namespace PanzerBlitz
 {
 	public class UnitView : Interactive
 	{
+		Vertex[] _FiredRect;
+		Vertex[] _MovedRect;
+
 		Texture _Texture;
 		Vertex[] _ImageVertices;
 		Vertex[] _Vertices;
 		Rectangle _Bounds;
 
+		public readonly float Scale;
 		public readonly Unit Unit;
 
 		public override Vector2f Size
@@ -29,9 +33,10 @@ namespace PanzerBlitz
 			}
 		}
 
-		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Size)
+		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Scale)
 		{
 			this.Unit = Unit;
+
 			Color[] colors = Unit.Army.ArmyConfiguration.Faction.Colors;
 			if (!Unit.UnitConfiguration.IsArmored)
 			{
@@ -53,25 +58,45 @@ namespace PanzerBlitz
 			_Texture.CopyToImage().SaveToFile("out0.png");
 			for (int i = 0; i < colors.Length; ++i)
 			{
-				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
-				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Size, colors[i]);
+				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Scale, colors[i]);
+				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Scale, colors[i]);
+				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Scale, colors[i]);
+				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Scale, colors[i]);
 			}
 			_ImageVertices = new Vertex[4];
 			Color c = Unit.UnitConfiguration.OverrideColor;
 			if (c.R == 0 && c.G == 0 && c.B == 0)
 				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
-			_ImageVertices[0] = new Vertex(
-				new Vector2f(-.5f, -.5f) * Size, c, renderInfo.Item2[0]);
-			_ImageVertices[1] = new Vertex(
-				new Vector2f(.5f, -.5f) * Size, c, renderInfo.Item2[1]);
-			_ImageVertices[2] = new Vertex(
-				new Vector2f(.5f, .5f) * Size, c, renderInfo.Item2[2]);
-			_ImageVertices[3] = new Vertex(
-				new Vector2f(-.5f, .5f) * Size, c, renderInfo.Item2[3]);
 
-			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Size, new Vector2f(1, 1) * Size);
+			Vector2f tl = new Vector2f(-.5f, -.5f) * Scale;
+			Vector2f tr = new Vector2f(.5f, -.5f) * Scale;
+			Vector2f br = new Vector2f(.5f, .5f) * Scale;
+			Vector2f bl = new Vector2f(-.5f, .5f) * Scale;
+			_ImageVertices[0] = new Vertex(tl, c, renderInfo.Item2[0]);
+			_ImageVertices[1] = new Vertex(tr, c, renderInfo.Item2[1]);
+			_ImageVertices[2] = new Vertex(br, c, renderInfo.Item2[2]);
+			_ImageVertices[3] = new Vertex(bl, c, renderInfo.Item2[3]);
+
+			tl = new Vector2f(-.5f, -.15f) * Scale;
+			tr = new Vector2f(.5f, -.15f) * Scale;
+			br = new Vector2f(.5f, .15f) * Scale;
+			bl = new Vector2f(-.5f, .15f) * Scale;
+			_FiredRect = new Vertex[]
+			{
+				new Vertex(tl, Color.Red),
+				new Vertex(tr, Color.Red),
+				new Vertex(br, Color.Red),
+				new Vertex(bl, Color.Red)
+			};
+			_MovedRect = new Vertex[]
+			{
+				new Vertex(tl, Color.Blue),
+				new Vertex(tr, Color.Blue),
+				new Vertex(br, Color.Blue),
+				new Vertex(bl, Color.Blue)
+			};
+
+			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
 		}
 
 		public override bool IsCollision(Vector2f Point)
@@ -91,6 +116,9 @@ namespace PanzerBlitz
 
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
+			Transform t = Transform.Identity;
+			t.Scale(Scale, Scale);
+
 			Transform.Translate(Position);
 			RenderStates r = new RenderStates();
 			r.Transform = Transform;
@@ -102,6 +130,11 @@ namespace PanzerBlitz
 				r.Texture = _Texture;
 				Target.Draw(_ImageVertices, PrimitiveType.Quads, r);
 			}
+
+			r.Texture = null;
+
+			if (Unit.Moved) Target.Draw(_MovedRect, PrimitiveType.Quads, r);
+			if (Unit.Fired) Target.Draw(_FiredRect, PrimitiveType.Quads, r);
 		}
 	}
 }

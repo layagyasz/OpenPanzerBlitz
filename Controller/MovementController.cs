@@ -23,7 +23,7 @@ namespace PanzerBlitz
 		GameScreen _GameScreen;
 
 		Unit _SelectedUnit;
-		Highlight _MoveHighlight = new Highlight();
+		Highlight _MoveHighlight;
 
 		public MovementController(bool VehicleMovement, Match Match, GameScreen GameScreen)
 		{
@@ -37,6 +37,7 @@ namespace PanzerBlitz
 		{
 			_Army = Army;
 
+			_MoveHighlight = new Highlight();
 			_GameScreen.HighlightLayer.AddHighlight(_MoveHighlight);
 		}
 
@@ -60,7 +61,9 @@ namespace PanzerBlitz
 
 		public void HandleUnitLeftClick(Unit Unit)
 		{
-			if (Unit.Army == _Army && Unit.UnitConfiguration.IsVehicle == VehicleMovement)
+			if (Unit.Army == _Army
+				&& Unit.UnitConfiguration.IsVehicle == VehicleMovement
+				&& Unit.CanMove(false) == NoMoveReason.NONE)
 			{
 				_SelectedUnit = Unit;
 

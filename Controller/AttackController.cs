@@ -7,7 +7,13 @@ namespace PanzerBlitz
 {
 	public class AttackController : Controller
 	{
-		static readonly Color[] HIGHLIGHT_COLORS = new Color[] { new Color(255, 0, 0, 120), new Color(0, 255, 0, 120) };
+		static readonly Color[] HIGHLIGHT_COLORS = new Color[]
+		{
+			new Color(255, 0, 0, 120),
+			new Color(255, 128, 0, 120),
+		  	new Color(255, 255, 0, 120),
+			new Color(0, 255, 0, 120)
+		};
 
 		public AttackMethod AttackMethod;
 
@@ -16,13 +22,14 @@ namespace PanzerBlitz
 		GameScreen _GameScreen;
 		UnitConfigurationRenderer _Renderer;
 
-		Highlight _RangeHighlight = new Highlight();
+		Highlight _RangeHighlight;
 
 		AttackOrder _AttackBuilder;
 		AttackPane _AttackPane;
 		Unit _SelectedUnit;
 
-		public AttackController(AttackMethod AttackMethod, Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+		public AttackController(
+			AttackMethod AttackMethod, Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
 		{
 			this.AttackMethod = AttackMethod;
 
@@ -34,6 +41,8 @@ namespace PanzerBlitz
 		public void Begin(Army Army)
 		{
 			_Army = Army;
+
+			_RangeHighlight = new Highlight();
 			_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
 		}
 
@@ -70,7 +79,8 @@ namespace PanzerBlitz
 							i.Final,
 							HIGHLIGHT_COLORS[
 								Math.Min(
-									i.Range * 2 / (Unit.UnitConfiguration.GetRange(AttackMethod) + 1),
+									i.Range * HIGHLIGHT_COLORS.Length
+										/ (Unit.UnitConfiguration.GetRange(AttackMethod) + 1),
 									HIGHLIGHT_COLORS.Length - 1)])));
 				_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
 			}

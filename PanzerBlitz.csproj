@@ -67,7 +67,6 @@
     <Compile Include="Controller\GameScreenController.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
-    <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="View\Highlight.cs" />
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="Model\DeployOrder.cs" />
     <Compile Include="Model\NoDeployReason.cs" />
     <Compile Include="View\Camera.cs" />
+    <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="Controller\DeploymentController.cs" />
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Model\ZoneDeployment.cs" />
