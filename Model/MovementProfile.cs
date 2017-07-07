@@ -7,10 +7,36 @@ namespace PanzerBlitz
 	{
 		public readonly Tile Tile;
 
+		bool _MustAttackAllUnits;
+		bool _TreatUnitsAsArmored;
+		int _DieModifier;
+
 		float[] _RoadMovement = new float[6];
 		float[] _NonRoadMovement = new float[6];
 		float[] _TruckNonRoadMovement = new float[6];
 		float[] _VehicleNonRoadMovement = new float[6];
+
+		public bool MustAttackAllUnits
+		{
+			get
+			{
+				return _MustAttackAllUnits;
+			}
+		}
+		public bool TreatUnitsAsArmored
+		{
+			get
+			{
+				return _TreatUnitsAsArmored;
+			}
+		}
+		public int DieModifier
+		{
+			get
+			{
+				return _DieModifier;
+			}
+		}
 
 		public MovementProfile(Tile Tile)
 		{
@@ -21,6 +47,19 @@ namespace PanzerBlitz
 		public void Recalculate()
 		{
 			if (Tile.TileBase == null) return;
+
+			_MustAttackAllUnits = Tile.TileBase.MustAttackAllUnits
+									  || Tile.Edges.Any(i => i != null && i.MustAttackAllUnits)
+									  || Tile.PathOverlays.Any(i => i != null && i.MustAttackAllUnits);
+			_TreatUnitsAsArmored = Tile.TileBase.TreatUnitsAsArmored
+									   || Tile.Edges.Any(i => i != null && i.TreatUnitsAsArmored)
+									   || Tile.PathOverlays.Any(i => i != null && i.TreatUnitsAsArmored);
+			_DieModifier =
+				Math.Max(
+					Tile.TileBase.DieModifier,
+					Math.Max(
+						Tile.Edges.Max(i => i == null ? 0 : i.DieModifier),
+						Tile.PathOverlays.Max(i => i == null ? 0 : i.DieModifier)));
 
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
@@ -36,8 +75,10 @@ namespace PanzerBlitz
 			}
 		}
 
-		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement)
+		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
 		{
+			if (!IgnoreOccupyingUnits && To.IsEnemyOccupied(Unit.Army)) return float.MaxValue;
+
 			int index = Array.IndexOf(Tile.NeighborTiles, To);
 
 			if (RoadMovement

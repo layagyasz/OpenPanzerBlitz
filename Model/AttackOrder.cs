@@ -152,15 +152,12 @@ namespace PanzerBlitz
 
 		private void Recalculate()
 		{
-			if (_Attackers.Count == 0)
-			{
-				_OddsCalculations.Clear();
-				return;
-			}
+			_OddsCalculations.Clear();
+			if (_Attackers.Count == 0) return;
 
 			if (AttackTarget == AttackTarget.ALL)
 			{
-				_OddsCalculations.Clear();
+
 				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers.Select(
@@ -171,7 +168,6 @@ namespace PanzerBlitz
 			}
 			else if (AttackTarget == AttackTarget.WEAKEST)
 			{
-				_OddsCalculations.Clear();
 				_OddsCalculations.Add(AttackAt.Units.Select(i =>
 					new OddsCalculation(
 						_Attackers.Select(
@@ -185,7 +181,14 @@ namespace PanzerBlitz
 
 		public virtual NoAttackReason Validate()
 		{
+			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
+
 			return NoAttackReason.NONE;
+		}
+
+		private bool MustAttackAllUnits()
+		{
+			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.MovementProfile.MustAttackAllUnits;
 		}
 
 		public virtual bool Execute(Random Random)

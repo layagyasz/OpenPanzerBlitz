@@ -46,6 +46,7 @@ namespace PanzerBlitz
 
 		public void End()
 		{
+			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
 			_GameScreen.HighlightLayer.RemoveHighlight(_MoveHighlight);
 		}
 

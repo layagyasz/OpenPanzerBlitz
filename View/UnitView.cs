@@ -38,7 +38,7 @@ namespace PanzerBlitz
 			this.Unit = Unit;
 
 			Color[] colors = Unit.Army.ArmyConfiguration.Faction.Colors;
-			if (!Unit.UnitConfiguration.IsArmored)
+			if (!Unit.UnitConfiguration.IsVehicle)
 			{
 				colors = colors.ToArray();
 				for (int i = 0; i < colors.Length; ++i)
@@ -55,7 +55,6 @@ namespace PanzerBlitz
 
 			var renderInfo = Renderer.GetRenderInfo(Unit.UnitConfiguration);
 			_Texture = renderInfo.Item1;
-			_Texture.CopyToImage().SaveToFile("out0.png");
 			for (int i = 0; i < colors.Length; ++i)
 			{
 				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Scale, colors[i]);

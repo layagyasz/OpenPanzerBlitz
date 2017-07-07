@@ -74,7 +74,6 @@ namespace PanzerBlitz
 			}
 			texture.Display();
 			renderedTexture = new Texture(texture.Texture);
-			renderedTexture.CopyToImage().SaveToFile("out.png");
 			foreach (KeyValuePair<UnitConfiguration, Vector2f[]> k in renderInfoCache)
 				_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
 			_Textures.Add(renderedTexture);

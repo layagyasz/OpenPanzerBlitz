@@ -31,6 +31,13 @@ namespace PanzerBlitz
 		bool _FiredAt;
 		bool _CanIndirectFireAt;
 
+		public IEnumerable<Edge> Edges
+		{
+			get
+			{
+				return _Edges;
+			}
+		}
 		public bool FiredAt
 		{
 			get
@@ -186,7 +193,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return Math.Abs(Node.RealX - RealX) + Math.Abs(Node.RealY - RealY);
+			return .5f * (Math.Abs(Node.RealX - RealX) + Math.Abs(Node.RealY - RealY));
 		}
 
 		public IEnumerable<Tile> Neighbors()
@@ -194,6 +201,11 @@ namespace PanzerBlitz
 			foreach (Tile T in NeighborTiles) yield return T;
 		}
 		// Pathable
+
+		public bool IsEnemyOccupied(Army Army)
+		{
+			return Units.Any(i => i.Army != Army);
+		}
 
 		public Tile GetOppositeNeighbor(Tile Neighbor)
 		{

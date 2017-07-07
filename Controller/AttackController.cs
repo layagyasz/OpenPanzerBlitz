@@ -48,6 +48,7 @@ namespace PanzerBlitz
 
 		public void End()
 		{
+			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
 			_GameScreen.HighlightLayer.RemoveHighlight(_RangeHighlight);
 		}
 
@@ -74,7 +75,7 @@ namespace PanzerBlitz
 
 				_GameScreen.HighlightLayer.RemoveHighlight(_RangeHighlight);
 				_RangeHighlight = new Highlight(
-					Unit.GetFieldOfSight().Select(
+					Unit.GetFieldOfSight(AttackMethod).Select(
 						i => new Tuple<Tile, Color>(
 							i.Final,
 							HIGHLIGHT_COLORS[

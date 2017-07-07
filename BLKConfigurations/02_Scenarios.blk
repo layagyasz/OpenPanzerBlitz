@@ -40,7 +40,7 @@
 					}
 					tile-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.guards-company }
+							!unit-configuration:_ { unit-configurations.t-34-c }
 						}
 						coordinate:coordinate { 8,6 }
 					}

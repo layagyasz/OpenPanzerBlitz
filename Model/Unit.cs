@@ -170,9 +170,9 @@ namespace PanzerBlitz
 				(i, j) => i == j);
 		}
 
-		public IEnumerable<LineOfSight> GetFieldOfSight()
+		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			return new Field<Tile>(_Position, UnitConfiguration.Range, (i, j) => 1)
+			return new Field<Tile>(_Position, UnitConfiguration.GetRange(AttackMethod), (i, j) => 1)
 				.GetReachableNodes()
 				.Select(i => GetLineOfSight(i.Item1))
 				.Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);

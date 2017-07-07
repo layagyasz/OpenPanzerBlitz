@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		NONE,
 		NO_MOVE,
-		TERRAIN
+		TERRAIN,
+		ENEMY_OCCUPIED
 	}
 }

@@ -93,8 +93,12 @@ namespace PanzerBlitz
 
 		private string OddsString(OddsCalculation OddsCalculation)
 		{
-			if (OddsCalculation.OddsAgainst) return string.Format("Attack at 1-{0} against", OddsCalculation.Odds);
-			else return string.Format("Attack at {0}-1 for", OddsCalculation.Odds);
+			string dieModifier =
+				string.Format(
+					"{0} {1}", OddsCalculation.DieModifier < 0 ? "-" : "+", Math.Abs(OddsCalculation.DieModifier));
+			if (OddsCalculation.OddsAgainst)
+				return string.Format("Attack at 1-{0} {1} against", OddsCalculation.Odds, dieModifier);
+			else return string.Format("Attack at {0}-1 {1} for", OddsCalculation.Odds, dieModifier);
 		}
 	}
 }
