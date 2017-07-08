@@ -38,13 +38,10 @@ namespace PanzerBlitz
 			_Controllers = new Dictionary<TurnComponent, Controller>()
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
-				{ TurnComponent.ATTACK, new AttackController(AttackMethod.NORMAL_FIRE, Match, Renderer, GameScreen) },
+				{ TurnComponent.ATTACK, new AttackController(Match, GameScreen) },
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(Match, GameScreen) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(true, Match, GameScreen) },
-				{
-					TurnComponent.CLOSE_ASSAULT,
-					new AttackController(AttackMethod.CLOSE_ASSAULT, Match, Renderer, GameScreen)
-				},
+				{ TurnComponent.CLOSE_ASSAULT, new CloseAssaultController(Match, GameScreen) },
 				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(false, Match, GameScreen) }
 			};
 

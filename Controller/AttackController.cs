@@ -5,63 +5,31 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class AttackController : Controller
+	public class AttackController : BaseAttackController<AttackOrder>
 	{
-		static readonly Color[] HIGHLIGHT_COLORS = new Color[]
-		{
-			new Color(255, 0, 0, 120),
-			new Color(255, 128, 0, 120),
-		  	new Color(255, 255, 0, 120),
-			new Color(0, 255, 0, 120)
-		};
-
-		public AttackMethod AttackMethod;
-
-		Army _Army;
-		Match _Match;
-		GameScreen _GameScreen;
-		UnitConfigurationRenderer _Renderer;
-
-		Highlight _RangeHighlight;
-
-		AttackOrder _AttackBuilder;
-		AttackPane _AttackPane;
-		Unit _SelectedUnit;
-
-		public AttackController(
-			AttackMethod AttackMethod, Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
-		{
-			this.AttackMethod = AttackMethod;
-
-			_Match = Match;
-			_GameScreen = GameScreen;
-			_Renderer = Renderer;
-		}
-
-		public void Begin(Army Army)
-		{
-			_Army = Army;
-
-			_RangeHighlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
-		}
-
-		public void End()
-		{
-			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
-			_GameScreen.HighlightLayer.RemoveHighlight(_RangeHighlight);
-		}
-
-		public void HandleTileLeftClick(Tile Tile)
-		{
-			if (Tile.Units.All(i => i.Army != _Army) && Tile.Units.Count() > 0) StartAttack(Tile);
-		}
-
-		public void HandleTileRightClick(Tile Tile)
+		public AttackController(Match Match, GameScreen GameScreen)
+			: base(Match, GameScreen)
 		{
 		}
 
-		public void HandleUnitLeftClick(Unit Unit)
+		public override void HandleTileLeftClick(Tile Tile)
+		{
+			if (Tile.Units.All(i => i.Army != _Army) && Tile.Units.Count() > 0)
+			{
+				StartAttack(new AttackOrder(_Army, Tile, AttackMethod.NORMAL_FIRE));
+				if (_SelectedUnit != null)
+				{
+					_AttackBuilder.AddAttacker(_SelectedUnit);
+					_AttackPane.UpdateDescription();
+				}
+			}
+		}
+
+		public override void HandleTileRightClick(Tile Tile)
+		{
+		}
+
+		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Army)
 			{
@@ -73,43 +41,29 @@ namespace PanzerBlitz
 					_AttackPane.UpdateDescription();
 				}
 
-				_GameScreen.HighlightLayer.RemoveHighlight(_RangeHighlight);
-				_RangeHighlight = new Highlight(
-					Unit.GetFieldOfSight(AttackMethod).Select(
+				Highlight(
+					Unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
 						i => new Tuple<Tile, Color>(
 							i.Final,
 							HIGHLIGHT_COLORS[
 								Math.Min(
 									i.Range * HIGHLIGHT_COLORS.Length
-										/ (Unit.UnitConfiguration.GetRange(AttackMethod) + 1),
+									/ (Unit.UnitConfiguration.GetRange(AttackMethod.NORMAL_FIRE) + 1),
 									HIGHLIGHT_COLORS.Length - 1)])));
-				_GameScreen.HighlightLayer.AddHighlight(_RangeHighlight);
 			}
-			else StartAttack(Unit.Position);
+			else
+			{
+				StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.NORMAL_FIRE));
+				if (_SelectedUnit != null)
+				{
+					_AttackBuilder.AddAttacker(_SelectedUnit);
+					_AttackPane.UpdateDescription();
+				}
+			}
 		}
 
-		public void HandleUnitRightClick(Unit Unit)
+		public override void HandleUnitRightClick(Unit Unit)
 		{
-		}
-
-		private void StartAttack(Tile Tile)
-		{
-			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
-
-			_AttackBuilder = new AttackOrder(_Army, Tile, AttackMethod);
-			if (_SelectedUnit != null) _AttackBuilder.AddAttacker(_SelectedUnit);
-			_SelectedUnit = null;
-
-			_AttackPane = new AttackPane(_AttackBuilder);
-			_GameScreen.AddPane(_AttackPane);
-			_AttackPane.UpdateDescription();
-			_AttackPane.OnExecute += ExecuteAttack;
-		}
-
-		private void ExecuteAttack(object sender, EventArgs e)
-		{
-			if (_Match.ExecuteOrder(_AttackBuilder)) _GameScreen.RemovePane(_AttackPane);
-			else _AttackPane.UpdateDescription();
 		}
 	}
 }

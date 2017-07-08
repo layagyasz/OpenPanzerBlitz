@@ -116,6 +116,9 @@
     <Compile Include="Model\MovementOrder.cs" />
     <Compile Include="Model\NoMoveReason.cs" />
     <Compile Include="Controller\MovementController.cs" />
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Controller\BaseAttackController.cs" />
+    <Compile Include="Controller\CloseAssaultController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

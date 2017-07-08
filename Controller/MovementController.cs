@@ -5,48 +5,17 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class MovementController : Controller
+	public class MovementController : BaseController
 	{
-		static readonly Color[] HIGHLIGHT_COLORS = new Color[]
-		{
-			new Color(255, 0, 0, 120),
-			new Color(255, 128, 0, 120),
-		  	new Color(255, 255, 0, 120),
-			new Color(0, 255, 0, 120)
-		};
-
 		public readonly bool VehicleMovement;
 
-		Army _Army;
-
-		Match _Match;
-		GameScreen _GameScreen;
-
-		Unit _SelectedUnit;
-		Highlight _MoveHighlight;
-
 		public MovementController(bool VehicleMovement, Match Match, GameScreen GameScreen)
+			: base(Match, GameScreen)
 		{
 			this.VehicleMovement = VehicleMovement;
-
-			_Match = Match;
-			_GameScreen = GameScreen;
 		}
 
-		public void Begin(Army Army)
-		{
-			_Army = Army;
-
-			_MoveHighlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_MoveHighlight);
-		}
-
-		public void End()
-		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_MoveHighlight);
-		}
-
-		public void HandleTileLeftClick(Tile Tile)
+		public override void HandleTileLeftClick(Tile Tile)
 		{
 			if (_SelectedUnit != null)
 			{
@@ -55,15 +24,14 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void HandleTileRightClick(Tile Tile)
+		public override void HandleTileRightClick(Tile Tile)
 		{
 		}
 
-		public void HandleUnitLeftClick(Unit Unit)
+		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Army
-				&& Unit.UnitConfiguration.IsVehicle == VehicleMovement
-				&& Unit.CanMove(false) == NoMoveReason.NONE)
+				&& Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE)
 			{
 				_SelectedUnit = Unit;
 
@@ -71,16 +39,15 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void HandleUnitRightClick(Unit Unit)
+		public override void HandleUnitRightClick(Unit Unit)
 		{
 		}
 
 		void SetMovementHighlight(Unit Unit)
 		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_MoveHighlight);
 			if (Unit.RemainingMovement > 0)
 			{
-				_MoveHighlight = new Highlight(
+				Highlight(
 					Unit.GetFieldOfMovement(false).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
@@ -89,8 +56,11 @@ namespace PanzerBlitz
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
 									HIGHLIGHT_COLORS.Length - 1)])));
 			}
-			else _MoveHighlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_MoveHighlight);
+			else
+			{
+				_SelectedUnit = null;
+				UnHighlight();
+			}
 		}
 	}
 }

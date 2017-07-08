@@ -78,7 +78,7 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Combat)
 		{
-			if (Fired) return NoMoveReason.NO_MOVE;
+			if (Fired || Disrupted) return NoMoveReason.NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
@@ -89,9 +89,15 @@ namespace PanzerBlitz
 			else return NoMoveReason.NO_MOVE;
 		}
 
+		public NoMoveReason CanMove(bool Vehicle, bool Combat)
+		{
+			if (Vehicle != UnitConfiguration.IsVehicle) return NoMoveReason.NO_MOVE;
+			else return CanMove(Combat);
+		}
+
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (Fired) return NoSingleAttackReason.UNABLE;
+			if (Fired || Disrupted) return NoSingleAttackReason.UNABLE;
 			return UnitConfiguration.CanAttack(AttackMethod);
 		}
 

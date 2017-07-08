@@ -43,6 +43,22 @@ namespace PanzerBlitz
 			this.Tile = Tile;
 			Recalculate();
 		}
+		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
+		{
+			if (!IgnoreOccupyingUnits && To.IsEnemyOccupied(Unit.Army)) return float.MaxValue;
+
+			int index = Array.IndexOf(Tile.NeighborTiles, To);
+			TilePathOverlay pathOverlay = Tile.GetPathOverlay(To);
+
+			if (RoadMovement
+				&& pathOverlay != null
+				&& pathOverlay.RoadMove
+				&& (Tile.Units.Count() == 0 || (Tile.Units.Count() == 1 && Tile.Units.Contains(Unit))))
+				return _RoadMovement[index];
+			if (Unit.UnitConfiguration.TruckMovement) return _TruckNonRoadMovement[index];
+			if (Unit.UnitConfiguration.IsVehicle) return _VehicleNonRoadMovement[index];
+			return _NonRoadMovement[index];
+		}
 
 		public void Recalculate()
 		{
@@ -68,48 +84,29 @@ namespace PanzerBlitz
 
 				Edge e = Tile.GetEdge(i);
 
-				_RoadMovement[i] = CalculateMovement(Tile, n, e, true, false, false);
+				_RoadMovement[i] = CalculateMovement(
+					Tile, n, e, true, false, false);
 				_NonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, false);
 				_TruckNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, true, true);
 				_VehicleNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, true);
 			}
 		}
 
-		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
-		{
-			if (!IgnoreOccupyingUnits && To.IsEnemyOccupied(Unit.Army)) return float.MaxValue;
-
-			int index = Array.IndexOf(Tile.NeighborTiles, To);
-
-			if (RoadMovement
-				&& (Tile.Units.Count() == 0 || (Tile.Units.Count() == 1 && Tile.Units.Contains(Unit)))
-				&& Tile.PathOverlays.Any(i => i != null && i.RoadMove)
-				&& To.PathOverlays.Any(i => i != null && i.RoadMove))
-				return _RoadMovement[index];
-			else if (Unit.UnitConfiguration.TruckMovement) return _TruckNonRoadMovement[index];
-			else if (Unit.UnitConfiguration.IsVehicle) return _VehicleNonRoadMovement[index];
-			else return _NonRoadMovement[index];
-		}
-
-		private float CalculateMovement(
+		float CalculateMovement(
 			Tile From, Tile To, Edge Edge, bool RoadMovement, bool TruckMovement, bool VehicleMovement)
 		{
-			if (Edge != null && (Edge.NoCrossing || To.TileBase.NoCrossing
-				|| (VehicleMovement
-					&& (Edge.NoVehicleCrossing || To.TileBase.NoVehicleCrossing)))) return float.MaxValue;
+			bool blockingEdge = Edge != null && (Edge.NoCrossing || (VehicleMovement && Edge.NoVehicleCrossing));
 
-			return CalculateEntryCost(
-				To, RoadMovement && From.PathOverlays.Any(i => i != null && i.RoadMove), TruckMovement);
-		}
+			if (!RoadMovement
+				&& (blockingEdge || To.TileBase.NoCrossing || (VehicleMovement && To.TileBase.NoVehicleCrossing)))
+				return float.MaxValue;
 
-		private float CalculateEntryCost(Tile Tile, bool RoadMovement, bool TruckMovement)
-		{
-			float move = TruckMovement ? Tile.TileBase.TruckMoveCost : Tile.TileBase.MoveCost;
+			float move = TruckMovement ? To.TileBase.TruckMoveCost : To.TileBase.MoveCost;
 
 			float edgeMove = float.MaxValue;
 			for (int i = 0; i < 6; ++i)
 			{
-				Edge e = Tile.GetEdge(i);
+				Edge e = To.GetEdge(i);
 				if (e == null) continue;
 
 				float eMove = TruckMovement ? e.TruckMoveCost : e.MoveCost;
@@ -119,7 +116,7 @@ namespace PanzerBlitz
 			float pathMove = float.MaxValue;
 			for (int i = 0; i < 6; ++i)
 			{
-				TilePathOverlay p = Tile.GetPathOverlay(i);
+				TilePathOverlay p = To.GetPathOverlay(i);
 				if (p == null) continue;
 
 				float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
