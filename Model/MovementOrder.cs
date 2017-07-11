@@ -27,8 +27,12 @@ namespace PanzerBlitz
 				float d = Path[i].MovementProfile.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 			}
-			if (Path.Distance > Unit.RemainingMovement) return NoMoveReason.NO_MOVE;
-			if (Combat && Unit.UnitConfiguration.CanCloseAssault && Path.Distance > 1) return NoMoveReason.NO_MOVE;
+			if (Path.Distance > Unit.RemainingMovement)
+			{
+				if (!Unit.Moved && Path.Count <= 2) return NoMoveReason.NONE;
+				return NoMoveReason.NO_MOVE;
+			}
+			if (Combat && Unit.UnitConfiguration.CanCloseAssault && Path.Count > 2) return NoMoveReason.NO_MOVE;
 			return NoMoveReason.NONE;
 		}
 

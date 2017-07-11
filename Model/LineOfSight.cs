@@ -11,7 +11,7 @@ namespace PanzerBlitz
 		Tile[] _LineOfSight;
 		Edge[] _CrossedEdges;
 
-		NoLineOfSightReason _Verified;
+		NoLineOfSightReason _Validated;
 
 		public Tile Initial
 		{
@@ -73,7 +73,7 @@ namespace PanzerBlitz
 			NoLineOfSightReason losAVerify = Verify(losA, crossedEdgesA);
 			if (losAVerify != NoLineOfSightReason.NONE)
 			{
-				_Verified = losAVerify;
+				_Validated = losAVerify;
 				_LineOfSight = losA;
 				_CrossedEdges = crossedEdgesA;
 			}
@@ -82,22 +82,22 @@ namespace PanzerBlitz
 				NoLineOfSightReason losBVerify = Verify(losB, crossedEdgesB);
 				if (losBVerify != NoLineOfSightReason.NONE)
 				{
-					_Verified = losBVerify;
+					_Validated = losBVerify;
 					_LineOfSight = losB;
 					_CrossedEdges = crossedEdgesB;
 				}
 				else
 				{
-					_Verified = losAVerify;
+					_Validated = losAVerify;
 					_LineOfSight = losA;
 					_CrossedEdges = crossedEdgesA;
 				}
 			}
 		}
 
-		public NoLineOfSightReason Verify()
+		public NoLineOfSightReason Validate()
 		{
-			return _Verified;
+			return _Validated;
 		}
 
 		static NoLineOfSightReason Verify(Tile[] LineOfSight, Edge[] CrossedEdges)

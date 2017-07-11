@@ -10,6 +10,7 @@ namespace PanzerBlitz
 		NO_LOS,
 		NO_ARMOR_ATTACK,
 		OUT_OF_RANGE,
+		TERRAIN,
 		NO_INDIRECT_FIRE_SPOTTER
 	}
 }

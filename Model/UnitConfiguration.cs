@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		private enum Attribute
 		{
 			NAME,
+			DISPLAY_NAME,
 			UNIT_CLASS,
 			WEAPON_CLASS,
 			ATTACK,
@@ -44,6 +45,7 @@ namespace PanzerBlitz
 		};
 
 		public readonly string Name;
+		public readonly string DisplayName;
 		public readonly UnitClass UnitClass;
 		public readonly WeaponClass WeaponClass;
 
@@ -80,6 +82,7 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Name = (string)attributes[(int)Attribute.NAME];
+			DisplayName = Parse.DefaultIfNull(attributes[(int)Attribute.DISPLAY_NAME], Name);
 			UnitClass = (UnitClass)attributes[(int)Attribute.UNIT_CLASS];
 			WeaponClass = (WeaponClass)attributes[(int)Attribute.WEAPON_CLASS];
 			Attack = (byte)attributes[(int)Attribute.ATTACK];
@@ -112,9 +115,13 @@ namespace PanzerBlitz
 
 			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
-			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE], false);
-			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN], IsVehicle && IsArmored);
-			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED], false);
+			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE],
+												  UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY);
+			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN],
+											 IsVehicle && IsArmored && UnitClass != UnitClass.SELF_PROPELLED_ARTILLERY);
+			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED],
+				CanOverrun && WeaponClass == WeaponClass.INFANTRY);
 			CanCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_CLOSE_ASSAULT],
 				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
@@ -157,6 +164,9 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
+			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
+				return NoSingleAttackReason.NO_LOS;
+
 			NoSingleAttackReason r = CanAttack(AttackMethod);
 			if (r != NoSingleAttackReason.NONE) return r;
 

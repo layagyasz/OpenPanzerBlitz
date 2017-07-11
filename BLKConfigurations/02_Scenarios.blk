@@ -19,6 +19,7 @@
 		army-configuration[]:army-configurations {
 			army-configuration:_ {
 				!faction:faction { factions.russian }
+				byte:team { 1 }
 				var[]:deployment-configurations {
 					tile-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {
@@ -54,6 +55,7 @@
 			}
 			army-configuration:_ {
 				!faction:faction { factions.german }
+				byte:team { 2 }
 				var[]:deployment-configurations {
 					tile-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {

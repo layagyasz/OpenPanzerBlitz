@@ -20,7 +20,9 @@ namespace PanzerBlitz
 		private float _RemainingMovement;
 		private bool _Fired;
 		private bool _Moved;
+		private bool _MovedMoreThanOneTile;
 		private bool _Disrupted;
+		private bool _Destroyed;
 
 		private Tile _Position;
 
@@ -54,11 +56,27 @@ namespace PanzerBlitz
 			}
 		}
 
+		public bool MovedMoreThanOneTile
+		{
+			get
+			{
+				return _MovedMoreThanOneTile;
+			}
+		}
+
 		public bool Disrupted
 		{
 			get
 			{
 				return _Disrupted;
+			}
+		}
+
+		public bool Destroyed
+		{
+			get
+			{
+				return _Destroyed;
 			}
 		}
 
@@ -78,12 +96,16 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Combat)
 		{
-			if (Fired || Disrupted) return NoMoveReason.NO_MOVE;
+			if (Fired || Disrupted || Destroyed) return NoMoveReason.NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
-					return UnitConfiguration.CanOverrun || UnitConfiguration.CanCloseAssault
-											? NoMoveReason.NONE : NoMoveReason.NO_MOVE;
+				{
+					if (UnitConfiguration.CanOverrun) return NoMoveReason.NONE;
+					if (UnitConfiguration.CanCloseAssault)
+						return _MovedMoreThanOneTile ? NoMoveReason.NO_MOVE : NoMoveReason.NONE;
+					return NoMoveReason.NO_MOVE;
+				}
 				else return NoMoveReason.NONE;
 			}
 			else return NoMoveReason.NO_MOVE;
@@ -97,7 +119,7 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (Fired || Disrupted) return NoSingleAttackReason.UNABLE;
+			if (Fired || Disrupted || Destroyed) return NoSingleAttackReason.UNABLE;
 			return UnitConfiguration.CanAttack(AttackMethod);
 		}
 
@@ -115,8 +137,9 @@ namespace PanzerBlitz
 				case CombatResult.MISS:
 					return;
 				case CombatResult.DESTROY:
-					Remove();
+					_Destroyed = true;
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+					Remove();
 					return;
 				case CombatResult.DISRUPT:
 					_Disrupted = true;
@@ -124,8 +147,9 @@ namespace PanzerBlitz
 				case CombatResult.DOUBLE_DISRUPT:
 					if (_Disrupted)
 					{
-						Remove();
+						_Destroyed = true;
 						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+						Remove();
 					}
 					else _Disrupted = true;
 					return;
@@ -150,6 +174,7 @@ namespace PanzerBlitz
 		public void MoveTo(Tile Tile, float Movement)
 		{
 			_RemainingMovement -= Movement;
+			_MovedMoreThanOneTile = Movement > 1 || _Moved;
 			_Moved = true;
 			Place(Tile);
 		}
@@ -178,18 +203,35 @@ namespace PanzerBlitz
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
 		{
+			if (CanAttack(AttackMethod) != NoSingleAttackReason.NONE) return Enumerable.Empty<LineOfSight>();
+
 			return new Field<Tile>(_Position, UnitConfiguration.GetRange(AttackMethod), (i, j) => 1)
 				.GetReachableNodes()
 				.Select(i => GetLineOfSight(i.Item1))
-				.Where(i => i.Final != _Position && i.Verify() == NoLineOfSightReason.NONE);
+				.Where(i => i.Final != _Position && i.Validate() == NoLineOfSightReason.NONE);
 		}
 
 		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)
 		{
-			return new Field<Tile>(
+			if (CanMove(Combat) != NoMoveReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
+
+			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
+				_Position.NeighborTiles
+		   			.Where(i => i != null && _Position.MovementProfile.CanMove(this, i, !Combat, false))
+					.Select(i => new Tuple<Tile, Tile, double>(
+							 i, _Position, _Position.MovementProfile.GetMoveCost(this, i, !Combat)));
+			if (Combat && UnitConfiguration.CanCloseAssault)
+				return adjacent;
+
+			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				_Position,
 				RemainingMovement,
-				(i, j) => i.MovementProfile.GetMoveCost(this, j, !Combat)).GetReachableNodes();
+				(i, j) => i.MovementProfile.GetMoveCost(this, j, !Combat))
+					.GetReachableNodes();
+
+			if (!Moved)
+				return fullMovement.Concat(adjacent.Where(i => !fullMovement.Any(j => i.Item1 == j.Item1)));
+			return fullMovement;
 		}
 
 		public void Fire()
@@ -201,6 +243,7 @@ namespace PanzerBlitz
 		{
 			_Fired = false;
 			_Moved = false;
+			_MovedMoreThanOneTile = false;
 			_RemainingMovement = UnitConfiguration.Movement;
 			_Disrupted = false;
 		}

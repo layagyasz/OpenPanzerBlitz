@@ -20,6 +20,8 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason AddAttacker(Unit Attacker, OverrunMoveOrder MoveOrder)
 		{
+			if (MoveOrder.Validate() != NoMoveReason.NONE) return NoSingleAttackReason.TERRAIN;
+
 			NoSingleAttackReason r = base.AddAttacker(Attacker);
 			if (r == NoSingleAttackReason.NONE) _Moves.Add(MoveOrder);
 			return r;
@@ -27,7 +29,15 @@ namespace PanzerBlitz
 
 		public override NoAttackReason Validate()
 		{
-			return base.Validate();
+			NoAttackReason r = base.Validate();
+			if (r != NoAttackReason.NONE) return r;
+
+			foreach (OverrunMoveOrder m in _Moves)
+			{
+				NoMoveReason noMove = m.Validate();
+				if (noMove != NoMoveReason.NONE) return NoAttackReason.ILLEGAL;
+			}
+			return NoAttackReason.NONE;
 		}
 
 		public override bool Execute(Random Random)
