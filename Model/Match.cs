@@ -110,9 +110,11 @@ namespace PanzerBlitz
 
 		private bool ValidateMovementOrder(MovementOrder Order)
 		{
-			if (Order.Combat) return false;
+			if (Order.Combat && !Order.Unit.UnitConfiguration.IsVehicle)
+				return CurrentPhase.Item2 == TurnComponent.CLOSE_ASSAULT;
 			if (Order.Unit.UnitConfiguration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
-			else return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
+
+			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
 		private bool ValidateDeployOrder(DeployOrder Order)

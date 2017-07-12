@@ -201,6 +201,7 @@ namespace PanzerBlitz
 			{
 				case AttackMethod.NORMAL_FIRE:
 					return GetNormalAttack(EnemyArmored, LineOfSight);
+				case AttackMethod.CLOSE_ASSAULT:
 				case AttackMethod.OVERRUN:
 					if (CanAttack(AttackMethod, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
 						return new AttackFactorCalculation(
