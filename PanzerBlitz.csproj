@@ -119,6 +119,11 @@
     <Compile Include="Controller\BaseController.cs" />
     <Compile Include="Controller\BaseAttackController.cs" />
     <Compile Include="Controller\CloseAssaultController.cs" />
+    <Compile Include="View\StackLayer.cs" />
+    <Compile Include="Model\LoadOrder.cs" />
+    <Compile Include="Model\NoLoadReason.cs" />
+    <Compile Include="Model\NoUnloadReason.cs" />
+    <Compile Include="Model\UnloadOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

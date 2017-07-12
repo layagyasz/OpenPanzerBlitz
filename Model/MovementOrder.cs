@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Cardamom.Graphing;
 
@@ -20,6 +21,8 @@ namespace PanzerBlitz
 		public NoMoveReason Validate()
 		{
 			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
+			if (Path.Destination.Units.Count() >= Unit.Army.ArmyConfiguration.Faction.StackLimit)
+				return NoMoveReason.STACK_LIMIT;
 
 			for (int i = 0; i < Path.Count - 1; ++i)
 			{

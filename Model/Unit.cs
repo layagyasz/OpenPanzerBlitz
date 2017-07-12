@@ -8,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class Unit
 	{
-		public EventHandler<EventArgs> OnMove;
+		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 
@@ -25,6 +25,9 @@ namespace PanzerBlitz
 		private bool _Destroyed;
 
 		private Tile _Position;
+
+		private Unit _Passenger;
+		private Unit _Carrier;
 
 		public bool Deployed
 		{
@@ -85,6 +88,22 @@ namespace PanzerBlitz
 			get
 			{
 				return _Position;
+			}
+		}
+
+		public Unit Passenger
+		{
+			get
+			{
+				return _Passenger;
+			}
+		}
+
+		public Unit Carrier
+		{
+			get
+			{
+				return _Carrier;
 			}
 		}
 
@@ -154,6 +173,7 @@ namespace PanzerBlitz
 					else _Disrupted = true;
 					return;
 			}
+			if (_Passenger != null) _Passenger.HandleCombatResult(CombatResult);
 		}
 
 		public void Remove()
@@ -168,7 +188,7 @@ namespace PanzerBlitz
 			if (_Position != null) _Position.Exit(this);
 			_Position = Tile;
 			_Position.Enter(this);
-			if (OnMove != null) OnMove(this, new MovementEventArgs());
+			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile));
 		}
 
 		public void MoveTo(Tile Tile, float Movement)
@@ -179,9 +199,45 @@ namespace PanzerBlitz
 			Place(Tile);
 		}
 
-		public void Deploy()
+		public NoLoadReason CanLoad(Unit Unit)
 		{
-			_Deployed = true;
+			if (Unit.Moved || Moved || Unit.Fired || Fired) return NoLoadReason.NO_MOVE;
+			if (Unit.Army != Army) return NoLoadReason.TEAM;
+
+			return UnitConfiguration.CanLoad(Unit.UnitConfiguration);
+		}
+
+		public NoUnloadReason CanUnload()
+		{
+			if (Fired) return NoUnloadReason.NO_MOVE;
+			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
+			if (_Position.Units.Count() >= _Passenger.Army.ArmyConfiguration.Faction.StackLimit)
+				return NoUnloadReason.STACK_LIMIT;
+			return NoUnloadReason.NONE;
+		}
+
+		public void Load(Unit Unit)
+		{
+			_Moved = true;
+			_RemainingMovement = 0;
+			_Passenger = Unit;
+
+			Unit.Remove();
+			Unit._Carrier = this;
+			Unit._Moved = true;
+			Unit._RemainingMovement = 0;
+		}
+
+		public void Unload()
+		{
+			_Passenger.Place(_Position);
+			_Passenger._Carrier = null;
+			_Passenger._Moved = true;
+			_Passenger._RemainingMovement = 0;
+
+			_Moved = true;
+			_RemainingMovement = 0;
+			_Passenger = null;
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)
@@ -232,6 +288,11 @@ namespace PanzerBlitz
 			if (!Moved)
 				return fullMovement.Concat(adjacent.Where(i => !fullMovement.Any(j => i.Item1 == j.Item1)));
 			return fullMovement;
+		}
+
+		public void Deploy()
+		{
+			_Deployed = true;
 		}
 
 		public void Fire()

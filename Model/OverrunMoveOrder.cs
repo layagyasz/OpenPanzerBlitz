@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -24,6 +25,8 @@ namespace PanzerBlitz
 			NoMoveReason r = _InitialMovement.Validate();
 			if (r != NoMoveReason.NONE) return r;
 			if (_ExitTile.IsEnemyOccupied(_InitialMovement.Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
+			if (_ExitTile.Units.Count() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
+				return NoMoveReason.STACK_LIMIT;
 
 			float distance1 = _InitialMovement.Path.Destination.MovementProfile.GetMoveCost(
 				_InitialMovement.Unit, _AttackTile, false, true);

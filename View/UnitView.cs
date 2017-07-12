@@ -115,9 +115,6 @@ namespace PanzerBlitz
 
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
-			Transform t = Transform.Identity;
-			t.Scale(Scale, Scale);
-
 			Transform.Translate(Position);
 			RenderStates r = new RenderStates();
 			r.Transform = Transform;

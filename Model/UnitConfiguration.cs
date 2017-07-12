@@ -131,6 +131,13 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.IS_COMMAND_POST], UnitClass == UnitClass.COMMAND_POST);
 		}
 
+		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
+		{
+			if (!IsCarrier || (CanOnlyCarryInfantry && UnitConfiguration.UnitClass == UnitClass.INFANTRY))
+				return NoLoadReason.NO_CARRY;
+			return NoLoadReason.NONE;
+		}
+
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			if (!CanDirectFire) return NoSingleAttackReason.UNABLE;

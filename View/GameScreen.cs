@@ -18,6 +18,7 @@ namespace PanzerBlitz
 		public readonly Vector2f Size;
 
 		MapView _MapView;
+		private StackLayer _StackLayer = new StackLayer();
 		private PaneLayer _PaneLayer = new PaneLayer();
 		private List<Pod> _Items = new List<Pod>();
 
@@ -35,7 +36,9 @@ namespace PanzerBlitz
 			Camera = new Camera(
 				WindowSize, new Vector2f((float)MapView.Map.Width, (float)MapView.Map.Height) * .5f, 64);
 			_MapView = MapView;
+
 			this.ArmyViews = ArmyViews.ToList();
+			foreach (ArmyView a in this.ArmyViews) _StackLayer.AddArmyView(a);
 		}
 
 		public void SetMapView(MapView MapView)
@@ -74,7 +77,7 @@ namespace PanzerBlitz
 
 			MapView.Update(MouseController, KeyController, DeltaT, Transform);
 			HighlightLayer.Update(MouseController, KeyController, DeltaT, Transform);
-			foreach (ArmyView a in ArmyViews) a.Update(MouseController, KeyController, DeltaT, Transform);
+			_StackLayer.Update(MouseController, KeyController, DeltaT, Transform);
 
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			_PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
@@ -86,7 +89,7 @@ namespace PanzerBlitz
 
 			MapView.Draw(Target, Transform);
 			HighlightLayer.Draw(Target, Transform);
-			foreach (ArmyView a in ArmyViews) a.Draw(Target, Transform);
+			_StackLayer.Draw(Target, Transform);
 
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
 			_PaneLayer.Draw(Target, Transform.Identity);

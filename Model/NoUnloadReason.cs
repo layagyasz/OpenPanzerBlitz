@@ -1,12 +1,11 @@
 ﻿using System;
 namespace PanzerBlitz
 {
-	public enum NoMoveReason
+	public enum NoUnloadReason
 	{
 		NONE,
 		NO_MOVE,
-		TERRAIN,
 		STACK_LIMIT,
-		ENEMY_OCCUPIED
+		NO_PASSENGER
 	}
 }
