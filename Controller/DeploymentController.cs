@@ -1,6 +1,7 @@
 ﻿using System;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -53,6 +54,10 @@ namespace PanzerBlitz
 		{
 			DeployOrder o = new DeployOrder(Unit, null);
 			if (_Match.ExecuteOrder(o)) _DeploymentPane.Add(Unit);
+		}
+
+		public void HandleKeyPress(Keyboard.Key Key)
+		{
 		}
 	}
 }

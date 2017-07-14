@@ -67,6 +67,14 @@ namespace PanzerBlitz
 			{
 				if (!ValidateMovementOrder((MovementOrder)Order)) return false;
 			}
+			else if (Order is LoadOrder)
+			{
+				if (!ValidateLoadOrder((LoadOrder)Order)) return false;
+			}
+			else if (Order is UnloadOrder)
+			{
+				if (!ValidateUnloadOrder((UnloadOrder)Order)) return false;
+			}
 			else if (Order is DeployOrder)
 			{
 				if (!ValidateDeployOrder((DeployOrder)Order)) return false;
@@ -106,6 +114,18 @@ namespace PanzerBlitz
 				&& CurrentPhase.Item2 != TurnComponent.CLOSE_ASSAULT)
 				return false;
 			return true;
+		}
+
+		private bool ValidateUnloadOrder(UnloadOrder Order)
+		{
+			if (Order.Carrier.UnitConfiguration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
+		private bool ValidateLoadOrder(LoadOrder Order)
+		{
+			if (Order.Carrier.UnitConfiguration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
 		private bool ValidateMovementOrder(MovementOrder Order)

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -31,7 +33,8 @@ namespace PanzerBlitz
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Army
-				&& Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE)
+				&& (Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE
+					|| Unit.CanUnload() == NoUnloadReason.NONE))
 			{
 				_SelectedUnit = Unit;
 
@@ -56,10 +59,26 @@ namespace PanzerBlitz
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
 									HIGHLIGHT_COLORS.Length - 1)])));
 			}
-			else
+			else UnHighlight();
+		}
+
+		public override void HandleKeyPress(Keyboard.Key Key)
+		{
+			if (Key == Keyboard.Key.L)
 			{
-				_SelectedUnit = null;
-				UnHighlight();
+				if (_SelectedUnit != null)
+				{
+					List<Unit> canLoad =
+						_SelectedUnit.Position.Units.Where(i => _SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
+					if (canLoad.Count == 1) _Match.ExecuteOrder(new LoadOrder(_SelectedUnit, canLoad.First()));
+					else if (canLoad.Count > 1)
+					{
+					}
+				}
+			}
+			else if (Key == Keyboard.Key.U)
+			{
+				if (_SelectedUnit != null) _Match.ExecuteOrder(new UnloadOrder(_SelectedUnit));
 			}
 		}
 	}

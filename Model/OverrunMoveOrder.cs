@@ -25,7 +25,7 @@ namespace PanzerBlitz
 			NoMoveReason r = _InitialMovement.Validate();
 			if (r != NoMoveReason.NONE) return r;
 			if (_ExitTile.IsEnemyOccupied(_InitialMovement.Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
-			if (_ExitTile.Units.Count() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
+			if (_ExitTile.GetStackSize() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;
 
 			float distance1 = _InitialMovement.Path.Destination.MovementProfile.GetMoveCost(

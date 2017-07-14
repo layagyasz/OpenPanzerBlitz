@@ -37,13 +37,13 @@
 						unit-configuration[]:unit-configurations {
 							!unit-configuration:_ { unit-configurations.engineer-company }
 						}
-						coordinate:coordinate { 9,5 }
+						coordinate:coordinate { 9,6 }
 					}
 					tile-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {
 							!unit-configuration:_ { unit-configurations.t-34-c }
 						}
-						coordinate:coordinate { 8,6 }
+						coordinate:coordinate { 9,6 }
 					}
 					tile-deployment-configuration:_ {
 						unit-configuration[]:unit-configurations {

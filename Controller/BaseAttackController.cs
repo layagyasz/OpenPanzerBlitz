@@ -1,4 +1,7 @@
 ﻿using System;
+
+using SFML.Window;
+
 namespace PanzerBlitz
 {
 	public abstract class BaseAttackController<T> : BaseController where T : AttackOrder
@@ -16,6 +19,10 @@ namespace PanzerBlitz
 			base.End();
 
 			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
+		}
+
+		public override void HandleKeyPress(Keyboard.Key Key)
+		{
 		}
 
 		protected void StartAttack(T Attack)

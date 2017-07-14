@@ -106,9 +106,9 @@ namespace PanzerBlitz
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_CARRIER], IsArmored && UnitClass == UnitClass.TRANSPORT);
+				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsArmored && UnitClass != UnitClass.TRANSPORT);
+				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsCarrier && UnitClass != UnitClass.TRANSPORT);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
 											  || UnitClass == UnitClass.TOWED_GUN);
@@ -133,9 +133,14 @@ namespace PanzerBlitz
 
 		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
 		{
-			if (!IsCarrier || (CanOnlyCarryInfantry && UnitConfiguration.UnitClass == UnitClass.INFANTRY))
+			if (!IsCarrier || (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY))
 				return NoLoadReason.NO_CARRY;
 			return NoLoadReason.NONE;
+		}
+
+		public int GetStackSize()
+		{
+			return 1;
 		}
 
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)

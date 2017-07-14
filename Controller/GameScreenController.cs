@@ -22,7 +22,8 @@ namespace PanzerBlitz
 
 		public readonly Match Match;
 
-		public GameScreenController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+		public GameScreenController(
+			Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
 		{
 			this.Match = Match;
 			_GameScreen = GameScreen;
@@ -63,6 +64,7 @@ namespace PanzerBlitz
 				a.OnStartPhase += HandleTurn;
 				a.OnEndPhase += HandleEndTurn;
 			}
+			KeyController.OnKeyPressed += OnKeyPressed;
 			Match.Start();
 		}
 
@@ -100,6 +102,12 @@ namespace PanzerBlitz
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleUnitRightClick(((UnitView)sender).Unit);
+		}
+
+		private void OnKeyPressed(object sender, KeyPressedEventArgs E)
+		{
+			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
+			_Controllers[phase.Item2].HandleKeyPress(E.Key);
 		}
 	}
 }

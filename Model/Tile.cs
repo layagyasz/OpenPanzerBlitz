@@ -202,6 +202,11 @@ namespace PanzerBlitz
 		}
 		// Pathable
 
+		public int GetStackSize()
+		{
+			return _Units.Sum(i => i.GetStackSize());
+		}
+
 		public bool IsEnemyOccupied(Army Army)
 		{
 			return Units.Any(i => i.Army != Army);

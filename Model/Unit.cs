@@ -115,7 +115,7 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Combat)
 		{
-			if (Fired || Disrupted || Destroyed) return NoMoveReason.NO_MOVE;
+			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoMoveReason.NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
@@ -138,7 +138,7 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (Fired || Disrupted || Destroyed) return NoSingleAttackReason.UNABLE;
+			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoSingleAttackReason.UNABLE;
 			return UnitConfiguration.CanAttack(AttackMethod);
 		}
 
@@ -185,6 +185,7 @@ namespace PanzerBlitz
 
 		public void Place(Tile Tile)
 		{
+			if (_Passenger != null) _Passenger.Place(Tile);
 			if (_Position != null) _Position.Exit(this);
 			_Position = Tile;
 			_Position.Enter(this);
@@ -211,7 +212,7 @@ namespace PanzerBlitz
 		{
 			if (Fired) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
-			if (_Position.Units.Count() >= _Passenger.Army.ArmyConfiguration.Faction.StackLimit)
+			if (_Position.GetStackSize() >= _Passenger.Army.ArmyConfiguration.Faction.StackLimit)
 				return NoUnloadReason.STACK_LIMIT;
 			return NoUnloadReason.NONE;
 		}
@@ -222,7 +223,6 @@ namespace PanzerBlitz
 			_RemainingMovement = 0;
 			_Passenger = Unit;
 
-			Unit.Remove();
 			Unit._Carrier = this;
 			Unit._Moved = true;
 			Unit._RemainingMovement = 0;
@@ -230,7 +230,6 @@ namespace PanzerBlitz
 
 		public void Unload()
 		{
-			_Passenger.Place(_Position);
 			_Passenger._Carrier = null;
 			_Passenger._Moved = true;
 			_Passenger._RemainingMovement = 0;
@@ -238,6 +237,11 @@ namespace PanzerBlitz
 			_Moved = true;
 			_RemainingMovement = 0;
 			_Passenger = null;
+		}
+
+		public int GetStackSize()
+		{
+			return _Carrier == null ? UnitConfiguration.GetStackSize() : 0;
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)

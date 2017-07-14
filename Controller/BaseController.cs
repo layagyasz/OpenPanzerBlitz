@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -46,6 +47,7 @@ namespace PanzerBlitz
 		public abstract void HandleTileRightClick(Tile Tile);
 		public abstract void HandleUnitLeftClick(Unit Unit);
 		public abstract void HandleUnitRightClick(Unit Unit);
+		public abstract void HandleKeyPress(Keyboard.Key Key);
 
 		protected void UnHighlight()
 		{

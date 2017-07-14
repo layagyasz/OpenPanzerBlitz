@@ -38,7 +38,7 @@ namespace PanzerBlitz
 					I.WindowBounds[2],
 					new MapView(match.Map, TileRenderer.SUMMER_STEPPE),
 					match.Armies.Select(i => new ArmyView(i, renderer)));
-				GameScreenController controller = new GameScreenController(match, renderer, screen);
+				GameScreenController controller = new GameScreenController(match, renderer, screen, I.KeyController);
 				I.Screen.Add(screen);
 			}
 			I.Start(false, true);

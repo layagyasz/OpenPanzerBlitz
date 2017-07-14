@@ -124,6 +124,7 @@
     <Compile Include="Model\NoLoadReason.cs" />
     <Compile Include="Model\NoUnloadReason.cs" />
     <Compile Include="Model\UnloadOrder.cs" />
+    <Compile Include="View\Panes\LoadUnitPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -801,9 +802,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\truck-5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="UnitSprites\motorcycle-3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\breda-32.png">

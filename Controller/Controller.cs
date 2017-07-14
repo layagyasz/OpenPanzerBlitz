@@ -1,4 +1,7 @@
 ﻿using System;
+
+using SFML.Window;
+
 namespace PanzerBlitz
 {
 	public interface Controller
@@ -9,5 +12,6 @@ namespace PanzerBlitz
 		void HandleTileRightClick(Tile Tile);
 		void HandleUnitLeftClick(Unit Unit);
 		void HandleUnitRightClick(Unit Unit);
+		void HandleKeyPress(Keyboard.Key key);
 	}
 }
