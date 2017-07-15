@@ -13,8 +13,6 @@ namespace PanzerBlitz
 	{
 		static readonly float STEP = .25f;
 
-		Text _LabelText;
-
 		List<UnitView> _UnitViews = new List<UnitView>();
 
 		public int Count
@@ -25,26 +23,15 @@ namespace PanzerBlitz
 			}
 		}
 
-		public bool Homogenous
+		public void Sort()
 		{
-			get
-			{
-				return _LabelText != null;
-			}
-		}
-
-		public StackView()
-		{
-		}
-
-		public StackView(Text LabelText)
-		{
-			_LabelText = new Text(LabelText);
+			_UnitViews.Sort(new StackViewUnitComparator());
 		}
 
 		public void Add(UnitView UnitView)
 		{
 			_UnitViews.Add(UnitView);
+			Sort();
 		}
 
 		public bool Contains(Unit Unit)
@@ -60,34 +47,24 @@ namespace PanzerBlitz
 		public void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			if (Homogenous)
+			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
+			foreach (UnitView u in _UnitViews)
 			{
+				u.Update(MouseController, KeyController, DeltaT, Transform);
+				Transform.Translate(STEP * u.Size);
 			}
-			else
-			{
-				Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
-				foreach (UnitView u in _UnitViews)
-				{
-					u.Update(MouseController, KeyController, DeltaT, Transform);
-					Transform.Translate(STEP * u.Size);
-				}
-			}
+
 		}
 
 		public void Draw(RenderTarget Target, Transform Transform)
 		{
-			if (Homogenous)
+			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
+			foreach (UnitView u in _UnitViews)
 			{
+				u.Draw(Target, Transform);
+				Transform.Translate(STEP * u.Size);
 			}
-			else
-			{
-				Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
-				foreach (UnitView u in _UnitViews)
-				{
-					u.Draw(Target, Transform);
-					Transform.Translate(STEP * u.Size);
-				}
-			}
+
 		}
 	}
 }

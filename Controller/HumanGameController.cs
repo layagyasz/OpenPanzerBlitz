@@ -11,18 +11,18 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class GameScreenController
+	public class HumanGameController
 	{
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
 
-		Dictionary<TurnComponent, Controller> _Controllers;
+		Dictionary<TurnComponent, Subcontroller> _Controllers;
 
 		TextBox _InfoDisplay = new TextBox("info-display");
 
 		public readonly Match Match;
 
-		public GameScreenController(
+		public HumanGameController(
 			Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
 		{
 			this.Match = Match;
@@ -30,13 +30,13 @@ namespace PanzerBlitz
 
 			Button finishButton = new Button("large-button") { DisplayedString = "Finish" };
 			finishButton.Position = GameScreen.Size - finishButton.Size - new Vector2f(32, 32);
-			finishButton.OnClick += (s, e) => Match.ExecuteOrder(new NextPhaseOrder());
+			finishButton.OnClick += EndTurn;
 			GameScreen.AddItem(finishButton);
 
 			_InfoDisplay.Position = finishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
 			GameScreen.AddItem(_InfoDisplay);
 
-			_Controllers = new Dictionary<TurnComponent, Controller>()
+			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
 				{ TurnComponent.ATTACK, new AttackController(Match, GameScreen) },
@@ -59,11 +59,7 @@ namespace PanzerBlitz
 					u.OnRightClick += OnUnitRightClick;
 				}
 			}
-			foreach (Army a in Match.Armies)
-			{
-				a.OnStartPhase += HandleTurn;
-				a.OnEndPhase += HandleEndTurn;
-			}
+			foreach (Army a in Match.Armies) a.OnStartPhase += HandleTurn;
 			KeyController.OnKeyPressed += OnKeyPressed;
 			Match.Start();
 		}
@@ -75,9 +71,10 @@ namespace PanzerBlitz
 			_Controllers[e.TurnComponent].Begin((Army)sender);
 		}
 
-		private void HandleEndTurn(object sender, StartTurnComponentEventArgs e)
+		private void EndTurn(object sender, EventArgs e)
 		{
-			_Controllers[e.TurnComponent].End();
+			TurnComponent t = Match.CurrentPhase.Item2;
+			if (Match.ExecuteOrder(new NextPhaseOrder())) _Controllers[t].End();
 		}
 
 		private void OnTileClick(object sender, MouseEventArgs e)

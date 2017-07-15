@@ -21,6 +21,7 @@ namespace PanzerBlitz
 		private StackLayer _StackLayer = new StackLayer();
 		private PaneLayer _PaneLayer = new PaneLayer();
 		private List<Pod> _Items = new List<Pod>();
+		private AlertText _AlertText = new AlertText(2500);
 
 		public MapView MapView
 		{
@@ -36,6 +37,7 @@ namespace PanzerBlitz
 			Camera = new Camera(
 				WindowSize, new Vector2f((float)MapView.Map.Width, (float)MapView.Map.Height) * .5f, 64);
 			_MapView = MapView;
+			_AlertText.Position = new Vector2f(.5f * WindowSize.X, 0);
 
 			this.ArmyViews = ArmyViews.ToList();
 			foreach (ArmyView a in this.ArmyViews) _StackLayer.AddArmyView(a);
@@ -66,6 +68,11 @@ namespace PanzerBlitz
 			_PaneLayer.Clear();
 		}
 
+		public void Alert(string Alert)
+		{
+			_AlertText.Alert(Alert);
+		}
+
 		public void Update(
 			MouseController MouseController,
 			KeyController KeyController,
@@ -80,6 +87,7 @@ namespace PanzerBlitz
 			_StackLayer.Update(MouseController, KeyController, DeltaT, Transform);
 
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
+			_AlertText.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			_PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 		}
 
@@ -92,6 +100,7 @@ namespace PanzerBlitz
 			_StackLayer.Draw(Target, Transform);
 
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
+			_AlertText.Draw(Target, Transform.Identity);
 			_PaneLayer.Draw(Target, Transform.Identity);
 		}
 	}

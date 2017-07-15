@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 
 using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class DeploymentController : Controller
+	public class DeploymentController : Subcontroller
 	{
 		DeploymentPane _DeploymentPane;
 		Army _Army;
@@ -35,10 +35,11 @@ namespace PanzerBlitz
 
 		public void HandleTileLeftClick(Tile Tile)
 		{
-			if (_DeploymentPane.SelectedUnit != null)
+			if (_DeploymentPane.Value != null)
 			{
-				DeployOrder o = new DeployOrder(_DeploymentPane.SelectedUnit, Tile);
-				if (_Match.ExecuteOrder(o)) _DeploymentPane.Remove(_DeploymentPane.SelectedUnit);
+				Unit unit = _DeploymentPane.Peek();
+				DeployOrder o = new DeployOrder(unit, Tile);
+				if (_Match.ExecuteOrder(o)) _DeploymentPane.Remove(unit);
 			}
 		}
 

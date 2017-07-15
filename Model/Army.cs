@@ -61,11 +61,6 @@ namespace PanzerBlitz
 			if (OnStartPhase != null) OnStartPhase(this, new StartTurnComponentEventArgs(TurnComponent));
 		}
 
-		public void EndPhase(TurnComponent TurnComponent)
-		{
-			if (OnEndPhase != null) OnEndPhase(this, new StartTurnComponentEventArgs(TurnComponent));
-		}
-
 		public bool IsDeploymentConfigured()
 		{
 			return Deployments.All(i => i.IsConfigured());

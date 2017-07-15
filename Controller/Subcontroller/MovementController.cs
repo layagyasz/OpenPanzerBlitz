@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Interface;
+
 using SFML.Graphics;
 using SFML.Window;
 
@@ -11,39 +13,54 @@ namespace PanzerBlitz
 	{
 		public readonly bool VehicleMovement;
 
+		LoadUnitPane _LoadUnitPane;
+
 		public MovementController(bool VehicleMovement, Match Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 			this.VehicleMovement = VehicleMovement;
 		}
 
+		void Clear()
+		{
+			if (_LoadUnitPane != null)
+			{
+				_GameScreen.RemovePane(_LoadUnitPane);
+				_LoadUnitPane = null;
+			}
+		}
+
 		public override void HandleTileLeftClick(Tile Tile)
 		{
+			Clear();
 			if (_SelectedUnit != null)
 			{
 				MovementOrder order = new MovementOrder(_SelectedUnit, Tile, false);
 				if (_Match.ExecuteOrder(order)) SetMovementHighlight(_SelectedUnit);
+				else _GameScreen.Alert(order.Validate().ToString());
 			}
 		}
 
 		public override void HandleTileRightClick(Tile Tile)
 		{
+			Clear();
 		}
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
+			Clear();
 			if (Unit.Army == _Army
 				&& (Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE
 					|| Unit.CanUnload() == NoUnloadReason.NONE))
 			{
 				_SelectedUnit = Unit;
-
 				SetMovementHighlight(Unit);
 			}
 		}
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
+			Clear();
 		}
 
 		void SetMovementHighlight(Unit Unit)
@@ -70,9 +87,16 @@ namespace PanzerBlitz
 				{
 					List<Unit> canLoad =
 						_SelectedUnit.Position.Units.Where(i => _SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
-					if (canLoad.Count == 1) _Match.ExecuteOrder(new LoadOrder(_SelectedUnit, canLoad.First()));
+					if (canLoad.Count == 1)
+					{
+						_Match.ExecuteOrder(new LoadOrder(_SelectedUnit, canLoad.First()));
+						SetMovementHighlight(_SelectedUnit);
+					}
 					else if (canLoad.Count > 1)
 					{
+						_LoadUnitPane = new LoadUnitPane(canLoad);
+						_GameScreen.AddPane(_LoadUnitPane);
+						_LoadUnitPane.OnUnitSelected += LoadUnit;
 					}
 				}
 			}
@@ -80,6 +104,13 @@ namespace PanzerBlitz
 			{
 				if (_SelectedUnit != null) _Match.ExecuteOrder(new UnloadOrder(_SelectedUnit));
 			}
+		}
+
+		void LoadUnit(object sender, ValueChangedEventArgs<Unit> E)
+		{
+			if (_SelectedUnit != null) _Match.ExecuteOrder(new LoadOrder(_SelectedUnit, E.Value));
+			SetMovementHighlight(_SelectedUnit);
+			Clear();
 		}
 	}
 }

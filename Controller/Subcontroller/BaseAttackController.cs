@@ -14,11 +14,19 @@ namespace PanzerBlitz
 		{
 		}
 
+		void Clear()
+		{
+			if (_AttackBuilder != null)
+			{
+				_GameScreen.RemovePane(_AttackPane);
+				_AttackBuilder = null;
+			}
+		}
+
 		public override void End()
 		{
 			base.End();
-
-			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
+			Clear();
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key)
@@ -27,7 +35,7 @@ namespace PanzerBlitz
 
 		protected void StartAttack(T Attack)
 		{
-			if (_AttackBuilder != null) _GameScreen.RemovePane(_AttackPane);
+			Clear();
 
 			_AttackBuilder = Attack;
 			_AttackPane = new AttackPane(_AttackBuilder);

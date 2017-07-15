@@ -8,6 +8,8 @@ namespace PanzerBlitz
 {
 	public class Unit
 	{
+		public EventHandler<EventArgs> OnLoad;
+		public EventHandler<EventArgs> OnUnload;
 		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
@@ -226,6 +228,8 @@ namespace PanzerBlitz
 			Unit._Carrier = this;
 			Unit._Moved = true;
 			Unit._RemainingMovement = 0;
+
+			if (OnLoad != null) OnLoad(this, EventArgs.Empty);
 		}
 
 		public void Unload()
@@ -237,6 +241,8 @@ namespace PanzerBlitz
 			_Moved = true;
 			_RemainingMovement = 0;
 			_Passenger = null;
+
+			if (OnUnload != null) OnUnload(this, EventArgs.Empty);
 		}
 
 		public int GetStackSize()

@@ -46,7 +46,6 @@ namespace PanzerBlitz
 
 		private void NextPhase()
 		{
-			if (_TurnOrder.Current != null) _TurnOrder.Current.Item1.EndPhase(_TurnOrder.Current.Item2);
 			_TurnOrder.MoveNext();
 			while (Automate()) _TurnOrder.MoveNext();
 			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);

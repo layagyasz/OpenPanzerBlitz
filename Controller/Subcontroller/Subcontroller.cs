@@ -4,7 +4,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public interface Controller
+	public interface Subcontroller
 	{
 		void Begin(Army Army);
 		void End();

@@ -64,7 +64,7 @@
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\TileView.cs" />
     <Compile Include="View\GameScreen.cs" />
-    <Compile Include="Controller\GameScreenController.cs" />
+    <Compile Include="Controller\HumanGameController.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="View\Highlight.cs" />
@@ -89,13 +89,10 @@
     <Compile Include="Model\NoDeployReason.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\HighlightLayer.cs" />
-    <Compile Include="Controller\DeploymentController.cs" />
-    <Compile Include="Controller\Controller.cs" />
     <Compile Include="Model\ZoneDeployment.cs" />
     <Compile Include="Model\ZoneDeploymentConfiguration.cs" />
     <Compile Include="Model\NextPhaseOrder.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
-    <Compile Include="Controller\AttackController.cs" />
     <Compile Include="View\Panes\AttackPane.cs" />
     <Compile Include="Model\TileDeploymentConfiguration.cs" />
     <Compile Include="Model\Coordinate.cs" />
@@ -109,22 +106,28 @@
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
     <Compile Include="Model\MovementProfile.cs" />
-    <Compile Include="Controller\OverrunController.cs" />
     <Compile Include="Model\OverrunMoveOrder.cs" />
     <Compile Include="Model\OverrunAttackOrder.cs" />
     <Compile Include="Model\ExecuteOrderEventArgs.cs" />
     <Compile Include="Model\MovementOrder.cs" />
     <Compile Include="Model\NoMoveReason.cs" />
-    <Compile Include="Controller\MovementController.cs" />
-    <Compile Include="Controller\BaseController.cs" />
-    <Compile Include="Controller\BaseAttackController.cs" />
-    <Compile Include="Controller\CloseAssaultController.cs" />
     <Compile Include="View\StackLayer.cs" />
     <Compile Include="Model\LoadOrder.cs" />
     <Compile Include="Model\NoLoadReason.cs" />
     <Compile Include="Model\NoUnloadReason.cs" />
     <Compile Include="Model\UnloadOrder.cs" />
     <Compile Include="View\Panes\LoadUnitPane.cs" />
+    <Compile Include="View\StackViewUnitComparator.cs" />
+    <Compile Include="View\HomogenousStackView.cs" />
+    <Compile Include="Controller\Subcontroller\AttackController.cs" />
+    <Compile Include="Controller\Subcontroller\BaseAttackController.cs" />
+    <Compile Include="Controller\Subcontroller\DeploymentController.cs" />
+    <Compile Include="Controller\Subcontroller\MovementController.cs" />
+    <Compile Include="Controller\Subcontroller\OverrunController.cs" />
+    <Compile Include="Controller\Subcontroller\CloseAssaultController.cs" />
+    <Compile Include="Controller\Subcontroller\BaseController.cs" />
+    <Compile Include="Controller\Subcontroller\Subcontroller.cs" />
+    <Compile Include="View\AlertText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -135,6 +138,7 @@
     <Folder Include="UnitSprites\" />
     <Folder Include="Maps\" />
     <Folder Include="Screenshots\" />
+    <Folder Include="Controller\Subcontroller\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

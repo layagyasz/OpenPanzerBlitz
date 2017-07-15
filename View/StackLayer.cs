@@ -22,6 +22,8 @@ namespace PanzerBlitz
 		public void AddUnitView(UnitView UnitView)
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
+			UnitView.Unit.OnLoad += UpdateStack;
+			UnitView.Unit.OnUnload += UpdateStack;
 			UnitView.Unit.OnMove += MoveUnit;
 			UnitView.Unit.OnRemove += RemoveUnit;
 		}
@@ -67,6 +69,18 @@ namespace PanzerBlitz
 				fromStack.Remove(Unit);
 				if (fromStack.Count == 0) _Stacks.Remove(from);
 			}
+		}
+
+		void UpdateStack(object Sender, EventArgs E)
+		{
+			UpdateStack((Unit)Sender);
+		}
+
+		void UpdateStack(Unit Unit)
+		{
+			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
+			StackView fromStack = from.Value;
+			if (fromStack != null) fromStack.Sort();
 		}
 
 		public void Update(

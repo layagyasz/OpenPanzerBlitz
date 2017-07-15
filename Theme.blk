@@ -4,6 +4,15 @@
 }
 class<>:classes {
 
+	class:screen-alert {
+		mode:default {
+			!font:font-face { fonts.univers }
+			color:font-color { #FF0000 }
+			int:font-size { 32 }
+			int:height { 48 }
+			int:width { 512 }
+		}
+	}
 	class:select {
 		mode:default {
 			color[]:background-color { #484848 #484848 #484848 #484848 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using SFML.Graphics;
@@ -6,7 +6,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public abstract class BaseController : Controller
+	public abstract class BaseController : Subcontroller
 	{
 		public static readonly Color[] HIGHLIGHT_COLORS = new Color[]
 		{

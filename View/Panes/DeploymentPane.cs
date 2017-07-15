@@ -15,35 +15,44 @@ namespace PanzerBlitz
 
 		UnitConfigurationRenderer _Renderer;
 
-		ScrollCollection<Unit> _Selection;
-
-		public Unit SelectedUnit
-		{
-			get
-			{
-				return _Selection.Value == null ? null : _Selection.Value.Value;
-			}
-		}
+		ScrollCollection<HomogenousStackView> _Selection;
 
 		public DeploymentPane(Army Army, UnitConfigurationRenderer Renderer)
-			: base("deployment-pane")
+					: base("deployment-pane")
 		{
 			this.Army = Army;
 			_Renderer = Renderer;
 
-			_Selection = new ScrollCollection<Unit>("deployment-select");
-			foreach (Unit u in Army.Units.Where(i => i.Position == null)) Add(u);
+			_Selection = new ScrollCollection<HomogenousStackView>("deployment-select");
+
+			foreach (var g in Army.Units.GroupBy(i => i.UnitConfiguration))
+				_Selection.Add(new DeploymentSelectionOption(g, _Renderer));
+
 			Add(_Selection);
 		}
 
 		public void Add(Unit Unit)
 		{
-			_Selection.Add(new DeploymentSelectionOption(Unit, _Renderer));
+			DeploymentSelectionOption option =
+							(DeploymentSelectionOption)_Selection.FirstOrDefault(
+								i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
+			if (option == null) _Selection.Add(new DeploymentSelectionOption(new Unit[] { Unit }, _Renderer));
+			else option.Push(Unit);
 		}
 
 		public void Remove(Unit Unit)
 		{
-			_Selection.Remove(i => i.Value == Unit);
+			DeploymentSelectionOption option =
+				(DeploymentSelectionOption)_Selection.FirstOrDefault(
+					i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
+			if (option != null) option.Pop();
+			if (option.Count == 0) _Selection.Remove(option);
+		}
+
+		public Unit Peek()
+		{
+			if (_Selection.Value != null) return _Selection.Value.Value.Peek();
+			return null;
 		}
 	}
 }

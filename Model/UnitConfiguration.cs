@@ -140,7 +140,20 @@ namespace PanzerBlitz
 
 		public int GetStackSize()
 		{
+			if (UnitClass == UnitClass.BLOCK
+				|| UnitClass == UnitClass.MINEFIELD
+				|| UnitClass == UnitClass.FORT
+				|| UnitClass == UnitClass.BRIDGE)
+				return 0;
 			return 1;
+		}
+
+		public bool IsStackUnique()
+		{
+			return UnitClass == UnitClass.FORT
+										 || UnitClass == UnitClass.BLOCK
+										 || UnitClass == UnitClass.MINEFIELD
+										 || UnitClass == UnitClass.BRIDGE;
 		}
 
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
