@@ -40,6 +40,7 @@ namespace PanzerBlitz
 				Unit unit = _DeploymentPane.Peek();
 				DeployOrder o = new DeployOrder(unit, Tile);
 				if (_Match.ExecuteOrder(o)) _DeploymentPane.Remove(unit);
+				else _GameScreen.Alert(o.Validate().ToString());
 			}
 		}
 

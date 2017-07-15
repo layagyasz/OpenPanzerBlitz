@@ -20,7 +20,7 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason AddAttacker(Unit Attacker, OverrunMoveOrder MoveOrder)
 		{
-			if (MoveOrder.Validate() != NoMoveReason.NONE) return NoSingleAttackReason.TERRAIN;
+			if (MoveOrder.Validate() != NoMoveReason.NONE) return NoSingleAttackReason.UNABLE;
 
 			NoSingleAttackReason r = base.AddAttacker(Attacker);
 			if (r == NoSingleAttackReason.NONE) _Moves.Add(MoveOrder);

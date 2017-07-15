@@ -28,8 +28,8 @@ namespace PanzerBlitz
 			Coordinate = (Coordinate)attributes[(int)Attribute.COORDINATE];
 		}
 
-		public Deployment GenerateDeployment(Army Army)
+		public Deployment GenerateDeployment(IEnumerable<Unit> Units)
 		{
-			return new TileDeployment(Army, this);
+			return new TileDeployment(Units, this);
 		}	}
 }

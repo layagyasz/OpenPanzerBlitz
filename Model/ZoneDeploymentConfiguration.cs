@@ -28,9 +28,9 @@ namespace PanzerBlitz
 			Zone = (Polygon)attributes[(int)Attribute.ZONE];
 		}
 
-		public Deployment GenerateDeployment(Army Army)
+		public Deployment GenerateDeployment(IEnumerable<Unit> Units)
 		{
-			return new ZoneDeployment(Army, this);
+			return new ZoneDeployment(Units, this);
 		}
 	}
 }

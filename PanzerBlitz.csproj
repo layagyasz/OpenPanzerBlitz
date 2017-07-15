@@ -64,7 +64,7 @@
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\TileView.cs" />
     <Compile Include="View\GameScreen.cs" />
-    <Compile Include="Controller\HumanGameController.cs" />
+    <Compile Include="Controller\HumanGamePlayerController.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="View\Highlight.cs" />
@@ -128,6 +128,8 @@
     <Compile Include="Controller\Subcontroller\BaseController.cs" />
     <Compile Include="Controller\Subcontroller\Subcontroller.cs" />
     <Compile Include="View\AlertText.cs" />
+    <Compile Include="Controller\GamePlayerController.cs" />
+    <Compile Include="Controller\GameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -295,7 +297,7 @@
     <None Include="UnitSprites\bt-5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="UnitSprites\t-36_85.png">
+    <None Include="UnitSprites\t-34_85.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\t-34-c.png">

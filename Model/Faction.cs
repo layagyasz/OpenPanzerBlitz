@@ -28,7 +28,7 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			Colors = (Color[])attributes[(int)Attribute.COLORS];
 			StackLimit = (byte)attributes[(int)Attribute.STACK_LIMIT];
-			HalfPriceTrucks = (bool)attributes[(int)Attribute.HALF_PRICE_TRUCKS];
+			HalfPriceTrucks = Parse.DefaultIfNull(attributes[(int)Attribute.HALF_PRICE_TRUCKS], false);
 		}
 	}
 }

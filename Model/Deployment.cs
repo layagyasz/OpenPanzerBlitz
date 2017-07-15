@@ -18,9 +18,9 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Deployment(Army Army, DeploymentConfiguration DeploymentConfiguration)
+		public Deployment(IEnumerable<Unit> Units, DeploymentConfiguration DeploymentConfiguration)
 		{
-			this.Units = DeploymentConfiguration.UnitConfigurations.Select(i => new Unit(Army, i)).ToList();
+			this.Units = Units.ToList();
 		}
 
 		public abstract bool AutomateDeployment(Match Match);

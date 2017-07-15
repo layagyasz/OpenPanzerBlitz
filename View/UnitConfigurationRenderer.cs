@@ -25,7 +25,7 @@ namespace PanzerBlitz
 			RenderAll(
 				Scenario.ArmyConfigurations
 				.SelectMany(i => i.DeploymentConfigurations)
-				.SelectMany(i => i.UnitConfigurations).Distinct());
+				.SelectMany(i => i.Item1).Distinct());
 		}
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(UnitConfiguration UnitConfiguration)

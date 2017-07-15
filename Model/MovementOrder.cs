@@ -21,7 +21,8 @@ namespace PanzerBlitz
 		public NoMoveReason Validate()
 		{
 			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
-			if (Path.Destination.GetStackSize() >= Unit.Army.ArmyConfiguration.Faction.StackLimit)
+			if (!Path.Destination.Units.Contains(Unit)
+				&& Path.Destination.GetStackSize() >= Unit.Army.ArmyConfiguration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;
 
 			for (int i = 0; i < Path.Count - 1; ++i)

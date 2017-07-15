@@ -19,6 +19,7 @@ namespace PanzerBlitz
 			{
 				MovementOrder order = new MovementOrder(_SelectedUnit, Tile, true);
 				if (_Match.ExecuteOrder(order)) SetCloseAssaultHighlight(_SelectedUnit);
+				else _GameScreen.Alert(order.Validate().ToString());
 			}
 		}
 
@@ -38,7 +39,8 @@ namespace PanzerBlitz
 				StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.CLOSE_ASSAULT));
 				if (_SelectedUnit != null)
 				{
-					_AttackBuilder.AddAttacker(_SelectedUnit);
+					NoSingleAttackReason r = _AttackBuilder.AddAttacker(_SelectedUnit);
+					if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
 					_AttackPane.UpdateDescription();
 				}
 			}

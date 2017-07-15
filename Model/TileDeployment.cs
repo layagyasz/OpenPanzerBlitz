@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PanzerBlitz
@@ -7,8 +8,8 @@ namespace PanzerBlitz
 	{
 		public readonly TileDeploymentConfiguration DeploymentConfiguration;
 
-		public TileDeployment(Army Army, TileDeploymentConfiguration DeploymentConfiguration)
-			: base(Army, DeploymentConfiguration)
+		public TileDeployment(IEnumerable<Unit> Units, TileDeploymentConfiguration DeploymentConfiguration)
+			: base(Units, DeploymentConfiguration)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}

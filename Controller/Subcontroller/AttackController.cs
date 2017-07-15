@@ -36,12 +36,6 @@ namespace PanzerBlitz
 			{
 				_SelectedUnit = Unit;
 
-				if (_AttackBuilder != null)
-				{
-					_AttackBuilder.AddAttacker(Unit);
-					_AttackPane.UpdateDescription();
-				}
-
 				Highlight(
 					Unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
 						i => new Tuple<Tile, Color>(
@@ -54,10 +48,12 @@ namespace PanzerBlitz
 			}
 			else if (Unit.Army != _Army)
 			{
-				StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.NORMAL_FIRE));
 				if (_SelectedUnit != null)
 				{
-					_AttackBuilder.AddAttacker(_SelectedUnit);
+					if (_AttackBuilder == null)
+						StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.NORMAL_FIRE));
+					NoSingleAttackReason r = _AttackBuilder.AddAttacker(_SelectedUnit);
+					if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
 					_AttackPane.UpdateDescription();
 				}
 			}

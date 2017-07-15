@@ -71,10 +71,13 @@ namespace PanzerBlitz
 				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Tile)
 					StartAttack(new OverrunAttackOrder(_Army, Tile));
 
-				_AttackBuilder.AddAttacker(
-					_SelectedUnit,
-					new OverrunMoveOrder(new MovementOrder(_SelectedUnit, _InitialMovement.Destination, true), Tile));
+				NoSingleAttackReason r =
+					_AttackBuilder.AddAttacker(
+						_SelectedUnit,
+						new OverrunMoveOrder(
+							new MovementOrder(_SelectedUnit, _InitialMovement.Destination, true), Tile));
 				_AttackPane.UpdateDescription();
+				if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
 			}
 			DeselectUnit();
 		}

@@ -7,6 +7,7 @@ namespace PanzerBlitz
 	public class Match
 	{
 		public EventHandler<ExecuteOrderEventArgs> OnExecuteOrder;
+		public EventHandler<StartTurnComponentEventArgs> OnStartPhase;
 
 		public readonly Scenario Scenario;
 		public readonly Map Map;
@@ -48,7 +49,8 @@ namespace PanzerBlitz
 		{
 			_TurnOrder.MoveNext();
 			while (Automate()) _TurnOrder.MoveNext();
-			_TurnOrder.Current.Item1.StartPhase(_TurnOrder.Current.Item2);
+			if (OnStartPhase != null)
+				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current.Item1, _TurnOrder.Current.Item2));
 		}
 
 		private bool Automate()
@@ -56,7 +58,7 @@ namespace PanzerBlitz
 			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2);
 		}
 
-		public bool ExecuteOrder(Order Order)
+		public bool ValidateOrder(Order Order)
 		{
 			if (Order is AttackOrder)
 			{
@@ -81,7 +83,17 @@ namespace PanzerBlitz
 			else if (Order is NextPhaseOrder)
 			{
 				if (!ValidateNextPhaseOrder()) return false;
-				else NextPhase();
+			}
+			return true;
+		}
+
+		public bool ExecuteOrder(Order Order)
+		{
+			if (!ValidateOrder(Order)) return false;
+			if (Order is NextPhaseOrder)
+			{
+				NextPhase();
+				return true;
 			}
 			bool executed = Order.Execute(_Random);
 			if (executed)

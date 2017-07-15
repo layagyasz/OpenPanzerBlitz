@@ -24,6 +24,7 @@ namespace PanzerBlitz
 		{
 			NoMoveReason r = _InitialMovement.Validate();
 			if (r != NoMoveReason.NONE) return r;
+
 			if (_ExitTile.IsEnemyOccupied(_InitialMovement.Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
 			if (_ExitTile.GetStackSize() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;

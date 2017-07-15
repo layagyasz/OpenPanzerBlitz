@@ -6,9 +6,6 @@ namespace PanzerBlitz
 {
 	public class Army
 	{
-		public EventHandler<StartTurnComponentEventArgs> OnStartPhase;
-		public EventHandler<StartTurnComponentEventArgs> OnEndPhase;
-
 		public readonly ArmyConfiguration ArmyConfiguration;
 		public readonly List<Deployment> Deployments;
 
@@ -24,7 +21,7 @@ namespace PanzerBlitz
 		{
 			this.ArmyConfiguration = ArmyConfiguration;
 			this.Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
-				i => i.GenerateDeployment(this)).ToList();
+				i => i.Item2.GenerateDeployment(i.Item1.Select(j => new Unit(this, j)))).ToList();
 		}
 
 		public bool AutomatePhase(Match Match, TurnComponent TurnComponent)
@@ -54,11 +51,6 @@ namespace PanzerBlitz
 						i => i.Units.Any(j => j.CanMove(true, false) == NoMoveReason.NONE));
 			}
 			return false;
-		}
-
-		public void StartPhase(TurnComponent TurnComponent)
-		{
-			if (OnStartPhase != null) OnStartPhase(this, new StartTurnComponentEventArgs(TurnComponent));
 		}
 
 		public bool IsDeploymentConfigured()

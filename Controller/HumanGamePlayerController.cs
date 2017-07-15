@@ -11,7 +11,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class HumanGameController
+	public class HumanGamePlayerController : GamePlayerController
 	{
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
@@ -22,7 +22,7 @@ namespace PanzerBlitz
 
 		public readonly Match Match;
 
-		public HumanGameController(
+		public HumanGamePlayerController(
 			Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
 		{
 			this.Match = Match;
@@ -59,22 +59,25 @@ namespace PanzerBlitz
 					u.OnRightClick += OnUnitRightClick;
 				}
 			}
-			foreach (Army a in Match.Armies) a.OnStartPhase += HandleTurn;
 			KeyController.OnKeyPressed += OnKeyPressed;
-			Match.Start();
 		}
 
-		private void HandleTurn(object sender, StartTurnComponentEventArgs e)
+		public void DoTurn(Army Army, TurnComponent TurnComponent)
 		{
 			_InfoDisplay.DisplayedString =
-				string.Format("{0}\n{1}", ((Army)sender).ArmyConfiguration.Faction.Name, e.TurnComponent);
-			_Controllers[e.TurnComponent].Begin((Army)sender);
+				string.Format("{0}\n{1}", Army.ArmyConfiguration.Faction.Name, TurnComponent);
+			_Controllers[TurnComponent].Begin(Army);
 		}
 
 		private void EndTurn(object sender, EventArgs e)
 		{
 			TurnComponent t = Match.CurrentPhase.Item2;
-			if (Match.ExecuteOrder(new NextPhaseOrder())) _Controllers[t].End();
+			NextPhaseOrder order = new NextPhaseOrder();
+			if (Match.ValidateOrder(order))
+			{
+				_Controllers[t].End();
+				Match.ExecuteOrder(order);
+			}
 		}
 
 		private void OnTileClick(object sender, MouseEventArgs e)

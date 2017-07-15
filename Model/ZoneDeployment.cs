@@ -10,8 +10,8 @@ namespace PanzerBlitz
 	{
 		public readonly ZoneDeploymentConfiguration DeploymentConfiguration;
 
-		public ZoneDeployment(Army Army, ZoneDeploymentConfiguration DeploymentConfiguration)
-			: base(Army, DeploymentConfiguration)
+		public ZoneDeployment(IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
+			: base(Units, DeploymentConfiguration)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}

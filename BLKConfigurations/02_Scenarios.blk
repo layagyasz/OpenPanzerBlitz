@@ -20,48 +20,34 @@
 			army-configuration:_ {
 				!faction:faction { factions.russian }
 				byte:team { 1 }
-				var[]:deployment-configurations {
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.127mm }
+				2-tuple[]:deployment-configurations {
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.t-34_85 }
+								int:_ { 2 }
+							}
 						}
-						coordinate:coordinate { 5,5 }
-					}
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.57mm }
+						tile-deployment-configuration:_ {
+							coordinate:coordinate { 9,6 }
 						}
-						coordinate:coordinate { 8,5 }
-					}
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.engineer-company }
-						}
-						coordinate:coordinate { 9,6 }
-					}
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.t-34-c }
-						}
-						coordinate:coordinate { 9,6 }
-					}
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.jsu-122 }
-						}
-						coordinate:coordinate { 6,4 }
 					}
 				}
 			}
 			army-configuration:_ {
 				!faction:faction { factions.german }
 				byte:team { 2 }
-				var[]:deployment-configurations {
-					tile-deployment-configuration:_ {
-						unit-configuration[]:unit-configurations {
-							!unit-configuration:_ { unit-configurations.127mm }
+				2-tuple[]:deployment-configurations {
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.pzkw-iv }
+								int:_ { 3 }
+							}
 						}
-						coordinate:coordinate { 7,6 }
+						tile-deployment-configuration:_ {
+							coordinate:coordinate { 10,6 }
+						}
 					}
 				}
 			}
