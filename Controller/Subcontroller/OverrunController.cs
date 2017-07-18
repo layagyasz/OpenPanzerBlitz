@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using Cardamom.Graphing;
@@ -7,7 +7,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class OverrunController : BaseAttackController<OverrunAttackOrder>
+	public class OverrunController : BaseAttackController
 	{
 		Path<Tile> _InitialMovement;
 
@@ -69,12 +69,11 @@ namespace PanzerBlitz
 			if (_SelectedUnit != null && _InitialMovement != null)
 			{
 				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Tile)
-					StartAttack(new OverrunAttackOrder(_Army, Tile));
+					StartAttack(new AttackOrder(_Army, Tile, AttackMethod.OVERRUN));
 
 				NoSingleAttackReason r =
 					_AttackBuilder.AddAttacker(
-						_SelectedUnit,
-						new OverrunMoveOrder(
+						new OverrunSingleAttackOrder(
 							new MovementOrder(_SelectedUnit, _InitialMovement.Destination, true), Tile));
 				_AttackPane.UpdateDescription();
 				if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());

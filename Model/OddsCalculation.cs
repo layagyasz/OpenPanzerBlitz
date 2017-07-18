@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public class OddsCalculation
 	{
-		public readonly IEnumerable<Tuple<Unit, AttackFactorCalculation>> AttackFactorCalculations;
+		public readonly IEnumerable<Tuple<SingleAttackOrder, AttackFactorCalculation>> AttackFactorCalculations;
 		public readonly IEnumerable<Unit> Defenders;
 		public readonly List<OddsCalculationFactor> OddsCalculationFactors;
 		public readonly bool StackArmored;
@@ -40,16 +40,17 @@ namespace PanzerBlitz
 		}
 
 		public OddsCalculation(
-			IEnumerable<Tuple<Unit, LineOfSight>> Attackers,
+			IEnumerable<SingleAttackOrder> AttackOrders,
 			IEnumerable<Unit> Defenders,
 			AttackMethod AttackMethod,
 			Tile Tile)
 		{
 			StackArmored = Tile.MovementProfile.TreatUnitsAsArmored
-							   || TreatStackAsArmored(Attackers, Defenders, AttackMethod);
-			AttackFactorCalculations = Attackers.Select(
-				i => new Tuple<Unit, AttackFactorCalculation>(
-					i.Item1, i.Item1.UnitConfiguration.GetAttack(AttackMethod, StackArmored, i.Item2)));
+							   || TreatStackAsArmored(AttackOrders, Defenders, AttackMethod);
+			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
+			AttackFactorCalculations = AttackOrders.Select(
+				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
+					i, i.GetAttack()));
 			this.Defenders = Defenders;
 
 			OddsCalculationFactors = new List<OddsCalculationFactor>();
@@ -74,8 +75,8 @@ namespace PanzerBlitz
 			{
 				_DieModifier -= 2;
 				OddsCalculationFactors.Add(OddsCalculationFactor.CLOSE_ASSAULT);
-				if (Attackers
-					.Select(i => i.Item1)
+				if (AttackOrders
+					.Select(i => i.Attacker)
 					.GroupBy(i => i.Position)
 					.Any(i => i.Count(j => j.UnitConfiguration.IsEngineer) > 0 && i.Count() > 1))
 				{
@@ -118,7 +119,7 @@ namespace PanzerBlitz
 		}
 
 		public static bool TreatStackAsArmored(
-			IEnumerable<Tuple<Unit, LineOfSight>> Attackers,
+			IEnumerable<SingleAttackOrder> Attackers,
 			IEnumerable<Unit> Defenders,
 			AttackMethod AttackMethod)
 		{
@@ -128,10 +129,14 @@ namespace PanzerBlitz
 			else if (armoredCount < unArmoredCount) return false;
 			else
 			{
+				foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(true);
 				int armoredAttack = Attackers.Sum(
-					i => i.Item1.UnitConfiguration.GetAttack(AttackMethod, true, i.Item2).Attack);
+					i => i.GetAttack().Attack);
+
+				foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(false);
 				int unArmoredAttack = Attackers.Sum(
-					i => i.Item1.UnitConfiguration.GetAttack(AttackMethod, false, i.Item2).Attack);
+					i => i.GetAttack().Attack);
+
 				if (armoredAttack > unArmoredAttack) return false;
 				else return true;
 			}

@@ -58,7 +58,7 @@ namespace PanzerBlitz
 				DisplayedString = string.Format("{0} Total Attack Factor", OddsCalculation.TotalAttack)
 			});
 			foreach (var a in OddsCalculation.AttackFactorCalculations)
-				DescribeAttackFactorCalculation(a.Item1, a.Item2);
+				DescribeAttackFactorCalculation(a.Item1.Attacker, a.Item2);
 			_Description.Add(new Button("attack-odds-section")
 			{
 				DisplayedString = string.Format("{0} Total Defense Factor", OddsCalculation.TotalDefense)

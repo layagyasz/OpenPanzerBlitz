@@ -1,17 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class OverrunMoveOrder : Order
+	public class OverrunSingleAttackOrder : SingleAttackOrder
 	{
 		MovementOrder _InitialMovement;
 		Tile _AttackTile;
 		Tile _ExitTile;
 		float _Distance;
 		NoMoveReason _Validate;
+		bool _TreatStackAsArmored;
 
-		public OverrunMoveOrder(MovementOrder InitialMovement, Tile AttackTile)
+		public Unit Attacker
+		{
+			get
+			{
+				return _InitialMovement.Unit;
+			}
+		}
+
+		public Unit Defender
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile)
 		{
 			_InitialMovement = InitialMovement;
 			_AttackTile = AttackTile;
@@ -40,15 +58,33 @@ namespace PanzerBlitz
 			return NoMoveReason.NONE;
 		}
 
-		public NoMoveReason Validate()
+		public void SetTreatStackAsArmored(bool TreatStackAsArmored)
 		{
-			return _Validate;
+			_TreatStackAsArmored = TreatStackAsArmored;
+		}
+
+		public AttackFactorCalculation GetAttack()
+		{
+			if (Validate() == NoSingleAttackReason.NONE)
+				return Attacker.UnitConfiguration.GetAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+			else return new AttackFactorCalculation(
+				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
+		}
+
+		public NoSingleAttackReason Validate()
+		{
+			if (_Validate != NoMoveReason.NONE) return NoSingleAttackReason.TERRAIN;
+			NoSingleAttackReason r = _InitialMovement.Unit.CanAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+			if (r != NoSingleAttackReason.NONE) return r;
+
+			return NoSingleAttackReason.NONE;
 		}
 
 		public bool Execute(Random Random)
 		{
-			if (Validate() == NoMoveReason.NONE)
+			if (Validate() == NoSingleAttackReason.NONE)
 			{
+				Attacker.Fire();
 				_InitialMovement.Unit.MoveTo(_ExitTile, _Distance);
 				return true;
 			}

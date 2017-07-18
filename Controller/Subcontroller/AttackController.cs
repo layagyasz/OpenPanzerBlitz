@@ -6,7 +6,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class AttackController : BaseAttackController<AttackOrder>
+	public class AttackController : BaseAttackController
 	{
 		public AttackController(Match Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
@@ -15,15 +15,6 @@ namespace PanzerBlitz
 
 		public override void HandleTileLeftClick(Tile Tile)
 		{
-			if (Tile.Units.All(i => i.Army != _Army) && Tile.Units.Count() > 0)
-			{
-				StartAttack(new AttackOrder(_Army, Tile, AttackMethod.NORMAL_FIRE));
-				if (_SelectedUnit != null)
-				{
-					_AttackBuilder.AddAttacker(_SelectedUnit);
-					_AttackPane.UpdateDescription();
-				}
-			}
 		}
 
 		public override void HandleTileRightClick(Tile Tile)
@@ -50,9 +41,10 @@ namespace PanzerBlitz
 			{
 				if (_SelectedUnit != null)
 				{
-					if (_AttackBuilder == null)
+					if (_AttackBuilder == null || _AttackBuilder.AttackAt != Unit.Position)
 						StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.NORMAL_FIRE));
-					NoSingleAttackReason r = _AttackBuilder.AddAttacker(_SelectedUnit);
+					NoSingleAttackReason r = _AttackBuilder.AddAttacker(
+						new NormalSingleAttackOrder(_SelectedUnit, Unit, AttackMethod.NORMAL_FIRE));
 					if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
 					_AttackPane.UpdateDescription();
 				}

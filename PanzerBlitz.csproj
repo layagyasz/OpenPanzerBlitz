@@ -106,8 +106,7 @@
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
     <Compile Include="Model\MovementProfile.cs" />
-    <Compile Include="Model\OverrunMoveOrder.cs" />
-    <Compile Include="Model\OverrunAttackOrder.cs" />
+    <Compile Include="Model\OverrunSingleAttackOrder.cs" />
     <Compile Include="Model\ExecuteOrderEventArgs.cs" />
     <Compile Include="Model\MovementOrder.cs" />
     <Compile Include="Model\NoMoveReason.cs" />
@@ -130,6 +129,8 @@
     <Compile Include="View\AlertText.cs" />
     <Compile Include="Controller\GamePlayerController.cs" />
     <Compile Include="Controller\GameController.cs" />
+    <Compile Include="Model\NormalSingleAttackOrder.cs" />
+    <Compile Include="Model\SingleAttackOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -6,7 +6,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class CloseAssaultController : BaseAttackController<AttackOrder>
+	public class CloseAssaultController : BaseAttackController
 	{
 		public CloseAssaultController(Match Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
@@ -39,7 +39,8 @@ namespace PanzerBlitz
 				StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.CLOSE_ASSAULT));
 				if (_SelectedUnit != null)
 				{
-					NoSingleAttackReason r = _AttackBuilder.AddAttacker(_SelectedUnit);
+					NoSingleAttackReason r = _AttackBuilder.AddAttacker(
+						new NormalSingleAttackOrder(_SelectedUnit, Unit, AttackMethod.CLOSE_ASSAULT));
 					if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
 					_AttackPane.UpdateDescription();
 				}

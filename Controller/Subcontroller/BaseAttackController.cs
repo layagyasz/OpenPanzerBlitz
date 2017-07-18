@@ -4,9 +4,9 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public abstract class BaseAttackController<T> : BaseController where T : AttackOrder
+	public abstract class BaseAttackController : BaseController
 	{
-		protected T _AttackBuilder;
+		protected AttackOrder _AttackBuilder;
 		protected AttackPane _AttackPane;
 
 		public BaseAttackController(Match Match, GameScreen GameScreen)
@@ -33,7 +33,7 @@ namespace PanzerBlitz
 		{
 		}
 
-		protected void StartAttack(T Attack)
+		protected void StartAttack(AttackOrder Attack)
 		{
 			Clear();
 

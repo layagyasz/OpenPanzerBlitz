@@ -95,8 +95,7 @@ namespace PanzerBlitz
 		public readonly AttackMethod AttackMethod;
 
 		AttackTarget _AttackTarget = AttackTarget.ALL;
-		List<Unit> _Attackers = new List<Unit>();
-
+		List<SingleAttackOrder> _Attackers = new List<SingleAttackOrder>();
 		List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
 
 		public AttackTarget AttackTarget
@@ -127,17 +126,17 @@ namespace PanzerBlitz
 			Recalculate();
 		}
 
-		public virtual NoSingleAttackReason AddAttacker(Unit Attacker)
+		public virtual NoSingleAttackReason AddAttacker(SingleAttackOrder AttackOrder)
 		{
-			if (!_Attackers.Contains(Attacker))
+			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
-				NoSingleAttackReason canAttack = Attacker.CanAttack(
-					AttackMethod, AttackAt.Units.Count(
-						i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored),
-					Attacker.GetLineOfSight(AttackAt));
+				bool TreatStackAsArmored = AttackAt.Units.Count(
+					i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored);
+				AttackOrder.SetTreatStackAsArmored(TreatStackAsArmored);
+				NoSingleAttackReason canAttack = AttackOrder.Validate();
 				if (canAttack != NoSingleAttackReason.NONE) return canAttack;
 
-				_Attackers.Add(Attacker);
+				_Attackers.Add(AttackOrder);
 				Recalculate();
 				return NoSingleAttackReason.NONE;
 			}
@@ -146,7 +145,7 @@ namespace PanzerBlitz
 
 		public virtual void RemoveAttacker(Unit Attacker)
 		{
-			_Attackers.Remove(Attacker);
+			_Attackers.RemoveAll(i => i.Attacker == Attacker);
 			Recalculate();
 		}
 
@@ -160,28 +159,28 @@ namespace PanzerBlitz
 
 				_OddsCalculations.Add(
 					new OddsCalculation(
-						_Attackers.Select(
-							i => new Tuple<Unit, LineOfSight>(i, i.GetLineOfSight(AttackAt))),
+						_Attackers,
 						AttackAt.Units.ToList(),
 						AttackMethod,
 						AttackAt));
 			}
 			else if (AttackTarget == AttackTarget.WEAKEST)
 			{
-				_OddsCalculations.Add(AttackAt.Units.Select(i =>
-					new OddsCalculation(
-						_Attackers.Select(
-					   		j => new Tuple<Unit, LineOfSight>(j, j.GetLineOfSight(AttackAt))),
-										   new Unit[] { i },
-											AttackMethod,
-											AttackAt))
-									 .ArgMax(i => OddsIndex(i.Odds, i.OddsAgainst)));
+				_OddsCalculations.Add(
+					AttackAt.Units.Select(
+						i => new OddsCalculation(
+							_Attackers,
+							new Unit[] { i },
+							AttackMethod,
+							AttackAt))
+					.ArgMax(i => OddsIndex(i.Odds, i.OddsAgainst)));
 			}
 		}
 
 		public virtual NoAttackReason Validate()
 		{
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
+			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
 
 			return NoAttackReason.NONE;
 		}
@@ -195,7 +194,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() != NoAttackReason.NONE) return false;
 
-			_Attackers.ForEach(i => i.Fire());
+			_Attackers.ForEach(i => i.Execute(Random));
 			foreach (OddsCalculation c in _OddsCalculations)
 			{
 				CombatResult result = COMBAT_RESULTS[
