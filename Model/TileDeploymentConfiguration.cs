@@ -7,16 +7,16 @@ namespace PanzerBlitz
 {
 	public class TileDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { UNIT_CONFIGURATIONS, COORDINATE }
+		enum Attribute { COORDINATE }
 
 		List<UnitConfiguration> _UnitConfigurations;
 		public readonly Coordinate Coordinate;
 
-		public IEnumerable<UnitConfiguration> UnitConfigurations
+		public DeploymentType DeploymentType
 		{
 			get
 			{
-				return _UnitConfigurations;
+				return DeploymentType.POSITIONAL;
 			}
 		}
 
@@ -24,7 +24,6 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			_UnitConfigurations = (List<UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
 			Coordinate = (Coordinate)attributes[(int)Attribute.COORDINATE];
 		}
 

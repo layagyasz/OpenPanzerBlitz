@@ -12,6 +12,9 @@ namespace PanzerBlitz
 		public readonly bool NoVehicleCrossing;
 		public readonly bool TreatUnitsAsArmored;
 		public readonly bool MustAttackAllUnits;
+		public readonly bool Elevated;
+		public readonly bool Depressed;
+		public readonly bool BlocksLineOfSight;
 
 		public TileComponent(
 			string Name,
@@ -22,7 +25,10 @@ namespace PanzerBlitz
 			bool NoCrossing,
 			bool NoVehicleCrossing,
 			bool TreatUnitsAsArmored,
-			bool MustAttackAllUnits)
+			bool MustAttackAllUnits,
+			bool Elevated,
+			bool Depressed,
+			bool BlocksLineOfSight)
 		{
 			this.Name = Name;
 			this.DieModifier = DieModifier;
@@ -33,6 +39,9 @@ namespace PanzerBlitz
 			this.NoVehicleCrossing = NoVehicleCrossing;
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;
 			this.MustAttackAllUnits = MustAttackAllUnits;
+			this.Elevated = Elevated;
+			this.Depressed = Depressed;
+			this.BlocksLineOfSight = BlocksLineOfSight;
 		}
 	}
 }

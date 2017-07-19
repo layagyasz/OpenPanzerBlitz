@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +26,7 @@ namespace PanzerBlitz
 		Edge[] _Edges = new Edge[6];
 		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
-		public readonly MovementProfile MovementProfile;
+		public readonly TileConfiguration TileConfiguration;
 
 		bool _FiredAt;
 		bool _CanIndirectFireAt;
@@ -118,8 +118,8 @@ namespace PanzerBlitz
 			this.Y = Y;
 			Bounds = CalculateBounds();
 
-			MovementProfile = new MovementProfile(this);
-			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
+			TileConfiguration = new TileConfiguration(this);
+			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
 		}
 
 		public Tile(int X, int Y, Tile Copy, bool Invert = false)
@@ -142,7 +142,7 @@ namespace PanzerBlitz
 				_PathOverlays = Copy._PathOverlays.ToArray();
 			}
 
-			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
+			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
 		}
 
 		public Tile(SerializationInputStream Stream)
@@ -155,8 +155,8 @@ namespace PanzerBlitz
 			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
 			Bounds = CalculateBounds();
 
-			MovementProfile = new MovementProfile(this);
-			OnReconfigure += (sender, e) => MovementProfile.Recalculate();
+			TileConfiguration = new TileConfiguration(this);
+			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -193,7 +193,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return .5f * (Math.Abs(Node.RealX - RealX) + Math.Abs(Node.RealY - RealY));
+			return Math.Sqrt((Node.RealX - RealX) * (Node.RealX - RealX) + (Node.RealY - RealY) * (Node.RealY - RealY));
 		}
 
 		public IEnumerable<Tile> Neighbors()

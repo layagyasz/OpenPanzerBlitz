@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using Cardamom.Graphing;
@@ -28,7 +28,7 @@ namespace PanzerBlitz
 			for (int i = 0; i < Path.Count - 1; ++i)
 			{
 				if (Path[i + 1].IsEnemyOccupied(Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
-				float d = Path[i].MovementProfile.GetMoveCost(Unit, Path[i + 1], !Combat);
+				float d = Path[i].TileConfiguration.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 			}
 			if (Path.Distance > Unit.RemainingMovement)

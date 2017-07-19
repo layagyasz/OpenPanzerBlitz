@@ -187,7 +187,7 @@ namespace PanzerBlitz
 
 		private bool MustAttackAllUnits()
 		{
-			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.MovementProfile.MustAttackAllUnits;
+			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.TileConfiguration.MustAttackAllUnits;
 		}
 
 		public virtual bool Execute(Random Random)

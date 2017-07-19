@@ -24,12 +24,40 @@
 					2-tuple:_ {
 						2-tuple[]:_ {
 							2-tuple:_ {
-								!unit-configuration:_ { unit-configurations.t-34_85 }
+								!unit-configuration:_ { unit-configurations.cavalry }
+								int:_ { 3 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.45mm }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.82mm-motorized }
 								int:_ { 2 }
 							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.smg-company }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.t-34-c }
+								int:_ { 3 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.su-76 }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.wagon }
+								int:_ { 4 }
+							}
 						}
-						tile-deployment-configuration:_ {
-							coordinate:coordinate { 9,6 }
+						zone-deployment-configuration:_ {
+							zone:zone { 0,0 10,0 10,10 0,10 }
 						}
 					}
 				}

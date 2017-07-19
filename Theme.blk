@@ -92,6 +92,7 @@ class<>:classes {
 			int:height { 100 }
 			int:width { 100 }
 			int[]:margin { 0 3 0 3 }
+			!font:unit-stack-font { fonts.univers }
 			color[]:background-color { #888888 #888888 #888888 #888888 }
 		}
 		mode:selected {

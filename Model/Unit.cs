@@ -31,11 +31,22 @@ namespace PanzerBlitz
 		private Unit _Passenger;
 		private Unit _Carrier;
 
+		public Deployment Deployment
+		{
+			get
+			{
+				return Army.Deployments.Find(i => i.Units.Contains(this));
+			}
+		}
 		public bool Deployed
 		{
 			get
 			{
 				return _Deployed;
+			}
+			set
+			{
+				_Deployed = value;
 			}
 		}
 		public float RemainingMovement
@@ -261,10 +272,15 @@ namespace PanzerBlitz
 				_Position,
 				Tile,
 				i => true,
-				(i, j) => i.MovementProfile.GetMoveCost(this, j, !Combat),
+				(i, j) => i.TileConfiguration.GetMoveCost(this, j, !Combat),
 				(i, j) => i.HeuristicDistanceTo(j),
 				i => i.Neighbors(),
 				(i, j) => i == j);
+		}
+
+		public IEnumerable<Tile> GetFieldOfDeployment(IEnumerable<Tile> Tiles)
+		{
+			return Tiles.Where(i => Deployment.Validate(this, i) == NoDeployReason.NONE);
 		}
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
@@ -283,26 +299,21 @@ namespace PanzerBlitz
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
 				_Position.NeighborTiles
-		   			.Where(i => i != null && _Position.MovementProfile.CanMove(this, i, !Combat, false))
+		   			.Where(i => i != null && _Position.TileConfiguration.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, _Position, _Position.MovementProfile.GetMoveCost(this, i, !Combat)));
+							 i, _Position, _Position.TileConfiguration.GetMoveCost(this, i, !Combat)));
 			if (Combat && UnitConfiguration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				_Position,
 				RemainingMovement,
-				(i, j) => i.MovementProfile.GetMoveCost(this, j, !Combat))
+				(i, j) => i.TileConfiguration.GetMoveCost(this, j, !Combat))
 					.GetReachableNodes();
 
 			if (!Moved)
 				return fullMovement.Concat(adjacent.Where(i => !fullMovement.Any(j => i.Item1 == j.Item1)));
 			return fullMovement;
-		}
-
-		public void Deploy()
-		{
-			_Deployed = true;
 		}
 
 		public void Fire()

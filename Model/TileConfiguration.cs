@@ -3,13 +3,15 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class MovementProfile
+	public class TileConfiguration
 	{
 		public readonly Tile Tile;
 
 		bool _MustAttackAllUnits;
 		bool _TreatUnitsAsArmored;
+		bool _Depressed;
 		int _DieModifier;
+		int _TrueElevation;
 
 		float[] _RoadMovement = new float[6];
 		float[] _NonRoadMovement = new float[6];
@@ -30,6 +32,13 @@ namespace PanzerBlitz
 				return _TreatUnitsAsArmored;
 			}
 		}
+		public bool Depressed
+		{
+			get
+			{
+				return _Depressed;
+			}
+		}
 		public int DieModifier
 		{
 			get
@@ -37,8 +46,15 @@ namespace PanzerBlitz
 				return _DieModifier;
 			}
 		}
+		public int TrueElevation
+		{
+			get
+			{
+				return _TrueElevation;
+			}
+		}
 
-		public MovementProfile(Tile Tile)
+		public TileConfiguration(Tile Tile)
 		{
 			this.Tile = Tile;
 			Recalculate();
@@ -76,12 +92,18 @@ namespace PanzerBlitz
 			_TreatUnitsAsArmored = Tile.TileBase.TreatUnitsAsArmored
 									   || Tile.Edges.Any(i => i != null && i.TreatUnitsAsArmored)
 									   || Tile.PathOverlays.Any(i => i != null && i.TreatUnitsAsArmored);
+			_Depressed = Tile.TileBase.Depressed
+							 || Tile.Edges.Any(i => i != null && i.Depressed)
+							 || Tile.PathOverlays.Any(i => i != null && i.Depressed);
 			_DieModifier =
 				Math.Max(
 					Tile.TileBase.DieModifier,
 					Math.Max(
 						Tile.Edges.Max(i => i == null ? 0 : i.DieModifier),
 						Tile.PathOverlays.Max(i => i == null ? 0 : i.DieModifier)));
+			_TrueElevation = 2 * Tile.Elevation + (Tile.TileBase.Elevated
+												|| Tile.Edges.Any(i => i != null && i.Elevated)
+												|| Tile.PathOverlays.Any(i => i != null && i.Elevated) ? 1 : 0);
 
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{

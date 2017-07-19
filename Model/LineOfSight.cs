@@ -13,6 +13,13 @@ namespace PanzerBlitz
 
 		NoLineOfSightReason _Validated;
 
+		public IEnumerable<Tile> Tiles
+		{
+			get
+			{
+				return _LineOfSight;
+			}
+		}
 		public Tile Initial
 		{
 			get
@@ -20,7 +27,6 @@ namespace PanzerBlitz
 				return _LineOfSight[0];
 			}
 		}
-
 		public Tile Final
 		{
 			get
@@ -28,7 +34,6 @@ namespace PanzerBlitz
 				return _LineOfSight[_LineOfSight.Length - 1];
 			}
 		}
-
 		public int Range
 		{
 			get
@@ -108,7 +113,8 @@ namespace PanzerBlitz
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;
 			Edge[] edges = null;
-			if (LineOfSight[0].Elevation > LineOfSight[LineOfSight.Length - 1].Elevation)
+			if (LineOfSight[0].TileConfiguration.TrueElevation
+				> LineOfSight[LineOfSight.Length - 1].TileConfiguration.TrueElevation)
 			{
 				los = LineOfSight.Reverse().ToArray();
 				edges = CrossedEdges.Reverse().ToArray();
@@ -120,48 +126,62 @@ namespace PanzerBlitz
 			}
 
 			// Check for blocks.
-			if (ElevationBlocks(los)) return NoLineOfSightReason.SLOPE;
-			// if (GullyBlocks(los, edges)) return NoLineOfSightReason.GULLY;
-			if (EdgeBlocks(los, edges, Edge.FOREST)) return NoLineOfSightReason.FOREST;
-			if (EdgeBlocks(los, edges, Edge.TOWN)) return NoLineOfSightReason.TOWN;
-			if (EdgeBlocks(los, edges, Edge.SLOPE)) return NoLineOfSightReason.SLOPE;
+			if (ElevationBlocks(los)) return NoLineOfSightReason.TERRAIN;
+			if (DepressionBlocks(los)) return NoLineOfSightReason.TERRAIN;
+			if (EdgeBlocks(los, edges)) return NoLineOfSightReason.TERRAIN;
 			return NoLineOfSightReason.NONE;
 		}
 
-		static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges, Edge EdgeType)
+		static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges)
 		{
 			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
 			{
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (Edges[i] == EdgeType && (LineOfSight[0].Elevation == LineOfSight[i].Elevation
-												 || LineOfSight[0].Elevation == LineOfSight[i + 1].Elevation))
+					if (Edges[i] != null
+						&& Edges[i].BlocksLineOfSight
+						&& (LineOfSight[0].Elevation < LineOfSight[i].Elevation
+							|| LineOfSight[0].Elevation == LineOfSight[i + 1].Elevation))
 						return true;
 				}
 			}
 			else
 			{
-				if (Edges[0] == EdgeType) return true;
+				if (Edges[0] != null && Edges[0].BlocksLineOfSight) return true;
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (LineOfSight[i + 1].Elevation > LineOfSight[0].Elevation && Edges[i] == EdgeType)
+					if (LineOfSight[i + 1].Elevation > LineOfSight[0].Elevation
+						&& Edges[i] != null && Edges[i].BlocksLineOfSight)
 						return true;
 				}
 			}
 			return false;
 		}
 
+		static bool DepressionBlocks(Tile[] LineOfSight)
+		{
+			if (LineOfSight[0].TileConfiguration.Depressed)
+				return LineOfSight[LineOfSight.Length - 1]
+					.TileConfiguration.TrueElevation <= LineOfSight[0].TileConfiguration.TrueElevation
+					|| LineOfSight[LineOfSight.Length - 1].TileConfiguration.Depressed;
+			return LineOfSight[LineOfSight.Length - 1].TileConfiguration.Depressed;
+		}
+
 		static bool ElevationBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
+			if (LineOfSight[0].TileConfiguration.TrueElevation
+				== LineOfSight[LineOfSight.Length - 1].TileConfiguration.TrueElevation)
 			{
-				return LineOfSight.Any(i => i.Elevation > LineOfSight[0].Elevation);
+				return LineOfSight.Any(
+					i => i.TileConfiguration.TrueElevation > LineOfSight[0].TileConfiguration.TrueElevation);
 			}
 			else
 			{
-				for (int i = 1; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 2); ++i)
+				if (LineOfSight.Length == 3 && LineOfSight[0].Elevation == LineOfSight[1].Elevation) return false;
+				for (int i = 0; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1); ++i)
 				{
-					if (LineOfSight[i].Elevation > LineOfSight[0].Elevation) return true;
+					if (LineOfSight[i].TileConfiguration.TrueElevation > LineOfSight[0].TileConfiguration.TrueElevation)
+						return true;
 				}
 			}
 			return false;

@@ -47,9 +47,9 @@ namespace PanzerBlitz
 			if (_ExitTile.GetStackSize() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;
 
-			float distance1 = _InitialMovement.Path.Destination.MovementProfile.GetMoveCost(
+			float distance1 = _InitialMovement.Path.Destination.TileConfiguration.GetMoveCost(
 				_InitialMovement.Unit, _AttackTile, false, true);
-			float distance2 = _AttackTile.MovementProfile.GetMoveCost(_InitialMovement.Unit, _ExitTile, false, false);
+			float distance2 = _AttackTile.TileConfiguration.GetMoveCost(_InitialMovement.Unit, _ExitTile, false, false);
 			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
 				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 

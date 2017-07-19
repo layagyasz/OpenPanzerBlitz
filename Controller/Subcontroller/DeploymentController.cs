@@ -1,65 +1,78 @@
 using System;
+using System.Linq;
 
 using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class DeploymentController : Subcontroller
+	public class DeploymentController : BaseController
 	{
 		DeploymentPane _DeploymentPane;
-		Army _Army;
-		Match _Match;
-		GameScreen _GameScreen;
 
 		UnitConfigurationRenderer _Renderer;
 
 		public DeploymentController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+			: base(Match, GameScreen)
 		{
-			_Match = Match;
-			_GameScreen = GameScreen;
 			_Renderer = Renderer;
 		}
 
-		public void Begin(Army Army)
+		public override void Begin(Army Army)
 		{
-			_Army = Army;
+			base.Begin(Army);
 			_DeploymentPane = new DeploymentPane(Army, _Renderer);
+			_DeploymentPane.OnSelectedStack += HighlightDeploymentArea;
 			_GameScreen.AddPane(_DeploymentPane);
 		}
 
-		public void End()
+		public override void End()
 		{
+			base.End();
 			_GameScreen.RemovePane(_DeploymentPane);
 		}
 
-		public void HandleTileLeftClick(Tile Tile)
+		public override void HandleTileLeftClick(Tile Tile)
 		{
-			if (_DeploymentPane.Value != null)
+			if (_DeploymentPane.SelectedStack != null)
 			{
 				Unit unit = _DeploymentPane.Peek();
 				DeployOrder o = new DeployOrder(unit, Tile);
-				if (_Match.ExecuteOrder(o)) _DeploymentPane.Remove(unit);
+				if (_Match.ExecuteOrder(o))
+				{
+					_DeploymentPane.Remove(unit);
+					HighlightDeploymentArea(null, EventArgs.Empty);
+				}
 				else _GameScreen.Alert(o.Validate().ToString());
 			}
 		}
 
-		public void HandleTileRightClick(Tile Tile)
+		public override void HandleTileRightClick(Tile Tile)
 		{
 		}
 
-		public void HandleUnitLeftClick(Unit Unit)
+		public override void HandleUnitLeftClick(Unit Unit)
 		{
 		}
 
-		public void HandleUnitRightClick(Unit Unit)
+		public override void HandleUnitRightClick(Unit Unit)
 		{
 			DeployOrder o = new DeployOrder(Unit, null);
 			if (_Match.ExecuteOrder(o)) _DeploymentPane.Add(Unit);
 		}
 
-		public void HandleKeyPress(Keyboard.Key Key)
+		public override void HandleKeyPress(Keyboard.Key Key)
 		{
+		}
+
+		void HighlightDeploymentArea(object Sender, EventArgs E)
+		{
+			if (_DeploymentPane.SelectedStack != null)
+			{
+				Highlight(_DeploymentPane.SelectedStack.Peek().GetFieldOfDeployment(
+					_Match.Map.TilesEnumerable).Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+			}
+			else UnHighlight();
 		}
 	}
 }

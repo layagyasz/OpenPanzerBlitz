@@ -9,14 +9,13 @@ namespace PanzerBlitz
 	{
 		enum Attribute { UNIT_CONFIGURATIONS, ZONE }
 
-		List<UnitConfiguration> _UnitConfigurations;
 		public readonly Polygon Zone;
 
-		public IEnumerable<UnitConfiguration> UnitConfigurations
+		public DeploymentType DeploymentType
 		{
 			get
 			{
-				return _UnitConfigurations;
+				return DeploymentType.POSITIONAL;
 			}
 		}
 
@@ -24,7 +23,6 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			_UnitConfigurations = (List<UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
 			Zone = (Polygon)attributes[(int)Attribute.ZONE];
 		}
 

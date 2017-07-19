@@ -12,7 +12,7 @@ namespace PanzerBlitz
 	public class HomogenousStackView : Interactive
 	{
 		static readonly int UNIT_VIEW_SCALE = 64;
-		static readonly uint FONT_SIZE = 24;
+		static readonly uint FONT_SIZE = 18;
 
 		Text _Text;
 		UnitConfigurationRenderer _Renderer;
@@ -74,8 +74,7 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 			_UnitViews.First().Draw(Target, Transform);
-			_Text.Position = new Vector2f(UNIT_VIEW_SCALE * .5f, UNIT_VIEW_SCALE)
-				- new Vector2f(_Text.GetLocalBounds().Width, _Text.GetLocalBounds().Height) * .5f;
+			_Text.Position = -.5f * new Vector2f(_Text.GetLocalBounds().Width, _Text.GetLocalBounds().Height);
 			_Text.Draw(Target, new RenderStates(Transform));
 		}
 	}

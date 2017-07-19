@@ -105,7 +105,7 @@
     <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
-    <Compile Include="Model\MovementProfile.cs" />
+    <Compile Include="Model\TileConfiguration.cs" />
     <Compile Include="Model\OverrunSingleAttackOrder.cs" />
     <Compile Include="Model\ExecuteOrderEventArgs.cs" />
     <Compile Include="Model\MovementOrder.cs" />
@@ -131,6 +131,7 @@
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Model\NormalSingleAttackOrder.cs" />
     <Compile Include="Model\SingleAttackOrder.cs" />
+    <Compile Include="Model\DeploymentType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

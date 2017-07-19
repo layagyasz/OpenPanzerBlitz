@@ -36,7 +36,8 @@ namespace PanzerBlitz
 			}
 			else if (Unit.Army != _Army)
 			{
-				StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.CLOSE_ASSAULT));
+				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Unit.Position)
+					StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.CLOSE_ASSAULT));
 				if (_SelectedUnit != null)
 				{
 					NoSingleAttackReason r = _AttackBuilder.AddAttacker(

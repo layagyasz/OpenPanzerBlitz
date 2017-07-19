@@ -4,9 +4,9 @@ namespace PanzerBlitz
 	public class TilePathOverlay : TileComponent
 	{
 		public static readonly TilePathOverlay ROAD =
-			new TilePathOverlay("Road", 0, .5f, .5f, true, false, false, false, false);
+			new TilePathOverlay("Road", 0, .5f, .5f, true, false, false, false, false, false, false, false);
 		public static readonly TilePathOverlay STREAM =
-			new TilePathOverlay("Stream", 0, 3, 5, false, false, false, false, false);
+			new TilePathOverlay("Stream", 0, 3, 5, false, false, false, false, false, false, true, false);
 
 		public static TilePathOverlay[] PATH_OVERLAYS = { null, ROAD, STREAM };
 
@@ -19,7 +19,10 @@ namespace PanzerBlitz
 			bool NoCrossing,
 			bool NoVehicleCrossing,
 			bool TreatUnitsAsArmored,
-			bool MustAttackAllUnits)
+			bool MustAttackAllUnits,
+			bool Elevated,
+			bool Depressed,
+			bool BlocksLineOfSight)
 			: base(
 				Name,
 				DieModifier,
@@ -29,7 +32,10 @@ namespace PanzerBlitz
 				NoCrossing,
 				NoVehicleCrossing,
 				TreatUnitsAsArmored,
-				MustAttackAllUnits)
+				MustAttackAllUnits,
+				Elevated,
+				Depressed,
+				BlocksLineOfSight)
 		{ }
 	}
 }

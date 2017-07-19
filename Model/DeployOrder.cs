@@ -16,15 +16,23 @@ namespace PanzerBlitz
 
 		public NoDeployReason Validate()
 		{
-			return Unit.Army.Deployments.Find(i => i.Units.Contains(Unit)).Validate(Unit, Tile);
+			return Unit.Deployment.Validate(Unit, Tile);
 		}
 
 		public bool Execute(Random Random)
 		{
 			if (Validate() != NoDeployReason.NONE) return false;
 
-			if (Tile == null) Unit.Remove();
-			else Unit.Place(Tile);
+			if (Tile == null)
+			{
+				Unit.Remove();
+				Unit.Deployed = false;
+			}
+			else
+			{
+				Unit.Place(Tile);
+				Unit.Deployed = true;
+			}
 
 			return true;
 		}

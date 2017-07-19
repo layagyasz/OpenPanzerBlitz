@@ -1,9 +1,9 @@
 ﻿using System;
 namespace PanzerBlitz
 {
-	public enum NoLineOfSightReason
+	public enum DeploymentType
 	{
-		NONE,
-		TERRAIN
+		POSITIONAL,
+		CONVOY
 	}
 }
