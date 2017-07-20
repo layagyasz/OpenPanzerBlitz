@@ -45,7 +45,7 @@ namespace PanzerBlitz
 				{
 					FloatingColor f = new FloatingColor(colors[i]);
 					f = f.MakeHSL();
-					f.B = (float)Math.Max(0, f.B + .1);
+					f.B = (float)Math.Min(1, f.B + .1);
 					colors[i] = f.MakeRGB().ConvertToColor();
 				}
 			}

@@ -133,7 +133,9 @@ namespace PanzerBlitz
 
 		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
 		{
-			if (!IsCarrier || (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY))
+			if (!IsCarrier
+				|| !UnitConfiguration.IsPassenger
+				|| (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY))
 				return NoLoadReason.NO_CARRY;
 			return NoLoadReason.NONE;
 		}

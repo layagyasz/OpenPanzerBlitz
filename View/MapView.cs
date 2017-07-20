@@ -12,6 +12,7 @@ namespace PanzerBlitz
 	{
 		private Map _Map;
 		public readonly TileView[,] Tiles;
+		public readonly TileRenderer TileRenderer;
 
 		public Map Map
 		{
@@ -39,6 +40,7 @@ namespace PanzerBlitz
 		{
 			_Map = Map;
 			Tiles = new TileView[_Map.Tiles.GetLength(0), _Map.Tiles.GetLength(1)];
+			this.TileRenderer = TileRenderer;
 			for (int i = 0; i < _Map.Tiles.GetLength(0); ++i)
 			{
 				for (int j = 0; j < _Map.Tiles.GetLength(1); ++j)

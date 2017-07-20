@@ -230,28 +230,39 @@ namespace PanzerBlitz
 			return NoUnloadReason.NONE;
 		}
 
-		public void Load(Unit Unit)
+		public bool IsSolitary()
 		{
-			_Moved = true;
-			_RemainingMovement = 0;
-			_Passenger = Unit;
+			return _Position.Units.Count() == 1 || _Position.Units.All(i => i == this || i == _Passenger);
+		}
 
+		public void Load(Unit Unit, bool UseMovement)
+		{
+			_Passenger = Unit;
 			Unit._Carrier = this;
-			Unit._Moved = true;
-			Unit._RemainingMovement = 0;
+
+			if (UseMovement)
+			{
+				_Moved = true;
+				Unit._Moved = true;
+				_RemainingMovement = 0;
+				Unit._RemainingMovement = 0;
+			}
 
 			if (OnLoad != null) OnLoad(this, EventArgs.Empty);
 		}
 
-		public void Unload()
+		public void Unload(bool UseMovement)
 		{
-			_Passenger._Carrier = null;
-			_Passenger._Moved = true;
-			_Passenger._RemainingMovement = 0;
+			if (UseMovement)
+			{
+				_Moved = true;
+				_Passenger._Moved = true;
+				_RemainingMovement = 0;
+				_Passenger._RemainingMovement = 0;
+			}
 
-			_Moved = true;
-			_RemainingMovement = 0;
 			_Passenger = null;
+			_Passenger._Carrier = null;
 
 			if (OnUnload != null) OnUnload(this, EventArgs.Empty);
 		}
@@ -280,7 +291,9 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tile> GetFieldOfDeployment(IEnumerable<Tile> Tiles)
 		{
-			return Tiles.Where(i => Deployment.Validate(this, i) == NoDeployReason.NONE);
+			if (Deployment is PositionalDeployment)
+				return Tiles.Where(i => ((PositionalDeployment)Deployment).Validate(this, i) == NoDeployReason.NONE);
+			return Enumerable.Empty<Tile>();
 		}
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)

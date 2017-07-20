@@ -12,14 +12,6 @@ namespace PanzerBlitz
 		List<UnitConfiguration> _UnitConfigurations;
 		public readonly Coordinate Coordinate;
 
-		public DeploymentType DeploymentType
-		{
-			get
-			{
-				return DeploymentType.POSITIONAL;
-			}
-		}
-
 		public TileDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));

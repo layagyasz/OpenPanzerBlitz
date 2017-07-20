@@ -6,6 +6,7 @@ namespace PanzerBlitz
 		NONE,
 		STACK_LIMIT,
 		DEPLOYMENT_RULE,
+		CONVOY_ORDER,
 		IMPOSSIBLE
 	}
 }

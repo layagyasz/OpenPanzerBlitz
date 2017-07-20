@@ -8,7 +8,6 @@ namespace PanzerBlitz
 {
 	public interface DeploymentConfiguration
 	{
-		DeploymentType DeploymentType { get; }
 		Deployment GenerateDeployment(IEnumerable<Unit> Units);
 	}
 }

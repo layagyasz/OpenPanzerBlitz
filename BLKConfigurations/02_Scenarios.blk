@@ -57,7 +57,7 @@
 							}
 						}
 						zone-deployment-configuration:_ {
-							zone:zone { 0,0 10,0 10,10 0,10 }
+							zone:zone { 0,0 10,0 10,37 0,37 }
 						}
 					}
 				}

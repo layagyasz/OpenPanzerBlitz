@@ -89,8 +89,7 @@ namespace PanzerBlitz
 						_SelectedUnit.Position.Units.Where(i => _SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
 					if (canLoad.Count == 1)
 					{
-						_Match.ExecuteOrder(new LoadOrder(_SelectedUnit, canLoad.First()));
-						SetMovementHighlight(_SelectedUnit);
+						LoadUnit(canLoad.First());
 					}
 					else if (canLoad.Count > 1)
 					{
@@ -100,17 +99,33 @@ namespace PanzerBlitz
 					}
 				}
 			}
-			else if (Key == Keyboard.Key.U)
-			{
-				if (_SelectedUnit != null) _Match.ExecuteOrder(new UnloadOrder(_SelectedUnit));
-			}
+			else if (Key == Keyboard.Key.U) UnloadUnit();
 		}
 
 		void LoadUnit(object sender, ValueChangedEventArgs<Unit> E)
 		{
-			if (_SelectedUnit != null) _Match.ExecuteOrder(new LoadOrder(_SelectedUnit, E.Value));
-			SetMovementHighlight(_SelectedUnit);
+			LoadUnit(E.Value);
+		}
+
+		void LoadUnit(Unit Unit)
+		{
+			if (_SelectedUnit != null)
+			{
+				LoadOrder order = new LoadOrder(_SelectedUnit, Unit);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+			}
 			Clear();
+		}
+
+		void UnloadUnit()
+		{
+			if (_SelectedUnit != null)
+			{
+				UnloadOrder order = new UnloadOrder(_SelectedUnit);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+			}
 		}
 	}
 }

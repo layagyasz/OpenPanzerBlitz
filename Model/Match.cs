@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,9 +76,9 @@ namespace PanzerBlitz
 			{
 				if (!ValidateUnloadOrder((UnloadOrder)Order)) return false;
 			}
-			else if (Order is DeployOrder)
+			else if (Order is PositionalDeployOrder)
 			{
-				if (!ValidateDeployOrder((DeployOrder)Order)) return false;
+				if (!ValidateDeployOrder((PositionalDeployOrder)Order)) return false;
 			}
 			else if (Order is NextPhaseOrder)
 			{
@@ -129,12 +129,14 @@ namespace PanzerBlitz
 
 		private bool ValidateUnloadOrder(UnloadOrder Order)
 		{
+			if (!Order.UseMovement) return CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
 			if (Order.Carrier.UnitConfiguration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
 			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
 		private bool ValidateLoadOrder(LoadOrder Order)
 		{
+			if (!Order.UseMovement) return CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
 			if (Order.Carrier.UnitConfiguration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
 			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
@@ -148,7 +150,7 @@ namespace PanzerBlitz
 			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
-		private bool ValidateDeployOrder(DeployOrder Order)
+		private bool ValidateDeployOrder(PositionalDeployOrder Order)
 		{
 			return (Order.Unit.Army == CurrentPhase.Item1 || CurrentPhase.Item1 == null)
 				&& CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;

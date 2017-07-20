@@ -74,7 +74,8 @@ namespace PanzerBlitz
 		);
 
 
-		Color _BaseColor;
+		public readonly Color BaseColor;
+
 		Color[] _ElevationColors;
 		Color[] _TopColors;
 		Color[] _EdgeColors;
@@ -95,7 +96,7 @@ namespace PanzerBlitz
 			float[] PathWidths,
 			float[] PathBorderWidths)
 		{
-			_BaseColor = BaseColor;
+			this.BaseColor = BaseColor;
 			_ElevationColors = ElevationColors;
 			_TopColors = TopColors;
 			_EdgeColors = EdgeColors;
@@ -110,7 +111,7 @@ namespace PanzerBlitz
 		{
 			List<Vertex> vertices = new List<Vertex>();
 
-			Color baseColor = BaseColor(Tile.TileBase);
+			Color baseColor = BaseColor;
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{
 				// Body.
@@ -372,11 +373,6 @@ namespace PanzerBlitz
 		static Vector2f OnSegment(Segment Segment, float Distance)
 		{
 			return Segment.Point + Distance * Segment.Length * Segment.Direction;
-		}
-
-		Color BaseColor(TileBase TileConfiguration)
-		{
-			return _BaseColor;
 		}
 
 		Color TopColor(TileBase TileBase)

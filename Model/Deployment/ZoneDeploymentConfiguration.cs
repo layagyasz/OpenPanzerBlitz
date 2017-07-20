@@ -11,14 +11,6 @@ namespace PanzerBlitz
 
 		public readonly Polygon Zone;
 
-		public DeploymentType DeploymentType
-		{
-			get
-			{
-				return DeploymentType.POSITIONAL;
-			}
-		}
-
 		public ZoneDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));

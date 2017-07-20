@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -11,61 +12,45 @@ namespace PanzerBlitz
 {
 	public class DeploymentPane : Pane
 	{
-		public EventHandler<EventArgs> OnSelectedStack;
+		public EventHandler<EventArgs> OnDeploymentSelected;
 
-		public readonly Army Army;
+		Select<DeploymentPage> _DeploymentPageSelect = new Select<DeploymentPage>("select");
+		List<DeploymentPage> _Pages = new List<DeploymentPage>();
 
-		UnitConfigurationRenderer _Renderer;
-
-		ScrollCollection<HomogenousStackView> _Selection;
-
-		public HomogenousStackView SelectedStack
+		public Deployment SelectedDeployment
 		{
 			get
 			{
-				if (_Selection.Value == null) return null;
-				return _Selection.Value.Value;
+				return _DeploymentPageSelect.Value.Value.Deployment;
 			}
 		}
 
-		public DeploymentPane(Army Army, UnitConfigurationRenderer Renderer)
+		public DeploymentPane()
 			: base("deployment-pane")
 		{
-			this.Army = Army;
-			_Renderer = Renderer;
-
-			_Selection = new ScrollCollection<HomogenousStackView>("deployment-select");
-			_Selection.OnChange +=
-				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
-
-			foreach (var g in Army.Units.GroupBy(i => i.UnitConfiguration))
-				_Selection.Add(new DeploymentSelectionOption(g, _Renderer));
-
-			Add(_Selection);
+			_DeploymentPageSelect.OnChange += SetActivePage;
+			Add(_DeploymentPageSelect);
 		}
 
-		public void Add(Unit Unit)
+		public void AddPage(DeploymentPage Page)
 		{
-			DeploymentSelectionOption option =
-							(DeploymentSelectionOption)_Selection.FirstOrDefault(
-								i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
-			if (option == null) _Selection.Add(new DeploymentSelectionOption(new Unit[] { Unit }, _Renderer));
-			else option.Push(Unit);
+			Page.Visible = false;
+			_Pages.Add(Page);
+			Add(Page);
+
+			SelectionOption<DeploymentPage> option = new SelectionOption<DeploymentPage>("select-option")
+			{
+				Value = Page,
+				DisplayedString = Page.Deployment.GetDisplayString()
+			};
+			_DeploymentPageSelect.Add(option);
 		}
 
-		public void Remove(Unit Unit)
+		void SetActivePage(object sender, ValueChangedEventArgs<StandardItem<DeploymentPage>> E)
 		{
-			DeploymentSelectionOption option =
-				(DeploymentSelectionOption)_Selection.FirstOrDefault(
-					i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
-			if (option != null) option.Pop();
-			if (option.Count == 0) _Selection.Remove(option);
-		}
-
-		public Unit Peek()
-		{
-			if (SelectedStack != null) return SelectedStack.Peek();
-			return null;
+			_Pages.ForEach(i => i.Visible = false);
+			E.Value.Value.Visible = true;
+			if (OnDeploymentSelected != null) OnDeploymentSelected(null, EventArgs.Empty);
 		}
 	}
 }

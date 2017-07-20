@@ -6,12 +6,12 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class ZoneDeployment : Deployment
+	public class ZoneDeployment : PositionalDeployment
 	{
 		public readonly ZoneDeploymentConfiguration DeploymentConfiguration;
 
 		public ZoneDeployment(IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
-			: base(Units, DeploymentConfiguration)
+			: base(Units)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
@@ -37,6 +37,11 @@ namespace PanzerBlitz
 					return NoDeployReason.DEPLOYMENT_RULE;
 			}
 			return NoDeployReason.NONE;
+		}
+
+		public override string GetDisplayString()
+		{
+			return "Zone Deployment";
 		}
 	}
 }

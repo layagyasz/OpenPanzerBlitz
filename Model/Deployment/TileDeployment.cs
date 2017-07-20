@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class TileDeployment : Deployment
+	public class TileDeployment : PositionalDeployment
 	{
 		public readonly TileDeploymentConfiguration DeploymentConfiguration;
 
 		public TileDeployment(IEnumerable<Unit> Units, TileDeploymentConfiguration DeploymentConfiguration)
-			: base(Units, DeploymentConfiguration)
+			: base(Units)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		public override bool AutomateDeployment(Match Match)
 		{
 			bool done = Units.All(i => Match.ExecuteOrder(
-				new DeployOrder(
+				new PositionalDeployOrder(
 					i,
 					Match.Map.Tiles[
 						DeploymentConfiguration.Coordinate.X, DeploymentConfiguration.Coordinate.Y])));
@@ -42,6 +42,11 @@ namespace PanzerBlitz
 				else return NoDeployReason.NONE;
 			}
 			else return NoDeployReason.DEPLOYMENT_RULE;
+		}
+
+		public override string GetDisplayString()
+		{
+			return "Tile Deployment";
 		}
 	}
 }

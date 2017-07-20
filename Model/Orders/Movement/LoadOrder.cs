@@ -5,11 +5,13 @@ namespace PanzerBlitz
 	{
 		public readonly Unit Carrier;
 		public readonly Unit Passenger;
+		public readonly bool UseMovement;
 
-		public LoadOrder(Unit Carrier, Unit Passenger)
+		public LoadOrder(Unit Carrier, Unit Passenger, bool UseMovement = true)
 		{
 			this.Carrier = Carrier;
 			this.Passenger = Passenger;
+			this.UseMovement = UseMovement;
 		}
 
 		public NoLoadReason Validate()
@@ -21,7 +23,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == NoLoadReason.NONE)
 			{
-				Carrier.Load(Passenger);
+				Carrier.Load(Passenger, UseMovement);
 				return true;
 			}
 			else return false;

@@ -72,33 +72,6 @@ class<>:classes {
 		}
 	}
 
-	class:deployment-pane {
-		mode:default {
-			int:height { 768 }
-			int:width { 128 }
-			int[]:padding { 14 14 14 14 }
-			color[]:background-color { #000000 #000000 #000000 #000000 }
-		}
-	}
-	class:deployment-select {
-		mode:default {
-			int:height { 740 }
-			int:width { 100 }
-			color[]:background-color { #444444 #444444 #444444 #444444 }
-		}
-	}
-	class:deployment-selection-option {
-		mode:default {
-			int:height { 100 }
-			int:width { 100 }
-			int[]:margin { 0 3 0 3 }
-			!font:unit-stack-font { fonts.univers }
-			color[]:background-color { #888888 #888888 #888888 #888888 }
-		}
-		mode:selected {
-			color[]:background-color { #AAAA88 #AAAA88 #AAAA88 #AAAA88 }
-		}
-	}
 	class:attack-pane {
 		mode:default {
 			int:height { 768 }
@@ -173,6 +146,32 @@ class<>:classes {
 			int[]:margin { 0 1 0 1 }
 		}
 	}
+
+	class:deployment-pane {
+		!class:parent { attack-pane }
+	}
+	class:deployment-select {
+		!class:parent { attack-display }
+	}
+	class:deployment-selection-option {
+		mode:default {
+			int:height { 100 }
+			int:width { 288 }
+			int[]:margin { 0 3 0 3 }
+			!font:unit-stack-font { fonts.univers }
+			color[]:background-color { #484848 #484848 #484848 #484848 }
+		}
+		mode:selected {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+		}
+		mode:selected-hover {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+		}
+		mode:selected-focus {
+			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+		}
+	}
+
 	class:load-unit-pane {
 		mode:default {
 			int:height { 92 }

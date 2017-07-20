@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using SFML.Graphics;
@@ -8,7 +9,10 @@ namespace PanzerBlitz
 {
 	public class DeploymentController : BaseController
 	{
+		Dictionary<Deployment, Subcontroller> _DeploymentMicrocontrollers = new Dictionary<Deployment, Subcontroller>();
+
 		DeploymentPane _DeploymentPane;
+		Deployment _WorkingDeployment;
 
 		UnitConfigurationRenderer _Renderer;
 
@@ -21,8 +25,20 @@ namespace PanzerBlitz
 		public override void Begin(Army Army)
 		{
 			base.Begin(Army);
-			_DeploymentPane = new DeploymentPane(Army, _Renderer);
-			_DeploymentPane.OnSelectedStack += HighlightDeploymentArea;
+			_DeploymentPane = new DeploymentPane();
+			_DeploymentPane.OnDeploymentSelected += HandleDeploymentSelected;
+			_DeploymentMicrocontrollers.Clear();
+			foreach (Deployment d in Army.Deployments)
+			{
+				if (d is PositionalDeployment)
+				{
+					PositionalDeploymentMicrocontroller c =
+						new PositionalDeploymentMicrocontroller(
+							_Match, _GameScreen, (PositionalDeployment)d, _Renderer);
+					_DeploymentMicrocontrollers.Add(d, c);
+					_DeploymentPane.AddPage(c.DeploymentPage);
+				}
+			}
 			_GameScreen.AddPane(_DeploymentPane);
 		}
 
@@ -34,45 +50,33 @@ namespace PanzerBlitz
 
 		public override void HandleTileLeftClick(Tile Tile)
 		{
-			if (_DeploymentPane.SelectedStack != null)
-			{
-				Unit unit = _DeploymentPane.Peek();
-				DeployOrder o = new DeployOrder(unit, Tile);
-				if (_Match.ExecuteOrder(o))
-				{
-					_DeploymentPane.Remove(unit);
-					HighlightDeploymentArea(null, EventArgs.Empty);
-				}
-				else _GameScreen.Alert(o.Validate().ToString());
-			}
+			_DeploymentMicrocontrollers[_DeploymentPane.SelectedDeployment].HandleTileLeftClick(Tile);
 		}
 
 		public override void HandleTileRightClick(Tile Tile)
 		{
+			_DeploymentMicrocontrollers[_DeploymentPane.SelectedDeployment].HandleTileRightClick(Tile);
 		}
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
+			_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitLeftClick(Unit);
 		}
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
-			DeployOrder o = new DeployOrder(Unit, null);
-			if (_Match.ExecuteOrder(o)) _DeploymentPane.Add(Unit);
+			_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitRightClick(Unit);
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
 		}
 
-		void HighlightDeploymentArea(object Sender, EventArgs E)
+		void HandleDeploymentSelected(object Sender, EventArgs E)
 		{
-			if (_DeploymentPane.SelectedStack != null)
-			{
-				Highlight(_DeploymentPane.SelectedStack.Peek().GetFieldOfDeployment(
-					_Match.Map.TilesEnumerable).Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
-			}
-			else UnHighlight();
+			if (_WorkingDeployment != null) _DeploymentMicrocontrollers[_WorkingDeployment].End();
+			_WorkingDeployment = _DeploymentPane.SelectedDeployment;
+			_DeploymentMicrocontrollers[_WorkingDeployment].Begin(_Army);
 		}
 	}
 }
