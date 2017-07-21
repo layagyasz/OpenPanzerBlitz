@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PanzerBlitz
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 		public AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
-				return _Attacker.UnitConfiguration.GetAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
+				return _Attacker.Configuration.GetAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
 			return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}

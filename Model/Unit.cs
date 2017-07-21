@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnDestroy;
 
 		public readonly Army Army;
-		public readonly UnitConfiguration UnitConfiguration;
+		public readonly UnitConfiguration Configuration;
 
 		private bool _Deployed;
 
@@ -123,7 +123,7 @@ namespace PanzerBlitz
 		public Unit(Army Army, UnitConfiguration UnitConfiguration)
 		{
 			this.Army = Army;
-			this.UnitConfiguration = UnitConfiguration;
+			this.Configuration = UnitConfiguration;
 		}
 
 		public NoMoveReason CanMove(bool Combat)
@@ -133,8 +133,8 @@ namespace PanzerBlitz
 			{
 				if (Combat)
 				{
-					if (UnitConfiguration.CanOverrun) return NoMoveReason.NONE;
-					if (UnitConfiguration.CanCloseAssault)
+					if (Configuration.CanOverrun) return NoMoveReason.NONE;
+					if (Configuration.CanCloseAssault)
 						return _MovedMoreThanOneTile ? NoMoveReason.NO_MOVE : NoMoveReason.NONE;
 					return NoMoveReason.NO_MOVE;
 				}
@@ -145,21 +145,21 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Vehicle, bool Combat)
 		{
-			if (Vehicle != UnitConfiguration.IsVehicle) return NoMoveReason.NO_MOVE;
+			if (Vehicle != Configuration.IsVehicle) return NoMoveReason.NO_MOVE;
 			else return CanMove(Combat);
 		}
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
 			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoSingleAttackReason.UNABLE;
-			return UnitConfiguration.CanAttack(AttackMethod);
+			return Configuration.CanAttack(AttackMethod);
 		}
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			NoSingleAttackReason r = CanAttack(AttackMethod);
 			if (r != NoSingleAttackReason.NONE) return r;
-			return UnitConfiguration.CanAttack(AttackMethod, EnemyArmored, LineOfSight);
+			return Configuration.CanAttack(AttackMethod, EnemyArmored, LineOfSight);
 		}
 
 		public void HandleCombatResult(CombatResult CombatResult)
@@ -218,14 +218,14 @@ namespace PanzerBlitz
 			if (Unit.Moved || Moved || Unit.Fired || Fired) return NoLoadReason.NO_MOVE;
 			if (Unit.Army != Army) return NoLoadReason.TEAM;
 
-			return UnitConfiguration.CanLoad(Unit.UnitConfiguration);
+			return Configuration.CanLoad(Unit.Configuration);
 		}
 
 		public NoUnloadReason CanUnload()
 		{
 			if (Fired) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
-			if (_Position.GetStackSize() >= _Passenger.Army.ArmyConfiguration.Faction.StackLimit)
+			if (_Position.GetStackSize() >= _Passenger.Army.Configuration.Faction.StackLimit)
 				return NoUnloadReason.STACK_LIMIT;
 			return NoUnloadReason.NONE;
 		}
@@ -269,7 +269,7 @@ namespace PanzerBlitz
 
 		public int GetStackSize()
 		{
-			return _Carrier == null ? UnitConfiguration.GetStackSize() : 0;
+			return _Carrier == null ? Configuration.GetStackSize() : 0;
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)
@@ -300,7 +300,7 @@ namespace PanzerBlitz
 		{
 			if (CanAttack(AttackMethod) != NoSingleAttackReason.NONE) return Enumerable.Empty<LineOfSight>();
 
-			return new Field<Tile>(_Position, UnitConfiguration.GetRange(AttackMethod), (i, j) => 1)
+			return new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
 				.GetReachableNodes()
 				.Select(i => GetLineOfSight(i.Item1))
 				.Where(i => i.Final != _Position && i.Validate() == NoLineOfSightReason.NONE);
@@ -315,7 +315,7 @@ namespace PanzerBlitz
 		   			.Where(i => i != null && _Position.TileConfiguration.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
 							 i, _Position, _Position.TileConfiguration.GetMoveCost(this, i, !Combat)));
-			if (Combat && UnitConfiguration.CanCloseAssault)
+			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
@@ -339,7 +339,7 @@ namespace PanzerBlitz
 			_Fired = false;
 			_Moved = false;
 			_MovedMoreThanOneTile = false;
-			_RemainingMovement = UnitConfiguration.Movement;
+			_RemainingMovement = Configuration.Movement;
 			_Disrupted = false;
 		}
 	}

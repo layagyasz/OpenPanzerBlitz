@@ -39,6 +39,8 @@ namespace PanzerBlitz
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(
 				"zone-deployment-configuration", i => new ZoneDeploymentConfiguration(i));
+			Block.AddParser<TileEntryDeployment>(
+				"tile-entry-deployment-configuration", i => new TileEntryDeploymentConfiguration(i));
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<MapConfiguration>("map-configuration", i => new MapConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));

@@ -5,9 +5,22 @@ namespace PanzerBlitz
 {
 	public class TileEntryDeployment : ConvoyDeployment
 	{
-		public TileEntryDeployment(IEnumerable<Unit> Units)
-			: base(Units)
+		public readonly TileEntryDeploymentConfiguration DeploymentConfiguration;
+
+		public override DeploymentConfiguration Configuration
 		{
+			get
+			{
+				return DeploymentConfiguration;
+
+			}
+		}
+
+		public TileEntryDeployment(
+			Army Army, IEnumerable<Unit> Units, TileEntryDeploymentConfiguration DeploymentConfiguration)
+			: base(Army, Units)
+		{
+			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
 		public override bool AutomateDeployment(Match Match)
@@ -18,11 +31,6 @@ namespace PanzerBlitz
 		public override bool IsConfigured()
 		{
 			return Validate(_EntryTile) == NoDeployReason.NONE && Validate(_ConvoyOrder) == NoDeployReason.NONE;
-		}
-
-		public override string GetDisplayString()
-		{
-			return "Tile Entry Deployment";
 		}
 	}
 }

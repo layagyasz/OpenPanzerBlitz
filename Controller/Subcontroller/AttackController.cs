@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using SFML.Graphics;
@@ -34,7 +34,7 @@ namespace PanzerBlitz
 							HIGHLIGHT_COLORS[
 								Math.Min(
 									i.Range * HIGHLIGHT_COLORS.Length
-									/ (Unit.UnitConfiguration.GetRange(AttackMethod.NORMAL_FIRE) + 1),
+									/ (Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE) + 1),
 									HIGHLIGHT_COLORS.Length - 1)])));
 			}
 			else if (Unit.Army != _Army)

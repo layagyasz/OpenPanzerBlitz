@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,7 +60,7 @@ namespace PanzerBlitz
 							HIGHLIGHT_COLORS[
 								Math.Min(
 									i.Range * HIGHLIGHT_COLORS.Length
-				/ (Unit.UnitConfiguration.GetRange(AttackMethod.CLOSE_ASSAULT) + 1),
+				/ (Unit.Configuration.GetRange(AttackMethod.CLOSE_ASSAULT) + 1),
 								HIGHLIGHT_COLORS.Length - 1)]));
 
 			IEnumerable<Tuple<Tile, Color>> moveRange = Unit.GetFieldOfMovement(true).Select(

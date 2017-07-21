@@ -6,8 +6,8 @@ namespace PanzerBlitz
 {
 	public abstract class PositionalDeployment : Deployment
 	{
-		public PositionalDeployment(IEnumerable<Unit> Units)
-			: base(Units)
+		public PositionalDeployment(Army Army, IEnumerable<Unit> Units)
+			: base(Army, Units)
 		{
 		}
 
@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		{
 			if (Tile == null) return NoDeployReason.NONE;
 			if (!Tile.Units.Contains(Unit)
-				&& Tile.GetStackSize() >= Unit.Army.ArmyConfiguration.Faction.StackLimit)
+				&& Tile.GetStackSize() >= Unit.Army.Configuration.Faction.StackLimit)
 				return NoDeployReason.STACK_LIMIT;
 			return NoDeployReason.NONE;
 		}

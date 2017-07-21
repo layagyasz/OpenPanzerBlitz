@@ -9,7 +9,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class DeploymentSelectionOption : SelectionOption<HomogenousStackView>
+	public class PositionalDeploymentSelectionOption : SelectionOption<HomogenousStackView>
 	{
 		public readonly UnitConfiguration UnitConfiguration;
 
@@ -23,10 +23,10 @@ namespace PanzerBlitz
 			}
 		}
 
-		public DeploymentSelectionOption(IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
+		public PositionalDeploymentSelectionOption(IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
 			: base("deployment-selection-option")
 		{
-			UnitConfiguration = Units.First().UnitConfiguration;
+			UnitConfiguration = Units.First().Configuration;
 
 			_StackView = new HomogenousStackView(
 				Units, Renderer, Class.GetAttributeWithDefault<Font>("unit-stack-font", null));

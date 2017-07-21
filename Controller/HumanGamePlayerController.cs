@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,7 +65,7 @@ namespace PanzerBlitz
 		public void DoTurn(Army Army, TurnComponent TurnComponent)
 		{
 			_InfoDisplay.DisplayedString =
-				string.Format("{0}\n{1}", Army.ArmyConfiguration.Faction.Name, TurnComponent);
+				string.Format("{0}\n{1}", Army.Configuration.Faction.Name, TurnComponent);
 			_Controllers[TurnComponent].Begin(Army);
 		}
 

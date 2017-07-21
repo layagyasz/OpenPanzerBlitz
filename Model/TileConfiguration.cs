@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 namespace PanzerBlitz
@@ -77,8 +77,8 @@ namespace PanzerBlitz
 				&& pathOverlay.RoadMove
 				&& (Tile.Units.Count() == 0 || (Tile == Unit.Position && Unit.IsSolitary())))
 				return _RoadMovement[index];
-			if (Unit.UnitConfiguration.TruckMovement) return _TruckNonRoadMovement[index];
-			if (Unit.UnitConfiguration.IsVehicle) return _VehicleNonRoadMovement[index];
+			if (Unit.Configuration.TruckMovement) return _TruckNonRoadMovement[index];
+			if (Unit.Configuration.IsVehicle) return _VehicleNonRoadMovement[index];
 			return _NonRoadMovement[index];
 		}
 

@@ -7,9 +7,18 @@ namespace PanzerBlitz
 {
 	public class ZoneDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { UNIT_CONFIGURATIONS, ZONE }
+		enum Attribute { DISPLAY_NAME, ZONE }
 
 		public readonly Polygon Zone;
+		string _DisplayName;
+
+		public string DisplayName
+		{
+			get
+			{
+				return _DisplayName;
+			}
+		}
 
 		public ZoneDeploymentConfiguration(ParseBlock Block)
 		{
@@ -18,9 +27,9 @@ namespace PanzerBlitz
 			Zone = (Polygon)attributes[(int)Attribute.ZONE];
 		}
 
-		public Deployment GenerateDeployment(IEnumerable<Unit> Units)
+		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units)
 		{
-			return new ZoneDeployment(Units, this);
+			return new ZoneDeployment(Army, Units, this);
 		}
 	}
 }

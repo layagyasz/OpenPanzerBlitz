@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -131,7 +131,7 @@ namespace PanzerBlitz
 			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
 				bool TreatStackAsArmored = AttackAt.Units.Count(
-					i => i.UnitConfiguration.IsArmored) > AttackAt.Units.Count(i => !i.UnitConfiguration.IsArmored);
+					i => i.Configuration.IsArmored) > AttackAt.Units.Count(i => !i.Configuration.IsArmored);
 				AttackOrder.SetTreatStackAsArmored(TreatStackAsArmored);
 				NoSingleAttackReason canAttack = AttackOrder.Validate();
 				if (canAttack != NoSingleAttackReason.NONE) return canAttack;

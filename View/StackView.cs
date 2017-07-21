@@ -9,7 +9,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class StackView : Pod
+	public class StackView : Interactive
 	{
 		static readonly float STEP = .25f;
 
@@ -21,6 +21,18 @@ namespace PanzerBlitz
 			{
 				return _UnitViews.Count;
 			}
+		}
+		public override Vector2f Size
+		{
+			get
+			{
+				return new Vector2f(0, 0);
+			}
+		}
+
+		public override bool IsCollision(Vector2f Point)
+		{
+			return false;
 		}
 
 		public void Sort()
@@ -44,10 +56,12 @@ namespace PanzerBlitz
 			_UnitViews.RemoveAll(i => i.Unit == Unit);
 		}
 
-		public void Update(
+		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
+			base.Update(MouseController, KeyController, DeltaT, Transform);
+
+			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1) + Position);
 			foreach (UnitView u in _UnitViews)
 			{
 				u.Update(MouseController, KeyController, DeltaT, Transform);
@@ -56,9 +70,9 @@ namespace PanzerBlitz
 
 		}
 
-		public void Draw(RenderTarget Target, Transform Transform)
+		public override void Draw(RenderTarget Target, Transform Transform)
 		{
-			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1));
+			Transform.Translate(-.5f * STEP * _UnitViews[0].Size * (_UnitViews.Count - 1) + Position);
 			foreach (UnitView u in _UnitViews)
 			{
 				u.Draw(Target, Transform);

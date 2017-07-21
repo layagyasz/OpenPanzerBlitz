@@ -48,7 +48,7 @@ namespace PanzerBlitz
 							i.Item1,
 							HIGHLIGHT_COLORS[
 								Math.Min(
-									(int)Math.Ceiling(i.Item3) * 4 / Unit.UnitConfiguration.Movement,
+									(int)Math.Ceiling(i.Item3) * 4 / Unit.Configuration.Movement,
 									HIGHLIGHT_COLORS.Length - 1)])));
 			}
 		}

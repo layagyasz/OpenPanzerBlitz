@@ -62,7 +62,7 @@
     <Compile Include="Model\MovementEventArgs.cs" />
     <Compile Include="View\ArmyView.cs" />
     <Compile Include="View\Panes\DeploymentPane.cs" />
-    <Compile Include="View\Panes\DeploymentSelectionOption.cs" />
+    <Compile Include="View\Panes\PositionalDeploymentSelectionOption.cs" />
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Model\Match.cs">
@@ -139,6 +139,12 @@
     <Compile Include="View\Panes\DeploymentPage.cs" />
     <Compile Include="View\Panes\PositionalDeploymentPage.cs" />
     <Compile Include="Controller\Subcontroller\DeploymentMicrocontroller.cs" />
+    <Compile Include="Model\Orders\Deployment\EntryTileDeployOrder.cs" />
+    <Compile Include="Model\Orders\Deployment\DeployOrder.cs" />
+    <Compile Include="Model\Orders\Deployment\ConvoyOrderDeployOrder.cs" />
+    <Compile Include="Controller\Subcontroller\ConvoyDeploymentMicrocontroller.cs" />
+    <Compile Include="View\Panes\ConvoyDeploymentPage.cs" />
+    <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public class Army
 	{
-		public readonly ArmyConfiguration ArmyConfiguration;
+		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
 
 		public IEnumerable<Unit> Units
@@ -19,9 +19,9 @@ namespace PanzerBlitz
 
 		public Army(ArmyConfiguration ArmyConfiguration)
 		{
-			this.ArmyConfiguration = ArmyConfiguration;
+			this.Configuration = ArmyConfiguration;
 			this.Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
-				i => i.Item2.GenerateDeployment(i.Item1.Select(j => new Unit(this, j)))).ToList();
+				i => i.Item2.GenerateDeployment(this, i.Item1.Select(j => new Unit(this, j)))).ToList();
 		}
 
 		public bool AutomatePhase(Match Match, TurnComponent TurnComponent)

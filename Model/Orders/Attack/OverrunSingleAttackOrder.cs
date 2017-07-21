@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 			if (r != NoMoveReason.NONE) return r;
 
 			if (_ExitTile.IsEnemyOccupied(_InitialMovement.Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
-			if (_ExitTile.GetStackSize() >= _InitialMovement.Unit.Army.ArmyConfiguration.Faction.StackLimit)
+			if (_ExitTile.GetStackSize() >= _InitialMovement.Unit.Army.Configuration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;
 
 			float distance1 = _InitialMovement.Path.Destination.TileConfiguration.GetMoveCost(
@@ -66,7 +66,7 @@ namespace PanzerBlitz
 		public AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
-				return Attacker.UnitConfiguration.GetAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+				return Attacker.Configuration.GetAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
 			else return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}

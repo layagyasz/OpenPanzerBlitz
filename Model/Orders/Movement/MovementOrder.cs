@@ -22,7 +22,7 @@ namespace PanzerBlitz
 		{
 			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
 			if (!Path.Destination.Units.Contains(Unit)
-				&& Path.Destination.GetStackSize() >= Unit.Army.ArmyConfiguration.Faction.StackLimit)
+				&& Path.Destination.GetStackSize() >= Unit.Army.Configuration.Faction.StackLimit)
 				return NoMoveReason.STACK_LIMIT;
 
 			for (int i = 0; i < Path.Count - 1; ++i)
@@ -36,7 +36,7 @@ namespace PanzerBlitz
 				if (!Unit.Moved && Path.Count <= 2) return NoMoveReason.NONE;
 				return NoMoveReason.NO_MOVE;
 			}
-			if (Combat && Unit.UnitConfiguration.CanCloseAssault && Path.Count > 2) return NoMoveReason.NO_MOVE;
+			if (Combat && Unit.Configuration.CanCloseAssault && Path.Count > 2) return NoMoveReason.NO_MOVE;
 			return NoMoveReason.NONE;
 		}
 

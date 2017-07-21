@@ -8,8 +8,16 @@ namespace PanzerBlitz
 	{
 		public readonly TileDeploymentConfiguration DeploymentConfiguration;
 
-		public TileDeployment(IEnumerable<Unit> Units, TileDeploymentConfiguration DeploymentConfiguration)
-			: base(Units)
+		public override DeploymentConfiguration Configuration
+		{
+			get
+			{
+				return DeploymentConfiguration;
+			}
+		}
+
+		public TileDeployment(Army Army, IEnumerable<Unit> Units, TileDeploymentConfiguration DeploymentConfiguration)
+			: base(Army, Units)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
@@ -42,11 +50,6 @@ namespace PanzerBlitz
 				else return NoDeployReason.NONE;
 			}
 			else return NoDeployReason.DEPLOYMENT_RULE;
-		}
-
-		public override string GetDisplayString()
-		{
-			return "Tile Deployment";
 		}
 	}
 }

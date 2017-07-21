@@ -8,6 +8,8 @@ namespace PanzerBlitz
 {
 	public interface DeploymentConfiguration
 	{
-		Deployment GenerateDeployment(IEnumerable<Unit> Units);
+		string DisplayName { get; }
+
+		Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units);
 	}
 }

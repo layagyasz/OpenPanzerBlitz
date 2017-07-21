@@ -10,8 +10,16 @@ namespace PanzerBlitz
 	{
 		public readonly ZoneDeploymentConfiguration DeploymentConfiguration;
 
-		public ZoneDeployment(IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
-			: base(Units)
+		public override DeploymentConfiguration Configuration
+		{
+			get
+			{
+				return DeploymentConfiguration;
+			}
+		}
+
+		public ZoneDeployment(Army Army, IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
+			: base(Army, Units)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
@@ -37,11 +45,6 @@ namespace PanzerBlitz
 					return NoDeployReason.DEPLOYMENT_RULE;
 			}
 			return NoDeployReason.NONE;
-		}
-
-		public override string GetDisplayString()
-		{
-			return "Zone Deployment";
 		}
 	}
 }

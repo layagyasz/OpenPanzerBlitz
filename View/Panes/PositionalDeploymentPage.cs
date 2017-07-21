@@ -41,8 +41,8 @@ namespace PanzerBlitz
 			_Selection.OnChange +=
 				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
 
-			foreach (var g in Deployment.Units.GroupBy(i => i.UnitConfiguration))
-				_Selection.Add(new DeploymentSelectionOption(g, _Renderer));
+			foreach (var g in Deployment.Units.GroupBy(i => i.Configuration))
+				_Selection.Add(new PositionalDeploymentSelectionOption(g, _Renderer));
 
 			_Selection.Position = new Vector2f(0, 48);
 			Add(_Selection);
@@ -50,18 +50,18 @@ namespace PanzerBlitz
 
 		public void Add(Unit Unit)
 		{
-			DeploymentSelectionOption option =
-							(DeploymentSelectionOption)_Selection.FirstOrDefault(
-								i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
-			if (option == null) _Selection.Add(new DeploymentSelectionOption(new Unit[] { Unit }, _Renderer));
+			PositionalDeploymentSelectionOption option =
+							(PositionalDeploymentSelectionOption)_Selection.FirstOrDefault(
+								i => ((PositionalDeploymentSelectionOption)i).UnitConfiguration == Unit.Configuration);
+			if (option == null) _Selection.Add(new PositionalDeploymentSelectionOption(new Unit[] { Unit }, _Renderer));
 			else option.Push(Unit);
 		}
 
 		public void Remove(Unit Unit)
 		{
-			DeploymentSelectionOption option =
-				(DeploymentSelectionOption)_Selection.FirstOrDefault(
-					i => ((DeploymentSelectionOption)i).UnitConfiguration == Unit.UnitConfiguration);
+			PositionalDeploymentSelectionOption option =
+				(PositionalDeploymentSelectionOption)_Selection.FirstOrDefault(
+					i => ((PositionalDeploymentSelectionOption)i).UnitConfiguration == Unit.Configuration);
 			if (option != null) option.Pop();
 			if (option.Count == 0) _Selection.Remove(option);
 		}

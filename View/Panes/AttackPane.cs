@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using Cardamom.Interface.Items;
@@ -66,7 +66,7 @@ namespace PanzerBlitz
 			foreach (Unit d in OddsCalculation.Defenders)
 				_Description.Add(new Button("attack-part-box")
 				{
-					DisplayedString = string.Format("+{0} {1}", d.UnitConfiguration.Defense, d.UnitConfiguration.Name)
+					DisplayedString = string.Format("+{0} {1}", d.Configuration.Defense, d.Configuration.Name)
 				});
 			_Description.Add(new Button("odds-factor-box")
 			{
@@ -81,11 +81,11 @@ namespace PanzerBlitz
 			_Description.Add(new Button("attack-part-box")
 			{
 				DisplayedString = string.Format(
-					"+{0} {1}", AttackFactorCalculation.Attack, Unit.UnitConfiguration.Name)
+					"+{0} {1}", AttackFactorCalculation.Attack, Unit.Configuration.Name)
 			});
 			_Description.Add(new Button("attack-factor-box")
 			{
-				DisplayedString = string.Format("{0} Base Attack Factor", Unit.UnitConfiguration.Attack)
+				DisplayedString = string.Format("{0} Base Attack Factor", Unit.Configuration.Attack)
 			});
 			foreach (AttackFactorCalculationFactor a in AttackFactorCalculation.Factors)
 				_Description.Add(new Button("attack-factor-box") { DisplayedString = a.ToString() });

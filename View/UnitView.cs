@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -37,8 +37,8 @@ namespace PanzerBlitz
 		{
 			this.Unit = Unit;
 
-			Color[] colors = Unit.Army.ArmyConfiguration.Faction.Colors;
-			if (!Unit.UnitConfiguration.IsVehicle)
+			Color[] colors = Unit.Army.Configuration.Faction.Colors;
+			if (!Unit.Configuration.IsVehicle)
 			{
 				colors = colors.ToArray();
 				for (int i = 0; i < colors.Length; ++i)
@@ -53,7 +53,7 @@ namespace PanzerBlitz
 			_Vertices = new Vertex[colors.Length * 4];
 			float barHeight = 1f / colors.Length;
 
-			var renderInfo = Renderer.GetRenderInfo(Unit.UnitConfiguration);
+			var renderInfo = Renderer.GetRenderInfo(Unit.Configuration);
 			_Texture = renderInfo.Item1;
 			for (int i = 0; i < colors.Length; ++i)
 			{
@@ -63,7 +63,7 @@ namespace PanzerBlitz
 				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Scale, colors[i]);
 			}
 			_ImageVertices = new Vertex[4];
-			Color c = Unit.UnitConfiguration.OverrideColor;
+			Color c = Unit.Configuration.OverrideColor;
 			if (c.R == 0 && c.G == 0 && c.B == 0)
 				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
 

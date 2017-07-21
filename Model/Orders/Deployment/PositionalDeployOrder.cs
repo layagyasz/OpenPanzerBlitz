@@ -3,10 +3,18 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class PositionalDeployOrder : Order
+	public class PositionalDeployOrder : DeployOrder
 	{
 		public readonly Unit Unit;
 		public readonly Tile Tile;
+
+		public override Army Army
+		{
+			get
+			{
+				return Unit.Army;
+			}
+		}
 
 		public PositionalDeployOrder(Unit Unit, Tile Tile)
 		{
@@ -14,14 +22,14 @@ namespace PanzerBlitz
 			this.Tile = Tile;
 		}
 
-		public NoDeployReason Validate()
+		public override NoDeployReason Validate()
 		{
 			if (Unit.Deployment is PositionalDeployment)
 				return ((PositionalDeployment)Unit.Deployment).Validate(Unit, Tile);
 			return NoDeployReason.DEPLOYMENT_RULE;
 		}
 
-		public bool Execute(Random Random)
+		public override bool Execute(Random Random)
 		{
 			if (Validate() != NoDeployReason.NONE) return false;
 

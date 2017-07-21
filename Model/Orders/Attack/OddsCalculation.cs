@@ -57,7 +57,7 @@ namespace PanzerBlitz
 
 			// Calculate Initial Odds
 			TotalAttack = AttackFactorCalculations.Sum(i => i.Item2.Attack);
-			TotalDefense = Defenders.Sum(i => i.UnitConfiguration.Defense);
+			TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
 			if (TotalAttack > TotalDefense)
 			{
 				_Odds = TotalAttack / TotalDefense;
@@ -78,7 +78,7 @@ namespace PanzerBlitz
 				if (AttackOrders
 					.Select(i => i.Attacker)
 					.GroupBy(i => i.Position)
-					.Any(i => i.Count(j => j.UnitConfiguration.IsEngineer) > 0 && i.Count() > 1))
+					.Any(i => i.Count(j => j.Configuration.IsEngineer) > 0 && i.Count() > 1))
 				{
 					OddsCalculationFactors.Add(OddsCalculationFactor.CLOSE_ASSAULT_ENGINEERS);
 					IncreaseOdds();
@@ -123,8 +123,8 @@ namespace PanzerBlitz
 			IEnumerable<Unit> Defenders,
 			AttackMethod AttackMethod)
 		{
-			int armoredCount = Defenders.Count(i => i.UnitConfiguration.IsArmored);
-			int unArmoredCount = Defenders.Count(i => !i.UnitConfiguration.IsArmored);
+			int armoredCount = Defenders.Count(i => i.Configuration.IsArmored);
+			int unArmoredCount = Defenders.Count(i => !i.Configuration.IsArmored);
 			if (armoredCount > unArmoredCount) return true;
 			else if (armoredCount < unArmoredCount) return false;
 			else
