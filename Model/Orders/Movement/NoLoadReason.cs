@@ -5,7 +5,9 @@ namespace PanzerBlitz
 	{
 		NONE,
 		NO_MOVE,
+		MUST_MOVE,
 		NO_CARRY,
+		CARRIED,
 		TEAM,
 		ILLEGAL
 	}

@@ -99,7 +99,7 @@ namespace PanzerBlitz
 			int DeltaT,
 			Transform Transform)
 		{
-			Camera.Update(MouseController, KeyController, DeltaT);
+			Camera.Update(MouseController, KeyController, DeltaT, _PaneLayer.Any(i => i.Hover));
 			Transform = Camera.GetTransform();
 
 			MapView.Update(MouseController, KeyController, DeltaT, Transform);

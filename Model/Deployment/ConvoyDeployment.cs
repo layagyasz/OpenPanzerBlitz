@@ -29,6 +29,21 @@ namespace PanzerBlitz
 		{
 		}
 
+		public override bool AutomateDeployment(Match Match)
+		{
+			return false;
+		}
+
+		public override NoDeployReason Validate(Unit Unit, Tile Tile)
+		{
+			NoDeployReason r = base.Validate(Unit, Tile);
+			if (r != NoDeployReason.NONE) return r;
+
+			if (_EntryTile.Units.Count() > 0) return NoDeployReason.DEPLOYMENT_RULE;
+			if (Tile != _EntryTile) return NoDeployReason.DEPLOYMENT_RULE;
+			return NoDeployReason.NONE;
+		}
+
 		public NoDeployReason Validate(Tile EntryTile)
 		{
 			if (EntryTile != null && EntryTile.NeighborTiles.Any(i => i == null)) return NoDeployReason.NONE;

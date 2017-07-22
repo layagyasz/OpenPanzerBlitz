@@ -8,7 +8,7 @@
 				}
 				2-tuple:_ {
 					string:_ { Maps/board-02.map }
-					bool:_ { true }
+					bool:_ { false }
 				}
 				2-tuple:_ {
 					string:_ { Maps/board-03.map }

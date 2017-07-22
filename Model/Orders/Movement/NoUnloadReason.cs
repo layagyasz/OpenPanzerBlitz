@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		NONE,
 		NO_MOVE,
+		MUST_MOVE,
 		STACK_LIMIT,
 		NO_PASSENGER
 	}

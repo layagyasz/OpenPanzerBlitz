@@ -32,7 +32,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public PositionalDeploymentPage(PositionalDeployment Deployment, UnitConfigurationRenderer Renderer)
+		public PositionalDeploymentPage(
+			PositionalDeployment Deployment, UnitConfigurationRenderer Renderer, DeploymentPane Pane)
 		{
 			_Deployment = Deployment;
 			_Renderer = Renderer;

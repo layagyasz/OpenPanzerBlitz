@@ -29,6 +29,10 @@ namespace PanzerBlitz
 			return false;
 		}
 
+		public override void AutomateMovement(Match Match, bool Vehicle)
+		{
+		}
+
 		public override bool IsConfigured()
 		{
 			return Units.All(i => i.Position != null && Validate(i, i.Position) == NoDeployReason.NONE);

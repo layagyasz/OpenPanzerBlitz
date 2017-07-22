@@ -38,6 +38,11 @@ namespace PanzerBlitz
 			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
+		public virtual bool Finish()
+		{
+			return true;
+		}
+
 		public virtual void End()
 		{
 			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);

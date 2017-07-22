@@ -51,7 +51,7 @@ namespace PanzerBlitz
 			if (fromStack != null)
 			{
 				fromStack.Remove(Unit);
-				if (fromStack.Count == 0) _Stacks.Remove(from);
+				if (fromStack.Units.Count() == 0) _Stacks.Remove(from);
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace PanzerBlitz
 			if (fromStack != null)
 			{
 				fromStack.Remove(Unit);
-				if (fromStack.Count == 0) _Stacks.Remove(from);
+				if (fromStack.Units.Count() == 0) _Stacks.Remove(from);
 			}
 		}
 

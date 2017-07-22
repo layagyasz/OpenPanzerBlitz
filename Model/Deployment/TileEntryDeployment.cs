@@ -23,9 +23,13 @@ namespace PanzerBlitz
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
-		public override bool AutomateDeployment(Match Match)
+		public override void AutomateMovement(Match Match, bool Vehicle)
 		{
-			return false;
+			if (_ConvoyOrder.Count > 0 && _ConvoyOrder[0].Configuration.IsVehicle == Vehicle)
+			{
+				DeployOrder order = new MovementDeployOrder(_ConvoyOrder[0], _EntryTile);
+				if (Match.ExecuteOrder(order)) _ConvoyOrder.RemoveAt(0);
+			}
 		}
 
 		public override bool IsConfigured()

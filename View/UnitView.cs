@@ -37,7 +37,10 @@ namespace PanzerBlitz
 		{
 			this.Unit = Unit;
 
-			Color[] colors = Unit.Army.Configuration.Faction.Colors;
+			Color[] colors = Unit.Configuration.UnitClass == UnitClass.BLOCK
+								 || Unit.Configuration.UnitClass == UnitClass.MINEFIELD
+								 ? new Color[] { Color.White }
+				: Unit.Army.Configuration.Faction.Colors;
 			if (!Unit.Configuration.IsVehicle)
 			{
 				colors = colors.ToArray();

@@ -40,7 +40,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Tile.cs" />
     <Compile Include="Model\TileBase.cs" />
@@ -145,6 +144,8 @@
     <Compile Include="Controller\Subcontroller\ConvoyDeploymentMicrocontroller.cs" />
     <Compile Include="View\Panes\ConvoyDeploymentPage.cs" />
     <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -885,6 +886,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\wagon-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\mine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\block.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

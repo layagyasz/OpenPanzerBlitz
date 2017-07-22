@@ -81,6 +81,13 @@ namespace PanzerBlitz
 
 		private void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
 		{
+			Sprite image = new Sprite(new Texture("./UnitSprites/" + UnitConfiguration.ImageName));
+			RenderStates r = new RenderStates(Transform);
+			Target.Draw(image, r);
+
+			// Do not render stats for blocks and mines.
+			if (UnitConfiguration.UnitClass == UnitClass.BLOCK || UnitConfiguration.UnitClass == UnitClass.MINEFIELD)
+				return;
 
 			Text attackText = new Text(UnitConfiguration.Attack.ToString(), Font, 36);
 			attackText.Color = Color.Black;
@@ -106,10 +113,6 @@ namespace PanzerBlitz
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 
-			Sprite image = new Sprite(new Texture("./UnitSprites/" + UnitConfiguration.ImageName));
-
-			RenderStates r = new RenderStates(Transform);
-			Target.Draw(image, r);
 			Target.Draw(attackText, r);
 			Target.Draw(rangeText, r);
 			Target.Draw(defenseText, r);

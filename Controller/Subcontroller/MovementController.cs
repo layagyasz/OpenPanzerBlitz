@@ -41,6 +41,12 @@ namespace PanzerBlitz
 			}
 		}
 
+		public override void End()
+		{
+			base.End();
+			Clear();
+		}
+
 		public override void HandleTileRightClick(Tile Tile)
 		{
 			Clear();

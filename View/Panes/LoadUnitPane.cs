@@ -12,21 +12,26 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValueChangedEventArgs<Unit>> OnUnitSelected;
 
-		Select<Unit> _UnitSelect = new Select<Unit>("load-unit-display");
+		Select<Unit> _UnitSelect = new Select<Unit>("select");
 
 		public LoadUnitPane(IEnumerable<Unit> Units)
 			: base("load-unit-pane")
 		{
-			Button header = new Button("load-unit-header");
+			Button header = new Button("load-unit-header") { DisplayedString = "Select Unit" };
 			Add(header);
 
 			_UnitSelect.Position = new Vector2f(0, header.Size.Y + 6);
 			foreach (Unit u in Units)
 			{
-				SelectionOption<Unit> option = new SelectionOption<Unit>("load-unit-option") { Value = u };
+				SelectionOption<Unit> option = new SelectionOption<Unit>("select-option")
+				{
+					Value = u,
+					DisplayedString = u.Configuration.Name
+				};
 				_UnitSelect.Add(option);
 			}
 			_UnitSelect.OnChange += HandleChange;
+			Add(_UnitSelect);
 		}
 
 		void HandleChange(object sender, ValueChangedEventArgs<StandardItem<Unit>> E)

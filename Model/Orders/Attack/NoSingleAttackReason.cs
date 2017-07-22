@@ -7,6 +7,7 @@ namespace PanzerBlitz
 		TEAM,
 		DUPLICATE,
 		UNABLE,
+		MUST_MOVE,
 		NO_LOS,
 		NO_ARMOR_ATTACK,
 		OUT_OF_RANGE,

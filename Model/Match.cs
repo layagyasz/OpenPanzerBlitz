@@ -38,6 +38,11 @@ namespace PanzerBlitz
 								 .Concat(Armies.Select(i => new Tuple<Army, TurnComponent>(i, TurnComponent.RESET)))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 									.SelectMany(i => i)).GetEnumerator();
+
+			Armies.ForEach(
+				i => i.Deployments.ForEach(
+					j => j.Units.ForEach(
+						k => k.OnMove += (sender, e) => j.AutomateMovement(this, k.Configuration.IsVehicle))));
 		}
 
 		public void Start()
@@ -107,8 +112,9 @@ namespace PanzerBlitz
 		private bool ValidateNextPhaseOrder()
 		{
 			if (CurrentPhase.Item2 == TurnComponent.DEPLOYMENT) return CurrentPhase.Item1.IsDeploymentConfigured();
+			if (CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT) return !CurrentPhase.Item1.MustMove(true);
+			if (CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT) return !CurrentPhase.Item1.MustMove(false);
 			return true;
-
 		}
 
 		private bool ValidateAttackOrder(AttackOrder Order)
@@ -152,6 +158,14 @@ namespace PanzerBlitz
 
 		private bool ValidateDeployOrder(DeployOrder Order)
 		{
+			if (Order is MovementDeployOrder)
+			{
+				if (CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT)
+					return ((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
+				if (CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT)
+					return !((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
+				return false;
+			}
 			return (Order.Army == CurrentPhase.Item1 || CurrentPhase.Item1 == null)
 				&& CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
 		}

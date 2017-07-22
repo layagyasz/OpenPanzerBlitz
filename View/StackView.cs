@@ -13,13 +13,13 @@ namespace PanzerBlitz
 	{
 		static readonly float STEP = .25f;
 
-		List<UnitView> _UnitViews = new List<UnitView>();
+		List<UnitView> _UnitViews;
 
-		public int Count
+		public IEnumerable<Unit> Units
 		{
 			get
 			{
-				return _UnitViews.Count;
+				return _UnitViews.Select(i => i.Unit);
 			}
 		}
 		public override Vector2f Size
@@ -30,6 +30,17 @@ namespace PanzerBlitz
 			}
 		}
 
+		public StackView()
+		{
+			_UnitViews = new List<UnitView>();
+		}
+
+		public StackView(IEnumerable<UnitView> Units)
+		{
+			_UnitViews = Units.ToList();
+			Sort();
+		}
+
 		public override bool IsCollision(Vector2f Point)
 		{
 			return false;
@@ -38,6 +49,19 @@ namespace PanzerBlitz
 		public void Sort()
 		{
 			_UnitViews.Sort(new StackViewUnitComparator());
+		}
+
+		public void Merge(StackView StackView)
+		{
+			_UnitViews.AddRange(StackView._UnitViews);
+			Sort();
+		}
+
+		public IEnumerable<StackView> Split()
+		{
+			IEnumerable<StackView> r = _UnitViews.Skip(1).Select(i => new StackView(Enumerable.Repeat(i, 1)));
+			_UnitViews.RemoveRange(1, _UnitViews.Count - 1);
+			return r;
 		}
 
 		public void Add(UnitView UnitView)

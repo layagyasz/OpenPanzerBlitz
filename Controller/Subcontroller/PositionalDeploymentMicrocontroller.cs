@@ -18,24 +18,21 @@ namespace PanzerBlitz
 				return _Deployment;
 			}
 		}
-		public override DeploymentPage DeploymentPage
-		{
-			get
-			{
-				return _DeploymentPage;
-			}
-		}
 
 		public PositionalDeploymentMicrocontroller(
 			Match Match,
 			GameScreen GameScreen,
-			PositionalDeployment Deployment,
-			UnitConfigurationRenderer Renderer)
+			PositionalDeployment Deployment)
 			: base(Match, GameScreen)
 		{
 			_Deployment = Deployment;
-			_DeploymentPage = new PositionalDeploymentPage(Deployment, Renderer);
+		}
+
+		public override DeploymentPage MakePage(DeploymentPane Pane, UnitConfigurationRenderer Renderer)
+		{
+			_DeploymentPage = new PositionalDeploymentPage(_Deployment, Renderer, Pane);
 			_DeploymentPage.OnSelectedStack += HighlightDeploymentArea;
+			return _DeploymentPage;
 		}
 
 		public override void Begin(Army Army)

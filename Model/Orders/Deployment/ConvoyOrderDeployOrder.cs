@@ -24,7 +24,7 @@ namespace PanzerBlitz
 
 		public override NoDeployReason Validate()
 		{
-			throw new NotImplementedException();
+			return Deployment.Validate(ConvoyOrder);
 		}
 
 		public override bool Execute(Random Random)

@@ -72,11 +72,14 @@ namespace PanzerBlitz
 		private void EndTurn(object sender, EventArgs e)
 		{
 			TurnComponent t = Match.CurrentPhase.Item2;
-			NextPhaseOrder order = new NextPhaseOrder();
-			if (Match.ValidateOrder(order))
+			if (_Controllers[t].Finish())
 			{
-				_Controllers[t].End();
-				Match.ExecuteOrder(order);
+				NextPhaseOrder order = new NextPhaseOrder();
+				if (Match.ValidateOrder(order))
+				{
+					_Controllers[t].End();
+					Match.ExecuteOrder(order);
+				}
 			}
 		}
 

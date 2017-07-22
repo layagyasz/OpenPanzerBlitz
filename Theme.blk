@@ -54,7 +54,7 @@ class<>:classes {
 	class:small-button {
 		!class:parent { normal-button }
 		mode:default {
-			int:width { 144 }
+			int:width { 140 }
 		}
 	}
 	class:large-button {
@@ -65,7 +65,7 @@ class<>:classes {
 			color:font-color { #FFFFFF }
 			int:font-size { 18 }
 			color[]:background-color { #484848 #484848 #484848 #484848 }
-			int[]:padding { 128 2 128 2 }
+			int[]:padding { 16 2 16 2 }
 		}
 		mode:hover {
 			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
@@ -152,6 +152,9 @@ class<>:classes {
 	}
 	class:deployment-select {
 		!class:parent { attack-display }
+		mode:default {
+			int:height { 636 }
+		}
 	}
 	class:deployment-selection-option {
 		mode:default {
@@ -161,37 +164,32 @@ class<>:classes {
 			!font:unit-stack-font { fonts.univers }
 			color[]:background-color { #484848 #484848 #484848 #484848 }
 		}
-		mode:selected {
+		mode:hover {
 			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+		}
+		mode:selected {
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
 		mode:selected-hover {
-			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
 		mode:selected-focus {
-			color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+			color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 		}
 	}
 
 	class:load-unit-pane {
 		mode:default {
-			int:height { 92 }
+			int:height { 108 }
 			int:width { 320 }
 			color[]:background-color { #000000 #000000 #000000 #000000 }
 			int[]:padding { 16 16 16 16 }
 		}
 	}
-	class:load-unit-display {
-		mode:default {
-			int:height { 60 }
-			int:width { 288 }
-		}
-	}
 	class:load-unit-header {
 		!class:parent { attack-odds-box }
 	}
-	class:load-unit-option {
-		!class:parent { attack-part-box }
-	}
+
 	class:edit-pane {
 		!class:parent { attack-pane }
 		mode:default {

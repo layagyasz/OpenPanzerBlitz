@@ -37,6 +37,7 @@ namespace PanzerBlitz
 				case TurnComponent.DEPLOYMENT:
 					return Deployments.All(i => i.AutomateDeployment(Match));
 				case TurnComponent.NON_VEHICLE_MOVEMENT:
+					Deployments.ForEach(i => i.AutomateMovement(Match, false));
 					return !Deployments.Any(
 						i => i.Units.Any(j => j.CanMove(false, false) == NoMoveReason.NONE));
 				case TurnComponent.RESET:
@@ -47,6 +48,7 @@ namespace PanzerBlitz
 					return !Deployments.Any(
 						i => i.Units.Any(j => j.CanMove(true, true) == NoMoveReason.NONE));
 				case TurnComponent.VEHICLE_MOVEMENT:
+					Deployments.ForEach(i => i.AutomateMovement(Match, true));
 					return !Deployments.Any(
 						i => i.Units.Any(j => j.CanMove(true, false) == NoMoveReason.NONE));
 			}
@@ -56,6 +58,11 @@ namespace PanzerBlitz
 		public bool IsDeploymentConfigured()
 		{
 			return Deployments.All(i => i.IsConfigured());
+		}
+
+		public bool MustMove(bool Vehicle)
+		{
+			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == NoMoveReason.NONE);
 		}
 	}
 }

@@ -33,12 +33,17 @@ namespace PanzerBlitz
 				DeploymentMicrocontroller c;
 				if (d is PositionalDeployment)
 					c = new PositionalDeploymentMicrocontroller(
-						_Match, _GameScreen, (PositionalDeployment)d, _Renderer);
-				else c = new ConvoyDeploymentMicrocontroller(_Match, _GameScreen, (ConvoyDeployment)d, _Renderer);
+						_Match, _GameScreen, (PositionalDeployment)d);
+				else c = new ConvoyDeploymentMicrocontroller(_Match, _GameScreen, (ConvoyDeployment)d);
 				_DeploymentMicrocontrollers.Add(d, c);
-				_DeploymentPane.AddPage(c.DeploymentPage);
+				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Renderer));
 			}
 			_GameScreen.AddPane(_DeploymentPane);
+		}
+
+		public override bool Finish()
+		{
+			return _DeploymentMicrocontrollers.All(i => i.Value.Finish());
 		}
 
 		public override void End()

@@ -152,6 +152,7 @@ namespace PanzerBlitz
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
 			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoSingleAttackReason.UNABLE;
+			if (MustMove()) return NoSingleAttackReason.MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
 		}
 
@@ -202,6 +203,7 @@ namespace PanzerBlitz
 			if (_Position != null) _Position.Exit(this);
 			_Position = Tile;
 			_Position.Enter(this);
+
 			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile));
 		}
 
@@ -213,10 +215,22 @@ namespace PanzerBlitz
 			Place(Tile);
 		}
 
+		public bool MustMove()
+		{
+			if (Deployment is ConvoyDeployment)
+				return _Position != null
+					&& ((ConvoyDeployment)Deployment).EntryTile == _Position
+					 && ((ConvoyDeployment)Deployment).ConvoyOrder.Count() > 0;
+			return false;
+		}
+
 		public NoLoadReason CanLoad(Unit Unit)
 		{
 			if (Unit.Moved || Moved || Unit.Fired || Fired) return NoLoadReason.NO_MOVE;
 			if (Unit.Army != Army) return NoLoadReason.TEAM;
+			if (Unit.Position != Position) return NoLoadReason.ILLEGAL;
+			if (Unit.Carrier != null) return NoLoadReason.CARRIED;
+			if (MustMove()) return NoLoadReason.MUST_MOVE;
 
 			return Configuration.CanLoad(Unit.Configuration);
 		}
@@ -225,8 +239,9 @@ namespace PanzerBlitz
 		{
 			if (Fired) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
-			if (_Position.GetStackSize() >= _Passenger.Army.Configuration.Faction.StackLimit)
+			if (_Position != null && _Position.GetStackSize() >= _Passenger.Army.Configuration.Faction.StackLimit)
 				return NoUnloadReason.STACK_LIMIT;
+			if (MustMove()) return NoUnloadReason.MUST_MOVE;
 			return NoUnloadReason.NONE;
 		}
 
@@ -261,8 +276,8 @@ namespace PanzerBlitz
 				_Passenger._RemainingMovement = 0;
 			}
 
-			_Passenger = null;
 			_Passenger._Carrier = null;
+			_Passenger = null;
 
 			if (OnUnload != null) OnUnload(this, EventArgs.Empty);
 		}
