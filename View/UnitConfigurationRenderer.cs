@@ -89,6 +89,16 @@ namespace PanzerBlitz
 			if (UnitConfiguration.UnitClass == UnitClass.BLOCK || UnitConfiguration.UnitClass == UnitClass.MINEFIELD)
 				return;
 
+			// Only render defense for forts.
+			if (UnitConfiguration.UnitClass == UnitClass.FORT)
+			{
+				Text fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 72);
+				fortText.Color = Color.Black;
+				fortText.Position = SpriteSize * new Vector2f(1f / 2, 1f / 3) - GetCenter(fortText);
+				Target.Draw(fortText, r);
+				return;
+			}
+
 			Text attackText = new Text(UnitConfiguration.Attack.ToString(), Font, 36);
 			attackText.Color = Color.Black;
 			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
@@ -133,7 +143,8 @@ namespace PanzerBlitz
 				if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "C";
 				else return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);
 			}
-			else return UnitConfiguration.WeaponClass.ToString().Substring(0, 1);
+			if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "-";
+			return UnitConfiguration.WeaponClass.ToString().Substring(0, 1);
 		}
 	}
 }

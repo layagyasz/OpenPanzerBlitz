@@ -7,9 +7,9 @@ namespace PanzerBlitz
 {
 	public class ZoneDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { DISPLAY_NAME, ZONE }
+		enum Attribute { DISPLAY_NAME, MATCHER }
 
-		public readonly Polygon Zone;
+		public readonly Matcher Matcher;
 		string _DisplayName;
 
 		public string DisplayName
@@ -24,7 +24,8 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			Zone = (Polygon)attributes[(int)Attribute.ZONE];
+			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
+			Matcher = (Matcher)attributes[(int)Attribute.MATCHER];
 		}
 
 		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units)

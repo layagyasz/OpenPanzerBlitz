@@ -67,7 +67,7 @@ namespace PanzerBlitz
 
 		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
 		{
-			if (!IgnoreOccupyingUnits && To.IsEnemyOccupied(Unit.Army)) return float.MaxValue;
+			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == NoDeployReason.ENEMY_OCCUPIED) return float.MaxValue;
 
 			int index = Array.IndexOf(Tile.NeighborTiles, To);
 			TilePathOverlay pathOverlay = Tile.GetPathOverlay(To);

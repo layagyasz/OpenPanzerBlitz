@@ -67,7 +67,11 @@ namespace PanzerBlitz
 		public override void HandleUnitRightClick(Unit Unit)
 		{
 			PositionalDeployOrder o = new PositionalDeployOrder(Unit, null);
-			if (_Match.ExecuteOrder(o)) _DeploymentPage.Add(Unit);
+			if (_Match.ExecuteOrder(o))
+			{
+				_DeploymentPage.Add(Unit);
+				HighlightDeploymentArea(null, EventArgs.Empty);
+			}
 		}
 
 		public override void HandleKeyPress(Keyboard.Key key)

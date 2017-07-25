@@ -28,8 +28,13 @@ namespace PanzerBlitz
 			Block.AddParser<Color>("color", i => ClassLibrary.Instance.ParseColor(i.String), false);
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
+			Block.AddParser<TileElevation>("tile-elevation", i => new TileElevation(i));
+			Block.AddParser<TileWithin>("tile-within", i => new TileWithin(i));
+			Block.AddParser<DistanceFromUnit>("distance-from-unit", i => new DistanceFromUnit(i));
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
+			Block.AddParser<CompositeMatcher>("and", i => new CompositeMatcher(i, (j, k) => j && k));
+			Block.AddParser<CompositeMatcher>("or", i => new CompositeMatcher(i, (j, k) => j || k));
 
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));

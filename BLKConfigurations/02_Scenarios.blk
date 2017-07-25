@@ -69,19 +69,125 @@
 					2-tuple:_ {
 						2-tuple[]:_ {
 							2-tuple:_ {
-								!unit-configuration:_ { unit-configurations.pzkw-iv }
-								int:_ { 3 }
+								!unit-configuration:_ { unit-configurations.command-post }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration { unit-configurations.fort-40 }
+								int:_ { 1 }
 							}
 						}
 						tile-deployment-configuration:_ {
-							string:display-name { German Test }
-							coordinate:coordinate { 10,6 }
+							string:display-name { 580th Signal Rgt. CP 1 }
+							coordinate:coordinate { 16,6 }
+						}
+					}
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.command-post }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration { unit-configurations.fort-40 }
+								int:_ { 1 }
+							}
+						}
+						tile-deployment-configuration:_ {
+							string:display-name { 580th Signal Rgt. CP 2 }
+							coordinate:coordinate { 15,19 }
+						}
+					}
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.command-post }
+								int:_ { 1 }
+							}
+						}
+						zone-deployment-configuration:_ {
+							string:display-name { 580th Signal Rgt. CP 3 }
+							and:matcher {
+								tile-within:_ {
+									zone:zone { 11,0 22,0 22,33 11,33 }
+								}
+								distance-from-unit:_ {
+									!unit-configuration:unit-configuration { unit-configurations.command-post }
+									int:distance { 2 }
+									bool:atleast { true }
+								}
+								tile-elevation:_ {
+									int:elevation { 1 }
+									bool:atleast { true }
+								}
+							}
+						}
+					}
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.fort-40 }
+								int:_ { 1 }
+							}
+						}
+						zone-deployment-configuration:_ {
+							string:display-name { 580th Signal Rgt. Fort 3 }
+							distance-from-unit:matcher {
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								int:distance { 0 }
+							}
+						}
+					}
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.security-platoon }
+								int:_ { 3 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.engineer-platoon }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.smg-platoon }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.50mm }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.88mm }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.20mm }
+								int:_ { 2 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.20mm_4 }
+								int:_ { 1 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.block }
+								int:_ { 4 }
+							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.minefield }
+								int:_ { 4 }
+							}
+						}
+						zone-deployment-configuration:_ {
+							string:display-name { 286th Sec. Rgt. & 10th Flak Rgt. }
+							tile-within:matcher {
+								zone:zone { 11,0 22,0 22,33 11,33 }
+							}
 						}
 					}
 				}
 			}
 		}
-		byte[]:deployment-order { 0 1 }
+		byte[]:deployment-order { 1 0 }
 		byte:turns { 10 }
 	}
 }

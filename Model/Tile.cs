@@ -207,9 +207,15 @@ namespace PanzerBlitz
 			return _Units.Sum(i => i.GetStackSize());
 		}
 
-		public bool IsEnemyOccupied(Army Army)
+		public BlockType GetBlockType()
 		{
-			return Units.Any(i => i.Army != Army);
+			foreach (Unit u in _Units)
+			{
+				BlockType t = u.Configuration.GetBlockType();
+				if (t == BlockType.CLEAR || t == BlockType.HARD_BLOCK || t == BlockType.SOFT_BLOCK) return t;
+			}
+			if (_Units.Count > 0) return BlockType.STANDARD;
+			return BlockType.CLEAR;
 		}
 
 		public Tile GetOppositeNeighbor(Tile Neighbor)

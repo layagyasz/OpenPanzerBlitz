@@ -28,7 +28,7 @@ namespace PanzerBlitz
 			_DeploymentPane = new DeploymentPane();
 			_DeploymentPane.OnDeploymentSelected += HandleDeploymentSelected;
 			_DeploymentMicrocontrollers.Clear();
-			foreach (Deployment d in Army.Deployments)
+			foreach (Deployment d in Army.Deployments.Where(i => !i.IsConfigured()))
 			{
 				DeploymentMicrocontroller c;
 				if (d is PositionalDeployment)
@@ -49,6 +49,7 @@ namespace PanzerBlitz
 		public override void End()
 		{
 			base.End();
+			_WorkingDeployment = null;
 			_GameScreen.RemovePane(_DeploymentPane);
 		}
 
@@ -64,12 +65,14 @@ namespace PanzerBlitz
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
-			_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitLeftClick(Unit);
+			if (_DeploymentMicrocontrollers.ContainsKey(Unit.Deployment))
+				_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitLeftClick(Unit);
 		}
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
-			_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitRightClick(Unit);
+			if (_DeploymentMicrocontrollers.ContainsKey(Unit.Deployment))
+				_DeploymentMicrocontrollers[Unit.Deployment].HandleUnitRightClick(Unit);
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key)

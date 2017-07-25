@@ -21,13 +21,15 @@ namespace PanzerBlitz
 		public NoMoveReason Validate()
 		{
 			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
-			if (!Path.Destination.Units.Contains(Unit)
-				&& Path.Destination.GetStackSize() >= Unit.Army.Configuration.Faction.StackLimit)
-				return NoMoveReason.STACK_LIMIT;
+
+			NoDeployReason noEnter = Unit.CanEnter(Path.Destination, true);
+			if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
 
 			for (int i = 0; i < Path.Count - 1; ++i)
 			{
-				if (Path[i + 1].IsEnemyOccupied(Unit.Army)) return NoMoveReason.ENEMY_OCCUPIED;
+				noEnter = Unit.CanEnter(Path[i + 1]);
+				if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
+
 				float d = Path[i].TileConfiguration.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 			}

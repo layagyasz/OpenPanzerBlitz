@@ -35,7 +35,7 @@ namespace PanzerBlitz
 
 		public override bool IsConfigured()
 		{
-			return Units.All(i => i.Position != null && Validate(i, i.Position) == NoDeployReason.NONE);
+			return Units.All(i => i.Position != null);
 		}
 
 		public override NoDeployReason Validate(Unit Unit, Tile Tile)
@@ -45,7 +45,7 @@ namespace PanzerBlitz
 
 			if (Tile != null)
 			{
-				if (!DeploymentConfiguration.Zone.ContainsPoint(new Vector2f(Tile.X, Tile.Y)))
+				if (!DeploymentConfiguration.Matcher.Matches(Tile))
 					return NoDeployReason.DEPLOYMENT_RULE;
 			}
 			return NoDeployReason.NONE;

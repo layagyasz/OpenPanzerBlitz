@@ -158,6 +158,14 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.BRIDGE;
 		}
 
+		public BlockType GetBlockType()
+		{
+			if (UnitClass == UnitClass.FORT) return BlockType.CLEAR;
+			if (UnitClass == UnitClass.MINEFIELD) return BlockType.SOFT_BLOCK;
+			if (UnitClass == UnitClass.BLOCK) return BlockType.HARD_BLOCK;
+			return BlockType.STANDARD;
+		}
+
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			if (!CanDirectFire) return NoSingleAttackReason.UNABLE;

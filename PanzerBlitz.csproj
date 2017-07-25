@@ -146,6 +146,13 @@
     <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
+    <Compile Include="Model\Deployment\TileMatchers\TileWithin.cs" />
+    <Compile Include="Model\Deployment\TileMatchers\Matcher.cs" />
+    <Compile Include="Model\Deployment\TileMatchers\DistanceFromUnit.cs" />
+    <Compile Include="Model\Deployment\TileMatchers\CompositeMatcher.cs" />
+    <Compile Include="Model\BlockType.cs" />
+    <Compile Include="Model\EnumConverter.cs" />
+    <Compile Include="Model\Deployment\TileMatchers\TileElevation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -162,6 +169,7 @@
     <Folder Include="Model\Orders\Deployment\" />
     <Folder Include="Model\Orders\Movement\" />
     <Folder Include="Model\Orders\Attack\" />
+    <Folder Include="Model\Deployment\TileMatchers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

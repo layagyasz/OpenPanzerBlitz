@@ -126,6 +126,17 @@ namespace PanzerBlitz
 			this.Configuration = UnitConfiguration;
 		}
 
+		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
+		{
+			if (Tile.GetBlockType() == BlockType.STANDARD && Tile.Units.Any(i => i.Army != Army))
+				return NoDeployReason.ENEMY_OCCUPIED;
+			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
+				return NoDeployReason.UNIQUE;
+			if (Terminal && Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit)
+				return NoDeployReason.STACK_LIMIT;
+			return NoDeployReason.NONE;
+		}
+
 		public NoMoveReason CanMove(bool Combat)
 		{
 			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoMoveReason.NO_MOVE;
@@ -239,8 +250,11 @@ namespace PanzerBlitz
 		{
 			if (Fired) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
-			if (_Position != null && _Position.GetStackSize() >= _Passenger.Army.Configuration.Faction.StackLimit)
-				return NoUnloadReason.STACK_LIMIT;
+			if (_Position != null)
+			{
+				NoDeployReason r = _Passenger.CanEnter(_Position);
+				if (r != NoDeployReason.NONE) return EnumConverter.ConvertToNoUnloadReason(r);
+			}
 			if (MustMove()) return NoUnloadReason.MUST_MOVE;
 			return NoUnloadReason.NONE;
 		}

@@ -19,10 +19,7 @@ namespace PanzerBlitz
 		public virtual NoDeployReason Validate(Unit Unit, Tile Tile)
 		{
 			if (Tile == null) return NoDeployReason.NONE;
-			if (!Tile.Units.Contains(Unit)
-				&& Tile.GetStackSize() >= Unit.Army.Configuration.Faction.StackLimit)
-				return NoDeployReason.STACK_LIMIT;
-			return NoDeployReason.NONE;
+			return Unit.CanEnter(Tile, true);
 		}
 
 		public abstract bool AutomateDeployment(Match Match);

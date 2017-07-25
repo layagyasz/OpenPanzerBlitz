@@ -7,6 +7,8 @@ namespace PanzerBlitz
 		NO_MOVE,
 		TERRAIN,
 		STACK_LIMIT,
-		ENEMY_OCCUPIED
+		ENEMY_OCCUPIED,
+		UNIQUE,
+		ILLEGAL
 	}
 }

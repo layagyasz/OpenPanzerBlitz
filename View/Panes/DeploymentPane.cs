@@ -36,7 +36,7 @@ namespace PanzerBlitz
 		{
 			Page.Visible = false;
 			_Pages.Add(Page);
-			Add(Page);
+			Insert(0, Page);
 
 			SelectionOption<DeploymentPage> option = new SelectionOption<DeploymentPage>("select-option")
 			{
