@@ -24,7 +24,7 @@ namespace PanzerBlitz
 				i => i.Item2.GenerateDeployment(this, i.Item1.Select(j => new Unit(this, j)))).ToList();
 		}
 
-		public bool AutomatePhase(Match Match, TurnComponent TurnComponent)
+		public bool AutomatePhase(Match Match, TurnComponent TurnComponent, Random Random)
 		{
 			switch (TurnComponent)
 			{
@@ -36,6 +36,9 @@ namespace PanzerBlitz
 						i => i.Units.Any(j => j.CanAttack(AttackMethod.CLOSE_ASSAULT) == NoSingleAttackReason.NONE));
 				case TurnComponent.DEPLOYMENT:
 					return Deployments.All(i => i.AutomateDeployment(Match));
+				case TurnComponent.MINEFIELD_ATTACK:
+					DoMinefieldAttacks(Random);
+					return true;
 				case TurnComponent.NON_VEHICLE_MOVEMENT:
 					Deployments.ForEach(i => i.AutomateMovement(Match, false));
 					return !Deployments.Any(
@@ -53,6 +56,20 @@ namespace PanzerBlitz
 						i => i.Units.Any(j => j.CanMove(true, false) == NoMoveReason.NONE));
 			}
 			return false;
+		}
+
+		void DoMinefieldAttacks(Random Random)
+		{
+			foreach (Unit u in Units)
+			{
+				Unit mine = u.Position.Units.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
+				if (mine != null)
+				{
+					AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
+					order.AddAttacker(new MinefieldSingleAttackOrder(mine, u));
+					order.Execute(Random);
+				}
+			}
 		}
 
 		public bool IsDeploymentConfigured()

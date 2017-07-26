@@ -92,7 +92,7 @@ namespace PanzerBlitz
 			// Only render defense for forts.
 			if (UnitConfiguration.UnitClass == UnitClass.FORT)
 			{
-				Text fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 72);
+				Text fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 56);
 				fortText.Color = Color.Black;
 				fortText.Position = SpriteSize * new Vector2f(1f / 2, 1f / 3) - GetCenter(fortText);
 				Target.Draw(fortText, r);

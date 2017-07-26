@@ -8,6 +8,7 @@ namespace PanzerBlitz
 		MUST_MOVE,
 		NO_CARRY,
 		CARRIED,
+		CARRYING,
 		TEAM,
 		ILLEGAL
 	}

@@ -18,26 +18,31 @@ namespace PanzerBlitz
 				{
 					Color.White,
 					new Color(145, 155, 130),
-					new Color(43, 122, 119),
-					new Color(169, 150, 71),
-					Color.White
+					new Color(169, 150, 71)
 				},
 				new Color[]
 				{
 					new Color(0, 0, 0, 0),
 					new Color(115, 112, 103),
 					new Color(94, 111, 56),
-					new Color(188, 126, 53)
+					new Color(188, 126, 53),
+					new Color(43, 122, 119)
 				},
 				new Color[]
 				{
 					new Color(0, 0, 0, 0),
 					new Color(138, 134, 122),
 					new Color(125, 150, 72),
-					new Color(169, 150, 71)
+					new Color(169, 150, 71),
+					new Color(43, 122, 119)
 				},
-				new Color[] { new Color(0, 0, 0, 0), new Color(220, 220, 220), new Color(43, 122, 119) },
-				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160) },
+				new Color[] {
+					new Color(0, 0, 0, 0),
+					new Color(220, 220, 220),
+					new Color(43, 122, 119),
+					new Color(43, 122, 119)
+				},
+				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160), new Color(160, 160, 160) },
 				new float[] { 0, .15f, .15f },
 				new float[] { 0, .2f, .3f }
 		);
@@ -49,26 +54,31 @@ namespace PanzerBlitz
 				{
 					Color.White,
 					new Color(145, 155, 130),
-					new Color(43, 122, 119),
-					new Color(160, 160, 160),
-					Color.White
+					new Color(160, 160, 160)
 				},
 				new Color[]
 				{
 					new Color(0, 0, 0, 0),
 					new Color(115, 112, 103),
 					new Color(94, 111, 56),
-					new Color(188, 126, 53)
+					new Color(188, 126, 53),
+					new Color(43, 122, 119)
 				},
 				new Color[]
 				{
 					new Color(0, 0, 0, 0),
 					new Color(138, 134, 122),
 					new Color(125, 150, 72),
-					new Color(160, 160, 160)
+					new Color(160, 160, 160),
+					new Color(43, 122, 119)
 				},
-				new Color[] { new Color(0, 0, 0, 0), new Color(195, 159, 109), new Color(140, 200, 200) },
-				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160) },
+				new Color[] {
+					new Color(0, 0, 0, 0),
+					new Color(195, 159, 109),
+					new Color(140, 200, 200),
+					new Color(140, 200, 200)
+				},
+				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160), new Color(160, 160, 160) },
 				new float[] { 0, .15f, .15f },
 				new float[] { 0, .2f, .3f }
 		);
@@ -156,33 +166,32 @@ namespace PanzerBlitz
 					vertices, OverlayColor(Edge.SLOPE));
 
 			// Stream Gully.
-			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM) && Tile.TileBase != TileBase.STREAM_FORD)
+			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM))
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
+					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM
+						|| i.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
 					vertices,
 					PathBorderColor(TilePathOverlay.STREAM),
 					PathBorderWidth(TilePathOverlay.STREAM));
 
 			// Stream.
-			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM))
+			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM)
+				|| Tile.PathOverlays.Contains(TilePathOverlay.STREAM_FORD))
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM,
+					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM
+						|| i.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
 					vertices,
 					PathColor(TilePathOverlay.STREAM),
 					PathWidth(TilePathOverlay.STREAM));
 
-			// Shore.
-			if (Tile.NeighborTiles.Count(i => i != null && i.TileBase == TileBase.WATER) > 0)
-				RenderTile(
-					Tile,
-					(i, j) => j != null && j.TileBase == TileBase.WATER,
-					vertices,
-					TopColor(TileBase.WATER));
 			// Water.
-			if (Tile.TileBase == TileBase.WATER)
-				RenderTile(Tile, (i, j) => true, vertices, TopColor(Tile.TileBase));
+			if (Tile.HasEdge(Edge.WATER))
+				RenderEdges(
+					Tile,
+					(i, j) => j != null && i.GetEdge(j) == Edge.WATER,
+					vertices, OverlayColor(Edge.WATER));
 
 			// Road.
 			if (Tile.PathOverlays.Contains(TilePathOverlay.ROAD))

@@ -139,7 +139,7 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Combat)
 		{
-			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoMoveReason.NO_MOVE;
+			if (_Position == null || Fired || Disrupted || Destroyed || _Carrier != null) return NoMoveReason.NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
@@ -162,7 +162,8 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (Fired || Disrupted || Destroyed || _Carrier != null) return NoSingleAttackReason.UNABLE;
+			if (_Position == null || Fired || Disrupted || Destroyed || _Carrier != null)
+				return NoSingleAttackReason.UNABLE;
 			if (MustMove()) return NoSingleAttackReason.MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
 		}
@@ -240,6 +241,7 @@ namespace PanzerBlitz
 			if (Unit.Moved || Moved || Unit.Fired || Fired) return NoLoadReason.NO_MOVE;
 			if (Unit.Army != Army) return NoLoadReason.TEAM;
 			if (Unit.Position != Position) return NoLoadReason.ILLEGAL;
+			if (_Passenger != null) return NoLoadReason.CARRYING;
 			if (Unit.Carrier != null) return NoLoadReason.CARRIED;
 			if (MustMove()) return NoLoadReason.MUST_MOVE;
 
@@ -312,7 +314,7 @@ namespace PanzerBlitz
 				_Position,
 				Tile,
 				i => true,
-				(i, j) => i.TileConfiguration.GetMoveCost(this, j, !Combat),
+				(i, j) => i.Configuration.GetMoveCost(this, j, !Combat),
 				(i, j) => i.HeuristicDistanceTo(j),
 				i => i.Neighbors(),
 				(i, j) => i == j);
@@ -341,16 +343,16 @@ namespace PanzerBlitz
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
 				_Position.NeighborTiles
-		   			.Where(i => i != null && _Position.TileConfiguration.CanMove(this, i, !Combat, false))
+		   			.Where(i => i != null && _Position.Configuration.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, _Position, _Position.TileConfiguration.GetMoveCost(this, i, !Combat)));
+							 i, _Position, _Position.Configuration.GetMoveCost(this, i, !Combat)));
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				_Position,
 				RemainingMovement,
-				(i, j) => i.TileConfiguration.GetMoveCost(this, j, !Combat))
+				(i, j) => i.Configuration.GetMoveCost(this, j, !Combat))
 					.GetReachableNodes();
 
 			if (!Moved)

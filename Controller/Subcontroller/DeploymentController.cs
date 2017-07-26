@@ -49,6 +49,7 @@ namespace PanzerBlitz
 		public override void End()
 		{
 			base.End();
+			if (_WorkingDeployment != null) _DeploymentMicrocontrollers[_WorkingDeployment].End();
 			_WorkingDeployment = null;
 			_GameScreen.RemovePane(_DeploymentPane);
 		}

@@ -10,6 +10,7 @@ namespace PanzerBlitz
 		bool _MustAttackAllUnits;
 		bool _TreatUnitsAsArmored;
 		bool _Depressed;
+		bool _DepressedTransition;
 		int _DieModifier;
 		int _TrueElevation;
 
@@ -37,6 +38,13 @@ namespace PanzerBlitz
 			get
 			{
 				return _Depressed;
+			}
+		}
+		public bool DepressedTransition
+		{
+			get
+			{
+				return _DepressedTransition;
 			}
 		}
 		public int DieModifier
@@ -95,6 +103,9 @@ namespace PanzerBlitz
 			_Depressed = Tile.TileBase.Depressed
 							 || Tile.Edges.Any(i => i != null && i.Depressed)
 							 || Tile.PathOverlays.Any(i => i != null && i.Depressed);
+			_DepressedTransition = Tile.TileBase.DepressedTransition
+									   || Tile.Edges.Any(i => i != null && i.DepressedTransition)
+									   || Tile.PathOverlays.Any(i => i != null && i.DepressedTransition);
 			_DieModifier =
 				Math.Max(
 					Tile.TileBase.DieModifier,
@@ -142,17 +153,35 @@ namespace PanzerBlitz
 			}
 
 			float pathMove = float.MaxValue;
+			float pathLeave = float.MaxValue;
+			bool roaded = false;
 			for (int i = 0; i < 6; ++i)
 			{
 				TilePathOverlay p = To.GetPathOverlay(i);
-				if (p == null) continue;
+				if (p != null)
+				{
+					float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
+					if (pMove > 0 && (!p.RoadMove || RoadMovement)) pathMove = Math.Min(pathMove, pMove);
+					if (p.RoadMove) roaded = true;
+				}
 
-				float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
-				if (pMove > 0 && (!p.RoadMove || RoadMovement)) pathMove = Math.Min(pathMove, pMove);
+				TilePathOverlay p2 = From.GetPathOverlay(i);
+				if (p2 != null)
+				{
+					float pLeave = TruckMovement ? p2.TruckLeaveCost : p2.LeaveCost;
+					if (pLeave > 0 && (!p2.RoadMove || RoadMovement)) pathLeave = Math.Min(pathLeave, pLeave);
+				}
 			}
 
 			if (edgeMove < float.MaxValue) move = edgeMove;
 			if (pathMove < float.MaxValue) move = Math.Min(pathMove, move);
+			if (From.Configuration.Depressed
+				&& !To.Configuration.Depressed
+				&& !To.Configuration.DepressedTransition
+				&& !roaded
+				&& pathLeave < float.MaxValue)
+				move += pathLeave;
+
 			return move;
 		}
 	}

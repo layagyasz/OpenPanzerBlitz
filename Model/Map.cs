@@ -81,7 +81,7 @@ namespace PanzerBlitz
 			{
 				for (int j = 0; j < Height; ++j)
 				{
-					Tiles[i, j] = new Tile(i, j);
+					Tiles[i, j] = new Tile(new Coordinate(i, j));
 					Tiles[i, j].TileBase = TileBase.CLEAR;
 				}
 			}
@@ -121,14 +121,15 @@ namespace PanzerBlitz
 					{
 						int x = From.GetLength(0) - i - 1 - ((Y + j) % 2 == 0 ? 1 : 0);
 						if (x < From.GetLength(0) && x >= 0)
-							To[X + i, Y + j] = new Tile(X + i, Y + j, From[x, From.GetLength(1) - j - 1], Invert);
+							To[X + i, Y + j] = new Tile(
+								new Coordinate(X + i, Y + j), From[x, From.GetLength(1) - j - 1], Invert);
 						else
 						{
-							To[X + i, Y + j] = new Tile(X + i, Y + j);
+							To[X + i, Y + j] = new Tile(new Coordinate(X + i, Y + j));
 							To[X + i, Y + j].TileBase = TileBase.CLEAR;
 						}
 					}
-					else To[X + i, Y + j] = new Tile(X + i, Y + j, From[i, j]);
+					else To[X + i, Y + j] = new Tile(new Coordinate(X + i, Y + j), From[i, j]);
 		}
 
 		private void SetupNeighbors()

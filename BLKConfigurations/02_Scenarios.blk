@@ -1,5 +1,66 @@
 ﻿scenario[]:scenarios {
 	scenario:_ {
+		byte[]:deployment-order { 1 0 }
+		byte:turns { 10 }
+		map-configuration:map-configuration {
+			2-tuple[]:_ {
+				2-tuple:_ {
+					string:_ { Maps/board-01.map }
+					bool:_ { false }
+				}
+				2-tuple:_ {
+					string:_ { Maps/board-02.map }
+					bool:_ { false }
+				}
+				2-tuple:_ {
+					string:_ { Maps/board-03.map }
+					bool:_ { false }
+				}
+			}
+		}
+		army-configuration[]:army-configurations {
+			army-configuration:_ {
+				!faction:faction { factions.russian }
+				byte:team { 1 }
+				2-tuple[]:deployment-configurations {
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.t-34-c }
+								int:_ { 2 }
+							}
+						}
+						tile-deployment-configuration:_ {
+							string:display-name { Russian Test }
+							coordinate:coordinate { 11, 16 }
+						}
+					}
+				}
+			}
+			army-configuration:_ {
+				!faction:faction { factions.german }
+				byte:team { 1 }
+				2-tuple[]:deployment-configurations {
+					2-tuple:_ {
+						2-tuple[]:_ {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.panther }
+								int:_ { 3 }
+							}
+						}
+						tile-deployment-configuration:_ {
+							string:display-name { German Test }
+							coordinate:coordinate { 22, 16 }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	scenario:_ {
+		byte[]:deployment-order { 1 0 }
+		byte:turns { 10 }
 		map-configuration:map-configuration {
 			2-tuple[]:_ {
 				2-tuple:_ {
@@ -187,7 +248,5 @@
 				}
 			}
 		}
-		byte[]:deployment-order { 1 0 }
-		byte:turns { 10 }
 	}
 }

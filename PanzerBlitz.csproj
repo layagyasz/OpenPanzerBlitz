@@ -153,6 +153,8 @@
     <Compile Include="Model\BlockType.cs" />
     <Compile Include="Model\EnumConverter.cs" />
     <Compile Include="Model\Deployment\TileMatchers\TileElevation.cs" />
+    <Compile Include="Model\HexCoordinate.cs" />
+    <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		NORMAL_FIRE,
 		CLOSE_ASSAULT,
-		OVERRUN
+		OVERRUN,
+		MINEFIELD
 	}
 }

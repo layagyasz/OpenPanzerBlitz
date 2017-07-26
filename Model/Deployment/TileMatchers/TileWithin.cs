@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		public bool Matches(Tile Tile)
 		{
-			return Zone.ContainsPoint(new Vector2f(Tile.X, Tile.Y));
+			return Zone.ContainsPoint(new Vector2f(Tile.Coordinate.X, Tile.Coordinate.Y));
 		}
 	}
 }

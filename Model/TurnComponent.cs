@@ -4,6 +4,7 @@ namespace PanzerBlitz
 	public enum TurnComponent
 	{
 		DEPLOYMENT,
+		MINEFIELD_ATTACK,
 		ATTACK,
 		VEHICLE_COMBAT_MOVEMENT,
 		VEHICLE_MOVEMENT,

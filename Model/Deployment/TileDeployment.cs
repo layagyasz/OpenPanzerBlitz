@@ -49,7 +49,8 @@ namespace PanzerBlitz
 
 			if (Tile != null)
 			{
-				if (DeploymentConfiguration.Coordinate.X != Tile.X || DeploymentConfiguration.Coordinate.Y != Tile.Y)
+				if (DeploymentConfiguration.Coordinate.X != Tile.Coordinate.X
+					|| DeploymentConfiguration.Coordinate.Y != Tile.Coordinate.Y)
 					return NoDeployReason.DEPLOYMENT_RULE;
 				else return NoDeployReason.NONE;
 			}

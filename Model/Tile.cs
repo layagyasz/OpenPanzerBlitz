@@ -18,15 +18,15 @@ namespace PanzerBlitz
 		int _Elevation;
 		TileBase _TileBase;
 
-		public readonly int X;
-		public readonly int Y;
+		public readonly Coordinate Coordinate;
+		public readonly HexCoordinate HexCoordinate;
 		public readonly CollisionPolygon Bounds;
 
 		public readonly Tile[] NeighborTiles = new Tile[6];
 		Edge[] _Edges = new Edge[6];
 		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
-		public readonly TileConfiguration TileConfiguration;
+		public readonly TileConfiguration Configuration;
 
 		bool _FiredAt;
 		bool _CanIndirectFireAt;
@@ -56,21 +56,7 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return new Vector2f(RealX, RealY);
-			}
-		}
-		public float RealY
-		{
-			get
-			{
-				return Y * .75f;
-			}
-		}
-		public float RealX
-		{
-			get
-			{
-				return X - (Y % 2 == 0 ? 0 : .5f);
+				return new Vector2f(Coordinate.X - (Coordinate.Y % 2 == 0 ? 0 : .5f), Coordinate.Y * .75f);
 			}
 		}
 		public int Elevation
@@ -112,18 +98,18 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Tile(int X, int Y)
+		public Tile(Coordinate Coordinate)
 		{
-			this.X = X;
-			this.Y = Y;
+			this.Coordinate = Coordinate;
+			HexCoordinate = new HexCoordinate(Coordinate);
 			Bounds = CalculateBounds();
 
-			TileConfiguration = new TileConfiguration(this);
-			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
+			Configuration = new TileConfiguration(this);
+			OnReconfigure += (sender, e) => Configuration.Recalculate();
 		}
 
-		public Tile(int X, int Y, Tile Copy, bool Invert = false)
-				: this(X, Y)
+		public Tile(Coordinate Coordinate, Tile Copy, bool Invert = false)
+				: this(Coordinate)
 		{
 			_Elevation = Copy.Elevation;
 			_TileBase = Copy.TileBase;
@@ -142,27 +128,26 @@ namespace PanzerBlitz
 				_PathOverlays = Copy._PathOverlays.ToArray();
 			}
 
-			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
+			OnReconfigure += (sender, e) => Configuration.Recalculate();
 		}
 
 		public Tile(SerializationInputStream Stream)
 		{
-			X = Stream.ReadInt32();
-			Y = Stream.ReadInt32();
+			Coordinate = new Coordinate(Stream);
+			HexCoordinate = new HexCoordinate(Coordinate);
 			_Elevation = Stream.ReadByte();
 			_TileBase = TileBase.TILE_BASES[Stream.ReadByte()];
 			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
 			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
 			Bounds = CalculateBounds();
 
-			TileConfiguration = new TileConfiguration(this);
-			OnReconfigure += (sender, e) => TileConfiguration.Recalculate();
+			Configuration = new TileConfiguration(this);
+			OnReconfigure += (sender, e) => Configuration.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(X);
-			Stream.Write(Y);
+			Stream.Write(Coordinate);
 			Stream.Write((byte)_Elevation);
 			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
 			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(Edge.EDGES, i)));
@@ -171,15 +156,16 @@ namespace PanzerBlitz
 
 		private CollisionPolygon CalculateBounds()
 		{
+			Vector2f c = Center;
 			return new CollisionPolygon(
 				new Vector2f[]
 			{
-				new Vector2f(RealX - .5f, RealY + .25f),
-				new Vector2f(RealX - .5f, RealY - .25f),
-				new Vector2f(RealX, RealY - .5f),
-				new Vector2f(RealX + .5f, RealY - .25f),
-				new Vector2f(RealX + .5f, RealY + .25f),
-				new Vector2f(RealX, RealY + .5f)
+				new Vector2f(c.X - .5f, c.Y + .25f),
+				new Vector2f(c.X - .5f, c.Y - .25f),
+				new Vector2f(c.X, c.Y - .5f),
+				new Vector2f(c.X + .5f, c.Y - .25f),
+				new Vector2f(c.X + .5f, c.Y + .25f),
+				new Vector2f(c.X, c.Y + .5f)
 			});
 		}
 
@@ -193,7 +179,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return Math.Sqrt((Node.RealX - RealX) * (Node.RealX - RealX) + (Node.RealY - RealY) * (Node.RealY - RealY));
+			return HexCoordinate.Distance(Node.HexCoordinate);
 		}
 
 		public IEnumerable<Tile> Neighbors()

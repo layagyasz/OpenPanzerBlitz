@@ -187,7 +187,7 @@ namespace PanzerBlitz
 
 		private bool MustAttackAllUnits()
 		{
-			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.TileConfiguration.MustAttackAllUnits;
+			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.Configuration.MustAttackAllUnits;
 		}
 
 		public virtual bool Execute(Random Random)
@@ -202,7 +202,7 @@ namespace PanzerBlitz
 					Random.Next(2, 7) + c.DieModifier];
 				foreach (Unit u in c.Defenders) u.HandleCombatResult(result);
 			}
-			AttackAt.FireAt();
+			if (AttackMethod != AttackMethod.MINEFIELD) AttackAt.FireAt();
 			return true;
 		}
 

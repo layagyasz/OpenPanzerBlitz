@@ -60,7 +60,7 @@ namespace PanzerBlitz
 
 		private bool Automate()
 		{
-			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2);
+			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2, _Random);
 		}
 
 		public bool ValidateOrder(Order Order)
@@ -177,6 +177,7 @@ namespace PanzerBlitz
 
 		private static IEnumerable<TurnComponent> TurnComponents()
 		{
+			yield return TurnComponent.MINEFIELD_ATTACK;
 			yield return TurnComponent.ATTACK;
 			yield return TurnComponent.VEHICLE_COMBAT_MOVEMENT;
 			yield return TurnComponent.VEHICLE_MOVEMENT;

@@ -45,7 +45,7 @@ namespace PanzerBlitz
 			AttackMethod AttackMethod,
 			Tile Tile)
 		{
-			StackArmored = Tile.TileConfiguration.TreatUnitsAsArmored
+			StackArmored = Tile.Configuration.TreatUnitsAsArmored
 							   || TreatStackAsArmored(AttackOrders, Defenders, AttackMethod);
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
 			AttackFactorCalculations = AttackOrders.Select(
@@ -92,9 +92,9 @@ namespace PanzerBlitz
 			}
 
 			// Terrain modifiers.
-			if (Defenders.First().Position.TileConfiguration.DieModifier != 0)
+			if (Defenders.First().Position.Configuration.DieModifier != 0)
 			{
-				_DieModifier += Defenders.First().Position.TileConfiguration.DieModifier;
+				_DieModifier += Defenders.First().Position.Configuration.DieModifier;
 				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
 			}
 

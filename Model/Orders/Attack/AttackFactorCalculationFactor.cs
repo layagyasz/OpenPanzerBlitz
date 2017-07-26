@@ -8,6 +8,7 @@ namespace PanzerBlitz
 		ANTI_ARMOR_RANGE,
 		ARMOR_RANGE,
 		NOT_ARMORED,
-		INDIRECT_FIRE
+		INDIRECT_FIRE,
+		MINEFIELD
 	}
 }
