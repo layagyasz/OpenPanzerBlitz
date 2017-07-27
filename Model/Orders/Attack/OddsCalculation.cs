@@ -45,8 +45,9 @@ namespace PanzerBlitz
 			AttackMethod AttackMethod,
 			Tile Tile)
 		{
-			StackArmored = Tile.Configuration.TreatUnitsAsArmored
-							   || TreatStackAsArmored(AttackOrders, Defenders, AttackMethod);
+			StackArmored = Defenders.Any(i => i.Configuration.UnitClass == UnitClass.FORT)
+					 			|| Tile.Configuration.TreatUnitsAsArmored
+								|| TreatStackAsArmored(AttackOrders, Defenders, AttackMethod);
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
@@ -57,7 +58,16 @@ namespace PanzerBlitz
 
 			// Calculate Initial Odds
 			TotalAttack = AttackFactorCalculations.Sum(i => i.Item2.Attack);
-			TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
+
+			// If there is a fort, only use its defense.
+			Unit fort = Defenders.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.FORT);
+			if (fort != null)
+			{
+				TotalDefense = fort.Configuration.Defense;
+				OddsCalculationFactors.Add(OddsCalculationFactor.FORT);
+			}
+			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
+
 			if (TotalAttack > TotalDefense)
 			{
 				_Odds = TotalAttack / TotalDefense;

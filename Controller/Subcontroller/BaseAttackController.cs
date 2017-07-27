@@ -46,7 +46,11 @@ namespace PanzerBlitz
 
 		private void ExecuteAttack(object sender, EventArgs e)
 		{
-			if (_Match.ExecuteOrder(_AttackBuilder)) _GameScreen.RemovePane(_AttackPane);
+			if (_Match.ExecuteOrder(_AttackBuilder))
+			{
+				_GameScreen.RemovePane(_AttackPane);
+				_AttackBuilder = null;
+			}
 			else _AttackPane.UpdateDescription();
 		}
 	}

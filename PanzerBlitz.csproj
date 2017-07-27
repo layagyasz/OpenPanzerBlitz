@@ -51,7 +51,6 @@
     <Compile Include="Model\Edge.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\TileView.cs" />
-    <Compile Include="View\GameScreen.cs" />
     <Compile Include="Controller\HumanGamePlayerController.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
@@ -155,6 +154,11 @@
     <Compile Include="Model\Deployment\TileMatchers\TileElevation.cs" />
     <Compile Include="Model\HexCoordinate.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
+    <Compile Include="Model\NewUnitEventArgs.cs" />
+    <Compile Include="View\NewUnitViewEventArgs.cs" />
+    <Compile Include="View\MovementDolly.cs" />
+    <Compile Include="View\Screens\GameScreen.cs" />
+    <Compile Include="View\Screens\ScenarioSelectScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -172,6 +176,7 @@
     <Folder Include="Model\Orders\Movement\" />
     <Folder Include="Model\Orders\Attack\" />
     <Folder Include="Model\Deployment\TileMatchers\" />
+    <Folder Include="View\Screens\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -433,9 +438,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\nkl-16.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="UnitSprites\t-20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\b-4-203mm.png">
@@ -709,6 +711,9 @@
     <None Include="UnitSprites\ski-platoon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="UnitSprites\t-20.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="UnitSprites\mg-platoon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -902,6 +907,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\block.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="UnitSprites\wreckage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

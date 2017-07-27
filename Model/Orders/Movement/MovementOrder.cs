@@ -46,7 +46,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == NoMoveReason.NONE)
 			{
-				Unit.MoveTo(Path.Destination, (float)Path.Distance);
+				Unit.MoveTo(Path.Destination, Path);
 				return true;
 			}
 			return false;

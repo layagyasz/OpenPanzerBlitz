@@ -99,9 +99,11 @@ namespace PanzerBlitz
 											|| UnitClass == UnitClass.RECONNAISSANCE_VEHICLE
 											|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
 											|| UnitClass == UnitClass.TANK
-											|| UnitClass == UnitClass.TRANSPORT);
+											|| UnitClass == UnitClass.TRANSPORT
+											|| UnitClass == UnitClass.WRECKAGE);
 			IsArmored = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_ARMORED], IsVehicle && UnitClass != UnitClass.TRANSPORT);
+				attributes[(int)Attribute.IS_ARMORED],
+				(IsVehicle && UnitClass != UnitClass.TRANSPORT) || UnitClass == UnitClass.FORT);
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
@@ -164,6 +166,14 @@ namespace PanzerBlitz
 			if (UnitClass == UnitClass.MINEFIELD) return BlockType.SOFT_BLOCK;
 			if (UnitClass == UnitClass.BLOCK) return BlockType.HARD_BLOCK;
 			return BlockType.STANDARD;
+		}
+
+		public bool IsNeutral()
+		{
+			return UnitClass == UnitClass.FORT
+										 || UnitClass == UnitClass.MINEFIELD
+										 || UnitClass == UnitClass.BLOCK
+										 || UnitClass == UnitClass.WRECKAGE;
 		}
 
 		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)

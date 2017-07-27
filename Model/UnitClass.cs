@@ -3,6 +3,7 @@ namespace PanzerBlitz
 {
 	public enum UnitClass
 	{
+		WRECKAGE,
 		TANK,
 		ASSAULT_GUN,
 		FLAME_TANK,

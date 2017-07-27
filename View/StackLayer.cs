@@ -26,6 +26,7 @@ namespace PanzerBlitz
 			UnitView.Unit.OnUnload += UpdateStack;
 			UnitView.Unit.OnMove += MoveUnit;
 			UnitView.Unit.OnRemove += RemoveUnit;
+			if (UnitView.Unit.Position != null) MoveUnit(UnitView.Unit, UnitView.Unit.Position);
 		}
 
 		void MoveUnit(object Sender, MovementEventArgs E)
@@ -36,7 +37,6 @@ namespace PanzerBlitz
 		void MoveUnit(Unit Unit, Tile Tile)
 		{
 			UnitView view = _UnitViews[Unit];
-			view.Position = Tile.Center;
 
 			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;

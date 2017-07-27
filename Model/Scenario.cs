@@ -8,8 +8,9 @@ namespace PanzerBlitz
 {
 	public class Scenario
 	{
-		private enum Attribute { MAP_CONFIGURATION, ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURNS };
+		enum Attribute { NAME, MAP_CONFIGURATION, ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURNS };
 
+		public readonly string Name;
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly byte Turns;
@@ -23,6 +24,7 @@ namespace PanzerBlitz
 		public Scenario(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			Name = (string)attributes[(int)Attribute.NAME];
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
 			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];

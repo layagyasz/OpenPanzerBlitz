@@ -11,19 +11,21 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class GameData
+	public static class GameData
 	{
-		private enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, SCENARIOS };
+		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, SCENARIOS };
 
-		public readonly Dictionary<string, Faction> Factions;
-		public readonly Dictionary<string, UnitConfiguration> UnitConfigurations;
-		public readonly List<Scenario> Scenarios;
+		public static Dictionary<string, Faction> Factions;
+		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
+		public static UnitConfiguration Wreckage;
+		public static List<Scenario> Scenarios;
 
-		public GameData(string Path)
-			: this(new ParseBlock(string.Join("\n", Directory.EnumerateFiles(Path).Select(i => File.ReadAllText(i)))))
-		{ }
+		public static void Load(string Path)
+		{
+			Load(new ParseBlock(string.Join("\n", Directory.EnumerateFiles(Path).Select(i => File.ReadAllText(i)))));
+		}
 
-		public GameData(ParseBlock Block)
+		public static void Load(ParseBlock Block)
 		{
 			Block.AddParser<Color>("color", i => ClassLibrary.Instance.ParseColor(i.String), false);
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
@@ -53,6 +55,7 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
+			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 		}
 	}

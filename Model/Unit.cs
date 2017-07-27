@@ -128,7 +128,8 @@ namespace PanzerBlitz
 
 		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
 		{
-			if (Tile.GetBlockType() == BlockType.STANDARD && Tile.Units.Any(i => i.Army != Army))
+			if (Tile.GetBlockType() == BlockType.STANDARD
+				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && i.Army != Army))
 				return NoDeployReason.ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return NoDeployReason.UNIQUE;
@@ -209,22 +210,23 @@ namespace PanzerBlitz
 			if (OnRemove != null) OnRemove(this, EventArgs.Empty);
 		}
 
-		public void Place(Tile Tile)
+		public void Place(Tile Tile, Path<Tile> Path = null)
 		{
-			if (_Passenger != null) _Passenger.Place(Tile);
+			if (_Passenger != null) _Passenger.Place(Tile, Path);
 			if (_Position != null) _Position.Exit(this);
 			_Position = Tile;
 			_Position.Enter(this);
 
-			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile));
+			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path));
 		}
 
-		public void MoveTo(Tile Tile, float Movement)
+		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
-			_RemainingMovement -= Movement;
-			_MovedMoreThanOneTile = Movement > 1 || _Moved;
+			float movement = (float)Path.Distance;
+			_RemainingMovement -= movement;
+			_MovedMoreThanOneTile = movement > 1 || _Moved;
 			_Moved = true;
-			Place(Tile);
+			Place(Tile, Path);
 		}
 
 		public bool MustMove()

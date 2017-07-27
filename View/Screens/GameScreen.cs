@@ -52,7 +52,11 @@ namespace PanzerBlitz
 			_AlertText.Position = new Vector2f(.5f * WindowSize.X, 0);
 
 			this.ArmyViews = ArmyViews.ToList();
-			foreach (ArmyView a in this.ArmyViews) _StackLayer.AddArmyView(a);
+			foreach (ArmyView a in this.ArmyViews)
+			{
+				_StackLayer.AddArmyView(a);
+				a.OnNewUnitView += (sender, e) => _StackLayer.AddUnitView(e.UnitView);
+			}
 		}
 
 		Color MakeBackdropColor(Color BaseColor)

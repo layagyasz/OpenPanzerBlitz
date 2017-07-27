@@ -1,4 +1,17 @@
 ﻿unit-configuration<>:unit-configurations {
+	unit-configuration:wreckage {
+		string:name { Wreckage }
+		string:display-name { }
+		unit-class:unit-class { wreckage }
+		string:image-name { wreckage.png }
+
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+		byte:defense { 0 }
+		byte:movement { 0 }
+		color:override-color { #E24B20 }
+	}
 	unit-configuration:command-post {
 		string:name { Command Post }
 		string:display-name { }
@@ -10,6 +23,7 @@
 		byte:range { 0 }
 		byte:defense { 1 }
 		byte:movement { 0 }
+		color:override-color { #FFFFFF }
 	}
 	unit-configuration:block {
 		string:name { Roadblock }

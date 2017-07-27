@@ -179,7 +179,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return HexCoordinate.Distance(Node.HexCoordinate);
+			return .5 * HexCoordinate.Distance(Node.HexCoordinate);
 		}
 
 		public IEnumerable<Tile> Neighbors()
@@ -187,6 +187,19 @@ namespace PanzerBlitz
 			foreach (Tile T in NeighborTiles) yield return T;
 		}
 		// Pathable
+
+		public NoAttackReason CanAttack(AttackMethod AttackMethod)
+		{
+			if (AttackMethod == AttackMethod.OVERRUN)
+			{
+				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)) return NoAttackReason.OVERRUN_FORT;
+				if (TileBase != TileBase.CLEAR
+					|| Edges.Any(i => i != null)
+					|| PathOverlays.Any(i => i != null && !i.RoadMove))
+					return NoAttackReason.OVERRUN_TERRAIN;
+			}
+			return NoAttackReason.NONE;
+		}
 
 		public int GetStackSize()
 		{

@@ -22,6 +22,8 @@ namespace PanzerBlitz
 		Vertex[] _Vertices;
 		Rectangle _Bounds;
 
+		MovementDolly _Movement;
+
 		public readonly float Scale;
 		public readonly Unit Unit;
 
@@ -36,6 +38,7 @@ namespace PanzerBlitz
 		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Scale)
 		{
 			this.Unit = Unit;
+			Unit.OnMove += HandleMove;
 
 			Color[] colors = Unit.Configuration.UnitClass == UnitClass.BLOCK
 								 || Unit.Configuration.UnitClass == UnitClass.MINEFIELD
@@ -101,6 +104,12 @@ namespace PanzerBlitz
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
 		}
 
+		void HandleMove(object Sender, MovementEventArgs E)
+		{
+			if (E.Path != null) _Movement = new MovementDolly(this, E.Path);
+			else Position = E.Tile.Center;
+		}
+
 		public override bool IsCollision(Vector2f Point)
 		{
 			return _Bounds.ContainsPoint(Point);
@@ -112,6 +121,11 @@ namespace PanzerBlitz
 			int DeltaT,
 			Transform Transform)
 		{
+			if (_Movement != null)
+			{
+				Position = _Movement.GetPoint(DeltaT);
+				if (_Movement.Done) _Movement = null;
+			}
 			Transform.Translate(Position);
 			base.Update(MouseController, KeyController, DeltaT, Transform);
 		}

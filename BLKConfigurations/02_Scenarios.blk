@@ -1,5 +1,6 @@
 ﻿scenario[]:scenarios {
 	scenario:_ {
+		string:name { Test Scenario }
 		byte[]:deployment-order { 1 0 }
 		byte:turns { 10 }
 		map-configuration:map-configuration {
@@ -59,6 +60,7 @@
 	}
 
 	scenario:_ {
+		string:name { Russian Rear Area Raid: White Russia }
 		byte[]:deployment-order { 1 0 }
 		byte:turns { 10 }
 		map-configuration:map-configuration {

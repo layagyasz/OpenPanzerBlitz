@@ -178,6 +178,23 @@ class<>:classes {
 		}
 	}
 
+	class:scenario-select {
+		!class:parent { deployment-select }
+		mode:default {
+			int:height { 636 }
+			int:width { 636 }
+			color[]:background-color { #000000 #000000 #000000 #000000 }
+		}
+	}
+	class:scenario-selection-option {
+		!class:parent { large-button }
+		mode:default {
+			int:height { 32 }
+			int:width { 636 }
+			int[]:margin { 0 3 0 3 }
+		}
+	}
+
 	class:load-unit-pane {
 		mode:default {
 			int:height { 108 }

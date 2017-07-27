@@ -23,9 +23,10 @@ namespace PanzerBlitz
 			this.SpriteSize = SpriteSize;
 			this.Font = Font;
 			RenderAll(
-				Scenario.ArmyConfigurations
-				.SelectMany(i => i.DeploymentConfigurations)
-				.SelectMany(i => i.Item1).Distinct());
+				new UnitConfiguration[] { GameData.Wreckage }
+				.Concat(Scenario.ArmyConfigurations
+					.SelectMany(i => i.DeploymentConfigurations)
+					 .SelectMany(i => i.Item1).Distinct()));
 		}
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(UnitConfiguration UnitConfiguration)
@@ -86,7 +87,9 @@ namespace PanzerBlitz
 			Target.Draw(image, r);
 
 			// Do not render stats for blocks and mines.
-			if (UnitConfiguration.UnitClass == UnitClass.BLOCK || UnitConfiguration.UnitClass == UnitClass.MINEFIELD)
+			if (UnitConfiguration.UnitClass == UnitClass.BLOCK
+				|| UnitConfiguration.UnitClass == UnitClass.MINEFIELD
+				|| UnitConfiguration.UnitClass == UnitClass.WRECKAGE)
 				return;
 
 			// Only render defense for forts.

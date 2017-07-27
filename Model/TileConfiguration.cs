@@ -77,6 +77,14 @@ namespace PanzerBlitz
 		{
 			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == NoDeployReason.ENEMY_OCCUPIED) return float.MaxValue;
 
+			BlockType toBlock = To.GetBlockType();
+			BlockType fromBlock = Tile.GetBlockType();
+
+			if (toBlock == BlockType.HARD_BLOCK && (Unit.Moved || !To.NeighborTiles.Any(i => i.Units.Contains(Unit))))
+				return float.MaxValue;
+			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && Unit.Moved)
+				return float.MaxValue;
+
 			int index = Array.IndexOf(Tile.NeighborTiles, To);
 			TilePathOverlay pathOverlay = Tile.GetPathOverlay(To);
 

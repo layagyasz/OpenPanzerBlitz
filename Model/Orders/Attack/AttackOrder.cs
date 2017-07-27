@@ -130,9 +130,6 @@ namespace PanzerBlitz
 		{
 			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
-				bool TreatStackAsArmored = AttackAt.Units.Count(
-					i => i.Configuration.IsArmored) > AttackAt.Units.Count(i => !i.Configuration.IsArmored);
-				AttackOrder.SetTreatStackAsArmored(TreatStackAsArmored);
 				NoSingleAttackReason canAttack = AttackOrder.Validate();
 				if (canAttack != NoSingleAttackReason.NONE) return canAttack;
 
@@ -181,13 +178,16 @@ namespace PanzerBlitz
 		{
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
 			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
+			if (AttackAt.CanAttack(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanAttack(AttackMethod);
 
 			return NoAttackReason.NONE;
 		}
 
 		private bool MustAttackAllUnits()
 		{
-			return AttackMethod != AttackMethod.NORMAL_FIRE || AttackAt.Configuration.MustAttackAllUnits;
+			return AttackMethod != AttackMethod.NORMAL_FIRE
+											   || AttackAt.Configuration.MustAttackAllUnits
+											   || AttackAt.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT);
 		}
 
 		public virtual bool Execute(Random Random)

@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Graphing;
+
 namespace PanzerBlitz
 {
 	public class OverrunSingleAttackOrder : SingleAttackOrder
 	{
 		MovementOrder _InitialMovement;
+		Path<Tile> _MovementPath;
+
 		Tile _AttackTile;
 		Tile _ExitTile;
-		float _Distance;
 		NoMoveReason _Validate;
 		bool _TreatStackAsArmored;
 
@@ -52,8 +55,11 @@ namespace PanzerBlitz
 			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
 				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 
-			_Distance = (float)_InitialMovement.Path.Distance + distance1 + distance2;
-			if (_Distance > _InitialMovement.Unit.RemainingMovement) return NoMoveReason.NO_MOVE;
+			_MovementPath = new Path<Tile>(_InitialMovement.Path);
+			_MovementPath.Add(_AttackTile, distance1);
+			_MovementPath.Add(_ExitTile, distance2);
+			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement) return NoMoveReason.NO_MOVE;
+
 			return NoMoveReason.NONE;
 		}
 
@@ -84,7 +90,7 @@ namespace PanzerBlitz
 			if (Validate() == NoSingleAttackReason.NONE)
 			{
 				Attacker.Fire();
-				_InitialMovement.Unit.MoveTo(_ExitTile, _Distance);
+				_InitialMovement.Unit.MoveTo(_ExitTile, _MovementPath);
 				return true;
 			}
 			else return false;

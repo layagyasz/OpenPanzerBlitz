@@ -6,6 +6,8 @@ namespace PanzerBlitz
 {
 	public class Army
 	{
+		public EventHandler<NewUnitEventArgs> OnUnitAdded;
+
 		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
 
@@ -22,6 +24,7 @@ namespace PanzerBlitz
 			this.Configuration = ArmyConfiguration;
 			this.Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
 				i => i.Item2.GenerateDeployment(this, i.Item1.Select(j => new Unit(this, j)))).ToList();
+			foreach (Unit u in Units) u.OnDestroy += UnitDestroyed;
 		}
 
 		public bool AutomatePhase(Match Match, TurnComponent TurnComponent, Random Random)
@@ -62,6 +65,8 @@ namespace PanzerBlitz
 		{
 			foreach (Unit u in Units)
 			{
+				if (u.Position == null) continue;
+
 				Unit mine = u.Position.Units.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
 				if (mine != null)
 				{
@@ -80,6 +85,17 @@ namespace PanzerBlitz
 		public bool MustMove(bool Vehicle)
 		{
 			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == NoMoveReason.NONE);
+		}
+
+		void UnitDestroyed(object Sender, EventArgs E)
+		{
+			Unit unit = (Unit)Sender;
+			if (unit.Configuration.IsArmored && unit.Configuration.IsVehicle)
+			{
+				Unit wreckage = new Unit(this, GameData.Wreckage);
+				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
+				wreckage.Place(unit.Position);
+			}
 		}
 	}
 }
