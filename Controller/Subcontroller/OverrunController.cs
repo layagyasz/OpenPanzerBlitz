@@ -53,10 +53,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void HandleUnitRightClick(Unit Unit)
-		{
-		}
-
 		private void DeselectUnit()
 		{
 			_SelectedUnit = null;

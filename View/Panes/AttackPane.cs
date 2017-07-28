@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Window;
@@ -9,6 +10,7 @@ namespace PanzerBlitz
 {
 	public class AttackPane : Pane
 	{
+		public EventHandler<ValueChangedEventArgs<AttackTarget>> OnAttackTargetChanged;
 		public EventHandler<EventArgs> OnExecute;
 
 		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
@@ -36,6 +38,7 @@ namespace PanzerBlitz
 				DisplayedString = AttackTarget.EACH.ToString(),
 				Value = AttackTarget.EACH
 			});
+			_AttackTargetSelect.OnChange += HandleAttackTargetChanged;
 			_OrderButton.Position = new Vector2f(0, Size.Y - _OrderButton.Size.Y - 32);
 			_OrderButton.OnClick += (sender, e) => { if (OnExecute != null) OnExecute(this, EventArgs.Empty); };
 			_Description.Position = new Vector2f(0, _AttackTargetSelect.Size.Y + 24);
@@ -48,9 +51,14 @@ namespace PanzerBlitz
 		{
 			_Description.Clear();
 			foreach (OddsCalculation o in Attack.OddsCalculations) DescribeOddsCalculation(o);
+			if (Attack.Validate() != NoAttackReason.NONE)
+				_Description.Add(new Button("attack-error-box")
+				{
+					DisplayedString = Attack.Validate().ToString()
+				});
 		}
 
-		private void DescribeOddsCalculation(OddsCalculation OddsCalculation)
+		void DescribeOddsCalculation(OddsCalculation OddsCalculation)
 		{
 			_Description.Add(new Button("attack-odds-box") { DisplayedString = OddsString(OddsCalculation) });
 			_Description.Add(new Button("attack-odds-section")
@@ -76,7 +84,7 @@ namespace PanzerBlitz
 				_Description.Add(new Button("odds-factor-box") { DisplayedString = o.ToString() });
 		}
 
-		private void DescribeAttackFactorCalculation(Unit Unit, AttackFactorCalculation AttackFactorCalculation)
+		void DescribeAttackFactorCalculation(Unit Unit, AttackFactorCalculation AttackFactorCalculation)
 		{
 			_Description.Add(new Button("attack-part-box")
 			{
@@ -91,7 +99,7 @@ namespace PanzerBlitz
 				_Description.Add(new Button("attack-factor-box") { DisplayedString = a.ToString() });
 		}
 
-		private string OddsString(OddsCalculation OddsCalculation)
+		string OddsString(OddsCalculation OddsCalculation)
 		{
 			string dieModifier =
 				string.Format(
@@ -99,6 +107,12 @@ namespace PanzerBlitz
 			if (OddsCalculation.OddsAgainst)
 				return string.Format("Attack at 1-{0} {1} against", OddsCalculation.Odds, dieModifier);
 			else return string.Format("Attack at {0}-1 {1} for", OddsCalculation.Odds, dieModifier);
+		}
+
+		void HandleAttackTargetChanged(object Sender, ValueChangedEventArgs<StandardItem<AttackTarget>> E)
+		{
+			if (OnAttackTargetChanged != null)
+				OnAttackTargetChanged(this, new ValueChangedEventArgs<AttackTarget>(E.Value.Value));
 		}
 	}
 }

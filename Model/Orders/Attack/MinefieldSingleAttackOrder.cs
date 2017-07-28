@@ -8,7 +8,7 @@ namespace PanzerBlitz
 		Unit _Attacker;
 		Unit _Defender;
 
-		public Unit Attacker
+		public override Unit Attacker
 		{
 			get
 			{
@@ -16,7 +16,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Unit Defender
+		public override Unit Defender
 		{
 			get
 			{
@@ -30,19 +30,19 @@ namespace PanzerBlitz
 			_Defender = Defender;
 		}
 
-		public void SetTreatStackAsArmored(bool TreatStackAsArmored)
+		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)
 		{
 			// Armored doesn't matter.
 		}
 
-		public AttackFactorCalculation GetAttack()
+		public override AttackFactorCalculation GetAttack()
 		{
 			return new AttackFactorCalculation(
 				_Defender.Configuration.Defense * _Attacker.Configuration.Attack,
 				new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.MINEFIELD });
 		}
 
-		public NoSingleAttackReason Validate()
+		public override NoSingleAttackReason Validate()
 		{
 			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != NoSingleAttackReason.NONE)
 				return NoSingleAttackReason.UNABLE;
@@ -50,7 +50,7 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
-		public bool Execute(Random Random)
+		public override bool Execute(Random Random)
 		{
 			return Validate() == NoSingleAttackReason.NONE;
 		}

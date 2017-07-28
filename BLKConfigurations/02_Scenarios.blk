@@ -23,6 +23,28 @@
 			army-configuration:_ {
 				!faction:faction { factions.russian }
 				byte:team { 1 }
+				victory-condition:victory-condition {
+					var<>:objectives {
+						units-destroyed:units-destroyed { }
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 1 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 2 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 3 }
+							!var:objective { objectives.units-destroyed }
+						}
+					}
+				}
 				2-tuple[]:deployment-configurations {
 					2-tuple:_ {
 						2-tuple[]:_ {
@@ -39,8 +61,30 @@
 				}
 			}
 			army-configuration:_ {
+				victory-condition:victory-condition {
+					var<>:objectives {
+						units-destroyed:units-destroyed { }
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 1 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 1 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 2 }
+							!var:objective { objectives.units-destroyed }
+						}
+					}
+				}
 				!faction:faction { factions.german }
-				byte:team { 1 }
+				byte:team { 2 }
 				2-tuple[]:deployment-configurations {
 					2-tuple:_ {
 						2-tuple[]:_ {
@@ -87,10 +131,6 @@
 					2-tuple:_ {
 						2-tuple[]:_ {
 							2-tuple:_ {
-								!unit-configuration:_ { unit-configurations.cavalry }
-								int:_ { 3 }
-							}
-							2-tuple:_ {
 								!unit-configuration:_ { unit-configurations.45mm }
 								int:_ { 1 }
 							}
@@ -118,6 +158,10 @@
 								!unit-configuration:_ { unit-configurations.wagon }
 								int:_ { 4 }
 							}
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.cavalry }
+								int:_ { 4 }
+							}
 						}
 						tile-entry-deployment-configuration:_ {
 							string:display-name { 982nd Tk. Rgt. & 371st Cav. Rgt. }
@@ -136,7 +180,7 @@
 								int:_ { 1 }
 							}
 							2-tuple:_ {
-								!unit-configuration { unit-configurations.fort-40 }
+								!unit-configuration:_ { unit-configurations.fort-40 }
 								int:_ { 1 }
 							}
 						}
@@ -152,7 +196,7 @@
 								int:_ { 1 }
 							}
 							2-tuple:_ {
-								!unit-configuration { unit-configurations.fort-40 }
+								!unit-configuration:_ { unit-configurations.fort-40 }
 								int:_ { 1 }
 							}
 						}

@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Cardamom.Interface;
+
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -29,6 +31,15 @@ namespace PanzerBlitz
 			Clear();
 		}
 
+		public override void HandleUnitRightClick(Unit Unit)
+		{
+			if (_AttackBuilder != null)
+			{
+				_AttackBuilder.RemoveAttacker(Unit);
+				_AttackPane.UpdateDescription();
+			}
+		}
+
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
 		}
@@ -41,10 +52,11 @@ namespace PanzerBlitz
 			_AttackPane = new AttackPane(_AttackBuilder);
 			_GameScreen.AddPane(_AttackPane);
 			_AttackPane.UpdateDescription();
+			_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
 			_AttackPane.OnExecute += ExecuteAttack;
 		}
 
-		private void ExecuteAttack(object sender, EventArgs e)
+		void ExecuteAttack(object sender, EventArgs e)
 		{
 			if (_Match.ExecuteOrder(_AttackBuilder))
 			{
@@ -52,6 +64,12 @@ namespace PanzerBlitz
 				_AttackBuilder = null;
 			}
 			else _AttackPane.UpdateDescription();
+		}
+
+		void ChangeAttackTarget(object Sender, ValueChangedEventArgs<AttackTarget> E)
+		{
+			_AttackBuilder.SetAttackTarget(E.Value);
+			_AttackPane.UpdateDescription();
 		}
 	}
 }

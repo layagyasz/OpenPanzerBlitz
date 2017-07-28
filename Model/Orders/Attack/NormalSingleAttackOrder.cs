@@ -12,7 +12,7 @@ namespace PanzerBlitz
 		Unit _Defender;
 		bool _TreatStackAsArmored;
 
-		public Unit Attacker
+		public override Unit Attacker
 		{
 			get
 			{
@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Unit Defender
+		public override Unit Defender
 		{
 			get
 			{
@@ -36,12 +36,12 @@ namespace PanzerBlitz
 			this.LineOfSight = Attacker.GetLineOfSight(Defender.Position);
 		}
 
-		public void SetTreatStackAsArmored(bool TreatStackAsArmored)
+		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)
 		{
 			_TreatStackAsArmored = TreatStackAsArmored;
 		}
 
-		public AttackFactorCalculation GetAttack()
+		public override AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
 				return _Attacker.Configuration.GetAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
@@ -49,16 +49,16 @@ namespace PanzerBlitz
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
-		public NoSingleAttackReason Validate()
+		public override NoSingleAttackReason Validate()
 		{
 			if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return NoSingleAttackReason.NO_LOS;
 			NoSingleAttackReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
 			if (r != NoSingleAttackReason.NONE) return r;
 
-			return NoSingleAttackReason.NONE;
+			return base.Validate();
 		}
 
-		public bool Execute(Random Random)
+		public override bool Execute(Random Random)
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
 			{

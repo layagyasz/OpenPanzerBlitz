@@ -61,6 +61,11 @@ namespace PanzerBlitz
 			return false;
 		}
 
+		public ObjectiveSuccessLevel GetObjectiveSuccessLevel(Match Match)
+		{
+			return Configuration.VictoryCondition.GetMatchResult(this, Match);
+		}
+
 		void DoMinefieldAttacks(Random Random)
 		{
 			foreach (Unit u in Units)
@@ -68,11 +73,14 @@ namespace PanzerBlitz
 				if (u.Position == null) continue;
 
 				Unit mine = u.Position.Units.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
-				if (mine != null)
+				if (mine != null && mine.Position != null)
 				{
-					AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
-					order.AddAttacker(new MinefieldSingleAttackOrder(mine, u));
-					order.Execute(Random);
+					foreach (Unit d in mine.Position.Units.Where(i => i != mine))
+					{
+						AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
+						order.AddAttacker(new MinefieldSingleAttackOrder(mine, d));
+						order.Execute(Random);
+					}
 				}
 			}
 		}

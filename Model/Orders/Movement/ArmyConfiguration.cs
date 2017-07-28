@@ -8,20 +8,23 @@ namespace PanzerBlitz
 {
 	public class ArmyConfiguration
 	{
-		private enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS }
+		private enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS, VICTORY_CONDITION }
 
 		public readonly Faction Faction;
 		public readonly byte Team;
 		public readonly List<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations;
+		public readonly VictoryCondition VictoryCondition;
 
 		public ArmyConfiguration(
 			Faction Faction,
 			byte Team,
-			IEnumerable<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations)
+			IEnumerable<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations,
+			VictoryCondition VictoryCondition)
 		{
 			this.Faction = Faction;
 			this.Team = Team;
 			this.DeploymentConfigurations = DeploymentConfigurations.ToList();
+			this.VictoryCondition = VictoryCondition;
 		}
 
 		public ArmyConfiguration(ParseBlock Block)
@@ -39,6 +42,7 @@ namespace PanzerBlitz
 													   (int)j.Item2)))
 					.ToList(), (DeploymentConfiguration)i.Item2))
 				.ToList();
+			VictoryCondition = (VictoryCondition)attributes[(int)Attribute.VICTORY_CONDITION];
 		}
 
 		IEnumerable<UnitConfiguration> BuildUnitConfigurationList(

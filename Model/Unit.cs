@@ -126,6 +126,11 @@ namespace PanzerBlitz
 			this.Configuration = UnitConfiguration;
 		}
 
+		public bool CanBeAttackedBy(Army Army)
+		{
+			return Army.Configuration.Team != this.Army.Configuration.Team && !Configuration.IsNeutral();
+		}
+
 		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
 		{
 			if (Tile.GetBlockType() == BlockType.STANDARD

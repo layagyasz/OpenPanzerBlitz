@@ -48,10 +48,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void HandleUnitRightClick(Unit Unit)
-		{
-		}
-
 		void SetCloseAssaultHighlight(Unit Unit)
 		{
 			IEnumerable<Tuple<Tile, Color>> attackRange = Unit.GetFieldOfSight(AttackMethod.CLOSE_ASSAULT).Select(

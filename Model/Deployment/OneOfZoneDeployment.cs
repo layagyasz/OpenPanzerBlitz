@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using SFML.Window;
-
 namespace PanzerBlitz
 {
-	public class ZoneDeployment : PositionalDeployment
+	public class OneOfZoneDeployment : PositionalDeployment
 	{
-		public readonly ZoneDeploymentConfiguration DeploymentConfiguration;
+		public readonly OneOfZoneDeploymentConfiguration DeploymentConfiguration;
 
 		public override DeploymentConfiguration Configuration
 		{
@@ -18,7 +16,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public ZoneDeployment(Army Army, IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
+		public OneOfZoneDeployment(
+			Army Army, IEnumerable<Unit> Units, OneOfZoneDeploymentConfiguration DeploymentConfiguration)
 			: base(Army, Units)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
@@ -40,7 +39,11 @@ namespace PanzerBlitz
 
 			if (Tile != null)
 			{
-				if (!DeploymentConfiguration.Matcher.Matches(Tile))
+				Matcher m = DeploymentConfiguration.Matchers.FirstOrDefault(
+					i => Units.Any(j => j.Position != null && i.Matches(j.Position)));
+
+				if (m != null && !m.Matches(Tile)) return NoDeployReason.DEPLOYMENT_RULE;
+				if (m == null && !DeploymentConfiguration.Matchers.Any(i => i.Matches(Tile)))
 					return NoDeployReason.DEPLOYMENT_RULE;
 			}
 			return NoDeployReason.NONE;

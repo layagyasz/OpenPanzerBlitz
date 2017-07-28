@@ -13,6 +13,7 @@ namespace PanzerBlitz
 		CardinalSpline _Spline;
 		double _Traveled;
 		double _SpeedRecipricol;
+		Vector2f _End;
 
 		public bool Done
 		{
@@ -24,21 +25,28 @@ namespace PanzerBlitz
 
 		public MovementDolly(UnitView UnitView, Path<Tile> Path)
 		{
-			_Spline = new CardinalSpline();
-			foreach (Tile t in Path.Nodes.Where((x, i) => i % 2 == 0 || i == Path.Nodes.Count() - 1))
-				_Spline.Points.Add(t.Center);
+			_End = Path.Destination.Center;
+			if (Path.Distance > 0)
+			{
+				_Spline = new CardinalSpline();
+				foreach (Tile t in Path.Nodes.Where((x, i) => i % 2 == 0 || i == Path.Nodes.Count() - 1))
+					_Spline.Points.Add(t.Center);
 
-			float move = UnitView.Unit.Carrier == null
-								 ? UnitView.Unit.Configuration.Movement
-								 : UnitView.Unit.Carrier.Configuration.Movement;
-			_SpeedRecipricol = .0002 * move / Path.Distance;
+				float move = UnitView.Unit.Carrier == null
+									 ? UnitView.Unit.Configuration.Movement
+									 : UnitView.Unit.Carrier.Configuration.Movement;
+				_SpeedRecipricol = .0002 * move / Path.Distance;
+			}
+			else _Traveled = 1;
 		}
 
 		public Vector2f GetPoint(int DeltaT)
 		{
 			_Traveled += _SpeedRecipricol * DeltaT;
 			if (_Traveled > 1) _Traveled = 1;
-			return _Spline.GetPoint(_Traveled);
+
+			if (_Traveled < 1) return _Spline.GetPoint(_Traveled);
+			return _End;
 		}
 	}
 }

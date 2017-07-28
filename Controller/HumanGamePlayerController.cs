@@ -69,7 +69,7 @@ namespace PanzerBlitz
 			_Controllers[TurnComponent].Begin(Army);
 		}
 
-		private void EndTurn(object sender, EventArgs e)
+		void EndTurn(object sender, EventArgs e)
 		{
 			TurnComponent t = Match.CurrentPhase.Item2;
 			if (_Controllers[t].Finish())
@@ -83,31 +83,31 @@ namespace PanzerBlitz
 			}
 		}
 
-		private void OnTileClick(object sender, MouseEventArgs e)
+		void OnTileClick(object sender, MouseEventArgs e)
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleTileLeftClick(((TileView)sender).Tile);
 		}
 
-		private void OnTileRightClick(object sender, MouseEventArgs e)
+		void OnTileRightClick(object sender, MouseEventArgs e)
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
-		private void OnUnitClick(object sender, MouseEventArgs e)
+		void OnUnitClick(object sender, MouseEventArgs e)
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleUnitLeftClick(((UnitView)sender).Unit);
 		}
 
-		private void OnUnitRightClick(object sender, MouseEventArgs e)
+		void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 
-		private void OnKeyPressed(object sender, KeyPressedEventArgs E)
+		void OnKeyPressed(object sender, KeyPressedEventArgs E)
 		{
 			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
 			_Controllers[phase.Item2].HandleKeyPress(E.Key);

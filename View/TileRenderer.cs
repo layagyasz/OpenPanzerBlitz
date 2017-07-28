@@ -83,6 +83,42 @@ namespace PanzerBlitz
 				new float[] { 0, .2f, .3f }
 		);
 
+		public static readonly TileRenderer SUMMER_GRASSLAND = new TileRenderer(
+			new Color(201, 205, 95),
+			new Color[] { Color.Black, new Color(235, 37, 26) },
+			new Color[]
+			{
+						Color.White,
+						new Color(145, 155, 130),
+						new Color(121, 130, 41)
+			},
+			new Color[]
+			{
+						new Color(0, 0, 0, 0),
+						new Color(115, 112, 103),
+						new Color(121, 130, 41),
+						new Color(188, 126, 53),
+						new Color(91, 138, 192)
+			},
+			new Color[]
+			{
+						new Color(0, 0, 0, 0),
+						new Color(138, 134, 122),
+						new Color(125, 150, 72),
+						new Color(121, 130, 41),
+						new Color(91, 138, 192)
+			},
+			new Color[] {
+						new Color(0, 0, 0, 0),
+						new Color(220, 220, 220),
+						new Color(91, 138, 192),
+						new Color(91, 138, 192)
+			},
+			new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(115, 102, 83), new Color(115, 102, 83) },
+			new float[] { 0, .15f, .2f },
+			new float[] { 0, .2f, .4f }
+		);
+
 
 		public readonly Color BaseColor;
 

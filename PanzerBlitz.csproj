@@ -145,13 +145,8 @@
     <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
-    <Compile Include="Model\Deployment\TileMatchers\TileWithin.cs" />
-    <Compile Include="Model\Deployment\TileMatchers\Matcher.cs" />
-    <Compile Include="Model\Deployment\TileMatchers\DistanceFromUnit.cs" />
-    <Compile Include="Model\Deployment\TileMatchers\CompositeMatcher.cs" />
     <Compile Include="Model\BlockType.cs" />
     <Compile Include="Model\EnumConverter.cs" />
-    <Compile Include="Model\Deployment\TileMatchers\TileElevation.cs" />
     <Compile Include="Model\HexCoordinate.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
     <Compile Include="Model\NewUnitEventArgs.cs" />
@@ -159,6 +154,18 @@
     <Compile Include="View\MovementDolly.cs" />
     <Compile Include="View\Screens\GameScreen.cs" />
     <Compile Include="View\Screens\ScenarioSelectScreen.cs" />
+    <Compile Include="Model\Deployment\OneOfZoneDeploymentConfiguration.cs" />
+    <Compile Include="Model\Deployment\OneOfZoneDeployment.cs" />
+    <Compile Include="Model\VictoryConditions\Objective.cs" />
+    <Compile Include="Model\VictoryConditions\UnitsDestroyed.cs" />
+    <Compile Include="Model\VictoryConditions\VictoryCondition.cs" />
+    <Compile Include="Model\VictoryConditions\ObjectiveSuccessLevel.cs" />
+    <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
+    <Compile Include="Model\TileMatchers\CompositeMatcher.cs" />
+    <Compile Include="Model\TileMatchers\DistanceFromUnit.cs" />
+    <Compile Include="Model\TileMatchers\Matcher.cs" />
+    <Compile Include="Model\TileMatchers\TileElevation.cs" />
+    <Compile Include="Model\TileMatchers\TileWithin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -175,8 +182,9 @@
     <Folder Include="Model\Orders\Deployment\" />
     <Folder Include="Model\Orders\Movement\" />
     <Folder Include="Model\Orders\Attack\" />
-    <Folder Include="Model\Deployment\TileMatchers\" />
     <Folder Include="View\Screens\" />
+    <Folder Include="Model\VictoryConditions\" />
+    <Folder Include="Model\TileMatchers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

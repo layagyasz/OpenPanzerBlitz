@@ -6,16 +6,16 @@ namespace PanzerBlitz
 {
 	public class OddsCalculation
 	{
-		public readonly IEnumerable<Tuple<SingleAttackOrder, AttackFactorCalculation>> AttackFactorCalculations;
-		public readonly IEnumerable<Unit> Defenders;
+		public readonly List<Tuple<SingleAttackOrder, AttackFactorCalculation>> AttackFactorCalculations;
+		public readonly List<Unit> Defenders;
 		public readonly List<OddsCalculationFactor> OddsCalculationFactors;
 		public readonly bool StackArmored;
 		public readonly int TotalAttack;
 		public readonly int TotalDefense;
 
-		private bool _OddsAgainst;
-		private int _Odds;
-		private int _DieModifier;
+		bool _OddsAgainst;
+		int _Odds;
+		int _DieModifier;
 
 		public bool OddsAgainst
 		{
@@ -51,8 +51,8 @@ namespace PanzerBlitz
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
-					i, i.GetAttack()));
-			this.Defenders = Defenders;
+					i, i.GetAttack())).ToList();
+			this.Defenders = Defenders.ToList();
 
 			OddsCalculationFactors = new List<OddsCalculationFactor>();
 

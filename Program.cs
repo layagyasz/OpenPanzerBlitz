@@ -11,6 +11,11 @@ namespace PanzerBlitz
 {
 	class MainClass
 	{
+		static void Match_OnMatchEnded(object sender, EventArgs e)
+		{
+
+		}
+
 		static Interface Interface = new Interface(VideoMode.DesktopMode, "PanzerBlitz", Styles.Default);
 
 		public static void Main(string[] args)
@@ -22,7 +27,9 @@ namespace PanzerBlitz
 			if (edit)
 			{
 				GameScreen screen = new GameScreen(
-					Interface.WindowBounds[2], new MapView(new Map(11, 33), TileRenderer.SUMMER_STEPPE), new ArmyView[] { });
+					Interface.WindowBounds[2],
+					new MapView(new Map(11, 33), TileRenderer.SUMMER_STEPPE),
+					new ArmyView[] { });
 				EditController controller = new EditController(screen);
 
 				Interface.Screen.Add(screen);
@@ -54,8 +61,18 @@ namespace PanzerBlitz
 			foreach (Army a in match.Armies) playerControllers.Add(a, controller);
 			GameController gameController = new GameController(match, playerControllers);
 
+			match.OnMatchEnded += MatchEnded;
+
 			Interface.Screen.Clear();
 			Interface.Screen.Add(screen);
+		}
+
+		static void MatchEnded(object Sender, EventArgs E)
+		{
+			Match match = (Match)Sender;
+			Console.WriteLine(
+				string.Join(
+					", ", match.GetArmyObjectiveSuccessLevels().Select(i => string.Format("{0}:{1}", i.Key, i.Value))));
 		}
 	}
 }

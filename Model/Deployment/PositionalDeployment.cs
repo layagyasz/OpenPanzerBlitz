@@ -10,5 +10,10 @@ namespace PanzerBlitz
 			: base(Army, Units)
 		{
 		}
+
+		public override bool IsConfigured()
+		{
+			return Units.All(i => i.Position != null);
+		}
 	}
 }

@@ -8,6 +8,7 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ExecuteOrderEventArgs> OnExecuteOrder;
 		public EventHandler<StartTurnComponentEventArgs> OnStartPhase;
+		public EventHandler<EventArgs> OnMatchEnded;
 
 		public readonly Scenario Scenario;
 		public readonly Map Map;
@@ -45,22 +46,40 @@ namespace PanzerBlitz
 						k => k.OnMove += (sender, e) => j.AutomateMovement(this, k.Configuration.IsVehicle))));
 		}
 
+		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
+		{
+			Dictionary<Army, ObjectiveSuccessLevel> r = new Dictionary<Army, ObjectiveSuccessLevel>();
+			foreach (Army a in Armies) r.Add(a, a.GetObjectiveSuccessLevel(this));
+			return r;
+		}
+
 		public void Start()
 		{
 			NextPhase();
 		}
 
-		private void NextPhase()
+		void NextPhase()
 		{
-			_TurnOrder.MoveNext();
-			while (Automate()) _TurnOrder.MoveNext();
+			if (!AdvancePhaseIterator()) return;
+			while (Automate())
+			{
+				if (!AdvancePhaseIterator()) return;
+			}
 			if (OnStartPhase != null)
 				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current.Item1, _TurnOrder.Current.Item2));
 		}
 
-		private bool Automate()
+		bool Automate()
 		{
 			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2, _Random);
+		}
+
+		bool AdvancePhaseIterator()
+		{
+			if (_TurnOrder.MoveNext()) return true;
+
+			if (OnMatchEnded != null) OnMatchEnded(this, EventArgs.Empty);
+			return false;
 		}
 
 		public bool ValidateOrder(Order Order)

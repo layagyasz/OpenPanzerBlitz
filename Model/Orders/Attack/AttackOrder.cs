@@ -126,7 +126,7 @@ namespace PanzerBlitz
 			Recalculate();
 		}
 
-		public virtual NoSingleAttackReason AddAttacker(SingleAttackOrder AttackOrder)
+		public NoSingleAttackReason AddAttacker(SingleAttackOrder AttackOrder)
 		{
 			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
@@ -140,13 +140,13 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.DUPLICATE;
 		}
 
-		public virtual void RemoveAttacker(Unit Attacker)
+		public void RemoveAttacker(Unit Attacker)
 		{
 			_Attackers.RemoveAll(i => i.Attacker == Attacker);
 			Recalculate();
 		}
 
-		private void Recalculate()
+		void Recalculate()
 		{
 			_OddsCalculations.Clear();
 			if (_Attackers.Count == 0) return;
@@ -157,20 +157,31 @@ namespace PanzerBlitz
 				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers,
-						AttackAt.Units.ToList(),
+						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy)),
 						AttackMethod,
 						AttackAt));
 			}
 			else if (AttackTarget == AttackTarget.WEAKEST)
 			{
 				_OddsCalculations.Add(
-					AttackAt.Units.Select(
-						i => new OddsCalculation(
-							_Attackers,
-							new Unit[] { i },
-							AttackMethod,
-							AttackAt))
-					.ArgMax(i => OddsIndex(i.Odds, i.OddsAgainst)));
+					AttackAt.Units
+						.Where(i => i.CanBeAttackedBy(AttackingArmy))
+						.Select(
+							i => new OddsCalculation(
+								_Attackers,
+								new Unit[] { i },
+								AttackMethod,
+								AttackAt))
+						.ArgMax(i => OddsIndex(i.Odds, i.OddsAgainst)));
+			}
+			else
+			{
+				_OddsCalculations.AddRange(
+					_Attackers
+						.GroupBy(i => i.Defender)
+						.Select(i => new OddsCalculation(i, new Unit[] { i.Key }, AttackMethod, AttackAt)));
+				_OddsCalculations.Sort(
+					(x, y) => OddsIndex(x.Odds, x.OddsAgainst).CompareTo(OddsIndex(y.Odds, y.OddsAgainst)));
 			}
 		}
 
@@ -179,6 +190,13 @@ namespace PanzerBlitz
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
 			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
 			if (AttackAt.CanAttack(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanAttack(AttackMethod);
+			if (_AttackTarget == AttackTarget.EACH)
+			{
+				if (_OddsCalculations.Count != AttackAt.Units.Count(i => i.CanBeAttackedBy(AttackingArmy)))
+					return NoAttackReason.ILLEGAL_EACH;
+				if (_OddsCalculations.Any(i => OddsIndex(i.Odds, i.OddsAgainst) < 3))
+					return NoAttackReason.ILLEGAL_EACH;
+			}
 
 			return NoAttackReason.NONE;
 		}

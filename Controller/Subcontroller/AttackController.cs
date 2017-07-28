@@ -50,9 +50,5 @@ namespace PanzerBlitz
 				}
 			}
 		}
-
-		public override void HandleUnitRightClick(Unit Unit)
-		{
-		}
 	}
 }
