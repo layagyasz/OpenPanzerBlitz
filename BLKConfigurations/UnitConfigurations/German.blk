@@ -1,0 +1,420 @@
+﻿unit-configuration:50mm {
+	string:name { 50mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 8 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:75mm {
+	string:name { 75 mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 13 }
+	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:88mm {
+	string:name { 88mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 20 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+}
+unit-configuration:20mm {
+	string:name { 20mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-aircraft.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:20mm_4 {
+	string:name { 20(4)mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-aircraft.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:75mm-howitzer {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { artillery.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:150mm {
+	string:name { 150mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { artillery-heavy.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:81mm {
+	string:name { 81mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { mortar.png }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:120mm-german {
+	string:name { 120mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { mortar.png }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 15 }
+	byte:range { 20 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:engineer-platoon {
+	string:name { Engineer Platoon }
+	string:display-name { }
+	unit-class:unit-class { infantry }
+	string:image-name { engineer-platoon.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 10 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:security-platoon {
+	string:name { Security Platoon }
+	string:display-name { SECURITY }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-platoon.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon {
+	string:name { Rifle Platoon }
+	string:display-name { RIFLE }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-platoon.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 6 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+}
+unit-configuration:smg-platoon {
+	string:name { SMG }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-platoon.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:opel-6700-a {
+	string:name { Opel 6700A Truck }
+	string:display-name { TRUCK }
+	unit-class:unit-class { transport }
+	string:image-name { truck-2.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:sdkfz-251 {
+	string:name { SdKfz. 251 Halftrack }
+	string:display-name { HALFTRK }
+	unit-class:unit-class { transport }
+	string:image-name { sdkfz-251.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+	bool:is-armored { true }
+}
+unit-configuration:sdkfz-234_1 {
+	string:name { SdKfz. 234/1 }
+	string:display-name { SdKfz 234/1 }
+	unit-class:unit-class { reconnaissance-vehicle }
+	string:image-name { sdkfz-234_1.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 16 }
+}
+unit-configuration:puma {
+	string:name { Puma SdKfz. 234/2 }
+	string:display-name { PUMA }
+	unit-class:unit-class { reconnaissance-vehicle }
+	string:image-name { sdkfz-234_2.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 14 }
+}
+unit-configuration:sdkfz-234_4 {
+	string:name { SdKfz. 234/4 }
+	string:display-name { SdKfz 234/4 }
+	unit-class:unit-class { reconnaissance-vehicle }
+	string:image-name { sdkfz-234_4.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 13 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 14 }
+}
+unit-configuration:maultier {
+	string:name { Maultier }
+	string:display-name { MAULTIER }
+	unit-class:unit-class { self-propelled-artillery }
+	string:image-name { maultier.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 50 }
+	byte:range { 12 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:wespe {
+	string:name { Wespe }
+	string:display-name { WESPE }
+	unit-class:unit-class { self-propelled-artillery }
+	string:image-name { wespe.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 32 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
+unit-configuration:hummel {
+	string:name { Hummel }
+	string:display-name { HUMMEL }
+	unit-class:unit-class { self-propelled-artillery }
+	string:image-name { hummel.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 50 }
+	byte:range { 12 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:gw-38_m {
+	string:name { GW 38(M) }
+	unit-class:unit-class { assault-gun }
+	string:image-name { gw-38_m.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 5 }
+	byte:movement { 6 }
+}
+unit-configuration:wirbelwind {
+	string:name { Wirbelwind }
+	string:display-name { WIRBELWIND }
+	unit-class:unit-class { assault-gun }
+	string:image-name { wirbelwind.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:stuh-42 {
+	string:name { StuH 42 }
+	unit-class:unit-class { assault-gun }
+	string:image-name { stuh-42.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:marder-iii {
+	string:name { Marder III }
+	unit-class:unit-class { tank }
+	string:image-name { marder-iii.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:stug-iii {
+	string:name { StuG III }
+	unit-class:unit-class { tank }
+	string:image-name { stug-iii-long.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:hetzer {
+	string:name { Hetzer }
+	unit-class:unit-class { tank }
+	string:image-name { hetzer.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 12 }
+	byte:movement { 6 }
+}
+unit-configuration:jgdpz-iv {
+	string:name { JgdPz IV }
+	unit-class:unit-class { tank }
+	string:image-name { pzjd-iv_70.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 12 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:nashorn {
+	string:name { Nashorn }
+	string:display-name { NASHORN }
+	unit-class:unit-class { tank }
+	string:image-name { nashorn.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 20 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:jgdpz-v {
+	string:name { JgdPz V }
+	unit-class:unit-class { tank }
+	string:image-name { jgdpz-v.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 15 }
+	byte:movement { 9 }
+}
+unit-configuration:jgdpz-vi {
+	string:name { JgdPz VI }
+	unit-class:unit-class { tank }
+	string:image-name { jgdpz-vi.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 22 }
+	byte:range { 12 }
+	byte:defense { 18 }
+	byte:movement { 5 }
+}
+unit-configuration:lynx {
+	string:name { Lynx }
+	string:display-name { LYNX }
+	unit-class:unit-class { tank }
+	string:image-name { lynx.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-iv {
+	string:name { PzKw IV }
+	unit-class:unit-class { tank }
+	string:image-name { pzkw-iv-long.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:panther {
+	string:name { Panther }
+	string:display-name { PANTH }
+	unit-class:unit-class { tank }
+	string:image-name { panther.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 10 }
+}
+unit-configuration:tiger-i {
+	string:name { Tiger I }
+	string:display-name { Tiger I }
+	unit-class:unit-class { tank }
+	string:image-name { tiger-i.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:tiger-ii {
+	string:name { Tiger II }
+	unit-class:unit-class { tank }
+	string:image-name { tiger-ii.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 16 }
+	byte:movement { 6 }
+}

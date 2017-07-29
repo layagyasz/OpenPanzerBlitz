@@ -12,7 +12,14 @@ namespace PanzerBlitz
 			get
 			{
 				return DeploymentConfiguration;
+			}
+		}
 
+		public override bool IsStrictConvoy
+		{
+			get
+			{
+				return DeploymentConfiguration.IsStrictConvoy;
 			}
 		}
 
@@ -35,6 +42,17 @@ namespace PanzerBlitz
 		public override bool IsConfigured()
 		{
 			return Validate(_EntryTile) == NoDeployReason.NONE && Validate(_ConvoyOrder) == NoDeployReason.NONE;
+		}
+
+		public override NoDeployReason Validate(Tile Tile)
+		{
+			NoDeployReason v = base.Validate(Tile);
+			if (v != NoDeployReason.NONE) return v;
+
+			if (!DeploymentConfiguration.Matcher.Matches(Tile))
+				return NoDeployReason.DEPLOYMENT_RULE;
+
+			return NoDeployReason.NONE;
 		}
 	}
 }

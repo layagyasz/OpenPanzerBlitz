@@ -128,7 +128,9 @@ namespace PanzerBlitz
 
 		public bool CanBeAttackedBy(Army Army)
 		{
-			return Army.Configuration.Team != this.Army.Configuration.Team && !Configuration.IsNeutral();
+			return Army.Configuration.Team != this.Army.Configuration.Team
+					   && !Configuration.IsNeutral()
+					   && _Carrier == null;
 		}
 
 		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)

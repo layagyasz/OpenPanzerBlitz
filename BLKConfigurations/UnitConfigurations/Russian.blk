@@ -1,0 +1,326 @@
+﻿unit-configuration:127mm {
+	string:name { 12.7mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-aircraft.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:45mm {
+	string:name { 45mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 7 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:57mm {
+	string:name { 57mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:76_2mm {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { anti-armor.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:76_2mm-howitzer {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { artillery.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 3 }
+	byte:range { 10 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:122mm {
+	string:name { 122mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { artillery-heavy.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 20 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:82mm-motorized {
+	string:name { 82mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { mortar-motorized.png }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 2 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:82mm {
+	string:name { 82mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { mortar.png }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:120mm {
+	string:name { 120mm }
+	unit-class:unit-class { towed-gun }
+	string:image-name { mortar.png }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 24 }
+	byte:range { 20 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:engineer-company {
+	string:name { Engineer Company }
+	string:display-name { }
+	unit-class:unit-class { infantry }
+	string:image-name { engineer-company.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:recon-company {
+	string:name { Recon Company }
+	string:display-name { RECON }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-company.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 1 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-company {
+	string:name { Rifle Company }
+	string:display-name { RIFLE }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-company.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 4 }
+	byte:defense { 16 }
+	byte:movement { 1 }
+}
+unit-configuration:guards-company {
+	string:name { Guards Company }
+	string:display-name { GUARDS }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-company.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 5 }
+	byte:defense { 18 }
+	byte:movement { 1 }
+	color:override-color { #E24B20 }
+}
+unit-configuration:smg-company {
+	string:name { SMG Company }
+	string:display-name { SMG }
+	unit-class:unit-class { infantry }
+	string:image-name { infantry-company.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 8 }
+	byte:range { 1 }
+	byte:defense { 12 }
+	byte:movement { 1 }
+}
+unit-configuration:cavalry {
+	string:name { Cavalry }
+	string:display-name { CAVALRY }
+	unit-class:unit-class { cavalry }
+	string:image-name { cavalry.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 10 }
+	byte:range { 3 }
+	byte:defense { 8 }
+	byte:movement { 3 }
+}
+unit-configuration:wagon {
+	string:name { Wagon }
+	unit-class:unit-class { transport }
+	string:image-name { wagon.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+}
+unit-configuration:sis-5 {
+	string:name { SIS-5 Truck }
+	string:display-name { TRUCK }
+	unit-class:unit-class { transport }
+	string:image-name { truck.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:sis-33 {
+	string:name { SIS-33 Halftrack }
+	string:display-name { HALFTRK }
+	unit-class:unit-class { transport }
+	string:image-name { sis-33.png }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+	bool:is-armored { true }
+	bool:can-only-overrun-unarmored { true }
+}
+unit-configuration:su-152 {
+	string:name { SU-152 }
+	unit-class:unit-class { assault-gun }
+	string:image-name { su-152.png }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 10 }
+	byte:defense { 16 }
+	byte:movement { 7 }
+}
+unit-configuration:su-76 {
+	string:name { SU-76 }
+	unit-class:unit-class { tank }
+	string:image-name { su-76.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 9 }
+	byte:movement { 9 }
+}
+unit-configuration:su-85 {
+	string:name { SU-85 }
+	unit-class:unit-class { tank }
+	string:image-name { su-85.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 8 }
+	byte:defense { 12 }
+	byte:movement { 11 }
+}
+unit-configuration:su-100 {
+	string:name { SU-100 }
+	unit-class:unit-class { tank }
+	string:image-name { SU-100 }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 8 }
+	byte:defense { 15 }
+	byte:movement { 8 }
+}
+unit-configuration:jsu-122 {
+	string:name { JSU-122 }
+	unit-class:unit-class { tank }
+	string:image-name { jsu-122.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 17 }
+	byte:range { 10 }
+	byte:defense { 15 }
+	byte:movement { 7 }
+}
+unit-configuration:kv-85 {
+	string:name { KV-85 }
+	unit-class:unit-class { tank }
+	string:image-name { kv-85.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 8 }
+	byte:defense { 13 }
+	byte:movement { 10 }
+}
+unit-configuration:t-34-c {
+	string:name { T-34c }
+	unit-class:unit-class { tank }
+	string:image-name { t-34-c.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 6 }
+	byte:defense { 9 }
+	byte:movement { 11 }	
+}
+unit-configuration:t-34_85 {
+	string:name { T-34/85 }
+	unit-class:unit-class { tank }
+	string:image-name { t-34_85.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 8 }
+	byte:defense { 10 }
+	byte:movement { 11 }	
+}
+unit-configuration:js-ii {
+	string:name { JS-II }
+	unit-class:unit-class { tank }
+	string:image-name { js-ii.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 18 }
+	byte:range { 8 }
+	byte:defense { 12 }
+	byte:movement { 8 }	
+}
+unit-configuration:js-iii {
+	string:name { JS-III }
+	unit-class:unit-class { tank }
+	string:image-name { js-iii.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 18 }
+	byte:range { 12 }
+	byte:defense { 14 }
+	byte:movement { 8 }	
+}

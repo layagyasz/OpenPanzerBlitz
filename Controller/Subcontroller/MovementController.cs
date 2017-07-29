@@ -99,6 +99,7 @@ namespace PanzerBlitz
 					}
 					else if (canLoad.Count > 1)
 					{
+						Clear();
 						_LoadUnitPane = new LoadUnitPane(canLoad);
 						_GameScreen.AddPane(_LoadUnitPane);
 						_LoadUnitPane.OnUnitSelected += LoadUnit;

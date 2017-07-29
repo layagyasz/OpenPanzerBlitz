@@ -1,0 +1,225 @@
+﻿scenario:_ {
+	string:name { Russian Advance on Nikopol }
+	byte[]:deployment-order { 0 1 }
+	byte:turns { 10 }
+	map-configuration:map-configuration {
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-01.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-03.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-02.map }
+				bool:_ { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:_ {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						furthest-advance:furthest-advance {
+							direction:direction { south }
+						}
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 8 }
+							!var:objective { objectives.furthest-advance }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 12 }
+							!var:objective { objectives.furthest-advance }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 18 }
+							!var:objective { objectives.furthest-advance }
+						}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-company }
+							int:_ { 6 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.82mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.120mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.wagon }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sis-5 }
+							int:_ { 1 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 203rd Rifle Div. Vanguard }
+						tile-within:matcher {
+							zone:zone { 0,0 10,0 10,1 0,1 }
+						}
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-company }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.recon-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.su-76 }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.82mm }
+							int:_ { 2 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 33rd Rifle Div. Vanguard }
+						tile-within:matcher {
+							zone:zone { 20,0 30,0 30,1 20,1 }
+						}
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.guards-company }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.recon-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.engineer-company }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.122mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sis-5 }
+							int:_ { 1 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 266th Rifle Div. Vanguard }
+						tile-within:matcher {
+							zone:zone { 10,0 20,0 20,1 10,1 }
+						}
+					}
+				}
+			}
+		}
+		army-configuration:_ {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						units-destroyed:units-destroyed { }
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 10 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 20 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 30 }
+							!var:objective { objectives.units-destroyed }
+						}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.pzkw-iv }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.stug-iii }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.75mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-company }
+							int:_ { 5 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.81mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.120mm-german }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sdkfz-251 }
+							int:_ { 5 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.opel-6700-a }
+							int:_ { 5 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 23rd Pz. Div. Rear Guard }
+						tile-on-edge:matcher {
+							direction:edge { south }
+						}
+					}
+				}
+			}
+		}
+	}
+}

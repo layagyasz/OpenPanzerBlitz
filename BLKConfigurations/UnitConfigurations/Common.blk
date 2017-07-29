@@ -1,0 +1,89 @@
+﻿unit-configuration:wreckage {
+	string:name { Wreckage }
+	string:display-name { }
+	unit-class:unit-class { wreckage }
+	string:image-name { wreckage.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 0 }
+	byte:movement { 0 }
+	color:override-color { #E24B20 }
+}
+unit-configuration:command-post {
+	string:name { Command Post }
+	string:display-name { }
+	unit-class:unit-class { command-post }
+	string:image-name { command-post.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	color:override-color { #FFFFFF }
+}
+unit-configuration:block {
+	string:name { Roadblock }
+	string:display-name { }
+	unit-class:unit-class { block }
+	string:image-name { block.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 0 }
+	byte:movement { 0 }
+}
+unit-configuration:minefield {
+	string:name { Minefield }
+	string:display-name { }
+	unit-class:unit-class { minefield }
+	string:image-name { mine.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 2 }
+	byte:range { 0 }
+	byte:defense { 0 }
+	byte:movement { 0 }
+}
+unit-configuration:fort-20 {
+	string:name { Fort }
+	string:display-name { }
+	unit-class:unit-class { fort }
+	string:image-name { fort.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 20 }
+	byte:movement { 0 }
+	color:override-color { #FFFFFF }
+}
+unit-configuration:fort-30 {
+	string:name { Fort }
+	string:display-name { }
+	unit-class:unit-class { fort }
+	string:image-name { fort.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 30 }
+	byte:movement { 0 }
+	color:override-color { #FFFFFF }
+}
+unit-configuration:fort-40 {
+	string:name { Fort }
+	string:display-name { }
+	unit-class:unit-class { fort }
+	string:image-name { fort.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 40 }
+	byte:movement { 0 }
+	color:override-color { #FFFFFF }
+}

@@ -166,6 +166,9 @@
     <Compile Include="Model\TileMatchers\Matcher.cs" />
     <Compile Include="Model\TileMatchers\TileElevation.cs" />
     <Compile Include="Model\TileMatchers\TileWithin.cs" />
+    <Compile Include="Model\Direction.cs" />
+    <Compile Include="Model\TileMatchers\TileOnEdge.cs" />
+    <Compile Include="Model\VictoryConditions\FurthestAdvance.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -185,6 +188,9 @@
     <Folder Include="View\Screens\" />
     <Folder Include="Model\VictoryConditions\" />
     <Folder Include="Model\TileMatchers\" />
+    <Folder Include="BLKConfigurations\Scenarios\" />
+    <Folder Include="BLKConfigurations\UnitConfigurations\" />
+    <Folder Include="BLKConfigurations\Scenarios\PanzerBlitz\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -206,13 +212,7 @@
     <None Include="csfml-window-2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BLKConfigurations\02_Scenarios.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="BLKConfigurations\01_UnitConfigurations.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="BLKConfigurations\00_Factions.blk">
+    <None Include="BLKConfigurations\Factions.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme.blk">
@@ -918,6 +918,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\wreckage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitConfigurations\Common.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitConfigurations\German.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitConfigurations\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_00.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_01.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_02.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

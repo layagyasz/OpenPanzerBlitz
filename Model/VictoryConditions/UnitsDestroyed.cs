@@ -8,22 +8,30 @@ namespace PanzerBlitz
 {
 	public class UnitsDestroyed : Objective
 	{
-		enum Attribute { OVERRIDE_SCORES };
+		enum Attribute { FRIENDLY, OVERRIDE_SCORES };
 
+		bool _Friendly;
 		Dictionary<UnitConfiguration, int> _OverrideScores;
 		int _Score;
 
 		public UnitsDestroyed(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
-			_OverrideScores = Parse.DefaultIfNull(
-				attributes[(int)Attribute.OVERRIDE_SCORES], new Dictionary<UnitConfiguration, int>());
+
+
+			_Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], false);
+			if (attributes[(int)Attribute.OVERRIDE_SCORES] != null)
+			{
+				_OverrideScores = ((List<Tuple<object, object>>)attributes[(int)Attribute.OVERRIDE_SCORES])
+					.ToDictionary(i => (UnitConfiguration)i.Item1, i => (int)i.Item2);
+			}
+			else _OverrideScores = new Dictionary<UnitConfiguration, int>();
 		}
 
 		public int CalculateScore(Army ForArmy, Match Match)
 		{
 			IEnumerable<Unit> countedUnits =
-				Match.Armies.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
+				Match.Armies.Where(i => _Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Destroyed);
 			_Score = countedUnits.Sum(

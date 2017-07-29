@@ -40,7 +40,7 @@ namespace PanzerBlitz
 
 			if (Tile != null)
 			{
-				if (!DeploymentConfiguration.Matcher.Matches(Tile))
+				if (DeploymentConfiguration.Matcher != null && !DeploymentConfiguration.Matcher.Matches(Tile))
 					return NoDeployReason.DEPLOYMENT_RULE;
 			}
 			return NoDeployReason.NONE;

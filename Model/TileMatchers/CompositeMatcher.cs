@@ -11,6 +11,12 @@ namespace PanzerBlitz
 		public readonly List<Matcher> Matchers;
 		public readonly Func<bool, bool, bool> Aggregator;
 
+		public CompositeMatcher(IEnumerable<Matcher> Matchers, Func<bool, bool, bool> Aggregator)
+		{
+			this.Matchers = Matchers.ToList();
+			this.Aggregator = Aggregator;
+		}
+
 		public CompositeMatcher(ParseBlock Block, Func<bool, bool, bool> Aggregator)
 		{
 			Matchers = Block.BreakToList<Matcher>();

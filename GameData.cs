@@ -22,7 +22,20 @@ namespace PanzerBlitz
 
 		public static void Load(string Path)
 		{
-			Load(new ParseBlock(string.Join("\n", Directory.EnumerateFiles(Path).Select(i => File.ReadAllText(i)))));
+			ParseBlock block = new ParseBlock(new ParseBlock[] {
+				ParseBlock.FromFile(Path + "/Factions.blk"),
+				new ParseBlock(
+					"unit-configuration<>",
+					"unit-configurations",
+					Directory.EnumerateFiles(Path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
+					.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
+					"scenario[]",
+					"scenarios",
+					Directory.EnumerateFiles(Path + "/Scenarios", "*", SearchOption.AllDirectories)
+						.Select(i => ParseBlock.FromFile(i)))
+			});
+			Load(block);
 		}
 
 		public static void Load(ParseBlock Block)
@@ -35,29 +48,33 @@ namespace PanzerBlitz
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
+			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
 			Block.AddParser<TileElevation>("tile-elevation", i => new TileElevation(i));
 			Block.AddParser<TileWithin>("tile-within", i => new TileWithin(i));
+			Block.AddParser<TileOnEdge>("tile-on-edge", i => new TileOnEdge(i));
 			Block.AddParser<DistanceFromUnit>("distance-from-unit", i => new DistanceFromUnit(i));
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
-			Block.AddParser<CompositeMatcher>("and", i => new CompositeMatcher(i, (j, k) => j && k));
-			Block.AddParser<CompositeMatcher>("or", i => new CompositeMatcher(i, (j, k) => j || k));
+			Block.AddParser<CompositeMatcher>("matches-all", i => new CompositeMatcher(i, (j, k) => j && k));
+			Block.AddParser<CompositeMatcher>("matches-any", i => new CompositeMatcher(i, (j, k) => j || k));
 
 			Block.AddParser<DeploymentConfiguration>(
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(
 				"zone-deployment-configuration", i => new ZoneDeploymentConfiguration(i));
-			Block.AddParser<TileEntryDeployment>(
+			Block.AddParser<DeploymentConfiguration>(
 				"tile-entry-deployment-configuration", i => new TileEntryDeploymentConfiguration(i));
-			Block.AddParser<OneOfZoneDeployment>(
+			Block.AddParser<DeploymentConfiguration>(
 				"one-of-zone-deployment", i => new OneOfZoneDeploymentConfiguration(i));
 
 			Block.AddParser<ObjectiveSuccessLevel>(
 				"objective-success-level", Parse.EnumParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel)));
 			Block.AddParser<VictoryCondition>("victory-condition", i => new VictoryCondition(i));
 			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
-			Block.AddParser<UnitsDestroyed>("units-destroyed", i => new UnitsDestroyed(i));
+
+			Block.AddParser<Objective>("units-destroyed", i => new UnitsDestroyed(i));
+			Block.AddParser<Objective>("furthest-advance", i => new FurthestAdvance(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<MapConfiguration>("map-configuration", i => new MapConfiguration(i));

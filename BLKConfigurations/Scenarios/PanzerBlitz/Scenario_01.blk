@@ -1,0 +1,248 @@
+﻿scenario:_ {
+	string:name { Russian Rear Area Raid: White Russia }
+	byte[]:deployment-order { 1 0 }
+	byte:turns { 10 }
+	map-configuration:map-configuration {
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-01.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-02.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-03.map }
+				bool:_ { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:_ {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						units-destroyed:units-destroyed {
+							2-tuple[]:override-scores {
+								2-tuple:_ {
+									!unit-configuration:_ { unit-configurations.command-post }
+									int:_ { 5 }
+								}
+							}
+						}
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 8 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 12 }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 16 }
+							!var:objective { objectives.units-destroyed }
+						}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.45mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.82mm-motorized }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.t-34-c }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.su-76 }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.wagon }
+							int:_ { 4 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.cavalry }
+							int:_ { 4 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 982nd Tk. Rgt. & 371st Cav. Rgt. }
+					}
+				}
+			}
+		}
+		army-configuration:_ {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						units-destroyed:units-destroyed {
+							bool:friendly { true }
+						}
+					}
+					objective-success-trigger[]:triggers {
+						objective-success-trigger:_ {
+							objective-success-level:success-level { marginal-victory }
+							int:threshold { 7 }
+							bool:invert { true }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { tactical-victory }
+							int:threshold { 5 }
+							bool:invert { true }
+							!var:objective { objectives.units-destroyed }
+						}
+						objective-success-trigger:_ {
+							objective-success-level:success-level { decisive-victory }
+							int:threshold { 2 }
+							bool:invert { true }
+							!var:objective { objectives.units-destroyed }
+						}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.command-post }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.fort-40 }
+							int:_ { 1 }
+						}
+					}
+					tile-deployment-configuration:_ {
+						string:display-name { 580th Signal Rgt. CP 1 }
+						coordinate:coordinate { 16,6 }
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.command-post }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.fort-40 }
+							int:_ { 1 }
+						}
+					}
+					tile-deployment-configuration:_ {
+						string:display-name { 580th Signal Rgt. CP 2 }
+						coordinate:coordinate { 15,19 }
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.command-post }
+							int:_ { 1 }
+						}
+					}
+					zone-deployment-configuration:_ {
+						string:display-name { 580th Signal Rgt. CP 3 }
+						matches-all:matcher {
+							tile-within:_ {
+								zone:zone { 11,0 22,0 22,33 11,33 }
+							}
+							distance-from-unit:_ {
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								int:distance { 2 }
+								bool:atleast { true }
+							}
+							tile-elevation:_ {
+								int:elevation { 1 }
+								bool:atleast { true }
+							}
+						}
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.fort-40 }
+							int:_ { 1 }
+						}
+					}
+					zone-deployment-configuration:_ {
+						string:display-name { 580th Signal Rgt. Fort 3 }
+						distance-from-unit:matcher {
+							!unit-configuration:unit-configuration { unit-configurations.command-post }
+							int:distance { 0 }
+						}
+					}
+				}
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.security-platoon }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.engineer-platoon }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-platoon }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.50mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.88mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.20mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.20mm_4 }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.block }
+							int:_ { 4 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.minefield }
+							int:_ { 4 }
+						}
+					}
+					zone-deployment-configuration:_ {
+						string:display-name { 286th Sec. Rgt. & 10th Flak Rgt. }
+						tile-within:matcher {
+							zone:zone { 11,0 22,0 22,33 11,33 }
+						}
+					}
+				}
+			}
+		}
+	}
+}

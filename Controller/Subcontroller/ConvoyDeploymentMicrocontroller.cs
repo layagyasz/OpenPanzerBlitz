@@ -107,6 +107,7 @@ namespace PanzerBlitz
 					Deployment.Units.Where(i => _DeploymentPage.SelectedUnit.CanLoad(i) == NoLoadReason.NONE);
 				if (units.Count() > 0)
 				{
+					Clear();
 					_LoadUnitPane = new LoadUnitPane(units);
 					_GameScreen.AddPane(_LoadUnitPane);
 					_LoadUnitPane.OnUnitSelected += LoadUnit;
