@@ -1,0 +1,143 @@
+﻿scenario:_ {
+	string:name { Battle of Vyazma }
+	byte[]:deployment-order { 0 1 }
+	byte:turns { 10 }
+	map-configuration:map-configuration {
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-03.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-02.map }
+				bool:_ { false }
+			}
+			2-tuple:_ {
+				string:_ { Maps/board-01.map }
+				bool:_ { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:_ {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						line-of-fire-objective:line-of-fire {
+							bool:vertical { false }
+						}
+					}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.line-of-fire }
+					}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.guards-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-company }
+							int:_ { 8 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.82mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.76_2mm }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.wagon }
+							int:_ { 6 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sis-5 }
+							int:_ { 3 }
+						}
+					}
+					zone-deployment-configuration:_ {
+						string:display-name { 119th Rifle Div. Remnants }
+					}
+				}
+			}
+		}
+		army-configuration:_ {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						line-of-fire-objective:line-of-fire {
+							bool:friendly { false }
+							bool:break-through { true }
+							byte:width { 3 }
+							bool:vertical { true }
+						}
+					}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.line-of-fire }
+					}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.pzkw-iii-g }
+							int:_ { 5 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.50mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-platoon }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.81mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.75mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sdkfz-251 }
+							int:_ { 5 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.opel-6700-a }
+							int:_ { 2 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 10th Pz. Div. Vanguard }
+						tile-on-edge:matcher {
+							direction:edge { south }
+						}
+					}
+				}
+			}
+		}
+	}
+}

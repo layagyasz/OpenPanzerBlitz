@@ -126,11 +126,12 @@ namespace PanzerBlitz
 			this.Configuration = UnitConfiguration;
 		}
 
-		public bool CanBeAttackedBy(Army Army)
+		public NoSingleAttackReason CanBeAttackedBy(Army Army)
 		{
-			return Army.Configuration.Team != this.Army.Configuration.Team
-					   && !Configuration.IsNeutral()
-					   && _Carrier == null;
+			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
+				return NoSingleAttackReason.TEAM;
+			if (_Carrier != null) return NoSingleAttackReason.PASSENGER;
+			return NoSingleAttackReason.NONE;
 		}
 
 		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
@@ -185,6 +186,7 @@ namespace PanzerBlitz
 
 		public void HandleCombatResult(CombatResult CombatResult)
 		{
+			if (_Passenger != null) _Passenger.HandleCombatResult(CombatResult);
 			switch (CombatResult)
 			{
 				case CombatResult.MISS:
@@ -207,7 +209,6 @@ namespace PanzerBlitz
 					else _Disrupted = true;
 					return;
 			}
-			if (_Passenger != null) _Passenger.HandleCombatResult(CombatResult);
 		}
 
 		public void Remove()
@@ -247,7 +248,7 @@ namespace PanzerBlitz
 
 		public NoLoadReason CanLoad(Unit Unit)
 		{
-			if (Unit.Moved || Moved || Unit.Fired || Fired) return NoLoadReason.NO_MOVE;
+			if (Unit.Moved || Moved || Unit.Fired) return NoLoadReason.NO_MOVE;
 			if (Unit.Army != Army) return NoLoadReason.TEAM;
 			if (Unit.Position != Position) return NoLoadReason.ILLEGAL;
 			if (_Passenger != null) return NoLoadReason.CARRYING;
@@ -259,7 +260,6 @@ namespace PanzerBlitz
 
 		public NoUnloadReason CanUnload()
 		{
-			if (Fired) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
 			if (_Position != null)
 			{

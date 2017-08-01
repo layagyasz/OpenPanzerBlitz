@@ -147,6 +147,8 @@ namespace PanzerBlitz
 				else return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);
 			}
 			if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "-";
+			if (UnitConfiguration.CanIndirectFire && UnitConfiguration.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+				return string.Format("({0})", UnitConfiguration.WeaponClass.ToString().Substring(0, 1));
 			return UnitConfiguration.WeaponClass.ToString().Substring(0, 1);
 		}
 	}

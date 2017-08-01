@@ -157,7 +157,7 @@
     <Compile Include="Model\Deployment\OneOfZoneDeploymentConfiguration.cs" />
     <Compile Include="Model\Deployment\OneOfZoneDeployment.cs" />
     <Compile Include="Model\VictoryConditions\Objective.cs" />
-    <Compile Include="Model\VictoryConditions\UnitsDestroyed.cs" />
+    <Compile Include="Model\VictoryConditions\UnitsDestroyedObjective.cs" />
     <Compile Include="Model\VictoryConditions\VictoryCondition.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessLevel.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
@@ -168,7 +168,9 @@
     <Compile Include="Model\TileMatchers\TileWithin.cs" />
     <Compile Include="Model\Direction.cs" />
     <Compile Include="Model\TileMatchers\TileOnEdge.cs" />
-    <Compile Include="Model\VictoryConditions\FurthestAdvance.cs" />
+    <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
+    <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
+    <Compile Include="Model\VictoryConditions\UnitsInZoneObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -936,6 +938,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_02.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_03.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

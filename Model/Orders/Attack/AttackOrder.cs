@@ -157,7 +157,7 @@ namespace PanzerBlitz
 				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers,
-						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy)),
+						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE),
 						AttackMethod,
 						AttackAt));
 			}
@@ -165,7 +165,7 @@ namespace PanzerBlitz
 			{
 				_OddsCalculations.Add(
 					AttackAt.Units
-						.Where(i => i.CanBeAttackedBy(AttackingArmy))
+						.Where(i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE)
 						.Select(
 							i => new OddsCalculation(
 								_Attackers,
@@ -189,10 +189,11 @@ namespace PanzerBlitz
 		{
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
 			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
-			if (AttackAt.CanAttack(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanAttack(AttackMethod);
+			if (AttackAt.CanBeAttacked(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanBeAttacked(AttackMethod);
 			if (_AttackTarget == AttackTarget.EACH)
 			{
-				if (_OddsCalculations.Count != AttackAt.Units.Count(i => i.CanBeAttackedBy(AttackingArmy)))
+				if (_OddsCalculations.Count != AttackAt.Units.Count(
+					i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE))
 					return NoAttackReason.ILLEGAL_EACH;
 				if (_OddsCalculations.Any(i => OddsIndex(i.Odds, i.OddsAgainst) < 3))
 					return NoAttackReason.ILLEGAL_EACH;

@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class FurthestAdvance : Objective
+	public class FurthestAdvanceObjective : Objective
 	{
 		enum Attribute { DIRECTION }
 
@@ -13,7 +13,7 @@ namespace PanzerBlitz
 
 		int _Score;
 
-		public FurthestAdvance(ParseBlock Block)
+		public FurthestAdvanceObjective(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Direction = (Direction)attributes[(int)Attribute.DIRECTION];

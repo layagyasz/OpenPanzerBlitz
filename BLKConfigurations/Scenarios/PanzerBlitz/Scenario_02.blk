@@ -24,26 +24,26 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						furthest-advance:furthest-advance {
+						furthest-advance-objective:furthest-advance {
 							direction:direction { south }
 						}
 					}
-					objective-success-trigger[]:triggers {
-						objective-success-trigger:_ {
-							objective-success-level:success-level { marginal-victory }
-							int:threshold { 8 }
-							!var:objective { objectives.furthest-advance }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { tactical-victory }
-							int:threshold { 12 }
-							!var:objective { objectives.furthest-advance }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { decisive-victory }
-							int:threshold { 18 }
-							!var:objective { objectives.furthest-advance }
-						}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 8 }
+						!var:objective { objectives.furthest-advance }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 12 }
+						!var:objective { objectives.furthest-advance }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 18 }
+						!var:objective { objectives.furthest-advance }
+					}
 				}
 			}
 			2-tuple[]:deployment-configurations {
@@ -156,24 +156,24 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed:units-destroyed { }
+						units-destroyed-objective:units-destroyed { }
 					}
-					objective-success-trigger[]:triggers {
-						objective-success-trigger:_ {
-							objective-success-level:success-level { marginal-victory }
-							int:threshold { 10 }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { tactical-victory }
-							int:threshold { 20 }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { decisive-victory }
-							int:threshold { 30 }
-							!var:objective { objectives.units-destroyed }
-						}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 30 }
+						!var:objective { objectives.units-destroyed }
+					}
 				}
 			}
 			2-tuple[]:deployment-configurations {
@@ -192,7 +192,7 @@
 							int:_ { 2 }
 						}
 						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.rifle-company }
+							!unit-configuration:_ { unit-configurations.rifle-platoon }
 							int:_ { 5 }
 						}
 						2-tuple:_ {
@@ -201,7 +201,7 @@
 						}
 						2-tuple:_ {
 							!unit-configuration:_ { unit-configurations.120mm-german }
-							int:_ { 2 }
+							int:_ { 1 }
 						}
 						2-tuple:_ {
 							!unit-configuration:_ { unit-configurations.sdkfz-251 }

@@ -70,7 +70,7 @@ namespace PanzerBlitz
 
 			if (TotalAttack == 0 || TotalDefense == 0) return;
 
-			if (TotalAttack > TotalDefense)
+			if (TotalAttack >= TotalDefense)
 			{
 				_Odds = TotalAttack / TotalDefense;
 			}

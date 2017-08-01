@@ -24,7 +24,7 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed:units-destroyed {
+						units-destroyed-objective:units-destroyed {
 							2-tuple[]:override-scores {
 								2-tuple:_ {
 									!unit-configuration:_ { unit-configurations.command-post }
@@ -33,22 +33,22 @@
 							}
 						}
 					}
-					objective-success-trigger[]:triggers {
-						objective-success-trigger:_ {
-							objective-success-level:success-level { marginal-victory }
-							int:threshold { 8 }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { tactical-victory }
-							int:threshold { 12 }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { decisive-victory }
-							int:threshold { 16 }
-							!var:objective { objectives.units-destroyed }
-						}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 8 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 12 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 16 }
+						!var:objective { objectives.units-destroyed }
+					}
 				}
 			}
 			2-tuple[]:deployment-configurations {
@@ -98,29 +98,29 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed:units-destroyed {
+						units-destroyed-objective:units-destroyed {
 							bool:friendly { true }
 						}
 					}
-					objective-success-trigger[]:triggers {
-						objective-success-trigger:_ {
-							objective-success-level:success-level { marginal-victory }
-							int:threshold { 7 }
-							bool:invert { true }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { tactical-victory }
-							int:threshold { 5 }
-							bool:invert { true }
-							!var:objective { objectives.units-destroyed }
-						}
-						objective-success-trigger:_ {
-							objective-success-level:success-level { decisive-victory }
-							int:threshold { 2 }
-							bool:invert { true }
-							!var:objective { objectives.units-destroyed }
-						}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 7 }
+						bool:invert { true }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 5 }
+						bool:invert { true }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 2 }
+						bool:invert { true }
+						!var:objective { objectives.units-destroyed }
+					}
 				}
 			}
 			2-tuple[]:deployment-configurations {
@@ -167,7 +167,7 @@
 						string:display-name { 580th Signal Rgt. CP 3 }
 						matches-all:matcher {
 							tile-within:_ {
-								zone:zone { 11,0 22,0 22,33 11,33 }
+								zone:zone { 10,0 20,0 20,33 10,33 }
 							}
 							distance-from-unit:_ {
 								!unit-configuration:unit-configuration { unit-configurations.command-post }
@@ -238,7 +238,7 @@
 					zone-deployment-configuration:_ {
 						string:display-name { 286th Sec. Rgt. & 10th Flak Rgt. }
 						tile-within:matcher {
-							zone:zone { 11,0 22,0 22,33 11,33 }
+							zone:zone { 10,0 20,0 20,33 10,33 }
 						}
 					}
 				}

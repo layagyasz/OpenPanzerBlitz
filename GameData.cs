@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -73,8 +73,10 @@ namespace PanzerBlitz
 			Block.AddParser<VictoryCondition>("victory-condition", i => new VictoryCondition(i));
 			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
 
-			Block.AddParser<Objective>("units-destroyed", i => new UnitsDestroyed(i));
-			Block.AddParser<Objective>("furthest-advance", i => new FurthestAdvance(i));
+			Block.AddParser<Objective>("units-destroyed-objective", i => new UnitsDestroyedObjective(i));
+			Block.AddParser<Objective>("units-in-zone-objective", i => new UnitsInZoneObjective(i));
+			Block.AddParser<Objective>("furthest-advance-objective", i => new FurthestAdvanceObjective(i));
+			Block.AddParser<Objective>("line-of-fire-objective", i => new LineOfFireObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<MapConfiguration>("map-configuration", i => new MapConfiguration(i));

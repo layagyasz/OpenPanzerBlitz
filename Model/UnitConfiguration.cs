@@ -170,8 +170,7 @@ namespace PanzerBlitz
 
 		public bool IsNeutral()
 		{
-			return UnitClass == UnitClass.FORT
-										 || UnitClass == UnitClass.MINEFIELD
+			return UnitClass == UnitClass.MINEFIELD
 										 || UnitClass == UnitClass.BLOCK
 										 || UnitClass == UnitClass.WRECKAGE;
 		}

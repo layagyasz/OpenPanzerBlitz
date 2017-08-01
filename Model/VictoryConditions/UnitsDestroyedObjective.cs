@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitsDestroyed : Objective
+	public class UnitsDestroyedObjective : Objective
 	{
 		enum Attribute { FRIENDLY, OVERRIDE_SCORES };
 
@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		Dictionary<UnitConfiguration, int> _OverrideScores;
 		int _Score;
 
-		public UnitsDestroyed(ParseBlock Block)
+		public UnitsDestroyedObjective(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 

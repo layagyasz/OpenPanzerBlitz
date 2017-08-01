@@ -372,6 +372,18 @@ unit-configuration:lynx {
 	byte:defense { 6 }
 	byte:movement { 10 }
 }
+unit-configuration:pzkw-iii-g {
+	string:name { PzKw III G }
+	string:display-name { PzKw III G }
+	unit-class:unit-class { tank }
+	string:image-name { pzkw-iii-medium.png }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 8 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
 unit-configuration:pzkw-iv {
 	string:name { PzKw IV }
 	unit-class:unit-class { tank }

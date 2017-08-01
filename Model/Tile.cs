@@ -179,7 +179,7 @@ namespace PanzerBlitz
 
 		public double HeuristicDistanceTo(Tile Node)
 		{
-			return .5 * HexCoordinate.Distance(Node.HexCoordinate);
+			return .49 * HexCoordinate.Distance(Node.HexCoordinate);
 		}
 
 		public IEnumerable<Tile> Neighbors()
@@ -188,7 +188,20 @@ namespace PanzerBlitz
 		}
 		// Pathable
 
-		public NoAttackReason CanAttack(AttackMethod AttackMethod)
+		public bool OnEdge(Direction Edge)
+		{
+			if (Edge == Direction.NONE) return true;
+			if (Edge == Direction.ANY) return NeighborTiles.Any(i => i == null);
+			if (Edge == Direction.NORTH)
+				return NeighborTiles[(int)Direction.NORTH_WEST] == null
+						   && NeighborTiles[(int)Direction.NORTH_EAST] == null;
+			if (Edge == Direction.SOUTH)
+				return NeighborTiles[(int)Direction.SOUTH_WEST] == null
+						   && NeighborTiles[(int)Direction.SOUTH_EAST] == null;
+			return NeighborTiles[(int)Edge] == null;
+		}
+
+		public NoAttackReason CanBeAttacked(AttackMethod AttackMethod)
 		{
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{

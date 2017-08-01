@@ -24,7 +24,7 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed:units-destroyed { }
+					units-destroyed-objective:units-destroyed { }
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
@@ -62,7 +62,7 @@
 		army-configuration:_ {
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed:units-destroyed { }
+					units-destroyed-objective:units-destroyed { }
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
