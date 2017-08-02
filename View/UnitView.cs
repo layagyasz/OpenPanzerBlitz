@@ -138,7 +138,7 @@ namespace PanzerBlitz
 
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);
 
-			if (!Unit.Disrupted)
+			if (Unit.Status != UnitStatus.DISRUPTED)
 			{
 				r.Texture = _Texture;
 				Target.Draw(_ImageVertices, PrimitiveType.Quads, r);

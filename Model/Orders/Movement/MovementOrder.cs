@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+
+using Cardamom.Serialization;
 
 using Cardamom.Graphing;
 
@@ -16,6 +19,16 @@ namespace PanzerBlitz
 			this.Unit = Unit;
 			this.Combat = Combat;
 			this.Path = Unit.GetPathTo(To, Combat);
+		}
+
+		public MovementOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Unit.Id);
+			Stream.Write(Combat);
+			Stream.Write(Path.Destination.Id);
 		}
 
 		public NoMoveReason Validate()

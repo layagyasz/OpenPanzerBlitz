@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -20,6 +23,15 @@ namespace PanzerBlitz
 		{
 			this.Unit = Unit;
 			this.Tile = Tile;
+		}
+
+		public PositionalDeployOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]) { }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Unit.Id);
+			Stream.Write(Tile.Id);
 		}
 
 		public override NoDeployReason Validate()

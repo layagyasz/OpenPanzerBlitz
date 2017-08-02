@@ -8,8 +8,11 @@ namespace PanzerBlitz
 	{
 		public EventHandler<NewUnitEventArgs> OnUnitAdded;
 
+		public readonly int Id;
 		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
+
+		IdGenerator _IdGenerator;
 
 		public IEnumerable<Unit> Units
 		{
@@ -19,12 +22,15 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Army(ArmyConfiguration ArmyConfiguration)
+		public Army(ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
 		{
-			this.Configuration = ArmyConfiguration;
-			this.Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
-				i => i.Item2.GenerateDeployment(this, i.Item1.Select(j => new Unit(this, j)))).ToList();
+			Id = IdGenerator.GenerateId();
+			Configuration = ArmyConfiguration;
+			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
+				i => i.Item2.GenerateDeployment(
+					this, i.Item1.Select(j => new Unit(this, j, IdGenerator)), IdGenerator)).ToList();
 			foreach (Unit u in Units) u.OnDestroy += UnitDestroyed;
+			_IdGenerator = IdGenerator;
 		}
 
 		public bool AutomatePhase(Match Match, TurnComponent TurnComponent, Random Random)
@@ -100,7 +106,7 @@ namespace PanzerBlitz
 			Unit unit = (Unit)Sender;
 			if (unit.Configuration.IsArmored && unit.Configuration.IsVehicle)
 			{
-				Unit wreckage = new Unit(this, GameData.Wreckage);
+				Unit wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
 				wreckage.Place(unit.Position);
 			}

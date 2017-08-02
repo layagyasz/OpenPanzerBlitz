@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class UnloadOrder : Order
@@ -10,6 +14,15 @@ namespace PanzerBlitz
 		{
 			this.Carrier = Carrier;
 			this.UseMovement = UseMovement;
+		}
+
+		public UnloadOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this((Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Carrier.Id);
+			Stream.Write(UseMovement);
 		}
 
 		public NoUnloadReason Validate()

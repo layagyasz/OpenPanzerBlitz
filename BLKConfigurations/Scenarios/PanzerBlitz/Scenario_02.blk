@@ -1,6 +1,7 @@
 ﻿scenario:_ {
 	string:name { Russian Advance on Nikopol }
 	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
 		2-tuple[]:_ {

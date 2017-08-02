@@ -65,7 +65,7 @@ namespace PanzerBlitz
 				{
 					CopyTo(Tiles, map.Item1.Tiles, rowX, rowY, map.Item2);
 					rowX += map.Item1.Width - 1;
-					nextRowY = Math.Max(nextRowY, map.Item1.Height - 1);
+					nextRowY = Math.Max(nextRowY, rowY + map.Item1.Height - 1);
 				}
 				rowY = nextRowY;
 			}

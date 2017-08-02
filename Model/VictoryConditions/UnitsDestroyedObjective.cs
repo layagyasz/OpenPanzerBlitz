@@ -33,7 +33,7 @@ namespace PanzerBlitz
 			IEnumerable<Unit> countedUnits =
 				Match.Armies.Where(i => _Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 					 .SelectMany(i => i.Units)
-					 .Where(i => i.Destroyed);
+					 .Where(i => i.Status == UnitStatus.DESTROYED);
 			_Score = countedUnits.Sum(
 				i => _OverrideScores.ContainsKey(i.Configuration) ? _OverrideScores[i.Configuration] : 1);
 			return _Score;

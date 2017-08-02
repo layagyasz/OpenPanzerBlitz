@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		public HexCoordinate(Coordinate From)
 		{
-			X = From.X - (From.X + 1) / 2;
+			X = From.X - (From.Y + 1) / 2;
 			Y = -(X + From.Y);
 			Z = From.Y;
 		}

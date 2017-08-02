@@ -6,7 +6,7 @@ using Cardamom.Graphing;
 
 namespace PanzerBlitz
 {
-	public class Unit
+	public class Unit : GameObject
 	{
 		public EventHandler<EventArgs> OnLoad;
 		public EventHandler<EventArgs> OnUnload;
@@ -17,20 +17,28 @@ namespace PanzerBlitz
 		public readonly Army Army;
 		public readonly UnitConfiguration Configuration;
 
+		int _Id;
+
 		private bool _Deployed;
 
 		private float _RemainingMovement;
 		private bool _Fired;
 		private bool _Moved;
 		private bool _MovedMoreThanOneTile;
-		private bool _Disrupted;
-		private bool _Destroyed;
+		private UnitStatus _Status;
 
 		private Tile _Position;
 
 		private Unit _Passenger;
 		private Unit _Carrier;
 
+		public int Id
+		{
+			get
+			{
+				return _Id;
+			}
+		}
 		public Deployment Deployment
 		{
 			get
@@ -80,19 +88,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public bool Disrupted
+		public UnitStatus Status
 		{
 			get
 			{
-				return _Disrupted;
-			}
-		}
-
-		public bool Destroyed
-		{
-			get
-			{
-				return _Destroyed;
+				return _Status;
 			}
 		}
 
@@ -120,10 +120,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Unit(Army Army, UnitConfiguration UnitConfiguration)
+		public Unit(Army Army, UnitConfiguration UnitConfiguration, IdGenerator IdGenerator)
 		{
 			this.Army = Army;
 			this.Configuration = UnitConfiguration;
+			_Id = IdGenerator.GenerateId();
 		}
 
 		public NoSingleAttackReason CanBeAttackedBy(Army Army)
@@ -148,7 +149,8 @@ namespace PanzerBlitz
 
 		public NoMoveReason CanMove(bool Combat)
 		{
-			if (_Position == null || Fired || Disrupted || Destroyed || _Carrier != null) return NoMoveReason.NO_MOVE;
+			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
+				return NoMoveReason.NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
@@ -171,7 +173,7 @@ namespace PanzerBlitz
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (_Position == null || Fired || Disrupted || Destroyed || _Carrier != null)
+			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
 				return NoSingleAttackReason.UNABLE;
 			if (MustMove()) return NoSingleAttackReason.MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
@@ -192,21 +194,21 @@ namespace PanzerBlitz
 				case CombatResult.MISS:
 					return;
 				case CombatResult.DESTROY:
-					_Destroyed = true;
+					_Status = UnitStatus.DESTROYED;
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
 				case CombatResult.DISRUPT:
-					_Disrupted = true;
+					_Status = UnitStatus.DISRUPTED;
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
-					if (_Disrupted)
+					if (_Status == UnitStatus.DISRUPTED)
 					{
-						_Destroyed = true;
+						_Status = UnitStatus.DESTROYED;
 						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 						Remove();
 					}
-					else _Disrupted = true;
+					else _Status = UnitStatus.DISRUPTED;
 					return;
 			}
 		}
@@ -380,7 +382,7 @@ namespace PanzerBlitz
 			_Moved = false;
 			_MovedMoreThanOneTile = false;
 			_RemainingMovement = Configuration.Movement;
-			_Disrupted = false;
+			if (_Status == UnitStatus.DISRUPTED) _Status = UnitStatus.ACTIVE;
 		}
 	}
 }

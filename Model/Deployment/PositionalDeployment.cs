@@ -6,8 +6,8 @@ namespace PanzerBlitz
 {
 	public abstract class PositionalDeployment : Deployment
 	{
-		public PositionalDeployment(Army Army, IEnumerable<Unit> Units)
-			: base(Army, Units)
+		public PositionalDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+			: base(Army, Units, IdGenerator)
 		{
 		}
 

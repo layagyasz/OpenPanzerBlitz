@@ -28,9 +28,9 @@ namespace PanzerBlitz
 			Matchers = (List<Matcher>)attributes[(int)Attribute.MATCHER];
 		}
 
-		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units)
+		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
 		{
-			return new OneOfZoneDeployment(Army, Units, this);
+			return new OneOfZoneDeployment(Army, Units, this, IdGenerator);
 		}
 	}
 }

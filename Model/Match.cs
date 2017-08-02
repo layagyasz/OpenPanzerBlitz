@@ -14,6 +14,7 @@ namespace PanzerBlitz
 		public readonly Map Map;
 		public readonly List<Army> Armies;
 		public readonly List<Order> ExecutedOrders = new List<Order>();
+		public readonly IdGenerator IdGenerator = new IdGenerator();
 
 		private IEnumerator<Tuple<Army, TurnComponent>> _TurnOrder;
 
@@ -31,8 +32,9 @@ namespace PanzerBlitz
 		{
 			this.Scenario = Scenario;
 			this.Map = new Map(Scenario.MapConfiguration);
+			foreach (Tile t in Map.TilesEnumerable) t.GiveId(IdGenerator);
 
-			Armies = Scenario.ArmyConfigurations.Select(i => new Army(i)).ToList();
+			Armies = Scenario.TurnOrder.Select(i => new Army(i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
 				i => new Tuple<Army, TurnComponent>(
 					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT))

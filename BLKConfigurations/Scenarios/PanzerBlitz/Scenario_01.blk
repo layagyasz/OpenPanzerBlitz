@@ -1,6 +1,7 @@
 ﻿scenario:_ {
 	string:name { Russian Rear Area Raid: White Russia }
 	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
 		2-tuple[]:_ {

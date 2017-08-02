@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class NormalSingleAttackOrder : SingleAttackOrder
@@ -34,6 +36,20 @@ namespace PanzerBlitz
 			_Defender = Defender;
 			this.AttackMethod = AttackMethod;
 			this.LineOfSight = Attacker.GetLineOfSight(Defender.Position);
+		}
+
+		public NormalSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this(
+				(Unit)Objects[Stream.ReadInt32()],
+				(Unit)Objects[Stream.ReadInt32()],
+				(AttackMethod)Stream.ReadByte())
+		{ }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Attacker.Id);
+			Stream.Write(Defender.Id);
+			Stream.Write((byte)AttackMethod);
 		}
 
 		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)

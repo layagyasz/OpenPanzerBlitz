@@ -140,8 +140,7 @@ namespace PanzerBlitz
 				{
 					if (Edges[i] != null
 						&& (Edges[i].BlocksLineOfSight || Edges[i].Elevated)
-						&& (LineOfSight[0].Elevation < LineOfSight[i].Elevation
-							|| LineOfSight[0].Elevation == LineOfSight[i + 1].Elevation))
+						&& (LineOfSight[0].Elevation <= LineOfSight[i + 1].Elevation))
 						return true;
 				}
 			}
@@ -183,8 +182,10 @@ namespace PanzerBlitz
 					if (LineOfSight[i].Configuration.TrueElevation > LineOfSight[0].Configuration.TrueElevation)
 						return true;
 				}
+				return LineOfSight.Any(
+					i => i.Configuration.TrueElevation > LineOfSight[0].Configuration.TrueElevation
+					&& i.Configuration.TrueElevation > LineOfSight[LineOfSight.Length - 1].Configuration.TrueElevation);
 			}
-			return false;
 		}
 	}
 }

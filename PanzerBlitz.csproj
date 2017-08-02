@@ -115,7 +115,6 @@
     <Compile Include="Model\Orders\Movement\UnloadOrder.cs" />
     <Compile Include="Model\Orders\Movement\NoMoveReason.cs" />
     <Compile Include="Model\Orders\Movement\NoLoadReason.cs" />
-    <Compile Include="Model\Orders\Movement\ArmyConfiguration.cs" />
     <Compile Include="Model\Orders\Attack\AttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AttackMethod.cs" />
     <Compile Include="Model\Orders\Attack\AttackFactorCalculation.cs" />
@@ -171,6 +170,12 @@
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
     <Compile Include="Model\VictoryConditions\UnitsInZoneObjective.cs" />
+    <Compile Include="Model\IdGenerator.cs" />
+    <Compile Include="Model\UnitStatus.cs" />
+    <Compile Include="Model\ArmyConfiguration.cs" />
+    <Compile Include="Model\GameObject.cs" />
+    <Compile Include="Model\Orders\Attack\SingleAttackOrderSerializer.cs" />
+    <Compile Include="Model\Orders\OrderSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -941,6 +946,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_03.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_04.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

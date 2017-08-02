@@ -1,8 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class NextPhaseOrder : Order
 	{
+		public NextPhaseOrder() { }
+
+		public NextPhaseOrder(SerializationInputStream Stream, List<GameObject> Objects) { }
+
+		public void Serialize(SerializationOutputStream Stream) { }
+
 		public bool Validate()
 		{
 			return true;

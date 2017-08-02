@@ -16,8 +16,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public TileDeployment(Army Army, IEnumerable<Unit> Units, TileDeploymentConfiguration DeploymentConfiguration)
-			: base(Army, Units)
+		public TileDeployment(
+			Army Army,
+			IEnumerable<Unit> Units,
+			TileDeploymentConfiguration DeploymentConfiguration,
+			IdGenerator IdGenerator)
+			: base(Army, Units, IdGenerator)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}

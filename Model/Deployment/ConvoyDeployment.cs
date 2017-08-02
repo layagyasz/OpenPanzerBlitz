@@ -26,8 +26,8 @@ namespace PanzerBlitz
 
 		public abstract bool IsStrictConvoy { get; }
 
-		public ConvoyDeployment(Army Army, IEnumerable<Unit> Units)
-			: base(Army, Units)
+		public ConvoyDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+			: base(Army, Units, IdGenerator)
 		{
 		}
 

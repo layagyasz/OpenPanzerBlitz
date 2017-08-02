@@ -18,8 +18,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public ZoneDeployment(Army Army, IEnumerable<Unit> Units, ZoneDeploymentConfiguration DeploymentConfiguration)
-			: base(Army, Units)
+		public ZoneDeployment(
+			Army Army,
+			IEnumerable<Unit> Units,
+			ZoneDeploymentConfiguration DeploymentConfiguration,
+			IdGenerator IdGenerator)
+			: base(Army, Units, IdGenerator)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}

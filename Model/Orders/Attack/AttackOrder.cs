@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Serialization;
 using Cardamom.Utilities;
 
 namespace PanzerBlitz
@@ -118,6 +119,26 @@ namespace PanzerBlitz
 			this.AttackingArmy = AttackingArmy;
 			this.AttackAt = AttackAt;
 			this.AttackMethod = AttackMethod;
+		}
+
+		public AttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this(
+				(Army)Objects[Stream.ReadInt32()],
+				(Tile)Objects[Stream.ReadInt32()],
+				(AttackMethod)Stream.ReadByte())
+		{
+			_AttackTarget = (AttackTarget)Stream.ReadByte();
+			_Attackers = Stream.ReadEnumerable(i => SingleAttackOrderSerializer.Deserialize(Stream, Objects)).ToList();
+			Recalculate();
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(AttackingArmy.Id);
+			Stream.Write(AttackAt.Id);
+			Stream.Write((byte)AttackMethod);
+			Stream.Write((byte)_AttackTarget);
+			Stream.Write(_Attackers, i => SingleAttackOrderSerializer.Serialize(i, Stream));
 		}
 
 		public void SetAttackTarget(AttackTarget AttackTarget)

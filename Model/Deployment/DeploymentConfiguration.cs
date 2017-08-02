@@ -10,6 +10,6 @@ namespace PanzerBlitz
 	{
 		string DisplayName { get; }
 
-		Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units);
+		Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator);
 	}
 }

@@ -35,9 +35,9 @@ namespace PanzerBlitz
 			else Matcher = new CompositeMatcher(new Matcher[] { edge, m }, (i, j) => i && j);
 		}
 
-		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units)
+		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
 		{
-			return new TileEntryDeployment(Army, Units, this);
+			return new TileEntryDeployment(Army, Units, this, IdGenerator);
 		}
 	}
 }

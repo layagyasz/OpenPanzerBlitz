@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class MinefieldSingleAttackOrder : SingleAttackOrder
@@ -28,6 +30,15 @@ namespace PanzerBlitz
 		{
 			_Attacker = Attacker;
 			_Defender = Defender;
+		}
+
+		public MinefieldSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()]) { }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(_Attacker.Id);
+			Stream.Write(_Defender.Id);
 		}
 
 		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)

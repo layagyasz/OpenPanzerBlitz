@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Graphing;
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -39,6 +40,15 @@ namespace PanzerBlitz
 			_ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.Path.Destination);
 
 			_Validate = InitialValidate();
+		}
+
+		public OverrunSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this(new MovementOrder(Stream, Objects), (Tile)Objects[Stream.ReadInt32()]) { }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(_InitialMovement);
+			Stream.Write(_AttackTile);
 		}
 
 		private NoMoveReason InitialValidate()

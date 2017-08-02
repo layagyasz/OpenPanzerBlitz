@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class ConvoyOrderDeployOrder : DeployOrder
@@ -20,6 +22,18 @@ namespace PanzerBlitz
 		{
 			this.Deployment = Deployment;
 			this.ConvoyOrder = ConvoyOrder;
+		}
+
+		public ConvoyOrderDeployOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this(
+				(ConvoyDeployment)Objects[Stream.ReadInt32()],
+				Stream.ReadEnumerable(i => (Unit)Objects[Stream.ReadInt32()]))
+		{ }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Deployment.Id);
+			Stream.Write(ConvoyOrder, i => Stream.Write(i.Id));
 		}
 
 		public override NoDeployReason Validate()

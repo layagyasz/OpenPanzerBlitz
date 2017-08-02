@@ -1,4 +1,7 @@
 ﻿using System;
+
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public abstract class SingleAttackOrder : Order
@@ -7,6 +10,8 @@ namespace PanzerBlitz
 		public abstract Unit Defender { get; }
 		public abstract void SetTreatStackAsArmored(bool TreatStackAsArmored);
 		public abstract AttackFactorCalculation GetAttack();
+
+		public abstract void Serialize(SerializationOutputStream Stream);
 
 		public virtual NoSingleAttackReason Validate()
 		{

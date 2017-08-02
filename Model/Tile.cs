@@ -10,11 +10,12 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class Tile : Pathable<Tile>, Serializable
+	public class Tile : Pathable<Tile>, Serializable, GameObject
 	{
 		public EventHandler<EventArgs> OnReconfigure;
 		List<Unit> _Units = new List<Unit>();
 
+		int _Id;
 		int _Elevation;
 		TileBase _TileBase;
 
@@ -31,6 +32,13 @@ namespace PanzerBlitz
 		bool _FiredAt;
 		bool _CanIndirectFireAt;
 
+		public int Id
+		{
+			get
+			{
+				return _Id;
+			}
+		}
 		public IEnumerable<Edge> Edges
 		{
 			get
@@ -109,7 +117,7 @@ namespace PanzerBlitz
 		}
 
 		public Tile(Coordinate Coordinate, Tile Copy, bool Invert = false)
-				: this(Coordinate)
+			: this(Coordinate)
 		{
 			_Elevation = Copy.Elevation;
 			_TileBase = Copy.TileBase;
@@ -187,6 +195,11 @@ namespace PanzerBlitz
 			foreach (Tile T in NeighborTiles) yield return T;
 		}
 		// Pathable
+
+		public void GiveId(IdGenerator IdGenerator)
+		{
+			_Id = IdGenerator.GenerateId();
+		}
 
 		public bool OnEdge(Direction Edge)
 		{

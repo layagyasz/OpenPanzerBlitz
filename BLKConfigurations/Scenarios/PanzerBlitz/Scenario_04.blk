@@ -1,0 +1,205 @@
+﻿scenario:_ {
+	string:name { Battle of Minsk }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 10 }
+	map-configuration:map-configuration {
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-01.map }
+				bool:_ { true }
+			}
+		}
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-03.map }
+				bool:_ { true }
+			}
+		}
+		2-tuple[]:_ {
+			2-tuple:_ {
+				string:_ { Maps/board-02.map }
+				bool:_ { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:_ {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						units-destroyed-objective:units-destroyed { }
+					}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 5 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 15 }
+						!var:objective { objectives.units-destroyed }
+					}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.t-34-c }
+							int:_ { 4 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.t-34_85 }
+							int:_ { 5 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.su-85 }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.su-152 }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.smg-company }
+							int:_ { 4 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.recon-company }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.82mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-company }
+							int:_ { 6 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.45mm }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.76_2mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sis-5 }
+							int:_ { 15 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sis-33 }
+							int:_ { 5 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 2nd Guard Tk. Corps Vanguard }
+						tile-on-edge:matcher {
+							direction:edge { south }
+						}
+					}
+				}
+			}
+		}
+		army-configuration:_ {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+						units-in-zone-objective:units-in-zone {
+							bool:friendly { false }
+							tile-within:matcher {
+								zone:zone { 0,32 11,32 11,64 0,64 }
+							}
+						}
+					}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 30 }
+						bool:invert { true }
+						!var:objective { objectives.units-in-zone }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						bool:invert { true }
+						!var:objective { objectives.units-in-zone }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 10 }
+						bool:invert { true }
+						!var:objective { objectives.units-in-zone }
+					}
+				}
+			}
+			2-tuple[]:deployment-configurations {
+				2-tuple:_ {
+					2-tuple[]:_ {
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.panther }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.jgdpz-iv }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.rifle-platoon }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.wespe }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.hummel }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.20mm }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.75mm }
+							int:_ { 2 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.nashorn }
+							int:_ { 1 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.sdkfz-251 }
+							int:_ { 3 }
+						}
+						2-tuple:_ {
+							!unit-configuration:_ { unit-configurations.opel-6700-a }
+							int:_ { 4 }
+						}
+					}
+					tile-entry-deployment-configuration:_ {
+						string:display-name { 5th Pz. Div. Battle Group }
+						matches-all:matcher {
+							tile-within:_ {
+								zone:zone { 0,64 11,64 11,96 0,96 }
+							}
+							tile-on-edge:_ {
+								direction:edge { east }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
