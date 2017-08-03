@@ -10,37 +10,60 @@ namespace PanzerBlitz
 	{
 		enum Attribute { FRIENDLY, OVERRIDE_SCORES };
 
-		bool _Friendly;
-		Dictionary<UnitConfiguration, int> _OverrideScores;
-		int _Score;
+		public readonly bool Friendly;
+		public readonly Dictionary<UnitConfiguration, int> OverrideScores;
+
+		public UnitsDestroyedObjective(
+			string UniqueKey, bool Friendly, Dictionary<UnitConfiguration, int> OverrideScores)
+			: base(UniqueKey)
+		{
+			this.Friendly = Friendly;
+			this.OverrideScores = OverrideScores;
+		}
 
 		public UnitsDestroyedObjective(ParseBlock Block)
+			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-
-			_Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], false);
+			Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], false);
 			if (attributes[(int)Attribute.OVERRIDE_SCORES] != null)
 			{
-				_OverrideScores = ((List<Tuple<object, object>>)attributes[(int)Attribute.OVERRIDE_SCORES])
+				OverrideScores = ((List<Tuple<object, object>>)attributes[(int)Attribute.OVERRIDE_SCORES])
 					.ToDictionary(i => (UnitConfiguration)i.Item1, i => (int)i.Item2);
 			}
-			else _OverrideScores = new Dictionary<UnitConfiguration, int>();
+			else OverrideScores = new Dictionary<UnitConfiguration, int>();
 		}
 
-		public int CalculateScore(Army ForArmy, Match Match)
+		public UnitsDestroyedObjective(SerializationInputStream Stream)
+			: this(
+				Stream.ReadString(),
+				Stream.ReadBoolean(),
+				Stream.ReadEnumerable(
+					i => new KeyValuePair<UnitConfiguration, int>(
+						GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32()))
+				.ToDictionary(i => i.Key, i => i.Value))
+		{ }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			base.Serialize(Stream);
+			Stream.Write(Friendly);
+			Stream.Write(OverrideScores, i =>
+			{
+				Stream.Write(i.Key.UniqueKey);
+				Stream.Write(i.Value);
+			});
+		}
+
+		public override int CalculateScore(Army ForArmy, Match Match)
 		{
 			IEnumerable<Unit> countedUnits =
-				Match.Armies.Where(i => _Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
+				Match.Armies.Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Status == UnitStatus.DESTROYED);
 			_Score = countedUnits.Sum(
-				i => _OverrideScores.ContainsKey(i.Configuration) ? _OverrideScores[i.Configuration] : 1);
-			return _Score;
-		}
-
-		public int GetScore()
-		{
+				i => OverrideScores.ContainsKey(i.Configuration) ? OverrideScores[i.Configuration] : 1);
 			return _Score;
 		}
 	}

@@ -12,9 +12,15 @@ namespace PanzerBlitz
 		public readonly Matcher Matcher;
 		public readonly bool Friendly;
 
-		int _Score;
+		public UnitsInZoneObjective(string UniqueKey, Matcher Matcher, bool Friendly)
+			: base(UniqueKey)
+		{
+			this.Matcher = Matcher;
+			this.Friendly = Friendly;
+		}
 
 		public UnitsInZoneObjective(ParseBlock Block)
+			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -22,7 +28,17 @@ namespace PanzerBlitz
 			Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], true);
 		}
 
-		public int CalculateScore(Army ForArmy, Match Match)
+		public UnitsInZoneObjective(SerializationInputStream Stream)
+			: this(Stream.ReadString(), MatcherSerializer.Deserialize(Stream), Stream.ReadBoolean()) { }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			base.Serialize(Stream);
+			MatcherSerializer.Serialize(Matcher, Stream);
+			Stream.Write(Friendly);
+		}
+
+		public override int CalculateScore(Army ForArmy, Match Match)
 		{
 			_Score = Match.Armies.Where(
 				i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
@@ -30,11 +46,6 @@ namespace PanzerBlitz
 						  .Count(i => i.Position != null
 								 && !i.Configuration.IsNeutral()
 								 && (Matcher == null || Matcher.Matches(i.Position)));
-			return _Score;
-		}
-
-		public int GetScore()
-		{
 			return _Score;
 		}
 	}

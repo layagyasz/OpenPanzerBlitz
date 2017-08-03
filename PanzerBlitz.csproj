@@ -176,6 +176,9 @@
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Model\Orders\Attack\SingleAttackOrderSerializer.cs" />
     <Compile Include="Model\Orders\OrderSerializer.cs" />
+    <Compile Include="Model\VictoryConditions\ObjectiveSerializer.cs" />
+    <Compile Include="Model\TileMatchers\MatcherSerializer.cs" />
+    <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

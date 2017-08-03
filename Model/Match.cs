@@ -55,6 +55,11 @@ namespace PanzerBlitz
 			return r;
 		}
 
+		public IEnumerable<GameObject> GetGameObjects()
+		{
+			return Armies.SelectMany(i => i.GetGameObjects());
+		}
+
 		public void Start()
 		{
 			NextPhase();

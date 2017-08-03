@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public interface DeploymentConfiguration
+	public interface DeploymentConfiguration : Serializable
 	{
 		string DisplayName { get; }
 

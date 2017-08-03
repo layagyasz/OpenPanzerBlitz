@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class ArmyConfiguration
+	public class ArmyConfiguration : Serializable
 	{
 		private enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS, VICTORY_CONDITION }
 
@@ -43,6 +43,31 @@ namespace PanzerBlitz
 					.ToList(), (DeploymentConfiguration)i.Item2))
 				.ToList();
 			VictoryCondition = (VictoryCondition)attributes[(int)Attribute.VICTORY_CONDITION];
+		}
+
+		public ArmyConfiguration(SerializationInputStream Stream)
+		{
+			Faction = GameData.Factions[Stream.ReadString()];
+			Team = Stream.ReadByte();
+			Stream.ReadEnumerable(i =>
+			{
+				return new Tuple<List<UnitConfiguration>, DeploymentConfiguration>(
+					Stream.ReadEnumerable(j => GameData.UnitConfigurations[Stream.ReadString()]).ToList(),
+					DeploymentConfigurationSerializer.Deserialize(Stream));
+			});
+			VictoryCondition = new VictoryCondition(Stream);
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Faction.UniqueKey);
+			Stream.Write(Team);
+			Stream.Write(DeploymentConfigurations, i =>
+			{
+				Stream.Write(i.Item1, j => Stream.Write(j.UniqueKey));
+				Stream.Write(i.Item2);
+			});
+			Stream.Write(VictoryCondition);
 		}
 
 		IEnumerable<UnitConfiguration> BuildUnitConfigurationList(

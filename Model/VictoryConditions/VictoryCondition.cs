@@ -6,12 +6,18 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class VictoryCondition
+	public class VictoryCondition : Serializable
 	{
 		enum Attribute { OBJECTIVES, TRIGGERS };
 
 		public readonly List<Objective> Scorers;
 		public readonly List<ObjectiveSuccessTrigger> Triggers;
+
+		public VictoryCondition(IEnumerable<Objective> Scorers, IEnumerable<ObjectiveSuccessTrigger> Triggers)
+		{
+			this.Scorers = Scorers.ToList();
+			this.Triggers = Triggers.ToList();
+		}
 
 		public VictoryCondition(ParseBlock Block)
 		{
@@ -19,6 +25,18 @@ namespace PanzerBlitz
 			Scorers = ((Dictionary<string, object>)attributes[(int)Attribute.OBJECTIVES])
 				.Values.Cast<Objective>().ToList();
 			Triggers = (List<ObjectiveSuccessTrigger>)attributes[(int)Attribute.TRIGGERS];
+		}
+
+		public VictoryCondition(SerializationInputStream Stream)
+		{
+			Scorers = Stream.ReadEnumerable(i => ObjectiveSerializer.Deserializer(i)).ToList();
+			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream, Scorers)).ToList();
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Scorers, i => ObjectiveSerializer.Serialize(i, Stream));
+			Stream.Write(Triggers);
 		}
 
 		public ObjectiveSuccessLevel GetMatchResult(Army ForArmy, Match Match)

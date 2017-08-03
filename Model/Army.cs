@@ -4,16 +4,23 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class Army
+	public class Army : GameObject
 	{
 		public EventHandler<NewUnitEventArgs> OnUnitAdded;
 
-		public readonly int Id;
 		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
 
+		int _Id;
 		IdGenerator _IdGenerator;
 
+		public int Id
+		{
+			get
+			{
+				return _Id;
+			}
+		}
 		public IEnumerable<Unit> Units
 		{
 			get
@@ -24,7 +31,7 @@ namespace PanzerBlitz
 
 		public Army(ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
 		{
-			Id = IdGenerator.GenerateId();
+			_Id = IdGenerator.GenerateId();
 			Configuration = ArmyConfiguration;
 			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
 				i => i.Item2.GenerateDeployment(
@@ -70,6 +77,11 @@ namespace PanzerBlitz
 		public ObjectiveSuccessLevel GetObjectiveSuccessLevel(Match Match)
 		{
 			return Configuration.VictoryCondition.GetMatchResult(this, Match);
+		}
+
+		public IEnumerable<GameObject> GetGameObjects()
+		{
+			return Enumerable.Repeat(this, 1).Concat<GameObject>(Deployments).Concat(Units);
 		}
 
 		void DoMinefieldAttacks(Random Random)

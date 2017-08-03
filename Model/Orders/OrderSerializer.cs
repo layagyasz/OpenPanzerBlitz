@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -33,7 +34,13 @@ namespace PanzerBlitz
 			(i, j) => new NextPhaseOrder(i, j),
 		};
 
-		List<GameObject> GameObjects = new List<GameObject>();
+		List<GameObject> _GameObjects = new List<GameObject>();
+
+		public OrderSerializer(IEnumerable<GameObject> GameObjects)
+		{
+			_GameObjects = GameObjects.ToList();
+			_GameObjects.Sort((i, j) => i.Id.CompareTo(j.Id));
+		}
 
 		public void SerializeOrder(Order Order, SerializationOutputStream Stream)
 		{
@@ -43,7 +50,7 @@ namespace PanzerBlitz
 
 		public Order DeserializeOrder(SerializationInputStream Stream)
 		{
-			return DESERIALIZERS[Stream.ReadByte()](Stream, GameObjects);
+			return DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
 		}
 	}
 }

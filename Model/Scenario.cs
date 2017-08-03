@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class Scenario
+	public class Scenario : Serializable
 	{
 		enum Attribute { NAME, MAP_CONFIGURATION, ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURN_ORDER, TURNS };
 
@@ -35,6 +35,20 @@ namespace PanzerBlitz
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
 			MapConfiguration = (MapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
+		}
+
+		public Scenario(SerializationInputStream Stream)
+		{
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Name);
+			Stream.Write(ArmyConfigurations);
+			Stream.Write(DeploymentOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
+			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
+			Stream.Write(Turns);
+			Stream.Write(MapConfiguration);
 		}
 	}
 }

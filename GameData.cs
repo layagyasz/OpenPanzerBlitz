@@ -56,8 +56,8 @@ namespace PanzerBlitz
 			Block.AddParser<DistanceFromUnit>("distance-from-unit", i => new DistanceFromUnit(i));
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
-			Block.AddParser<CompositeMatcher>("matches-all", i => new CompositeMatcher(i, (j, k) => j && k));
-			Block.AddParser<CompositeMatcher>("matches-any", i => new CompositeMatcher(i, (j, k) => j || k));
+			Block.AddParser<CompositeMatcher>("matches-all", i => new CompositeMatcher(i, CompositeMatcher.AND));
+			Block.AddParser<CompositeMatcher>("matches-any", i => new CompositeMatcher(i, CompositeMatcher.OR));
 
 			Block.AddParser<DeploymentConfiguration>(
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));

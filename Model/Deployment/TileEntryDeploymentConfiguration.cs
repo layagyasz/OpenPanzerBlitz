@@ -22,6 +22,13 @@ namespace PanzerBlitz
 			}
 		}
 
+		public TileEntryDeploymentConfiguration(string DisplayName, bool IsStrictConvoy, Matcher Matcher)
+		{
+			_DisplayName = DisplayName;
+			this.IsStrictConvoy = IsStrictConvoy;
+			this.Matcher = Matcher;
+		}
+
 		public TileEntryDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
@@ -33,6 +40,16 @@ namespace PanzerBlitz
 
 			if (m == null) Matcher = edge;
 			else Matcher = new CompositeMatcher(new Matcher[] { edge, m }, (i, j) => i && j);
+		}
+
+		public TileEntryDeploymentConfiguration(SerializationInputStream Stream)
+			: this(Stream.ReadString(), Stream.ReadBoolean(), MatcherSerializer.Deserialize(Stream)) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(_DisplayName);
+			Stream.Write(IsStrictConvoy);
+			MatcherSerializer.Serialize(Matcher, Stream);
 		}
 
 		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)

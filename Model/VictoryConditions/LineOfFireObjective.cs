@@ -16,9 +16,17 @@ namespace PanzerBlitz
 		public readonly byte Width;
 		public readonly bool Vertical;
 
-		int _Score;
+		public LineOfFireObjective(string UniqueKey, bool Friendly, bool BreakThrough, byte Width, bool Vertical)
+			: base(UniqueKey)
+		{
+			this.Friendly = Friendly;
+			this.BreakThrough = BreakThrough;
+			this.Width = Width;
+			this.Vertical = Vertical;
+		}
 
 		public LineOfFireObjective(ParseBlock Block)
+			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -28,7 +36,25 @@ namespace PanzerBlitz
 			Vertical = (bool)attributes[(int)Attribute.VERTICAL];
 		}
 
-		public int CalculateScore(Army ForArmy, Match Match)
+		public LineOfFireObjective(SerializationInputStream Stream)
+			: this(
+				Stream.ReadString(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadByte(),
+				Stream.ReadBoolean())
+		{ }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			base.Serialize(Stream);
+			Stream.Write(Friendly);
+			Stream.Write(BreakThrough);
+			Stream.Write(Width);
+			Stream.Write(Vertical);
+		}
+
+		public override int CalculateScore(Army ForArmy, Match Match)
 		{
 			IEnumerable<Tile> losTiles =
 				Match.Armies
@@ -100,11 +126,6 @@ namespace PanzerBlitz
 			}
 			if (SinkEdge.Contains(Tile)) yield return Sink;
 			foreach (Tile t in Tile.Neighbors()) yield return t;
-		}
-
-		public int GetScore()
-		{
-			return _Score;
 		}
 	}
 }

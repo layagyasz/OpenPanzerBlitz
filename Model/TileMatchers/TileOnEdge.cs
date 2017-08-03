@@ -22,6 +22,14 @@ namespace PanzerBlitz
 			Edge = (Direction)attributes[(int)Attribute.EDGE];
 		}
 
+		public TileOnEdge(SerializationInputStream Stream)
+			: this((Direction)Stream.ReadByte()) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write((byte)Edge);
+		}
+
 		public bool Matches(Tile Tile)
 		{
 			return Tile.OnEdge(Edge);

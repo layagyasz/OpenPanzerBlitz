@@ -11,15 +11,29 @@ namespace PanzerBlitz
 
 		public readonly Direction Direction;
 
-		int _Score;
+		public FurthestAdvanceObjective(string UniqueKey, Direction Direction)
+			: base(UniqueKey)
+		{
+			this.Direction = Direction;
+		}
 
 		public FurthestAdvanceObjective(ParseBlock Block)
+			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Direction = (Direction)attributes[(int)Attribute.DIRECTION];
 		}
 
-		public int CalculateScore(Army ForArmy, Match Match)
+		public FurthestAdvanceObjective(SerializationInputStream Stream)
+			: this(Stream.ReadString(), (Direction)Stream.ReadByte()) { }
+
+		public override void Serialize(SerializationOutputStream Stream)
+		{
+			base.Serialize(Stream);
+			Stream.Write((byte)Direction);
+		}
+
+		public override int CalculateScore(Army ForArmy, Match Match)
 		{
 			if (Direction == Direction.NORTH_WEST || Direction == Direction.NORTH_EAST || Direction == Direction.NORTH)
 				_Score = Match.Map.Height - ForArmy.Units.Max(i => i.Position != null ? 0 : i.Position.Coordinate.Y);
@@ -29,11 +43,6 @@ namespace PanzerBlitz
 				_Score = ForArmy.Units.Max(i => i.Position != null ? 0 : i.Position.Coordinate.X) + 1;
 			if (Direction == Direction.WEST)
 				_Score = Match.Map.Width - ForArmy.Units.Max(i => i.Position != null ? 0 : i.Position.Coordinate.Y);
-			return _Score;
-		}
-
-		public int GetScore()
-		{
 			return _Score;
 		}
 	}

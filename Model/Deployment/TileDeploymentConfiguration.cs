@@ -20,12 +20,28 @@ namespace PanzerBlitz
 			}
 		}
 
+		public TileDeploymentConfiguration(string DisplayName, Coordinate Coordinate)
+		{
+			_DisplayName = DisplayName;
+			this.Coordinate = Coordinate;
+		}
+
 		public TileDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
 			Coordinate = (Coordinate)attributes[(int)Attribute.COORDINATE];
+		}
+
+		public TileDeploymentConfiguration(SerializationInputStream Stream)
+			: this(Stream.ReadString(), new Coordinate(Stream.ReadInt32(), Stream.ReadInt32())) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(_DisplayName);
+			Stream.Write(Coordinate.X);
+			Stream.Write(Coordinate.Y);
 		}
 
 		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)

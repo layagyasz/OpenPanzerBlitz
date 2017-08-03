@@ -14,6 +14,13 @@ namespace PanzerBlitz
 		public readonly int Distance;
 		public readonly bool Atleast;
 
+		public DistanceFromUnit(UnitConfiguration UnitConfiguration, int Distance, bool Atleast)
+		{
+			this.UnitConfiguration = UnitConfiguration;
+			this.Distance = Distance;
+			this.Atleast = Atleast;
+		}
+
 		public DistanceFromUnit(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
@@ -21,6 +28,16 @@ namespace PanzerBlitz
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
 			Distance = (int)attributes[(int)Attribute.DISTANCE];
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
+		}
+
+		public DistanceFromUnit(SerializationInputStream Stream)
+			: this(GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32(), Stream.ReadBoolean()) { }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UnitConfiguration.UniqueKey);
+			Stream.Write(Distance);
+			Stream.Write(Atleast);
 		}
 
 		public bool Matches(Tile Tile)
