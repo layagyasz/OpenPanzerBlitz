@@ -11,6 +11,14 @@ namespace PanzerBlitz
 		public readonly Unit Passenger;
 		public readonly bool UseMovement;
 
+		public Army Army
+		{
+			get
+			{
+				return Carrier.Army;
+			}
+		}
+
 		public LoadOrder(Unit Carrier, Unit Passenger, bool UseMovement = true)
 		{
 			this.Carrier = Carrier;

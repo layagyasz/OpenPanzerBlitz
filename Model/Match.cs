@@ -16,11 +16,11 @@ namespace PanzerBlitz
 		public readonly List<Order> ExecutedOrders = new List<Order>();
 		public readonly IdGenerator IdGenerator = new IdGenerator();
 
-		private IEnumerator<Tuple<Army, TurnComponent>> _TurnOrder;
+		private IEnumerator<TurnInfo> _TurnOrder;
 
 		private Random _Random = new Random();
 
-		public Tuple<Army, TurnComponent> CurrentPhase
+		public TurnInfo CurrentPhase
 		{
 			get
 			{
@@ -36,9 +36,9 @@ namespace PanzerBlitz
 
 			Armies = Scenario.TurnOrder.Select(i => new Army(i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
-				i => new Tuple<Army, TurnComponent>(
+				i => new TurnInfo(
 					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT))
-								 .Concat(Armies.Select(i => new Tuple<Army, TurnComponent>(i, TurnComponent.RESET)))
+								 .Concat(Armies.Select(i => new TurnInfo(i, TurnComponent.RESET)))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 									.SelectMany(i => i)).GetEnumerator();
 
@@ -73,12 +73,13 @@ namespace PanzerBlitz
 				if (!AdvancePhaseIterator()) return;
 			}
 			if (OnStartPhase != null)
-				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current.Item1, _TurnOrder.Current.Item2));
+				OnStartPhase(
+					this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 		}
 
 		bool Automate()
 		{
-			return _TurnOrder.Current.Item1.AutomatePhase(this, _TurnOrder.Current.Item2, _Random);
+			return _TurnOrder.Current.Army.AutomatePhase(this, _TurnOrder.Current.TurnComponent, _Random);
 		}
 
 		bool AdvancePhaseIterator()
@@ -91,6 +92,7 @@ namespace PanzerBlitz
 
 		public bool ValidateOrder(Order Order)
 		{
+			if (Order.Army != CurrentPhase.Army) return false;
 			if (Order is AttackOrder)
 			{
 				if (!ValidateAttackOrder((AttackOrder)Order)) return false;
@@ -135,73 +137,76 @@ namespace PanzerBlitz
 			return executed;
 		}
 
-		private bool ValidateNextPhaseOrder()
+		bool ValidateNextPhaseOrder()
 		{
-			if (CurrentPhase.Item2 == TurnComponent.DEPLOYMENT) return CurrentPhase.Item1.IsDeploymentConfigured();
-			if (CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT) return !CurrentPhase.Item1.MustMove(true);
-			if (CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT) return !CurrentPhase.Item1.MustMove(false);
+			if (CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT)
+				return CurrentPhase.Army.IsDeploymentConfigured();
+			if (CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT)
+				return !CurrentPhase.Army.MustMove(true);
+			if (CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT)
+				return !CurrentPhase.Army.MustMove(false);
 			return true;
 		}
 
-		private bool ValidateAttackOrder(AttackOrder Order)
+		bool ValidateAttackOrder(AttackOrder Order)
 		{
-			if (Order.AttackingArmy != CurrentPhase.Item1)
-				return false;
 			if (Order.AttackMethod == AttackMethod.OVERRUN
-				&& CurrentPhase.Item2 != TurnComponent.VEHICLE_COMBAT_MOVEMENT)
+				&& CurrentPhase.TurnComponent != TurnComponent.VEHICLE_COMBAT_MOVEMENT)
 				return false;
 			if (Order.AttackMethod == AttackMethod.NORMAL_FIRE
-				&& CurrentPhase.Item2 != TurnComponent.ATTACK)
+				&& CurrentPhase.TurnComponent != TurnComponent.ATTACK)
 				return false;
 			if (Order.AttackMethod == AttackMethod.CLOSE_ASSAULT
-				&& CurrentPhase.Item2 != TurnComponent.CLOSE_ASSAULT)
+				&& CurrentPhase.TurnComponent != TurnComponent.CLOSE_ASSAULT)
 				return false;
 			return true;
 		}
 
-		private bool ValidateUnloadOrder(UnloadOrder Order)
+		bool ValidateUnloadOrder(UnloadOrder Order)
 		{
-			if (!Order.UseMovement) return CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
-			if (Order.Carrier.Configuration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
+			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
+			if (Order.Carrier.Configuration.IsVehicle)
+				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
-		private bool ValidateLoadOrder(LoadOrder Order)
+		bool ValidateLoadOrder(LoadOrder Order)
 		{
-			if (!Order.UseMovement) return CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
-			if (Order.Carrier.Configuration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
+			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
+			if (Order.Carrier.Configuration.IsVehicle)
+				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
-		private bool ValidateMovementOrder(MovementOrder Order)
+		bool ValidateMovementOrder(MovementOrder Order)
 		{
 			if (Order.Combat && !Order.Unit.Configuration.IsVehicle)
-				return CurrentPhase.Item2 == TurnComponent.CLOSE_ASSAULT;
-			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT;
+				return CurrentPhase.TurnComponent == TurnComponent.CLOSE_ASSAULT;
+			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
 
-			return CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT;
+			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
-		private bool ValidateDeployOrder(DeployOrder Order)
+		bool ValidateDeployOrder(DeployOrder Order)
 		{
 			if (Order is MovementDeployOrder)
 			{
-				if (CurrentPhase.Item2 == TurnComponent.VEHICLE_MOVEMENT)
+				if (CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT)
 					return ((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
-				if (CurrentPhase.Item2 == TurnComponent.NON_VEHICLE_MOVEMENT)
+				if (CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT)
 					return !((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
 				return false;
 			}
-			return (Order.Army == CurrentPhase.Item1 || CurrentPhase.Item1 == null)
-				&& CurrentPhase.Item2 == TurnComponent.DEPLOYMENT;
+			return (Order.Army == CurrentPhase.Army || CurrentPhase.Army == null)
+				&& CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
 		}
 
-		private static IEnumerable<Tuple<Army, TurnComponent>> StandardTurnOrder(IEnumerable<Army> Armies)
+		static IEnumerable<TurnInfo> StandardTurnOrder(IEnumerable<Army> Armies)
 		{
-			return Armies.SelectMany(i => TurnComponents().Select(j => new Tuple<Army, TurnComponent>(i, j)));
+			return Armies.SelectMany(i => TurnComponents().Select(j => new TurnInfo(i, j)));
 		}
 
-		private static IEnumerable<TurnComponent> TurnComponents()
+		static IEnumerable<TurnComponent> TurnComponents()
 		{
 			yield return TurnComponent.MINEFIELD_ATTACK;
 			yield return TurnComponent.ATTACK;

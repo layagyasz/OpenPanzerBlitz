@@ -179,6 +179,11 @@
     <Compile Include="Model\VictoryConditions\ObjectiveSerializer.cs" />
     <Compile Include="Model\TileMatchers\MatcherSerializer.cs" />
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
+    <Compile Include="Model\TurnInfo.cs" />
+    <Compile Include="Controller\RemotePlayerController.cs" />
+    <Compile Include="Network\Messages\GameMessage.cs" />
+    <Compile Include="Network\GameMessageSerializer.cs" />
+    <Compile Include="Network\Messages\ExecuteOrderMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -201,6 +206,8 @@
     <Folder Include="BLKConfigurations\Scenarios\" />
     <Folder Include="BLKConfigurations\UnitConfigurations\" />
     <Folder Include="BLKConfigurations\Scenarios\PanzerBlitz\" />
+    <Folder Include="Network\" />
+    <Folder Include="Network\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

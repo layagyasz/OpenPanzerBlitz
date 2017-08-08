@@ -62,16 +62,16 @@ namespace PanzerBlitz
 			KeyController.OnKeyPressed += OnKeyPressed;
 		}
 
-		public void DoTurn(Army Army, TurnComponent TurnComponent)
+		public void DoTurn(TurnInfo TurnInfo)
 		{
 			_InfoDisplay.DisplayedString =
-				string.Format("{0}\n{1}", Army.Configuration.Faction.Name, TurnComponent);
-			_Controllers[TurnComponent].Begin(Army);
+				string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, TurnInfo.TurnComponent);
+			_Controllers[TurnInfo.TurnComponent].Begin(TurnInfo.Army);
 		}
 
 		void EndTurn(object sender, EventArgs e)
 		{
-			TurnComponent t = Match.CurrentPhase.Item2;
+			TurnComponent t = Match.CurrentPhase.TurnComponent;
 			if (_Controllers[t].Finish())
 			{
 				NextPhaseOrder order = new NextPhaseOrder();
@@ -85,32 +85,32 @@ namespace PanzerBlitz
 
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
-			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
-			_Controllers[phase.Item2].HandleTileLeftClick(((TileView)sender).Tile);
+			TurnInfo phase = Match.CurrentPhase;
+			_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);
 		}
 
 		void OnTileRightClick(object sender, MouseEventArgs e)
 		{
-			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
-			_Controllers[phase.Item2].HandleTileRightClick(((TileView)sender).Tile);
+			TurnInfo phase = Match.CurrentPhase;
+			_Controllers[phase.TurnComponent].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
 		void OnUnitClick(object sender, MouseEventArgs e)
 		{
-			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
-			_Controllers[phase.Item2].HandleUnitLeftClick(((UnitView)sender).Unit);
+			TurnInfo phase = Match.CurrentPhase;
+			_Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
 		}
 
 		void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
-			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
-			_Controllers[phase.Item2].HandleUnitRightClick(((UnitView)sender).Unit);
+			TurnInfo phase = Match.CurrentPhase;
+			_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 
 		void OnKeyPressed(object sender, KeyPressedEventArgs E)
 		{
-			Tuple<Army, TurnComponent> phase = Match.CurrentPhase;
-			_Controllers[phase.Item2].HandleKeyPress(E.Key);
+			TurnInfo phase = Match.CurrentPhase;
+			_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
 		}
 	}
 }

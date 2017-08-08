@@ -19,6 +19,14 @@ namespace PanzerBlitz
 			return Defender.CanBeAttackedBy(Attacker.Army);
 		}
 
+		public Army Army
+		{
+			get
+			{
+				return Attacker.Army;
+			}
+		}
+
 		public abstract bool Execute(Random Random);
 	}
 }

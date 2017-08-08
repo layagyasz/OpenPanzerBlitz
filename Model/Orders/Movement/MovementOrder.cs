@@ -14,6 +14,14 @@ namespace PanzerBlitz
 		public readonly bool Combat;
 		public readonly Path<Tile> Path;
 
+		public Army Army
+		{
+			get
+			{
+				return Unit.Army;
+			}
+		}
+
 		public MovementOrder(Unit Unit, Tile To, bool Combat)
 		{
 			this.Unit = Unit;

@@ -3,13 +3,11 @@ namespace PanzerBlitz
 {
 	public class StartTurnComponentEventArgs
 	{
-		public readonly Army Army;
-		public readonly TurnComponent TurnComponent;
+		public readonly TurnInfo TurnInfo;
 
-		public StartTurnComponentEventArgs(Army Army, TurnComponent TurnComponent)
+		public StartTurnComponentEventArgs(TurnInfo TurnInfo)
 		{
-			this.Army = Army;
-			this.TurnComponent = TurnComponent;
+			this.TurnInfo = TurnInfo;
 		}
 	}
 }

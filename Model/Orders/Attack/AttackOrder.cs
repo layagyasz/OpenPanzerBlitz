@@ -99,6 +99,13 @@ namespace PanzerBlitz
 		List<SingleAttackOrder> _Attackers = new List<SingleAttackOrder>();
 		List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
 
+		public Army Army
+		{
+			get
+			{
+				return AttackingArmy;
+			}
+		}
 		public AttackTarget AttackTarget
 		{
 			get

@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		void HandleTurn(object Sender, StartTurnComponentEventArgs E)
 		{
-			_PlayerControllers[E.Army].DoTurn(E.Army, E.TurnComponent);
+			_PlayerControllers[E.TurnInfo.Army].DoTurn(E.TurnInfo);
 		}
 	}
 }

@@ -7,6 +7,14 @@ namespace PanzerBlitz
 {
 	public class NextPhaseOrder : Order
 	{
+		public Army Army
+		{
+			get
+			{
+				return null;
+			}
+		}
+
 		public NextPhaseOrder() { }
 
 		public NextPhaseOrder(SerializationInputStream Stream, List<GameObject> Objects) { }

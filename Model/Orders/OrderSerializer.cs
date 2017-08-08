@@ -42,13 +42,13 @@ namespace PanzerBlitz
 			_GameObjects.Sort((i, j) => i.Id.CompareTo(j.Id));
 		}
 
-		public void SerializeOrder(Order Order, SerializationOutputStream Stream)
+		public void Serialize(Order Order, SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Array.IndexOf(ORDER_TYPES, Order.GetType()));
 			Stream.Write(Order);
 		}
 
-		public Order DeserializeOrder(SerializationInputStream Stream)
+		public Order Deserialize(SerializationInputStream Stream)
 		{
 			return DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
 		}
