@@ -12,20 +12,22 @@ namespace PanzerBlitz
 		RPCAdapter _Adapter;
 		OrderSerializer _OrderSerializer;
 
-		public RemotePlayerController(Match Match, TCPConnection Connection)
+		public RemotePlayerController(Match Match, TCPClient Client)
 		{
 			_Match = Match;
 			_OrderSerializer = new OrderSerializer(Match.GetGameObjects());
-			_Adapter = new RPCAdapter(Connection, new Dictionary<Type, Func<RPCRequest, RPCResponse>>()
+			_Adapter = new RPCAdapter(Client, new Dictionary<Type, Func<RPCRequest, RPCResponse>>()
 			{
 				{ typeof(ValidateOrderRequest), i => HandleValidateOrderRequest((ValidateOrderRequest)i) },
 				{ typeof(ExecuteOrderRequest), i => HandleExecuteOrderRequest((ExecuteOrderRequest)i) }
 			});
 		}
 
-		public void DoTurn(TurnInfo TurnInfo)
+		public void DoTurn(TurnInfo TurnInfo) { }
+
+		public void ExecuteOrder(Order Order)
 		{
-			_Adapter.Call(new DoTurnRequest(TurnInfo));
+			_Adapter.Call(new ExecuteOrderRequest(Order, _OrderSerializer));
 		}
 
 		RPCResponse HandleValidateOrderRequest(ValidateOrderRequest Request)

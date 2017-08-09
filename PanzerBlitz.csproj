@@ -51,7 +51,6 @@
     <Compile Include="Model\Edge.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\TileView.cs" />
-    <Compile Include="Controller\HumanGamePlayerController.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="View\Highlight.cs" />
@@ -86,16 +85,7 @@
     <Compile Include="View\Panes\LoadUnitPane.cs" />
     <Compile Include="View\StackViewUnitComparator.cs" />
     <Compile Include="View\HomogenousStackView.cs" />
-    <Compile Include="Controller\Subcontroller\AttackController.cs" />
-    <Compile Include="Controller\Subcontroller\BaseAttackController.cs" />
-    <Compile Include="Controller\Subcontroller\DeploymentController.cs" />
-    <Compile Include="Controller\Subcontroller\MovementController.cs" />
-    <Compile Include="Controller\Subcontroller\OverrunController.cs" />
-    <Compile Include="Controller\Subcontroller\CloseAssaultController.cs" />
-    <Compile Include="Controller\Subcontroller\BaseController.cs" />
-    <Compile Include="Controller\Subcontroller\Subcontroller.cs" />
     <Compile Include="View\AlertText.cs" />
-    <Compile Include="Controller\GamePlayerController.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Model\Deployment\ConvoyDeployment.cs" />
     <Compile Include="Model\Deployment\DeploymentConfiguration.cs" />
@@ -107,7 +97,6 @@
     <Compile Include="Model\Deployment\ZoneDeploymentConfiguration.cs" />
     <Compile Include="Model\Deployment\TileDeployment.cs" />
     <Compile Include="Model\Deployment\TileEntryDeployment.cs" />
-    <Compile Include="Controller\Subcontroller\PositionalDeploymentMicrocontroller.cs" />
     <Compile Include="Model\Orders\Deployment\PositionalDeployOrder.cs" />
     <Compile Include="Model\Orders\Movement\MovementOrder.cs" />
     <Compile Include="Model\Orders\Deployment\NoDeployReason.cs" />
@@ -135,11 +124,9 @@
     <Compile Include="Model\Orders\Attack\AttackTarget.cs" />
     <Compile Include="View\Panes\DeploymentPage.cs" />
     <Compile Include="View\Panes\PositionalDeploymentPage.cs" />
-    <Compile Include="Controller\Subcontroller\DeploymentMicrocontroller.cs" />
     <Compile Include="Model\Orders\Deployment\EntryTileDeployOrder.cs" />
     <Compile Include="Model\Orders\Deployment\DeployOrder.cs" />
     <Compile Include="Model\Orders\Deployment\ConvoyOrderDeployOrder.cs" />
-    <Compile Include="Controller\Subcontroller\ConvoyDeploymentMicrocontroller.cs" />
     <Compile Include="View\Panes\ConvoyDeploymentPage.cs" />
     <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
     <Compile Include="Program.cs" />
@@ -180,15 +167,40 @@
     <Compile Include="Model\TileMatchers\MatcherSerializer.cs" />
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
     <Compile Include="Model\TurnInfo.cs" />
-    <Compile Include="Controller\RemotePlayerController.cs" />
     <Compile Include="Network\GameMessageSerializer.cs" />
     <Compile Include="Network\Messages\ExecuteOrderRequest.cs" />
-    <Compile Include="Controller\MatchAdapter.cs" />
-    <Compile Include="Controller\LocalMatchAdapter.cs" />
     <Compile Include="Network\Messages\ValidateOrderRequest.cs" />
     <Compile Include="Network\Messages\DoTurnRequest.cs" />
-    <Compile Include="Controller\RemoteMatchAdapter.cs" />
-    <Compile Include="Controller\PlayerClient.cs" />
+    <Compile Include="Network\PlayerClient.cs" />
+    <Compile Include="Model\Lobby.cs" />
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Controller\MatchController\GamePlayerController.cs" />
+    <Compile Include="Controller\MatchController\HumanGamePlayerController.cs" />
+    <Compile Include="Controller\MatchController\LocalMatchAdapter.cs" />
+    <Compile Include="Controller\MatchController\MatchAdapter.cs" />
+    <Compile Include="Controller\MatchController\RemoteMatchAdapter.cs" />
+    <Compile Include="Controller\MatchController\RemotePlayerController.cs" />
+    <Compile Include="Controller\ProgramFlowController.cs" />
+    <Compile Include="Controller\ProgramState.cs" />
+    <Compile Include="Controller\ProgramStateContext.cs" />
+    <Compile Include="Controller\ProgramContext.cs" />
+    <Compile Include="Controller\ProgramStateTransitionEventArgs.cs" />
+    <Compile Include="Controller\MatchContext.cs" />
+    <Compile Include="Controller\ProgramStateControllers\EditStateController.cs" />
+    <Compile Include="Controller\ProgramStateControllers\LocalMatchStateController.cs" />
+    <Compile Include="Controller\ProgramStateControllers\LocalScenarioSelectStateController.cs" />
+    <Compile Include="Controller\ProgramStateControllers\ProgramStateController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\AttackController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\BaseAttackController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\BaseController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\CloseAssaultController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\ConvoyDeploymentMicrocontroller.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\DeploymentController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\DeploymentMicrocontroller.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\MovementController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\OverrunController.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\PositionalDeploymentMicrocontroller.cs" />
+    <Compile Include="Controller\MatchController\Subcontroller\Subcontroller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -199,7 +211,6 @@
     <Folder Include="UnitSprites\" />
     <Folder Include="Maps\" />
     <Folder Include="Screenshots\" />
-    <Folder Include="Controller\Subcontroller\" />
     <Folder Include="Model\Deployment\" />
     <Folder Include="Model\Orders\" />
     <Folder Include="Model\Orders\Deployment\" />
@@ -213,6 +224,9 @@
     <Folder Include="BLKConfigurations\Scenarios\PanzerBlitz\" />
     <Folder Include="Network\" />
     <Folder Include="Network\Messages\" />
+    <Folder Include="Controller\MatchController\" />
+    <Folder Include="Controller\ProgramStateControllers\" />
+    <Folder Include="Controller\MatchController\Subcontroller\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

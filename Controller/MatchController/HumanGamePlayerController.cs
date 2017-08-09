@@ -69,6 +69,8 @@ namespace PanzerBlitz
 			_Controllers[TurnInfo.TurnComponent].Begin(TurnInfo.Army);
 		}
 
+		public void ExecuteOrder(Order Order) { }
+
 		void EndTurn(object sender, EventArgs e)
 		{
 			TurnComponent t = Match.GetTurnInfo().TurnComponent;

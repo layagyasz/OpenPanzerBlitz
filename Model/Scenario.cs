@@ -11,6 +11,7 @@ namespace PanzerBlitz
 		enum Attribute { NAME, MAP_CONFIGURATION, ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURN_ORDER, TURNS };
 
 		public readonly string Name;
+		public readonly string UniqueKey;
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly List<ArmyConfiguration> TurnOrder;
@@ -26,6 +27,7 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Name = (string)attributes[(int)Attribute.NAME];
+			UniqueKey = Block.Name;
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
 			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
@@ -44,6 +46,7 @@ namespace PanzerBlitz
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Name);
+			Stream.Write(UniqueKey);
 			Stream.Write(ArmyConfigurations);
 			Stream.Write(DeploymentOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
