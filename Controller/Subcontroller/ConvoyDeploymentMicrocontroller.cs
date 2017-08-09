@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		}
 
 		public ConvoyDeploymentMicrocontroller(
-			Match Match,
+			MatchAdapter Match,
 			GameScreen GameScreen,
 			ConvoyDeployment Deployment)
 			: base(Match, GameScreen)
@@ -123,7 +123,7 @@ namespace PanzerBlitz
 		void HighlightDeploymentArea(object Sender, EventArgs E)
 		{
 			Highlight(
-				_Match.Map.TilesEnumerable.Where(
+				_Match.GetMap().TilesEnumerable.Where(
 					i => _Deployment.Validate(i) == NoDeployReason.NONE)
 				.Select(i => new Tuple<Tile, Color>(
 					i, _Deployment.EntryTile == i

@@ -5,7 +5,7 @@ namespace PanzerBlitz
 	{
 		public abstract Deployment Deployment { get; }
 
-		public DeploymentMicrocontroller(Match Match, GameScreen GameScreen)
+		public DeploymentMicrocontroller(MatchAdapter Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 		}

@@ -11,7 +11,7 @@ namespace PanzerBlitz
 	{
 		Path<Tile> _InitialMovement;
 
-		public OverrunController(Match Match, GameScreen GameScreen)
+		public OverrunController(MatchAdapter Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 		}

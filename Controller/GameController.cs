@@ -14,9 +14,14 @@ namespace PanzerBlitz
 			Match.Start();
 		}
 
+		public void DoTurn(TurnInfo TurnInfo)
+		{
+			_PlayerControllers[TurnInfo.Army].DoTurn(TurnInfo);
+		}
+
 		void HandleTurn(object Sender, StartTurnComponentEventArgs E)
 		{
-			_PlayerControllers[E.TurnInfo.Army].DoTurn(E.TurnInfo);
+			DoTurn(E.TurnInfo);
 		}
 	}
 }

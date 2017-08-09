@@ -15,7 +15,7 @@ namespace PanzerBlitz
 
 		LoadUnitPane _LoadUnitPane;
 
-		public MovementController(bool VehicleMovement, Match Match, GameScreen GameScreen)
+		public MovementController(bool VehicleMovement, MatchAdapter Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 			this.VehicleMovement = VehicleMovement;

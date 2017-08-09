@@ -11,7 +11,7 @@ namespace PanzerBlitz
 		protected AttackOrder _AttackBuilder;
 		protected AttackPane _AttackPane;
 
-		public BaseAttackController(Match Match, GameScreen GameScreen)
+		public BaseAttackController(MatchAdapter Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 		}

@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 
 using Cardamom.Network;
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class GameMessageSerializer : RPCAdapter
+	public class GameMessageSerializer : MessageAdapter
 	{
 		static readonly Type[] _Messages =
 		{
-			typeof(ExecuteOrderMessage)
+			typeof(ExecuteOrderRequest)
 		};
 
 		Func<SerializationInputStream, Message>[] _Deserializers;
@@ -34,9 +34,9 @@ namespace PanzerBlitz
 		public GameMessageSerializer(OrderSerializer OrderSerializer)
 		{
 			_OrderSerializer = OrderSerializer;
-			_Deserializers = new Func<SerializationInputStream, GameMessage>[]
+			_Deserializers = new Func<SerializationInputStream, Message>[]
 			{
-				i => new ExecuteOrderMessage(i, _OrderSerializer)
+				i => new ExecuteOrderRequest(i, _OrderSerializer)
 			};
 		}
 	}

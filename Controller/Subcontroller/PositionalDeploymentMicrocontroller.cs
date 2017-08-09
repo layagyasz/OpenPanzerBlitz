@@ -20,7 +20,7 @@ namespace PanzerBlitz
 		}
 
 		public PositionalDeploymentMicrocontroller(
-			Match Match,
+			MatchAdapter Match,
 			GameScreen GameScreen,
 			PositionalDeployment Deployment)
 			: base(Match, GameScreen)
@@ -83,7 +83,7 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedStack != null)
 			{
 				Highlight(_DeploymentPage.SelectedStack.Peek().GetFieldOfDeployment(
-					_Match.Map.TilesEnumerable).Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+					_Match.GetMap().TilesEnumerable).Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
 			}
 			else UnHighlight();
 		}

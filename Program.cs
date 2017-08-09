@@ -56,7 +56,7 @@ namespace PanzerBlitz
 				new MapView(match.Map, TileRenderer.SUMMER_STEPPE),
 				match.Armies.Select(i => new ArmyView(i, renderer)));
 			HumanGamePlayerController controller =
-				new HumanGamePlayerController(match, renderer, screen, Interface.KeyController);
+				new HumanGamePlayerController(new LocalMatchAdapter(match), renderer, screen, Interface.KeyController);
 			Dictionary<Army, GamePlayerController> playerControllers = new Dictionary<Army, GamePlayerController>();
 			foreach (Army a in match.Armies) playerControllers.Add(a, controller);
 			GameController gameController = new GameController(match, playerControllers);

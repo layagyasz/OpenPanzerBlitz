@@ -8,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class AttackController : BaseAttackController
 	{
-		public AttackController(Match Match, GameScreen GameScreen)
+		public AttackController(MatchAdapter Match, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 		}

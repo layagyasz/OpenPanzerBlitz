@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		UnitConfigurationRenderer _Renderer;
 
-		public DeploymentController(Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+		public DeploymentController(MatchAdapter Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 			_Renderer = Renderer;

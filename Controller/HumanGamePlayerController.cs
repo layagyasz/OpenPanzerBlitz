@@ -20,10 +20,10 @@ namespace PanzerBlitz
 
 		TextBox _InfoDisplay = new TextBox("info-display");
 
-		public readonly Match Match;
+		public readonly MatchAdapter Match;
 
 		public HumanGamePlayerController(
-			Match Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
+			MatchAdapter Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
 		{
 			this.Match = Match;
 			_GameScreen = GameScreen;
@@ -71,7 +71,7 @@ namespace PanzerBlitz
 
 		void EndTurn(object sender, EventArgs e)
 		{
-			TurnComponent t = Match.CurrentPhase.TurnComponent;
+			TurnComponent t = Match.GetTurnInfo().TurnComponent;
 			if (_Controllers[t].Finish())
 			{
 				NextPhaseOrder order = new NextPhaseOrder();
@@ -85,31 +85,31 @@ namespace PanzerBlitz
 
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.CurrentPhase;
+			TurnInfo phase = Match.GetTurnInfo();
 			_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);
 		}
 
 		void OnTileRightClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.CurrentPhase;
+			TurnInfo phase = Match.GetTurnInfo();
 			_Controllers[phase.TurnComponent].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
 		void OnUnitClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.CurrentPhase;
+			TurnInfo phase = Match.GetTurnInfo();
 			_Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
 		}
 
 		void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.CurrentPhase;
+			TurnInfo phase = Match.GetTurnInfo();
 			_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 
 		void OnKeyPressed(object sender, KeyPressedEventArgs E)
 		{
-			TurnInfo phase = Match.CurrentPhase;
+			TurnInfo phase = Match.GetTurnInfo();
 			_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
 		}
 	}

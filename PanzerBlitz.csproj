@@ -181,9 +181,14 @@
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
     <Compile Include="Model\TurnInfo.cs" />
     <Compile Include="Controller\RemotePlayerController.cs" />
-    <Compile Include="Network\Messages\GameMessage.cs" />
     <Compile Include="Network\GameMessageSerializer.cs" />
-    <Compile Include="Network\Messages\ExecuteOrderMessage.cs" />
+    <Compile Include="Network\Messages\ExecuteOrderRequest.cs" />
+    <Compile Include="Controller\MatchAdapter.cs" />
+    <Compile Include="Controller\LocalMatchAdapter.cs" />
+    <Compile Include="Network\Messages\ValidateOrderRequest.cs" />
+    <Compile Include="Network\Messages\DoTurnRequest.cs" />
+    <Compile Include="Controller\RemoteMatchAdapter.cs" />
+    <Compile Include="Controller\PlayerClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
