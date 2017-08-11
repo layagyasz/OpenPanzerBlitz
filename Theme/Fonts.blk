@@ -1,0 +1,4 @@
+﻿font<>:fonts {
+	font:compacta { Compacta Std Regular.otf }
+	font:univers { Univers-light-normal.ttf }
+}

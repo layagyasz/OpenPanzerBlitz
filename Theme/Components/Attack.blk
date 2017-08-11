@@ -1,0 +1,24 @@
+﻿class:attack-pane {
+	!class:parent { pane }
+}
+class:attack-display {
+	!class:parent { pane-display }
+}
+class:attack-odds-box {
+	!class:parent { header-1 }
+}
+class:attack-odds-section {
+	!class:parent { header-2 }
+}
+class:attack-part-box {
+	!class:parent { regular }
+}
+class:attack-factor-box {
+	!class:parent { detail }
+}
+class:odds-factor-box {
+	!class:parent { footer }
+}
+class:attack-error-box {
+	!class:parent { footer-error }
+}

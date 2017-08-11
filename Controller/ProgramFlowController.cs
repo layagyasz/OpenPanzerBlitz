@@ -11,9 +11,10 @@ namespace PanzerBlitz
 		public readonly ProgramContext ProgramContext;
 
 		Dictionary<ProgramState, ProgramStateController> _ProgramStateControllers =
-			new Dictionary<ProgramState, ProgramStateController>()
+			new Dictionary<ProgramState, ProgramStateController>
 		{
-			{ ProgramState.EDIT_STATE, new EditStateController() },
+			{ ProgramState.LANDING, new LandingStateController() },
+			{ ProgramState.EDIT, new EditStateController() },
 			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
 			{ ProgramState.LOCAL_MATCH, new LocalMatchStateController() }
 		};

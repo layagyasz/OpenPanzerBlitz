@@ -1,0 +1,6 @@
+﻿class:edit-pane {
+	!class:parent { pane }
+	mode:default {
+		int:height { 84 }
+	}
+}

@@ -1,0 +1,9 @@
+﻿class:setup-network-connection-pane {
+	!class:parent { pane }
+	mode:default {
+		int:height { 84 }
+	}
+}
+class:setup-network-connection-text-input {
+	!class:parent { text-input }
+}

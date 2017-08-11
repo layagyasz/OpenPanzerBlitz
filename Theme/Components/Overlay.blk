@@ -1,0 +1,20 @@
+﻿class:screen-alert {
+	mode:default {
+		!font:font-face { fonts.univers }
+		color:font-color { #FF0000 }
+		int:font-size { 32 }
+		int:height { 48 }
+		int:width { 512 }
+	}
+}
+class:info-display {
+	mode:default {
+		int:height { 96 }
+		int:width { 288 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 12 }
+		int[]:padding { 8 8 8 8 }
+	}
+}

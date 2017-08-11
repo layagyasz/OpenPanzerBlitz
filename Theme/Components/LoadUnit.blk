@@ -1,0 +1,11 @@
+﻿class:load-unit-pane {
+	mode:default {
+		int:height { 108 }
+		int:width { 320 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+		int[]:padding { 16 16 16 16 }
+	}
+}
+class:load-unit-header {
+	!class:parent { header-1 }
+}

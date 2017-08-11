@@ -16,10 +16,12 @@ namespace PanzerBlitz
 		{
 			_Match = Match;
 			_OrderSerializer = new OrderSerializer(Match.GetGameObjects());
-			_Adapter = new RPCAdapter(Client, new Dictionary<Type, Func<RPCRequest, RPCResponse>>()
-			{
-				{ typeof(ValidateOrderRequest), i => HandleValidateOrderRequest((ValidateOrderRequest)i) },
-				{ typeof(ExecuteOrderRequest), i => HandleExecuteOrderRequest((ExecuteOrderRequest)i) }
+			_Adapter = new RPCAdapter(
+				new GameMessageSerializer(Client.Connection, _OrderSerializer),
+				new Dictionary<Type, Func<RPCRequest, RPCResponse>>
+				{
+					{ typeof(ValidateOrderRequest), i => HandleValidateOrderRequest((ValidateOrderRequest)i) },
+					{ typeof(ExecuteOrderRequest), i => HandleExecuteOrderRequest((ExecuteOrderRequest)i) }
 			});
 		}
 

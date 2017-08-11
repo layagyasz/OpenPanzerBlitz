@@ -17,10 +17,12 @@ namespace PanzerBlitz
 		{
 			_GameController = GameController;
 			_Match = Match;
-			_Adapter = new RPCAdapter(Client, new Dictionary<Type, Func<RPCRequest, RPCResponse>>()
-			{
-				{ typeof(ExecuteOrderRequest), i => HandleExecuteOrderRequest((ExecuteOrderRequest)i) }
-			});
+			_Adapter = new RPCAdapter(
+				new GameMessageSerializer(Client.Connection, new OrderSerializer(Match.GetGameObjects())),
+				new Dictionary<Type, Func<RPCRequest, RPCResponse>>
+				{
+					{ typeof(ExecuteOrderRequest), i => HandleExecuteOrderRequest((ExecuteOrderRequest)i) }
+				});
 		}
 
 		RPCResponse HandleExecuteOrderRequest(ExecuteOrderRequest Request)

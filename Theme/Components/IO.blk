@@ -1,0 +1,27 @@
+﻿class:io-pane {
+	mode:default {
+		int:height { 768 }
+		int:width { 512 }
+		int[]:padding { 16 16 16 16 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+	}
+}
+class:io-select {
+	mode:default {
+		int:height { 688 }
+		int:width { 480 }
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+	}
+}
+class:io-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 480 }
+	}
+}
+class:io-text-input {
+	!class:parent { text-input }
+	mode:default {
+		int:width { 480 }
+	}
+}

@@ -201,6 +201,12 @@
     <Compile Include="Controller\MatchController\Subcontroller\OverrunController.cs" />
     <Compile Include="Controller\MatchController\Subcontroller\PositionalDeploymentMicrocontroller.cs" />
     <Compile Include="Controller\MatchController\Subcontroller\Subcontroller.cs" />
+    <Compile Include="View\Screens\ScreenBase.cs" />
+    <Compile Include="Controller\ProgramStateControllers\LandingStateController.cs" />
+    <Compile Include="View\Screens\LandingScreen.cs" />
+    <Compile Include="Controller\LandingController.cs" />
+    <Compile Include="View\Panes\SetupNetworkConnectionPane.cs" />
+    <Compile Include="Controller\RemoteMatchContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -227,6 +233,8 @@
     <Folder Include="Controller\MatchController\" />
     <Folder Include="Controller\ProgramStateControllers\" />
     <Folder Include="Controller\MatchController\Subcontroller\" />
+    <Folder Include="Theme\" />
+    <Folder Include="Theme\Components\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -249,9 +257,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Factions.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Theme.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Compacta Std Regular.otf">
@@ -978,6 +983,39 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_04.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Fonts.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Base.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\Attack.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\Deployment.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\LoadUnit.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\LocalScenarioSelect.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\Edit.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\IO.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\Landing.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\NetworkConnect.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\Overlay.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

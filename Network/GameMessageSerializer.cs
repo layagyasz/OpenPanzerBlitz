@@ -31,7 +31,8 @@ namespace PanzerBlitz
 
 		OrderSerializer _OrderSerializer;
 
-		public GameMessageSerializer(OrderSerializer OrderSerializer)
+		public GameMessageSerializer(TCPConnection Connection, OrderSerializer OrderSerializer)
+			: base(Connection)
 		{
 			_OrderSerializer = OrderSerializer;
 			_Deserializers = new Func<SerializationInputStream, Message>[]

@@ -1,0 +1,143 @@
+﻿class:select {
+	mode:default {
+		color[]:background-color { #484848 #484848 #484848 #484848 }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 12 }
+		int:height { 24 }
+		int:width { 288 }
+		int[]:padding { 0 0 0 0 }
+		int[]:margin { 0 0 0 0 }
+	}
+	mode:hover {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:focus {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected-hover {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}
+class:select-option
+{
+	!class:parent { select }
+	mode:default {
+		int[]:padding { 8 2 8 2 }
+		int[]:margin { 0 0 0 2 }
+	}
+}
+class:normal-button {
+	!class:parent { select-option }
+	mode:default {
+		int[]:margin { 0 1 0 1 }
+	}
+}
+class:small-button {
+	!class:parent { normal-button }
+	mode:default {
+		int:width { 140 }
+	}
+}
+class:large-button {
+	mode:default {
+		int:height { 32 }
+		int:width { 288 }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 18 }
+		color[]:background-color { #484848 #484848 #484848 #484848 }
+		int[]:padding { 16 2 16 2 }
+	}
+	mode:hover {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}
+class:large-selection-option {
+	!class:parent { large-button }
+	mode:default {
+		int:height { 32 }
+		int:width { 636 }
+		int[]:margin { 0 3 0 3 }
+	}
+}
+class:pane {
+	mode:default {
+		int:height { 768 }
+		int:width { 320 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+		int[]:padding { 16 16 16 16 }
+	}
+}
+class:pane-display {
+	mode:default {
+		int:height { 662 }
+		int:width { 288 }
+	}
+}
+class:header-1 {
+	mode:default {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 18 }
+		int:height { 40 }
+		int:width { 288 }
+		int[]:padding { 8 6 8 6 }
+		int[]:margin { 0 8 0 1 }
+	}
+}
+class:header-2 {
+	mode:default {
+		color[]:background-color { #484848 #484848 #484848 #484848 }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 12 }
+		int:height { 24 }
+		int:width { 288 }
+		int[]:padding { 8 2 8 2 }
+		int[]:margin { 0 1 0 1 }
+	}
+}
+class:regular {
+	!class:parent { header-2 }
+	mode:default {
+		color[]:background-color { #626262 #626262 #626262 #626262 }
+		int:font-size { 14 }
+		int:height { 32 }
+		int[]:padding { 8 5 8 5 }
+	}
+}
+class:detail {
+	!class:parent { header-2 }
+	mode:default {
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+	}
+}
+class:footer {
+	!class:parent { detail }
+	mode:default {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+}
+class:footer-error {
+	!class:parent { regular }
+	mode:default {
+		color[]:background-color { #AD4531 #AD4531 #AD4531 #AD4531 }
+	}
+}
+class:text-input {
+	!class:parent { select-option }
+	mode:default {
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+	}
+	mode:hover {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+	mode:focus {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+}
