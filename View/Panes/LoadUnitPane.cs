@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Window;
 
@@ -10,7 +10,7 @@ namespace PanzerBlitz
 {
 	public class LoadUnitPane : Pane
 	{
-		public EventHandler<ValueChangedEventArgs<Unit>> OnUnitSelected;
+		public EventHandler<ValuedEventArgs<Unit>> OnUnitSelected;
 
 		Select<Unit> _UnitSelect = new Select<Unit>("select");
 
@@ -34,9 +34,9 @@ namespace PanzerBlitz
 			Add(_UnitSelect);
 		}
 
-		void HandleChange(object sender, ValueChangedEventArgs<StandardItem<Unit>> E)
+		void HandleChange(object sender, ValuedEventArgs<StandardItem<Unit>> E)
 		{
-			if (OnUnitSelected != null) OnUnitSelected(this, new ValueChangedEventArgs<Unit>(E.Value.Value));
+			if (OnUnitSelected != null) OnUnitSelected(this, new ValuedEventArgs<Unit>(E.Value.Value));
 		}
 	}
 }

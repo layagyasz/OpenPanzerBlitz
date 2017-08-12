@@ -41,6 +41,13 @@ namespace PanzerBlitz
 
 		public Scenario(SerializationInputStream Stream)
 		{
+			Name = Stream.ReadString();
+			UniqueKey = Stream.ReadString();
+			ArmyConfigurations = Stream.ReadEnumerable(i => new ArmyConfiguration(Stream)).ToList();
+			DeploymentOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
+			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
+			Turns = Stream.ReadByte();
+			MapConfiguration = new MapConfiguration(Stream);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

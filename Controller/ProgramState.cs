@@ -7,6 +7,6 @@ namespace PanzerBlitz
 		EDIT,
 		LOCAL_SCENARIO_SELECT,
 		LOCAL_MATCH,
-		REMOTE_MATCH_LOBBY
+		MATCH_LOBBY
 	}
 }

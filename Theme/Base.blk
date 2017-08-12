@@ -87,7 +87,7 @@ class:header-1 {
 		int:height { 40 }
 		int:width { 288 }
 		int[]:padding { 8 6 8 6 }
-		int[]:margin { 0 8 0 1 }
+		int[]:margin { 0 1 0 8 }
 	}
 }
 class:header-2 {

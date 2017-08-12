@@ -15,6 +15,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, SCENARIOS };
 
+		public static Player Player = new Player("Player " + DateTime.Now.Ticks.ToString());
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
 		public static UnitConfiguration Wreckage;

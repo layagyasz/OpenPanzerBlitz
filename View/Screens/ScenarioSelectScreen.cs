@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -11,7 +12,7 @@ namespace PanzerBlitz
 {
 	public class ScenarioSelectScreen : ScreenBase
 	{
-		public EventHandler<ValueChangedEventArgs<Scenario>> OnScenarioSelected;
+		public EventHandler<ValuedEventArgs<Scenario>> OnScenarioSelected;
 
 		ScrollCollection<Scenario> _ScenarioSelect = new ScrollCollection<Scenario>("scenario-select");
 
@@ -31,10 +32,10 @@ namespace PanzerBlitz
 			_ScenarioSelect.Position = .5f * (WindowSize - _ScenarioSelect.Size);
 		}
 
-		void HandleSelect(object Sender, ValueChangedEventArgs<ClassedGuiInput<Scenario>> E)
+		void HandleSelect(object Sender, ValuedEventArgs<ClassedGuiInput<Scenario>> E)
 		{
 			if (OnScenarioSelected != null)
-				OnScenarioSelected(this, new ValueChangedEventArgs<Scenario>(E.Value.Value));
+				OnScenarioSelected(this, new ValuedEventArgs<Scenario>(E.Value.Value));
 		}
 
 		public override void Update(

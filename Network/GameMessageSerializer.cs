@@ -5,40 +5,18 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class GameMessageSerializer : MessageAdapter
+	public class GameMessageSerializer : SerializableAdapter
 	{
-		static readonly Type[] _Messages =
-		{
-			typeof(ExecuteOrderRequest)
-		};
-
-		Func<SerializationInputStream, Message>[] _Deserializers;
-
-		public override Type[] Messages
-		{
-			get
-			{
-				return _Messages;
-			}
-		}
-		public override Func<SerializationInputStream, Message>[] Deserializers
-		{
-			get
-			{
-				return _Deserializers;
-			}
-		}
-
 		OrderSerializer _OrderSerializer;
 
-		public GameMessageSerializer(TCPConnection Connection, OrderSerializer OrderSerializer)
-			: base(Connection)
+		public GameMessageSerializer(OrderSerializer OrderSerializer)
+			: base(new Tuple<Type, Func<SerializationInputStream, Serializable>>[]
+		{
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(ExecuteOrderRequest), i => new ExecuteOrderRequest(i, OrderSerializer))
+		})
 		{
 			_OrderSerializer = OrderSerializer;
-			_Deserializers = new Func<SerializationInputStream, Message>[]
-			{
-				i => new ExecuteOrderRequest(i, _OrderSerializer)
-			};
 		}
 	}
 }

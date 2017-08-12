@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Cardamom.Interface;
 using Cardamom.Interface.Items;
-
-using SFML.Graphics;
+using Cardamom.Utilities;
 
 
 namespace PanzerBlitz
@@ -46,7 +44,7 @@ namespace PanzerBlitz
 			_DeploymentPageSelect.Add(option);
 		}
 
-		void SetActivePage(object sender, ValueChangedEventArgs<StandardItem<DeploymentPage>> E)
+		void SetActivePage(object sender, ValuedEventArgs<StandardItem<DeploymentPage>> E)
 		{
 			_Pages.ForEach(i => i.Visible = false);
 			E.Value.Value.Visible = true;

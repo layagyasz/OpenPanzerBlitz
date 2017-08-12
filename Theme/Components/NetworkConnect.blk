@@ -1,7 +1,13 @@
 ﻿class:setup-network-connection-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 84 }
+		int:height { 166 }
+	}
+}
+class:setup-network-connection-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 114 }
 	}
 }
 class:setup-network-connection-text-input {

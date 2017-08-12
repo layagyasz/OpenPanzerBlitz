@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 
 using Cardamom.Interface;
+using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
@@ -15,7 +16,7 @@ namespace PanzerBlitz
 			return scenarioSelect;
 		}
 
-		void HandleStartScenario(object Sender, ValueChangedEventArgs<Scenario> E)
+		void HandleStartScenario(object Sender, ValuedEventArgs<Scenario> E)
 		{
 			if (OnProgramStateTransition != null)
 				OnProgramStateTransition(

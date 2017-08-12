@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-using Cardamom.Interface;
+using Cardamom.Utilities;
 
 using SFML.Window;
 
@@ -66,7 +66,7 @@ namespace PanzerBlitz
 			else _AttackPane.UpdateDescription();
 		}
 
-		void ChangeAttackTarget(object Sender, ValueChangedEventArgs<AttackTarget> E)
+		void ChangeAttackTarget(object Sender, ValuedEventArgs<AttackTarget> E)
 		{
 			_AttackBuilder.SetAttackTarget(E.Value);
 			_AttackPane.UpdateDescription();

@@ -1,0 +1,9 @@
+﻿class:match-lobby-pane {
+	!class:parent { pane }
+	mode:default {
+		int:width { 624 }
+	}
+}
+class:match-lobby-display {
+	!class:parent { pane-display }
+}

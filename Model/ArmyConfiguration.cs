@@ -49,12 +49,12 @@ namespace PanzerBlitz
 		{
 			Faction = GameData.Factions[Stream.ReadString()];
 			Team = Stream.ReadByte();
-			Stream.ReadEnumerable(i =>
+			DeploymentConfigurations = Stream.ReadEnumerable(i =>
 			{
 				return new Tuple<List<UnitConfiguration>, DeploymentConfiguration>(
 					Stream.ReadEnumerable(j => GameData.UnitConfigurations[Stream.ReadString()]).ToList(),
 					DeploymentConfigurationSerializer.Deserialize(Stream));
-			});
+			}).ToList();
 			VictoryCondition = new VictoryCondition(Stream);
 		}
 
@@ -65,7 +65,7 @@ namespace PanzerBlitz
 			Stream.Write(DeploymentConfigurations, i =>
 			{
 				Stream.Write(i.Item1, j => Stream.Write(j.UniqueKey));
-				Stream.Write(i.Item2);
+				DeploymentConfigurationSerializer.Serialize(i.Item2, Stream);
 			});
 			Stream.Write(VictoryCondition);
 		}

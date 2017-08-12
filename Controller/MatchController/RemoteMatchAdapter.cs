@@ -8,14 +8,14 @@ namespace PanzerBlitz
 	public class RemoteMatchAdapter : MatchAdapter
 	{
 		Match _LocalMatch;
-		RPCAdapter _Adapter;
+		TCPClient _Client;
 		OrderSerializer _Serializer;
 
-		public RemoteMatchAdapter(Match LocalMatch, RPCAdapter Adapter)
+		public RemoteMatchAdapter(Match LocalMatch, TCPClient Client, OrderSerializer Serializer)
 		{
 			_LocalMatch = LocalMatch;
-			_Serializer = new OrderSerializer(LocalMatch.GetGameObjects());
-			_Adapter = Adapter;
+			_Client = Client;
+			_Serializer = Serializer;
 		}
 
 		public Map GetMap()
@@ -30,12 +30,12 @@ namespace PanzerBlitz
 
 		public bool ValidateOrder(Order Order)
 		{
-			return ((BooleanResponse)_Adapter.Call(new ValidateOrderRequest(Order, _Serializer)).Get()).Value;
+			return ((BooleanResponse)_Client.Call(new ValidateOrderRequest(Order, _Serializer)).Get()).Value;
 		}
 
 		public bool ExecuteOrder(Order Order)
 		{
-			return ((BooleanResponse)_Adapter.Call(new ExecuteOrderRequest(Order, _Serializer)).Get()).Value;
+			return ((BooleanResponse)_Client.Call(new ExecuteOrderRequest(Order, _Serializer)).Get()).Value;
 		}
 	}
 }

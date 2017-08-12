@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Tile.cs" />
     <Compile Include="Model\TileBase.cs" />
+    <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitClass.cs" />
     <Compile Include="Model\UnitConfiguration.cs" />
@@ -57,15 +58,15 @@
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
     <Compile Include="Model\MovementEventArgs.cs" />
-    <Compile Include="View\ArmyView.cs" />
     <Compile Include="View\Panes\DeploymentPane.cs" />
     <Compile Include="View\Panes\PositionalDeploymentSelectionOption.cs" />
-    <Compile Include="Model\Scenario.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Model\Match.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
+    <Compile Include="View\ArmyView.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="View\Panes\EditPane.cs" />
     <Compile Include="View\TileRenderer.cs" />
     <Compile Include="Model\TileComponent.cs" />
-    <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
     <Compile Include="Model\TileConfiguration.cs" />
@@ -115,12 +115,12 @@
     <Compile Include="Model\Orders\Attack\OddsCalculationFactor.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\NextPhaseOrder.cs" />
+    <Compile Include="Model\Orders\Attack\OverrunSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\SingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\NoAttackReason.cs" />
     <Compile Include="Model\Orders\Attack\NormalSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\NoLineOfSightReason.cs" />
     <Compile Include="Model\Orders\Movement\NoUnloadReason.cs" />
-    <Compile Include="Model\Orders\Attack\OverrunSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AttackTarget.cs" />
     <Compile Include="View\Panes\DeploymentPage.cs" />
     <Compile Include="View\Panes\PositionalDeploymentPage.cs" />
@@ -170,16 +170,13 @@
     <Compile Include="Network\GameMessageSerializer.cs" />
     <Compile Include="Network\Messages\ExecuteOrderRequest.cs" />
     <Compile Include="Network\Messages\ValidateOrderRequest.cs" />
-    <Compile Include="Network\Messages\DoTurnRequest.cs" />
-    <Compile Include="Network\PlayerClient.cs" />
-    <Compile Include="Model\Lobby.cs" />
+    <Compile Include="Model\MatchLobby.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Controller\MatchController\GamePlayerController.cs" />
     <Compile Include="Controller\MatchController\HumanGamePlayerController.cs" />
     <Compile Include="Controller\MatchController\LocalMatchAdapter.cs" />
     <Compile Include="Controller\MatchController\MatchAdapter.cs" />
     <Compile Include="Controller\MatchController\RemoteMatchAdapter.cs" />
-    <Compile Include="Controller\MatchController\RemotePlayerController.cs" />
     <Compile Include="Controller\ProgramFlowController.cs" />
     <Compile Include="Controller\ProgramState.cs" />
     <Compile Include="Controller\ProgramStateContext.cs" />
@@ -206,7 +203,20 @@
     <Compile Include="View\Screens\LandingScreen.cs" />
     <Compile Include="Controller\LandingController.cs" />
     <Compile Include="View\Panes\SetupNetworkConnectionPane.cs" />
-    <Compile Include="Controller\RemoteMatchContext.cs" />
+    <Compile Include="Controller\NetworkContext.cs" />
+    <Compile Include="Controller\ProgramStateControllers\MatchLobbyStateController.cs" />
+    <Compile Include="View\Screens\MatchLobbyScreen.cs" />
+    <Compile Include="Controller\MatchLobbyController\MatchLobbyAdapter.cs" />
+    <Compile Include="Controller\MatchLobbyController\LocalMatchLobbyAdapter.cs" />
+    <Compile Include="Model\LobbyActions\LobbyAction.cs" />
+    <Compile Include="Model\LobbyActions\AddPlayerAction.cs" />
+    <Compile Include="Model\LobbyActions\LobbyActionSerializer.cs" />
+    <Compile Include="Network\Messages\ApplyLobbyActionRequest.cs" />
+    <Compile Include="Network\NonGameMessageSerializer.cs" />
+    <Compile Include="Controller\LobbyContext.cs" />
+    <Compile Include="Network\LobbyRPCHandler.cs" />
+    <Compile Include="Network\Messages\GetLobbyResponse.cs" />
+    <Compile Include="Network\Messages\GetLobbyRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -235,6 +245,8 @@
     <Folder Include="Controller\MatchController\Subcontroller\" />
     <Folder Include="Theme\" />
     <Folder Include="Theme\Components\" />
+    <Folder Include="Controller\MatchLobbyController\" />
+    <Folder Include="Model\LobbyActions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1016,6 +1028,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme\Components\Overlay.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\MatchLobby.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

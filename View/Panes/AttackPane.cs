@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 
-using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Window;
 
@@ -10,7 +10,7 @@ namespace PanzerBlitz
 {
 	public class AttackPane : Pane
 	{
-		public EventHandler<ValueChangedEventArgs<AttackTarget>> OnAttackTargetChanged;
+		public EventHandler<ValuedEventArgs<AttackTarget>> OnAttackTargetChanged;
 		public EventHandler<EventArgs> OnExecute;
 
 		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
@@ -109,10 +109,10 @@ namespace PanzerBlitz
 			else return string.Format("Attack at {0}-1 {1} for", OddsCalculation.Odds, dieModifier);
 		}
 
-		void HandleAttackTargetChanged(object Sender, ValueChangedEventArgs<StandardItem<AttackTarget>> E)
+		void HandleAttackTargetChanged(object Sender, ValuedEventArgs<StandardItem<AttackTarget>> E)
 		{
 			if (OnAttackTargetChanged != null)
-				OnAttackTargetChanged(this, new ValueChangedEventArgs<AttackTarget>(E.Value.Value));
+				OnAttackTargetChanged(this, new ValuedEventArgs<AttackTarget>(E.Value.Value));
 		}
 	}
 }

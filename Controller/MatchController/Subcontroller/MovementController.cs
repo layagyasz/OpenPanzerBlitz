@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Cardamom.Interface;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -109,7 +109,7 @@ namespace PanzerBlitz
 			else if (Key == Keyboard.Key.U) UnloadUnit();
 		}
 
-		void LoadUnit(object sender, ValueChangedEventArgs<Unit> E)
+		void LoadUnit(object sender, ValuedEventArgs<Unit> E)
 		{
 			LoadUnit(E.Value);
 		}

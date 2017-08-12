@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Cardamom.Interface;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -131,7 +131,7 @@ namespace PanzerBlitz
 					: HIGHLIGHT_COLORS[0])));
 		}
 
-		void LoadUnit(object Sender, ValueChangedEventArgs<Unit> E)
+		void LoadUnit(object Sender, ValuedEventArgs<Unit> E)
 		{
 			LoadUnit(E.Value);
 		}

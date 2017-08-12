@@ -86,7 +86,7 @@ namespace PanzerBlitz
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
-		public NoSingleAttackReason Validate()
+		public override NoSingleAttackReason Validate()
 		{
 			if (_Validate != NoMoveReason.NONE) return NoSingleAttackReason.TERRAIN;
 			NoSingleAttackReason r = _InitialMovement.Unit.CanAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);

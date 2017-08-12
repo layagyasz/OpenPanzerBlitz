@@ -1,13 +1,13 @@
 ﻿using System;
 
-using Cardamom.Interface;
 using Cardamom.Network;
+using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
 	public class LandingController
 	{
-		public EventHandler<ValueChangedEventArgs<TCPClient>> OnConnectionSetup;
+		public EventHandler<ValuedEventArgs<LobbyContext>> OnConnectionSetup;
 
 		LandingScreen _LandingScreen;
 		SetupNetworkConnectionPane _ConnectionPane;
@@ -30,10 +30,23 @@ namespace PanzerBlitz
 			_LandingScreen.PaneLayer.Add(_ConnectionPane);
 		}
 
-		void HandleRemoteConnect(object Sender, ValueChangedEventArgs<string> E)
+		void HandleRemoteConnect(object Sender, ValuedEventArgs<string> E)
 		{
 			if (OnConnectionSetup != null)
-				OnConnectionSetup(this, new ValueChangedEventArgs<TCPClient>(new TCPClient(E.Value, 1000)));
+			{
+				TCPClient client = new TCPClient(E.Value, 1000);
+				client.MessageAdapter = new NonGameMessageSerializer();
+				LobbyRPCHandler handler = new LobbyRPCHandler();
+				client.RPCHandler = handler;
+				client.Start();
+
+				client.Call(new ApplyLobbyActionRequest(new AddPlayerAction(GameData.Player))).Get();
+				MatchLobby lobby = ((GetLobbyResponse)client.Call(
+					new GetLobbyRequest()).Get()).Lobby;
+				handler.SetLobby(lobby);
+
+				OnConnectionSetup(this, new ValuedEventArgs<LobbyContext>(new LobbyContext(client, lobby)));
+			}
 		}
 	}
 }

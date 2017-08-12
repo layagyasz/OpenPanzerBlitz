@@ -10,6 +10,7 @@ namespace PanzerBlitz
 	public abstract class ScreenBase : Pod
 	{
 		static Color ORANGE = new Color(172, 107, 26);
+		static Color DARK_GRAY = new Color(10, 10, 10);
 		Vertex[] _Backdrop;
 
 		public ScreenBase(Vector2f WindowSize)
@@ -21,10 +22,10 @@ namespace PanzerBlitz
 				new Vertex(new Vector2f(WindowSize.X, .33f * WindowSize.Y), ORANGE),
 				new Vertex(new Vector2f(0, .33f * WindowSize.Y), ORANGE),
 
-				new Vertex(new Vector2f(0, .33f * WindowSize.Y), Color.Black),
-				new Vertex(new Vector2f(WindowSize.X, .33f * WindowSize.Y), Color.Black),
-				new Vertex(WindowSize, Color.Black),
-				new Vertex(new Vector2f(0, WindowSize.Y), Color.Black)
+				new Vertex(new Vector2f(0, .33f * WindowSize.Y), DARK_GRAY),
+				new Vertex(new Vector2f(WindowSize.X, .33f * WindowSize.Y), DARK_GRAY),
+				new Vertex(WindowSize, DARK_GRAY),
+				new Vertex(new Vector2f(0, WindowSize.Y), DARK_GRAY)
 			};
 		}
 
