@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Cardamom.Network;
 using Cardamom.Utilities;
@@ -7,7 +7,7 @@ namespace PanzerBlitz
 {
 	public class LandingController
 	{
-		public EventHandler<ValuedEventArgs<LobbyContext>> OnConnectionSetup;
+		public EventHandler<ValuedEventArgs<MatchLobbyContext>> OnConnectionSetup;
 
 		LandingScreen _LandingScreen;
 		SetupNetworkConnectionPane _ConnectionPane;
@@ -32,21 +32,18 @@ namespace PanzerBlitz
 
 		void HandleRemoteConnect(object Sender, ValuedEventArgs<string> E)
 		{
-			if (OnConnectionSetup != null)
+			NetworkContext client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
+			if (client != null)
 			{
-				TCPClient client = new TCPClient(E.Value, 1000);
-				client.MessageAdapter = new NonGameMessageSerializer();
-				LobbyRPCHandler handler = new LobbyRPCHandler();
-				client.RPCHandler = handler;
-				client.Start();
-
-				client.Call(new ApplyLobbyActionRequest(new AddPlayerAction(GameData.Player))).Get();
-				MatchLobby lobby = ((GetLobbyResponse)client.Call(
-					new GetLobbyRequest()).Get()).Lobby;
-				handler.SetLobby(lobby);
-
-				OnConnectionSetup(this, new ValuedEventArgs<LobbyContext>(new LobbyContext(client, lobby)));
+				MatchLobbyContext lobby = client.MakeLobbyContext();
+				if (lobby != null) OnConnectionSetup(this, new ValuedEventArgs<MatchLobbyContext>(lobby));
+				else
+				{
+					_ConnectionPane.SetError("Failed to join lobby");
+					client.Close();
+				}
 			}
+			else _ConnectionPane.SetError("Failed to establish connection");
 		}
 	}
 }

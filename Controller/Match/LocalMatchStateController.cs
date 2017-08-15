@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +11,7 @@ namespace PanzerBlitz
 	public class LocalMatchStateController : ProgramStateController
 	{
 		Match _Match;
-		GameController _GameController;
+		MatchController _GameController;
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
@@ -26,9 +26,9 @@ namespace PanzerBlitz
 			HumanGamePlayerController controller =
 				new HumanGamePlayerController(
 					new LocalMatchAdapter(_Match), renderer, screen, ProgramContext.KeyController);
-			Dictionary<Army, GamePlayerController> playerControllers = new Dictionary<Army, GamePlayerController>();
+			Dictionary<Army, MatchPlayerController> playerControllers = new Dictionary<Army, MatchPlayerController>();
 			foreach (Army a in _Match.Armies) playerControllers.Add(a, controller);
-			_GameController = new GameController(_Match, playerControllers);
+			_GameController = new MatchController(_Match, playerControllers, true);
 
 			return screen;
 		}

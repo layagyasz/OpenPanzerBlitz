@@ -1,7 +1,7 @@
 ﻿class:setup-network-connection-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 166 }
+		int:height { 190 }
 	}
 }
 class:setup-network-connection-display {
@@ -12,4 +12,10 @@ class:setup-network-connection-display {
 }
 class:setup-network-connection-text-input {
 	!class:parent { text-input }
+}
+class:setup-network-connection-error {
+	!class:parent { header-2 }
+	mode:default {
+		color[]:background-color { #AD4531 #AD4531 #AD4531 #AD4531 }
+	}
 }

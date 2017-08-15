@@ -11,7 +11,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class HumanGamePlayerController : GamePlayerController
+	public class HumanGamePlayerController : MatchPlayerController
 	{
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
@@ -68,8 +68,6 @@ namespace PanzerBlitz
 				string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, TurnInfo.TurnComponent);
 			_Controllers[TurnInfo.TurnComponent].Begin(TurnInfo.Army);
 		}
-
-		public void ExecuteOrder(Order Order) { }
 
 		void EndTurn(object sender, EventArgs e)
 		{

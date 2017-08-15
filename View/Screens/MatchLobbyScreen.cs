@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -11,18 +12,24 @@ namespace PanzerBlitz
 {
 	public class MatchLobbyScreen : ScreenBase
 	{
-		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("match-lobby-pane");
-		ScrollCollection<object> _Display = new ScrollCollection<object>("match-lobby-display");
+		public EventHandler<ValuedEventArgs<Tuple<Player, ArmyConfiguration>>> OnArmyConfigurationSelected;
+		public EventHandler<ValuedEventArgs<Tuple<Player, bool>>> OnPlayerReadyStateChanged;
 
+		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("match-lobby-pane");
+		SingleColumnTable _Display = new SingleColumnTable("match-lobby-display");
+
+		bool _Dirty;
 		bool _Host;
 		MatchLobby _Lobby;
+		Player _Player;
 
-		public MatchLobbyScreen(Vector2f WindowSize, bool Host, MatchLobby Lobby)
+		public MatchLobbyScreen(Vector2f WindowSize, bool Host, MatchLobby Lobby, Player Player)
 			: base(WindowSize)
 		{
 			_Host = Host;
 			_Lobby = Lobby;
-			_Lobby.OnActionApplied += (sender, e) => DisplayPlayers();
+			_Lobby.OnActionApplied += (sender, e) => _Dirty = true;
+			_Player = Player;
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 			_Pane.Add(_Display);
@@ -33,13 +40,31 @@ namespace PanzerBlitz
 		{
 			_Display.Clear();
 			_Display.Add(new Button("header-1") { DisplayedString = _Host ? "Host Match" : "Remote Match" });
-			foreach (KeyValuePair<Player, ArmyConfiguration> p in _Lobby.PlayerConfiguration)
-				_Display.Add(new Button("regular") { DisplayedString = p.Key.Name });
+			_Display.Add(new Button("header-2") { DisplayedString = "Player Setup" });
+			foreach (Player p in _Lobby.Players)
+			{
+				MatchLobbyPlayerSection section = new MatchLobbyPlayerSection(p, _Lobby, p == _Player);
+				section.OnArmyConfigurationSelected += HandleArmyConfigurationSelected;
+				section.OnPlayerReadyStateChanged += HandlePlayerReadyStateChanged;
+				_Display.Add(section);
+			}
+			_Dirty = false;
+		}
+
+		void HandleArmyConfigurationSelected(object Sender, ValuedEventArgs<Tuple<Player, ArmyConfiguration>> E)
+		{
+			if (OnArmyConfigurationSelected != null) OnArmyConfigurationSelected(this, E);
+		}
+
+		void HandlePlayerReadyStateChanged(object Sender, ValuedEventArgs<Tuple<Player, bool>> E)
+		{
+			if (OnPlayerReadyStateChanged != null) OnPlayerReadyStateChanged(this, E);
 		}
 
 		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			if (_Dirty) DisplayPlayers();
 			_Pane.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 

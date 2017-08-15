@@ -40,40 +40,6 @@ namespace PanzerBlitz
 			_IdGenerator = IdGenerator;
 		}
 
-		public bool AutomatePhase(Match Match, TurnComponent TurnComponent, Random Random)
-		{
-			switch (TurnComponent)
-			{
-				case TurnComponent.ATTACK:
-					return !Deployments.Any(
-						i => i.Units.Any(j => j.CanAttack(AttackMethod.NORMAL_FIRE) == NoSingleAttackReason.NONE));
-				case TurnComponent.CLOSE_ASSAULT:
-					return !Deployments.Any(
-						i => i.Units.Any(j => j.CanAttack(AttackMethod.CLOSE_ASSAULT) == NoSingleAttackReason.NONE));
-				case TurnComponent.DEPLOYMENT:
-					return Deployments.All(i => i.AutomateDeployment(Match));
-				case TurnComponent.MINEFIELD_ATTACK:
-					DoMinefieldAttacks(Random);
-					return true;
-				case TurnComponent.NON_VEHICLE_MOVEMENT:
-					Deployments.ForEach(i => i.AutomateMovement(Match, false));
-					return !Deployments.Any(
-						i => i.Units.Any(j => j.CanMove(false, false) == NoMoveReason.NONE));
-				case TurnComponent.RESET:
-					foreach (Deployment d in Deployments)
-						foreach (Unit u in d.Units) u.Reset();
-					return true;
-				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
-					return !Deployments.Any(
-						i => i.Units.Any(j => j.CanMove(true, true) == NoMoveReason.NONE));
-				case TurnComponent.VEHICLE_MOVEMENT:
-					Deployments.ForEach(i => i.AutomateMovement(Match, true));
-					return !Deployments.Any(
-						i => i.Units.Any(j => j.CanMove(true, false) == NoMoveReason.NONE));
-			}
-			return false;
-		}
-
 		public ObjectiveSuccessLevel GetObjectiveSuccessLevel(Match Match)
 		{
 			return Configuration.VictoryCondition.GetMatchResult(this, Match);
@@ -82,25 +48,6 @@ namespace PanzerBlitz
 		public IEnumerable<GameObject> GetGameObjects()
 		{
 			return Enumerable.Repeat(this, 1).Concat<GameObject>(Deployments).Concat(Units);
-		}
-
-		void DoMinefieldAttacks(Random Random)
-		{
-			foreach (Unit u in Units)
-			{
-				if (u.Position == null) continue;
-
-				Unit mine = u.Position.Units.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
-				if (mine != null && mine.Position != null)
-				{
-					foreach (Unit d in mine.Position.Units.Where(i => i != mine))
-					{
-						AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
-						order.AddAttacker(new MinefieldSingleAttackOrder(mine, d));
-						order.Execute(Random);
-					}
-				}
-			}
 		}
 
 		public bool IsDeploymentConfigured()

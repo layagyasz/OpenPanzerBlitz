@@ -141,3 +141,22 @@ class:text-input {
 		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
 	}
 }
+class:checkbox {
+	mode:default {
+		int:height { 24 }
+		int:width { 24 }
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+	}
+	mode:hover {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+	mode:focus {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+	mode:selected {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected-hover {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}

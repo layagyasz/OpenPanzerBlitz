@@ -1,9 +1,8 @@
 ﻿using System;
 namespace PanzerBlitz
 {
-	public interface GamePlayerController
+	public interface MatchPlayerController
 	{
 		void DoTurn(TurnInfo TurnInfo);
-		void ExecuteOrder(Order Order);
 	}
 }

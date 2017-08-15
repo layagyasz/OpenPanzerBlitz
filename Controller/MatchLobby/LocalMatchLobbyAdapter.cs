@@ -10,9 +10,14 @@ namespace PanzerBlitz
 			_Lobby = Lobby;
 		}
 
-		public bool ApplyAction(LobbyAction Action)
+		public bool SetArmyPlayer(Player Player, ArmyConfiguration Army)
 		{
-			return _Lobby.ApplyAction(Action);
+			return false;
+		}
+
+		public bool SetPlayerReady(Player Player, bool Ready)
+		{
+			return false;
 		}
 	}
 }

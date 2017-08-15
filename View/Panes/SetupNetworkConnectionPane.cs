@@ -13,6 +13,7 @@ namespace PanzerBlitz
 
 		SingleColumnTable _Display = new SingleColumnTable("setup-network-connection-display");
 		TextInput _IPInput = new TextInput("setup-network-connection-text-input");
+		Button _Error = new Button("setup-network-connection-error");
 		Button _ConnectButton = new Button("small-button") { DisplayedString = "Connect" };
 
 		public SetupNetworkConnectionPane()
@@ -28,6 +29,13 @@ namespace PanzerBlitz
 
 			Add(_Display);
 			Add(_ConnectButton);
+		}
+
+		public void SetError(string Message)
+		{
+			_Error.DisplayedString = Message;
+			_Display.Remove(_Error);
+			_Display.Add(_Error);
 		}
 
 		void HandleConnectButtonClick(object Sender, EventArgs E)

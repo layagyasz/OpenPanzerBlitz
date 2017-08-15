@@ -41,11 +41,6 @@ namespace PanzerBlitz
 								 .Concat(Armies.Select(i => new TurnInfo(i, TurnComponent.RESET)))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 									.SelectMany(i => i)).GetEnumerator();
-
-			Armies.ForEach(
-				i => i.Deployments.ForEach(
-					j => j.Units.ForEach(
-						k => k.OnMove += (sender, e) => j.AutomateMovement(this, k.Configuration.IsVehicle))));
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
@@ -57,7 +52,7 @@ namespace PanzerBlitz
 
 		public IEnumerable<GameObject> GetGameObjects()
 		{
-			return Armies.SelectMany(i => i.GetGameObjects());
+			return Enumerable.Repeat<GameObject>(null, 1).Concat(Armies.SelectMany(i => i.GetGameObjects()));
 		}
 
 		public void Start()
@@ -68,18 +63,8 @@ namespace PanzerBlitz
 		void NextPhase()
 		{
 			if (!AdvancePhaseIterator()) return;
-			while (Automate())
-			{
-				if (!AdvancePhaseIterator()) return;
-			}
 			if (OnStartPhase != null)
-				OnStartPhase(
-					this, new StartTurnComponentEventArgs(_TurnOrder.Current));
-		}
-
-		bool Automate()
-		{
-			return _TurnOrder.Current.Army.AutomatePhase(this, _TurnOrder.Current.TurnComponent, _Random);
+				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 		}
 
 		bool AdvancePhaseIterator()
@@ -92,7 +77,7 @@ namespace PanzerBlitz
 
 		public bool ValidateOrder(Order Order)
 		{
-			if (Order.Army != CurrentPhase.Army) return false;
+			if (Order.Army != null && Order.Army != CurrentPhase.Army) return false;
 			if (Order is AttackOrder)
 			{
 				if (!ValidateAttackOrder((AttackOrder)Order)) return false;

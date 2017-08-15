@@ -67,6 +67,7 @@ namespace PanzerBlitz
 
 		public override NoSingleAttackReason Validate()
 		{
+			if (_Defender == null) return NoSingleAttackReason.ILLEGAL;
 			if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return NoSingleAttackReason.NO_LOS;
 			NoSingleAttackReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
 			if (r != NoSingleAttackReason.NONE) return r;

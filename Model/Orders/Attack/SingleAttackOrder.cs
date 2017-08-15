@@ -15,7 +15,7 @@ namespace PanzerBlitz
 
 		public virtual NoSingleAttackReason Validate()
 		{
-			if (Defender == null) return NoSingleAttackReason.ILLEGAL;
+			if (Defender == null) return NoSingleAttackReason.NONE;
 			return Defender.CanBeAttackedBy(Attacker.Army);
 		}
 

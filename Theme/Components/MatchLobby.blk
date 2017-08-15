@@ -7,3 +7,30 @@
 class:match-lobby-display {
 	!class:parent { pane-display }
 }
+class:match-lobby-player-section {
+	!class:parent { regular }
+	mode:default {
+		int:height { 64 }
+	}
+}
+class:match-lobby-player-section-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 242 }
+	}
+}
+class:match-lobby-player-section-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 272 }
+	}
+}
+class:match-lobby-player-section-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 272 }
+	}
+}
+class:match-lobby-player-section-checkbox {
+	!class:parent { checkbox }
+}

@@ -14,12 +14,20 @@ namespace PanzerBlitz
 		Scenario _Scenario;
 		List<Player> _Players;
 		Dictionary<Player, ArmyConfiguration> _PlayerArmies;
+		Dictionary<Player, bool> _PlayerReady;
 
-		public IEnumerable<KeyValuePair<Player, ArmyConfiguration>> PlayerConfiguration
+		public IEnumerable<Player> Players
 		{
 			get
 			{
-				return _PlayerArmies;
+				return _Players;
+			}
+		}
+		public Scenario Scenario
+		{
+			get
+			{
+				return _Scenario;
 			}
 		}
 
@@ -28,6 +36,7 @@ namespace PanzerBlitz
 			_Scenario = GameData.Scenarios.First();
 			_Players = new List<Player>();
 			_PlayerArmies = new Dictionary<Player, ArmyConfiguration>();
+			_PlayerReady = new Dictionary<Player, bool>();
 		}
 
 		public MatchLobby(SerializationInputStream Stream)
@@ -36,8 +45,11 @@ namespace PanzerBlitz
 			_Players = Stream.ReadEnumerable(i => new Player(Stream)).ToList();
 			_PlayerArmies = Stream.ReadEnumerable(
 				i => new KeyValuePair<Player, ArmyConfiguration>(
-					_Players[Stream.ReadByte()], _Scenario.ArmyConfigurations[Stream.ReadByte()]))
+					_Players[Stream.ReadByte()], ReadArmyConfiguration(Stream)))
 								  .ToDictionary(i => i.Key, i => i.Value);
+			_PlayerReady = Stream.ReadEnumerable(
+				i => new KeyValuePair<Player, bool>(
+					_Players[Stream.ReadByte()], Stream.ReadBoolean())).ToDictionary(i => i.Key, i => i.Value);
 		}
 
 		public bool ApplyAction(LobbyAction Action)
@@ -50,15 +62,21 @@ namespace PanzerBlitz
 		public bool SetScenario(Scenario Scenario)
 		{
 			_Scenario = Scenario;
-			foreach (Player p in _Players) _PlayerArmies[p] = _Scenario.ArmyConfigurations.First();
+			foreach (Player p in _Players) _PlayerArmies[p] = null;
 			return true;
 		}
 
 		public bool AddPlayer(Player Player)
 		{
 			_Players.Add(Player);
-			_PlayerArmies.Add(Player, _Scenario == null ? null : _Scenario.ArmyConfigurations.First());
+			_PlayerArmies.Add(Player, _Scenario.ArmyConfigurations.First());
+			_PlayerReady.Add(Player, false);
 			return true;
+		}
+
+		public ArmyConfiguration GetPlayerArmy(Player Player)
+		{
+			return _PlayerArmies[Player];
 		}
 
 		public bool SetArmyPlayer(Player Player, ArmyConfiguration Army)
@@ -71,6 +89,21 @@ namespace PanzerBlitz
 			return false;
 		}
 
+		public bool GetPlayerReady(Player Player)
+		{
+			return _PlayerReady[Player];
+		}
+
+		public bool SetPlayerReady(Player Player, bool Ready)
+		{
+			if (_Players.Contains(Player))
+			{
+				_PlayerReady[Player] = Ready;
+				return true;
+			}
+			return false;
+		}
+
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(_Scenario);
@@ -78,8 +111,15 @@ namespace PanzerBlitz
 			Stream.Write(_PlayerArmies, i =>
 			{
 				Stream.Write((byte)_Players.IndexOf(i.Key));
-				Stream.Write((byte)_Scenario.ArmyConfigurations.IndexOf(i.Value));
+				Stream.Write((byte)(i.Value == null ? 0 : _Scenario.ArmyConfigurations.IndexOf(i.Value) + 1));
 			});
+		}
+
+		ArmyConfiguration ReadArmyConfiguration(SerializationInputStream Stream)
+		{
+			int index = Stream.ReadByte();
+			if (index == 0) return null;
+			return _Scenario.ArmyConfigurations[index - 1];
 		}
 	}
 }
