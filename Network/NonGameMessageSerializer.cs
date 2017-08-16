@@ -17,7 +17,9 @@ namespace PanzerBlitz
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(GetLobbyRequest), i => new GetLobbyRequest(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(GetLobbyResponse), i => new GetLobbyResponse(i))
+				typeof(GetLobbyResponse), i => new GetLobbyResponse(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(ApplyChatActionRequest), i => new ApplyChatActionRequest(i))
 		})
 		{ }
 	}

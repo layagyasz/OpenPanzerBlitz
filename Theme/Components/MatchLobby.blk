@@ -34,3 +34,28 @@ class:match-lobby-player-section-select-option {
 class:match-lobby-player-section-checkbox {
 	!class:parent { checkbox }
 }
+class:match-lobby-chat-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 736 }
+	}
+}
+class:match-lobby-chat {
+	mode:default {
+		int:height { 690 }
+		int:width { 288 }
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+		int[]:margin { 0 0 0 8 }
+		int[]:padding { 0 0 0 0 }
+	}
+}
+class:match-lobby-chat-message {
+	!class:parent { detail }
+	mode:default {
+		int:height { 69 }
+		int:width { 288 }
+	}
+	mode:hover {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+}

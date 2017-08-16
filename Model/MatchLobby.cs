@@ -69,7 +69,7 @@ namespace PanzerBlitz
 		public bool AddPlayer(Player Player)
 		{
 			_Players.Add(Player);
-			_PlayerArmies.Add(Player, _Scenario.ArmyConfigurations.First());
+			_PlayerArmies.Add(Player, null);
 			_PlayerReady.Add(Player, false);
 			return true;
 		}
@@ -79,7 +79,7 @@ namespace PanzerBlitz
 			return _PlayerArmies[Player];
 		}
 
-		public bool SetArmyPlayer(Player Player, ArmyConfiguration Army)
+		public bool SetPlayerArmy(Player Player, ArmyConfiguration Army)
 		{
 			if (_Players.Contains(Player))
 			{
@@ -112,6 +112,11 @@ namespace PanzerBlitz
 			{
 				Stream.Write((byte)_Players.IndexOf(i.Key));
 				Stream.Write((byte)(i.Value == null ? 0 : _Scenario.ArmyConfigurations.IndexOf(i.Value) + 1));
+			});
+			Stream.Write(_PlayerReady, i =>
+			{
+				Stream.Write((byte)_Players.IndexOf(i.Key));
+				Stream.Write(i.Value);
 			});
 		}
 

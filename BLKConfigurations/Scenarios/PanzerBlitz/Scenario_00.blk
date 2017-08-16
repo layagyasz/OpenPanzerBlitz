@@ -20,7 +20,7 @@
 		}
 	}
 	army-configuration[]:army-configurations {
-		army-configuration:_ {
+		army-configuration:russian {
 			!faction:faction { factions.russian }
 			byte:team { 1 }
 			victory-condition:victory-condition {
@@ -60,7 +60,7 @@
 				}
 			}
 		}
-		army-configuration:_ {
+		army-configuration:german {
 			victory-condition:victory-condition {
 				var<>:objectives {
 					units-destroyed-objective:units-destroyed { }

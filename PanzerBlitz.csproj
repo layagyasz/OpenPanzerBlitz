@@ -51,10 +51,12 @@
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\Edge.cs" />
     <Compile Include="View\MapView.cs" />
+    <Compile Include="View\TileRenderer.cs" />
     <Compile Include="View\TileView.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="View\Highlight.cs" />
+    <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
     <Compile Include="Model\MovementEventArgs.cs" />
@@ -68,13 +70,12 @@
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
     <Compile Include="View\ArmyView.cs" />
     <Compile Include="View\Camera.cs" />
-    <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
     <Compile Include="View\Panes\AttackPane.cs" />
+    <Compile Include="Model\BlockType.cs" />
     <Compile Include="Model\Coordinate.cs" />
     <Compile Include="View\StackView.cs" />
     <Compile Include="View\Panes\EditPane.cs" />
-    <Compile Include="View\TileRenderer.cs" />
     <Compile Include="Model\TileComponent.cs" />
     <Compile Include="View\Panes\IOPane.cs" />
     <Compile Include="Model\MapConfiguration.cs" />
@@ -129,7 +130,7 @@
     <Compile Include="View\Panes\ConvoyDeploymentSelectionOption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
-    <Compile Include="Model\BlockType.cs" />
+    <Compile Include="Model\Direction.cs" />
     <Compile Include="Model\EnumConverter.cs" />
     <Compile Include="Model\HexCoordinate.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Model\TileMatchers\Matcher.cs" />
     <Compile Include="Model\TileMatchers\TileElevation.cs" />
     <Compile Include="Model\TileMatchers\TileWithin.cs" />
-    <Compile Include="Model\Direction.cs" />
     <Compile Include="Model\TileMatchers\TileOnEdge.cs" />
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
@@ -219,6 +219,21 @@
     <Compile Include="Controller\LocalScenarioSelect\LocalScenarioSelectStateController.cs" />
     <Compile Include="View\Screens\MatchLobbyPlayerSection.cs" />
     <Compile Include="Controller\MatchLobby\MatchLobbyController.cs" />
+    <Compile Include="Model\LobbyActions\SetPlayerArmyAction.cs" />
+    <Compile Include="Model\LobbyActions\SetPlayerReadyAction.cs" />
+    <Compile Include="Controller\MatchLobby\RemoteMatchLobbyAdapter.cs" />
+    <Compile Include="Model\LobbyActions\SetScenarioAction.cs" />
+    <Compile Include="View\Screens\ChatView.cs" />
+    <Compile Include="Model\Chat\Chat.cs" />
+    <Compile Include="Model\Chat\ChatMessage.cs" />
+    <Compile Include="Model\Chat\ChatAction.cs" />
+    <Compile Include="Model\Chat\AddChatMessageAction.cs" />
+    <Compile Include="Model\Chat\ChatActionSerializer.cs" />
+    <Compile Include="Controller\Chat\ChatController.cs" />
+    <Compile Include="Controller\Chat\ChatAdapter.cs" />
+    <Compile Include="Controller\Chat\LocalChatAdapter.cs" />
+    <Compile Include="Controller\Chat\RemoteChatAdapter.cs" />
+    <Compile Include="Network\Messages\ApplyChatActionRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -251,6 +266,8 @@
     <Folder Include="Controller\Landing\" />
     <Folder Include="Controller\Edit\" />
     <Folder Include="Controller\LocalScenarioSelect\" />
+    <Folder Include="Model\Chat\" />
+    <Folder Include="Controller\Chat\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

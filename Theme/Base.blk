@@ -9,6 +9,9 @@
 		int[]:padding { 0 0 0 0 }
 		int[]:margin { 0 0 0 0 }
 	}
+	mode:disabled {
+		color[]:background-color { #969696 #969696 #969696 #969696 }
+	}
 	mode:hover {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 	}
@@ -158,5 +161,8 @@ class:checkbox {
 	}
 	mode:selected-hover {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected-disabled {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
 	}
 }

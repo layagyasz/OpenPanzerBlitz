@@ -17,13 +17,14 @@ namespace PanzerBlitz
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("match-lobby-pane");
 		SingleColumnTable _Display = new SingleColumnTable("match-lobby-display");
+		public readonly ChatView ChatView;
 
 		bool _Dirty;
 		bool _Host;
 		MatchLobby _Lobby;
 		Player _Player;
 
-		public MatchLobbyScreen(Vector2f WindowSize, bool Host, MatchLobby Lobby, Player Player)
+		public MatchLobbyScreen(Vector2f WindowSize, bool Host, MatchLobby Lobby, Chat Chat, Player Player)
 			: base(WindowSize)
 		{
 			_Host = Host;
@@ -31,8 +32,13 @@ namespace PanzerBlitz
 			_Lobby.OnActionApplied += (sender, e) => _Dirty = true;
 			_Player = Player;
 
+			ChatView = new ChatView(
+				Chat, "match-lobby-chat-display", "match-lobby-chat", "match-lobby-chat-message", "text-input");
+			ChatView.Position = new Vector2f(_Display.Size.X + 16, 0);
+
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 			_Pane.Add(_Display);
+			_Pane.Add(ChatView);
 			DisplayPlayers();
 		}
 

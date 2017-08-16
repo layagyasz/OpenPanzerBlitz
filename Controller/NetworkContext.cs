@@ -40,18 +40,21 @@ namespace PanzerBlitz
 			{
 				MatchLobby lobby = new MatchLobby();
 				lobby.ApplyAction(new AddPlayerAction(GameData.Player));
+				Chat chat = new Chat();
 
 				Server.MessageAdapter = new NonGameMessageSerializer();
-				Server.RPCHandler = new LobbyRPCHandler(lobby);
+				Server.RPCHandler = new LobbyRPCHandler(lobby, chat);
 
 				lobby.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyLobbyActionRequest(e.Value));
+				chat.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyChatActionRequest(e.Value));
 
-				return new MatchLobbyContext(Server, lobby);
+				return new MatchLobbyContext(Server, lobby, chat);
 			}
 			else
 			{
+				Chat chat = new Chat();
 				Client.MessageAdapter = new NonGameMessageSerializer();
-				LobbyRPCHandler handler = new LobbyRPCHandler();
+				LobbyRPCHandler handler = new LobbyRPCHandler(chat);
 				Client.RPCHandler = handler;
 
 				if (((BooleanResponse)Client.Call(
@@ -59,7 +62,7 @@ namespace PanzerBlitz
 				{
 					MatchLobby lobby = ((GetLobbyResponse)Client.Call(new GetLobbyRequest()).Get()).Lobby;
 					handler.SetLobby(lobby);
-					return new MatchLobbyContext(Client, lobby);
+					return new MatchLobbyContext(Client, lobby, chat);
 				}
 				else return null;
 			}

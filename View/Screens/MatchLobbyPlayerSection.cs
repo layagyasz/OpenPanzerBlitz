@@ -44,6 +44,7 @@ namespace PanzerBlitz
 
 			if (Enabled) ready.OnChange += HandlePlayerReadyStateChanged;
 			ready.Position = new Vector2f(Size.X - ready.Size.X - 16, 0);
+			ready.Value = Lobby.GetPlayerReady(Player);
 			ready.Enabled = Enabled;
 
 			Add(header);

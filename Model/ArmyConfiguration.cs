@@ -10,17 +10,20 @@ namespace PanzerBlitz
 	{
 		private enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS, VICTORY_CONDITION }
 
+		public readonly string UniqueKey;
 		public readonly Faction Faction;
 		public readonly byte Team;
 		public readonly List<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations;
 		public readonly VictoryCondition VictoryCondition;
 
 		public ArmyConfiguration(
+			string UniqueKey,
 			Faction Faction,
 			byte Team,
 			IEnumerable<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations,
 			VictoryCondition VictoryCondition)
 		{
+			this.UniqueKey = UniqueKey;
 			this.Faction = Faction;
 			this.Team = Team;
 			this.DeploymentConfigurations = DeploymentConfigurations.ToList();
@@ -30,6 +33,7 @@ namespace PanzerBlitz
 		public ArmyConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			Team = (byte)attributes[(int)Attribute.TEAM];
 			DeploymentConfigurations = ((List<Tuple<object, object>>)attributes[
@@ -47,6 +51,7 @@ namespace PanzerBlitz
 
 		public ArmyConfiguration(SerializationInputStream Stream)
 		{
+			UniqueKey = Stream.ReadString();
 			Faction = GameData.Factions[Stream.ReadString()];
 			Team = Stream.ReadByte();
 			DeploymentConfigurations = Stream.ReadEnumerable(i =>
@@ -60,6 +65,7 @@ namespace PanzerBlitz
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
+			Stream.Write(UniqueKey);
 			Stream.Write(Faction.UniqueKey);
 			Stream.Write(Team);
 			Stream.Write(DeploymentConfigurations, i =>

@@ -19,7 +19,7 @@ namespace PanzerBlitz
 
 		void HandlePlayerArmyChanged(object Sender, ValuedEventArgs<Tuple<Player, ArmyConfiguration>> E)
 		{
-			_LobbyAdapter.SetArmyPlayer(E.Value.Item1, E.Value.Item2);
+			_LobbyAdapter.SetPlayerArmy(E.Value.Item1, E.Value.Item2);
 		}
 
 		void HandlePlayerReadyStateChanged(object Sender, ValuedEventArgs<Tuple<Player, bool>> E)
