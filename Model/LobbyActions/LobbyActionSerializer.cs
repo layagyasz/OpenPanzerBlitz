@@ -18,7 +18,9 @@ namespace PanzerBlitz
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(SetPlayerReadyAction), i => new SetPlayerReadyAction(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(SetScenarioAction), i => new SetScenarioAction(i))
+				typeof(SetScenarioAction), i => new SetScenarioAction(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(LaunchAction), i => new LaunchAction(i))
 		})
 		{ }
 	}

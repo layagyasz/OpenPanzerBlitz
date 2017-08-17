@@ -26,7 +26,6 @@ namespace PanzerBlitz
 			}
 
 			Match.OnStartPhase += HandleTurn;
-			Match.Start();
 		}
 
 		public void DoTurn(TurnInfo TurnInfo)

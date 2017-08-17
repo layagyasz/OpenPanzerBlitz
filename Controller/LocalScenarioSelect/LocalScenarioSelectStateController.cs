@@ -19,7 +19,8 @@ namespace PanzerBlitz
 		void HandleStartScenario(object Sender, ValuedEventArgs<Scenario> E)
 		{
 			OnProgramStateTransition(
-				this, new ProgramStateTransitionEventArgs(ProgramState.LOCAL_MATCH, new MatchContext(E.Value)));
+				this, new ProgramStateTransitionEventArgs(
+					ProgramState.MATCH, new MatchContext(new Match(E.Value))));
 		}
 	}
 }

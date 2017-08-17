@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Cardamom.Interface;
@@ -16,7 +16,7 @@ namespace PanzerBlitz
 			{ ProgramState.LANDING, new LandingStateController() },
 			{ ProgramState.EDIT, new EditStateController() },
 			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
-			{ ProgramState.LOCAL_MATCH, new LocalMatchStateController() },
+			{ ProgramState.MATCH, new MatchStateController() },
 			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
 		};
 

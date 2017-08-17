@@ -11,7 +11,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class HumanGamePlayerController : MatchPlayerController
+	public class HumanMatchPlayerController : MatchPlayerController
 	{
 		GameScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
@@ -21,11 +21,17 @@ namespace PanzerBlitz
 		TextBox _InfoDisplay = new TextBox("info-display");
 
 		public readonly MatchAdapter Match;
+		public readonly HashSet<Army> AllowedArmies;
 
-		public HumanGamePlayerController(
-			MatchAdapter Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen, KeyController KeyController)
+		public HumanMatchPlayerController(
+			MatchAdapter Match,
+			IEnumerable<Army> AllowedArmies,
+			UnitConfigurationRenderer Renderer,
+			GameScreen GameScreen,
+			KeyController KeyController)
 		{
 			this.Match = Match;
+			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
 			_GameScreen = GameScreen;
 
 			Button finishButton = new Button("large-button") { DisplayedString = "Finish" };
@@ -86,31 +92,36 @@ namespace PanzerBlitz
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
 			TurnInfo phase = Match.GetTurnInfo();
-			_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);
+			if (AllowedArmies.Contains(phase.Army))
+				_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);
 		}
 
 		void OnTileRightClick(object sender, MouseEventArgs e)
 		{
 			TurnInfo phase = Match.GetTurnInfo();
-			_Controllers[phase.TurnComponent].HandleTileRightClick(((TileView)sender).Tile);
+			if (AllowedArmies.Contains(phase.Army))
+				_Controllers[phase.TurnComponent].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
 		void OnUnitClick(object sender, MouseEventArgs e)
 		{
 			TurnInfo phase = Match.GetTurnInfo();
-			_Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
+			if (AllowedArmies.Contains(phase.Army))
+				_Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
 		}
 
 		void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
 			TurnInfo phase = Match.GetTurnInfo();
-			_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
+			if (AllowedArmies.Contains(phase.Army))
+				_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 
 		void OnKeyPressed(object sender, KeyPressedEventArgs E)
 		{
 			TurnInfo phase = Match.GetTurnInfo();
-			_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+			if (AllowedArmies.Contains(phase.Army))
+				_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
 		}
 	}
 }

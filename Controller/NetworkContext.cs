@@ -18,6 +18,8 @@ namespace PanzerBlitz
 			}
 		}
 
+		protected NetworkContext() { }
+
 		protected NetworkContext(TCPClient Client)
 		{
 			this.Client = Client;
@@ -42,7 +44,7 @@ namespace PanzerBlitz
 				lobby.ApplyAction(new AddPlayerAction(GameData.Player));
 				Chat chat = new Chat();
 
-				Server.MessageAdapter = new NonGameMessageSerializer();
+				Server.MessageAdapter = new NonMatchMessageSerializer();
 				Server.RPCHandler = new LobbyRPCHandler(lobby, chat);
 
 				lobby.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyLobbyActionRequest(e.Value));
@@ -53,7 +55,7 @@ namespace PanzerBlitz
 			else
 			{
 				Chat chat = new Chat();
-				Client.MessageAdapter = new NonGameMessageSerializer();
+				Client.MessageAdapter = new NonMatchMessageSerializer();
 				LobbyRPCHandler handler = new LobbyRPCHandler(chat);
 				Client.RPCHandler = handler;
 

@@ -5,9 +5,9 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class NonGameMessageSerializer : SerializableAdapter
+	public class NonMatchMessageSerializer : SerializableAdapter
 	{
-		public NonGameMessageSerializer()
+		public NonMatchMessageSerializer()
 			: base(new Tuple<Type, Func<SerializationInputStream, Serializable>>[]
 		{
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(

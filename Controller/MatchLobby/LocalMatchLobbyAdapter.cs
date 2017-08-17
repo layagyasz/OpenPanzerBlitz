@@ -19,5 +19,10 @@ namespace PanzerBlitz
 		{
 			return _Lobby.ApplyAction(new SetPlayerReadyAction(Player, Ready));
 		}
+
+		public bool Start()
+		{
+			return _Lobby.ApplyAction(new LaunchAction());
+		}
 	}
 }

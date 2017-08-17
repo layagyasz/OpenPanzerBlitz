@@ -46,6 +46,7 @@ class:small-button {
 	}
 }
 class:large-button {
+	!class:parent { normal-button }
 	mode:default {
 		int:height { 32 }
 		int:width { 288 }
@@ -54,6 +55,9 @@ class:large-button {
 		int:font-size { 18 }
 		color[]:background-color { #484848 #484848 #484848 #484848 }
 		int[]:padding { 16 2 16 2 }
+	}
+	mode:disabled {
+		color[]:background-color { #969696 #969696 #969696 #969696 }
 	}
 	mode:hover {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }

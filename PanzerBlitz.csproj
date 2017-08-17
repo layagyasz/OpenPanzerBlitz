@@ -55,7 +55,6 @@
     <Compile Include="View\TileView.cs" />
     <Compile Include="View\UnitView.cs" />
     <Compile Include="Model\Faction.cs" />
-    <Compile Include="View\Highlight.cs" />
     <Compile Include="View\HighlightLayer.cs" />
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
     <Compile Include="View\ArmyView.cs" />
     <Compile Include="View\Camera.cs" />
+    <Compile Include="View\Highlight.cs" />
     <Compile Include="View\UnitConfigurationRenderer.cs" />
     <Compile Include="View\Panes\AttackPane.cs" />
     <Compile Include="Model\BlockType.cs" />
@@ -165,13 +165,13 @@
     <Compile Include="Model\TileMatchers\MatcherSerializer.cs" />
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
     <Compile Include="Model\TurnInfo.cs" />
-    <Compile Include="Network\GameMessageSerializer.cs" />
+    <Compile Include="Network\MatchMessageSerializer.cs" />
     <Compile Include="Network\Messages\ExecuteOrderRequest.cs" />
     <Compile Include="Network\Messages\ValidateOrderRequest.cs" />
     <Compile Include="Model\MatchLobby.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Controller\Match\MatchPlayerController.cs" />
-    <Compile Include="Controller\Match\HumanGamePlayerController.cs" />
+    <Compile Include="Controller\Match\HumanMatchPlayerController.cs" />
     <Compile Include="Controller\Match\LocalMatchAdapter.cs" />
     <Compile Include="Controller\Match\MatchAdapter.cs" />
     <Compile Include="Controller\Match\RemoteMatchAdapter.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Model\LobbyActions\AddPlayerAction.cs" />
     <Compile Include="Model\LobbyActions\LobbyActionSerializer.cs" />
     <Compile Include="Network\Messages\ApplyLobbyActionRequest.cs" />
-    <Compile Include="Network\NonGameMessageSerializer.cs" />
+    <Compile Include="Network\NonMatchMessageSerializer.cs" />
     <Compile Include="Network\LobbyRPCHandler.cs" />
     <Compile Include="Network\Messages\GetLobbyResponse.cs" />
     <Compile Include="Network\Messages\GetLobbyRequest.cs" />
@@ -215,7 +215,7 @@
     <Compile Include="Controller\ProgramStateController.cs" />
     <Compile Include="Controller\Match\MatchContext.cs" />
     <Compile Include="Controller\MatchLobby\MatchLobbyContext.cs" />
-    <Compile Include="Controller\Match\LocalMatchStateController.cs" />
+    <Compile Include="Controller\Match\MatchStateController.cs" />
     <Compile Include="Controller\LocalScenarioSelect\LocalScenarioSelectStateController.cs" />
     <Compile Include="View\Screens\MatchLobbyPlayerSection.cs" />
     <Compile Include="Controller\MatchLobby\MatchLobbyController.cs" />
@@ -234,6 +234,8 @@
     <Compile Include="Controller\Chat\LocalChatAdapter.cs" />
     <Compile Include="Controller\Chat\RemoteChatAdapter.cs" />
     <Compile Include="Network\Messages\ApplyChatActionRequest.cs" />
+    <Compile Include="Model\LobbyActions\LaunchAction.cs" />
+    <Compile Include="Network\MatchRPCHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

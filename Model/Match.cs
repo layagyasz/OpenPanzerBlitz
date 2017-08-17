@@ -52,12 +52,12 @@ namespace PanzerBlitz
 
 		public IEnumerable<GameObject> GetGameObjects()
 		{
-			return Enumerable.Repeat<GameObject>(null, 1).Concat(Armies.SelectMany(i => i.GetGameObjects()));
+			return Map.TilesEnumerable.Concat(Armies.SelectMany(i => i.GetGameObjects()));
 		}
 
 		public void Start()
 		{
-			NextPhase();
+			if (CurrentPhase == null) NextPhase();
 		}
 
 		void NextPhase()
@@ -77,6 +77,10 @@ namespace PanzerBlitz
 
 		public bool ValidateOrder(Order Order)
 		{
+			if (CurrentPhase == null) Start();
+
+			Console.WriteLine("VALIDATE {0} {1}", Order, CurrentPhase.TurnComponent);
+
 			if (Order.Army != null && Order.Army != CurrentPhase.Army) return false;
 			if (Order is AttackOrder)
 			{
@@ -108,12 +112,18 @@ namespace PanzerBlitz
 		public bool ExecuteOrder(Order Order)
 		{
 			if (!ValidateOrder(Order)) return false;
+
+			Console.WriteLine("{0} {1}", Order, CurrentPhase.TurnComponent);
+
 			if (Order is NextPhaseOrder)
 			{
+				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
+				ExecutedOrders.Add(Order);
 				NextPhase();
 				return true;
 			}
 			bool executed = Order.Execute(_Random);
+			Console.WriteLine(executed);
 			if (executed)
 			{
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));

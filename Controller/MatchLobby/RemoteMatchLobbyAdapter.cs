@@ -25,5 +25,10 @@ namespace PanzerBlitz
 			return ((BooleanResponse)_Client.Call(
 				new ApplyLobbyActionRequest(new SetPlayerReadyAction(Player, Ready))).Get()).Value;
 		}
+
+		public bool Start()
+		{
+			return false;
+		}
 	}
 }

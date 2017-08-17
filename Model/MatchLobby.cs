@@ -10,6 +10,7 @@ namespace PanzerBlitz
 	public class MatchLobby : Serializable
 	{
 		public EventHandler<ValuedEventArgs<LobbyAction>> OnActionApplied;
+		public EventHandler<EventArgs> OnLaunched;
 
 		Scenario _Scenario;
 		List<Player> _Players;
@@ -102,6 +103,12 @@ namespace PanzerBlitz
 				return true;
 			}
 			return false;
+		}
+
+		public bool Start()
+		{
+			if (OnLaunched != null) OnLaunched(this, EventArgs.Empty);
+			return true;
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

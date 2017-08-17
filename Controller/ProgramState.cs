@@ -6,7 +6,7 @@ namespace PanzerBlitz
 		LANDING,
 		EDIT,
 		LOCAL_SCENARIO_SELECT,
-		LOCAL_MATCH,
+		MATCH,
 		MATCH_LOBBY
 	}
 }

@@ -14,9 +14,12 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<Tuple<Player, ArmyConfiguration>>> OnArmyConfigurationSelected;
 		public EventHandler<ValuedEventArgs<Tuple<Player, bool>>> OnPlayerReadyStateChanged;
+		public EventHandler<EventArgs> OnLaunched;
+		public EventHandler<EventArgs> OnPulse;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("match-lobby-pane");
 		SingleColumnTable _Display = new SingleColumnTable("match-lobby-display");
+		Button _LaunchButton = new Button("large-button") { DisplayedString = "Launch" };
 		public readonly ChatView ChatView;
 
 		bool _Dirty;
@@ -36,8 +39,13 @@ namespace PanzerBlitz
 				Chat, "match-lobby-chat-display", "match-lobby-chat", "match-lobby-chat-message", "text-input");
 			ChatView.Position = new Vector2f(_Display.Size.X + 16, 0);
 
+			_LaunchButton.Position = new Vector2f(0, _Pane.Size.Y - _LaunchButton.Size.Y - 32);
+			_LaunchButton.Enabled = Host;
+			_LaunchButton.OnClick += HandleLaunched;
+
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 			_Pane.Add(_Display);
+			_Pane.Add(_LaunchButton);
 			_Pane.Add(ChatView);
 			DisplayPlayers();
 		}
@@ -67,9 +75,15 @@ namespace PanzerBlitz
 			if (OnPlayerReadyStateChanged != null) OnPlayerReadyStateChanged(this, E);
 		}
 
+		void HandleLaunched(object Sender, EventArgs E)
+		{
+			if (OnLaunched != null) OnLaunched(this, EventArgs.Empty);
+		}
+
 		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
 			if (_Dirty) DisplayPlayers();
 			_Pane.Update(MouseController, KeyController, DeltaT, Transform);
 		}

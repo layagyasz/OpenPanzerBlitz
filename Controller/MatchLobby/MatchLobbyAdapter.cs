@@ -5,5 +5,6 @@ namespace PanzerBlitz
 	{
 		bool SetPlayerArmy(Player Player, ArmyConfiguration Army);
 		bool SetPlayerReady(Player Player, bool Ready);
+		bool Start();
 	}
 }

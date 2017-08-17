@@ -15,6 +15,7 @@ namespace PanzerBlitz
 			_LobbyScreen = LobbyScreen;
 			_LobbyScreen.OnArmyConfigurationSelected += HandlePlayerArmyChanged;
 			_LobbyScreen.OnPlayerReadyStateChanged += HandlePlayerReadyStateChanged;
+			_LobbyScreen.OnLaunched += HandleLaunched;
 		}
 
 		void HandlePlayerArmyChanged(object Sender, ValuedEventArgs<Tuple<Player, ArmyConfiguration>> E)
@@ -25,6 +26,11 @@ namespace PanzerBlitz
 		void HandlePlayerReadyStateChanged(object Sender, ValuedEventArgs<Tuple<Player, bool>> E)
 		{
 			_LobbyAdapter.SetPlayerReady(E.Value.Item1, E.Value.Item2);
+		}
+
+		void HandleLaunched(object Sender, EventArgs E)
+		{
+			_LobbyAdapter.Start();
 		}
 	}
 }

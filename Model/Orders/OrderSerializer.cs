@@ -40,6 +40,7 @@ namespace PanzerBlitz
 		{
 			_GameObjects = GameObjects.ToList();
 			_GameObjects.Sort((i, j) => i.Id.CompareTo(j.Id));
+			_GameObjects.Insert(0, null);
 		}
 
 		public void Serialize(Order Order, SerializationOutputStream Stream)
