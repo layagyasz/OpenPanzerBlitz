@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 namespace PanzerBlitz
 {
 	public abstract class DeploymentMicrocontroller : BaseController
 	{
 		public abstract Deployment Deployment { get; }
 
-		public DeploymentMicrocontroller(MatchAdapter Match, GameScreen GameScreen)
+		public DeploymentMicrocontroller(MatchAdapter Match, MatchScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 		}

@@ -25,7 +25,7 @@ namespace PanzerBlitz
 
 		public ConvoyDeploymentMicrocontroller(
 			MatchAdapter Match,
-			GameScreen GameScreen,
+			MatchScreen GameScreen,
 			ConvoyDeployment Deployment)
 			: base(Match, GameScreen)
 		{
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 		{
 			if (_LoadUnitPane != null)
 			{
-				_GameScreen.RemovePane(_LoadUnitPane);
+				_GameScreen.PaneLayer.Remove(_LoadUnitPane);
 				_LoadUnitPane = null;
 			}
 		}
@@ -109,7 +109,7 @@ namespace PanzerBlitz
 				{
 					Clear();
 					_LoadUnitPane = new LoadUnitPane(units);
-					_GameScreen.AddPane(_LoadUnitPane);
+					_GameScreen.PaneLayer.Add(_LoadUnitPane);
 					_LoadUnitPane.OnUnitSelected += LoadUnit;
 				}
 			}

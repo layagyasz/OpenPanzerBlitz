@@ -36,11 +36,13 @@ namespace PanzerBlitz
 
 		List<GameObject> _GameObjects = new List<GameObject>();
 
-		public OrderSerializer(IEnumerable<GameObject> GameObjects)
+		public OrderSerializer(Match Match)
 		{
-			_GameObjects = GameObjects.ToList();
+			_GameObjects = Match.GetGameObjects().ToList();
 			_GameObjects.Sort((i, j) => i.Id.CompareTo(j.Id));
 			_GameObjects.Insert(0, null);
+
+			foreach (Army a in Match.Armies) a.OnUnitAdded += (sender, e) => _GameObjects.Add(e.Unit);
 		}
 
 		public void Serialize(Order Order, SerializationOutputStream Stream)

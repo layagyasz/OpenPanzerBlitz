@@ -21,9 +21,10 @@ namespace PanzerBlitz
 				_Context.Match.Scenario, 1024, 128, new Font("Compacta Std Regular.otf"));
 			HashSet<Army> armies = new HashSet<Army>(_Context.GetArmies());
 
-			GameScreen screen = new GameScreen(
+			MatchScreen screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
-				new MapView(_Context.Match.Map, TileRenderer.SUMMER_STEPPE),
+				_Context.Match.Map,
+				TileRenderer.SUMMER_STEPPE,
 				_Context.Match.Armies.Select(i => new ArmyView(i, renderer)));
 			HumanMatchPlayerController controller =
 				new HumanMatchPlayerController(
@@ -35,6 +36,7 @@ namespace PanzerBlitz
 				playerControllers.Add(a, controller);
 			}
 			_GameController = new MatchController(_Context.Match, playerControllers, _Context.IsHost);
+			screen.OnPulse += (sender, e) => _Context.Match.DoBufferedOrders();
 			_Context.Match.Start();
 
 			return screen;

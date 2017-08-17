@@ -12,19 +12,20 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class GameScreen : Pod
+	public class MapScreenBase : Pod
 	{
+		public EventHandler<EventArgs> OnPulse;
+
 		public readonly Camera Camera;
 		public readonly HighlightLayer HighlightLayer = new HighlightLayer();
-		public readonly List<ArmyView> ArmyViews;
 		public readonly Vector2f Size;
+		public readonly PaneLayer PaneLayer = new PaneLayer();
 
-		Vertex[] _Backdrop;
-		MapView _MapView;
-		private StackLayer _StackLayer = new StackLayer();
-		private PaneLayer _PaneLayer = new PaneLayer();
-		private List<Pod> _Items = new List<Pod>();
-		private AlertText _AlertText = new AlertText(2500);
+		protected Vertex[] _Backdrop;
+		protected MapView _MapView;
+		protected TileRenderer _TileRenderer;
+		protected List<Pod> _Items = new List<Pod>();
+		protected AlertText _AlertText = new AlertText(2500);
 
 		public MapView MapView
 		{
@@ -34,8 +35,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public GameScreen(Vector2f WindowSize, MapView MapView, IEnumerable<ArmyView> ArmyViews)
+		public MapScreenBase(Vector2f WindowSize, Map Map, TileRenderer TileRenderer)
 		{
+			_MapView = new MapView(Map, TileRenderer);
+			_TileRenderer = TileRenderer;
+
 			Size = WindowSize;
 			Camera = new Camera(
 				WindowSize, new Vector2f((float)MapView.Map.Width, (float)MapView.Map.Height) * .5f, 64);
@@ -50,13 +54,6 @@ namespace PanzerBlitz
 			};
 			_MapView = MapView;
 			_AlertText.Position = new Vector2f(.5f * WindowSize.X, 0);
-
-			this.ArmyViews = ArmyViews.ToList();
-			foreach (ArmyView a in this.ArmyViews)
-			{
-				_StackLayer.AddArmyView(a);
-				a.OnNewUnitView += (sender, e) => _StackLayer.AddUnitView(e.UnitView);
-			}
 		}
 
 		Color MakeBackdropColor(Color BaseColor)
@@ -67,29 +64,9 @@ namespace PanzerBlitz
 			return f.MakeRGB().ConvertToColor();
 		}
 
-		public void SetMapView(MapView MapView)
+		public void SetMap(Map Map)
 		{
-			_MapView = MapView;
-		}
-
-		public void AddItem(Pod Pod)
-		{
-			_Items.Add(Pod);
-		}
-
-		public void AddPane(Pane Pane)
-		{
-			_PaneLayer.Add(Pane);
-		}
-
-		public void RemovePane(Pane Pane)
-		{
-			_PaneLayer.Remove(Pane);
-		}
-
-		public void ClearPanes()
-		{
-			_PaneLayer.Clear();
+			_MapView = new MapView(Map, _TileRenderer);
 		}
 
 		public void Alert(string Alert)
@@ -97,36 +74,36 @@ namespace PanzerBlitz
 			_AlertText.Alert(Alert);
 		}
 
-		public void Update(
+		public virtual void Update(
 			MouseController MouseController,
 			KeyController KeyController,
 			int DeltaT,
 			Transform Transform)
 		{
-			Camera.Update(MouseController, KeyController, DeltaT, _PaneLayer.Any(i => i.Hover));
+			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
+
+			Camera.Update(MouseController, KeyController, DeltaT, PaneLayer.Any(i => i.Hover));
 			Transform = Camera.GetTransform();
 
 			MapView.Update(MouseController, KeyController, DeltaT, Transform);
 			HighlightLayer.Update(MouseController, KeyController, DeltaT, Transform);
-			_StackLayer.Update(MouseController, KeyController, DeltaT, Transform);
 
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			_AlertText.Update(MouseController, KeyController, DeltaT, Transform.Identity);
-			_PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
+			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 		}
 
-		public void Draw(RenderTarget Target, Transform Transform)
+		public virtual void Draw(RenderTarget Target, Transform Transform)
 		{
 			Transform = Camera.GetTransform();
 
 			Target.Draw(_Backdrop, PrimitiveType.Quads);
 			MapView.Draw(Target, Transform);
 			HighlightLayer.Draw(Target, Transform);
-			_StackLayer.Draw(Target, Transform);
 
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
 			_AlertText.Draw(Target, Transform.Identity);
-			_PaneLayer.Draw(Target, Transform.Identity);
+			PaneLayer.Draw(Target, Transform.Identity);
 		}
 	}
 }

@@ -13,34 +13,28 @@ namespace PanzerBlitz
 {
 	public class HumanMatchPlayerController : MatchPlayerController
 	{
-		GameScreen _GameScreen;
+		MatchScreen _GameScreen;
 		Highlight _MovementHighlight = new Highlight();
 
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
 
-		TextBox _InfoDisplay = new TextBox("info-display");
-
 		public readonly MatchAdapter Match;
 		public readonly HashSet<Army> AllowedArmies;
+
+		TurnComponent _CurrentTurn;
 
 		public HumanMatchPlayerController(
 			MatchAdapter Match,
 			IEnumerable<Army> AllowedArmies,
 			UnitConfigurationRenderer Renderer,
-			GameScreen GameScreen,
+			MatchScreen GameScreen,
 			KeyController KeyController)
 		{
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
 			_GameScreen = GameScreen;
 
-			Button finishButton = new Button("large-button") { DisplayedString = "Finish" };
-			finishButton.Position = GameScreen.Size - finishButton.Size - new Vector2f(32, 32);
-			finishButton.OnClick += EndTurn;
-			GameScreen.AddItem(finishButton);
-
-			_InfoDisplay.Position = finishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
-			GameScreen.AddItem(_InfoDisplay);
+			_GameScreen.OnFinishClicked += EndTurn;
 
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
 			{
@@ -70,22 +64,21 @@ namespace PanzerBlitz
 
 		public void DoTurn(TurnInfo TurnInfo)
 		{
-			_InfoDisplay.DisplayedString =
-				string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, TurnInfo.TurnComponent);
-			_Controllers[TurnInfo.TurnComponent].Begin(TurnInfo.Army);
+			TurnComponent t = AllowedArmies.Contains(TurnInfo.Army) ? TurnInfo.TurnComponent : TurnComponent.SPECTATE;
+			_GameScreen.SetInfoMessage(string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, t));
+			if (_Controllers.ContainsKey(_CurrentTurn))
+				_Controllers[_CurrentTurn].End();
+			_CurrentTurn = t;
+			if (_Controllers.ContainsKey(t))
+				_Controllers[t].Begin(TurnInfo.Army);
 		}
 
 		void EndTurn(object sender, EventArgs e)
 		{
 			TurnComponent t = Match.GetTurnInfo().TurnComponent;
-			if (_Controllers[t].Finish())
+			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
 			{
-				NextPhaseOrder order = new NextPhaseOrder();
-				if (Match.ValidateOrder(order))
-				{
-					_Controllers[t].End();
-					Match.ExecuteOrder(order);
-				}
+				Match.ExecuteOrder(new NextPhaseOrder());
 			}
 		}
 

@@ -107,6 +107,15 @@ namespace PanzerBlitz
 
 		public bool Start()
 		{
+			// All players are in the ready state.
+			if (!_PlayerReady.Values.All(i => i)) return false;
+
+			List<ArmyConfiguration> pickedArmies = _PlayerArmies.Values.Where(i => i != null).ToList();
+			// All players have picked a unique army.
+			if (pickedArmies.Count != pickedArmies.Distinct().Count()) return false;
+			// All armies are picked.
+			if (!_Scenario.ArmyConfigurations.All(i => pickedArmies.Contains(i))) return false;
+
 			if (OnLaunched != null) OnLaunched(this, EventArgs.Empty);
 			return true;
 		}

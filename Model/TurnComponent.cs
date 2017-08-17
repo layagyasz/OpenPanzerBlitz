@@ -10,6 +10,7 @@ namespace PanzerBlitz
 		VEHICLE_MOVEMENT,
 		CLOSE_ASSAULT,
 		NON_VEHICLE_MOVEMENT,
-		RESET
+		RESET,
+		SPECTATE    // Not used by match.
 	}
 }

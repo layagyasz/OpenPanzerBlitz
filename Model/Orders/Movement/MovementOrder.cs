@@ -35,8 +35,8 @@ namespace PanzerBlitz
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Unit.Id);
-			Stream.Write(Combat);
 			Stream.Write(Path.Destination.Id);
+			Stream.Write(Combat);
 		}
 
 		public NoMoveReason Validate()

@@ -39,7 +39,7 @@ namespace PanzerBlitz
 		public MatchContext MakeMatchContext()
 		{
 			Match match = new Match(Lobby.Scenario);
-			OrderSerializer serializer = new OrderSerializer(match.GetGameObjects());
+			OrderSerializer serializer = new OrderSerializer(match);
 
 			if (IsHost)
 			{

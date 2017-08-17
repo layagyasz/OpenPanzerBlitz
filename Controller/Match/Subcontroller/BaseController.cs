@@ -18,13 +18,13 @@ namespace PanzerBlitz
 
 		protected Army _Army;
 		protected MatchAdapter _Match;
-		protected GameScreen _GameScreen;
+		protected MatchScreen _GameScreen;
 
 		protected Unit _SelectedUnit;
 
 		Highlight _Highlight;
 
-		public BaseController(MatchAdapter Match, GameScreen GameScreen)
+		public BaseController(MatchAdapter Match, MatchScreen GameScreen)
 		{
 			_Match = Match;
 			_GameScreen = GameScreen;

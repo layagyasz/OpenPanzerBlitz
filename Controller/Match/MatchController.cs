@@ -31,6 +31,7 @@ namespace PanzerBlitz
 		public void DoTurn(TurnInfo TurnInfo)
 		{
 			if (_Automated && AutomateTurn(TurnInfo)) _Match.ExecuteOrder(new NextPhaseOrder());
+			else if (TurnInfo.TurnComponent == TurnComponent.RESET) AutomateTurn(TurnInfo);
 			else _PlayerControllers[TurnInfo.Army].DoTurn(TurnInfo);
 		}
 

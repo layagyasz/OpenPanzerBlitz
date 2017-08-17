@@ -48,7 +48,7 @@ namespace PanzerBlitz
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(_InitialMovement);
-			Stream.Write(_AttackTile);
+			Stream.Write(_AttackTile.Id);
 		}
 
 		private NoMoveReason InitialValidate()

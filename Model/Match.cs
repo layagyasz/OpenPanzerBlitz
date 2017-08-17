@@ -16,9 +16,10 @@ namespace PanzerBlitz
 		public readonly List<Order> ExecutedOrders = new List<Order>();
 		public readonly IdGenerator IdGenerator = new IdGenerator();
 
-		private IEnumerator<TurnInfo> _TurnOrder;
+		IEnumerator<TurnInfo> _TurnOrder;
 
-		private Random _Random = new Random();
+		List<Order> _OrderBuffer = new List<Order>();
+		Random _Random = new Random();
 
 		public TurnInfo CurrentPhase
 		{
@@ -57,7 +58,11 @@ namespace PanzerBlitz
 
 		public void Start()
 		{
-			if (CurrentPhase == null) NextPhase();
+			lock (_OrderBuffer)
+			{
+				NextPhase();
+				DoBufferedOrders();
+			}
 		}
 
 		void NextPhase()
@@ -77,10 +82,7 @@ namespace PanzerBlitz
 
 		public bool ValidateOrder(Order Order)
 		{
-			if (CurrentPhase == null) Start();
-
-			Console.WriteLine("VALIDATE {0} {1}", Order, CurrentPhase.TurnComponent);
-
+			if (CurrentPhase == null) return false;
 			if (Order.Army != null && Order.Army != CurrentPhase.Army) return false;
 			if (Order is AttackOrder)
 			{
@@ -109,11 +111,27 @@ namespace PanzerBlitz
 			return true;
 		}
 
+		public bool BufferOrder(Order Order)
+		{
+			lock (_OrderBuffer)
+			{
+				_OrderBuffer.Add(Order);
+			}
+			return ValidateOrder(Order);
+		}
+
+		public void DoBufferedOrders()
+		{
+			lock (_OrderBuffer)
+			{
+				foreach (Order o in _OrderBuffer) ExecuteOrder(o);
+				_OrderBuffer.Clear();
+			}
+		}
+
 		public bool ExecuteOrder(Order Order)
 		{
 			if (!ValidateOrder(Order)) return false;
-
-			Console.WriteLine("{0} {1}", Order, CurrentPhase.TurnComponent);
 
 			if (Order is NextPhaseOrder)
 			{
@@ -123,7 +141,6 @@ namespace PanzerBlitz
 				return true;
 			}
 			bool executed = Order.Execute(_Random);
-			Console.WriteLine(executed);
 			if (executed)
 			{
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));

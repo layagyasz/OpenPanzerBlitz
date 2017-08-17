@@ -15,7 +15,7 @@ namespace PanzerBlitz
 
 		LoadUnitPane _LoadUnitPane;
 
-		public MovementController(bool VehicleMovement, MatchAdapter Match, GameScreen GameScreen)
+		public MovementController(bool VehicleMovement, MatchAdapter Match, MatchScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 			this.VehicleMovement = VehicleMovement;
@@ -25,7 +25,7 @@ namespace PanzerBlitz
 		{
 			if (_LoadUnitPane != null)
 			{
-				_GameScreen.RemovePane(_LoadUnitPane);
+				_GameScreen.PaneLayer.Remove(_LoadUnitPane);
 				_LoadUnitPane = null;
 			}
 		}
@@ -101,7 +101,7 @@ namespace PanzerBlitz
 					{
 						Clear();
 						_LoadUnitPane = new LoadUnitPane(canLoad);
-						_GameScreen.AddPane(_LoadUnitPane);
+						_GameScreen.PaneLayer.Add(_LoadUnitPane);
 						_LoadUnitPane.OnUnitSelected += LoadUnit;
 					}
 				}

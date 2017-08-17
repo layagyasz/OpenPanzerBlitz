@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		UnitConfigurationRenderer _Renderer;
 
-		public DeploymentController(MatchAdapter Match, UnitConfigurationRenderer Renderer, GameScreen GameScreen)
+		public DeploymentController(MatchAdapter Match, UnitConfigurationRenderer Renderer, MatchScreen GameScreen)
 			: base(Match, GameScreen)
 		{
 			_Renderer = Renderer;
@@ -38,7 +38,7 @@ namespace PanzerBlitz
 				_DeploymentMicrocontrollers.Add(d, c);
 				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Renderer));
 			}
-			_GameScreen.AddPane(_DeploymentPane);
+			_GameScreen.PaneLayer.Add(_DeploymentPane);
 		}
 
 		public override bool Finish()
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 			base.End();
 			if (_WorkingDeployment != null) _DeploymentMicrocontrollers[_WorkingDeployment].End();
 			_WorkingDeployment = null;
-			_GameScreen.RemovePane(_DeploymentPane);
+			_GameScreen.PaneLayer.Remove(_DeploymentPane);
 		}
 
 		public override void HandleTileLeftClick(Tile Tile)

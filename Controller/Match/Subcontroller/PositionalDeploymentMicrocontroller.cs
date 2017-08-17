@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using SFML.Graphics;
@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		public PositionalDeploymentMicrocontroller(
 			MatchAdapter Match,
-			GameScreen GameScreen,
+			MatchScreen GameScreen,
 			PositionalDeployment Deployment)
 			: base(Match, GameScreen)
 		{

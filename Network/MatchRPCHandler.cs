@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		RPCResponse ExecuteOrder(ExecuteOrderRequest Request)
 		{
-			return new BooleanResponse(_Match.ExecuteOrder(Request.Order));
+			return new BooleanResponse(_Match.BufferOrder(Request.Order));
 		}
 
 		RPCResponse ValidateOrder(ValidateOrderRequest Request)
