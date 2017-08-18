@@ -22,6 +22,7 @@ namespace PanzerBlitz
 			_ConnectButton.Position =
 				new Vector2f(Size.X - _ConnectButton.Size.X - 32, Size.Y - _ConnectButton.Size.Y - 32);
 			_ConnectButton.OnClick += HandleConnectButtonClick;
+			_IPInput.OnSubmitted += HandleConnectButtonClick;
 
 			_Display.Add(new Button("header-1") { DisplayedString = "Remote Connection" });
 			_Display.Add(new Button("header-2") { DisplayedString = "IP Address" });

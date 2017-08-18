@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Cardamom.Network;
 using Cardamom.Network.Responses;
@@ -40,12 +41,12 @@ namespace PanzerBlitz
 		{
 			if (IsHost)
 			{
-				MatchLobby lobby = new MatchLobby();
+				MatchLobby lobby = new MatchLobby(GameData.Scenarios.First());
 				lobby.ApplyAction(new AddPlayerAction(GameData.Player));
 				Chat chat = new Chat();
 
 				Server.MessageAdapter = new NonMatchMessageSerializer();
-				Server.RPCHandler = new LobbyRPCHandler(lobby, chat);
+				Server.RPCHandler = new LobbyServerRPCHandler(lobby, chat);
 
 				lobby.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyLobbyActionRequest(e.Value));
 				chat.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyChatActionRequest(e.Value));

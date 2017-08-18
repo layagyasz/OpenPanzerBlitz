@@ -8,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class SetPlayerArmyAction : LobbyAction
 	{
-		public readonly Player Player;
+		public Player Player { get; }
 		public readonly string ArmyConfigurationKey;
 
 		public SetPlayerArmyAction(Player Player, ArmyConfiguration ArmyConfiguration)

@@ -7,19 +7,20 @@ namespace PanzerBlitz
 {
 	public class NextPhaseOrder : Order
 	{
-		public Army Army
+		public Army Army { get; }
+
+		public NextPhaseOrder(Army Army)
 		{
-			get
-			{
-				return null;
-			}
+			this.Army = Army;
 		}
 
-		public NextPhaseOrder() { }
+		public NextPhaseOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: this((Army)Objects[Stream.ReadInt32()]) { }
 
-		public NextPhaseOrder(SerializationInputStream Stream, List<GameObject> Objects) { }
-
-		public void Serialize(SerializationOutputStream Stream) { }
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Army.Id);
+		}
 
 		public bool Validate()
 		{

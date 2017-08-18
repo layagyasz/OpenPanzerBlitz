@@ -30,13 +30,13 @@ namespace PanzerBlitz
 
 		public CompositeMatcher(SerializationInputStream Stream)
 			: this(
-				Stream.ReadEnumerable(i => MatcherSerializer.Deserialize(Stream)),
+				Stream.ReadEnumerable(i => MatcherSerializer.Deserialize(Stream)).ToList(),
 				AGGREGATORS[Stream.ReadByte()])
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(Matchers);
+			Stream.Write(Matchers, i => MatcherSerializer.Serialize(i, Stream));
 			Stream.Write((byte)Array.IndexOf(AGGREGATORS, Aggregator));
 		}
 

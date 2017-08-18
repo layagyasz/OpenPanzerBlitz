@@ -32,9 +32,9 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MatchLobby()
+		public MatchLobby(Scenario Scenario)
 		{
-			_Scenario = GameData.Scenarios.First();
+			_Scenario = Scenario;
 			_Players = new List<Player>();
 			_PlayerArmies = new Dictionary<Player, ArmyConfiguration>();
 			_PlayerReady = new Dictionary<Player, bool>();
@@ -62,9 +62,17 @@ namespace PanzerBlitz
 
 		public bool SetScenario(Scenario Scenario)
 		{
-			_Scenario = Scenario;
-			foreach (Player p in _Players) _PlayerArmies[p] = null;
-			return true;
+			if (_Scenario != Scenario)
+			{
+				_Scenario = Scenario;
+				foreach (Player p in _Players)
+				{
+					_PlayerArmies[p] = null;
+					_PlayerReady[p] = false;
+				}
+				return true;
+			}
+			return false;
 		}
 
 		public bool AddPlayer(Player Player)
@@ -82,7 +90,7 @@ namespace PanzerBlitz
 
 		public bool SetPlayerArmy(Player Player, ArmyConfiguration Army)
 		{
-			if (_Players.Contains(Player))
+			if (_Players.Contains(Player) && !_PlayerReady[Player])
 			{
 				_PlayerArmies[Player] = Army;
 				return true;

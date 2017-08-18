@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public class SetPlayerReadyAction : LobbyAction
 	{
-		public readonly Player Player;
+		public Player Player { get; }
 		public readonly bool Ready;
 
 		public SetPlayerReadyAction(Player Player, bool Ready)

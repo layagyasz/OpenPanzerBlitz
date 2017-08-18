@@ -13,9 +13,15 @@ namespace PanzerBlitz
 		{
 			_LobbyAdapter = LobbyAdapter;
 			_LobbyScreen = LobbyScreen;
+			_LobbyScreen.OnScenarioSelected += HandleScenarioChanged;
 			_LobbyScreen.OnArmyConfigurationSelected += HandlePlayerArmyChanged;
 			_LobbyScreen.OnPlayerReadyStateChanged += HandlePlayerReadyStateChanged;
 			_LobbyScreen.OnLaunched += HandleLaunched;
+		}
+
+		void HandleScenarioChanged(object Sender, ValuedEventArgs<Scenario> E)
+		{
+			_LobbyAdapter.SetScenario(E.Value);
 		}
 
 		void HandlePlayerArmyChanged(object Sender, ValuedEventArgs<Tuple<Player, ArmyConfiguration>> E)

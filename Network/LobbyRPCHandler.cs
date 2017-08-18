@@ -14,9 +14,9 @@ namespace PanzerBlitz
 		public LobbyRPCHandler(Chat Chat)
 		{
 			_Chat = Chat;
-			RegisterRPC(typeof(ApplyLobbyActionRequest), i => ApplyLobbyAction((ApplyLobbyActionRequest)i));
-			RegisterRPC(typeof(GetLobbyRequest), i => GetLobby((GetLobbyRequest)i));
-			RegisterRPC(typeof(ApplyChatActionRequest), i => ApplyChatAction((ApplyChatActionRequest)i));
+			RegisterRPC(typeof(ApplyLobbyActionRequest), (i, j) => ApplyLobbyAction((ApplyLobbyActionRequest)i, j));
+			RegisterRPC(typeof(GetLobbyRequest), (i, j) => GetLobby((GetLobbyRequest)i, j));
+			RegisterRPC(typeof(ApplyChatActionRequest), (i, j) => ApplyChatAction((ApplyChatActionRequest)i, j));
 		}
 
 		public void SetLobby(MatchLobby Lobby)
@@ -30,17 +30,17 @@ namespace PanzerBlitz
 			_Lobby = Lobby;
 		}
 
-		RPCResponse ApplyLobbyAction(ApplyLobbyActionRequest Request)
+		protected virtual RPCResponse ApplyLobbyAction(ApplyLobbyActionRequest Request, TCPConnection Connection)
 		{
 			return new BooleanResponse(_Lobby != null && _Lobby.ApplyAction(Request.Action));
 		}
 
-		RPCResponse ApplyChatAction(ApplyChatActionRequest Request)
+		protected virtual RPCResponse ApplyChatAction(ApplyChatActionRequest Request, TCPConnection Connection)
 		{
 			return new BooleanResponse(_Chat != null && _Chat.ApplyAction(Request.Action));
 		}
 
-		RPCResponse GetLobby(GetLobbyRequest Request)
+		protected virtual RPCResponse GetLobby(GetLobbyRequest Request, TCPConnection Connection)
 		{
 			return new GetLobbyResponse(_Lobby);
 		}

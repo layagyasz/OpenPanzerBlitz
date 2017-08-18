@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public class AddPlayerAction : LobbyAction
 	{
-		public readonly Player Player;
+		public Player Player { get; }
 
 		public AddPlayerAction(Player Player)
 		{

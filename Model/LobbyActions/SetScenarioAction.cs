@@ -8,6 +8,14 @@ namespace PanzerBlitz
 	{
 		public readonly Scenario Scenario;
 
+		public Player Player
+		{
+			get
+			{
+				return null;
+			}
+		}
+
 		public SetScenarioAction(Scenario Scenario)
 		{
 			this.Scenario = Scenario;

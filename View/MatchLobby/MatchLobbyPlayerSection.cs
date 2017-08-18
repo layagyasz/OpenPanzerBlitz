@@ -39,7 +39,7 @@ namespace PanzerBlitz
 			}
 			if (Enabled) select.OnChange += HandleArmyConfigurationSelected;
 			select.Position = new Vector2f(0, header.Size.Y + 6);
-			select.Enabled = Enabled;
+			select.Enabled = Enabled && !Lobby.GetPlayerReady(Player);
 			select.SetValue(i => i.Value == Lobby.GetPlayerArmy(Player));
 
 			if (Enabled) ready.OnChange += HandlePlayerReadyStateChanged;

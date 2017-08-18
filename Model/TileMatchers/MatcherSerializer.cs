@@ -8,6 +8,7 @@ namespace PanzerBlitz
 	{
 		static readonly Type[] MATCHER_TYPES =
 		{
+			typeof(EmptyMatcher),
 			typeof(CompositeMatcher),
 			typeof(DistanceFromUnit),
 			typeof(TileElevation),
@@ -17,6 +18,7 @@ namespace PanzerBlitz
 
 		static readonly Func<SerializationInputStream, Matcher>[] DESERIALIZERS =
 		{
+			i => new EmptyMatcher(i),
 			i => new CompositeMatcher(i),
 			i => new DistanceFromUnit(i),
 			i => new TileElevation(i),

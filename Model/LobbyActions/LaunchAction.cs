@@ -6,6 +6,14 @@ namespace PanzerBlitz
 {
 	public class LaunchAction : LobbyAction
 	{
+		public Player Player
+		{
+			get
+			{
+				return null;
+			}
+		}
+
 		public LaunchAction() { }
 
 		public LaunchAction(SerializationInputStream Stream) { }

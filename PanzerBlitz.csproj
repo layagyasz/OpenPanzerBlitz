@@ -238,6 +238,9 @@
     <Compile Include="View\Map\Camera.cs" />
     <Compile Include="View\MapScreenBase.cs" />
     <Compile Include="View\Edit\EditScreen.cs" />
+    <Compile Include="Network\LobbyServerRPCHandler.cs" />
+    <Compile Include="Network\MatchServerRPCHandler.cs" />
+    <Compile Include="Model\TileMatchers\EmptyMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

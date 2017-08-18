@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Network;
@@ -43,8 +44,19 @@ namespace PanzerBlitz
 
 			if (IsHost)
 			{
+				LobbyServerRPCHandler currentHandler = (LobbyServerRPCHandler)Server.RPCHandler;
+				Dictionary<Army, TCPConnection> armyConnections = new Dictionary<Army, TCPConnection>();
+				foreach (Player p in Lobby.Players)
+				{
+					if (currentHandler.PlayerConnections.ContainsKey(p))
+					{
+						Army a = match.Armies.FirstOrDefault(i => i.Configuration == Lobby.GetPlayerArmy(p));
+						armyConnections.Add(a, currentHandler.PlayerConnections[p]);
+					}
+				}
+
 				Server.MessageAdapter = new MatchMessageSerializer(serializer);
-				Server.RPCHandler = new MatchRPCHandler(match);
+				Server.RPCHandler = new MatchServerRPCHandler(match, armyConnections);
 				match.OnExecuteOrder += (sender, e) => Server.Broadcast(new ExecuteOrderRequest(e.Order, serializer));
 				return new MatchContext(
 					Server,

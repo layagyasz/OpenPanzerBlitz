@@ -18,7 +18,12 @@ namespace PanzerBlitz
 			_Context = (MatchLobbyContext)ProgramStateContext;
 
 			MatchLobbyScreen screen = new MatchLobbyScreen(
-				ProgramContext.ScreenResolution, _Context.IsHost, _Context.Lobby, _Context.Chat, GameData.Player);
+				ProgramContext.ScreenResolution,
+				_Context.IsHost,
+				_Context.Lobby,
+				_Context.Chat,
+				GameData.Player,
+				GameData.Scenarios);
 			_Controller = new MatchLobbyController(_Context.MakeMatchLobbyAdapter(), screen);
 			_ChatController = new ChatController(_Context.MakeChatAdapter(), screen.ChatView, GameData.Player);
 			_Context.Lobby.OnLaunched += HandleLaunch;

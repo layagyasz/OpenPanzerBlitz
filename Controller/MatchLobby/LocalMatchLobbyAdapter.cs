@@ -10,6 +10,11 @@ namespace PanzerBlitz
 			_Lobby = Lobby;
 		}
 
+		public bool SetScenario(Scenario Scenario)
+		{
+			return _Lobby.ApplyAction(new SetScenarioAction(Scenario));
+		}
+
 		public bool SetPlayerArmy(Player Player, ArmyConfiguration Army)
 		{
 			return _Lobby.ApplyAction(new SetPlayerArmyAction(Player, Army));

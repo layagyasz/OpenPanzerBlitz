@@ -12,16 +12,16 @@ namespace PanzerBlitz
 		public MatchRPCHandler(Match Match)
 		{
 			_Match = Match;
-			RegisterRPC(typeof(ExecuteOrderRequest), i => ExecuteOrder((ExecuteOrderRequest)i));
-			RegisterRPC(typeof(ValidateOrderRequest), i => ValidateOrder((ValidateOrderRequest)i));
+			RegisterRPC(typeof(ExecuteOrderRequest), (i, j) => ExecuteOrder((ExecuteOrderRequest)i, j));
+			RegisterRPC(typeof(ValidateOrderRequest), (i, j) => ValidateOrder((ValidateOrderRequest)i, j));
 		}
 
-		RPCResponse ExecuteOrder(ExecuteOrderRequest Request)
+		protected virtual RPCResponse ExecuteOrder(ExecuteOrderRequest Request, TCPConnection Connection)
 		{
 			return new BooleanResponse(_Match.BufferOrder(Request.Order));
 		}
 
-		RPCResponse ValidateOrder(ValidateOrderRequest Request)
+		protected virtual RPCResponse ValidateOrder(ValidateOrderRequest Request, TCPConnection Connection)
 		{
 			return new BooleanResponse(_Match.ValidateOrder(Request.Order));
 		}

@@ -14,6 +14,11 @@ namespace PanzerBlitz
 			_Client = Client;
 		}
 
+		public bool SetScenario(Scenario Scenario)
+		{
+			return false;
+		}
+
 		public bool SetPlayerArmy(Player Player, ArmyConfiguration Army)
 		{
 			return ((BooleanResponse)_Client.Call(

@@ -39,7 +39,7 @@ namespace PanzerBlitz
 			Matcher edge = new TileOnEdge(Direction.ANY);
 
 			if (m == null) Matcher = edge;
-			else Matcher = new CompositeMatcher(new Matcher[] { edge, m }, (i, j) => i && j);
+			else Matcher = new CompositeMatcher(new Matcher[] { edge, m }, CompositeMatcher.AND);
 		}
 
 		public TileEntryDeploymentConfiguration(SerializationInputStream Stream)

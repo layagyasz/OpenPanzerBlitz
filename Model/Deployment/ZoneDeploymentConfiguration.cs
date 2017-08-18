@@ -31,7 +31,7 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
-			Matcher = (Matcher)attributes[(int)Attribute.MATCHER];
+			Matcher = Parse.DefaultIfNull<Matcher>(attributes[(int)Attribute.MATCHER], new EmptyMatcher());
 		}
 
 		public ZoneDeploymentConfiguration(SerializationInputStream Stream)

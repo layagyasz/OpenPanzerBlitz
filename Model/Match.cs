@@ -83,7 +83,7 @@ namespace PanzerBlitz
 		public bool ValidateOrder(Order Order)
 		{
 			if (CurrentPhase == null) return false;
-			if (Order.Army != null && Order.Army != CurrentPhase.Army) return false;
+			if (Order.Army != CurrentPhase.Army) return false;
 			if (Order is AttackOrder)
 			{
 				if (!ValidateAttackOrder((AttackOrder)Order)) return false;

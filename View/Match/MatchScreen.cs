@@ -20,6 +20,7 @@ namespace PanzerBlitz
 
 		StackLayer _StackLayer = new StackLayer();
 		TextBox _InfoDisplay = new TextBox("info-display");
+		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
 
 		public MatchScreen(Vector2f WindowSize, Map Map, TileRenderer TileRenderer, IEnumerable<ArmyView> ArmyViews)
 			: base(WindowSize, Map, TileRenderer)
@@ -31,17 +32,21 @@ namespace PanzerBlitz
 				a.OnNewUnitView += (sender, e) => _StackLayer.AddUnitView(e.UnitView);
 			}
 
-			Button finishButton = new Button("large-button") { DisplayedString = "Finish" };
-			finishButton.Position = Size - finishButton.Size - new Vector2f(32, 32);
-			finishButton.OnClick += HandleFinishClicked;
-			_InfoDisplay.Position = finishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
-			_Items.Add(finishButton);
+			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
+			_FinishButton.OnClick += HandleFinishClicked;
+			_InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
+			_Items.Add(_FinishButton);
 			_Items.Add(_InfoDisplay);
 		}
 
 		public void SetInfoMessage(string Message)
 		{
 			_InfoDisplay.DisplayedString = Message;
+		}
+
+		public void SetEnabled(bool Enabled)
+		{
+			_FinishButton.Enabled = Enabled;
 		}
 
 		void HandleFinishClicked(object Sender, EventArgs E)

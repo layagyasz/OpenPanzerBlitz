@@ -8,6 +8,14 @@ namespace PanzerBlitz
 	{
 		public readonly ChatMessage Message;
 
+		public Player Player
+		{
+			get
+			{
+				return Message.Player;
+			}
+		}
+
 		public AddChatMessageAction(ChatMessage Message)
 		{
 			this.Message = Message;

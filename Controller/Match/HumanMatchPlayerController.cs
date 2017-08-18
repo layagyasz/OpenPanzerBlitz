@@ -66,6 +66,7 @@ namespace PanzerBlitz
 		{
 			TurnComponent t = AllowedArmies.Contains(TurnInfo.Army) ? TurnInfo.TurnComponent : TurnComponent.SPECTATE;
 			_GameScreen.SetInfoMessage(string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, t));
+			_GameScreen.SetEnabled(AllowedArmies.Contains(TurnInfo.Army));
 			if (_Controllers.ContainsKey(_CurrentTurn))
 				_Controllers[_CurrentTurn].End();
 			_CurrentTurn = t;
@@ -78,7 +79,7 @@ namespace PanzerBlitz
 			TurnComponent t = Match.GetTurnInfo().TurnComponent;
 			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
 			{
-				Match.ExecuteOrder(new NextPhaseOrder());
+				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurnInfo().Army));
 			}
 		}
 
