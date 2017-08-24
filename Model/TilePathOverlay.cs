@@ -4,11 +4,11 @@ namespace PanzerBlitz
 	public class TilePathOverlay : TileComponent
 	{
 		public static readonly TilePathOverlay ROAD = new TilePathOverlay(
-			"Road", 0, .5f, .5f, 0, 0, true, false, false, false, false, false, false, false, false);
-		public static readonly TilePathOverlay STREAM =
-			new TilePathOverlay("Stream", 0, 0, 0, 3, 5, false, false, false, false, false, false, true, false, false);
+			"Road", 0, .5f, .5f, 0, 0, true, false, false, false, false, false, false, false, false, false);
+		public static readonly TilePathOverlay STREAM = new TilePathOverlay(
+			"Stream", 0, 0, 0, 3, 5, false, false, false, false, false, false, true, false, false, false);
 		public static readonly TilePathOverlay STREAM_FORD = new TilePathOverlay(
-			"Stream Ford", 0, 0, 0, 0, 0, false, false, false, false, false, false, false, true, false);
+			"Stream Ford", 0, 0, 0, 0, 0, false, false, false, false, false, false, false, true, false, false);
 
 		public static TilePathOverlay[] PATH_OVERLAYS = { null, ROAD, STREAM, STREAM_FORD };
 
@@ -27,7 +27,8 @@ namespace PanzerBlitz
 			bool Elevated,
 			bool Depressed,
 			bool DepressedTransition,
-			bool BlocksLineOfSight)
+			bool BlocksLineOfSight,
+			bool Concealing)
 			: base(
 				Name,
 				DieModifier,
@@ -43,7 +44,8 @@ namespace PanzerBlitz
 				Elevated,
 				Depressed,
 				DepressedTransition,
-				BlocksLineOfSight)
+				BlocksLineOfSight,
+				Concealing)
 		{ }
 	}
 }

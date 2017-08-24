@@ -108,7 +108,7 @@ namespace PanzerBlitz
 		static NoLineOfSightReason Verify(Tile[] LineOfSight, Edge[] CrossedEdges)
 		{
 			// Always LOS if adjacent.
-			if (CrossedEdges.Length == 1) return NoLineOfSightReason.NONE;
+			if (CrossedEdges.Length <= 1) return NoLineOfSightReason.NONE;
 
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;

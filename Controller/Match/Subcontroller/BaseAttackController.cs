@@ -20,7 +20,7 @@ namespace PanzerBlitz
 		{
 			if (_AttackBuilder != null)
 			{
-				_GameScreen.PaneLayer.Add(_AttackPane);
+				_GameScreen.PaneLayer.Remove(_AttackPane);
 				_AttackBuilder = null;
 			}
 		}

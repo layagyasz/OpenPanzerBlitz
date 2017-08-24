@@ -241,6 +241,7 @@
     <Compile Include="Network\LobbyServerRPCHandler.cs" />
     <Compile Include="Network\MatchServerRPCHandler.cs" />
     <Compile Include="Model\TileMatchers\EmptyMatcher.cs" />
+    <Compile Include="FileUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -292,6 +293,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Compacta Std Regular.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="csfml-audio-2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -302,9 +306,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Factions.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Compacta Std Regular.otf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\anti-aircraft.png">

@@ -18,6 +18,7 @@ namespace PanzerBlitz
 		public readonly bool Depressed;
 		public readonly bool DepressedTransition;
 		public readonly bool BlocksLineOfSight;
+		public readonly bool Concealing;
 
 		public TileComponent(
 			string Name,
@@ -34,7 +35,8 @@ namespace PanzerBlitz
 			bool Elevated,
 			bool Depressed,
 			bool DepressedTransition,
-			bool BlocksLineOfSight)
+			bool BlocksLineOfSight,
+			bool Concealing)
 		{
 			this.Name = Name;
 			this.DieModifier = DieModifier;
@@ -51,6 +53,7 @@ namespace PanzerBlitz
 			this.Depressed = Depressed;
 			this.DepressedTransition = DepressedTransition;
 			this.BlocksLineOfSight = BlocksLineOfSight;
+			this.Concealing = Concealing;
 		}
 
 		public override string ToString()

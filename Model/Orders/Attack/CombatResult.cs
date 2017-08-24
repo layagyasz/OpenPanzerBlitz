@@ -1,5 +1,12 @@
 ﻿using System;
 namespace PanzerBlitz
 {
-	public enum CombatResult { MISS, DISRUPT, DOUBLE_DISRUPT, DESTROY }
+	public enum CombatResult
+	{
+		NONE,
+		MISS,
+		DISRUPT,
+		DOUBLE_DISRUPT,
+		DESTROY
+	}
 }

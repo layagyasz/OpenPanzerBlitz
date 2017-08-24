@@ -4,11 +4,11 @@ namespace PanzerBlitz
 	public class TileBase : TileComponent
 	{
 		public static readonly TileBase CLEAR =
-			new TileBase("Clear", 0, 1, 1, 0, 0, false, false, false, false, false, false, false, false, false);
+			new TileBase("Clear", 0, 1, 1, 0, 0, false, false, false, false, false, false, false, false, false, false);
 		public static readonly TileBase SWAMP =
-			new TileBase("Swamp", 1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, false);
+			new TileBase("Swamp", 1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, false, false);
 		public static readonly TileBase SLOPE =
-			new TileBase("Slope", 0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false);
+			new TileBase("Slope", 0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false, false);
 
 		public static readonly TileBase[] TILE_BASES = { CLEAR, SWAMP, SLOPE };
 
@@ -27,7 +27,8 @@ namespace PanzerBlitz
 			bool Elevated,
 			bool Depressed,
 			bool DepressedTransition,
-			bool BlocksLineOfSight)
+			bool BlocksLineOfSight,
+		 	bool Concealing)
 			: base(
 				Name,
 				DieModifier,
@@ -43,7 +44,8 @@ namespace PanzerBlitz
 				Elevated,
 				Depressed,
 				DepressedTransition,
-				BlocksLineOfSight)
+				BlocksLineOfSight,
+				Concealing)
 		{ }
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -46,7 +45,7 @@ namespace PanzerBlitz
 		{
 			List<List<Tuple<Map, bool>>> boards = MapConfiguration.Boards.Select(i => i.Select(j =>
 			{
-				FileStream f = GetReadStream(j.Item1, 1000);
+				FileStream f = FileUtils.GetStream(j.Item1, FileMode.Open, 1000);
 				Map map = new Map(new SerializationInputStream(new GZipStream(f, CompressionMode.Decompress)));
 				f.Close();
 				return new Tuple<Map, bool>(map, j.Item2);
@@ -107,26 +106,6 @@ namespace PanzerBlitz
 			SetupNeighbors();
 		}
 
-		FileStream GetReadStream(string path, int timeoutMs)
-		{
-			var time = Stopwatch.StartNew();
-			while (time.ElapsedMilliseconds < timeoutMs)
-			{
-				try
-				{
-					return new FileStream(path, FileMode.Open);
-				}
-				catch (IOException e)
-				{
-					// access error
-					if (e.HResult != -2147024864)
-						throw;
-				}
-			}
-
-			throw new TimeoutException($"Failed to get a write handle to {path} within {timeoutMs}ms.");
-		}
-
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Width);
@@ -142,8 +121,12 @@ namespace PanzerBlitz
 					{
 						int x = From.GetLength(0) - i - 1 - ((Y + j) % 2 == 0 ? 1 : 0);
 						if (x < From.GetLength(0) && x >= 0)
-							To[X + i, Y + j] = new Tile(
+						{
+							Tile newTile = new Tile(
 								new Coordinate(X + i, Y + j), From[x, From.GetLength(1) - j - 1], Invert);
+							if (To[X + i, Y + j] == null) To[X + i, Y + j] = newTile;
+							else To[X + i, Y + j].Merge(newTile);
+						}
 						else
 						{
 							To[X + i, Y + j] = new Tile(new Coordinate(X + i, Y + j));
@@ -176,6 +159,7 @@ namespace PanzerBlitz
 					if (i > 0) t.SetNeighbor(0, Tiles[i - 1, j]);
 				}
 			}
+			foreach (Tile t in TilesEnumerable) t.FixPaths();
 		}
 	}
 }

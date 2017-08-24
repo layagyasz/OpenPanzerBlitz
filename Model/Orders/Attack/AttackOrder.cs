@@ -99,6 +99,8 @@ namespace PanzerBlitz
 		List<SingleAttackOrder> _Attackers = new List<SingleAttackOrder>();
 		List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
 
+		CombatResult[] _Results = new CombatResult[0];
+
 		public Army Army
 		{
 			get
@@ -136,6 +138,7 @@ namespace PanzerBlitz
 		{
 			_AttackTarget = (AttackTarget)Stream.ReadByte();
 			_Attackers = Stream.ReadEnumerable(i => SingleAttackOrderSerializer.Deserialize(Stream, Objects)).ToList();
+			_Results = Stream.ReadEnumerable(i => (CombatResult)Stream.ReadByte()).ToArray();
 			Recalculate();
 		}
 
@@ -146,6 +149,7 @@ namespace PanzerBlitz
 			Stream.Write((byte)AttackMethod);
 			Stream.Write((byte)_AttackTarget);
 			Stream.Write(_Attackers, i => SingleAttackOrderSerializer.Serialize(i, Stream));
+			Stream.Write(_Results, i => Stream.Write((byte)i));
 		}
 
 		public void SetAttackTarget(AttackTarget AttackTarget)
@@ -242,12 +246,15 @@ namespace PanzerBlitz
 			if (Validate() != NoAttackReason.NONE) return false;
 
 			_Attackers.ForEach(i => i.Execute(Random));
-			foreach (OddsCalculation c in _OddsCalculations)
+
+			if (_Results.Length == 0) _Results = new CombatResult[_OddsCalculations.Count];
+			for (int i = 0; i < _OddsCalculations.Count; ++i)
 			{
-				CombatResult result = COMBAT_RESULTS[
+				OddsCalculation c = _OddsCalculations[i];
+				if (_Results[i] == CombatResult.NONE) _Results[i] = COMBAT_RESULTS[
 					OddsIndex(c.Odds, c.OddsAgainst),
 					Random.Next(2, 7) + c.DieModifier];
-				foreach (Unit u in c.Defenders) u.HandleCombatResult(result);
+				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
 			}
 			if (AttackMethod != AttackMethod.MINEFIELD) AttackAt.FireAt();
 			return true;

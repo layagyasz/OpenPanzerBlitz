@@ -11,6 +11,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnLoad;
 		public EventHandler<EventArgs> OnUnload;
 		public EventHandler<MovementEventArgs> OnMove;
+		public EventHandler<EventArgs> OnFire;
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 
@@ -132,6 +133,8 @@ namespace PanzerBlitz
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
 				return NoSingleAttackReason.TEAM;
 			if (_Carrier != null) return NoSingleAttackReason.PASSENGER;
+			if (_Position == null) return NoSingleAttackReason.ILLEGAL;
+			if (_Position.Configuration.Concealing && !Army.CanSeeUnit(this)) return NoSingleAttackReason.CONCEALED;
 			return NoSingleAttackReason.NONE;
 		}
 
@@ -316,11 +319,13 @@ namespace PanzerBlitz
 
 		public LineOfSight GetLineOfSight(Tile Tile)
 		{
+			if (_Position == null) return null;
 			return new LineOfSight(_Position, Tile);
 		}
 
 		public Path<Tile> GetPathTo(Tile Tile, bool Combat)
 		{
+			if (_Position == null) return null;
 			return new Path<Tile>(
 				_Position,
 				Tile,
@@ -340,7 +345,8 @@ namespace PanzerBlitz
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			if (CanAttack(AttackMethod) != NoSingleAttackReason.NONE) return Enumerable.Empty<LineOfSight>();
+			if (_Position == null || CanAttack(AttackMethod) != NoSingleAttackReason.NONE)
+				return Enumerable.Empty<LineOfSight>();
 
 			return new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
 				.GetReachableNodes()
@@ -350,6 +356,7 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)
 		{
+			if (_Position == null) return null;
 			if (CanMove(Combat) != NoMoveReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
@@ -374,6 +381,7 @@ namespace PanzerBlitz
 		public void Fire()
 		{
 			_Fired = true;
+			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
 		public void Reset()

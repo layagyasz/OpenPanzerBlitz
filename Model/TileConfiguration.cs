@@ -11,6 +11,7 @@ namespace PanzerBlitz
 		bool _TreatUnitsAsArmored;
 		bool _Depressed;
 		bool _DepressedTransition;
+		bool _Concealing;
 		int _DieModifier;
 		int _TrueElevation;
 
@@ -45,6 +46,13 @@ namespace PanzerBlitz
 			get
 			{
 				return _DepressedTransition;
+			}
+		}
+		public bool Concealing
+		{
+			get
+			{
+				return _Concealing;
 			}
 		}
 		public int DieModifier
@@ -114,6 +122,10 @@ namespace PanzerBlitz
 			_DepressedTransition = Tile.TileBase.DepressedTransition
 									   || Tile.Edges.Any(i => i != null && i.DepressedTransition)
 									   || Tile.PathOverlays.Any(i => i != null && i.DepressedTransition);
+			_Concealing = Tile.TileBase.Concealing
+							  || Tile.Edges.Any(i => i != null && i.Concealing)
+							  || Tile.PathOverlays.Any(i => i != null && i.Concealing);
+
 			_DieModifier =
 				Math.Max(
 					Tile.TileBase.DieModifier,

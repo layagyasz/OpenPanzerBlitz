@@ -4,13 +4,13 @@ namespace PanzerBlitz
 	public class Edge : TileComponent
 	{
 		public static Edge TOWN =
-			new Edge("Town", 1, .5f, .5f, 0, 0, false, false, false, true, true, false, false, false, true);
+			new Edge("Town", 1, .5f, .5f, 0, 0, false, false, false, true, true, false, false, false, true, true);
 		public static Edge FOREST =
-			new Edge("Forest", 1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, true);
+			new Edge("Forest", 1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, true, true);
 		public static Edge SLOPE =
-			new Edge("Slope", 0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false);
+			new Edge("Slope", 0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false, false);
 		public static readonly Edge WATER =
-			new Edge("Water", 0, 1, 1, 0, 0, false, true, true, false, false, false, false, false, false);
+			new Edge("Water", 0, 1, 1, 0, 0, false, true, true, false, false, false, false, false, false, false);
 
 		public static Edge[] EDGES = { null, TOWN, FOREST, SLOPE, WATER };
 
@@ -29,7 +29,8 @@ namespace PanzerBlitz
 			bool Elevated,
 			bool Depressed,
 			bool DepressedTransition,
-			bool BlocksLineOfSight)
+			bool BlocksLineOfSight,
+			bool Concealing)
 			: base(
 				Name,
 				DieModifier,
@@ -45,7 +46,8 @@ namespace PanzerBlitz
 				Elevated,
 				Depressed,
 				DepressedTransition,
-				BlocksLineOfSight)
+				BlocksLineOfSight,
+				Concealing)
 		{ }
 	}
 }

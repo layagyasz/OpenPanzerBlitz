@@ -201,6 +201,56 @@ namespace PanzerBlitz
 			_Id = IdGenerator.GenerateId();
 		}
 
+		public void FixPaths()
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				if (NeighborTiles[i] == null) continue;
+				// There is a disconnected path.
+				if (_PathOverlays[i] != null && NeighborTiles[i].GetPathOverlay((i + 3) % 6) == null)
+				{
+					// Find other tiles disconnected path.
+					TilePathOverlay p = _PathOverlays[i];
+					Tuple<int, int> otherPath = GetDisconntedNeighbor(p);
+					// Connect them.
+					if (otherPath != null)
+					{
+						SetPathOverlay(i, null);
+						SetPathOverlay(otherPath.Item1, p);
+
+						NeighborTiles[i].SetPathOverlay(otherPath.Item2, null);
+						NeighborTiles[i].SetPathOverlay((otherPath.Item1 + 3) % 6, p);
+					}
+					// Could not find another path.  Just continue this one.
+					else NeighborTiles[i].SetPathOverlay((i + 3) % 6, p);
+				}
+			}
+		}
+
+		Tuple<int, int> GetDisconntedNeighbor(TilePathOverlay Overlay)
+		{
+			for (int i = 0; i < 6; ++i)
+			{
+				for (int j = 0; j < 6; ++j)
+				{
+					if (NeighborTiles[i]._PathOverlays[j] == Overlay
+						&& NeighborTiles[i].NeighborTiles[j]._PathOverlays[(j + 3) % 6] == null)
+						return new Tuple<int, int>(i, j);
+				}
+			}
+			return null;
+		}
+
+		public void Merge(Tile Tile)
+		{
+			if (_TileBase == TileBase.CLEAR) _TileBase = Tile.TileBase;
+			for (int i = 0; i < 6; ++i)
+			{
+				if (_PathOverlays[i] == null) _PathOverlays[i] = Tile._PathOverlays[i];
+				if (_Edges[i] == null) _Edges[i] = Tile._Edges[i];
+			}
+		}
+
 		public bool OnEdge(Direction Edge)
 		{
 			if (Edge == Direction.NONE) return true;

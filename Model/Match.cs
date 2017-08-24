@@ -42,6 +42,7 @@ namespace PanzerBlitz
 								 .Concat(Armies.Select(i => new TurnInfo(i, TurnComponent.RESET)))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 									.SelectMany(i => i)).GetEnumerator();
+			foreach (Unit u in Armies.SelectMany(i => i.Units)) u.OnMove += UpdateUnitVisibilityFromMove;
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
@@ -211,6 +212,25 @@ namespace PanzerBlitz
 			}
 			return (Order.Army == CurrentPhase.Army || CurrentPhase.Army == null)
 				&& CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
+		}
+
+		void UpdateUnitVisibilityFromMove(object Sender, MovementEventArgs E)
+		{
+			Unit u = (Unit)Sender;
+			foreach (Army a in Armies)
+			{
+				if (E.Path == null) a.UpdateUnitVisibility(u, E.Tile);
+				else a.UpdateUnitVisibility(u, E.Path[E.Path.Count - 2], E.Path.Destination);
+			}
+		}
+
+		void UpdateUnitVisibilityFromFire(object Sender, EventArgs E)
+		{
+			Unit u = (Unit)Sender;
+			foreach (Army a in Armies)
+			{
+				a.SetUnitVisibility(u, true);
+			}
 		}
 
 		static IEnumerable<TurnInfo> StandardTurnOrder(IEnumerable<Army> Armies)

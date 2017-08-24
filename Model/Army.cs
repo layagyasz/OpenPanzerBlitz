@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Graphing;
+
 namespace PanzerBlitz
 {
 	public class Army : GameObject
@@ -13,6 +15,8 @@ namespace PanzerBlitz
 
 		int _Id;
 		IdGenerator _IdGenerator;
+
+		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
 		public int Id
 		{
@@ -58,6 +62,37 @@ namespace PanzerBlitz
 		public bool MustMove(bool Vehicle)
 		{
 			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == NoMoveReason.NONE);
+		}
+
+		public bool CanSeeUnit(Unit Unit)
+		{
+			if (Unit.Position == null) return false;
+			return !Unit.Position.Configuration.Concealing
+						|| CanSpotTile(Unit.Position)
+						|| _OverrideVisibleUnits.Contains(Unit);
+		}
+
+		public bool CanSpotTile(Tile Tile)
+		{
+			if (Tile == null) return false;
+			return Units.Any(i => i.Position != null && (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
+		}
+
+		public void SetUnitVisibility(Unit Unit, bool Visible)
+		{
+			if (Visible) _OverrideVisibleUnits.Add(Unit);
+			else _OverrideVisibleUnits.Remove(Unit);
+		}
+
+		public void UpdateUnitVisibility(Unit Unit, Tile MovedFrom, Tile MovedTo)
+		{
+			if (Unit.Army == this || !MovedTo.Configuration.Concealing) return;
+			SetUnitVisibility(Unit, CanSpotTile(MovedFrom) /* Should also check line of sights */);
+		}
+
+		public void UpdateUnitVisibility(Unit Unit, Tile MovedTo)
+		{
+			UpdateUnitVisibility(Unit, null, MovedTo);
 		}
 
 		void UnitDestroyed(object Sender, EventArgs E)
