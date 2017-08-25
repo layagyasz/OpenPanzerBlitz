@@ -9,7 +9,7 @@ namespace PanzerBlitz
 {
 	public class AttackOrder : Order
 	{
-		private static readonly CombatResult[,] COMBAT_RESULTS =
+		static readonly CombatResult[,] COMBAT_RESULTS =
 		{
 			{
 				CombatResult.DISRUPT,
@@ -234,7 +234,7 @@ namespace PanzerBlitz
 			return NoAttackReason.NONE;
 		}
 
-		private bool MustAttackAllUnits()
+		bool MustAttackAllUnits()
 		{
 			return AttackMethod != AttackMethod.NORMAL_FIRE
 											   || AttackAt.Configuration.MustAttackAllUnits
@@ -256,15 +256,14 @@ namespace PanzerBlitz
 					Random.Next(2, 7) + c.DieModifier];
 				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
 			}
-			if (AttackMethod != AttackMethod.MINEFIELD) AttackAt.FireAt();
 			return true;
 		}
 
 		// Map 4, 3, 2, 1, 2, 3, 4 => 0 -> 6
-		private int OddsIndex(int Odds, bool OddsAgainst)
+		int OddsIndex(int Odds, bool OddsAgainst)
 		{
 			if (OddsAgainst) return 4 - Odds;
-			else return 2 + Odds;
+			return 2 + Odds;
 		}
 	}
 }

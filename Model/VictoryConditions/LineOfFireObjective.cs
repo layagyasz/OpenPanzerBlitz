@@ -61,7 +61,7 @@ namespace PanzerBlitz
 					 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 					 .SelectMany(i => i.Units)
 					 .SelectMany(i => i.GetFieldOfSight(AttackMethod.NORMAL_FIRE))
-					 .Select(i => i.Final);
+					 .Select(i => i.Item1.Final);
 
 			HashSet<Tile> image;
 			HashSet<Tile> negative;

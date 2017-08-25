@@ -42,7 +42,11 @@ namespace PanzerBlitz
 								 .Concat(Armies.Select(i => new TurnInfo(i, TurnComponent.RESET)))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 									.SelectMany(i => i)).GetEnumerator();
-			foreach (Unit u in Armies.SelectMany(i => i.Units)) u.OnMove += UpdateUnitVisibilityFromMove;
+			foreach (Unit u in Armies.SelectMany(i => i.Units))
+			{
+				u.OnMove += UpdateUnitVisibilityFromMove;
+				u.OnFire += UpdateUnitVisibilityFromFire;
+			}
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()

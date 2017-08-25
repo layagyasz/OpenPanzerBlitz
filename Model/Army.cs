@@ -72,22 +72,54 @@ namespace PanzerBlitz
 						|| _OverrideVisibleUnits.Contains(Unit);
 		}
 
+		public bool CanSeeTile(Tile Tile, bool OverrideConcealment = false)
+		{
+			if (Tile == null) return false;
+			if (Tile.Configuration.Concealing && !OverrideConcealment)
+				return CanSpotTile(Tile);
+			foreach (Unit u in Units)
+			{
+				LineOfSight s = u.GetLineOfSight(Tile);
+				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
+			}
+			return false;
+		}
+
+		public bool CanIndirectFireAtTile(Tile Tile)
+		{
+			if (!CanSpotTile(Tile)) return false;
+			foreach (Unit u in Units.Where(i => i.Configuration.CanSpotIndirectFire))
+			{
+				LineOfSight s = u.GetLineOfSight(Tile);
+				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
+			}
+			return false;
+		}
+
 		public bool CanSpotTile(Tile Tile)
 		{
 			if (Tile == null) return false;
+			if (!Tile.Configuration.Concealing) return true;
 			return Units.Any(i => i.Position != null && (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
 		}
 
 		public void SetUnitVisibility(Unit Unit, bool Visible)
 		{
-			if (Visible) _OverrideVisibleUnits.Add(Unit);
+			if (Unit.Army == this || Unit.Position == null || !Unit.Position.Configuration.Concealing) return;
+
+			if (Unit.Position != null && CanSeeTile(Unit.Position, true))
+			{
+				if (Visible) _OverrideVisibleUnits.Add(Unit);
+				else _OverrideVisibleUnits.Remove(Unit);
+			}
 			else _OverrideVisibleUnits.Remove(Unit);
 		}
 
 		public void UpdateUnitVisibility(Unit Unit, Tile MovedFrom, Tile MovedTo)
 		{
 			if (Unit.Army == this || !MovedTo.Configuration.Concealing) return;
-			SetUnitVisibility(Unit, CanSpotTile(MovedFrom) /* Should also check line of sights */);
+			if (CanSeeTile(MovedFrom)) _OverrideVisibleUnits.Add(Unit);
+			else _OverrideVisibleUnits.Remove(Unit);
 		}
 
 		public void UpdateUnitVisibility(Unit Unit, Tile MovedTo)

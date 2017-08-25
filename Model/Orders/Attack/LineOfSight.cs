@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Graphing;
+using Cardamom.Planar;
 
 namespace PanzerBlitz
 {
@@ -45,12 +46,13 @@ namespace PanzerBlitz
 		public LineOfSight(Tile From, Tile To)
 		{
 			// We calculate lines of sight to and from to make sure sighting is symmetrical.
+			Segment s = new Segment(From.Center, To.Center);
 			Tile[] losA = new Path<Tile>(
 				From,
 				To,
 				i => true,
 				(i, j) => 1,
-				(i, j) => i.HeuristicDistanceTo(j),
+				(i, j) => s.DistanceSquared(j.Center),
 				i => i.Neighbors(),
 				(i, j) => i == j).Nodes.ToArray();
 			Edge[] crossedEdgesA = new Edge[losA.Length - 1];
@@ -65,7 +67,7 @@ namespace PanzerBlitz
 				From,
 				i => true,
 				(i, j) => 1,
-				(i, j) => i.HeuristicDistanceTo(j),
+				(i, j) => s.DistanceSquared(j.Center),
 				i => i.Neighbors(),
 				(i, j) => i == j).Nodes.Reverse().ToArray();
 			Edge[] crossedEdgesB = new Edge[losB.Length - 1];

@@ -30,12 +30,11 @@ namespace PanzerBlitz
 				Highlight(
 					Unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
 						i => new Tuple<Tile, Color>(
-							i.Final,
-							HIGHLIGHT_COLORS[
-								Math.Min(
-									i.Range * HIGHLIGHT_COLORS.Length
-									/ (Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE) + 1),
-									HIGHLIGHT_COLORS.Length - 1)])));
+							i.Item1.Final,
+							GetRangeColor(
+								i.Item2 ? HIGHLIGHT_COLORS : DIM_HIGHLIGHT_COLORS,
+								i.Item1.Range,
+								Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE)))));
 			}
 			else if (Unit.Army != _Army)
 			{

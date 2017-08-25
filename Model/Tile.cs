@@ -29,9 +29,6 @@ namespace PanzerBlitz
 
 		public readonly TileConfiguration Configuration;
 
-		bool _FiredAt;
-		bool _CanIndirectFireAt;
-
 		public int Id
 		{
 			get
@@ -44,20 +41,6 @@ namespace PanzerBlitz
 			get
 			{
 				return _Edges;
-			}
-		}
-		public bool FiredAt
-		{
-			get
-			{
-				return _FiredAt;
-			}
-		}
-		public bool CanIndirectFireAt
-		{
-			get
-			{
-				return _CanIndirectFireAt;
 			}
 		}
 		public Vector2f Center
@@ -222,7 +205,11 @@ namespace PanzerBlitz
 						NeighborTiles[i].SetPathOverlay((otherPath.Item1 + 3) % 6, p);
 					}
 					// Could not find another path.  Just continue this one.
-					else NeighborTiles[i].SetPathOverlay((i + 3) % 6, p);
+					else
+					{
+						NeighborTiles[i].SetPathOverlay((i + 3) % 6, p);
+						NeighborTiles[i].ContinuePath((i + 3) % 6);
+					}
 				}
 			}
 		}
@@ -239,6 +226,20 @@ namespace PanzerBlitz
 				}
 			}
 			return null;
+		}
+
+		void ContinuePath(int PathIndex)
+		{
+			int[] checkSides = { 0, 3, 2, 4, 1, 5 };
+			for (int i = 0; i < 6; ++i)
+			{
+				if (checkSides[i] == PathIndex) continue;
+				if (NeighborTiles[checkSides[i]] == null)
+				{
+					SetPathOverlay(checkSides[i], _PathOverlays[PathIndex]);
+					return;
+				}
+			}
 		}
 
 		public void Merge(Tile Tile)
@@ -354,22 +355,6 @@ namespace PanzerBlitz
 		public void Exit(Unit Unit)
 		{
 			_Units.Remove(Unit);
-		}
-
-		public void FireAt()
-		{
-			_FiredAt = true;
-		}
-
-		public void MakeCanIndirectFireAt()
-		{
-			_CanIndirectFireAt = true;
-		}
-
-		public void Reset()
-		{
-			_FiredAt = false;
-			_CanIndirectFireAt = false;
 		}
 	}
 }

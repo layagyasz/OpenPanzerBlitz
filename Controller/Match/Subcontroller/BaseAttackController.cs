@@ -2,6 +2,7 @@ using System;
 
 using Cardamom.Utilities;
 
+using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -54,6 +55,11 @@ namespace PanzerBlitz
 			_AttackPane.UpdateDescription();
 			_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
 			_AttackPane.OnExecute += ExecuteAttack;
+		}
+
+		protected Color GetRangeColor(Color[] ColorSet, int Range, int MaxRange)
+		{
+			return ColorSet[Math.Min(Range * HIGHLIGHT_COLORS.Length / (MaxRange + 1), ColorSet.Length - 1)];
 		}
 
 		void ExecuteAttack(object sender, EventArgs e)

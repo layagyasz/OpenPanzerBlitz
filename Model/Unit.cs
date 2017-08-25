@@ -163,15 +163,15 @@ namespace PanzerBlitz
 						return _MovedMoreThanOneTile ? NoMoveReason.NO_MOVE : NoMoveReason.NONE;
 					return NoMoveReason.NO_MOVE;
 				}
-				else return NoMoveReason.NONE;
+				return NoMoveReason.NONE;
 			}
-			else return NoMoveReason.NO_MOVE;
+			return NoMoveReason.NO_MOVE;
 		}
 
 		public NoMoveReason CanMove(bool Vehicle, bool Combat)
 		{
 			if (Vehicle != Configuration.IsVehicle) return NoMoveReason.NO_MOVE;
-			else return CanMove(Combat);
+			return CanMove(Combat);
 		}
 
 		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
@@ -186,7 +186,22 @@ namespace PanzerBlitz
 		{
 			NoSingleAttackReason r = CanAttack(AttackMethod);
 			if (r != NoSingleAttackReason.NONE) return r;
-			return Configuration.CanAttack(AttackMethod, EnemyArmored, LineOfSight);
+
+			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
+				return NoSingleAttackReason.NO_LOS;
+
+			if (AttackMethod == AttackMethod.NORMAL_FIRE)
+			{
+				if (Configuration.CanDirectFireAt(EnemyArmored, LineOfSight) == NoSingleAttackReason.NONE)
+					return NoSingleAttackReason.NONE;
+				r = Configuration.CanIndirectFireAt(LineOfSight);
+				if (r != NoSingleAttackReason.NONE) return r;
+				if (!Army.CanIndirectFireAtTile(LineOfSight.Final))
+					return NoSingleAttackReason.NO_INDIRECT_FIRE_SPOTTER;
+				return NoSingleAttackReason.NONE;
+			}
+			if (AttackMethod == AttackMethod.OVERRUN) return Configuration.CanOverrunAt(EnemyArmored);
+			return Configuration.CanCloseAssaultAt(LineOfSight);
 		}
 
 		public void HandleCombatResult(CombatResult CombatResult)
@@ -343,15 +358,20 @@ namespace PanzerBlitz
 			return Enumerable.Empty<Tile>();
 		}
 
-		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
+		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			if (_Position == null || CanAttack(AttackMethod) != NoSingleAttackReason.NONE)
-				return Enumerable.Empty<LineOfSight>();
-
-			return new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
-				.GetReachableNodes()
-				.Select(i => GetLineOfSight(i.Item1))
-				.Where(i => i.Final != _Position && i.Validate() == NoLineOfSightReason.NONE);
+			if (_Position != null && CanAttack(AttackMethod) == NoSingleAttackReason.NONE)
+			{
+				foreach (LineOfSight l in new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
+						 .GetReachableNodes()
+						 .Select(i => GetLineOfSight(i.Item1))
+						  .Where(i => i.Final != _Position))
+				{
+					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
+					else if (CanAttack(AttackMethod, false, l) == NoSingleAttackReason.NONE)
+						yield return new Tuple<LineOfSight, bool>(l, false);
+				}
+			}
 		}
 
 		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)

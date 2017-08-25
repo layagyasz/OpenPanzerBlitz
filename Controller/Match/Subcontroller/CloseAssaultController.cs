@@ -52,12 +52,11 @@ namespace PanzerBlitz
 		{
 			IEnumerable<Tuple<Tile, Color>> attackRange = Unit.GetFieldOfSight(AttackMethod.CLOSE_ASSAULT).Select(
 						i => new Tuple<Tile, Color>(
-							i.Final,
-							HIGHLIGHT_COLORS[
-								Math.Min(
-									i.Range * HIGHLIGHT_COLORS.Length
-				/ (Unit.Configuration.GetRange(AttackMethod.CLOSE_ASSAULT) + 1),
-								HIGHLIGHT_COLORS.Length - 1)]));
+							i.Item1.Final,
+							GetRangeColor(
+								HIGHLIGHT_COLORS,
+								i.Item1.Range,
+								Unit.Configuration.GetRange(AttackMethod.CLOSE_ASSAULT))));
 
 			IEnumerable<Tuple<Tile, Color>> moveRange = Unit.GetFieldOfMovement(true).Select(
 									i => new Tuple<Tile, Color>(

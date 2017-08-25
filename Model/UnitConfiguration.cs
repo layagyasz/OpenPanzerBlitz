@@ -41,7 +41,7 @@ namespace PanzerBlitz
 			CAN_ONLY_OVERRUN_UNARMORED,
 			IS_PASSENGER,
 
-			IS_COMMAND_POST
+			CAN_SPOT_INDIRECT_FIRE
 		};
 
 		public readonly string UniqueKey;
@@ -77,7 +77,7 @@ namespace PanzerBlitz
 		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool IsPassenger;
 
-		public readonly bool IsCommandPost;
+		public readonly bool CanSpotIndirectFire;
 
 		public UnitConfiguration(ParseBlock Block)
 		{
@@ -131,8 +131,8 @@ namespace PanzerBlitz
 				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 
-			IsCommandPost = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_COMMAND_POST], UnitClass == UnitClass.COMMAND_POST);
+			CanSpotIndirectFire = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
 		}
 
 		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
@@ -177,7 +177,7 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.WRECKAGE;
 		}
 
-		private NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
+		public NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			if (!CanDirectFire) return NoSingleAttackReason.UNABLE;
 			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
@@ -186,11 +186,23 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
-		private NoSingleAttackReason CanIndirectFireAt(LineOfSight LineOfSight)
+		public NoSingleAttackReason CanIndirectFireAt(LineOfSight LineOfSight)
 		{
 			if (!CanIndirectFire) return NoSingleAttackReason.UNABLE;
-			if (!LineOfSight.Final.CanIndirectFireAt) return NoSingleAttackReason.NO_INDIRECT_FIRE_SPOTTER;
 			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
+			return NoSingleAttackReason.NONE;
+		}
+
+		public NoSingleAttackReason CanOverrunAt(bool EnemyArmored)
+		{
+			if (CanOnlyOverrunUnarmored && EnemyArmored) return NoSingleAttackReason.NO_ARMOR_ATTACK;
+			return NoSingleAttackReason.NONE;
+		}
+
+		public NoSingleAttackReason CanCloseAssaultAt(LineOfSight LineOfSight)
+		{
+			if (!CanCloseAssault) return NoSingleAttackReason.UNABLE;
+			if (LineOfSight.Range > 1) return NoSingleAttackReason.OUT_OF_RANGE;
 			return NoSingleAttackReason.NONE;
 		}
 
@@ -208,27 +220,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
-		{
-			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
-				return NoSingleAttackReason.NO_LOS;
-
-			NoSingleAttackReason r = CanAttack(AttackMethod);
-			if (r != NoSingleAttackReason.NONE) return r;
-
-			switch (AttackMethod)
-			{
-				case AttackMethod.NORMAL_FIRE:
-					if (CanDirectFireAt(EnemyArmored, LineOfSight) == NoSingleAttackReason.NONE)
-						return NoSingleAttackReason.NONE;
-					return CanIndirectFireAt(LineOfSight);
-				case AttackMethod.OVERRUN:
-					if (CanOnlyOverrunUnarmored && EnemyArmored) return NoSingleAttackReason.NO_ARMOR_ATTACK;
-					return NoSingleAttackReason.NONE;
-			}
-			return NoSingleAttackReason.NONE;
-		}
-
 		public int GetRange(AttackMethod AttackMethod)
 		{
 			switch (AttackMethod)
@@ -239,70 +230,6 @@ namespace PanzerBlitz
 			}
 			// Should not end up here.
 			return 0;
-		}
-
-		public AttackFactorCalculation GetAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
-		{
-			switch (AttackMethod)
-			{
-				case AttackMethod.NORMAL_FIRE:
-					return GetNormalAttack(EnemyArmored, LineOfSight);
-				case AttackMethod.CLOSE_ASSAULT:
-				case AttackMethod.OVERRUN:
-					if (CanAttack(AttackMethod, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
-						return new AttackFactorCalculation(
-							0, new List<AttackFactorCalculationFactor>()
-							{
-								AttackFactorCalculationFactor.CANNOT_ATTACK
-							});
-					return new AttackFactorCalculation(Attack, new List<AttackFactorCalculationFactor>());
-			}
-			return null;
-		}
-
-		private AttackFactorCalculation GetNormalAttack(bool EnemyArmored, LineOfSight LineOfSight)
-		{
-			if (CanAttack(AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
-			{
-				return new AttackFactorCalculation(
-					0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
-			}
-
-			List<AttackFactorCalculationFactor> factors = new List<AttackFactorCalculationFactor>();
-			int attack = Attack;
-			if (LineOfSight.Initial.Elevation < LineOfSight.Final.Elevation)
-			{
-				attack /= 2;
-				factors.Add(AttackFactorCalculationFactor.ELEVATION);
-			}
-
-			if (EnemyArmored)
-			{
-				int HalfRange = Range / 2;
-				if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE || WeaponClass == WeaponClass.MORTAR)
-				{
-					if (LineOfSight.Range > HalfRange)
-					{
-						attack /= 2;
-						factors.Add(AttackFactorCalculationFactor.ARMOR_RANGE);
-					}
-				}
-				else if (WeaponClass == WeaponClass.ANTI_ARMOR)
-				{
-					if (LineOfSight.Range <= HalfRange)
-					{
-						attack *= 2;
-						factors.Add(AttackFactorCalculationFactor.ANTI_ARMOR_RANGE);
-					}
-				}
-			}
-			else if (WeaponClass == WeaponClass.ANTI_ARMOR && !EnemyArmored)
-			{
-				attack /= 2;
-				factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
-			}
-
-			return new AttackFactorCalculation(attack, factors);
 		}
 
 		public float GetPointValue()
@@ -325,7 +252,7 @@ namespace PanzerBlitz
 					if (Range > 16) return Attack + .25f * Range + Defense + Movement;
 					else return Attack + 4 + Defense + Movement;
 				case UnitClass.RECONNAISSANCE_VEHICLE:
-					if (IsCommandPost) return 5 + Defense + Movement;
+					if (CanSpotIndirectFire) return 5 + Defense + Movement;
 					if (CanAntiAircraft)
 					{
 						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f * Range + Defense + Movement;

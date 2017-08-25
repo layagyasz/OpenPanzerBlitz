@@ -60,7 +60,7 @@ namespace PanzerBlitz
 		public override AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
-				return _Attacker.Configuration.GetAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
+				return new AttackFactorCalculation(_Attacker, AttackMethod, _TreatStackAsArmored, LineOfSight);
 			return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
@@ -68,7 +68,6 @@ namespace PanzerBlitz
 		public override NoSingleAttackReason Validate()
 		{
 			if (_Defender == null) return NoSingleAttackReason.ILLEGAL;
-			if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return NoSingleAttackReason.NO_LOS;
 			NoSingleAttackReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
 			if (r != NoSingleAttackReason.NONE) return r;
 

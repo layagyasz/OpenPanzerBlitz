@@ -81,7 +81,7 @@ namespace PanzerBlitz
 		public override AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
-				return Attacker.Configuration.GetAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, _TreatStackAsArmored, null);
 			else return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
