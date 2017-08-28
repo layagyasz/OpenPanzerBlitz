@@ -81,7 +81,7 @@ namespace PanzerBlitz
 			Block.AddParser<Objective>("line-of-fire-objective", i => new LineOfFireObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
-			Block.AddParser<MapConfiguration>("map-configuration", i => new MapConfiguration(i));
+			Block.AddParser<BoardCompositeMapConfiguration>("map-configuration", i => new BoardCompositeMapConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);

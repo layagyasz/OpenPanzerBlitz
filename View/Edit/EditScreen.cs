@@ -8,6 +8,7 @@ namespace PanzerBlitz
 {
 	public class EditScreen : MapScreenBase
 	{
+		public EventHandler<EventArgs> OnNewClicked;
 		public EventHandler<EventArgs> OnOpenClicked;
 		public EventHandler<EventArgs> OnSaveClicked;
 
@@ -17,6 +18,11 @@ namespace PanzerBlitz
 			: base(WindowSize, Map, TileRenderer)
 		{
 			_FileDropDown.Add(new SelectionOption<object>("select-option") { DisplayedString = "File" });
+
+			SelectionOption<object> newOption =
+				new SelectionOption<object>("select-option") { DisplayedString = "New " };
+			newOption.OnClick += HandleNewClicked;
+			_FileDropDown.Add(newOption);
 
 			SelectionOption<object> openOption =
 				new SelectionOption<object>("select-option") { DisplayedString = "Open" };
@@ -29,6 +35,11 @@ namespace PanzerBlitz
 			_FileDropDown.Add(saveOption);
 
 			_Items.Add(_FileDropDown);
+		}
+
+		void HandleNewClicked(object Sender, EventArgs E)
+		{
+			if (OnNewClicked != null) OnNewClicked(this, E);
 		}
 
 		void HandleOpenClicked(object Sender, EventArgs E)

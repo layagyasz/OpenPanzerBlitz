@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Graphing;
+using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
 	public class Unit : GameObject
 	{
 		public EventHandler<EventArgs> OnLoad;
-		public EventHandler<EventArgs> OnUnload;
+		public EventHandler<ValuedEventArgs<Unit>> OnUnload;
 		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnFire;
 		public EventHandler<EventArgs> OnRemove;
@@ -321,10 +322,11 @@ namespace PanzerBlitz
 				_Passenger._RemainingMovement = 0;
 			}
 
+			Unit passenger = _Passenger;
 			_Passenger._Carrier = null;
 			_Passenger = null;
 
-			if (OnUnload != null) OnUnload(this, EventArgs.Empty);
+			if (OnUnload != null) OnUnload(this, new ValuedEventArgs<Unit>(passenger));
 		}
 
 		public int GetStackSize()

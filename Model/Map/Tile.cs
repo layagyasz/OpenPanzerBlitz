@@ -254,7 +254,7 @@ namespace PanzerBlitz
 
 		public bool OnEdge(Direction Edge)
 		{
-			if (Edge == Direction.NONE) return true;
+			if (Edge == Direction.NONE) return !NeighborTiles.Any(i => i == null);
 			if (Edge == Direction.ANY) return NeighborTiles.Any(i => i == null);
 			if (Edge == Direction.NORTH)
 				return NeighborTiles[(int)Direction.NORTH_WEST] == null

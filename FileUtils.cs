@@ -10,7 +10,17 @@ namespace PanzerBlitz
 		{
 			var time = Stopwatch.StartNew();
 			while (time.ElapsedMilliseconds < Timeout)
-				return new FileStream(Path, FileMode);
+			{
+				try
+				{
+					return new FileStream(Path, FileMode);
+				}
+				catch (IOException e)
+				{
+					if (e.HResult != -2147024864)
+						throw;
+				}
+			}
 
 			throw new TimeoutException($"Failed to get a write handle to {Path} within {Timeout}ms.");
 		}

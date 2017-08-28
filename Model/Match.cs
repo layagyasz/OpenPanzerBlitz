@@ -32,7 +32,7 @@ namespace PanzerBlitz
 		public Match(Scenario Scenario)
 		{
 			this.Scenario = Scenario;
-			this.Map = new Map(Scenario.MapConfiguration);
+			this.Map = Scenario.MapConfiguration.GenerateMap();
 			foreach (Tile t in Map.TilesEnumerable) t.GiveId(IdGenerator);
 
 			Armies = Scenario.TurnOrder.Select(i => new Army(i, IdGenerator)).ToList();

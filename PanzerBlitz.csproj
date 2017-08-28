@@ -41,15 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Tile.cs" />
-    <Compile Include="Model\TileBase.cs" />
-    <Compile Include="Model\TilePathOverlay.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\UnitClass.cs" />
     <Compile Include="Model\UnitConfiguration.cs" />
     <Compile Include="Model\WeaponClass.cs" />
-    <Compile Include="Model\Map.cs" />
-    <Compile Include="Model\Edge.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
@@ -61,10 +56,6 @@
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
     <Compile Include="Model\BlockType.cs" />
-    <Compile Include="Model\Coordinate.cs" />
-    <Compile Include="Model\TileComponent.cs" />
-    <Compile Include="Model\MapConfiguration.cs" />
-    <Compile Include="Model\TileConfiguration.cs" />
     <Compile Include="Model\ExecuteOrderEventArgs.cs" />
     <Compile Include="Model\Deployment\ConvoyDeployment.cs" />
     <Compile Include="Model\Deployment\DeploymentConfiguration.cs" />
@@ -106,9 +97,7 @@
     <Compile Include="Model\Orders\Deployment\ConvoyOrderDeployOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
-    <Compile Include="Model\Direction.cs" />
     <Compile Include="Model\EnumConverter.cs" />
-    <Compile Include="Model\HexCoordinate.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
     <Compile Include="Model\NewUnitEventArgs.cs" />
     <Compile Include="Model\Deployment\OneOfZoneDeploymentConfiguration.cs" />
@@ -242,6 +231,20 @@
     <Compile Include="Network\MatchServerRPCHandler.cs" />
     <Compile Include="Model\TileMatchers\EmptyMatcher.cs" />
     <Compile Include="FileUtils.cs" />
+    <Compile Include="View\Edit\NewMapPane.cs" />
+    <Compile Include="Model\Map\BoardCompositeMapConfiguration.cs" />
+    <Compile Include="Model\Map\Coordinate.cs" />
+    <Compile Include="Model\Map\Direction.cs" />
+    <Compile Include="Model\Map\Edge.cs" />
+    <Compile Include="Model\Map\HexCoordinate.cs" />
+    <Compile Include="Model\Map\Map.cs" />
+    <Compile Include="Model\Map\MapConfiguration.cs" />
+    <Compile Include="Model\Map\Tile.cs" />
+    <Compile Include="Model\Map\TileBase.cs" />
+    <Compile Include="Model\Map\TileComponent.cs" />
+    <Compile Include="Model\Map\TileConfiguration.cs" />
+    <Compile Include="Model\Map\TilePathOverlay.cs" />
+    <Compile Include="Model\Map\RandomMapConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -281,6 +284,7 @@
     <Folder Include="View\Edit\" />
     <Folder Include="View\ScenarioSelect\" />
     <Folder Include="View\Map\" />
+    <Folder Include="Model\Map\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

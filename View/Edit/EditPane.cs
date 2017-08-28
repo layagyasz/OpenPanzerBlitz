@@ -39,10 +39,12 @@ namespace PanzerBlitz
 			_ModeSelect.Add(
 				new SelectionOption<GuiItem>("select-option") { DisplayedString = "Elevation", Value = _Elevation });
 
-			_TileBaseSelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
-			_PathOverlaySelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
-			_EdgeSelect.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
-			_Elevation.Position = new Vector2f(0, _ModeSelect.Size.Y + 2);
+			Button header = new Button("edit-header-1") { DisplayedString = "Edit" };
+			_ModeSelect.Position = new Vector2f(0, header.Size.Y);
+			_TileBaseSelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
+			_PathOverlaySelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
+			_EdgeSelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
+			_Elevation.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
 
 			foreach (TileBase t in TileBase.TILE_BASES)
 				_TileBaseSelect.Add(
@@ -59,6 +61,7 @@ namespace PanzerBlitz
 					Value = t
 				});
 
+			Add(header);
 			Add(_Elevation);
 			Add(_PathOverlaySelect);
 			Add(_EdgeSelect);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +16,7 @@ namespace PanzerBlitz
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly List<ArmyConfiguration> TurnOrder;
 		public readonly byte Turns;
-		public readonly MapConfiguration MapConfiguration;
+		public readonly BoardCompositeMapConfiguration MapConfiguration;
 
 		public Scenario(IEnumerable<ArmyConfiguration> ArmyConfigurations)
 		{
@@ -36,7 +36,7 @@ namespace PanzerBlitz
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
-			MapConfiguration = (MapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
+			MapConfiguration = (BoardCompositeMapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
 		}
 
 		public Scenario(SerializationInputStream Stream)
@@ -47,7 +47,7 @@ namespace PanzerBlitz
 			DeploymentOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			Turns = Stream.ReadByte();
-			MapConfiguration = new MapConfiguration(Stream);
+			MapConfiguration = new BoardCompositeMapConfiguration(Stream);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

@@ -1,6 +1,36 @@
 ﻿class:edit-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 84 }
+		int:height { 133 }
+	}
+}
+class:edit-header-1 {
+	!class:parent { header-1 }
+}
+class:new-map-header-1 {
+	!class:parent { header-1 }
+}
+class:new-map-header-2 {
+	!class:parent { header-2 }
+}
+class:new-map-pane {
+	!class:parent { pane }
+	mode:default {
+		int:height { 242 }
+	}
+}
+class:new-map-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 114 }
+	}
+}
+class:new-map-text-input {
+	!class:parent { text-input }
+}
+class:new-map-error {
+	!class:parent { header-2 }
+	mode:default {
+		color[]:background-color { #AD4531 #AD4531 #AD4531 #AD4531 }
 	}
 }

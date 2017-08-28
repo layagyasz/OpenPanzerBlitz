@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Window;
 
@@ -118,15 +119,15 @@ namespace PanzerBlitz
 			carrierOption.Value.Merge(passengerOption.Value);
 		}
 
-		void HandleUnload(object Sender, EventArgs E)
+		void HandleUnload(object Sender, ValuedEventArgs<Unit> E)
 		{
 			Unit u = (Unit)Sender;
 			ConvoyDeploymentSelectionOption carrierOption =
 				(ConvoyDeploymentSelectionOption)_Selection.FirstOrDefault(
 					i => ((ConvoyDeploymentSelectionOption)i).Unit == u);
-			ConvoyDeploymentSelectionOption option = new ConvoyDeploymentSelectionOption(u, _Renderer);
+			ConvoyDeploymentSelectionOption option = new ConvoyDeploymentSelectionOption(E.Value, _Renderer);
 			_Selection.Insert(Math.Min(_Selection.Count() - 1, _Selection.ToList().IndexOf(carrierOption) + 1), option);
-			carrierOption.Value.Split();
+			carrierOption.Value.Remove(E.Value);
 		}
 	}
 }
