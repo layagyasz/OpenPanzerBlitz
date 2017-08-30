@@ -1,4 +1,4 @@
-﻿unit-configuration:127mm {
+﻿unit-configuration:12_7mm {
 	string:name { 12.7mm }
 	unit-class:unit-class { towed-gun }
 	string:image-name { anti-aircraft.png }

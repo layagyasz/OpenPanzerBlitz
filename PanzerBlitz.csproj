@@ -116,7 +116,6 @@
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
     <Compile Include="Model\VictoryConditions\UnitsInZoneObjective.cs" />
-    <Compile Include="Model\IdGenerator.cs" />
     <Compile Include="Model\UnitStatus.cs" />
     <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="Model\GameObject.cs" />
@@ -245,6 +244,15 @@
     <Compile Include="Model\Map\TileConfiguration.cs" />
     <Compile Include="Model\Map\TilePathOverlay.cs" />
     <Compile Include="Model\Map\RandomMapConfiguration.cs" />
+    <Compile Include="Server\UnitConfigurationLock.cs" />
+    <Compile Include="IdGenerator.cs" />
+    <Compile Include="Server\UnitConfigurationPack.cs" />
+    <Compile Include="Server\TagMatcher.cs" />
+    <Compile Include="Server\ServerData.cs" />
+    <Compile Include="Server\PanzerBlitzServer.cs" />
+    <Compile Include="Controller\Server\ServerStateController.cs" />
+    <Compile Include="Controller\Server\ServerContext.cs" />
+    <Compile Include="View\Server\ServerScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -285,6 +293,11 @@
     <Folder Include="View\ScenarioSelect\" />
     <Folder Include="View\Map\" />
     <Folder Include="Model\Map\" />
+    <Folder Include="Server\" />
+    <Folder Include="BLKConfigurations\Server\" />
+    <Folder Include="BLKConfigurations\Server\UnitConfigurationLocks\" />
+    <Folder Include="Controller\Server\" />
+    <Folder Include="View\Server\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1069,6 +1082,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme\Components\MatchLobby.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Server\UnitConfigurationPacks.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Server\UnitConfigurationLocks\Russian.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

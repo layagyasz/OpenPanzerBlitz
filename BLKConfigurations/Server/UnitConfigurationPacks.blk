@@ -1,0 +1,9 @@
+﻿unit-configuration-pack<>:unit-configuration-packs {
+	unit-configuration-pack:guns {
+		string:name { Guns }
+		int:number { 5 }
+		tag-matcher:tag-matcher {
+			string[]:tags { guns }
+		}
+	}
+}

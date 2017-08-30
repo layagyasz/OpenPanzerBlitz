@@ -18,6 +18,7 @@ namespace PanzerBlitz
 			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
 			{ ProgramState.MATCH, new MatchStateController() },
 			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
+			{ ProgramState.SERVER, new ServerStateController() }
 		};
 
 		public ProgramFlowController(Interface Interface)
