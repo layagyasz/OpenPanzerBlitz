@@ -1,13 +1,13 @@
 ﻿class:join-server-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 281 }
+		int:height { 345 }
 	}
 }
 class:join-server-display {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 249 }
+		int:height { 213 }
 	}
 }
 class:join-server-header-1 {

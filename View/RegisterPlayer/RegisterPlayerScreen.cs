@@ -8,10 +8,12 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class LogInPlayerScreen : ScreenBase
+	// For now this is basically the same as LogInPlayerScreen.  That will probably change in the future as more player
+	// information is added.
+	public class RegisterPlayerScreen : ScreenBase
 	{
-		public EventHandler<EventArgs> OnLogIn;
 		public EventHandler<EventArgs> OnRegister;
+		public EventHandler<EventArgs> OnLogIn;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("join-server-pane");
 		SingleColumnTable _Display = new SingleColumnTable("join-server-display");
@@ -19,8 +21,8 @@ namespace PanzerBlitz
 		TextInput _UsernameInput = new TextInput("join-server-text-input");
 		TextInput _PasswordInput = new TextInput("join-server-text-input");
 		Button _Error = new Button("join-server-error");
-		Button _LogInButton = new Button("join-server-button") { DisplayedString = "Log In" };
-		Button _RegisterButton = new Button("join-server-button") { DisplayedString = "Go to Registration" };
+		Button _RegisterButton = new Button("join-server-button") { DisplayedString = "Register" };
+		Button _LogInButton = new Button("join-server-button") { DisplayedString = "Back To Log In" };
 
 		public string IpAddress
 		{
@@ -46,10 +48,10 @@ namespace PanzerBlitz
 			}
 		}
 
-		public LogInPlayerScreen(Vector2f WindowSize)
+		public RegisterPlayerScreen(Vector2f WindowSize)
 			: base(WindowSize)
 		{
-			_Display.Add(new Button("join-server-header-1") { DisplayedString = "Log In" });
+			_Display.Add(new Button("join-server-header-1") { DisplayedString = "Register" });
 			_Display.Add(new Button("join-server-header-2") { DisplayedString = "Server IP" });
 			_Display.Add(_ServerInput);
 			_Display.Add(new Button("join-server-header-2") { DisplayedString = "Username" });
@@ -57,16 +59,16 @@ namespace PanzerBlitz
 			_Display.Add(new Button("join-server-header-2") { DisplayedString = "Password" });
 			_Display.Add(_PasswordInput);
 
-			_RegisterButton.Position = new Vector2f(0, _Pane.Size.Y - _RegisterButton.Size.Y - 32);
-			_RegisterButton.OnClick += HandleRegister;
-
-			_LogInButton.Position = new Vector2f(0, _RegisterButton.Position.Y - _LogInButton.Size.Y - 4);
+			_LogInButton.Position = new Vector2f(0, _Pane.Size.Y - _LogInButton.Size.Y - 32);
 			_LogInButton.OnClick += HandleLogIn;
+
+			_RegisterButton.Position = new Vector2f(0, _LogInButton.Position.Y - _RegisterButton.Size.Y - 4);
+			_RegisterButton.OnClick += HandleRegister;
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 			_Pane.Add(_Display);
-			_Pane.Add(_LogInButton);
 			_Pane.Add(_RegisterButton);
+			_Pane.Add(_LogInButton);
 		}
 
 		public void SetError(string Message)
@@ -88,14 +90,14 @@ namespace PanzerBlitz
 			_Pane.Draw(Target, Transform);
 		}
 
-		void HandleLogIn(object Sender, EventArgs E)
-		{
-			if (OnLogIn != null) OnLogIn(this, E);
-		}
-
 		void HandleRegister(object Sender, EventArgs E)
 		{
 			if (OnRegister != null) OnRegister(this, E);
+		}
+
+		void HandleLogIn(object Sender, EventArgs E)
+		{
+			if (OnLogIn != null) OnLogIn(this, E);
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace PanzerBlitz
 			{ ProgramState.MATCH, new MatchStateController() },
 			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
 			{ ProgramState.LOG_IN_PLAYER, new LogInPlayerStateController() },
+			{ ProgramState.REGISTER_PLAYER, new RegisterPlayerStateController() },
 			{ ProgramState.SERVER, new ServerStateController() }
 		};
 

@@ -71,32 +71,35 @@ namespace PanzerBlitz
 			}
 		}
 
+		public PlayerContext MakePlayerContext(Player Player)
+		{
+			if (Client != null) return new PlayerContext(Client, Player);
+			if (Server != null) return new PlayerContext(Server, Player);
+			return new PlayerContext(Player);
+		}
+
+		public PlayerContext MakeLoggedInPlayerContext(string Username, string Password)
+		{
+			Client.MessageAdapter = new NonMatchMessageSerializer();
+			Client.RPCHandler = new RPCHandler();
+
+			Player p = ((LogInPlayerResponse)Client.Call(new LogInPlayerRequest(Username, Password)).Get()).Player;
+			if (p == null) throw new ArgumentException();
+			return new PlayerContext(Client, p);
+		}
+
 		public static NetworkContext CreateClient(string IpAddress, ushort Port)
 		{
-			try
-			{
-				TCPClient client = new TCPClient(IpAddress, Port);
-				client.Start();
-				return new NetworkContext(client);
-			}
-			catch
-			{
-				return null;
-			}
+			TCPClient client = new TCPClient(IpAddress, Port);
+			client.Start();
+			return new NetworkContext(client);
 		}
 
 		public static NetworkContext CreateServer(ushort Port)
 		{
-			try
-			{
-				TCPServer server = new TCPServer(Port);
-				server.Start();
-				return new NetworkContext(server);
-			}
-			catch
-			{
-				return null;
-			}
+			TCPServer server = new TCPServer(Port);
+			server.Start();
+			return new NetworkContext(server);
 		}
 	}
 }

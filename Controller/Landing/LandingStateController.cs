@@ -41,7 +41,12 @@ namespace PanzerBlitz
 
 		void HandleHostMatch(object Sender, EventArgs E)
 		{
-			NetworkContext context = NetworkContext.CreateServer(GameData.OnlinePort);
+			NetworkContext context = null;
+			try
+			{
+				context = NetworkContext.CreateServer(GameData.OnlinePort);
+			}
+			catch { }
 			if (context != null)
 			{
 				OnProgramStateTransition(

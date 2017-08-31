@@ -262,6 +262,10 @@
     <Compile Include="Controller\PlayerContext.cs" />
     <Compile Include="Network\Messages\LogInPlayerResponse.cs" />
     <Compile Include="Network\PanzerBlitzServerRPCHandler.cs" />
+    <Compile Include="Controller\LogInPlayer\LogInPlayerController.cs" />
+    <Compile Include="View\RegisterPlayer\RegisterPlayerScreen.cs" />
+    <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
+    <Compile Include="Controller\RegisterPlayer\RegisterPlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -311,6 +315,7 @@
     <Folder Include="View\LogInPlayer\" />
     <Folder Include="View\RegisterPlayer\" />
     <Folder Include="Controller\LogInPlayer\" />
+    <Folder Include="Controller\RegisterPlayer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

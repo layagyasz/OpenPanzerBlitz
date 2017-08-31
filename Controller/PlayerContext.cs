@@ -8,6 +8,11 @@ namespace PanzerBlitz
 	{
 		public readonly Player Player;
 
+		public PlayerContext(Player Player)
+		{
+			this.Player = Player;
+		}
+
 		public PlayerContext(TCPClient Client, Player Player)
 			: base(Client)
 		{

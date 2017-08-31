@@ -29,6 +29,7 @@ namespace PanzerBlitz
 
 		public override bool Equals(object obj)
 		{
+			if (obj == null) return false;
 			if (obj is Player)
 			{
 				Player o = (Player)obj;
@@ -44,7 +45,14 @@ namespace PanzerBlitz
 
 		public static bool operator ==(Player p1, Player p2)
 		{
-			return p1.Equals(p2);
+			try
+			{
+				return p1.Equals(p2);
+			}
+			catch
+			{
+				return false;
+			}
 		}
 
 		public static bool operator !=(Player p1, Player p2)

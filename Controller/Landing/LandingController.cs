@@ -32,9 +32,9 @@ namespace PanzerBlitz
 
 		void HandleRemoteConnect(object Sender, ValuedEventArgs<string> E)
 		{
-			NetworkContext client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
-			if (client != null)
+			try
 			{
+				NetworkContext client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
 				MatchLobbyContext lobby = client.MakeLobbyContext();
 				if (lobby != null) OnConnectionSetup(this, new ValuedEventArgs<MatchLobbyContext>(lobby));
 				else
@@ -43,7 +43,10 @@ namespace PanzerBlitz
 					client.Close();
 				}
 			}
-			else _ConnectionPane.SetError("Failed to establish connection");
+			catch
+			{
+				_ConnectionPane.SetError("Failed to establish connection");
+			}
 		}
 	}
 }
