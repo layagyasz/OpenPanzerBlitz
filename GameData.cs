@@ -16,7 +16,7 @@ namespace PanzerBlitz
 		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, SCENARIOS };
 
 		public static ushort OnlinePort = 1000;
-		public static Player Player = new Player("Player " + DateTime.Now.Ticks.ToString());
+		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
 		public static UnitConfiguration Wreckage;

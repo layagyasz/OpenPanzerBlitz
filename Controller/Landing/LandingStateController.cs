@@ -16,7 +16,8 @@ namespace PanzerBlitz
 			screen.LocalMatchButton.OnClick += HandleLocalMatch;
 			screen.HostMatchButton.OnClick += HandleHostMatch;
 			screen.EditButton.OnClick += HandleEdit;
-			screen.ServerButton.OnClick += HandleStartServer;
+			screen.JoinServerButton.OnClick += HandleJoinServer;
+			screen.StartServerButton.OnClick += HandleStartServer;
 
 			_Controller = new LandingController(screen);
 			_Controller.OnConnectionSetup += HandleJoinRemoteMatch;
@@ -52,6 +53,11 @@ namespace PanzerBlitz
 		void HandleEdit(object Sender, EventArgs E)
 		{
 			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.EDIT, null));
+		}
+
+		void HandleJoinServer(object Sender, EventArgs E)
+		{
+			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.LOG_IN_PLAYER, null));
 		}
 
 		void HandleStartServer(object Sender, EventArgs E)

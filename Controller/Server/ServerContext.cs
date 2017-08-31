@@ -8,17 +8,20 @@ namespace PanzerBlitz
 	{
 		public readonly PanzerBlitzServer PanzerBlitzServer;
 
-		public ServerContext(TCPServer Server)
+		public ServerContext(TCPServer Server, PanzerBlitzServer PanzerBlitzServer)
 			: base(Server)
 		{
-			PanzerBlitzServer = new PanzerBlitzServer(Server, "./BLKConfigurations/Server");
+			this.PanzerBlitzServer = PanzerBlitzServer;
 		}
 
 		new public static ServerContext CreateServer(ushort Port)
 		{
+			PanzerBlitzServer pbServer = new PanzerBlitzServer("./BLKConfigurations/Server");
 			TCPServer server = new TCPServer(Port);
 			server.Start();
-			return new ServerContext(server);
+			server.MessageAdapter = new NonMatchMessageSerializer();
+			server.RPCHandler = new PanzerBlitzServerRPCHandler(pbServer);
+			return new ServerContext(server, pbServer);
 		}
 	}
 }

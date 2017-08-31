@@ -16,7 +16,8 @@ namespace PanzerBlitz
 			new Button("landing-button") { DisplayedString = "Join Remote Match" };
 		public readonly Button HostMatchButton = new Button("landing-button") { DisplayedString = "Host Match" };
 		public readonly Button EditButton = new Button("landing-button") { DisplayedString = "Edit" };
-		public readonly Button ServerButton = new Button("landing-button") { DisplayedString = "Start Server" };
+		public readonly Button JoinServerButton = new Button("landing-button") { DisplayedString = "Join Server" };
+		public readonly Button StartServerButton = new Button("landing-button") { DisplayedString = "Start Server" };
 
 		ScrollCollection<object> _LandingSelect = new ScrollCollection<object>("landing-select", true);
 
@@ -28,7 +29,8 @@ namespace PanzerBlitz
 			_LandingSelect.Add(JoinRemoteMatchButton);
 			_LandingSelect.Add(HostMatchButton);
 			_LandingSelect.Add(EditButton);
-			_LandingSelect.Add(ServerButton);
+			_LandingSelect.Add(JoinServerButton);
+			_LandingSelect.Add(StartServerButton);
 		}
 
 		public override void Update(

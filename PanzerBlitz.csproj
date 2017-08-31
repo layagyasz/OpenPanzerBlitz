@@ -129,7 +129,6 @@
     <Compile Include="Network\Messages\ExecuteOrderRequest.cs" />
     <Compile Include="Network\Messages\ValidateOrderRequest.cs" />
     <Compile Include="Model\MatchLobby.cs" />
-    <Compile Include="Model\Player.cs" />
     <Compile Include="Controller\Match\MatchPlayerController.cs" />
     <Compile Include="Controller\Match\HumanMatchPlayerController.cs" />
     <Compile Include="Controller\Match\LocalMatchAdapter.cs" />
@@ -253,6 +252,16 @@
     <Compile Include="Controller\Server\ServerStateController.cs" />
     <Compile Include="Controller\Server\ServerContext.cs" />
     <Compile Include="View\Server\ServerScreen.cs" />
+    <Compile Include="Server\Orm\PlayerOrm.cs" />
+    <Compile Include="Server\Database.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Network\Messages\LogInPlayerRequest.cs" />
+    <Compile Include="Network\Messages\RegisterPlayerRequest.cs" />
+    <Compile Include="View\LogInPlayer\LogInPlayerScreen.cs" />
+    <Compile Include="Controller\LogInPlayer\LogInPlayerStateController.cs" />
+    <Compile Include="Controller\PlayerContext.cs" />
+    <Compile Include="Network\Messages\LogInPlayerResponse.cs" />
+    <Compile Include="Network\PanzerBlitzServerRPCHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -298,6 +307,10 @@
     <Folder Include="BLKConfigurations\Server\UnitConfigurationLocks\" />
     <Folder Include="Controller\Server\" />
     <Folder Include="View\Server\" />
+    <Folder Include="Server\Orm\" />
+    <Folder Include="View\LogInPlayer\" />
+    <Folder Include="View\RegisterPlayer\" />
+    <Folder Include="Controller\LogInPlayer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1088,6 +1101,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\Server\UnitConfigurationLocks\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\JoinServer.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

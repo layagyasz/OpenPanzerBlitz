@@ -1,0 +1,30 @@
+﻿class:join-server-pane {
+	!class:parent { pane }
+	mode:default {
+		int:height { 281 }
+	}
+}
+class:join-server-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 249 }
+	}
+}
+class:join-server-header-1 {
+	!class:parent { header-1 }
+}
+class:join-server-header-2 {
+	!class:parent { header-2 }
+}
+class:join-server-text-input {
+	!class:parent { text-input }
+}
+class:join-server-error {
+	!class:parent { header-2 }
+	mode:default {
+		color[]:background-color { #AD4531 #AD4531 #AD4531 #AD4531 }
+	}
+}
+class:join-server-button {
+	!class:parent { large-button }
+}

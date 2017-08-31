@@ -8,6 +8,8 @@ namespace PanzerBlitz
 		LOCAL_SCENARIO_SELECT,
 		MATCH,
 		MATCH_LOBBY,
-		SERVER
+		SERVER,
+		LOG_IN_PLAYER,
+		REGISTER_PLAYER
 	}
 }
