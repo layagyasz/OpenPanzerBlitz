@@ -30,9 +30,10 @@ namespace PanzerBlitz
 
 		public void DoTurn(TurnInfo TurnInfo)
 		{
+			TurnInfo.Army.Reset(TurnInfo.TurnComponent == TurnComponent.RESET);
+
 			if (_Automated && AutomateTurn(TurnInfo)) _Match.ExecuteOrder(new NextPhaseOrder(TurnInfo.Army));
-			else if (TurnInfo.TurnComponent == TurnComponent.RESET) AutomateTurn(TurnInfo);
-			else _PlayerControllers[TurnInfo.Army].DoTurn(TurnInfo);
+			else if (TurnInfo.TurnComponent != TurnComponent.RESET) _PlayerControllers[TurnInfo.Army].DoTurn(TurnInfo);
 		}
 
 		void HandleTurn(object Sender, StartTurnComponentEventArgs E)
@@ -59,7 +60,6 @@ namespace PanzerBlitz
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(_Match, false));
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == NoMoveReason.NONE);
 				case TurnComponent.RESET:
-					foreach (Unit u in TurnInfo.Army.Units) u.Reset();
 					return true;
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == NoMoveReason.NONE);

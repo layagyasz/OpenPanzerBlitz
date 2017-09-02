@@ -16,6 +16,7 @@ namespace PanzerBlitz
 		int _Id;
 		IdGenerator _IdGenerator;
 
+		HashSet<Tile> _AttackedTiles = new HashSet<Tile>();
 		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
 		public int Id
@@ -57,6 +58,25 @@ namespace PanzerBlitz
 		public bool IsDeploymentConfigured()
 		{
 			return Deployments.All(i => i.IsConfigured());
+		}
+
+		public void Reset(bool CompleteReset)
+		{
+			if (CompleteReset)
+			{
+				foreach (Unit u in Units) u.Reset();
+			}
+			_AttackedTiles.Clear();
+		}
+
+		public void AttackTile(Tile Tile)
+		{
+			_AttackedTiles.Add(Tile);
+		}
+
+		public bool HasAttackedTile(Tile Tile)
+		{
+			return _AttackedTiles.Contains(Tile);
 		}
 
 		public bool MustMove(bool Vehicle)
@@ -136,6 +156,15 @@ namespace PanzerBlitz
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
 				wreckage.Place(unit.Position);
 			}
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[Army: Id={0}, Faction.Name={1} ({2})]",
+				Id,
+				Configuration.Faction.Name,
+				Configuration.Faction.UniqueKey);
 		}
 	}
 }

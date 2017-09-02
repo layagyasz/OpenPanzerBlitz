@@ -316,6 +316,7 @@
     <Folder Include="View\RegisterPlayer\" />
     <Folder Include="Controller\LogInPlayer\" />
     <Folder Include="Controller\RegisterPlayer\" />
+    <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1109,6 +1110,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme\Components\JoinServer.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Logs\Meta.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

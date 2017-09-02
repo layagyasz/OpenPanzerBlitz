@@ -12,8 +12,9 @@ namespace PanzerBlitz
 		MovementOrder _InitialMovement;
 		Path<Tile> _MovementPath;
 
-		Tile _AttackTile;
-		Tile _ExitTile;
+		public readonly Tile AttackTile;
+		public readonly Tile ExitTile;
+
 		NoMoveReason _Validate;
 		bool _TreatStackAsArmored;
 
@@ -36,8 +37,8 @@ namespace PanzerBlitz
 		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile)
 		{
 			_InitialMovement = InitialMovement;
-			_AttackTile = AttackTile;
-			_ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.Path.Destination);
+			this.AttackTile = AttackTile;
+			ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.Path.Destination);
 
 			_Validate = InitialValidate();
 		}
@@ -48,7 +49,7 @@ namespace PanzerBlitz
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(_InitialMovement);
-			Stream.Write(_AttackTile.Id);
+			Stream.Write(AttackTile.Id);
 		}
 
 		private NoMoveReason InitialValidate()
@@ -56,18 +57,18 @@ namespace PanzerBlitz
 			NoMoveReason r = _InitialMovement.Validate();
 			if (r != NoMoveReason.NONE) return r;
 
-			NoDeployReason noEnter = _InitialMovement.Unit.CanEnter(_ExitTile, true);
+			NoDeployReason noEnter = _InitialMovement.Unit.CanEnter(ExitTile, true);
 			if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
 
 			float distance1 = _InitialMovement.Path.Destination.Configuration.GetMoveCost(
-				_InitialMovement.Unit, _AttackTile, false, true);
-			float distance2 = _AttackTile.Configuration.GetMoveCost(_InitialMovement.Unit, _ExitTile, false, false);
+				_InitialMovement.Unit, AttackTile, false, true);
+			float distance2 = AttackTile.Configuration.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
 			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
 				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 
 			_MovementPath = new Path<Tile>(_InitialMovement.Path);
-			_MovementPath.Add(_AttackTile, distance1);
-			_MovementPath.Add(_ExitTile, distance2);
+			_MovementPath.Add(AttackTile, distance1);
+			_MovementPath.Add(ExitTile, distance2);
 			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement) return NoMoveReason.NO_MOVE;
 
 			return NoMoveReason.NONE;
@@ -100,7 +101,7 @@ namespace PanzerBlitz
 			if (Validate() == NoSingleAttackReason.NONE)
 			{
 				Attacker.Fire();
-				_InitialMovement.Unit.MoveTo(_ExitTile, _MovementPath);
+				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
 				return true;
 			}
 			else return false;

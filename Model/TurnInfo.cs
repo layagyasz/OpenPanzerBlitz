@@ -24,5 +24,10 @@ namespace PanzerBlitz
 			Stream.Write(Army.Id);
 			Stream.Write((byte)TurnComponent);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[TurnInfo: Army={0}, TurnComponent={1}]", Army, TurnComponent);
+		}
 	}
 }

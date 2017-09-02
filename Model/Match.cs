@@ -252,5 +252,11 @@ namespace PanzerBlitz
 			yield return TurnComponent.NON_VEHICLE_MOVEMENT;
 			yield return TurnComponent.RESET;
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[Match: CurrentPhase={0}, Scenario={1} ({2})]", CurrentPhase, Scenario.Name, Scenario.UniqueKey);
+		}
 	}
 }

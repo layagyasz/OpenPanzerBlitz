@@ -36,13 +36,18 @@ namespace PanzerBlitz
 		public MatchAdapter MakeMatchAdapter()
 		{
 			if (IsHost) return new LocalMatchAdapter(Match);
-			else return new RemoteMatchAdapter(Match, Client, OrderSerializer);
+			return new RemoteMatchAdapter(Match, Client, OrderSerializer);
 		}
 
 		public IEnumerable<Army> GetArmies()
 		{
 			if (Client != null || Server != null) return Enumerable.Repeat(Army, 1);
-			else return Match.Armies;
+			return Match.Armies;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[MatchContext: Match={0}]", Match);
 		}
 	}
 }

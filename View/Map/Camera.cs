@@ -41,7 +41,11 @@ namespace PanzerBlitz
 			if (Keyboard.IsKeyPressed(Keyboard.Key.PageUp)) _Zoom += 5 * step;
 			if (Keyboard.IsKeyPressed(Keyboard.Key.PageDown)) _Zoom -= 5 * step;
 
-			if (!Blocked) _Zoom += MouseController.WheelDelta * 20 * step;
+			if (!Blocked)
+			{
+				_Zoom += MouseController.WheelDelta * 20 * step;
+				_Center -= MouseController.DragDelta / _Zoom;
+			}
 		}
 	}
 }

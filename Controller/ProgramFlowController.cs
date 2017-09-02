@@ -10,6 +10,8 @@ namespace PanzerBlitz
 		public readonly Interface Interface;
 		public readonly ProgramContext ProgramContext;
 
+		ProgramState _ProgramState;
+
 		Dictionary<ProgramState, ProgramStateController> _ProgramStateControllers =
 			new Dictionary<ProgramState, ProgramStateController>
 		{
@@ -34,6 +36,7 @@ namespace PanzerBlitz
 
 		public void EnterState(ProgramState ProgramState, ProgramStateContext ProgramStateContext)
 		{
+			_ProgramState = ProgramState;
 			Interface.Screen.Clear();
 			Interface.Screen.Add(
 				_ProgramStateControllers[ProgramState].SetupState(ProgramContext, ProgramStateContext));
@@ -42,6 +45,14 @@ namespace PanzerBlitz
 		void HandleStateChange(object Sender, ProgramStateTransitionEventArgs E)
 		{
 			EnterState(E.TransitionState, E.ProgramStateContext);
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[ProgramFlowController: State={0}, ActiveStateController={1}]",
+				_ProgramState,
+				_ProgramStateControllers[_ProgramState]);
 		}
 	}
 }

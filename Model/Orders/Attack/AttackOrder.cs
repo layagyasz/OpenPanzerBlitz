@@ -219,6 +219,7 @@ namespace PanzerBlitz
 
 		public virtual NoAttackReason Validate()
 		{
+			if (AttackingArmy.HasAttackedTile(AttackAt)) return NoAttackReason.ALREADY_ATTACKED;
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
 			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
 			if (AttackAt.CanBeAttacked(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanBeAttacked(AttackMethod);
@@ -229,6 +230,25 @@ namespace PanzerBlitz
 					return NoAttackReason.ILLEGAL_EACH;
 				if (_OddsCalculations.Any(i => OddsIndex(i.Odds, i.OddsAgainst) < 3))
 					return NoAttackReason.ILLEGAL_EACH;
+			}
+
+			if (AttackMethod == AttackMethod.OVERRUN)
+			{
+				if (!_Attackers.All(i => i is OverrunSingleAttackOrder)) return NoAttackReason.ILLEGAL;
+				foreach (var g in _Attackers.Cast<OverrunSingleAttackOrder>().GroupBy(i => i.ExitTile))
+				{
+					if (g.Key.GetStackSize() + g.Sum(i => i.Attacker.GetStackSize())
+						> AttackingArmy.Configuration.Faction.StackLimit)
+						return NoAttackReason.OVERRUN_EXIT;
+				}
+			}
+			else if (AttackMethod == AttackMethod.MINEFIELD)
+			{
+				if (!_Attackers.All(i => i is MinefieldSingleAttackOrder)) return NoAttackReason.ILLEGAL;
+			}
+			else
+			{
+				if (!_Attackers.All(i => i is NormalSingleAttackOrder)) return NoAttackReason.ILLEGAL;
 			}
 
 			return NoAttackReason.NONE;
@@ -245,6 +265,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() != NoAttackReason.NONE) return false;
 
+			AttackingArmy.AttackTile(AttackAt);
 			_Attackers.ForEach(i => i.Execute(Random));
 
 			if (_Results.Length == 0) _Results = new CombatResult[_OddsCalculations.Count];

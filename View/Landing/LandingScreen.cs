@@ -29,8 +29,9 @@ namespace PanzerBlitz
 			_LandingSelect.Add(JoinRemoteMatchButton);
 			_LandingSelect.Add(HostMatchButton);
 			_LandingSelect.Add(EditButton);
-			_LandingSelect.Add(JoinServerButton);
-			_LandingSelect.Add(StartServerButton);
+			// Commenting these out for now.  Maybe one day in the future work on PanzerBlitz online will continue!
+			//_LandingSelect.Add(JoinServerButton);
+			//_LandingSelect.Add(StartServerButton);
 		}
 
 		public override void Update(

@@ -11,7 +11,7 @@ namespace PanzerBlitz
 	public class MatchStateController : ProgramStateController
 	{
 		MatchContext _Context;
-		MatchController _GameController;
+		MatchController _MatchController;
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
@@ -35,11 +35,16 @@ namespace PanzerBlitz
 			{
 				playerControllers.Add(a, controller);
 			}
-			_GameController = new MatchController(_Context.Match, playerControllers, _Context.IsHost);
+			_MatchController = new MatchController(_Context.Match, playerControllers, _Context.IsHost);
 			screen.OnPulse += (sender, e) => _Context.Match.DoBufferedOrders();
 			_Context.Match.Start();
 
 			return screen;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[MatchStateController: Context={0}]", _Context);
 		}
 	}
 }
