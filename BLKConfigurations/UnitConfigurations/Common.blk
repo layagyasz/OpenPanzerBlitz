@@ -87,3 +87,14 @@ unit-configuration:fort-40 {
 	byte:movement { 0 }
 	color:override-color { #FFFFFF }
 }
+unit-configuration:wagon {
+	string:name { Wagon }
+	unit-class:unit-class { transport }
+	string:image-name { wagon.png }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+}

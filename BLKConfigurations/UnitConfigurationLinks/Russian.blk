@@ -1,0 +1,108 @@
+﻿unit-configuration-link:12_7mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.12_7mm }
+}
+unit-configuration-link:45mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.45mm }
+}
+unit-configuration-link:57mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.57mm }
+}
+unit-configuration-link:76_2mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm }
+}
+unit-configuration-link:76_2mm-howitzer {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-howitzer }
+}
+unit-configuration-link:122mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.122mm }
+}
+unit-configuration-link:82mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.82mm }
+}
+unit-configuration-link:82mm-motorized {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.82mm-motorized }
+}
+unit-configuration-link:120mm {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.120mm }
+}
+unit-configuration-link:engineer-company {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-company }
+}
+unit-configuration-link:recon-company {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.recon-company }
+}
+unit-configuration-link:rifle-company {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+}
+unit-configuration-link:guards-company {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.guards-company }
+}
+unit-configuration-link:smg-company {
+	!faction:faction { factions.russian }
+	unit-configuration:unit-configuration { unit-configurations.smg-company }
+}
+unit-configuration-link:cavalry {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry }
+}
+unit-configuration-link:truck-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+}
+unit-configuration-link:sis-33 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+}
+unit-configuration-link:su-152 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.su-152 }
+}
+unit-configuration-link:su-76 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.su-76 }
+}
+unit-configuration-link:su-85 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.su-85 }
+}
+unit-configuration-link:su-100 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.su-100 }
+}
+unit-configuration-link:jsu-122 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.js-122 }
+}
+unit-configuration-link:kv-85 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.kv-85 }
+}
+unit-configuration-link:t-34-c {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+}
+unit-configuration-link:t-34_85 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
+}
+unit-configuration-link:js-ii {
+	!faction:faction { factions.russian }
+	unit-configuration:unit-configuration { unit-configurations.cavalry }
+}
+unit-configuration-link:js-iii {
+	!faction:faction { factions.russian }
+	unit-configuration:unit-configuration { unit-configurations.cavalry }
+}

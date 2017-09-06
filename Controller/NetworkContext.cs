@@ -37,40 +37,6 @@ namespace PanzerBlitz
 			if (Server != null) Server.Close();
 		}
 
-		public MatchLobbyContext MakeLobbyContext()
-		{
-			if (IsHost)
-			{
-				MatchLobby lobby = new MatchLobby(GameData.Scenarios.First());
-				lobby.ApplyAction(new AddPlayerAction(GameData.Player));
-				Chat chat = new Chat();
-
-				Server.MessageAdapter = new NonMatchMessageSerializer();
-				Server.RPCHandler = new LobbyServerRPCHandler(lobby, chat);
-
-				lobby.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyLobbyActionRequest(e.Value));
-				chat.OnActionApplied += (sender, e) => Server.Broadcast(new ApplyChatActionRequest(e.Value));
-
-				return new MatchLobbyContext(Server, lobby, chat);
-			}
-			else
-			{
-				Chat chat = new Chat();
-				Client.MessageAdapter = new NonMatchMessageSerializer();
-				LobbyRPCHandler handler = new LobbyRPCHandler(chat);
-				Client.RPCHandler = handler;
-
-				if (((BooleanResponse)Client.Call(
-					new ApplyLobbyActionRequest(new AddPlayerAction(GameData.Player))).Get()).Value)
-				{
-					MatchLobby lobby = ((GetLobbyResponse)Client.Call(new GetLobbyRequest()).Get()).Lobby;
-					handler.SetLobby(lobby);
-					return new MatchLobbyContext(Client, lobby, chat);
-				}
-				else return null;
-			}
-		}
-
 		public PlayerContext MakePlayerContext(Player Player)
 		{
 			if (Client != null) return new PlayerContext(Client, Player);
@@ -84,7 +50,7 @@ namespace PanzerBlitz
 			Client.RPCHandler = new RPCHandler();
 
 			Player p = ((LogInPlayerResponse)Client.Call(new LogInPlayerRequest(Username, Password)).Get()).Player;
-			if (p == null) throw new ArgumentException();
+			if (p == null) return null;
 			return new PlayerContext(Client, p);
 		}
 

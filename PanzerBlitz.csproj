@@ -51,7 +51,6 @@
     <Compile Include="Model\MovementEventArgs.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Model\Match.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
@@ -266,6 +265,7 @@
     <Compile Include="View\RegisterPlayer\RegisterPlayerScreen.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerController.cs" />
+    <Compile Include="Model\UnitConfigurationLink.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -317,6 +317,7 @@
     <Folder Include="Controller\LogInPlayer\" />
     <Folder Include="Controller\RegisterPlayer\" />
     <Folder Include="Logs\" />
+    <Folder Include="BLKConfigurations\UnitConfigurationLinks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -459,7 +460,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Screenshots\screen.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="UnitSprites\bt-5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1115,6 +1115,10 @@
     <None Include="Logs\Meta.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="BLKConfigurations\UnitConfigurationLinks\German.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitConfigurationLinks\Russian.blk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

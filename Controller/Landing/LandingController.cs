@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			try
 			{
 				NetworkContext client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
-				MatchLobbyContext lobby = client.MakeLobbyContext();
+				MatchLobbyContext lobby = client.MakePlayerContext(GameData.Player).MakeLobbyContext();
 				if (lobby != null) OnConnectionSetup(this, new ValuedEventArgs<MatchLobbyContext>(lobby));
 				else
 				{

@@ -75,7 +75,7 @@
 							int:_ { 1 }
 						}
 						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.sis-5 }
+							!unit-configuration:_ { unit-configurations.truck-russian }
 							int:_ { 1 }
 						}
 					}
@@ -139,7 +139,7 @@
 							int:_ { 1 }
 						}
 						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.sis-5 }
+							!unit-configuration:_ { unit-configurations.truck-russian }
 							int:_ { 1 }
 						}
 					}
@@ -209,7 +209,7 @@
 							int:_ { 5 }
 						}
 						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.opel-6700-a }
+							!unit-configuration:_ { unit-configurations.truck-german }
 							int:_ { 5 }
 						}
 					}

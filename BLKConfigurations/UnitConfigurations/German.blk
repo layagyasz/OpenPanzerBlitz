@@ -150,8 +150,8 @@ unit-configuration:smg-platoon {
 	byte:defense { 6 }
 	byte:movement { 1 }
 }
-unit-configuration:opel-6700-a {
-	string:name { Opel 6700A Truck }
+unit-configuration:truck-german {
+	string:name { Truck }
 	string:display-name { TRUCK }
 	unit-class:unit-class { transport }
 	string:image-name { truck-2.png }

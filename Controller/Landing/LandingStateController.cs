@@ -51,7 +51,7 @@ namespace PanzerBlitz
 			{
 				OnProgramStateTransition(
 					this, new ProgramStateTransitionEventArgs(
-						ProgramState.MATCH_LOBBY, context.MakeLobbyContext()));
+						ProgramState.MATCH_LOBBY, context.MakePlayerContext(GameData.Player).MakeLobbyContext()));
 			}
 		}
 

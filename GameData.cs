@@ -13,12 +13,13 @@ namespace PanzerBlitz
 {
 	public static class GameData
 	{
-		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, SCENARIOS };
+		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, UNIT_CONFIGURATION_LINKS, SCENARIOS };
 
 		public static ushort OnlinePort = 1000;
 		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
+		public static List<UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 
@@ -30,7 +31,12 @@ namespace PanzerBlitz
 					"unit-configuration<>",
 					"unit-configurations",
 					Directory.EnumerateFiles(Path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
-					.SelectMany(i => ParseBlock.FromFile(i).Break())),
+						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
+					"unit-configuration-link[]",
+					"unit-configuration-links",
+					Directory.EnumerateFiles(Path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
+						   .SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"scenario[]",
 					"scenarios",
@@ -50,6 +56,7 @@ namespace PanzerBlitz
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
+			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
 			Block.AddParser<TileElevation>("tile-elevation", i => new TileElevation(i));
@@ -88,6 +95,7 @@ namespace PanzerBlitz
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
 			Wreckage = UnitConfigurations["wreckage"];
+			UnitConfigurationLinks = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 		}
 	}

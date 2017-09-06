@@ -18,25 +18,21 @@ namespace PanzerBlitz
 
 		void HandleLogIn(object Sender, EventArgs E)
 		{
-			PlayerContext context = null;
 			try
 			{
 				NetworkContext client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
-				try
-				{
-					context = client.MakeLoggedInPlayerContext(_Screen.Username, _Screen.Password);
-				}
-				catch
+				PlayerContext context = client.MakeLoggedInPlayerContext(_Screen.Username, _Screen.Password);
+				if (context == null)
 				{
 					_Screen.SetError("Invalid Log In information.");
 					client.Close();
 				}
+				else if (OnLogIn != null) OnLogIn(this, new ValuedEventArgs<PlayerContext>(context));
 			}
 			catch
 			{
 				_Screen.SetError("Could not connect to server.");
 			}
-			if (context != null && OnLogIn != null) OnLogIn(this, new ValuedEventArgs<PlayerContext>(context));
 		}
 	}
 }

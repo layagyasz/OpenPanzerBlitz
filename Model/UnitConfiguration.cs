@@ -82,6 +82,7 @@ namespace PanzerBlitz
 		public UnitConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			UniqueKey = Block.Name;
 			Name = (string)attributes[(int)Attribute.NAME];
 			DisplayName = Parse.DefaultIfNull(attributes[(int)Attribute.DISPLAY_NAME], Name);

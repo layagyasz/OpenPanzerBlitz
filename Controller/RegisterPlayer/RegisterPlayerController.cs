@@ -19,7 +19,6 @@ namespace PanzerBlitz
 
 		void HandleRegister(object Sender, EventArgs E)
 		{
-			PlayerContext context = null;
 			try
 			{
 				NetworkContext client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
@@ -27,16 +26,18 @@ namespace PanzerBlitz
 				client.Client.RPCHandler = new RPCHandler();
 				Player p = ((LogInPlayerResponse)client.Client.Call(
 					new RegisterPlayerRequest(_Screen.Username, _Screen.Password)).Get()).Player;
-				if (p == null) _Screen.SetError("Unable to Register.");
-				else context = client.MakePlayerContext(p);
+				if (p == null)
+				{
+					_Screen.SetError("Unable to Register.");
+					client.Close();
+				}
+				if (OnRegister != null)
+					OnRegister(this, new ValuedEventArgs<PlayerContext>(client.MakePlayerContext(p)));
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine(e.Message);
 				_Screen.SetError("Could not connect to server.");
 			}
-			if (context != null && OnRegister != null)
-				OnRegister(this, new ValuedEventArgs<PlayerContext>(context));
 		}
 	}
 }

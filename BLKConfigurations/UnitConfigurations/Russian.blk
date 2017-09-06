@@ -176,18 +176,7 @@ unit-configuration:cavalry {
 	byte:defense { 8 }
 	byte:movement { 3 }
 }
-unit-configuration:wagon {
-	string:name { Wagon }
-	unit-class:unit-class { transport }
-	string:image-name { wagon.png }
-
-	weapon-class:weapon-class { na }
-	byte:attack { 0 }
-	byte:range { 0 }
-	byte:defense { 1 }
-	byte:movement { 3 }
-}
-unit-configuration:sis-5 {
+unit-configuration:truck-russian {
 	string:name { SIS-5 Truck }
 	string:display-name { TRUCK }
 	unit-class:unit-class { transport }
