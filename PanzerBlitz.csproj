@@ -196,12 +196,10 @@
     <Compile Include="View\Match\MatchScreen.cs" />
     <Compile Include="View\Match\AttackPane.cs" />
     <Compile Include="View\Match\ConvoyDeploymentPage.cs" />
-    <Compile Include="View\Match\ConvoyDeploymentSelectionOption.cs" />
     <Compile Include="View\Match\DeploymentPage.cs" />
     <Compile Include="View\Match\DeploymentPane.cs" />
     <Compile Include="View\Match\LoadUnitPane.cs" />
     <Compile Include="View\Match\PositionalDeploymentPage.cs" />
-    <Compile Include="View\Match\PositionalDeploymentSelectionOption.cs" />
     <Compile Include="View\Edit\EditPane.cs" />
     <Compile Include="View\Edit\IOPane.cs" />
     <Compile Include="View\Landing\SetupNetworkConnectionPane.cs" />
@@ -210,11 +208,6 @@
     <Compile Include="View\Match\MovementDolly.cs" />
     <Compile Include="View\Match\NewUnitViewEventArgs.cs" />
     <Compile Include="View\Match\StackLayer.cs" />
-    <Compile Include="View\Match\StackView.cs" />
-    <Compile Include="View\Match\StackViewUnitComparator.cs" />
-    <Compile Include="View\Match\UnitConfigurationRenderer.cs" />
-    <Compile Include="View\Match\UnitView.cs" />
-    <Compile Include="View\Match\HomogenousStackView.cs" />
     <Compile Include="View\Map\Highlight.cs" />
     <Compile Include="View\Map\HighlightLayer.cs" />
     <Compile Include="View\Map\MapView.cs" />
@@ -266,6 +259,15 @@
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerController.cs" />
     <Compile Include="Model\UnitConfigurationLink.cs" />
+    <Compile Include="View\Unit\StackView.cs" />
+    <Compile Include="View\Unit\StackViewUnitComparator.cs" />
+    <Compile Include="View\Unit\UnitConfigurationRenderer.cs" />
+    <Compile Include="View\Unit\UnitView.cs" />
+    <Compile Include="View\Unit\HomogenousStackView.cs" />
+    <Compile Include="View\Unit\SingularUnitSelectionOption.cs" />
+    <Compile Include="View\Unit\GroupedUnitSelectionOption.cs" />
+    <Compile Include="View\ArmyBuilder\ArmyBuilderScreen.cs" />
+    <Compile Include="View\Unit\UnitConfigurationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -318,6 +320,8 @@
     <Folder Include="Controller\RegisterPlayer\" />
     <Folder Include="Logs\" />
     <Folder Include="BLKConfigurations\UnitConfigurationLinks\" />
+    <Folder Include="View\Unit\" />
+    <Folder Include="View\ArmyBuilder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1118,7 +1122,10 @@
     <None Include="BLKConfigurations\UnitConfigurationLinks\German.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="BLKConfigurations\UnitConfigurationLinks\Russian.blk" />
+    <None Include="BLKConfigurations\UnitConfigurationLinks\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Theme\Components\ArmyBuilder.blk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

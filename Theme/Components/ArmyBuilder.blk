@@ -1,0 +1,33 @@
+﻿class:army-builder-header {
+	!class:parent { header-1 }
+}
+class:army-builder-pane {
+	!class:parent { pane }
+}
+class:army-builder-select {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 636 }
+	}
+}
+class:army-builder-selection-option {
+	mode:default {
+		int:height { 100 }
+		int:width { 288 }
+		int[]:margin { 0 3 0 3 }
+		!font:unit-stack-font { fonts.univers }
+		color[]:background-color { #484848 #484848 #484848 #484848 }
+	}
+	mode:hover {
+		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
+	}
+	mode:selected {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected-hover {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+	mode:selected-focus {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}

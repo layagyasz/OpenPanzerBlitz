@@ -8,7 +8,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class ConvoyDeploymentSelectionOption : SelectionOption<StackView>
+	public class SingularUnitSelectionOption : SelectionOption<StackView>
 	{
 		static readonly int UNIT_VIEW_SCALE = 64;
 
@@ -16,8 +16,8 @@ namespace PanzerBlitz
 
 		StackView _StackView = new StackView();
 
-		public ConvoyDeploymentSelectionOption(Unit Unit, UnitConfigurationRenderer Renderer)
-					: base("deployment-selection-option")
+		public SingularUnitSelectionOption(string ClassName, Unit Unit, UnitConfigurationRenderer Renderer)
+					: base(ClassName)
 		{
 			this.Unit = Unit;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,7 +59,8 @@ namespace PanzerBlitz
 				u.OnLoad += HandleLoad;
 				u.OnUnload += HandleUnload;
 
-				ConvoyDeploymentSelectionOption option = new ConvoyDeploymentSelectionOption(u, _Renderer);
+				SingularUnitSelectionOption option =
+					new SingularUnitSelectionOption("deployment-selection-option", u, _Renderer);
 				_Selection.Add(option);
 			}
 
@@ -109,12 +110,12 @@ namespace PanzerBlitz
 		void HandleLoad(object Sender, EventArgs E)
 		{
 			Unit u = (Unit)Sender;
-			ConvoyDeploymentSelectionOption carrierOption =
-				(ConvoyDeploymentSelectionOption)_Selection.FirstOrDefault(
-					i => ((ConvoyDeploymentSelectionOption)i).Unit == u);
-			ConvoyDeploymentSelectionOption passengerOption =
-							(ConvoyDeploymentSelectionOption)_Selection.FirstOrDefault(
-								i => ((ConvoyDeploymentSelectionOption)i).Unit == u.Passenger);
+			SingularUnitSelectionOption carrierOption =
+				(SingularUnitSelectionOption)_Selection.FirstOrDefault(
+					i => ((SingularUnitSelectionOption)i).Unit == u);
+			SingularUnitSelectionOption passengerOption =
+							(SingularUnitSelectionOption)_Selection.FirstOrDefault(
+								i => ((SingularUnitSelectionOption)i).Unit == u.Passenger);
 			_Selection.Remove(passengerOption);
 			carrierOption.Value.Merge(passengerOption.Value);
 		}
@@ -122,10 +123,11 @@ namespace PanzerBlitz
 		void HandleUnload(object Sender, ValuedEventArgs<Unit> E)
 		{
 			Unit u = (Unit)Sender;
-			ConvoyDeploymentSelectionOption carrierOption =
-				(ConvoyDeploymentSelectionOption)_Selection.FirstOrDefault(
-					i => ((ConvoyDeploymentSelectionOption)i).Unit == u);
-			ConvoyDeploymentSelectionOption option = new ConvoyDeploymentSelectionOption(E.Value, _Renderer);
+			SingularUnitSelectionOption carrierOption =
+				(SingularUnitSelectionOption)_Selection.FirstOrDefault(
+					i => ((SingularUnitSelectionOption)i).Unit == u);
+			SingularUnitSelectionOption option =
+				new SingularUnitSelectionOption("deployment-selection-option", E.Value, _Renderer);
 			_Selection.Insert(Math.Min(_Selection.Count() - 1, _Selection.ToList().IndexOf(carrierOption) + 1), option);
 			carrierOption.Value.Remove(E.Value);
 		}

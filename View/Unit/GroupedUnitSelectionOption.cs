@@ -9,7 +9,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class PositionalDeploymentSelectionOption : SelectionOption<HomogenousStackView>
+	public class GroupedUnitSelectionOption : SelectionOption<HomogenousStackView>
 	{
 		public readonly UnitConfiguration UnitConfiguration;
 
@@ -23,8 +23,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public PositionalDeploymentSelectionOption(IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
-			: base("deployment-selection-option")
+		public GroupedUnitSelectionOption(string ClassName, IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
+			: base(ClassName)
 		{
 			UnitConfiguration = Units.First().Configuration;
 

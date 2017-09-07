@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 using Cardamom.Interface.Items;
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
 
 			foreach (var g in Deployment.Units.GroupBy(i => i.Configuration))
-				_Selection.Add(new PositionalDeploymentSelectionOption(g, _Renderer));
+				_Selection.Add(new GroupedUnitSelectionOption("deployment-selection-option", g, _Renderer));
 
 			_Selection.Position = new Vector2f(0, 48);
 			Add(_Selection);
@@ -51,18 +51,19 @@ namespace PanzerBlitz
 
 		public void Add(Unit Unit)
 		{
-			PositionalDeploymentSelectionOption option =
-							(PositionalDeploymentSelectionOption)_Selection.FirstOrDefault(
-								i => ((PositionalDeploymentSelectionOption)i).UnitConfiguration == Unit.Configuration);
-			if (option == null) _Selection.Add(new PositionalDeploymentSelectionOption(new Unit[] { Unit }, _Renderer));
+			GroupedUnitSelectionOption option =
+							(GroupedUnitSelectionOption)_Selection.FirstOrDefault(
+								i => ((GroupedUnitSelectionOption)i).UnitConfiguration == Unit.Configuration);
+			if (option == null) _Selection.Add(
+				new GroupedUnitSelectionOption("deployment-selection-option", new Unit[] { Unit }, _Renderer));
 			else option.Push(Unit);
 		}
 
 		public void Remove(Unit Unit)
 		{
-			PositionalDeploymentSelectionOption option =
-				(PositionalDeploymentSelectionOption)_Selection.FirstOrDefault(
-					i => ((PositionalDeploymentSelectionOption)i).UnitConfiguration == Unit.Configuration);
+			GroupedUnitSelectionOption option =
+				(GroupedUnitSelectionOption)_Selection.FirstOrDefault(
+					i => ((GroupedUnitSelectionOption)i).UnitConfiguration == Unit.Configuration);
 			if (option != null) option.Pop();
 			if (option.Count == 0) _Selection.Remove(option);
 		}
