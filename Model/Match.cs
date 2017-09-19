@@ -18,6 +18,7 @@ namespace PanzerBlitz
 
 		IEnumerator<TurnInfo> _TurnOrder;
 
+		OrderAutomater _OrderAutomater;
 		List<Order> _OrderBuffer = new List<Order>();
 		Random _Random = new Random();
 
@@ -29,7 +30,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Match(Scenario Scenario)
+		public Match(Scenario Scenario, bool AutomateTurns = true)
 		{
 			this.Scenario = Scenario;
 			this.Map = Scenario.MapConfiguration.GenerateMap();
@@ -47,6 +48,7 @@ namespace PanzerBlitz
 				u.OnMove += UpdateUnitVisibilityFromMove;
 				u.OnFire += UpdateUnitVisibilityFromFire;
 			}
+			if (AutomateTurns) _OrderAutomater = new OrderAutomater(this);
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
@@ -75,6 +77,8 @@ namespace PanzerBlitz
 			if (!AdvancePhaseIterator()) return;
 			if (OnStartPhase != null)
 				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
+			if (_OrderAutomater != null && _OrderAutomater.AutomateTurn(_TurnOrder.Current))
+				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.Army));
 		}
 
 		bool AdvancePhaseIterator()
@@ -105,9 +109,21 @@ namespace PanzerBlitz
 			{
 				if (!ValidateUnloadOrder((UnloadOrder)Order)) return false;
 			}
+			else if (Order is ReconOrder)
+			{
+				if (!ValidateReconOrder((ReconOrder)Order)) return false;
+			}
+			else if (Order is EvacuateOrder)
+			{
+				if (!ValidateEvacuateOrder((EvacuateOrder)Order)) return false;
+			}
 			else if (Order is DeployOrder)
 			{
 				if (!ValidateDeployOrder((DeployOrder)Order)) return false;
+			}
+			else if (Order is ResetOrder)
+			{
+				if (!ValidateResetOrder((ResetOrder)Order)) return false;
 			}
 			else if (Order is NextPhaseOrder)
 			{
@@ -145,13 +161,15 @@ namespace PanzerBlitz
 				NextPhase();
 				return true;
 			}
-			bool executed = Order.Execute(_Random);
-			if (executed)
+			OrderStatus executed = Order.Execute(_Random);
+			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
+				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current);
+			if (executed != OrderStatus.ILLEGAL)
 			{
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 				ExecutedOrders.Add(Order);
 			}
-			return executed;
+			return executed != OrderStatus.ILLEGAL;
 		}
 
 		bool ValidateNextPhaseOrder()
@@ -216,6 +234,24 @@ namespace PanzerBlitz
 			}
 			return (Order.Army == CurrentPhase.Army || CurrentPhase.Army == null)
 				&& CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
+		}
+
+		bool ValidateReconOrder(ReconOrder Order)
+		{
+			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
+		bool ValidateEvacuateOrder(EvacuateOrder Order)
+		{
+			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
+			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
+		bool ValidateResetOrder(ResetOrder Order)
+		{
+			if (Order.CompleteReset) return CurrentPhase.TurnComponent == TurnComponent.RESET;
+			return true;
 		}
 
 		void UpdateUnitVisibilityFromMove(object Sender, MovementEventArgs E)

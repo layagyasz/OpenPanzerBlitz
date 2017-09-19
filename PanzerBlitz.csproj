@@ -268,6 +268,11 @@
     <Compile Include="View\Unit\GroupedUnitSelectionOption.cs" />
     <Compile Include="View\ArmyBuilder\ArmyBuilderScreen.cs" />
     <Compile Include="View\Unit\UnitConfigurationView.cs" />
+    <Compile Include="Model\Orders\OrderAutomater.cs" />
+    <Compile Include="Model\Orders\OrderStatus.cs" />
+    <Compile Include="Model\Orders\Movement\ReconOrder.cs" />
+    <Compile Include="Model\Orders\Movement\EvacuateOrder.cs" />
+    <Compile Include="Model\Orders\ResetOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

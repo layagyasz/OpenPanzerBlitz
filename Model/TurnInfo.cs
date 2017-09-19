@@ -25,6 +25,39 @@ namespace PanzerBlitz
 			Stream.Write((byte)TurnComponent);
 		}
 
+		public override bool Equals(object obj)
+		{
+			if (obj == null) return false;
+			if (obj is TurnInfo)
+			{
+				TurnInfo i = (TurnInfo)obj;
+				return Army == i.Army && TurnComponent == i.TurnComponent;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Army.GetHashCode() ^ TurnComponent.GetHashCode();
+		}
+
+		public static bool operator ==(TurnInfo i1, TurnInfo i2)
+		{
+			try
+			{
+				return i1.Equals(i2);
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		public static bool operator !=(TurnInfo i1, TurnInfo i2)
+		{
+			return !(i1 == i2);
+		}
+
 		public override string ToString()
 		{
 			return string.Format("[TurnInfo: Army={0}, TurnComponent={1}]", Army, TurnComponent);

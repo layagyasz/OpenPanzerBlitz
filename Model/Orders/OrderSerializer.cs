@@ -18,6 +18,9 @@ namespace PanzerBlitz
 			typeof(LoadOrder),
 			typeof(MovementOrder),
 			typeof(UnloadOrder),
+			typeof(ReconOrder),
+			typeof(EvacuateOrder),
+			typeof(ResetOrder),
 			typeof(NextPhaseOrder)
 		};
 
@@ -31,6 +34,9 @@ namespace PanzerBlitz
 			(i, j) => new LoadOrder(i, j),
 			(i, j) => new MovementOrder(i, j),
 			(i, j) => new UnloadOrder(i, j),
+			(i, j) => new ReconOrder(i, j),
+			(i, j) => new EvacuateOrder(i, j),
+			(i, j) => new ResetOrder(i, j),
 			(i, j) => new NextPhaseOrder(i, j),
 		};
 

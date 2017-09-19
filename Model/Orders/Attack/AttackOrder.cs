@@ -261,9 +261,9 @@ namespace PanzerBlitz
 											   || AttackAt.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT);
 		}
 
-		public virtual bool Execute(Random Random)
+		public virtual OrderStatus Execute(Random Random)
 		{
-			if (Validate() != NoAttackReason.NONE) return false;
+			if (Validate() != NoAttackReason.NONE) return OrderStatus.ILLEGAL;
 
 			AttackingArmy.AttackTile(AttackAt);
 			_Attackers.ForEach(i => i.Execute(Random));
@@ -277,7 +277,7 @@ namespace PanzerBlitz
 					Random.Next(2, 7) + c.DieModifier];
 				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
 			}
-			return true;
+			return OrderStatus.FINISHED;
 		}
 
 		// Map 4, 3, 2, 1, 2, 3, 4 => 0 -> 6

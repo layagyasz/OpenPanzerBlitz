@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			{
 				playerControllers.Add(a, controller);
 			}
-			_MatchController = new MatchController(_Context.Match, playerControllers, _Context.IsHost);
+			_MatchController = new MatchController(_Context.Match, playerControllers);
 			screen.OnPulse += (sender, e) => _Context.Match.DoBufferedOrders();
 			_Context.Match.Start();
 

@@ -61,9 +61,9 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
-			return Validate() == NoSingleAttackReason.NONE;
+			return Validate() == NoSingleAttackReason.NONE ? OrderStatus.FINISHED : OrderStatus.ILLEGAL;
 		}
 	}
 }

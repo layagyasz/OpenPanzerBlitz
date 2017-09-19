@@ -96,15 +96,15 @@ namespace PanzerBlitz
 			return base.Validate();
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
 			{
 				Attacker.Fire();
 				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			else return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

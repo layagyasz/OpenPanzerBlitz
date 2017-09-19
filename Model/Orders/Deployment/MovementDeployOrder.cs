@@ -41,15 +41,15 @@ namespace PanzerBlitz
 			return NoDeployReason.DEPLOYMENT_RULE;
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoDeployReason.NONE)
 			{
 				Unit.Place(Tile);
 				Unit.Deployed = true;
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

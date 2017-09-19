@@ -27,6 +27,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public abstract bool Execute(Random Random);
+		public abstract OrderStatus Execute(Random Random);
 	}
 }

@@ -38,14 +38,14 @@ namespace PanzerBlitz
 			return Deployment.Validate(Tile);
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoDeployReason.NONE)
 			{
 				Deployment.SetEntryTile(Tile);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

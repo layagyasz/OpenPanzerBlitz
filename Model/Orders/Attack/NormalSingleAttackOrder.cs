@@ -74,14 +74,14 @@ namespace PanzerBlitz
 			return base.Validate();
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoSingleAttackReason.NONE)
 			{
 				_Attacker.Fire();
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

@@ -41,14 +41,14 @@ namespace PanzerBlitz
 			return Carrier.CanLoad(Passenger);
 		}
 
-		public bool Execute(Random Random)
+		public OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoLoadReason.NONE)
 			{
 				Carrier.Load(Passenger, UseMovement);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			else return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

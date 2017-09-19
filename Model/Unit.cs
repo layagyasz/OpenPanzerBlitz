@@ -21,18 +21,21 @@ namespace PanzerBlitz
 
 		int _Id;
 
-		private bool _Deployed;
+		bool _Deployed;
 
-		private float _RemainingMovement;
-		private bool _Fired;
-		private bool _Moved;
-		private bool _MovedMoreThanOneTile;
-		private UnitStatus _Status;
+		float _RemainingMovement;
+		bool _Fired;
+		bool _Moved;
+		bool _MovedMoreThanOneTile;
+		UnitStatus _Status;
 
-		private Tile _Position;
+		Tile _Position;
 
-		private Unit _Passenger;
-		private Unit _Carrier;
+		Unit _Passenger;
+		Unit _Carrier;
+
+		bool[] _ReconDirections = new bool[Enum.GetValues(typeof(Direction)).Length];
+		public Direction Evacuated { get; set; } = Direction.NONE;
 
 		public int Id
 		{
@@ -398,6 +401,16 @@ namespace PanzerBlitz
 			if (!Moved)
 				return fullMovement.Concat(adjacent.Where(i => !fullMovement.Any(j => i.Item1 == j.Item1)));
 			return fullMovement;
+		}
+
+		public void Recon(Direction Direction)
+		{
+			_ReconDirections[(int)Direction] = true;
+		}
+
+		public bool HasRecon(Direction Direction)
+		{
+			return _ReconDirections[(int)Direction];
 		}
 
 		public void Fire()

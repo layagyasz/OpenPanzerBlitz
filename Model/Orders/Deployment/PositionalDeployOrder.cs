@@ -41,9 +41,9 @@ namespace PanzerBlitz
 			return NoDeployReason.DEPLOYMENT_RULE;
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() != NoDeployReason.NONE) return false;
+			if (Validate() != NoDeployReason.NONE) return OrderStatus.ILLEGAL;
 
 			if (Tile == null)
 			{
@@ -56,7 +56,7 @@ namespace PanzerBlitz
 				Unit.Deployed = true;
 			}
 
-			return true;
+			return OrderStatus.FINISHED;
 		}
 	}
 }

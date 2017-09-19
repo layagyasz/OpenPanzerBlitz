@@ -9,6 +9,6 @@ namespace PanzerBlitz
 		public abstract void Serialize(SerializationOutputStream Stream);
 		public abstract Army Army { get; }
 		public abstract NoDeployReason Validate();
-		public abstract bool Execute(Random Random);
+		public abstract OrderStatus Execute(Random Random);
 	}
 }

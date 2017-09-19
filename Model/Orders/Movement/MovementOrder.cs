@@ -63,14 +63,14 @@ namespace PanzerBlitz
 			return NoMoveReason.NONE;
 		}
 
-		public bool Execute(Random Random)
+		public OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoMoveReason.NONE)
 			{
 				Unit.MoveTo(Path.Destination, Path);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

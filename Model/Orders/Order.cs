@@ -7,6 +7,6 @@ namespace PanzerBlitz
 	public interface Order : Serializable
 	{
 		Army Army { get; }
-		bool Execute(Random Random);
+		OrderStatus Execute(Random Random);
 	}
 }

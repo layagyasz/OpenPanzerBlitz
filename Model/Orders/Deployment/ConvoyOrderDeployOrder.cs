@@ -41,14 +41,14 @@ namespace PanzerBlitz
 			return Deployment.Validate(ConvoyOrder);
 		}
 
-		public override bool Execute(Random Random)
+		public override OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoDeployReason.NONE)
 			{
 				Deployment.SetConvoyOrder(ConvoyOrder);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

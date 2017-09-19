@@ -38,14 +38,14 @@ namespace PanzerBlitz
 			return Carrier.CanUnload();
 		}
 
-		public bool Execute(Random Random)
+		public OrderStatus Execute(Random Random)
 		{
 			if (Validate() == NoUnloadReason.NONE)
 			{
 				Carrier.Unload(UseMovement);
-				return true;
+				return OrderStatus.FINISHED;
 			}
-			else return false;
+			return OrderStatus.ILLEGAL;
 		}
 	}
 }

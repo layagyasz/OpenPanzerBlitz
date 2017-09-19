@@ -27,9 +27,9 @@ namespace PanzerBlitz
 			return true;
 		}
 
-		public bool Execute(Random Random)
+		public OrderStatus Execute(Random Random)
 		{
-			return true;
+			return OrderStatus.FINISHED;
 		}
 	}
 }
