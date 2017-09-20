@@ -13,12 +13,13 @@ namespace PanzerBlitz
 {
 	public static class GameData
 	{
-		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, UNIT_CONFIGURATION_LINKS, SCENARIOS };
+		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, UNIT_RENDER_DETAILS, UNIT_CONFIGURATION_LINKS, SCENARIOS };
 
 		public static ushort OnlinePort = 1000;
 		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
+		public static Dictionary<UnitConfiguration, UnitRenderDetails> UnitRenderDetails;
 		public static List<UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
@@ -31,6 +32,11 @@ namespace PanzerBlitz
 					"unit-configuration<>",
 					"unit-configurations",
 					Directory.EnumerateFiles(Path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
+						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
+					"unit-render-details<>",
+					"unit-render-details",
+					Directory.EnumerateFiles(Path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"unit-configuration-link[]",
@@ -59,6 +65,7 @@ namespace PanzerBlitz
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
+			Block.AddParser<UnitRenderDetails>("unit-render-details", i => new UnitRenderDetails(i));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
@@ -106,9 +113,19 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
+			UnitRenderDetails = ((Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS])
+				.Select(i => new KeyValuePair<UnitConfiguration, UnitRenderDetails>(UnitConfigurations[i.Key], i.Value))
+				.ToDictionary(i => i.Key, i => i.Value);
 			Wreckage = UnitConfigurations["wreckage"];
 			UnitConfigurationLinks = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
+
+			// Emit warnings for units without configured render details.
+			foreach (UnitConfiguration unit in UnitConfigurations.Values)
+			{
+				if (!UnitRenderDetails.ContainsKey(unit))
+					Console.WriteLine("[WARNING]: No render details configured for UnitConfiguration {0}", unit.Name);
+			}
 		}
 	}
 }

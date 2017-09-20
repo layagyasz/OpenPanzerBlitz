@@ -278,6 +278,7 @@
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasReconned.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasEvacuated.cs" />
     <Compile Include="Model\VictoryConditions\UnitsMatchedObjective.cs" />
+    <Compile Include="View\Unit\UnitRenderDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -334,6 +335,7 @@
     <Folder Include="Model\Matchers\" />
     <Folder Include="Model\Matchers\TileMatchers\" />
     <Folder Include="Model\Matchers\UnitMatchers\" />
+    <Folder Include="BLKConfigurations\UnitRenderDetails\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1138,6 +1140,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme\Components\ArmyBuilder.blk" />
+    <None Include="BLKConfigurations\UnitRenderDetails\Common.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitRenderDetails\German.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\UnitRenderDetails\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

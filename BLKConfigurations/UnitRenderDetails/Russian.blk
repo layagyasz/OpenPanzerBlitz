@@ -1,0 +1,90 @@
+﻿unit-render-details:12_7mm {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:45mm {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:57mm {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:76_2mm {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:76_2mm-howitzer {
+	string:image-path { artillery.png }
+}
+unit-render-details:122mm {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:82mm-motorized {
+	string:image-path { mortar-motorized.png }
+}
+unit-render-details:82mm {
+	string:image-path { mortar.png }
+}
+unit-render-details:120mm {
+	string:image-path { mortar.png }
+}
+unit-render-details:engineer-company {
+	string:override-display-name { }
+	string:image-path { engineer-company.png }
+}
+unit-render-details:recon-company {
+	string:override-display-name { RECON }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:rifle-company {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:guards-company {
+	string:override-display-name { GUARDS }
+	string:image-path { infantry-company.png }
+	color:override-color { #E24B20 }
+}
+unit-render-details:smg-company {
+	string:override-display-name { SMG }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:cavalry {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry.png }
+}
+unit-render-details:truck-russian {
+	string:override-display-name { TRUCK }
+	string:image-path { truck.png }
+}
+unit-render-details:sis-33 {
+	string:override-display-name { HALFTRK }
+	string:image-path { sis-33.png }
+}
+unit-render-details:su-152 {
+	string:image-path { su-152.png }
+}
+unit-render-details:su-76 {
+	string:image-path { su-76.png }
+}
+unit-render-details:su-85 {
+	string:image-path { su-85.png }
+}
+unit-render-details:su-100 {
+	string:image-path { SU-100 }
+}
+unit-render-details:jsu-122 {
+	string:image-path { jsu-122.png }
+}
+unit-render-details:kv-85 {
+	string:image-path { kv-85.png }
+}
+unit-render-details:t-34-c {
+	string:image-path { t-34-c.png }
+}
+unit-render-details:t-34_85 {
+	string:image-path { t-34_85.png }
+}
+unit-render-details:js-ii {
+	string:image-path { js-ii.png }
+}
+unit-render-details:js-iii {
+	string:image-path { js-iii.png }
+}

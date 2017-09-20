@@ -9,6 +9,7 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationRenderer
 	{
+		public readonly Dictionary<UnitConfiguration, UnitRenderDetails> RenderDetails;
 		public readonly Font Font;
 		public readonly uint SpriteSize;
 		public readonly uint TextureSize;
@@ -17,8 +18,14 @@ namespace PanzerBlitz
 		Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>> _RenderInfo =
 			new Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>>();
 
-		public UnitConfigurationRenderer(Scenario Scenario, uint TextureSize, uint SpriteSize, Font Font)
+		public UnitConfigurationRenderer(
+			Scenario Scenario,
+			Dictionary<UnitConfiguration, UnitRenderDetails> RenderDetails,
+			uint TextureSize,
+			uint SpriteSize,
+			Font Font)
 		{
+			this.RenderDetails = RenderDetails;
 			this.TextureSize = TextureSize;
 			this.SpriteSize = SpriteSize;
 			this.Font = Font;
@@ -69,8 +76,11 @@ namespace PanzerBlitz
 					renderedTexture = new Texture(texture.Texture);
 					foreach (KeyValuePair<UnitConfiguration, Vector2f[]> k in renderInfoCache)
 						_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
+					_RenderInfo.Clear();
 					_Textures.Add(renderedTexture);
 					texture = new RenderTexture(TextureSize, TextureSize);
+					i = 0;
+					j = 0;
 				}
 			}
 			texture.Display();
@@ -82,7 +92,9 @@ namespace PanzerBlitz
 
 		private void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
 		{
-			Sprite image = new Sprite(new Texture("./UnitSprites/" + UnitConfiguration.ImageName));
+			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration];
+
+			Sprite image = new Sprite(new Texture("./UnitSprites/" + renderDetails.ImagePath));
 			RenderStates r = new RenderStates(Transform);
 			Target.Draw(image, r);
 
@@ -122,7 +134,10 @@ namespace PanzerBlitz
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
-			Text nameText = new Text(UnitConfiguration.DisplayName, Font, 24);
+			Text nameText = new Text(
+				renderDetails.OverrideDisplayName == null ? UnitConfiguration.Name : renderDetails.OverrideDisplayName,
+				Font,
+				24);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 

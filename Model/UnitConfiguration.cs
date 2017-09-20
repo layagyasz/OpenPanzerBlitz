@@ -12,16 +12,12 @@ namespace PanzerBlitz
 		private enum Attribute
 		{
 			NAME,
-			DISPLAY_NAME,
 			UNIT_CLASS,
 			WEAPON_CLASS,
 			ATTACK,
 			RANGE,
 			DEFENSE,
 			MOVEMENT,
-
-			IMAGE_NAME,
-			OVERRIDE_COLOR,
 
 			CAN_DIRECT_FIRE,
 			CAN_INDIRECT_FIRE,
@@ -46,7 +42,6 @@ namespace PanzerBlitz
 
 		public readonly string UniqueKey;
 		public readonly string Name;
-		public readonly string DisplayName;
 		public readonly UnitClass UnitClass;
 		public readonly WeaponClass WeaponClass;
 
@@ -54,9 +49,6 @@ namespace PanzerBlitz
 		public readonly byte Range;
 		public readonly byte Defense;
 		public readonly byte Movement;
-
-		public readonly string ImageName;
-		public readonly Color OverrideColor;
 
 		public readonly bool CanDirectFire;
 		public readonly bool CanIndirectFire;
@@ -85,15 +77,12 @@ namespace PanzerBlitz
 
 			UniqueKey = Block.Name;
 			Name = (string)attributes[(int)Attribute.NAME];
-			DisplayName = Parse.DefaultIfNull(attributes[(int)Attribute.DISPLAY_NAME], Name);
 			UnitClass = (UnitClass)attributes[(int)Attribute.UNIT_CLASS];
 			WeaponClass = (WeaponClass)attributes[(int)Attribute.WEAPON_CLASS];
 			Attack = (byte)attributes[(int)Attribute.ATTACK];
 			Range = (byte)attributes[(int)Attribute.RANGE];
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
 			Movement = (byte)attributes[(int)Attribute.MOVEMENT];
-			ImageName = (string)attributes[(int)Attribute.IMAGE_NAME];
-			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
 			IsVehicle = Parse.DefaultIfNull(attributes[(int)Attribute.IS_VEHICLE],
 											UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
 											|| UnitClass == UnitClass.ASSAULT_GUN

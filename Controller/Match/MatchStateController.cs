@@ -18,7 +18,7 @@ namespace PanzerBlitz
 			_Context = (MatchContext)ProgramStateContext;
 
 			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
-				_Context.Match.Scenario, 1024, 128, new Font("Compacta Std Regular.otf"));
+				_Context.Match.Scenario, GameData.UnitRenderDetails, 1024, 128, new Font("Compacta Std Regular.otf"));
 			HashSet<Army> armies = new HashSet<Army>(_Context.GetArmies());
 
 			MatchScreen screen = new MatchScreen(

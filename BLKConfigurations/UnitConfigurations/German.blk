@@ -1,7 +1,6 @@
 ﻿unit-configuration:50mm {
 	string:name { 50mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { anti-armor.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 8 }
@@ -12,7 +11,6 @@
 unit-configuration:75mm {
 	string:name { 75 mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { anti-armor.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 13 }
@@ -23,7 +21,6 @@ unit-configuration:75mm {
 unit-configuration:88mm {
 	string:name { 88mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { anti-armor.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -34,7 +31,6 @@ unit-configuration:88mm {
 unit-configuration:20mm {
 	string:name { 20mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { anti-aircraft.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 4 }
@@ -46,7 +42,6 @@ unit-configuration:20mm {
 unit-configuration:20mm_4 {
 	string:name { 20(4)mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { anti-aircraft.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
@@ -58,7 +53,6 @@ unit-configuration:20mm_4 {
 unit-configuration:75mm-howitzer {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { artillery.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 2 }
@@ -69,7 +63,6 @@ unit-configuration:75mm-howitzer {
 unit-configuration:150mm {
 	string:name { 150mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { artillery-heavy.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 20 }
@@ -81,7 +74,6 @@ unit-configuration:150mm {
 unit-configuration:81mm {
 	string:name { 81mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { mortar.png }
 
 	weapon-class:weapon-class { mortar}
 	byte:attack { 3 }
@@ -93,7 +85,6 @@ unit-configuration:81mm {
 unit-configuration:120mm-german {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
-	string:image-name { mortar.png }
 
 	weapon-class:weapon-class { mortar}
 	byte:attack { 15 }
@@ -104,9 +95,7 @@ unit-configuration:120mm-german {
 }
 unit-configuration:engineer-platoon {
 	string:name { Engineer Platoon }
-	string:display-name { }
 	unit-class:unit-class { infantry }
-	string:image-name { engineer-platoon.png }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 3 }
@@ -117,9 +106,7 @@ unit-configuration:engineer-platoon {
 }
 unit-configuration:security-platoon {
 	string:name { Security Platoon }
-	string:display-name { SECURITY }
 	unit-class:unit-class { infantry }
-	string:image-name { infantry-platoon.png }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
@@ -129,9 +116,7 @@ unit-configuration:security-platoon {
 }
 unit-configuration:rifle-platoon {
 	string:name { Rifle Platoon }
-	string:display-name { RIFLE }
 	unit-class:unit-class { infantry }
-	string:image-name { infantry-platoon.png }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 3 }
@@ -140,9 +125,8 @@ unit-configuration:rifle-platoon {
 	byte:movement { 1 }
 }
 unit-configuration:smg-platoon {
-	string:name { SMG }
+	string:name { SMG Platoon }
 	unit-class:unit-class { infantry }
-	string:image-name { infantry-platoon.png }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 6 }
@@ -152,9 +136,7 @@ unit-configuration:smg-platoon {
 }
 unit-configuration:truck-german {
 	string:name { Truck }
-	string:display-name { TRUCK }
 	unit-class:unit-class { transport }
-	string:image-name { truck-2.png }
 
 	weapon-class:weapon-class { na }
 	byte:attack { 0 }
@@ -165,9 +147,7 @@ unit-configuration:truck-german {
 }
 unit-configuration:sdkfz-251 {
 	string:name { SdKfz. 251 Halftrack }
-	string:display-name { HALFTRK }
 	unit-class:unit-class { transport }
-	string:image-name { sdkfz-251.png }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
@@ -178,9 +158,7 @@ unit-configuration:sdkfz-251 {
 }
 unit-configuration:sdkfz-234_1 {
 	string:name { SdKfz. 234/1 }
-	string:display-name { SdKfz 234/1 }
 	unit-class:unit-class { reconnaissance-vehicle }
-	string:image-name { sdkfz-234_1.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 2 }
@@ -190,9 +168,7 @@ unit-configuration:sdkfz-234_1 {
 }
 unit-configuration:puma {
 	string:name { Puma SdKfz. 234/2 }
-	string:display-name { PUMA }
 	unit-class:unit-class { reconnaissance-vehicle }
-	string:image-name { sdkfz-234_2.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 6 }
@@ -202,9 +178,7 @@ unit-configuration:puma {
 }
 unit-configuration:sdkfz-234_4 {
 	string:name { SdKfz. 234/4 }
-	string:display-name { SdKfz 234/4 }
 	unit-class:unit-class { reconnaissance-vehicle }
-	string:image-name { sdkfz-234_4.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 13 }
@@ -214,9 +188,7 @@ unit-configuration:sdkfz-234_4 {
 }
 unit-configuration:maultier {
 	string:name { Maultier }
-	string:display-name { MAULTIER }
 	unit-class:unit-class { self-propelled-artillery }
-	string:image-name { maultier.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 50 }
@@ -226,9 +198,7 @@ unit-configuration:maultier {
 }
 unit-configuration:wespe {
 	string:name { Wespe }
-	string:display-name { WESPE }
 	unit-class:unit-class { self-propelled-artillery }
-	string:image-name { wespe.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 40 }
@@ -238,9 +208,7 @@ unit-configuration:wespe {
 }
 unit-configuration:hummel {
 	string:name { Hummel }
-	string:display-name { HUMMEL }
 	unit-class:unit-class { self-propelled-artillery }
-	string:image-name { hummel.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 50 }
@@ -251,7 +219,6 @@ unit-configuration:hummel {
 unit-configuration:gw-38_m {
 	string:name { GW 38(M) }
 	unit-class:unit-class { assault-gun }
-	string:image-name { gw-38_m.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -261,9 +228,7 @@ unit-configuration:gw-38_m {
 }
 unit-configuration:wirbelwind {
 	string:name { Wirbelwind }
-	string:display-name { WIRBELWIND }
 	unit-class:unit-class { assault-gun }
-	string:image-name { wirbelwind.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
@@ -274,7 +239,6 @@ unit-configuration:wirbelwind {
 unit-configuration:stuh-42 {
 	string:name { StuH 42 }
 	unit-class:unit-class { assault-gun }
-	string:image-name { stuh-42.png }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
@@ -285,7 +249,6 @@ unit-configuration:stuh-42 {
 unit-configuration:marder-iii {
 	string:name { Marder III }
 	unit-class:unit-class { tank }
-	string:image-name { marder-iii.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -296,7 +259,6 @@ unit-configuration:marder-iii {
 unit-configuration:stug-iii {
 	string:name { StuG III }
 	unit-class:unit-class { tank }
-	string:image-name { stug-iii-long.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -307,7 +269,6 @@ unit-configuration:stug-iii {
 unit-configuration:hetzer {
 	string:name { Hetzer }
 	unit-class:unit-class { tank }
-	string:image-name { hetzer.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -318,7 +279,6 @@ unit-configuration:hetzer {
 unit-configuration:jgdpz-iv {
 	string:name { JgdPz IV }
 	unit-class:unit-class { tank }
-	string:image-name { pzjd-iv_70.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }
@@ -328,9 +288,7 @@ unit-configuration:jgdpz-iv {
 }
 unit-configuration:nashorn {
 	string:name { Nashorn }
-	string:display-name { NASHORN }
 	unit-class:unit-class { tank }
-	string:image-name { nashorn.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -341,7 +299,6 @@ unit-configuration:nashorn {
 unit-configuration:jgdpz-v {
 	string:name { JgdPz V }
 	unit-class:unit-class { tank }
-	string:image-name { jgdpz-v.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -352,7 +309,6 @@ unit-configuration:jgdpz-v {
 unit-configuration:jgdpz-vi {
 	string:name { JgdPz VI }
 	unit-class:unit-class { tank }
-	string:image-name { jgdpz-vi.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 22 }
@@ -362,9 +318,7 @@ unit-configuration:jgdpz-vi {
 }
 unit-configuration:lynx {
 	string:name { Lynx }
-	string:display-name { LYNX }
 	unit-class:unit-class { tank }
-	string:image-name { lynx.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 2 }
@@ -374,9 +328,7 @@ unit-configuration:lynx {
 }
 unit-configuration:pzkw-iii-g {
 	string:name { PzKw III G }
-	string:display-name { PzKw III G }
 	unit-class:unit-class { tank }
-	string:image-name { pzkw-iii-medium.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 8 }
@@ -387,7 +339,6 @@ unit-configuration:pzkw-iii-g {
 unit-configuration:pzkw-iv {
 	string:name { PzKw IV }
 	unit-class:unit-class { tank }
-	string:image-name { pzkw-iv-long.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -397,9 +348,7 @@ unit-configuration:pzkw-iv {
 }
 unit-configuration:panther {
 	string:name { Panther }
-	string:display-name { PANTH }
 	unit-class:unit-class { tank }
-	string:image-name { panther.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }
@@ -409,9 +358,7 @@ unit-configuration:panther {
 }
 unit-configuration:tiger-i {
 	string:name { Tiger I }
-	string:display-name { Tiger I }
 	unit-class:unit-class { tank }
-	string:image-name { tiger-i.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 15 }
@@ -422,7 +369,6 @@ unit-configuration:tiger-i {
 unit-configuration:tiger-ii {
 	string:name { Tiger II }
 	unit-class:unit-class { tank }
-	string:image-name { tiger-ii.png }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
