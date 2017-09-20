@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute { DISPLAY_NAME, MATCHER }
 
-		public readonly List<Matcher> Matchers;
+		public readonly List<Matcher<Tile>> Matchers;
 		string _DisplayName;
 
 		public string DisplayName
@@ -21,7 +21,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public OneOfZoneDeploymentConfiguration(string DisplayName, IEnumerable<Matcher> Matchers)
+		public OneOfZoneDeploymentConfiguration(string DisplayName, IEnumerable<Matcher<Tile>> Matchers)
 		{
 			_DisplayName = DisplayName;
 			this.Matchers = Matchers.ToList();
@@ -32,16 +32,19 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
-			Matchers = (List<Matcher>)attributes[(int)Attribute.MATCHER];
+			Matchers = (List<Matcher<Tile>>)attributes[(int)Attribute.MATCHER];
 		}
 
 		public OneOfZoneDeploymentConfiguration(SerializationInputStream Stream)
-			: this(Stream.ReadString(), Stream.ReadEnumerable(i => MatcherSerializer.Deserialize(Stream))) { }
+			: this(
+				Stream.ReadString(),
+				Stream.ReadEnumerable(i => (Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream)))
+		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(_DisplayName);
-			Stream.Write(Matchers, i => MatcherSerializer.Serialize(i, Stream));
+			Stream.Write(Matchers, i => MatcherSerializer.Instance.Serialize(i, Stream));
 		}
 
 		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)

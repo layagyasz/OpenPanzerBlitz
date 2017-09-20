@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileOnEdge : Matcher
+	public class TileOnEdge : Matcher<Tile>
 	{
 		enum Attribute { EDGE }
 

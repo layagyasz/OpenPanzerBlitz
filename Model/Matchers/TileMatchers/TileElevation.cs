@@ -4,7 +4,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileElevation : Matcher
+	public class TileElevation : Matcher<Tile>
 	{
 		enum Attribute { ELEVATION, ATLEAST }
 

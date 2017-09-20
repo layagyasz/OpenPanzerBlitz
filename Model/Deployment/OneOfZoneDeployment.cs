@@ -42,7 +42,7 @@ namespace PanzerBlitz
 
 			if (Tile != null)
 			{
-				Matcher m = DeploymentConfiguration.Matchers.FirstOrDefault(
+				Matcher<Tile> m = DeploymentConfiguration.Matchers.FirstOrDefault(
 					i => Units.Any(j => j.Position != null && i.Matches(j.Position)));
 
 				if (m != null && !m.Matches(Tile)) return NoDeployReason.DEPLOYMENT_RULE;

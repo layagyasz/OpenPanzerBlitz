@@ -166,11 +166,11 @@
 					}
 					zone-deployment-configuration:_ {
 						string:display-name { 580th Signal Rgt. CP 3 }
-						matches-all:matcher {
+						tile-matches-all:matcher {
 							tile-within:_ {
 								zone:zone { 10,0 20,0 20,33 10,33 }
 							}
-							distance-from-unit:_ {
+							tile-distance-from-unit:_ {
 								!unit-configuration:unit-configuration { unit-configurations.command-post }
 								int:distance { 2 }
 								bool:atleast { true }
@@ -191,7 +191,7 @@
 					}
 					zone-deployment-configuration:_ {
 						string:display-name { 580th Signal Rgt. Fort 3 }
-						distance-from-unit:matcher {
+						tile-distance-from-unit:matcher {
 							!unit-configuration:unit-configuration { unit-configurations.command-post }
 							int:distance { 0 }
 						}

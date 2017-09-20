@@ -142,6 +142,13 @@ namespace PanzerBlitz
 			return NoSingleAttackReason.NONE;
 		}
 
+		public bool CanExitDirection(Direction Direction)
+		{
+			if (Position == null) return false;
+			return (Direction == Direction.WEST || Direction == Direction.NORTH || Direction == Direction.EAST
+					|| Direction == Direction.SOUTH) && Position.OnEdge(Direction);
+		}
+
 		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
 		{
 			if (Tile.GetBlockType() == BlockType.STANDARD

@@ -52,21 +52,32 @@ namespace PanzerBlitz
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
 
+			Block.AddParser<Polygon>("zone", i => new Polygon(i));
+			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
+			Block.AddParser<UnitStatus>("unit-status", Parse.EnumParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
-			Block.AddParser<TileElevation>("tile-elevation", i => new TileElevation(i));
-			Block.AddParser<TileWithin>("tile-within", i => new TileWithin(i));
-			Block.AddParser<TileOnEdge>("tile-on-edge", i => new TileOnEdge(i));
-			Block.AddParser<DistanceFromUnit>("distance-from-unit", i => new DistanceFromUnit(i));
-			Block.AddParser<Polygon>("zone", i => new Polygon(i));
-			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
-			Block.AddParser<CompositeMatcher>("matches-all", i => new CompositeMatcher(i, CompositeMatcher.AND));
-			Block.AddParser<CompositeMatcher>("matches-any", i => new CompositeMatcher(i, CompositeMatcher.OR));
+			Block.AddParser<Matcher<Tile>>("tile-elevation", i => new TileElevation(i));
+			Block.AddParser<Matcher<Tile>>("tile-within", i => new TileWithin(i));
+			Block.AddParser<Matcher<Tile>>("tile-on-edge", i => new TileOnEdge(i));
+			Block.AddParser<Matcher<Tile>>("tile-distance-from-unit", i => new TileDistanceFromUnit(i));
+			Block.AddParser<Matcher<Tile>>(
+				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
+			Block.AddParser<Matcher<Tile>>(
+				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
+
+			Block.AddParser<Matcher<Unit>>("unit-has-evacuated", i => new UnitHasEvacuated(i));
+			Block.AddParser<Matcher<Unit>>("unit-has-reconned", i => new UnitHasReconned(i));
+			Block.AddParser<Matcher<Unit>>("unit-has-status", i => new UnitHasStatus(i));
+			Block.AddParser<Matcher<Unit>>(
+				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
+			Block.AddParser<Matcher<Unit>>(
+				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
 
 			Block.AddParser<DeploymentConfiguration>(
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
@@ -86,6 +97,7 @@ namespace PanzerBlitz
 			Block.AddParser<Objective>("units-in-zone-objective", i => new UnitsInZoneObjective(i));
 			Block.AddParser<Objective>("furthest-advance-objective", i => new FurthestAdvanceObjective(i));
 			Block.AddParser<Objective>("line-of-fire-objective", i => new LineOfFireObjective(i));
+			Block.AddParser<Objective>("units-matched-objective", i => new UnitsMatchedObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<BoardCompositeMapConfiguration>("map-configuration", i => new BoardCompositeMapConfiguration(i));

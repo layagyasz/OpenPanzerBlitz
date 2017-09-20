@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class DistanceFromUnit : Matcher
+	public class TileDistanceFromUnit : Matcher<Tile>
 	{
 		enum Attribute { UNIT_CONFIGURATION, DISTANCE, ATLEAST };
 
@@ -14,14 +14,14 @@ namespace PanzerBlitz
 		public readonly int Distance;
 		public readonly bool Atleast;
 
-		public DistanceFromUnit(UnitConfiguration UnitConfiguration, int Distance, bool Atleast)
+		public TileDistanceFromUnit(UnitConfiguration UnitConfiguration, int Distance, bool Atleast)
 		{
 			this.UnitConfiguration = UnitConfiguration;
 			this.Distance = Distance;
 			this.Atleast = Atleast;
 		}
 
-		public DistanceFromUnit(ParseBlock Block)
+		public TileDistanceFromUnit(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -30,7 +30,7 @@ namespace PanzerBlitz
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
 		}
 
-		public DistanceFromUnit(SerializationInputStream Stream)
+		public TileDistanceFromUnit(SerializationInputStream Stream)
 			: this(GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32(), Stream.ReadBoolean()) { }
 
 		public void Serialize(SerializationOutputStream Stream)

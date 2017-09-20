@@ -7,7 +7,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class TileWithin : Matcher
+	public class TileWithin : Matcher<Tile>
 	{
 		enum Attribute { ZONE };
 

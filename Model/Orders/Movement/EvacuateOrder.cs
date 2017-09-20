@@ -34,7 +34,7 @@ namespace PanzerBlitz
 
 		public NoMoveReason Validate()
 		{
-			if (!Unit.Position.OnEdge(Direction)) return NoMoveReason.ILLEGAL;
+			if (!Unit.CanExitDirection(Direction)) return NoMoveReason.ILLEGAL;
 			if (Unit.CanMove(false) != NoMoveReason.NONE) return Unit.CanMove(false);
 			return NoMoveReason.NONE;
 		}

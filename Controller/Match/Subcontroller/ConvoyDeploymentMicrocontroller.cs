@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
 using SFML.Graphics;
@@ -13,7 +14,7 @@ namespace PanzerBlitz
 	{
 		ConvoyDeployment _Deployment;
 		ConvoyDeploymentPage _DeploymentPage;
-		LoadUnitPane _LoadUnitPane;
+		Pane _LoadUnitPane;
 
 		public override Deployment Deployment
 		{
@@ -108,9 +109,10 @@ namespace PanzerBlitz
 				if (units.Count() > 0)
 				{
 					Clear();
-					_LoadUnitPane = new LoadUnitPane(units);
+					SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", units); ;
+					pane.OnItemSelected += LoadUnit;
+					_LoadUnitPane = pane;
 					_GameScreen.PaneLayer.Add(_LoadUnitPane);
-					_LoadUnitPane.OnUnitSelected += LoadUnit;
 				}
 			}
 		}

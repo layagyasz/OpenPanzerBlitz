@@ -21,19 +21,20 @@ namespace PanzerBlitz
 			}
 		}
 
-		public ReconOrder(Unit Unit, Direction Direction, int Turns)
+		public ReconOrder(Unit Unit, Direction Direction)
 		{
 			this.Unit = Unit;
 			this.Direction = Direction;
-			this.Turns = Turns;
 
+			Turns = 3;
 			ExitTile = Unit.Position;
 			_RemainingTurns = Turns;
 		}
 
 		public ReconOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Direction)Stream.ReadByte(), Stream.ReadInt32())
+			: this((Unit)Objects[Stream.ReadInt32()], (Direction)Stream.ReadByte())
 		{
+			Turns = Stream.ReadInt32();
 			ExitTile = (Tile)Objects[Stream.ReadInt32()];
 			_RemainingTurns = (int)Stream.ReadInt32();
 		}
@@ -49,7 +50,7 @@ namespace PanzerBlitz
 
 		public NoMoveReason Validate()
 		{
-			if (!ExitTile.OnEdge(Direction)) return NoMoveReason.ILLEGAL;
+			if (!Unit.CanExitDirection(Direction)) return NoMoveReason.ILLEGAL;
 			if (Unit.CanMove(false) != NoMoveReason.NONE) return Unit.CanMove(false);
 			return NoMoveReason.NONE;
 		}

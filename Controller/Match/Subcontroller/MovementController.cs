@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
 using SFML.Graphics;
@@ -13,7 +14,7 @@ namespace PanzerBlitz
 	{
 		public readonly bool VehicleMovement;
 
-		LoadUnitPane _LoadUnitPane;
+		Pane _SelectPane;
 
 		public MovementController(bool VehicleMovement, MatchAdapter Match, MatchScreen GameScreen)
 			: base(Match, GameScreen)
@@ -23,10 +24,10 @@ namespace PanzerBlitz
 
 		void Clear()
 		{
-			if (_LoadUnitPane != null)
+			if (_SelectPane != null)
 			{
-				_GameScreen.PaneLayer.Remove(_LoadUnitPane);
-				_LoadUnitPane = null;
+				_GameScreen.PaneLayer.Remove(_SelectPane);
+				_SelectPane = null;
 			}
 		}
 
@@ -87,6 +88,7 @@ namespace PanzerBlitz
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
+			// Load/Unload
 			if (Key == Keyboard.Key.L)
 			{
 				if (_SelectedUnit != null)
@@ -100,13 +102,56 @@ namespace PanzerBlitz
 					else if (canLoad.Count > 1)
 					{
 						Clear();
-						_LoadUnitPane = new LoadUnitPane(canLoad);
-						_GameScreen.PaneLayer.Add(_LoadUnitPane);
-						_LoadUnitPane.OnUnitSelected += LoadUnit;
+						SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", canLoad); ;
+						pane.OnItemSelected += LoadUnit;
+						_SelectPane = pane;
+						_GameScreen.PaneLayer.Add(_SelectPane);
 					}
 				}
 			}
 			else if (Key == Keyboard.Key.U) UnloadUnit();
+			// Recon
+			else if (Key == Keyboard.Key.R)
+			{
+				if (_SelectedUnit != null)
+				{
+					List<Direction> directions =
+						Enum.GetValues(typeof(Direction))
+							.Cast<Direction>()
+							.Where(i => _SelectedUnit.CanExitDirection(i))
+							.ToList();
+					if (directions.Count == 1) ReconDirection(directions.First());
+					else if (directions.Count > 1)
+					{
+						Clear();
+						SelectPane<Direction> pane = new SelectPane<Direction>("Recon", directions);
+						pane.OnItemSelected += ReconDirection;
+						_SelectPane = pane;
+						_GameScreen.PaneLayer.Add(_SelectPane);
+					}
+				}
+			}
+			// Evacuate
+			else if (Key == Keyboard.Key.E)
+			{
+				if (_SelectedUnit != null)
+				{
+					List<Direction> directions =
+						Enum.GetValues(typeof(Direction))
+							.Cast<Direction>()
+							.Where(i => _SelectedUnit.CanExitDirection(i))
+							.ToList();
+					if (directions.Count == 1) EvacuateDirection(directions.First());
+					else if (directions.Count > 1)
+					{
+						Clear();
+						SelectPane<Direction> pane = new SelectPane<Direction>("Evacuate", directions);
+						pane.OnItemSelected += EvacuateDirection;
+						_SelectPane = pane;
+						_GameScreen.PaneLayer.Add(_SelectPane);
+					}
+				}
+			}
 		}
 
 		void LoadUnit(object sender, ValuedEventArgs<Unit> E)
@@ -130,6 +175,36 @@ namespace PanzerBlitz
 			if (_SelectedUnit != null)
 			{
 				UnloadOrder order = new UnloadOrder(_SelectedUnit);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+			}
+		}
+
+		void ReconDirection(object Sender, ValuedEventArgs<Direction> E)
+		{
+			ReconDirection(E.Value);
+		}
+
+		void ReconDirection(Direction Direction)
+		{
+			if (_SelectedUnit != null)
+			{
+				ReconOrder order = new ReconOrder(_SelectedUnit, Direction);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+			}
+		}
+
+		void EvacuateDirection(object Sender, ValuedEventArgs<Direction> E)
+		{
+			EvacuateDirection(E.Value);
+		}
+
+		void EvacuateDirection(Direction Direction)
+		{
+			if (_SelectedUnit != null)
+			{
+				EvacuateOrder order = new EvacuateOrder(_SelectedUnit, Direction);
 				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
 				else SetMovementHighlight(_SelectedUnit);
 			}

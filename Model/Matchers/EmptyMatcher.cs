@@ -4,13 +4,13 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class EmptyMatcher : Matcher
+	public class EmptyMatcher<T> : Matcher<T>
 	{
 		public EmptyMatcher() { }
 
 		public EmptyMatcher(SerializationInputStream Stream) { }
 
-		public bool Matches(Tile Tile)
+		public bool Matches(T Object)
 		{
 			return true;
 		}

@@ -189,7 +189,7 @@
 					}
 					tile-entry-deployment-configuration:_ {
 						string:display-name { 5th Pz. Div. Battle Group }
-						matches-all:matcher {
+						tile-matches-all:matcher {
 							tile-within:_ {
 								zone:zone { 0,64 11,64 11,96 0,96 }
 							}

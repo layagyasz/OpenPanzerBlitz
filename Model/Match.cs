@@ -75,10 +75,10 @@ namespace PanzerBlitz
 		void NextPhase()
 		{
 			if (!AdvancePhaseIterator()) return;
-			if (OnStartPhase != null)
-				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 			if (_OrderAutomater != null && _OrderAutomater.AutomateTurn(_TurnOrder.Current))
 				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.Army));
+			else if (OnStartPhase != null)
+				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 		}
 
 		bool AdvancePhaseIterator()

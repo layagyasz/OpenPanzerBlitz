@@ -4,8 +4,8 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public interface Matcher : Serializable
+	public interface Matcher<T> : Serializable
 	{
-		bool Matches(Tile Tile);
+		bool Matches(T Object);
 	}
 }

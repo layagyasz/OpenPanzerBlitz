@@ -106,12 +106,6 @@
     <Compile Include="Model\VictoryConditions\VictoryCondition.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessLevel.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
-    <Compile Include="Model\TileMatchers\CompositeMatcher.cs" />
-    <Compile Include="Model\TileMatchers\DistanceFromUnit.cs" />
-    <Compile Include="Model\TileMatchers\Matcher.cs" />
-    <Compile Include="Model\TileMatchers\TileElevation.cs" />
-    <Compile Include="Model\TileMatchers\TileWithin.cs" />
-    <Compile Include="Model\TileMatchers\TileOnEdge.cs" />
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
     <Compile Include="Model\VictoryConditions\UnitsInZoneObjective.cs" />
@@ -121,7 +115,6 @@
     <Compile Include="Model\Orders\Attack\SingleAttackOrderSerializer.cs" />
     <Compile Include="Model\Orders\OrderSerializer.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSerializer.cs" />
-    <Compile Include="Model\TileMatchers\MatcherSerializer.cs" />
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
     <Compile Include="Model\TurnInfo.cs" />
     <Compile Include="Network\MatchMessageSerializer.cs" />
@@ -198,7 +191,7 @@
     <Compile Include="View\Match\ConvoyDeploymentPage.cs" />
     <Compile Include="View\Match\DeploymentPage.cs" />
     <Compile Include="View\Match\DeploymentPane.cs" />
-    <Compile Include="View\Match\LoadUnitPane.cs" />
+    <Compile Include="View\Match\SelectPane.cs" />
     <Compile Include="View\Match\PositionalDeploymentPage.cs" />
     <Compile Include="View\Edit\EditPane.cs" />
     <Compile Include="View\Edit\IOPane.cs" />
@@ -219,7 +212,6 @@
     <Compile Include="View\Edit\EditScreen.cs" />
     <Compile Include="Network\LobbyServerRPCHandler.cs" />
     <Compile Include="Network\MatchServerRPCHandler.cs" />
-    <Compile Include="Model\TileMatchers\EmptyMatcher.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="View\Edit\NewMapPane.cs" />
     <Compile Include="Model\Map\BoardCompositeMapConfiguration.cs" />
@@ -273,6 +265,19 @@
     <Compile Include="Model\Orders\Movement\ReconOrder.cs" />
     <Compile Include="Model\Orders\Movement\EvacuateOrder.cs" />
     <Compile Include="Model\Orders\ResetOrder.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileDistanceFromUnit.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileElevation.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileOnEdge.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileWithin.cs" />
+    <Compile Include="Model\Matchers\Matcher.cs" />
+    <Compile Include="Model\Matchers\CompositeMatcher.cs" />
+    <Compile Include="Model\Matchers\EmptyMatcher.cs" />
+    <Compile Include="View\ObjectDescriber.cs" />
+    <Compile Include="Model\Matchers\MatcherSerializer.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasStatus.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasReconned.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasEvacuated.cs" />
+    <Compile Include="Model\VictoryConditions\UnitsMatchedObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -288,7 +293,6 @@
     <Folder Include="Model\Orders\Movement\" />
     <Folder Include="Model\Orders\Attack\" />
     <Folder Include="Model\VictoryConditions\" />
-    <Folder Include="Model\TileMatchers\" />
     <Folder Include="BLKConfigurations\Scenarios\" />
     <Folder Include="BLKConfigurations\UnitConfigurations\" />
     <Folder Include="BLKConfigurations\Scenarios\PanzerBlitz\" />
@@ -327,6 +331,9 @@
     <Folder Include="BLKConfigurations\UnitConfigurationLinks\" />
     <Folder Include="View\Unit\" />
     <Folder Include="View\ArmyBuilder\" />
+    <Folder Include="Model\Matchers\" />
+    <Folder Include="Model\Matchers\TileMatchers\" />
+    <Folder Include="Model\Matchers\UnitMatchers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
