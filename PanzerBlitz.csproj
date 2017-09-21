@@ -283,6 +283,7 @@
     <Compile Include="Model\Matchers\UnitMatchers\UnitPositionMatches.cs" />
     <Compile Include="Model\UnitGroup.cs" />
     <Compile Include="Model\UnitCount.cs" />
+    <Compile Include="Model\Map\BoardConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1151,6 +1152,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\UnitRenderDetails\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_05.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BLKConfigurations\Scenarios\PanzerBlitz\Scenario_06.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

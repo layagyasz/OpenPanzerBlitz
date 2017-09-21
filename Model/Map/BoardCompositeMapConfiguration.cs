@@ -10,35 +10,27 @@ namespace PanzerBlitz
 {
 	public class BoardCompositeMapConfiguration : MapConfiguration
 	{
-		public readonly List<List<Tuple<string, bool>>> Boards;
+		public readonly List<List<BoardConfiguration>> Boards;
 
-		public BoardCompositeMapConfiguration(IEnumerable<IEnumerable<Tuple<string, bool>>> Boards)
+		public BoardCompositeMapConfiguration(IEnumerable<IEnumerable<BoardConfiguration>> Boards)
 		{
 			this.Boards = Boards.Select(i => i.ToList()).ToList();
 		}
 
 		public BoardCompositeMapConfiguration(ParseBlock Block)
 		{
-			Boards = Block.BreakToList<List<Tuple<object, object>>>().Select(
-				i => i.Select(
-					j => new Tuple<string, bool>((string)j.Item1, (bool)j.Item2)).ToList()).ToList();
+			Boards = Block.BreakToList<List<BoardConfiguration>>();
 		}
 
 		public BoardCompositeMapConfiguration(SerializationInputStream Stream)
 			: this(Stream.ReadEnumerable(
 				i => Stream.ReadEnumerable(
-					j => new Tuple<string, bool>(Stream.ReadString(), Stream.ReadBoolean()))))
+					j => new BoardConfiguration(Stream.ReadString(), Stream.ReadBoolean()))))
 		{ }
 
 		public Map GenerateMap()
 		{
-			List<List<Tuple<Map, bool>>> boards = Boards.Select(i => i.Select(j =>
-			{
-				FileStream f = FileUtils.GetStream(j.Item1, FileMode.Open, 1000);
-				Map m = new Map(new SerializationInputStream(new GZipStream(f, CompressionMode.Decompress)));
-				f.Close();
-				return new Tuple<Map, bool>(m, j.Item2);
-			}).ToList()).ToList();
+			List<List<Tuple<Map, bool>>> boards = Boards.Select(i => i.Select(j => j.LoadMap()).ToList()).ToList();
 
 			int width = boards.Max(i => i.Sum(j => j.Item1.Width) - i.Count + 1);
 			int height = boards.Sum(i => i.Max(j => j.Item1.Height)) - Boards.Count + 1;
@@ -65,11 +57,7 @@ namespace PanzerBlitz
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(Boards, i => Stream.Write(i, j =>
-			{
-				Stream.Write(j.Item1);
-				Stream.Write(j.Item2);
-			}));
+			Stream.Write(Boards, i => Stream.Write(i));
 		}
 	}
 }

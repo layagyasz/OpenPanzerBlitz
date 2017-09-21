@@ -1,4 +1,4 @@
-﻿unit-configuration:50mm {
+﻿unit-configuration:50mm-at {
 	string:name { 50mm }
 	unit-class:unit-class { towed-gun }
 
@@ -8,7 +8,7 @@
 	byte:defense { 3 }
 	byte:movement { 0 }
 }
-unit-configuration:75mm {
+unit-configuration:75mm-at {
 	string:name { 75 mm }
 	unit-class:unit-class { towed-gun }
 
@@ -18,7 +18,7 @@ unit-configuration:75mm {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:88mm {
+unit-configuration:88mm-at {
 	string:name { 88mm }
 	unit-class:unit-class { towed-gun }
 
@@ -28,7 +28,7 @@ unit-configuration:88mm {
 	byte:defense { 1 }
 	byte:movement { 0 }
 }
-unit-configuration:20mm {
+unit-configuration:20mm-aa {
 	string:name { 20mm }
 	unit-class:unit-class { towed-gun }
 
@@ -39,7 +39,7 @@ unit-configuration:20mm {
 	byte:movement { 0 }
 	bool:can-anti-aircraft { true }
 }
-unit-configuration:20mm_4 {
+unit-configuration:20mm_4-aa {
 	string:name { 20(4)mm }
 	unit-class:unit-class { towed-gun }
 
@@ -50,7 +50,7 @@ unit-configuration:20mm_4 {
 	byte:movement { 0 }
 	bool:can-anti-aircraft { true }
 }
-unit-configuration:75mm-howitzer {
+unit-configuration:75mm-how {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
 
@@ -60,7 +60,7 @@ unit-configuration:75mm-howitzer {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:150mm {
+unit-configuration:150mm-how {
 	string:name { 150mm }
 	unit-class:unit-class { towed-gun }
 
@@ -71,7 +71,7 @@ unit-configuration:150mm {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:81mm {
+unit-configuration:81mm-mortar {
 	string:name { 81mm }
 	unit-class:unit-class { towed-gun }
 
@@ -82,7 +82,7 @@ unit-configuration:81mm {
 	byte:movement { 1 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:120mm-german {
+unit-configuration:120mm-mortar-german {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
 

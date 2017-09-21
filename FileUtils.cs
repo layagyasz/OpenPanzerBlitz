@@ -22,7 +22,7 @@ namespace PanzerBlitz
 				}
 			}
 
-			throw new TimeoutException($"Failed to get a write handle to {Path} within {Timeout}ms.");
+			throw new TimeoutException($"Failed to get a handle to {Path} within {Timeout}ms.");
 		}
 	}
 }

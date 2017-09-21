@@ -4,18 +4,18 @@
 	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
-		2-tuple[]:_ {
-			2-tuple:_ {
-				string:_ { Maps/board-01.map }
-				bool:_ { false }
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-02.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-03.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
 			}
 		}
 	}
@@ -58,15 +58,15 @@
 						string:name { 982nd Tk. Rgt. & 371st Cav. Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.45mm }
+								!unit-configuration:unit-configuration { unit-configurations.45mm-at }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.82mm-motorized }
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar-motorized }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-howitzer }
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how }
 								int:count { 1 }
 							}
 							unit-count:_ {
@@ -217,19 +217,19 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.50mm }
+								!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.88mm }
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.20mm }
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.20mm_4 }
+								!unit-configuration:unit-configuration { unit-configurations.20mm_4-aa }
 								int:count { 1 }
 							}
 							unit-count:_ {

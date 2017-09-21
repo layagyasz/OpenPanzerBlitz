@@ -1,4 +1,4 @@
-﻿unit-configuration:12_7mm {
+﻿unit-configuration:12_7mm-mg {
 	string:name { 12.7mm }
 	unit-class:unit-class { towed-gun }
 
@@ -9,7 +9,7 @@
 	byte:movement { 0 }
 	bool:can-anti-aircraft { true }
 }
-unit-configuration:45mm {
+unit-configuration:45mm-at {
 	string:name { 45mm }
 	unit-class:unit-class { towed-gun }
 
@@ -19,7 +19,7 @@ unit-configuration:45mm {
 	byte:defense { 3 }
 	byte:movement { 0 }
 }
-unit-configuration:57mm {
+unit-configuration:57mm-at {
 	string:name { 57mm }
 	unit-class:unit-class { towed-gun }
 
@@ -29,7 +29,7 @@ unit-configuration:57mm {
 	byte:defense { 3 }
 	byte:movement { 0 }
 }
-unit-configuration:76_2mm {
+unit-configuration:76_2mm-at {
 	string:name { 76.2mm }
 	unit-class:unit-class { towed-gun }
 
@@ -39,7 +39,7 @@ unit-configuration:76_2mm {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:76_2mm-howitzer {
+unit-configuration:76_2mm-how {
 	string:name { 76.2mm }
 	unit-class:unit-class { towed-gun }
 
@@ -49,7 +49,7 @@ unit-configuration:76_2mm-howitzer {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:122mm {
+unit-configuration:122mm-how {
 	string:name { 122mm }
 	unit-class:unit-class { towed-gun }
 
@@ -60,7 +60,7 @@ unit-configuration:122mm {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:82mm-motorized {
+unit-configuration:82mm-mortar-motorized {
 	string:name { 82mm }
 	unit-class:unit-class { towed-gun }
 
@@ -71,7 +71,7 @@ unit-configuration:82mm-motorized {
 	byte:movement { 1 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:82mm {
+unit-configuration:82mm-mortar {
 	string:name { 82mm }
 	unit-class:unit-class { towed-gun }
 
@@ -82,7 +82,7 @@ unit-configuration:82mm {
 	byte:movement { 1 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:120mm {
+unit-configuration:120mm-mortar-russian {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
 

@@ -4,18 +4,18 @@
 	byte[]:turn-order { 1 0 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
-		2-tuple[]:_ {
-			2-tuple:_ {
-				string:_ { Maps/board-03.map }
-				bool:_ { false }
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-02.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-01.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
 			}
 		}
 	}
@@ -55,15 +55,15 @@
 								int:count { 8 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.82mm }
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-howitzer }
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm }
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
 								int:count { 3 }
 							}
 							unit-count:_ {
@@ -112,7 +112,7 @@
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.50mm }
+								!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 								int:count { 2 }
 							}
 							unit-count:_ {
@@ -120,11 +120,11 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.81mm }
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm }
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
 								int:count { 1 }
 							}
 							unit-count:_ {

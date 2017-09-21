@@ -1,15 +1,9 @@
 ﻿scenario:_ {
-	string:name { Battle of Minsk }
+	string:name { German Retreat from Dnieper Bend }
 	byte[]:deployment-order { 0 1 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
-		board-configuration[]:_ {
-			board-configuration:_ {
-				string:board-path { Maps/board-01.map }
-				bool:invert { true }
-			}
-		}
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-03.map }
@@ -19,6 +13,12 @@
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+		}
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
 				bool:invert { false }
 			}
 		}
@@ -29,41 +29,60 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed { }
+					units-matched-objective:units-in-zone {
+						bool:friendly { true }
+						unit-position-matches:matcher {
+							tile-within:matcher {
+								zone:zone { 0,0 11,0 11,33 0,33 }
+							}
+						}
+					}
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
-						int:threshold { 5 }
-						!var:objective { objectives.units-destroyed }
+						int:threshold { 10 }
+						!var:objective { objectives.units-in-zone }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { tactical-victory }
-						int:threshold { 10 }
-						!var:objective { objectives.units-destroyed }
+						int:threshold { 20 }
+						!var:objective { objectives.units-in-zone }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { decisive-victory }
-						int:threshold { 15 }
-						!var:objective { objectives.units-destroyed }
+						int:threshold { 30 }
+						!var:objective { objectives.units-in-zone }
 					}
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
-					tile-on-edge:matcher {
-						direction:edge { south }
+				zone-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,87 11,87 11,97 0,97 }
 					}
 					unit-group:unit-group {
-						string:name { 2nd Guard Tk. Corps Vanguard }
+						string:name { 19th Tk. Corps }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
-								int:count { 4 }
+								int:count { 12 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
-								int:count { 5 }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.45mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+								int:count { 2 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.su-85 }
@@ -71,39 +90,15 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.su-152 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
-								int:count { 4 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.recon-company }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
-								int:count { 6 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.45mm-at }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
 								int:count { 2 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
-								int:count { 15 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
-								int:count { 5 }
+								int:count { 10 }
 							}
 						}
 					}
@@ -115,11 +110,17 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-matched-objective:units-in-zone {
-						bool:friendly { false }
-						unit-position-matches:matcher {
-							tile-within:matcher {
-								zone:zone { 0,32 11,32 11,64 0,64 }
+					ratio-objective:units-destroyed {
+						units-matched-objective:numerator {
+							bool:friendly { false }
+							unit-has-status:matcher {
+								unit-status:status { destroyed }
+							}
+						}
+						units-matched-objective:denominator {
+							bool:friendly { true }
+							unit-has-status:matcher {
+								unit-status:status { destroyed }
 							}
 						}
 					}
@@ -127,39 +128,43 @@
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
-						int:threshold { 30 }
-						bool:invert { true }
-						!var:objective { objectives.units-in-zone }
+						int:threshold { 1 }
+						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { tactical-victory }
-						int:threshold { 20 }
-						bool:invert { true }
-						!var:objective { objectives.units-in-zone }
+						int:threshold { 2 }
+						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { decisive-victory }
-						int:threshold { 10 }
-						bool:invert { true }
-						!var:objective { objectives.units-in-zone }
+						int:threshold { 3 }
+						!var:objective { objectives.units-destroyed }
 					}
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
-					tile-matches-all:matcher {
-						tile-within:_ {
-							zone:zone { 0,64 11,64 11,96 0,96 }
-						}
-						tile-on-edge:_ {
-							direction:edge { east }
-						}
+				zone-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,32 11,32 11,64 0,64 }
 					}
 					unit-group:unit-group {
-						string:name { 5th Pz. Div. Battle Group }
+						string:name { 24th Pz. Div. Battle Group }
 						unit-count[]:unit-counts {
 							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv }
+								int:count { 2 }
+							}
+							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.panther }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
 								int:count { 1 }
 							}
 							unit-count:_ {
@@ -167,8 +172,16 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
 								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm_4-aa }
+								int:count { 1 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.wespe }
@@ -179,24 +192,12 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.nashorn }
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
 								int:count { 1 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-german }
-								int:count { 4 }
+								int:count { 8 }
 							}
 						}
 					}

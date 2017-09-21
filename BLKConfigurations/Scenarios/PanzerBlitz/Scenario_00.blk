@@ -4,18 +4,18 @@
 	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
 	map-configuration:map-configuration {
-		2-tuple[]:_ {
-			2-tuple:_ {
-				string:_ { Maps/board-01.map }
-				bool:_ { false }
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-02.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { false }
 			}
-			2-tuple:_ {
-				string:_ { Maps/board-03.map }
-				bool:_ { false }
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
 			}
 		}
 	}

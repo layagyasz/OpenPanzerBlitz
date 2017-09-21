@@ -82,8 +82,10 @@ namespace PanzerBlitz
 
 		internal void CopyTo(Tile[,] From, int X, int Y, bool Invert)
 		{
-			for (int i = 0; i < From.GetLength(0) && X + i < Tiles.GetLength(0); ++i)
+			for (int i = 0; i < From.GetLength(0); ++i)
+			{
 				for (int j = 0; j < From.GetLength(1); ++j)
+				{
 					if (Invert)
 					{
 						int x = From.GetLength(0) - i - 1 - ((Y + j) % 2 == 0 ? 1 : 0);
@@ -91,16 +93,12 @@ namespace PanzerBlitz
 						{
 							Tile newTile = new Tile(
 								new Coordinate(X + i, Y + j), From[x, From.GetLength(1) - j - 1], Invert);
-							if (Tiles[X + i, Y + j] == null) Tiles[X + i, Y + j] = newTile;
-							else Tiles[X + i, Y + j].Merge(newTile);
-						}
-						else
-						{
-							Tiles[X + i, Y + j] = new Tile(new Coordinate(X + i, Y + j));
-							Tiles[X + i, Y + j].TileBase = TileBase.CLEAR;
+							Tiles[X + i, Y + j].Merge(newTile);
 						}
 					}
-					else Tiles[X + i, Y + j] = new Tile(new Coordinate(X + i, Y + j), From[i, j]);
+					else Tiles[X + i, Y + j].Merge(new Tile(new Coordinate(X + i, Y + j), From[i, j]));
+				}
+			}
 		}
 
 		internal void Ready()

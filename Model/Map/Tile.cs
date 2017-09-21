@@ -204,11 +204,17 @@ namespace PanzerBlitz
 						NeighborTiles[i].SetPathOverlay(otherPath.Item2, null);
 						NeighborTiles[i].SetPathOverlay((otherPath.Item1 + 3) % 6, p);
 					}
-					// Could not find another path.  Just continue this one.
+					// Could not find another path.
 					else
 					{
-						NeighborTiles[i].SetPathOverlay((i + 3) % 6, p);
-						NeighborTiles[i].ContinuePath((i + 3) % 6);
+						// Continue in tile on edge.
+						if (NeighborTiles[i].NeighborTiles.Any(j => j == null))
+						{
+							NeighborTiles[i].SetPathOverlay((i + 3) % 6, p);
+							NeighborTiles[i].ContinuePath((i + 3) % 6);
+						}
+						// Otherwise shorten.
+						else _PathOverlays[i] = null;
 					}
 				}
 			}
@@ -245,6 +251,7 @@ namespace PanzerBlitz
 		public void Merge(Tile Tile)
 		{
 			if (_TileBase == TileBase.CLEAR) _TileBase = Tile.TileBase;
+			_Elevation = Math.Max(_Elevation, Tile.Elevation);
 			for (int i = 0; i < 6; ++i)
 			{
 				if (_PathOverlays[i] == null) _PathOverlays[i] = Tile._PathOverlays[i];

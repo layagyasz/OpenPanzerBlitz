@@ -39,11 +39,6 @@ namespace PanzerBlitz
 					Directory.EnumerateFiles(Path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
-					"unit-configuration-link[]",
-					"unit-configuration-links",
-					Directory.EnumerateFiles(Path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
-						   .SelectMany(i => ParseBlock.FromFile(i).Break())),
-				new ParseBlock(
 					"scenario[]",
 					"scenarios",
 					Directory.EnumerateFiles(Path + "/Scenarios", "*", SearchOption.AllDirectories)
@@ -111,7 +106,9 @@ namespace PanzerBlitz
 			Block.AddParser<Objective>("ratio-objective", i => new RatioObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
-			Block.AddParser<BoardCompositeMapConfiguration>("map-configuration", i => new BoardCompositeMapConfiguration(i));
+			Block.AddParser<BoardConfiguration>("board-configuration", i => new BoardConfiguration(i));
+			Block.AddParser<BoardCompositeMapConfiguration>(
+				"map-configuration", i => new BoardCompositeMapConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
@@ -121,7 +118,6 @@ namespace PanzerBlitz
 				.Select(i => new KeyValuePair<UnitConfiguration, UnitRenderDetails>(UnitConfigurations[i.Key], i.Value))
 				.ToDictionary(i => i.Key, i => i.Value);
 			Wreckage = UnitConfigurations["wreckage"];
-			UnitConfigurationLinks = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 
 			// Emit warnings for units without configured render details.
