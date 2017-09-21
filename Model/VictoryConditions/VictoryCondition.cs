@@ -29,7 +29,7 @@ namespace PanzerBlitz
 
 		public VictoryCondition(SerializationInputStream Stream)
 		{
-			Scorers = Stream.ReadEnumerable(i => ObjectiveSerializer.Deserializer(i)).ToList();
+			Scorers = Stream.ReadEnumerable(i => ObjectiveSerializer.Deserialize(i)).ToList();
 			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream, Scorers)).ToList();
 		}
 

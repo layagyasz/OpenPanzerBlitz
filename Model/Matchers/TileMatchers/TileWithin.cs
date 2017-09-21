@@ -34,6 +34,7 @@ namespace PanzerBlitz
 
 		public bool Matches(Tile Tile)
 		{
+			if (Tile == null) return false;
 			return Zone.ContainsPoint(new Vector2f(Tile.Coordinate.X, Tile.Coordinate.Y));
 		}
 	}

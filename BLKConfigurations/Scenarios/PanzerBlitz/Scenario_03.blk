@@ -25,10 +25,10 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						line-of-fire-objective:line-of-fire {
-							bool:vertical { false }
-						}
+					line-of-fire-objective:line-of-fire {
+						bool:vertical { false }
 					}
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { victory }
@@ -37,44 +37,44 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.guards-company }
-							int:_ { 2 }
+			var[]:deployment-configurations {
+				zone-deployment-configuration:_ {
+					unit-group:unit-group {
+						string:name { 119th Rifle Div. Remnants }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.guards-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-howitzer }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 3 }
+							}
 						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.smg-company }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.rifle-company }
-							int:_ { 8 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.82mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.76_2mm }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.wagon }
-							int:_ { 6 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.truck-russian }
-							int:_ { 3 }
-						}
-					}
-					zone-deployment-configuration:_ {
-						string:display-name { 119th Rifle Div. Remnants }
 					}
 				}
 			}
@@ -84,13 +84,13 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						line-of-fire-objective:line-of-fire {
-							bool:friendly { false }
-							bool:break-through { true }
-							byte:width { 3 }
-							bool:vertical { true }
-						}
+					line-of-fire-objective:line-of-fire {
+						bool:friendly { false }
+						bool:break-through { true }
+						byte:width { 3 }
+						bool:vertical { true }
 					}
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { victory }
@@ -99,42 +99,42 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.pzkw-iii-g }
-							int:_ { 5 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.50mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.rifle-platoon }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.81mm }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.75mm }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.sdkfz-251 }
-							int:_ { 5 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.truck-german }
-							int:_ { 2 }
-						}
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { south }
 					}
-					tile-entry-deployment-configuration:_ {
-						string:display-name { 10th Pz. Div. Vanguard }
-						tile-on-edge:matcher {
-							direction:edge { south }
+					unit-group:unit-group {
+						string:name { 10th Pz. Div. Vanguard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-g }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.50mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 2 }
+							}
 						}
 					}
 				}

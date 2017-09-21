@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
 	public class TileDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { DISPLAY_NAME, COORDINATE }
+		enum Attribute { UNIT_GROUP, COORDINATE }
 
+		public UnitGroup UnitGroup { get; }
 		public readonly Coordinate Coordinate;
-		string _DisplayName;
 
-		public string DisplayName
+		public TileDeploymentConfiguration(UnitGroup UnitGroup, Coordinate Coordinate)
 		{
-			get
-			{
-				return _DisplayName;
-			}
-		}
-
-		public TileDeploymentConfiguration(string DisplayName, Coordinate Coordinate)
-		{
-			_DisplayName = DisplayName;
+			this.UnitGroup = UnitGroup;
 			this.Coordinate = Coordinate;
 		}
 
@@ -30,22 +22,23 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
+			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			Coordinate = (Coordinate)attributes[(int)Attribute.COORDINATE];
 		}
 
 		public TileDeploymentConfiguration(SerializationInputStream Stream)
-			: this(Stream.ReadString(), new Coordinate(Stream.ReadInt32(), Stream.ReadInt32())) { }
+			: this(new UnitGroup(Stream), new Coordinate(Stream.ReadInt32(), Stream.ReadInt32())) { }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_DisplayName);
+			Stream.Write(UnitGroup);
 			Stream.Write(Coordinate.X);
 			Stream.Write(Coordinate.Y);
 		}
 
-		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)
 		{
-			return new TileDeployment(Army, Units, this, IdGenerator);
+			return new TileDeployment(
+				Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
 		}	}
 }

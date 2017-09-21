@@ -108,7 +108,6 @@
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
-    <Compile Include="Model\VictoryConditions\UnitsInZoneObjective.cs" />
     <Compile Include="Model\UnitStatus.cs" />
     <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="Model\GameObject.cs" />
@@ -279,6 +278,11 @@
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasEvacuated.cs" />
     <Compile Include="Model\VictoryConditions\UnitsMatchedObjective.cs" />
     <Compile Include="View\Unit\UnitRenderDetails.cs" />
+    <Compile Include="Model\VictoryConditions\PreventEnemyObjective.cs" />
+    <Compile Include="Model\VictoryConditions\RatioObjective.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitPositionMatches.cs" />
+    <Compile Include="Model\UnitGroup.cs" />
+    <Compile Include="Model\UnitCount.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1130,7 +1134,7 @@
     <None Include="Theme\Components\JoinServer.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Logs\Meta.txt">
+    <None Include="Logs\META">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="BLKConfigurations\UnitConfigurationLinks\German.blk">

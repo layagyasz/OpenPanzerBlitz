@@ -13,14 +13,14 @@ namespace PanzerBlitz
 		public readonly string UniqueKey;
 		public readonly Faction Faction;
 		public readonly byte Team;
-		public readonly List<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations;
+		public readonly List<DeploymentConfiguration> DeploymentConfigurations;
 		public readonly VictoryCondition VictoryCondition;
 
 		public ArmyConfiguration(
 			string UniqueKey,
 			Faction Faction,
 			byte Team,
-			IEnumerable<Tuple<List<UnitConfiguration>, DeploymentConfiguration>> DeploymentConfigurations,
+			IEnumerable<DeploymentConfiguration> DeploymentConfigurations,
 			VictoryCondition VictoryCondition)
 		{
 			this.UniqueKey = UniqueKey;
@@ -36,15 +36,8 @@ namespace PanzerBlitz
 			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			Team = (byte)attributes[(int)Attribute.TEAM];
-			DeploymentConfigurations = ((List<Tuple<object, object>>)attributes[
-				(int)Attribute.DEPLOYMENT_CONFIGURATIONS])
-				.Select(i => new Tuple<List<UnitConfiguration>, DeploymentConfiguration>(
-					BuildUnitConfigurationList(((List<Tuple<object, object>>)i.Item1)
-											   .Select(
-												   j => new Tuple<UnitConfiguration, int>(
-													   (UnitConfiguration)j.Item1,
-													   (int)j.Item2)))
-					.ToList(), (DeploymentConfiguration)i.Item2))
+			DeploymentConfigurations = ((List<object>)attributes[(int)Attribute.DEPLOYMENT_CONFIGURATIONS])
+				.Select(i => (DeploymentConfiguration)i)
 				.ToList();
 			VictoryCondition = (VictoryCondition)attributes[(int)Attribute.VICTORY_CONDITION];
 		}
@@ -54,12 +47,7 @@ namespace PanzerBlitz
 			UniqueKey = Stream.ReadString();
 			Faction = GameData.Factions[Stream.ReadString()];
 			Team = Stream.ReadByte();
-			DeploymentConfigurations = Stream.ReadEnumerable(i =>
-			{
-				return new Tuple<List<UnitConfiguration>, DeploymentConfiguration>(
-					Stream.ReadEnumerable(j => GameData.UnitConfigurations[Stream.ReadString()]).ToList(),
-					DeploymentConfigurationSerializer.Deserialize(Stream));
-			}).ToList();
+			DeploymentConfigurations = Stream.ReadEnumerable(DeploymentConfigurationSerializer.Deserialize).ToList();
 			VictoryCondition = new VictoryCondition(Stream);
 		}
 
@@ -68,11 +56,7 @@ namespace PanzerBlitz
 			Stream.Write(UniqueKey);
 			Stream.Write(Faction.UniqueKey);
 			Stream.Write(Team);
-			Stream.Write(DeploymentConfigurations, i =>
-			{
-				Stream.Write(i.Item1, j => Stream.Write(j.UniqueKey));
-				DeploymentConfigurationSerializer.Serialize(i.Item2, Stream);
-			});
+			Stream.Write(DeploymentConfigurations, i => DeploymentConfigurationSerializer.Serialize(i, Stream));
 			Stream.Write(VictoryCondition);
 		}
 

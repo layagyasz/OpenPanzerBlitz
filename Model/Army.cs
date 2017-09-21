@@ -39,8 +39,7 @@ namespace PanzerBlitz
 			_Id = IdGenerator.GenerateId();
 			Configuration = ArmyConfiguration;
 			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
-				i => i.Item2.GenerateDeployment(
-					this, i.Item1.Select(j => new Unit(this, j, IdGenerator)), IdGenerator)).ToList();
+				i => i.GenerateDeployment(this, IdGenerator)).ToList();
 			foreach (Unit u in Units) u.OnDestroy += UnitDestroyed;
 			_IdGenerator = IdGenerator;
 		}

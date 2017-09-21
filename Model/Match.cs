@@ -292,7 +292,7 @@ namespace PanzerBlitz
 		public override string ToString()
 		{
 			return string.Format(
-				"[Match: CurrentPhase={0}, Scenario={1} ({2})]", CurrentPhase, Scenario.Name, Scenario.UniqueKey);
+				"[Match: CurrentPhase={0}, Scenario={1}]", CurrentPhase, Scenario.Name);
 		}
 	}
 }

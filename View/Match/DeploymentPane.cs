@@ -39,7 +39,7 @@ namespace PanzerBlitz
 			SelectionOption<DeploymentPage> option = new SelectionOption<DeploymentPage>("select-option")
 			{
 				Value = Page,
-				DisplayedString = Page.Deployment.Configuration.DisplayName
+				DisplayedString = Page.Deployment.Configuration.UnitGroup.Name
 			};
 			_DeploymentPageSelect.Add(option);
 		}

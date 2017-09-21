@@ -81,11 +81,14 @@ namespace PanzerBlitz
 			Block.AddParser<Matcher<Unit>>("unit-has-evacuated", i => new UnitHasEvacuated(i));
 			Block.AddParser<Matcher<Unit>>("unit-has-reconned", i => new UnitHasReconned(i));
 			Block.AddParser<Matcher<Unit>>("unit-has-status", i => new UnitHasStatus(i));
+			Block.AddParser<Matcher<Tile>>("unit-position-matches", i => new UnitPositionMatches(i));
 			Block.AddParser<Matcher<Unit>>(
 				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
 			Block.AddParser<Matcher<Unit>>(
 				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
 
+			Block.AddParser<UnitGroup>("unit-group", i => new UnitGroup(i));
+			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
 			Block.AddParser<DeploymentConfiguration>(
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(
@@ -101,10 +104,11 @@ namespace PanzerBlitz
 			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
 
 			Block.AddParser<Objective>("units-destroyed-objective", i => new UnitsDestroyedObjective(i));
-			Block.AddParser<Objective>("units-in-zone-objective", i => new UnitsInZoneObjective(i));
 			Block.AddParser<Objective>("furthest-advance-objective", i => new FurthestAdvanceObjective(i));
 			Block.AddParser<Objective>("line-of-fire-objective", i => new LineOfFireObjective(i));
 			Block.AddParser<Objective>("units-matched-objective", i => new UnitsMatchedObjective(i));
+			Block.AddParser<Objective>("prevent-enemy-objective", i => new PreventEnemyObjective(i));
+			Block.AddParser<Objective>("ratio-objective", i => new RatioObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<BoardCompositeMapConfiguration>("map-configuration", i => new BoardCompositeMapConfiguration(i));
@@ -125,6 +129,11 @@ namespace PanzerBlitz
 			{
 				if (!UnitRenderDetails.ContainsKey(unit))
 					Console.WriteLine("[WARNING]: No render details configured for UnitConfiguration {0}", unit.Name);
+				else if (File.Exists(UnitRenderDetails[unit].ImagePath))
+					Console.WriteLine(
+						"[WARNING]: Image {0} missing for UnitConfiguration {1}",
+						UnitRenderDetails[unit].ImagePath,
+						unit.Name);
 			}
 		}
 	}

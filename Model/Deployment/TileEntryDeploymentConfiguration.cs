@@ -7,24 +7,15 @@ namespace PanzerBlitz
 {
 	public class TileEntryDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { DISPLAY_NAME, MATCHER, IS_STRICT_CONVOY }
+		enum Attribute { UNIT_GROUP, MATCHER, IS_STRICT_CONVOY }
 
+		public UnitGroup UnitGroup { get; }
 		public readonly bool IsStrictConvoy;
 		public readonly Matcher<Tile> Matcher;
 
-		string _DisplayName;
-
-		public string DisplayName
+		public TileEntryDeploymentConfiguration(UnitGroup UnitGroup, bool IsStrictConvoy, Matcher<Tile> Matcher)
 		{
-			get
-			{
-				return _DisplayName;
-			}
-		}
-
-		public TileEntryDeploymentConfiguration(string DisplayName, bool IsStrictConvoy, Matcher<Tile> Matcher)
-		{
-			_DisplayName = DisplayName;
+			this.UnitGroup = UnitGroup;
 			this.IsStrictConvoy = IsStrictConvoy;
 			this.Matcher = Matcher;
 		}
@@ -32,7 +23,8 @@ namespace PanzerBlitz
 		public TileEntryDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
-			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
+
+			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			IsStrictConvoy = Parse.DefaultIfNull(attributes[(int)Attribute.IS_STRICT_CONVOY], false);
 
 			Matcher<Tile> m = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
@@ -44,20 +36,21 @@ namespace PanzerBlitz
 
 		public TileEntryDeploymentConfiguration(SerializationInputStream Stream)
 			: this(
-				Stream.ReadString(), Stream.ReadBoolean(),
+				new UnitGroup(Stream),
+				Stream.ReadBoolean(),
 				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream))
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_DisplayName);
+			Stream.Write(UnitGroup);
 			Stream.Write(IsStrictConvoy);
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
-		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)
 		{
-			return new TileEntryDeployment(Army, Units, this, IdGenerator);
+			return new TileEntryDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
 		}
 	}
 }

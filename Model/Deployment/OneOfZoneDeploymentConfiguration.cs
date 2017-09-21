@@ -8,22 +8,14 @@ namespace PanzerBlitz
 {
 	public class OneOfZoneDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { DISPLAY_NAME, MATCHER }
+		enum Attribute { UNIT_GROUP, MATCHER }
 
+		public UnitGroup UnitGroup { get; }
 		public readonly List<Matcher<Tile>> Matchers;
-		string _DisplayName;
 
-		public string DisplayName
+		public OneOfZoneDeploymentConfiguration(UnitGroup UnitGroup, IEnumerable<Matcher<Tile>> Matchers)
 		{
-			get
-			{
-				return _DisplayName;
-			}
-		}
-
-		public OneOfZoneDeploymentConfiguration(string DisplayName, IEnumerable<Matcher<Tile>> Matchers)
-		{
-			_DisplayName = DisplayName;
+			this.UnitGroup = UnitGroup;
 			this.Matchers = Matchers.ToList();
 		}
 
@@ -31,25 +23,25 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			_DisplayName = (string)attributes[(int)Attribute.DISPLAY_NAME];
+			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			Matchers = (List<Matcher<Tile>>)attributes[(int)Attribute.MATCHER];
 		}
 
 		public OneOfZoneDeploymentConfiguration(SerializationInputStream Stream)
 			: this(
-				Stream.ReadString(),
+				new UnitGroup(Stream),
 				Stream.ReadEnumerable(i => (Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream)))
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_DisplayName);
+			Stream.Write(UnitGroup);
 			Stream.Write(Matchers, i => MatcherSerializer.Instance.Serialize(i, Stream));
 		}
 
-		public Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)
 		{
-			return new OneOfZoneDeployment(Army, Units, this, IdGenerator);
+			return new OneOfZoneDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
 		}
 	}
 }

@@ -11,8 +11,8 @@ namespace PanzerBlitz
 			typeof(FurthestAdvanceObjective),
 			typeof(LineOfFireObjective),
 			typeof(UnitsDestroyedObjective),
-			typeof(UnitsInZoneObjective),
 			typeof(UnitsMatchedObjective),
+			typeof(PreventEnemyObjective)
 		};
 
 		static readonly Func<SerializationInputStream, Objective>[] DESERIALIZERS =
@@ -20,8 +20,8 @@ namespace PanzerBlitz
 			i => new FurthestAdvanceObjective(i),
 			i => new LineOfFireObjective(i),
 			i => new UnitsDestroyedObjective(i),
-			i => new UnitsInZoneObjective(i),
-			i => new UnitsMatchedObjective(i)
+			i => new UnitsMatchedObjective(i),
+			i => new PreventEnemyObjective(i)
 		};
 
 		public static void Serialize(Objective Objective, SerializationOutputStream Stream)
@@ -30,7 +30,7 @@ namespace PanzerBlitz
 			Stream.Write(Objective);
 		}
 
-		public static Objective Deserializer(SerializationInputStream Stream)
+		public static Objective Deserialize(SerializationInputStream Stream)
 		{
 			return DESERIALIZERS[Stream.ReadByte()](Stream);
 		}

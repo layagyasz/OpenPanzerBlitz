@@ -42,6 +42,8 @@ namespace PanzerBlitz
 
 		public bool Matches(Tile Tile)
 		{
+			if (Tile == null) return false;
+
 			return new Field<Tile>(Tile, Distance, (i, j) => 1)
 				.GetReachableNodes()
 				.Any(i => i.Item1.Units.Any(j => j.Configuration == UnitConfiguration)) ^ Atleast;

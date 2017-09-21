@@ -29,8 +29,8 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed-objective:units-destroyed { }
-					}
+					units-destroyed-objective:units-destroyed { }
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
@@ -49,62 +49,62 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.t-34-c }
-							int:_ { 4 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.t-34_85 }
-							int:_ { 5 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.su-85 }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.su-152 }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.smg-company }
-							int:_ { 4 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.recon-company }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.82mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.rifle-company }
-							int:_ { 6 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.45mm }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.76_2mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.truck-russian }
-							int:_ { 15 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.sis-33 }
-							int:_ { 5 }
-						}
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { south }
 					}
-					tile-entry-deployment-configuration:_ {
-						string:display-name { 2nd Guard Tk. Corps Vanguard }
-						tile-on-edge:matcher {
-							direction:edge { south }
+					unit-group:unit-group {
+						string:name { 2nd Guard Tk. Corps Vanguard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-85 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-152 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.45mm }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 15 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+								int:count { 5 }
+							}
 						}
 					}
 				}
@@ -115,13 +115,15 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-in-zone-objective:units-in-zone {
-							bool:friendly { false }
+					units-matched-objective:units-in-zone {
+						bool:friendly { false }
+						unit-position-matches:matcher {
 							tile-within:matcher {
 								zone:zone { 0,32 11,32 11,64 0,64 }
 							}
 						}
 					}
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
@@ -143,58 +145,58 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.panther }
-							int:_ { 1 }
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 0,64 11,64 11,96 0,96 }
 						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.jgdpz-iv }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.rifle-platoon }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.wespe }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.hummel }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.20mm }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.75mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.nashorn }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.sdkfz-251 }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.truck-german }
-							int:_ { 4 }
+						tile-on-edge:_ {
+							direction:edge { east }
 						}
 					}
-					tile-entry-deployment-configuration:_ {
-						string:display-name { 5th Pz. Div. Battle Group }
-						tile-matches-all:matcher {
-							tile-within:_ {
-								zone:zone { 0,64 11,64 11,96 0,96 }
+					unit-group:unit-group {
+						string:name { 5th Pz. Div. Battle Group }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.panther }
+								int:count { 1 }
 							}
-							tile-on-edge:_ {
-								direction:edge { east }
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wespe }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hummel }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.nashorn }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 4 }
 							}
 						}
 					}

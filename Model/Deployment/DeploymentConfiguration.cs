@@ -8,8 +8,7 @@ namespace PanzerBlitz
 {
 	public interface DeploymentConfiguration : Serializable
 	{
-		string DisplayName { get; }
-
-		Deployment GenerateDeployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator);
+		UnitGroup UnitGroup { get; }
+		Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator);
 	}
 }

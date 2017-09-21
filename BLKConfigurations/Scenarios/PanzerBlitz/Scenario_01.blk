@@ -25,15 +25,15 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed-objective:units-destroyed {
-							2-tuple[]:override-scores {
-								2-tuple:_ {
-									!unit-configuration:_ { unit-configurations.command-post }
-									int:_ { 5 }
-								}
+					units-destroyed-objective:units-destroyed {
+						2-tuple[]:override-scores {
+							2-tuple:_ {
+								!unit-configuration:_ { unit-configurations.command-post }
+								int:_ { 5 }
 							}
 						}
 					}
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
@@ -52,44 +52,44 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.45mm }
-							int:_ { 1 }
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					unit-group:unit-group {
+						string:name { 982nd Tk. Rgt. & 371st Cav. Rgt. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.45mm }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-motorized }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-howitzer }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-76 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.cavalry }
+								int:count { 4 }
+							}
 						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.82mm-motorized }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.76_2mm-howitzer }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.smg-company }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.t-34-c }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.su-76 }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.wagon }
-							int:_ { 4 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.cavalry }
-							int:_ { 4 }
-						}
-					}
-					tile-entry-deployment-configuration:_ {
-						string:display-name { 982nd Tk. Rgt. & 371st Cav. Rgt. }
 					}
 				}
 			}
@@ -99,10 +99,10 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-						units-destroyed-objective:units-destroyed {
-							bool:friendly { true }
-						}
+					units-destroyed-objective:units-destroyed {
+						bool:friendly { true }
 					}
+				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
@@ -124,122 +124,122 @@
 					}
 				}
 			}
-			2-tuple[]:deployment-configurations {
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.command-post }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.fort-40 }
-							int:_ { 1 }
-						}
-					}
-					tile-deployment-configuration:_ {
-						string:display-name { 580th Signal Rgt. CP 1 }
-						coordinate:coordinate { 16,6 }
-					}
-				}
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.command-post }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.fort-40 }
-							int:_ { 1 }
-						}
-					}
-					tile-deployment-configuration:_ {
-						string:display-name { 580th Signal Rgt. CP 2 }
-						coordinate:coordinate { 15,19 }
-					}
-				}
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.command-post }
-							int:_ { 1 }
-						}
-					}
-					zone-deployment-configuration:_ {
-						string:display-name { 580th Signal Rgt. CP 3 }
-						tile-matches-all:matcher {
-							tile-within:_ {
-								zone:zone { 10,0 20,0 20,33 10,33 }
-							}
-							tile-distance-from-unit:_ {
+			var[]:deployment-configurations {
+				tile-deployment-configuration:_ {
+					coordinate:coordinate { 16,6 }
+					unit-group:unit-group {
+						string:name { 580th Signal Rgt. CP 1 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.command-post }
-								int:distance { 2 }
-								bool:atleast { true }
+								int:count { 1 }
 							}
-							tile-elevation:_ {
-								int:elevation { 1 }
-								bool:atleast { true }
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								int:count { 1 }
 							}
 						}
 					}
 				}
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.fort-40 }
-							int:_ { 1 }
-						}
-					}
-					zone-deployment-configuration:_ {
-						string:display-name { 580th Signal Rgt. Fort 3 }
-						tile-distance-from-unit:matcher {
-							!unit-configuration:unit-configuration { unit-configurations.command-post }
-							int:distance { 0 }
+				tile-deployment-configuration:_ {
+					coordinate:coordinate { 15,19 }
+					unit-group:unit-group {
+						string:name { 580th Signal Rgt. CP 2 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								int:count { 1 }
+							}
 						}
 					}
 				}
-				2-tuple:_ {
-					2-tuple[]:_ {
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.security-platoon }
-							int:_ { 3 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.engineer-platoon }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.smg-platoon }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.50mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.88mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.20mm }
-							int:_ { 2 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.20mm_4 }
-							int:_ { 1 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.block }
-							int:_ { 4 }
-						}
-						2-tuple:_ {
-							!unit-configuration:_ { unit-configurations.minefield }
-							int:_ { 4 }
-						}
-					}
-					zone-deployment-configuration:_ {
-						string:display-name { 286th Sec. Rgt. & 10th Flak Rgt. }
-						tile-within:matcher {
+				zone-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
 							zone:zone { 10,0 20,0 20,33 10,33 }
+						}
+						tile-distance-from-unit:_ {
+							!unit-configuration:unit-configuration { unit-configurations.command-post }
+							int:distance { 2 }
+							bool:atleast { true }
+						}
+						tile-elevation:_ {
+							int:elevation { 1 }
+							bool:atleast { true }
+						}
+					}
+					unit-group:unit-group {
+						string:name { 580th Signal Rgt. CP 3 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				zone-deployment-configuration:_ {
+					tile-distance-from-unit:matcher {
+						!unit-configuration:unit-configuration { unit-configurations.command-post }
+						int:distance { 0 }
+					}
+					unit-group:unit-group {
+						string:name { 580th Signal Rgt. Fort 3 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				zone-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 10,0 20,0 20,33 10,33 }
+					}
+					unit-group:unit-group {
+						string:name { 286th Sec. Rgt. & 10th Flak Rgt. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.security-platoon }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-platoon }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.50mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm_4 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								int:count { 4 }
+							}
 						}
 					}
 				}

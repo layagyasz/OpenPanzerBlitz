@@ -36,6 +36,7 @@ namespace PanzerBlitz
 
 		public bool Matches(Tile Tile)
 		{
+			if (Tile == null) return false;
 			return Tile.Elevation < Elevation ^ Atleast;
 		}
 	}
