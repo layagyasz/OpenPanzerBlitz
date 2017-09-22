@@ -13,7 +13,7 @@ namespace PanzerBlitz
 
 		public override bool IsConfigured()
 		{
-			return Units.All(i => i.Position != null);
+			return Units.All(i => i.Deployed && Validate(i, i.Position) == NoDeployReason.NONE);
 		}
 	}
 }

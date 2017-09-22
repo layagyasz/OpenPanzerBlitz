@@ -4,24 +4,24 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitPositionMatches : Matcher<Unit>
+	public class UnitHasPosition : Matcher<Unit>
 	{
 		enum Attribute { MATCHER }
 
 		public readonly Matcher<Tile> Matcher;
 
-		public UnitPositionMatches(Matcher<Tile> Matcher)
+		public UnitHasPosition(Matcher<Tile> Matcher)
 		{
 			this.Matcher = Matcher;
 		}
 
-		public UnitPositionMatches(ParseBlock Block)
+		public UnitHasPosition(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Matcher = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
 		}
 
-		public UnitPositionMatches(SerializationInputStream Stream)
+		public UnitHasPosition(SerializationInputStream Stream)
 			: this((Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream)) { }
 
 		public void Serialize(SerializationOutputStream Stream)

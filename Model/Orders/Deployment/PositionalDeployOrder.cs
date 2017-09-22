@@ -26,12 +26,16 @@ namespace PanzerBlitz
 		}
 
 		public PositionalDeployOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]) { }
+		{
+			Unit = (Unit)Objects[Stream.ReadInt32()];
+			if (Stream.ReadBoolean()) Tile = (Tile)Objects[Stream.ReadInt32()];
+		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Unit.Id);
-			Stream.Write(Tile.Id);
+			Stream.Write(Tile != null);
+			if (Tile != null) Stream.Write(Tile.Id);
 		}
 
 		public override NoDeployReason Validate()

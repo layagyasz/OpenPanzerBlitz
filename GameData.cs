@@ -76,7 +76,9 @@ namespace PanzerBlitz
 			Block.AddParser<Matcher<Unit>>("unit-has-evacuated", i => new UnitHasEvacuated(i));
 			Block.AddParser<Matcher<Unit>>("unit-has-reconned", i => new UnitHasReconned(i));
 			Block.AddParser<Matcher<Unit>>("unit-has-status", i => new UnitHasStatus(i));
-			Block.AddParser<Matcher<Tile>>("unit-position-matches", i => new UnitPositionMatches(i));
+			Block.AddParser<Matcher<Unit>>("unit-has-position", i => new UnitHasPosition(i));
+			Block.AddParser<Matcher<Unit>>("unit-has-configuration", i => new UnitHasConfiguration(i));
+			Block.AddParser<Matcher<Unit>>("unit-is-hostile", i => new UnitIsHostile(i));
 			Block.AddParser<Matcher<Unit>>(
 				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
 			Block.AddParser<Matcher<Unit>>(

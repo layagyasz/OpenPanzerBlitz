@@ -45,14 +45,8 @@ namespace PanzerBlitz
 
 		public static bool operator ==(Player p1, Player p2)
 		{
-			try
-			{
-				return p1.Equals(p2);
-			}
-			catch
-			{
-				return false;
-			}
+			if ((object)p1 == null) return (object)p2 == null;
+			return p1.Equals(p2);
 		}
 
 		public static bool operator !=(Player p1, Player p2)

@@ -259,7 +259,7 @@
     <Compile Include="View\Unit\GroupedUnitSelectionOption.cs" />
     <Compile Include="View\ArmyBuilder\ArmyBuilderScreen.cs" />
     <Compile Include="View\Unit\UnitConfigurationView.cs" />
-    <Compile Include="Model\Orders\OrderAutomater.cs" />
+    <Compile Include="Model\Orders\OrderAutomator.cs" />
     <Compile Include="Model\Orders\OrderStatus.cs" />
     <Compile Include="Model\Orders\Movement\ReconOrder.cs" />
     <Compile Include="Model\Orders\Movement\EvacuateOrder.cs" />
@@ -280,10 +280,13 @@
     <Compile Include="View\Unit\UnitRenderDetails.cs" />
     <Compile Include="Model\VictoryConditions\PreventEnemyObjective.cs" />
     <Compile Include="Model\VictoryConditions\RatioObjective.cs" />
-    <Compile Include="Model\Matchers\UnitMatchers\UnitPositionMatches.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasPosition.cs" />
     <Compile Include="Model\UnitGroup.cs" />
     <Compile Include="Model\UnitCount.cs" />
     <Compile Include="Model\Map\BoardConfiguration.cs" />
+    <Compile Include="Model\Deployment\ConvoyMovementAutomator.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasConfiguration.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitIsHostile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1102,7 +1105,7 @@
     <None Include="Theme\Components\Deployment.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Theme\Components\LoadUnit.blk">
+    <None Include="Theme\Components\SelectPane.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Theme\Components\LocalScenarioSelect.blk">

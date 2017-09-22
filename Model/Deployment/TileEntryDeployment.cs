@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -23,6 +24,8 @@ namespace PanzerBlitz
 			}
 		}
 
+		bool _StopAutomatedMovement;
+
 		public TileEntryDeployment(
 			Army Army,
 			IEnumerable<Unit> Units,
@@ -35,10 +38,21 @@ namespace PanzerBlitz
 
 		public override void AutomateMovement(Match Match, bool Vehicle)
 		{
-			if (_ConvoyOrder.Count > 0 && _ConvoyOrder[0].Configuration.IsVehicle == Vehicle)
+			Unit unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null);
+			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
 			{
-				DeployOrder order = new MovementDeployOrder(_ConvoyOrder[0], _EntryTile);
-				if (Match.ExecuteOrder(order)) _ConvoyOrder.RemoveAt(0);
+				Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));
+			}
+
+			if (DeploymentConfiguration.MovementAutomator != null && !_StopAutomatedMovement)
+			{
+				foreach (Unit u in _ConvoyOrder)
+				{
+					if (u.Position != null && DeploymentConfiguration.MovementAutomator.AutomateMovement(u, Match))
+					{
+						_StopAutomatedMovement = true;
+					}
+				}
 			}
 		}
 

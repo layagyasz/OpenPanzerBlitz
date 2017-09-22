@@ -7,17 +7,20 @@ namespace PanzerBlitz
 {
 	public class TileEntryDeploymentConfiguration : DeploymentConfiguration
 	{
-		enum Attribute { UNIT_GROUP, MATCHER, IS_STRICT_CONVOY }
+		enum Attribute { UNIT_GROUP, MATCHER, IS_STRICT_CONVOY, MOVEMENT_AUTOMATOR }
 
 		public UnitGroup UnitGroup { get; }
 		public readonly bool IsStrictConvoy;
 		public readonly Matcher<Tile> Matcher;
+		public readonly ConvoyMovementAutomator MovementAutomator;
 
-		public TileEntryDeploymentConfiguration(UnitGroup UnitGroup, bool IsStrictConvoy, Matcher<Tile> Matcher)
+		public TileEntryDeploymentConfiguration(
+			UnitGroup UnitGroup, bool IsStrictConvoy, Matcher<Tile> Matcher, ConvoyMovementAutomator MovementAutomator)
 		{
 			this.UnitGroup = UnitGroup;
 			this.IsStrictConvoy = IsStrictConvoy;
 			this.Matcher = Matcher;
+			this.MovementAutomator = MovementAutomator;
 		}
 
 		public TileEntryDeploymentConfiguration(ParseBlock Block)
@@ -38,7 +41,8 @@ namespace PanzerBlitz
 			: this(
 				new UnitGroup(Stream),
 				Stream.ReadBoolean(),
-				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream))
+				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream),
+				Stream.ReadNullOrObject(i => new ConvoyMovementAutomator(Stream)))
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -46,6 +50,7 @@ namespace PanzerBlitz
 			Stream.Write(UnitGroup);
 			Stream.Write(IsStrictConvoy);
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
+			Stream.Write(MovementAutomator, true);
 		}
 
 		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)

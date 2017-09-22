@@ -33,7 +33,13 @@ namespace PanzerBlitz
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(UnitHasReconned), i => new UnitHasReconned(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasEvacuated), i => new UnitHasEvacuated(i))
+				typeof(UnitHasEvacuated), i => new UnitHasEvacuated(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(UnitHasPosition), i => new UnitHasPosition(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(UnitHasConfiguration), i => new UnitHasConfiguration(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(UnitIsHostile), i => new UnitIsHostile(i))
 		})
 		{ }
 	}

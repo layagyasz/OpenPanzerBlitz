@@ -31,7 +31,7 @@
 				var<>:objectives {
 					units-matched-objective:units-in-zone {
 						bool:friendly { true }
-						unit-position-matches:matcher {
+						unit-has-position:matcher {
 							tile-within:matcher {
 								zone:zone { 0,0 11,0 11,33 0,33 }
 							}

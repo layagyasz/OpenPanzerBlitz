@@ -8,15 +8,15 @@ namespace PanzerBlitz
 {
 	public class TileDistanceFromUnit : Matcher<Tile>
 	{
-		enum Attribute { UNIT_CONFIGURATION, DISTANCE, ATLEAST };
+		enum Attribute { MATCHER, DISTANCE, ATLEAST };
 
-		public readonly UnitConfiguration UnitConfiguration;
+		public readonly Matcher<Unit> Matcher;
 		public readonly int Distance;
 		public readonly bool Atleast;
 
-		public TileDistanceFromUnit(UnitConfiguration UnitConfiguration, int Distance, bool Atleast)
+		public TileDistanceFromUnit(Matcher<Unit> Matcher, int Distance, bool Atleast)
 		{
-			this.UnitConfiguration = UnitConfiguration;
+			this.Matcher = Matcher;
 			this.Distance = Distance;
 			this.Atleast = Atleast;
 		}
@@ -25,17 +25,21 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
+			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
 			Distance = (int)attributes[(int)Attribute.DISTANCE];
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
 		}
 
 		public TileDistanceFromUnit(SerializationInputStream Stream)
-			: this(GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32(), Stream.ReadBoolean()) { }
+			: this(
+				(Matcher<Unit>)MatcherSerializer.Instance.Deserialize(Stream),
+				Stream.ReadInt32(),
+				Stream.ReadBoolean())
+		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(UnitConfiguration.UniqueKey);
+			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 			Stream.Write(Distance);
 			Stream.Write(Atleast);
 		}
@@ -46,7 +50,7 @@ namespace PanzerBlitz
 
 			return new Field<Tile>(Tile, Distance, (i, j) => 1)
 				.GetReachableNodes()
-				.Any(i => i.Item1.Units.Any(j => j.Configuration == UnitConfiguration)) ^ Atleast;
+				.Any(i => i.Item1.Units.Any(j => Matcher.Matches(j))) ^ Atleast;
 		}
 	}
 }

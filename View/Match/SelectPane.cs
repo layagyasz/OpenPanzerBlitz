@@ -15,9 +15,9 @@ namespace PanzerBlitz
 		Select<T> _UnitSelect = new Select<T>("select");
 
 		public SelectPane(string Title, IEnumerable<T> Items)
-			: base("load-unit-pane")
+			: base("select-pane")
 		{
-			Button header = new Button("load-unit-header") { DisplayedString = Title };
+			Button header = new Button("select-pane-header") { DisplayedString = Title };
 			Add(header);
 
 			_UnitSelect.Position = new Vector2f(0, header.Size.Y + 6);

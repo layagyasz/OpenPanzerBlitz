@@ -43,14 +43,8 @@ namespace PanzerBlitz
 
 		public static bool operator ==(TurnInfo i1, TurnInfo i2)
 		{
-			try
-			{
-				return i1.Equals(i2);
-			}
-			catch
-			{
-				return false;
-			}
+			if ((object)i1 == null) return (object)i2 == null;
+			return i1.Equals(i2);
 		}
 
 		public static bool operator !=(TurnInfo i1, TurnInfo i2)

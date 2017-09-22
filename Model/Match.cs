@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		IEnumerator<TurnInfo> _TurnOrder;
 
-		OrderAutomater _OrderAutomater;
+		OrderAutomator _OrderAutomater;
 		List<Order> _OrderBuffer = new List<Order>();
 		Random _Random = new Random();
 
@@ -48,7 +48,7 @@ namespace PanzerBlitz
 				u.OnMove += UpdateUnitVisibilityFromMove;
 				u.OnFire += UpdateUnitVisibilityFromFire;
 			}
-			if (AutomateTurns) _OrderAutomater = new OrderAutomater(this);
+			if (AutomateTurns) _OrderAutomater = new OrderAutomator(this);
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()

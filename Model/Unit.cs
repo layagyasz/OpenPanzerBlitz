@@ -156,7 +156,9 @@ namespace PanzerBlitz
 				return NoDeployReason.ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return NoDeployReason.UNIQUE;
-			if (Terminal && Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit)
+			if (Terminal
+				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
+				&& !Tile.Units.Contains(this))
 				return NoDeployReason.STACK_LIMIT;
 			return NoDeployReason.NONE;
 		}

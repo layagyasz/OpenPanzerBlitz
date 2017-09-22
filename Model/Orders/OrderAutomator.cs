@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class OrderAutomater
+	public class OrderAutomator
 	{
 		public readonly Match Match;
 
 		Dictionary<TurnInfo, List<Order>> _RecurringOrderBuffer = new Dictionary<TurnInfo, List<Order>>();
 
-		public OrderAutomater(Match Match)
+		public OrderAutomator(Match Match)
 		{
 			this.Match = Match;
 

@@ -1,4 +1,4 @@
-﻿class:load-unit-pane {
+﻿class:select-pane {
 	mode:default {
 		int:height { 108 }
 		int:width { 320 }
@@ -6,6 +6,6 @@
 		int[]:padding { 16 16 16 16 }
 	}
 }
-class:load-unit-header {
+class:select-pane-header {
 	!class:parent { header-1 }
 }
