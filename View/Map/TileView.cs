@@ -26,10 +26,10 @@ namespace PanzerBlitz
 		public TileView(Tile Tile, TileRenderer TileRenderer)
 		{
 			this.Tile = Tile;
-			Tile.OnReconfigure += (sender, e) => Render(TileRenderer);
+			Tile.Configuration.OnReconfigure += (sender, e) => Render(TileRenderer);
 			foreach (Tile t in Tile.NeighborTiles)
 			{
-				if (t != null) t.OnReconfigure += (sender, e) => Render(TileRenderer);
+				if (t != null) t.Configuration.OnReconfigure += (sender, e) => Render(TileRenderer);
 			}
 
 			_BorderVertices = new Vertex[Tile.Bounds.Length + 1];

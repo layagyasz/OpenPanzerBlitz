@@ -167,92 +167,94 @@ namespace PanzerBlitz
 			}
 
 			// Slopes.
-			if (Tile.TileBase == TileBase.SLOPE)
+			if (Tile.Configuration.TileBase == TileBase.SLOPE)
 				RenderTile(
 					Tile,
-					(i, j) => j != null && (j.TileBase == TileBase.SLOPE || j.Elevation > Tile.Elevation),
+					(i, j) => j != null && (j.Configuration.TileBase == TileBase.SLOPE
+											|| j.Configuration.Elevation > Tile.Configuration.Elevation),
 					vertices,
-					TopColor(Tile.TileBase));
+					TopColor(Tile.Configuration.TileBase));
 			// Swamp.
-			if (Tile.TileBase == TileBase.SWAMP)
+			if (Tile.Configuration.TileBase == TileBase.SWAMP)
 				RenderTile(
 					Tile,
-					(i, j) => j != null && j.TileBase == TileBase.SWAMP,
+					(i, j) => j != null && j.Configuration.TileBase == TileBase.SWAMP,
 					vertices,
-					TopColor(Tile.TileBase));
+					TopColor(Tile.Configuration.TileBase));
 
 			// Forest.
-			if (Tile.HasEdge(Edge.FOREST))
+			if (Tile.Configuration.HasEdge(Edge.FOREST))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == Edge.FOREST,
 					vertices, OverlayColor(Edge.FOREST));
 			// Town.
-			if (Tile.HasEdge(Edge.TOWN))
+			if (Tile.Configuration.HasEdge(Edge.TOWN))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == Edge.TOWN,
 					vertices, OverlayColor(Edge.TOWN));
 
 			// Ridges.
-			if (Tile.TileBase != TileBase.SLOPE && Tile.HasEdge(Edge.SLOPE))
+			if (Tile.Configuration.TileBase != TileBase.SLOPE && Tile.Configuration.HasEdge(Edge.SLOPE))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == Edge.SLOPE,
 					vertices, OverlayColor(Edge.SLOPE));
 
 			// Stream Gully.
-			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM))
+			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.STREAM))
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM
-						|| i.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.STREAM
+						|| i.Configuration.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
 					vertices,
 					PathBorderColor(TilePathOverlay.STREAM),
 					PathBorderWidth(TilePathOverlay.STREAM));
 
 			// Stream.
-			if (Tile.PathOverlays.Contains(TilePathOverlay.STREAM)
-				|| Tile.PathOverlays.Contains(TilePathOverlay.STREAM_FORD))
+			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.STREAM)
+				|| Tile.Configuration.PathOverlays.Contains(TilePathOverlay.STREAM_FORD))
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.STREAM
-						|| i.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.STREAM
+						|| i.Configuration.GetPathOverlay(j) == TilePathOverlay.STREAM_FORD,
 					vertices,
 					PathColor(TilePathOverlay.STREAM),
 					PathWidth(TilePathOverlay.STREAM));
 
 			// Water.
-			if (Tile.HasEdge(Edge.WATER))
+			if (Tile.Configuration.HasEdge(Edge.WATER))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == Edge.WATER,
 					vertices, OverlayColor(Edge.WATER));
 
 			// Road.
-			if (Tile.PathOverlays.Contains(TilePathOverlay.ROAD))
+			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.ROAD))
 			{
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.ROAD,
 					vertices,
 					PathBorderColor(TilePathOverlay.ROAD),
 					PathBorderWidth(TilePathOverlay.ROAD));
 				RenderPath(
 					Tile,
-					(i, j) => i.GetPathOverlay(j) == TilePathOverlay.ROAD,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.ROAD,
 					vertices,
 					PathColor(TilePathOverlay.ROAD),
 					PathWidth(TilePathOverlay.ROAD));
 			}
 
 			// IsHilltop.
-			bool isHilltop = Tile.NeighborTiles.Any(i => i != null && i.Elevation < Tile.Elevation);
+			bool isHilltop = Tile.NeighborTiles.Any(i => i != null
+													&& i.Configuration.Elevation < Tile.Configuration.Elevation);
 
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{
 				// Border.
-				Color edgeColor = EdgeColor(Tile.GetEdge(i), isHilltop, Tile.Elevation);
+				Color edgeColor = EdgeColor(Tile.Configuration.GetEdge(i), isHilltop, Tile.Configuration.Elevation);
 				Segment left = Tile.Bounds[Mod(i - 1, Tile.Bounds.Length)];
 				Segment right = Tile.Bounds[Mod(i + 1, Tile.Bounds.Length)];
 				Vector2f internalLeft =

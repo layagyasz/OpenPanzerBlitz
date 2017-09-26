@@ -115,8 +115,8 @@ namespace PanzerBlitz
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;
 			Edge[] edges = null;
-			if (LineOfSight[0].Configuration.TrueElevation
-				> LineOfSight[LineOfSight.Length - 1].Configuration.TrueElevation)
+			if (LineOfSight[0].Rules.TrueElevation
+				> LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation)
 			{
 				los = LineOfSight.Reverse().ToArray();
 				edges = CrossedEdges.Reverse().ToArray();
@@ -136,13 +136,13 @@ namespace PanzerBlitz
 
 		static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges)
 		{
-			if (LineOfSight[0].Elevation == LineOfSight[LineOfSight.Length - 1].Elevation)
+			if (LineOfSight[0].Configuration.Elevation == LineOfSight[LineOfSight.Length - 1].Configuration.Elevation)
 			{
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
 					if (Edges[i] != null
 						&& (Edges[i].BlocksLineOfSight || Edges[i].Elevated)
-						&& (LineOfSight[0].Elevation <= LineOfSight[i + 1].Elevation))
+						&& (LineOfSight[0].Configuration.Elevation <= LineOfSight[i + 1].Configuration.Elevation))
 						return true;
 				}
 			}
@@ -151,7 +151,7 @@ namespace PanzerBlitz
 				if (Edges[0] != null && Edges[0].BlocksLineOfSight) return true;
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (LineOfSight[i + 1].Elevation > LineOfSight[0].Elevation
+					if (LineOfSight[i + 1].Configuration.Elevation > LineOfSight[0].Configuration.Elevation
 						&& Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
 						return true;
 				}
@@ -161,32 +161,33 @@ namespace PanzerBlitz
 
 		static bool DepressionBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].Configuration.Depressed)
+			if (LineOfSight[0].Rules.Depressed)
 				return LineOfSight[LineOfSight.Length - 1]
-					.Configuration.TrueElevation <= LineOfSight[0].Configuration.TrueElevation
-					|| LineOfSight[LineOfSight.Length - 1].Configuration.Depressed;
-			return LineOfSight[LineOfSight.Length - 1].Configuration.Depressed;
+					.Rules.TrueElevation <= LineOfSight[0].Rules.TrueElevation
+					|| LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
+			return LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
 		}
 
 		static bool ElevationBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].Configuration.TrueElevation
-				== LineOfSight[LineOfSight.Length - 1].Configuration.TrueElevation)
+			if (LineOfSight[0].Rules.TrueElevation
+				== LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation)
 			{
 				return LineOfSight.Any(
-					i => i.Configuration.TrueElevation > LineOfSight[0].Configuration.TrueElevation);
+					i => i.Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation);
 			}
 			else
 			{
-				if (LineOfSight.Length == 3 && LineOfSight[0].Elevation == LineOfSight[1].Elevation) return false;
+				if (LineOfSight.Length == 3
+					&& LineOfSight[0].Configuration.Elevation == LineOfSight[1].Configuration.Elevation) return false;
 				for (int i = 0; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1); ++i)
 				{
-					if (LineOfSight[i].Configuration.TrueElevation > LineOfSight[0].Configuration.TrueElevation)
+					if (LineOfSight[i].Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation)
 						return true;
 				}
 				return LineOfSight.Any(
-					i => i.Configuration.TrueElevation > LineOfSight[0].Configuration.TrueElevation
-					&& i.Configuration.TrueElevation > LineOfSight[LineOfSight.Length - 1].Configuration.TrueElevation);
+					i => i.Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation
+					&& i.Rules.TrueElevation > LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation);
 			}
 		}
 	}

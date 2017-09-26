@@ -90,7 +90,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _TileBaseSelect)
 			{
-				Tile.TileBase = _TileBaseSelect.Value.Value;
+				Tile.Configuration.SetTileBase(_TileBaseSelect.Value.Value);
 			}
 			else if (_ModeSelect.Value.Value == _PathOverlaySelect)
 			{
@@ -99,7 +99,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _Elevation)
 			{
-				Tile.Elevation++;
+				Tile.Configuration.SetElevation(Tile.Configuration.Elevation + 1);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _TileBaseSelect)
 			{
-				Tile.TileBase = TileBase.CLEAR;
+				Tile.Configuration.SetTileBase(TileBase.CLEAR);
 			}
 			else if (_ModeSelect.Value.Value == _PathOverlaySelect)
 			{
@@ -121,7 +121,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _Elevation)
 			{
-				Tile.Elevation--;
+				Tile.Configuration.SetElevation(Tile.Configuration.Elevation - 1);
 			}
 		}
 	}

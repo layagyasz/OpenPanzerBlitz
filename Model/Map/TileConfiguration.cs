@@ -1,208 +1,156 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileConfiguration
+	public class TileConfiguration : Serializable
 	{
-		public readonly Tile Tile;
+		public EventHandler<EventArgs> OnReconfigure;
 
-		bool _MustAttackAllUnits;
-		bool _TreatUnitsAsArmored;
-		bool _Depressed;
-		bool _DepressedTransition;
-		bool _Concealing;
-		int _DieModifier;
-		int _TrueElevation;
+		int _Elevation;
+		TileBase _TileBase;
+		Edge[] _Edges = new Edge[6];
+		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
-		float[] _RoadMovement = new float[6];
-		float[] _NonRoadMovement = new float[6];
-		float[] _TruckNonRoadMovement = new float[6];
-		float[] _VehicleNonRoadMovement = new float[6];
-
-		public bool MustAttackAllUnits
+		public int Elevation
 		{
 			get
 			{
-				return _MustAttackAllUnits;
+				return _Elevation;
 			}
 		}
-		public bool TreatUnitsAsArmored
+		public TileBase TileBase
 		{
 			get
 			{
-				return _TreatUnitsAsArmored;
+				return _TileBase;
 			}
 		}
-		public bool Depressed
+		public IEnumerable<TilePathOverlay> PathOverlays
 		{
 			get
 			{
-				return _Depressed;
+				return _PathOverlays;
+
 			}
 		}
-		public bool DepressedTransition
+		public IEnumerable<Edge> Edges
 		{
 			get
 			{
-				return _DepressedTransition;
-			}
-		}
-		public bool Concealing
-		{
-			get
-			{
-				return _Concealing;
-			}
-		}
-		public int DieModifier
-		{
-			get
-			{
-				return _DieModifier;
-			}
-		}
-		public int TrueElevation
-		{
-			get
-			{
-				return _TrueElevation;
+				return _Edges;
 			}
 		}
 
-		public TileConfiguration(Tile Tile)
+		public TileConfiguration()
 		{
-			this.Tile = Tile;
-			Recalculate();
+			_TileBase = TileBase.CLEAR;
 		}
 
-		public bool CanMove(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
+		public TileConfiguration(TileConfiguration Copy, bool Invert = false)
 		{
-			return Math.Abs(float.MaxValue - GetMoveCost(Unit, To, RoadMovement, IgnoreOccupyingUnits)) > float.Epsilon;
-		}
+			_Elevation = Copy._Elevation;
+			_TileBase = Copy._TileBase;
 
-		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
-		{
-			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == NoDeployReason.ENEMY_OCCUPIED) return float.MaxValue;
-
-			BlockType toBlock = To.GetBlockType();
-			BlockType fromBlock = Tile.GetBlockType();
-
-			if (toBlock == BlockType.HARD_BLOCK && (Unit.Moved || !To.NeighborTiles.Any(i => i.Units.Contains(Unit))))
-				return float.MaxValue;
-			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && Unit.Moved)
-				return float.MaxValue;
-
-			int index = Array.IndexOf(Tile.NeighborTiles, To);
-			TilePathOverlay pathOverlay = Tile.GetPathOverlay(To);
-
-			if (RoadMovement
-				&& pathOverlay != null
-				&& pathOverlay.RoadMove
-				&& (Tile.Units.Count() == 0 || (Tile == Unit.Position && Unit.IsSolitary())))
-				return _RoadMovement[index];
-			if (Unit.Configuration.TruckMovement) return _TruckNonRoadMovement[index];
-			if (Unit.Configuration.IsVehicle) return _VehicleNonRoadMovement[index];
-			return _NonRoadMovement[index];
-		}
-
-		public void Recalculate()
-		{
-			if (Tile.TileBase == null) return;
-
-			_MustAttackAllUnits = Tile.TileBase.MustAttackAllUnits
-									  || Tile.Edges.Any(i => i != null && i.MustAttackAllUnits)
-									  || Tile.PathOverlays.Any(i => i != null && i.MustAttackAllUnits);
-			_TreatUnitsAsArmored = Tile.TileBase.TreatUnitsAsArmored
-									   || Tile.Edges.Any(i => i != null && i.TreatUnitsAsArmored)
-									   || Tile.PathOverlays.Any(i => i != null && i.TreatUnitsAsArmored);
-			_Depressed = Tile.TileBase.Depressed
-							 || Tile.Edges.Any(i => i != null && i.Depressed)
-							 || Tile.PathOverlays.Any(i => i != null && i.Depressed);
-			_DepressedTransition = Tile.TileBase.DepressedTransition
-									   || Tile.Edges.Any(i => i != null && i.DepressedTransition)
-									   || Tile.PathOverlays.Any(i => i != null && i.DepressedTransition);
-			_Concealing = Tile.TileBase.Concealing
-							  || Tile.Edges.Any(i => i != null && i.Concealing)
-							  || Tile.PathOverlays.Any(i => i != null && i.Concealing);
-
-			_DieModifier =
-				Math.Max(
-					Tile.TileBase.DieModifier,
-					Math.Max(
-						Tile.Edges.Max(i => i == null ? 0 : i.DieModifier),
-						Tile.PathOverlays.Max(i => i == null ? 0 : i.DieModifier)));
-			_TrueElevation = 2 * Tile.Elevation + (Tile.TileBase.Elevated
-												|| Tile.Edges.Any(i => i != null && i.Elevated)
-												|| Tile.PathOverlays.Any(i => i != null && i.Elevated) ? 1 : 0);
-
-			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
+			if (Invert)
 			{
-				Tile n = Tile.NeighborTiles[i];
-				if (n == null) continue;
-
-				Edge e = Tile.GetEdge(i);
-
-				_RoadMovement[i] = CalculateMovement(
-					Tile, n, e, true, false, false);
-				_NonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, false);
-				_TruckNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, true, true);
-				_VehicleNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, true);
-			}
-		}
-
-		float CalculateMovement(
-			Tile From, Tile To, Edge Edge, bool RoadMovement, bool TruckMovement, bool VehicleMovement)
-		{
-			bool blockingEdge = Edge != null && (Edge.NoCrossing || (VehicleMovement && Edge.NoVehicleCrossing));
-
-			if (!RoadMovement
-				&& (blockingEdge || To.TileBase.NoCrossing || (VehicleMovement && To.TileBase.NoVehicleCrossing)))
-				return float.MaxValue;
-
-			float move = TruckMovement ? To.TileBase.TruckMoveCost : To.TileBase.MoveCost;
-
-			float edgeMove = float.MaxValue;
-			for (int i = 0; i < 6; ++i)
-			{
-				Edge e = To.GetEdge(i);
-				if (e == null) continue;
-
-				float eMove = TruckMovement ? e.TruckMoveCost : e.MoveCost;
-				if (eMove > 0 && (!e.RoadMove || RoadMovement)) edgeMove = Math.Min(edgeMove, eMove);
-			}
-
-			float pathMove = float.MaxValue;
-			float pathLeave = float.MaxValue;
-			bool roaded = false;
-			for (int i = 0; i < 6; ++i)
-			{
-				TilePathOverlay p = To.GetPathOverlay(i);
-				if (p != null)
+				for (int i = 0; i < 6; ++i)
 				{
-					float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
-					if (pMove > 0 && (!p.RoadMove || RoadMovement)) pathMove = Math.Min(pathMove, pMove);
-					if (p.RoadMove) roaded = true;
-				}
-
-				TilePathOverlay p2 = From.GetPathOverlay(i);
-				if (p2 != null)
-				{
-					float pLeave = TruckMovement ? p2.TruckLeaveCost : p2.LeaveCost;
-					if (pLeave > 0 && (!p2.RoadMove || RoadMovement)) pathLeave = Math.Min(pathLeave, pLeave);
+					_Edges[i] = Copy._Edges[(i + 3) % 6];
+					_PathOverlays[i] = Copy._PathOverlays[(i + 3) % 6];
 				}
 			}
+			else
+			{
+				_Edges = Copy._Edges.ToArray();
+				_PathOverlays = Copy._PathOverlays.ToArray();
+			}
+		}
 
-			if (edgeMove < float.MaxValue) move = edgeMove;
-			if (pathMove < float.MaxValue) move = Math.Min(pathMove, move);
-			if (From.Configuration.Depressed
-				&& !To.Configuration.Depressed
-				&& !To.Configuration.DepressedTransition
-				&& !roaded
-				&& pathLeave < float.MaxValue)
-				move += pathLeave;
+		public TileConfiguration(SerializationInputStream Stream)
+		{
+			_Elevation = Stream.ReadByte();
+			_TileBase = TileBase.TILE_BASES[Stream.ReadByte()];
+			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
+			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
+		}
 
-			return move;
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write((byte)_Elevation);
+			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
+			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(Edge.EDGES, i)));
+			Stream.Write(_PathOverlays, i => Stream.Write((byte)Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, i)));
+		}
+
+		public void Merge(TileConfiguration Configuration)
+		{
+			if (_TileBase == TileBase.CLEAR) _TileBase = Configuration._TileBase;
+			_Elevation = Math.Max(_Elevation, Configuration._Elevation);
+			for (int i = 0; i < 6; ++i)
+			{
+				if (_PathOverlays[i] == null) _PathOverlays[i] = Configuration._PathOverlays[i];
+				if (_Edges[i] == null) _Edges[i] = Configuration._Edges[i];
+			}
+			TriggerReconfigure();
+		}
+
+		public NoAttackReason CanBeAttacked(AttackMethod AttackMethod)
+		{
+			if (AttackMethod == AttackMethod.OVERRUN)
+			{
+				if (_TileBase != TileBase.CLEAR
+					|| Edges.Any(i => i != null)
+					|| PathOverlays.Any(i => i != null && !i.RoadMove))
+					return NoAttackReason.OVERRUN_TERRAIN;
+			}
+			return NoAttackReason.NONE;
+		}
+
+		public void SetPathOverlay(int Index, TilePathOverlay PathOverlay)
+		{
+			_PathOverlays[Index] = PathOverlay;
+			TriggerReconfigure();
+		}
+
+		public void SetElevation(int Elevation)
+		{
+			_Elevation = Elevation;
+			TriggerReconfigure();
+		}
+
+		public void SetTileBase(TileBase TileBase)
+		{
+			_TileBase = TileBase;
+			TriggerReconfigure();
+		}
+
+		public TilePathOverlay GetPathOverlay(int Index)
+		{
+			return _PathOverlays[Index];
+		}
+
+		public Edge GetEdge(int Index)
+		{
+			return _Edges[Index];
+		}
+
+		public void SetEdge(int Index, Edge Edge)
+		{
+			_Edges[Index] = Edge;
+			TriggerReconfigure();
+		}
+
+		public bool HasEdge(Edge Edge)
+		{
+			return _Edges.Any(i => i == Edge);
+		}
+
+		public void TriggerReconfigure()
+		{
+			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
 		}
 	}
 }

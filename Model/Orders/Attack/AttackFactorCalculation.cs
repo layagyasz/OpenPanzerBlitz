@@ -41,7 +41,7 @@ namespace PanzerBlitz
 
 			Factors = new List<AttackFactorCalculationFactor>();
 			Attack = Unit.Configuration.Attack;
-			if (LineOfSight.Initial.Elevation < LineOfSight.Final.Elevation)
+			if (LineOfSight.Initial.Configuration.Elevation < LineOfSight.Final.Configuration.Elevation)
 			{
 				Attack /= 2;
 				Factors.Add(AttackFactorCalculationFactor.ELEVATION);

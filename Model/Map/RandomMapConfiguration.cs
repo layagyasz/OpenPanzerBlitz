@@ -71,22 +71,25 @@ namespace PanzerBlitz
 			{
 				double elevation = noise.Generate(t.Center.X, t.Center.Y);
 				if (elevation > thresholdNoise.Generate(t.Center.X, t.Center.Y) && t.OnEdge(Direction.NONE))
-					t.Elevation = 1;
+					t.Configuration.SetElevation(1);
 				else if (elevation < waterThresholdNoise.Generate(t.Center.X, t.Center.Y))
 				{
 					for (int i = 0; i < 6; ++i) t.SetEdge(i, Edge.WATER);
 				}
-				if (t.Elevation == 0 && swampNoise.Generate(t.Center.X, t.Center.Y)
+				if (t.Configuration.Elevation == 0 && swampNoise.Generate(t.Center.X, t.Center.Y)
 					< swampThresholdNoise.Generate(t.Center.X, t.Center.Y))
-					t.TileBase = TileBase.SWAMP;
+					t.Configuration.SetTileBase(TileBase.SWAMP);
 			}
 			foreach (Tile t in map.TilesEnumerable)
 			{
-				if (t.NeighborTiles.Any(i => i != null && i.Elevation > t.Elevation)) t.TileBase = TileBase.SLOPE;
+				if (t.NeighborTiles.Any(i => i != null && i.Configuration.Elevation > t.Configuration.Elevation))
+					t.Configuration.SetTileBase(TileBase.SLOPE);
 
 				for (int i = 0; i < 6; ++i)
 				{
-					if (t.TileBase == TileBase.SLOPE || t.TileBase == TileBase.SWAMP || t.GetEdge(i) == Edge.WATER)
+					if (t.Configuration.TileBase == TileBase.SLOPE
+						|| t.Configuration.TileBase == TileBase.SWAMP
+						|| t.Configuration.GetEdge(i) == Edge.WATER)
 						continue;
 
 					Vector2f v = .5f * (t.Bounds[i].Point + t.Bounds[i].End);

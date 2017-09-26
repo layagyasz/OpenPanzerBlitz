@@ -223,7 +223,7 @@
     <Compile Include="Model\Map\Tile.cs" />
     <Compile Include="Model\Map\TileBase.cs" />
     <Compile Include="Model\Map\TileComponent.cs" />
-    <Compile Include="Model\Map\TileConfiguration.cs" />
+    <Compile Include="Model\Map\TileRules.cs" />
     <Compile Include="Model\Map\TilePathOverlay.cs" />
     <Compile Include="Model\Map\RandomMapConfiguration.cs" />
     <Compile Include="Server\UnitConfigurationLock.cs" />
@@ -287,6 +287,7 @@
     <Compile Include="Model\Deployment\ConvoyMovementAutomator.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasConfiguration.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitIsHostile.cs" />
+    <Compile Include="Model\Map\TileConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

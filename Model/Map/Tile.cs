@@ -12,22 +12,18 @@ namespace PanzerBlitz
 {
 	public class Tile : Pathable<Tile>, Serializable, GameObject
 	{
-		public EventHandler<EventArgs> OnReconfigure;
 		List<Unit> _Units = new List<Unit>();
 
 		int _Id;
-		int _Elevation;
-		TileBase _TileBase;
 
 		public readonly Coordinate Coordinate;
 		public readonly HexCoordinate HexCoordinate;
 		public readonly CollisionPolygon Bounds;
 
 		public readonly Tile[] NeighborTiles = new Tile[6];
-		Edge[] _Edges = new Edge[6];
-		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
 		public readonly TileConfiguration Configuration;
+		public readonly TileRules Rules;
 
 		public int Id
 		{
@@ -36,13 +32,7 @@ namespace PanzerBlitz
 				return _Id;
 			}
 		}
-		public IEnumerable<Edge> Edges
-		{
-			get
-			{
-				return _Edges;
-			}
-		}
+
 		public Vector2f Center
 		{
 			get
@@ -50,37 +40,7 @@ namespace PanzerBlitz
 				return new Vector2f(Coordinate.X - (Coordinate.Y % 2 == 0 ? 0 : .5f), Coordinate.Y * .75f);
 			}
 		}
-		public int Elevation
-		{
-			get
-			{
-				return _Elevation;
-			}
-			set
-			{
-				_Elevation = value;
-				if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
-			}
-		}
-		public TileBase TileBase
-		{
-			get
-			{
-				return _TileBase;
-			}
-			set
-			{
-				_TileBase = value;
-				if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
-			}
-		}
-		public IEnumerable<TilePathOverlay> PathOverlays
-		{
-			get
-			{
-				return _PathOverlays;
-			}
-		}
+
 		public IEnumerable<Unit> Units
 		{
 			get
@@ -95,54 +55,26 @@ namespace PanzerBlitz
 			HexCoordinate = new HexCoordinate(Coordinate);
 			Bounds = CalculateBounds();
 
-			Configuration = new TileConfiguration(this);
-			OnReconfigure += (sender, e) => Configuration.Recalculate();
-		}
-
-		public Tile(Coordinate Coordinate, Tile Copy, bool Invert = false)
-			: this(Coordinate)
-		{
-			_Elevation = Copy.Elevation;
-			_TileBase = Copy.TileBase;
-
-			if (Invert)
-			{
-				for (int i = 0; i < 6; ++i)
-				{
-					_Edges[i] = Copy._Edges[(i + 3) % 6];
-					_PathOverlays[i] = Copy._PathOverlays[(i + 3) % 6];
-				}
-			}
-			else
-			{
-				_Edges = Copy._Edges.ToArray();
-				_PathOverlays = Copy._PathOverlays.ToArray();
-			}
-
-			OnReconfigure += (sender, e) => Configuration.Recalculate();
+			Configuration = new TileConfiguration();
+			Rules = new TileRules(this);
+			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
 		}
 
 		public Tile(SerializationInputStream Stream)
 		{
 			Coordinate = new Coordinate(Stream);
 			HexCoordinate = new HexCoordinate(Coordinate);
-			_Elevation = Stream.ReadByte();
-			_TileBase = TileBase.TILE_BASES[Stream.ReadByte()];
-			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
-			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
+			Configuration = new TileConfiguration(Stream);
 			Bounds = CalculateBounds();
 
-			Configuration = new TileConfiguration(this);
-			OnReconfigure += (sender, e) => Configuration.Recalculate();
+			Rules = new TileRules(this);
+			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Coordinate);
-			Stream.Write((byte)_Elevation);
-			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
-			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(Edge.EDGES, i)));
-			Stream.Write(_PathOverlays, i => Stream.Write((byte)Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, i)));
+			Stream.Write(Configuration);
 		}
 
 		private CollisionPolygon CalculateBounds()
@@ -190,10 +122,11 @@ namespace PanzerBlitz
 			{
 				if (NeighborTiles[i] == null) continue;
 				// There is a disconnected path.
-				if (_PathOverlays[i] != null && NeighborTiles[i].GetPathOverlay((i + 3) % 6) == null)
+				if (Configuration.GetPathOverlay(i) != null
+					&& NeighborTiles[i].Configuration.GetPathOverlay((i + 3) % 6) == null)
 				{
 					// Find other tiles disconnected path.
-					TilePathOverlay p = _PathOverlays[i];
+					TilePathOverlay p = Configuration.GetPathOverlay(i);
 					Tuple<int, int> otherPath = GetDisconntedNeighbor(p);
 					// Connect them.
 					if (otherPath != null)
@@ -214,7 +147,7 @@ namespace PanzerBlitz
 							NeighborTiles[i].ContinuePath((i + 3) % 6);
 						}
 						// Otherwise shorten.
-						else _PathOverlays[i] = null;
+						else Configuration.SetPathOverlay(i, null);
 					}
 				}
 			}
@@ -226,8 +159,8 @@ namespace PanzerBlitz
 			{
 				for (int j = 0; j < 6; ++j)
 				{
-					if (NeighborTiles[i]._PathOverlays[j] == Overlay
-						&& NeighborTiles[i].NeighborTiles[j]._PathOverlays[(j + 3) % 6] == null)
+					if (NeighborTiles[i].Configuration.GetPathOverlay(j) == Overlay
+						&& NeighborTiles[i].NeighborTiles[j].Configuration.GetPathOverlay((j + 3) % 6) == null)
 						return new Tuple<int, int>(i, j);
 				}
 			}
@@ -242,20 +175,9 @@ namespace PanzerBlitz
 				if (checkSides[i] == PathIndex) continue;
 				if (NeighborTiles[checkSides[i]] == null)
 				{
-					SetPathOverlay(checkSides[i], _PathOverlays[PathIndex]);
+					SetPathOverlay(checkSides[i], Configuration.GetPathOverlay(PathIndex));
 					return;
 				}
-			}
-		}
-
-		public void Merge(Tile Tile)
-		{
-			if (_TileBase == TileBase.CLEAR) _TileBase = Tile.TileBase;
-			_Elevation = Math.Max(_Elevation, Tile.Elevation);
-			for (int i = 0; i < 6; ++i)
-			{
-				if (_PathOverlays[i] == null) _PathOverlays[i] = Tile._PathOverlays[i];
-				if (_Edges[i] == null) _Edges[i] = Tile._Edges[i];
 			}
 		}
 
@@ -277,10 +199,7 @@ namespace PanzerBlitz
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
 				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)) return NoAttackReason.OVERRUN_FORT;
-				if (TileBase != TileBase.CLEAR
-					|| Edges.Any(i => i != null)
-					|| PathOverlays.Any(i => i != null && !i.RoadMove))
-					return NoAttackReason.OVERRUN_TERRAIN;
+				return Configuration.CanBeAttacked(AttackMethod);
 			}
 			return NoAttackReason.NONE;
 		}
@@ -309,49 +228,33 @@ namespace PanzerBlitz
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
 			NeighborTiles[Index] = Neighbor;
-			if (_Edges[Index] != null) SetEdge(Index, _Edges[Index]);
-			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
+			if (Configuration.GetEdge(Index) != null) SetEdge(Index, Configuration.GetEdge(Index));
+			Configuration.TriggerReconfigure();
 		}
 
 		public void SetPathOverlay(int Index, TilePathOverlay PathOverlay)
 		{
-			_PathOverlays[Index] = PathOverlay;
-			if (NeighborTiles[Index] != null && NeighborTiles[Index]._PathOverlays[(Index + 3) % 6] != PathOverlay)
+			Configuration.SetPathOverlay(Index, PathOverlay);
+			if (NeighborTiles[Index] != null
+				&& NeighborTiles[Index].Configuration.GetPathOverlay((Index + 3) % 6) != PathOverlay)
 				NeighborTiles[Index].SetPathOverlay((Index + 3) % 6, PathOverlay);
-			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
-		}
-
-		public TilePathOverlay GetPathOverlay(int Index)
-		{
-			return _PathOverlays[Index];
 		}
 
 		public TilePathOverlay GetPathOverlay(Tile Neighbor)
 		{
-			return _PathOverlays[Array.IndexOf(NeighborTiles, Neighbor)];
-		}
-
-		public Edge GetEdge(int Index)
-		{
-			return _Edges[Index];
+			return Configuration.GetPathOverlay(Array.IndexOf(NeighborTiles, Neighbor));
 		}
 
 		public Edge GetEdge(Tile Neighbor)
 		{
-			return _Edges[Array.IndexOf(NeighborTiles, Neighbor)];
+			return Configuration.GetEdge(Array.IndexOf(NeighborTiles, Neighbor));
 		}
 
 		public void SetEdge(int Index, Edge Edge)
 		{
-			_Edges[Index] = Edge;
-			if (NeighborTiles[Index] != null && NeighborTiles[Index]._Edges[(Index + 3) % 6] != Edge)
+			Configuration.SetEdge(Index, Edge);
+			if (NeighborTiles[Index] != null && NeighborTiles[Index].Configuration.GetEdge((Index + 3) % 6) != Edge)
 				NeighborTiles[Index].SetEdge((Index + 3) % 6, Edge);
-			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);
-		}
-
-		public bool HasEdge(Edge Edge)
-		{
-			return _Edges.Any(i => i == Edge);
 		}
 
 		public void Enter(Unit Unit)

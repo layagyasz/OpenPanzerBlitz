@@ -49,7 +49,6 @@ namespace PanzerBlitz
 				for (int j = 0; j < Height; ++j)
 				{
 					Tiles[i, j] = new Tile(new Coordinate(i, j));
-					Tiles[i, j].TileBase = TileBase.CLEAR;
 				}
 			}
 			Ready();
@@ -91,12 +90,11 @@ namespace PanzerBlitz
 						int x = From.GetLength(0) - i - 1 - ((Y + j) % 2 == 0 ? 1 : 0);
 						if (x < From.GetLength(0) && x >= 0)
 						{
-							Tile newTile = new Tile(
-								new Coordinate(X + i, Y + j), From[x, From.GetLength(1) - j - 1], Invert);
-							Tiles[X + i, Y + j].Merge(newTile);
+							Tiles[X + i, Y + j].Configuration.Merge(new TileConfiguration(
+								From[x, From.GetLength(1) - j - 1].Configuration, Invert));
 						}
 					}
-					else Tiles[X + i, Y + j].Merge(new Tile(new Coordinate(X + i, Y + j), From[i, j]));
+					else Tiles[X + i, Y + j].Configuration.Merge(From[i, j].Configuration);
 				}
 			}
 		}
