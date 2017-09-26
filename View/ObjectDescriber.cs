@@ -13,5 +13,20 @@ namespace PanzerBlitz
 		{
 			return Unit.Configuration.Name;
 		}
+
+		public static string Describe(TileBase TileBase)
+		{
+			return TileBase.ToString();
+		}
+
+		public static string Describe(TileEdge TileEdge)
+		{
+			return TileEdge.ToString();
+		}
+
+		public static string Describe(TilePathOverlay TilePathOverlay)
+		{
+			return TilePathOverlay.ToString();
+		}
 	}
 }

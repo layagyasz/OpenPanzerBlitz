@@ -60,9 +60,9 @@ namespace PanzerBlitz
 			NoDeployReason noEnter = _InitialMovement.Unit.CanEnter(ExitTile, true);
 			if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
 
-			float distance1 = _InitialMovement.Path.Destination.Rules.GetMoveCost(
+			float distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);
-			float distance2 = AttackTile.Rules.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
+			float distance2 = AttackTile.RulesCalculator.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
 			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
 				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 

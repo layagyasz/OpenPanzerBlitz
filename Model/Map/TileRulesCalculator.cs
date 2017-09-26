@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class TileRules
+	public class TileRulesCalculator
 	{
 		public readonly Tile Tile;
 
@@ -70,7 +70,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public TileRules(Tile Tile)
+		public TileRulesCalculator(Tile Tile)
 		{
 			this.Tile = Tile;
 			Recalculate();
@@ -94,7 +94,7 @@ namespace PanzerBlitz
 				return float.MaxValue;
 
 			int index = Array.IndexOf(Tile.NeighborTiles, To);
-			TilePathOverlay pathOverlay = Tile.GetPathOverlay(To);
+			TileComponentRules pathOverlay = Tile.RuleSet.GetRules(Tile.Configuration.GetPathOverlay(index));
 
 			if (RoadMovement
 				&& pathOverlay != null
@@ -108,41 +108,41 @@ namespace PanzerBlitz
 
 		public void Recalculate()
 		{
-			if (Tile.Configuration.TileBase == null) return;
+			if (Tile.RuleSet == null) return;
 
-			_MustAttackAllUnits = Tile.Configuration.TileBase.MustAttackAllUnits
-									  || Tile.Configuration.Edges.Any(i => i != null && i.MustAttackAllUnits)
-									  || Tile.Configuration.PathOverlays.Any(i => i != null && i.MustAttackAllUnits);
-			_TreatUnitsAsArmored = Tile.Configuration.TileBase.TreatUnitsAsArmored
-									   || Tile.Configuration.Edges.Any(i => i != null && i.TreatUnitsAsArmored)
-									   || Tile.Configuration.PathOverlays.Any(i => i != null && i.TreatUnitsAsArmored);
-			_Depressed = Tile.Configuration.TileBase.Depressed
-							 || Tile.Configuration.Edges.Any(i => i != null && i.Depressed)
-							 || Tile.Configuration.PathOverlays.Any(i => i != null && i.Depressed);
-			_DepressedTransition = Tile.Configuration.TileBase.DepressedTransition
-									   || Tile.Configuration.Edges.Any(i => i != null && i.DepressedTransition)
-									   || Tile.Configuration.PathOverlays.Any(i => i != null && i.DepressedTransition);
-			_Concealing = Tile.Configuration.TileBase.Concealing
-							  || Tile.Configuration.Edges.Any(i => i != null && i.Concealing)
-							  || Tile.Configuration.PathOverlays.Any(i => i != null && i.Concealing);
+			_MustAttackAllUnits = Tile.GetBaseRules().MustAttackAllUnits
+									  || Tile.GetEdgeRules().Any(i => i != null && i.MustAttackAllUnits)
+									  || Tile.GetPathOverlayRules().Any(i => i != null && i.MustAttackAllUnits);
+			_TreatUnitsAsArmored = Tile.GetBaseRules().TreatUnitsAsArmored
+									   || Tile.GetEdgeRules().Any(i => i != null && i.TreatUnitsAsArmored)
+									   || Tile.GetPathOverlayRules().Any(i => i != null && i.TreatUnitsAsArmored);
+			_Depressed = Tile.GetBaseRules().Depressed
+							 || Tile.GetEdgeRules().Any(i => i != null && i.Depressed)
+							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Depressed);
+			_DepressedTransition = Tile.GetBaseRules().DepressedTransition
+									   || Tile.GetEdgeRules().Any(i => i != null && i.DepressedTransition)
+									   || Tile.GetPathOverlayRules().Any(i => i != null && i.DepressedTransition);
+			_Concealing = Tile.GetBaseRules().Concealing
+							  || Tile.GetEdgeRules().Any(i => i != null && i.Concealing)
+							  || Tile.GetPathOverlayRules().Any(i => i != null && i.Concealing);
 
 			_DieModifier =
 				Math.Max(
-					Tile.Configuration.TileBase.DieModifier,
+					Tile.GetBaseRules().DieModifier,
 					Math.Max(
-						Tile.Configuration.Edges.Max(i => i == null ? 0 : i.DieModifier),
-						Tile.Configuration.PathOverlays.Max(i => i == null ? 0 : i.DieModifier)));
-			_TrueElevation = 2 * Tile.Configuration.Elevation + (Tile.Configuration.TileBase.Elevated
-												|| Tile.Configuration.Edges.Any(i => i != null && i.Elevated)
-												|| Tile.Configuration.PathOverlays.Any(i => i != null && i.Elevated)
-																 ? 1 : 0);
+						Tile.GetEdgeRules().Max(i => i == null ? 0 : i.DieModifier),
+						Tile.GetPathOverlayRules().Max(i => i == null ? 0 : i.DieModifier)));
+			_TrueElevation = 2 * Tile.Configuration.Elevation
+									 + (Tile.GetBaseRules().Elevated
+										|| Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
+										|| Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated) ? 1 : 0);
 
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
 				Tile n = Tile.NeighborTiles[i];
 				if (n == null) continue;
 
-				Edge e = Tile.Configuration.GetEdge(i);
+				TileComponentRules e = Tile.GetEdgeRules(i);
 
 				_RoadMovement[i] = CalculateMovement(
 					Tile, n, e, true, false, false);
@@ -153,22 +153,22 @@ namespace PanzerBlitz
 		}
 
 		float CalculateMovement(
-			Tile From, Tile To, Edge Edge, bool RoadMovement, bool TruckMovement, bool VehicleMovement)
+			Tile From, Tile To, TileComponentRules Edge, bool RoadMovement, bool TruckMovement, bool VehicleMovement)
 		{
 			bool blockingEdge = Edge != null && (Edge.NoCrossing || (VehicleMovement && Edge.NoVehicleCrossing));
 
 			if (!RoadMovement
 				&& (blockingEdge
-					|| To.Configuration.TileBase.NoCrossing
-					|| (VehicleMovement && To.Configuration.TileBase.NoVehicleCrossing)))
+					|| To.GetBaseRules().NoCrossing
+					|| (VehicleMovement && To.GetBaseRules().NoVehicleCrossing)))
 				return float.MaxValue;
 
-			float move = TruckMovement ? To.Configuration.TileBase.TruckMoveCost : To.Configuration.TileBase.MoveCost;
+			float move = TruckMovement ? To.GetBaseRules().TruckMoveCost : To.GetBaseRules().MoveCost;
 
 			float edgeMove = float.MaxValue;
 			for (int i = 0; i < 6; ++i)
 			{
-				Edge e = To.Configuration.GetEdge(i);
+				TileComponentRules e = To.GetEdgeRules(i);
 				if (e == null) continue;
 
 				float eMove = TruckMovement ? e.TruckMoveCost : e.MoveCost;
@@ -180,7 +180,7 @@ namespace PanzerBlitz
 			bool roaded = false;
 			for (int i = 0; i < 6; ++i)
 			{
-				TilePathOverlay p = To.Configuration.GetPathOverlay(i);
+				TileComponentRules p = To.GetPathOverlayRules(i);
 				if (p != null)
 				{
 					float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
@@ -188,7 +188,7 @@ namespace PanzerBlitz
 					if (p.RoadMove) roaded = true;
 				}
 
-				TilePathOverlay p2 = From.Configuration.GetPathOverlay(i);
+				TileComponentRules p2 = From.GetPathOverlayRules(i);
 				if (p2 != null)
 				{
 					float pLeave = TruckMovement ? p2.TruckLeaveCost : p2.LeaveCost;
@@ -198,9 +198,9 @@ namespace PanzerBlitz
 
 			if (edgeMove < float.MaxValue) move = edgeMove;
 			if (pathMove < float.MaxValue) move = Math.Min(pathMove, move);
-			if (From.Rules.Depressed
-				&& !To.Rules.Depressed
-				&& !To.Rules.DepressedTransition
+			if (From.RulesCalculator.Depressed
+				&& !To.RulesCalculator.Depressed
+				&& !To.RulesCalculator.DepressedTransition
 				&& !roaded
 				&& pathLeave < float.MaxValue)
 				move += pathLeave;

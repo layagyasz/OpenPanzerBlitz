@@ -25,9 +25,9 @@ namespace PanzerBlitz
 		public RandomMapConfiguration(SerializationInputStream Stream)
 			: this(Stream.ReadInt32(), Stream.ReadInt32()) { }
 
-		public Map GenerateMap()
+		public Map GenerateMap(IdGenerator IdGenerator)
 		{
-			Map map = new Map(_Width, _Height);
+			Map map = new Map(_Width, _Height, TileRuleSet.SUMMER_STEPPE, IdGenerator);
 
 			LatticeNoiseGenerator thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
 			{
@@ -74,7 +74,7 @@ namespace PanzerBlitz
 					t.Configuration.SetElevation(1);
 				else if (elevation < waterThresholdNoise.Generate(t.Center.X, t.Center.Y))
 				{
-					for (int i = 0; i < 6; ++i) t.SetEdge(i, Edge.WATER);
+					for (int i = 0; i < 6; ++i) t.SetEdge(i, TileEdge.WATER);
 				}
 				if (t.Configuration.Elevation == 0 && swampNoise.Generate(t.Center.X, t.Center.Y)
 					< swampThresholdNoise.Generate(t.Center.X, t.Center.Y))
@@ -89,17 +89,17 @@ namespace PanzerBlitz
 				{
 					if (t.Configuration.TileBase == TileBase.SLOPE
 						|| t.Configuration.TileBase == TileBase.SWAMP
-						|| t.Configuration.GetEdge(i) == Edge.WATER)
+						|| t.Configuration.GetEdge(i) == TileEdge.WATER)
 						continue;
 
 					Vector2f v = .5f * (t.Bounds[i].Point + t.Bounds[i].End);
 					if (forestNoise.Generate(v.X, v.Y) > forestThresholdNoise.Generate(v.X, v.Y))
-						t.SetEdge(i, Edge.FOREST);
+						t.SetEdge(i, TileEdge.FOREST);
 					if (townNoise.Generate(t.Bounds[i].Point.X, t.Bounds[i].Point.Y)
 						> townThresholdNoise.Generate(t.Bounds[i].Point.X, t.Bounds[i].Point.Y)
 					   || townNoise.Generate(t.Bounds[i].End.X, t.Bounds[i].End.Y)
 						> townThresholdNoise.Generate(t.Bounds[i].End.X, t.Bounds[i].End.Y))
-						t.SetEdge(i, Edge.TOWN);
+						t.SetEdge(i, TileEdge.TOWN);
 				}
 			}
 

@@ -138,7 +138,7 @@ namespace PanzerBlitz
 				return NoSingleAttackReason.TEAM;
 			if (_Carrier != null) return NoSingleAttackReason.PASSENGER;
 			if (_Position == null) return NoSingleAttackReason.ILLEGAL;
-			if (_Position.Rules.Concealing && !Army.CanSeeUnit(this)) return NoSingleAttackReason.CONCEALED;
+			if (_Position.RulesCalculator.Concealing && !Army.CanSeeUnit(this)) return NoSingleAttackReason.CONCEALED;
 			return NoSingleAttackReason.NONE;
 		}
 
@@ -359,7 +359,7 @@ namespace PanzerBlitz
 				_Position,
 				Tile,
 				i => true,
-				(i, j) => i.Rules.GetMoveCost(this, j, !Combat),
+				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat),
 				(i, j) => i.HeuristicDistanceTo(j),
 				i => i.Neighbors(),
 				(i, j) => i == j);
@@ -395,16 +395,16 @@ namespace PanzerBlitz
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
 				_Position.NeighborTiles
-		   			.Where(i => i != null && _Position.Rules.CanMove(this, i, !Combat, false))
+		   			.Where(i => i != null && _Position.RulesCalculator.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, _Position, _Position.Rules.GetMoveCost(this, i, !Combat)));
+							 i, _Position, _Position.RulesCalculator.GetMoveCost(this, i, !Combat)));
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				_Position,
 				RemainingMovement,
-				(i, j) => i.Rules.GetMoveCost(this, j, !Combat))
+				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat))
 					.GetReachableNodes();
 
 			if (!Moved)

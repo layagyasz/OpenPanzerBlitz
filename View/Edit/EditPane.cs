@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		Select<GuiItem> _ModeSelect = new Select<GuiItem>("select");
 
 		Select<TileBase> _TileBaseSelect = new Select<TileBase>("select");
-		Select<Edge> _EdgeSelect = new Select<Edge>("select");
+		Select<TileEdge> _EdgeSelect = new Select<TileEdge>("select");
 		Select<TilePathOverlay> _PathOverlaySelect = new Select<TilePathOverlay>("select");
 		Button _Elevation = new Button("select-option") { DisplayedString = "Left/Right Click" };
 
@@ -46,18 +46,26 @@ namespace PanzerBlitz
 			_EdgeSelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
 			_Elevation.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
 
-			foreach (TileBase t in TileBase.TILE_BASES)
+			foreach (TileBase t in Enum.GetValues(typeof(TileBase)).Cast<TileBase>().Where(i => i != TileBase.CLEAR))
 				_TileBaseSelect.Add(
-					new SelectionOption<TileBase>("select-option") { DisplayedString = t.Name, Value = t });
+					new SelectionOption<TileBase>("select-option")
+					{
+						DisplayedString = ObjectDescriber.Describe(t),
+						Value = t
+					});
 
-			foreach (Edge e in Edge.EDGES.Where(i => i != null))
-				_EdgeSelect.Add(
-					new SelectionOption<Edge>("select-option") { DisplayedString = e.Name, Value = e });
+			foreach (TileEdge e in Enum.GetValues(typeof(TileEdge)).Cast<TileEdge>().Where(i => i != TileEdge.NONE))
+				_EdgeSelect.Add(new SelectionOption<TileEdge>("select-option")
+				{
+					DisplayedString = ObjectDescriber.Describe(e),
+					Value = e
+				});
 
-			foreach (TilePathOverlay t in TilePathOverlay.PATH_OVERLAYS.Where(i => i != null))
+			foreach (TilePathOverlay t in Enum.GetValues(typeof(TilePathOverlay))
+					 .Cast<TilePathOverlay>().Where(i => i != TilePathOverlay.NONE))
 				_PathOverlaySelect.Add(new SelectionOption<TilePathOverlay>("select-option")
 				{
-					DisplayedString = t.Name,
+					DisplayedString = ObjectDescriber.Describe(t),
 					Value = t
 				});
 
@@ -108,7 +116,7 @@ namespace PanzerBlitz
 			if (_ModeSelect.Value.Value == _EdgeSelect)
 			{
 				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
-				Tile.SetEdge(index, null);
+				Tile.SetEdge(index, TileEdge.NONE);
 			}
 			else if (_ModeSelect.Value.Value == _TileBaseSelect)
 			{
@@ -117,7 +125,7 @@ namespace PanzerBlitz
 			else if (_ModeSelect.Value.Value == _PathOverlaySelect)
 			{
 				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
-				Tile.SetPathOverlay(index, null);
+				Tile.SetPathOverlay(index, TilePathOverlay.NONE);
 			}
 			else if (_ModeSelect.Value.Value == _Elevation)
 			{

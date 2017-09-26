@@ -51,7 +51,7 @@ namespace PanzerBlitz
 				noEnter = Unit.CanEnter(Path[i + 1]);
 				if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
 
-				float d = Path[i].Rules.GetMoveCost(Unit, Path[i + 1], !Combat);
+				float d = Path[i].RulesCalculator.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
 			}
 			if (Path.Distance > Unit.RemainingMovement)

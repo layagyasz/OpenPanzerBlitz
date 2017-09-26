@@ -38,7 +38,9 @@ namespace PanzerBlitz
 		public Tuple<Map, bool> LoadMap()
 		{
 			FileStream f = FileUtils.GetStream(BoardPath, FileMode.Open, 1000);
-			Map m = new Map(new SerializationInputStream(new GZipStream(f, CompressionMode.Decompress)));
+			Map m = new Map(
+				new SerializationInputStream(
+					new GZipStream(f, CompressionMode.Decompress)), null, new IdGenerator());
 			f.Close();
 			return new Tuple<Map, bool>(m, Invert);
 		}

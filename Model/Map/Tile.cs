@@ -14,8 +14,7 @@ namespace PanzerBlitz
 	{
 		List<Unit> _Units = new List<Unit>();
 
-		int _Id;
-
+		public int Id { get; }
 		public readonly Coordinate Coordinate;
 		public readonly HexCoordinate HexCoordinate;
 		public readonly CollisionPolygon Bounds;
@@ -23,15 +22,8 @@ namespace PanzerBlitz
 		public readonly Tile[] NeighborTiles = new Tile[6];
 
 		public readonly TileConfiguration Configuration;
-		public readonly TileRules Rules;
-
-		public int Id
-		{
-			get
-			{
-				return _Id;
-			}
-		}
+		public readonly TileRulesCalculator RulesCalculator;
+		public readonly TileRuleSet RuleSet;
 
 		public Vector2f Center
 		{
@@ -49,26 +41,30 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Tile(Coordinate Coordinate)
+		public Tile(Coordinate Coordinate, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
 			this.Coordinate = Coordinate;
+			this.RuleSet = RuleSet;
+			Id = IdGenerator.GenerateId();
 			HexCoordinate = new HexCoordinate(Coordinate);
 			Bounds = CalculateBounds();
 
 			Configuration = new TileConfiguration();
-			Rules = new TileRules(this);
-			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
+			RulesCalculator = new TileRulesCalculator(this);
+			Configuration.OnReconfigure += (sender, e) => RulesCalculator.Recalculate();
 		}
 
-		public Tile(SerializationInputStream Stream)
+		public Tile(SerializationInputStream Stream, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
 			Coordinate = new Coordinate(Stream);
 			HexCoordinate = new HexCoordinate(Coordinate);
+			Id = IdGenerator.GenerateId();
 			Configuration = new TileConfiguration(Stream);
 			Bounds = CalculateBounds();
 
-			Rules = new TileRules(this);
-			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
+			this.RuleSet = RuleSet;
+			RulesCalculator = new TileRulesCalculator(this);
+			Configuration.OnReconfigure += (sender, e) => RulesCalculator.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -111,19 +107,14 @@ namespace PanzerBlitz
 		}
 		// Pathable
 
-		public void GiveId(IdGenerator IdGenerator)
-		{
-			_Id = IdGenerator.GenerateId();
-		}
-
 		public void FixPaths()
 		{
 			for (int i = 0; i < 6; ++i)
 			{
 				if (NeighborTiles[i] == null) continue;
 				// There is a disconnected path.
-				if (Configuration.GetPathOverlay(i) != null
-					&& NeighborTiles[i].Configuration.GetPathOverlay((i + 3) % 6) == null)
+				if (Configuration.GetPathOverlay(i) != TilePathOverlay.NONE
+					&& NeighborTiles[i].Configuration.GetPathOverlay((i + 3) % 6) == TilePathOverlay.NONE)
 				{
 					// Find other tiles disconnected path.
 					TilePathOverlay p = Configuration.GetPathOverlay(i);
@@ -131,10 +122,10 @@ namespace PanzerBlitz
 					// Connect them.
 					if (otherPath != null)
 					{
-						SetPathOverlay(i, null);
+						SetPathOverlay(i, TilePathOverlay.NONE);
 						SetPathOverlay(otherPath.Item1, p);
 
-						NeighborTiles[i].SetPathOverlay(otherPath.Item2, null);
+						NeighborTiles[i].SetPathOverlay(otherPath.Item2, TilePathOverlay.NONE);
 						NeighborTiles[i].SetPathOverlay((otherPath.Item1 + 3) % 6, p);
 					}
 					// Could not find another path.
@@ -147,7 +138,7 @@ namespace PanzerBlitz
 							NeighborTiles[i].ContinuePath((i + 3) % 6);
 						}
 						// Otherwise shorten.
-						else Configuration.SetPathOverlay(i, null);
+						else Configuration.SetPathOverlay(i, TilePathOverlay.NONE);
 					}
 				}
 			}
@@ -160,7 +151,8 @@ namespace PanzerBlitz
 				for (int j = 0; j < 6; ++j)
 				{
 					if (NeighborTiles[i].Configuration.GetPathOverlay(j) == Overlay
-						&& NeighborTiles[i].NeighborTiles[j].Configuration.GetPathOverlay((j + 3) % 6) == null)
+						&& NeighborTiles[i].NeighborTiles[j].Configuration.GetPathOverlay(
+							(j + 3) % 6) == TilePathOverlay.NONE)
 						return new Tuple<int, int>(i, j);
 				}
 			}
@@ -199,7 +191,11 @@ namespace PanzerBlitz
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
 				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)) return NoAttackReason.OVERRUN_FORT;
-				return Configuration.CanBeAttacked(AttackMethod);
+				if (Configuration.TileBase != TileBase.CLEAR
+					|| Configuration.Edges.Any(i => i != TileEdge.NONE)
+					|| Configuration.PathOverlays.Any(
+						i => i != TilePathOverlay.NONE && !RuleSet.GetRules(i).RoadMove))
+					return NoAttackReason.OVERRUN_TERRAIN;
 			}
 			return NoAttackReason.NONE;
 		}
@@ -228,7 +224,7 @@ namespace PanzerBlitz
 		public void SetNeighbor(int Index, Tile Neighbor)
 		{
 			NeighborTiles[Index] = Neighbor;
-			if (Configuration.GetEdge(Index) != null) SetEdge(Index, Configuration.GetEdge(Index));
+			if (Configuration.GetEdge(Index) != TileEdge.NONE) SetEdge(Index, Configuration.GetEdge(Index));
 			Configuration.TriggerReconfigure();
 		}
 
@@ -245,12 +241,42 @@ namespace PanzerBlitz
 			return Configuration.GetPathOverlay(Array.IndexOf(NeighborTiles, Neighbor));
 		}
 
-		public Edge GetEdge(Tile Neighbor)
+		public TileEdge GetEdge(Tile Neighbor)
 		{
 			return Configuration.GetEdge(Array.IndexOf(NeighborTiles, Neighbor));
 		}
 
-		public void SetEdge(int Index, Edge Edge)
+		public TileComponentRules GetBaseRules()
+		{
+			return RuleSet.GetRules(Configuration.TileBase);
+		}
+
+		public IEnumerable<TileComponentRules> GetEdgeRules()
+		{
+			return Configuration.Edges.Select(i => RuleSet.GetRules(i));
+		}
+
+		public TileComponentRules GetEdgeRules(int Index)
+		{
+			return RuleSet.GetRules(Configuration.GetEdge(Index));
+		}
+
+		public TileComponentRules GetEdgeRules(Tile Neighbor)
+		{
+			return RuleSet.GetRules(GetEdge(Neighbor));
+		}
+
+		public IEnumerable<TileComponentRules> GetPathOverlayRules()
+		{
+			return Configuration.PathOverlays.Select(i => RuleSet.GetRules(i));
+		}
+
+		public TileComponentRules GetPathOverlayRules(int Index)
+		{
+			return RuleSet.GetRules(Configuration.GetPathOverlay(Index));
+		}
+
+		public void SetEdge(int Index, TileEdge Edge)
 		{
 			Configuration.SetEdge(Index, Edge);
 			if (NeighborTiles[Index] != null && NeighborTiles[Index].Configuration.GetEdge((Index + 3) % 6) != Edge)

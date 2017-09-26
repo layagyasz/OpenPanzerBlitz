@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	public class LineOfSight
 	{
 		Tile[] _LineOfSight;
-		Edge[] _CrossedEdges;
+		TileComponentRules[] _CrossedEdges;
 
 		NoLineOfSightReason _Validated;
 
@@ -52,29 +52,14 @@ namespace PanzerBlitz
 				To,
 				i => true,
 				(i, j) => 1,
-				(i, j) => s.DistanceSquared(j.Center),
+				(i, j) => s.DistanceSquared(i.Center),
 				i => i.Neighbors(),
 				(i, j) => i == j).Nodes.ToArray();
-			Edge[] crossedEdgesA = new Edge[losA.Length - 1];
+			TileComponentRules[] crossedEdgesA = new TileComponentRules[losA.Length - 1];
 
 			for (int i = 0; i < losA.Length - 1; ++i)
 			{
-				crossedEdgesA[i] = losA[i].GetEdge(losA[i + 1]);
-			}
-
-			Tile[] losB = new Path<Tile>(
-				To,
-				From,
-				i => true,
-				(i, j) => 1,
-				(i, j) => s.DistanceSquared(j.Center),
-				i => i.Neighbors(),
-				(i, j) => i == j).Nodes.Reverse().ToArray();
-			Edge[] crossedEdgesB = new Edge[losB.Length - 1];
-
-			for (int i = 0; i < losB.Length - 1; ++i)
-			{
-				crossedEdgesB[i] = losB[i].GetEdge(losB[i + 1]);
+				crossedEdgesA[i] = losA[i].GetEdgeRules(losA[i + 1]);
 			}
 
 			NoLineOfSightReason losAVerify = Verify(losA, crossedEdgesA);
@@ -86,6 +71,21 @@ namespace PanzerBlitz
 			}
 			else
 			{
+				Tile[] losB = new Path<Tile>(
+					To,
+					From,
+					i => true,
+					(i, j) => 1,
+					(i, j) => s.DistanceSquared(i.Center),
+					i => i.Neighbors(),
+					(i, j) => i == j).Nodes.Reverse().ToArray();
+				TileComponentRules[] crossedEdgesB = new TileComponentRules[losB.Length - 1];
+
+				for (int i = 0; i < losB.Length - 1; ++i)
+				{
+					crossedEdgesB[i] = losB[i].GetEdgeRules(losB[i + 1]);
+				}
+
 				NoLineOfSightReason losBVerify = Verify(losB, crossedEdgesB);
 				if (losBVerify != NoLineOfSightReason.NONE)
 				{
@@ -107,16 +107,16 @@ namespace PanzerBlitz
 			return _Validated;
 		}
 
-		static NoLineOfSightReason Verify(Tile[] LineOfSight, Edge[] CrossedEdges)
+		static NoLineOfSightReason Verify(Tile[] LineOfSight, TileComponentRules[] CrossedEdges)
 		{
 			// Always LOS if adjacent.
 			if (CrossedEdges.Length <= 1) return NoLineOfSightReason.NONE;
 
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;
-			Edge[] edges = null;
-			if (LineOfSight[0].Rules.TrueElevation
-				> LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation)
+			TileComponentRules[] edges = null;
+			if (LineOfSight[0].RulesCalculator.TrueElevation
+				> LineOfSight[LineOfSight.Length - 1].RulesCalculator.TrueElevation)
 			{
 				los = LineOfSight.Reverse().ToArray();
 				edges = CrossedEdges.Reverse().ToArray();
@@ -134,7 +134,7 @@ namespace PanzerBlitz
 			return NoLineOfSightReason.NONE;
 		}
 
-		static bool EdgeBlocks(Tile[] LineOfSight, Edge[] Edges)
+		static bool EdgeBlocks(Tile[] LineOfSight, TileComponentRules[] Edges)
 		{
 			if (LineOfSight[0].Configuration.Elevation == LineOfSight[LineOfSight.Length - 1].Configuration.Elevation)
 			{
@@ -161,20 +161,20 @@ namespace PanzerBlitz
 
 		static bool DepressionBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].Rules.Depressed)
+			if (LineOfSight[0].RulesCalculator.Depressed)
 				return LineOfSight[LineOfSight.Length - 1]
-					.Rules.TrueElevation <= LineOfSight[0].Rules.TrueElevation
-					|| LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
-			return LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
+					.RulesCalculator.TrueElevation <= LineOfSight[0].RulesCalculator.TrueElevation
+					|| LineOfSight[LineOfSight.Length - 1].RulesCalculator.Depressed;
+			return LineOfSight[LineOfSight.Length - 1].RulesCalculator.Depressed;
 		}
 
 		static bool ElevationBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].Rules.TrueElevation
-				== LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation)
+			if (LineOfSight[0].RulesCalculator.TrueElevation
+				== LineOfSight[LineOfSight.Length - 1].RulesCalculator.TrueElevation)
 			{
 				return LineOfSight.Any(
-					i => i.Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation);
+					i => i.RulesCalculator.TrueElevation > LineOfSight[0].RulesCalculator.TrueElevation);
 			}
 			else
 			{
@@ -182,12 +182,12 @@ namespace PanzerBlitz
 					&& LineOfSight[0].Configuration.Elevation == LineOfSight[1].Configuration.Elevation) return false;
 				for (int i = 0; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1); ++i)
 				{
-					if (LineOfSight[i].Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation)
+					if (LineOfSight[i].RulesCalculator.TrueElevation > LineOfSight[0].RulesCalculator.TrueElevation)
 						return true;
 				}
 				return LineOfSight.Any(
-					i => i.Rules.TrueElevation > LineOfSight[0].Rules.TrueElevation
-					&& i.Rules.TrueElevation > LineOfSight[LineOfSight.Length - 1].Rules.TrueElevation);
+					i => i.RulesCalculator.TrueElevation > LineOfSight[0].RulesCalculator.TrueElevation
+					&& i.RulesCalculator.TrueElevation > LineOfSight[LineOfSight.Length - 1].RulesCalculator.TrueElevation);
 			}
 		}
 	}

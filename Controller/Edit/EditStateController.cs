@@ -12,7 +12,7 @@ namespace PanzerBlitz
 		{
 			EditScreen screen = new EditScreen(
 				ProgramContext.ScreenResolution,
-				new Map(11, 33),
+				new Map(11, 33, null, new IdGenerator()),
 				TileRenderer.SUMMER_STEPPE);
 			_Controller = new EditController(screen);
 

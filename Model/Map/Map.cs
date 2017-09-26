@@ -41,25 +41,25 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Map(int Width, int Height)
+		public Map(int Width, int Height, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
 			Tiles = new Tile[Width, Height];
 			for (int i = 0; i < Width; ++i)
 			{
 				for (int j = 0; j < Height; ++j)
 				{
-					Tiles[i, j] = new Tile(new Coordinate(i, j));
+					Tiles[i, j] = new Tile(new Coordinate(i, j), RuleSet, IdGenerator);
 				}
 			}
 			Ready();
 		}
 
-		public Map(SerializationInputStream Stream)
+		public Map(SerializationInputStream Stream, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
 			int width = Stream.ReadInt32();
 			int height = Stream.ReadInt32();
 			Tiles = new Tile[width, height];
-			IEnumerator<Tile> tiles = Stream.ReadEnumerable(i => new Tile(i)).GetEnumerator();
+			IEnumerator<Tile> tiles = Stream.ReadEnumerable(i => new Tile(i, RuleSet, IdGenerator)).GetEnumerator();
 
 			for (int i = 0; i < width; ++i)
 			{

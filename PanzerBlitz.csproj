@@ -216,14 +216,14 @@
     <Compile Include="Model\Map\BoardCompositeMapConfiguration.cs" />
     <Compile Include="Model\Map\Coordinate.cs" />
     <Compile Include="Model\Map\Direction.cs" />
-    <Compile Include="Model\Map\Edge.cs" />
+    <Compile Include="Model\Map\TileEdge.cs" />
     <Compile Include="Model\Map\HexCoordinate.cs" />
     <Compile Include="Model\Map\Map.cs" />
     <Compile Include="Model\Map\MapConfiguration.cs" />
     <Compile Include="Model\Map\Tile.cs" />
     <Compile Include="Model\Map\TileBase.cs" />
-    <Compile Include="Model\Map\TileComponent.cs" />
-    <Compile Include="Model\Map\TileRules.cs" />
+    <Compile Include="Model\Map\TileComponentRules.cs" />
+    <Compile Include="Model\Map\TileRulesCalculator.cs" />
     <Compile Include="Model\Map\TilePathOverlay.cs" />
     <Compile Include="Model\Map\RandomMapConfiguration.cs" />
     <Compile Include="Server\UnitConfigurationLock.cs" />
@@ -288,6 +288,7 @@
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasConfiguration.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitIsHostile.cs" />
     <Compile Include="Model\Map\TileConfiguration.cs" />
+    <Compile Include="Model\Map\TileRuleSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

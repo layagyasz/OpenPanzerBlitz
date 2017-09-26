@@ -62,7 +62,7 @@ namespace PanzerBlitz
 		void New(object Sender, ValuedEventArgs<Vector2i> E)
 		{
 			NewMapPane pane = (NewMapPane)Sender;
-			Map newMap = new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap();
+			Map newMap = new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap(new IdGenerator());
 			_GameScreen.SetMap(newMap);
 			pane.Visible = false;
 		}
@@ -89,7 +89,11 @@ namespace PanzerBlitz
 			{
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))
 				{
-					_GameScreen.SetMap(new Map(new SerializationInputStream(compressionStream)));
+					_GameScreen.SetMap(
+						new Map(
+							new SerializationInputStream(compressionStream),
+							null,
+							new IdGenerator()));
 					foreach (TileView t in _GameScreen.MapView.TilesEnumerable)
 					{
 						t.OnClick += OnTileClick;

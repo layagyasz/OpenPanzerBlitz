@@ -11,7 +11,7 @@ namespace PanzerBlitz
 
 		int _Elevation;
 		TileBase _TileBase;
-		Edge[] _Edges = new Edge[6];
+		TileEdge[] _Edges = new TileEdge[6];
 		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
 		public int Elevation
@@ -36,7 +36,7 @@ namespace PanzerBlitz
 
 			}
 		}
-		public IEnumerable<Edge> Edges
+		public IEnumerable<TileEdge> Edges
 		{
 			get
 			{
@@ -72,17 +72,17 @@ namespace PanzerBlitz
 		public TileConfiguration(SerializationInputStream Stream)
 		{
 			_Elevation = Stream.ReadByte();
-			_TileBase = TileBase.TILE_BASES[Stream.ReadByte()];
-			_Edges = Stream.ReadArray(i => Edge.EDGES[Stream.ReadByte()]);
-			_PathOverlays = Stream.ReadArray(i => TilePathOverlay.PATH_OVERLAYS[Stream.ReadByte()]);
+			_TileBase = (TileBase)Stream.ReadByte();
+			_Edges = Stream.ReadArray(i => (TileEdge)Stream.ReadByte());
+			_PathOverlays = Stream.ReadArray(i => (TilePathOverlay)Stream.ReadByte());
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)_Elevation);
-			Stream.Write((byte)Array.IndexOf(TileBase.TILE_BASES, _TileBase));
-			Stream.Write(_Edges, i => Stream.Write((byte)Array.IndexOf(Edge.EDGES, i)));
-			Stream.Write(_PathOverlays, i => Stream.Write((byte)Array.IndexOf(TilePathOverlay.PATH_OVERLAYS, i)));
+			Stream.Write((byte)_TileBase);
+			Stream.Write(_Edges, i => Stream.Write((byte)i));
+			Stream.Write(_PathOverlays, i => Stream.Write((byte)i));
 		}
 
 		public void Merge(TileConfiguration Configuration)
@@ -91,8 +91,8 @@ namespace PanzerBlitz
 			_Elevation = Math.Max(_Elevation, Configuration._Elevation);
 			for (int i = 0; i < 6; ++i)
 			{
-				if (_PathOverlays[i] == null) _PathOverlays[i] = Configuration._PathOverlays[i];
-				if (_Edges[i] == null) _Edges[i] = Configuration._Edges[i];
+				if (_PathOverlays[i] == TilePathOverlay.NONE) _PathOverlays[i] = Configuration._PathOverlays[i];
+				if (_Edges[i] == TileEdge.NONE) _Edges[i] = Configuration._Edges[i];
 			}
 			TriggerReconfigure();
 		}
@@ -101,10 +101,6 @@ namespace PanzerBlitz
 		{
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
-				if (_TileBase != TileBase.CLEAR
-					|| Edges.Any(i => i != null)
-					|| PathOverlays.Any(i => i != null && !i.RoadMove))
-					return NoAttackReason.OVERRUN_TERRAIN;
 			}
 			return NoAttackReason.NONE;
 		}
@@ -132,18 +128,18 @@ namespace PanzerBlitz
 			return _PathOverlays[Index];
 		}
 
-		public Edge GetEdge(int Index)
+		public TileEdge GetEdge(int Index)
 		{
 			return _Edges[Index];
 		}
 
-		public void SetEdge(int Index, Edge Edge)
+		public void SetEdge(int Index, TileEdge Edge)
 		{
 			_Edges[Index] = Edge;
 			TriggerReconfigure();
 		}
 
-		public bool HasEdge(Edge Edge)
+		public bool HasEdge(TileEdge Edge)
 		{
 			return _Edges.Any(i => i == Edge);
 		}

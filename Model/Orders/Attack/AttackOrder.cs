@@ -257,7 +257,7 @@ namespace PanzerBlitz
 		bool MustAttackAllUnits()
 		{
 			return AttackMethod != AttackMethod.NORMAL_FIRE
-											   || AttackAt.Rules.MustAttackAllUnits
+											   || AttackAt.RulesCalculator.MustAttackAllUnits
 											   || AttackAt.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT);
 		}
 
