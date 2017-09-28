@@ -24,30 +24,44 @@ namespace PanzerBlitz
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 
-		public static void Load(string Path)
+		public static void Load(string Module)
 		{
+			string path = "./Modules/" + Module;
+
+			ClassLibrary.Instance.ReadBlock(new ParseBlock(new ParseBlock[]
+				{
+					ParseBlock.FromFile(path + "/Theme/Fonts.blk"),
+						new ParseBlock(
+							"class<>",
+							"classes",
+							Enumerable.Repeat(path + "/Theme/Base.blk", 1)
+								.Concat(Directory.EnumerateFiles(
+									path + "/Theme/Components", "*", SearchOption.AllDirectories))
+								.SelectMany(i => ParseBlock.FromFile(i).Break()))
+				}));
+
 			ParseBlock block = new ParseBlock(new ParseBlock[] {
-				ParseBlock.FromFile(Path + "/Factions.blk"),
+				ParseBlock.FromFile(path + "/Factions.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
-					Directory.EnumerateFiles(Path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
+					Directory.EnumerateFiles(path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"unit-render-details<>",
 					"unit-render-details",
-					Directory.EnumerateFiles(Path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
+					Directory.EnumerateFiles(path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"scenario[]",
 					"scenarios",
-					Directory.EnumerateFiles(Path + "/Scenarios", "*", SearchOption.AllDirectories)
+					Directory.EnumerateFiles(path + "/Scenarios", "*", SearchOption.AllDirectories)
 						.Select(i => ParseBlock.FromFile(i)))
 			});
-			Load(block);
+			Load(path, block);
 		}
 
-		public static void Load(ParseBlock Block)
+		static void Load(string Path, ParseBlock Block)
 		{
 			Block.AddParser<Color>("color", i => ClassLibrary.Instance.ParseColor(i.String), false);
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
@@ -60,7 +74,8 @@ namespace PanzerBlitz
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
-			Block.AddParser<UnitRenderDetails>("unit-render-details", i => new UnitRenderDetails(i));
+			Block.AddParser<UnitRenderDetails>(
+				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
@@ -127,7 +142,7 @@ namespace PanzerBlitz
 			{
 				if (!UnitRenderDetails.ContainsKey(unit))
 					Console.WriteLine("[WARNING]: No render details configured for UnitConfiguration {0}", unit.Name);
-				else if (File.Exists(UnitRenderDetails[unit].ImagePath))
+				else if (!File.Exists(UnitRenderDetails[unit].ImagePath))
 					Console.WriteLine(
 						"[WARNING]: Image {0} missing for UnitConfiguration {1}",
 						UnitRenderDetails[unit].ImagePath,

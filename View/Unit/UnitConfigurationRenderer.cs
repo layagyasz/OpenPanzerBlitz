@@ -90,11 +90,11 @@ namespace PanzerBlitz
 			_Textures.Add(renderedTexture);
 		}
 
-		private void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
+		void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
 		{
 			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration];
 
-			Sprite image = new Sprite(new Texture("./UnitSprites/" + renderDetails.ImagePath));
+			Sprite image = new Sprite(new Texture(renderDetails.ImagePath));
 			RenderStates r = new RenderStates(Transform);
 			Target.Draw(image, r);
 
@@ -149,12 +149,12 @@ namespace PanzerBlitz
 			Target.Draw(nameText, r);
 		}
 
-		private Vector2f GetCenter(Text Text)
+		Vector2f GetCenter(Text Text)
 		{
 			return new Vector2f(Text.GetLocalBounds().Width, Text.GetLocalBounds().Height) * .5f;
 		}
 
-		private static string WeaponClassString(UnitConfiguration UnitConfiguration)
+		static string WeaponClassString(UnitConfiguration UnitConfiguration)
 		{
 			if (UnitConfiguration.UnitClass == UnitClass.TRANSPORT)
 			{

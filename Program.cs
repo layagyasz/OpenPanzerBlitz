@@ -20,18 +20,7 @@ namespace PanzerBlitz
 			ProgramFlowController flowController = null;
 			try
 			{
-				ClassLibrary.Instance.ReadBlock(new ParseBlock(new ParseBlock[]
-				{
-					ParseBlock.FromFile("./Theme/Fonts.blk"),
-						new ParseBlock(
-							"class<>",
-							"classes",
-							Enumerable.Repeat("./Theme/Base.blk", 1)
-								.Concat(Directory.EnumerateFiles(
-									"./Theme/Components", "*", SearchOption.AllDirectories))
-								.SelectMany(i => ParseBlock.FromFile(i).Break()))
-				}));
-				GameData.Load("./BLKConfigurations");
+				GameData.Load("Default");
 
 				Interface.Screen = new Screen();
 

@@ -1,0 +1,6 @@
+﻿unit-configuration-lock:12_7mm {
+	string:unit-configuration { 12_7mm }
+	string:faction { russian }
+	int:rarity { 1 }
+	string[]:tags { russian guns }
+}

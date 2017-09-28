@@ -14,13 +14,13 @@ namespace PanzerBlitz
 		public readonly Color OverrideColor;
 		public readonly string ImagePath;
 
-		public UnitRenderDetails(ParseBlock Block)
+		public UnitRenderDetails(ParseBlock Block, string Path)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			OverrideDisplayName = (string)attributes[(int)Attribute.OVERRIDE_DISPLAY_NAME];
 			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
-			ImagePath = (string)attributes[(int)Attribute.IMAGE_PATH];
+			ImagePath = Path + (string)attributes[(int)Attribute.IMAGE_PATH];
 		}
 	}
 }

@@ -1,0 +1,226 @@
+﻿scenario:_ {
+	string:name { Russian Advance on Nikopol }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 10 }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					furthest-advance-objective:furthest-advance {
+						direction:direction { south }
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 8 }
+						!var:objective { objectives.furthest-advance }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 12 }
+						!var:objective { objectives.furthest-advance }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 18 }
+						!var:objective { objectives.furthest-advance }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 10,0 10,1 0,1 }
+					}
+					unit-group:unit-group {
+						string:name { 203rd Rifle Div. Vanguard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				tile-entry-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 20,0 30,0 30,1 20,1 }
+					}
+					unit-group:unit-group {
+						string:name { 33rd Rifle Div. Vanguard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-76 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+				tile-entry-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 10,0 20,0 20,1 10,1 }
+					}
+					unit-group:unit-group {
+						string:name { 266th Rifle Div. Vanguard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.guards-company }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.122mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-destroyed-objective:units-destroyed { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 30 }
+						!var:objective { objectives.units-destroyed }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				tile-entry-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { south }
+					}
+					unit-group:unit-group {
+						string:name { 23rd Pz. Div. Rear Guard }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
