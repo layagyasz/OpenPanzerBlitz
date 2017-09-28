@@ -33,5 +33,37 @@ namespace PanzerBlitz
 			Stream.Write(X);
 			Stream.Write(Y);
 		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj == null) return false;
+			if (obj is Coordinate)
+			{
+				Coordinate o = (Coordinate)obj;
+				return X == o.X && Y == o.Y;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return X.GetHashCode() ^ Y.GetHashCode();
+		}
+
+		public static bool operator ==(Coordinate c1, Coordinate c2)
+		{
+			if ((object)c1 == null) return (object)c2 == null;
+			return c1.Equals(c2);
+		}
+
+		public static bool operator !=(Coordinate c1, Coordinate c2)
+		{
+			return !(c1 == c2);
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[Coordinate: X={0}, Y={1}]", X, Y);
+		}
 	}
 }

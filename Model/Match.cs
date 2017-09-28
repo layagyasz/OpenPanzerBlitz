@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			this.Scenario = Scenario;
 			Map = Scenario.MapConfiguration.GenerateMap(IdGenerator);
 
-			Armies = Scenario.TurnOrder.Select(i => new Army(i, IdGenerator)).ToList();
+			Armies = Scenario.TurnOrder.Select(i => new Army(this, i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
 				i => new TurnInfo(
 					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT))
@@ -258,7 +258,7 @@ namespace PanzerBlitz
 			Unit u = (Unit)Sender;
 			foreach (Army a in Armies)
 			{
-				if (E.Path == null) a.UpdateUnitVisibility(u, E.Tile);
+				if (E.Path == null || E.Path.Count < 2) a.UpdateUnitVisibility(u, E.Tile);
 				else a.UpdateUnitVisibility(u, E.Path[E.Path.Count - 2], E.Path.Destination);
 			}
 		}

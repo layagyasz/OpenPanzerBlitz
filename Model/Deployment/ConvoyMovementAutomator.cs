@@ -9,57 +9,86 @@ namespace PanzerBlitz
 {
 	public class ConvoyMovementAutomator : Serializable
 	{
-		enum Attribute { DESTINATION, SPEED, STOP_CONDITION };
+		enum Attribute { ORIGIN, DESTINATION, SPEED, STOP_CONDITION, RECIPROCAL_STOP };
 
+		public readonly Coordinate Origin;
 		public readonly Coordinate Destination;
 		public readonly byte Speed;
 		public readonly Matcher<Tile> StopCondition;
+		public readonly bool ReciprocalStop;
 
-		Dictionary<Unit, Path<Tile>> _CachedPaths = new Dictionary<Unit, Path<Tile>>();
-
-		public ConvoyMovementAutomator(Coordinate Destination, byte Speed, Matcher<Tile> StopCondition)
+		public ConvoyMovementAutomator(
+			Coordinate Origin,
+			Coordinate Destination,
+			byte Speed,
+			Matcher<Tile> StopCondition,
+			bool ReciprocalStop = false)
 		{
+			this.Origin = Origin;
 			this.Destination = Destination;
 			this.Speed = Speed;
 			this.StopCondition = StopCondition;
+			this.ReciprocalStop = ReciprocalStop;
 		}
 
 		public ConvoyMovementAutomator(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
+			Origin = (Coordinate)attributes[(int)Attribute.ORIGIN];
 			Destination = (Coordinate)attributes[(int)Attribute.DESTINATION];
 			Speed = (byte)attributes[(int)Attribute.SPEED];
 			StopCondition = (Matcher<Tile>)attributes[(int)Attribute.STOP_CONDITION];
+			ReciprocalStop = Parse.DefaultIfNull(attributes[(int)Attribute.RECIPROCAL_STOP], false);
 		}
 
 		public ConvoyMovementAutomator(SerializationInputStream Stream)
 			: this(
 				new Coordinate(Stream),
+				new Coordinate(Stream),
 				Stream.ReadByte(),
-				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream))
+				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream),
+				Stream.ReadBoolean())
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
+			Stream.Write(Origin);
 			Stream.Write(Destination);
 			Stream.Write(Speed);
 			Stream.Write(StopCondition);
+			Stream.Write(ReciprocalStop);
 		}
 
-		Path<Tile> GetPathForUnit(Unit Unit, Match Match)
+		public bool StopEarly(Army Army)
 		{
-			if (_CachedPaths.ContainsKey(Unit)) return _CachedPaths[Unit];
-
-			Path<Tile> path = Unit.GetPathTo(Match.Map.Tiles[Destination.X, Destination.Y], false);
-			_CachedPaths.Add(Unit, path);
-			return path;
+			if (ReciprocalStop)
+			{
+				if (Army.Match.Armies.Any(
+					a => a.Configuration.Team != Army.Configuration.Team
+						&& a.Units.Any(u => u.Deployed && !u.MustMove())))
+					return true;
+			}
+			return false;
 		}
 
-		public bool AutomateMovement(Unit Unit, Match Match)
+		public bool AutomateMovement(Unit Unit, bool Halted)
 		{
-			Path<Tile> path = GetPathForUnit(Unit, Match);
-			bool halt = false;
+			if (StopEarly(Unit.Army)) return true;
+
+			Path<Tile> path = new Path<Tile>(
+				Unit.Army.Match.Map.Tiles[Origin.X, Origin.Y],
+				Unit.Army.Match.Map.Tiles[Destination.X, Destination.Y],
+				t => true,
+				(t, j) =>
+				{
+					TileComponentRules rules = t.GetPathOverlayRules(j);
+					if (rules == null || !rules.RoadMove) return float.MaxValue;
+					return 1;
+				},
+				(t, j) => t.HeuristicDistanceTo(j),
+				t => t.Neighbors(),
+				(t, j) => t == j);
 
 			int i = 0;
 			for (; i < path.Count; ++i)
@@ -67,20 +96,20 @@ namespace PanzerBlitz
 				if (path[i] == Unit.Position) break;
 			}
 
-			for (int d = 0; i < path.Count && d <= Speed; ++i, ++d)
+			for (int d = 0; i < path.Count && d < Speed; ++i, ++d)
 			{
 				if (StopCondition.Matches(path[i]))
 				{
-					halt = true;
+					Halted = true;
 					break;
 				}
 				if (i < path.Count - 1 && path[i + 1].Units.Count() > 0) break;
 			}
 
-			if (!Match.ExecuteOrder(new MovementOrder(Unit, path[i], false)))
-				throw new Exception(string.Format("Could not move unit {0} to {1}", Unit, path[i]));
-
-			return halt;
+			MovementOrder o = new MovementOrder(Unit, path[i], false, !Halted);
+			if (!Unit.Army.Match.ExecuteOrder(o))
+				throw new Exception(string.Format("Could not move unit {0} to {1}: {2}", Unit, path[i], o.Validate()));
+			return Halted;
 		}
 	}
 }

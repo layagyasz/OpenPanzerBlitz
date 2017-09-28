@@ -299,5 +299,10 @@ namespace PanzerBlitz
 					return Attack + Range + Defense + Movement;
 			}
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[UnitConfiguration: Name={0}]", Name);
+		}
 	}
 }

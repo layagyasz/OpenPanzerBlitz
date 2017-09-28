@@ -11,10 +11,10 @@ namespace PanzerBlitz
 		enum Attribute { MATCHER, DISTANCE, ATLEAST };
 
 		public readonly Matcher<Unit> Matcher;
-		public readonly int Distance;
+		public readonly byte Distance;
 		public readonly bool Atleast;
 
-		public TileDistanceFromUnit(Matcher<Unit> Matcher, int Distance, bool Atleast)
+		public TileDistanceFromUnit(Matcher<Unit> Matcher, byte Distance, bool Atleast)
 		{
 			this.Matcher = Matcher;
 			this.Distance = Distance;
@@ -26,14 +26,14 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
-			Distance = (int)attributes[(int)Attribute.DISTANCE];
+			Distance = (byte)attributes[(int)Attribute.DISTANCE];
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
 		}
 
 		public TileDistanceFromUnit(SerializationInputStream Stream)
 			: this(
 				(Matcher<Unit>)MatcherSerializer.Instance.Deserialize(Stream),
-				Stream.ReadInt32(),
+				Stream.ReadByte(),
 				Stream.ReadBoolean())
 		{ }
 

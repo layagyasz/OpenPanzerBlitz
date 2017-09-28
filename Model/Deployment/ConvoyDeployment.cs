@@ -31,9 +31,9 @@ namespace PanzerBlitz
 		{
 		}
 
-		public override bool AutomateDeployment(Match Match)
+		public override bool UnitMustMove(Unit Unit)
 		{
-			return false;
+			return Unit.Position != null && Unit.Position == _EntryTile && _ConvoyOrder.Any(i => !i.Deployed);
 		}
 
 		public override NoDeployReason Validate(Unit Unit, Tile Tile)

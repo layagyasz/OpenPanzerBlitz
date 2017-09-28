@@ -23,6 +23,8 @@ namespace PanzerBlitz
 				typeof(TileOnEdge), i => new TileOnEdge(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(TileWithin), i => new TileWithin(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(TileHasCoordinate), i => new TileHasCoordinate(i)),
 
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(EmptyMatcher<Unit>), i => new EmptyMatcher<Unit>(i)),

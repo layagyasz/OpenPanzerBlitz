@@ -79,6 +79,7 @@ namespace PanzerBlitz
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
 
+			Block.AddParser<Matcher<Tile>>("tile-has-coordinate", i => new TileHasCoordinate(i));
 			Block.AddParser<Matcher<Tile>>("tile-elevation", i => new TileElevation(i));
 			Block.AddParser<Matcher<Tile>>("tile-within", i => new TileWithin(i));
 			Block.AddParser<Matcher<Tile>>("tile-on-edge", i => new TileOnEdge(i));
@@ -101,6 +102,7 @@ namespace PanzerBlitz
 
 			Block.AddParser<UnitGroup>("unit-group", i => new UnitGroup(i));
 			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
+			Block.AddParser<ConvoyMovementAutomator>("convoy-movement-automator", i => new ConvoyMovementAutomator(i));
 			Block.AddParser<DeploymentConfiguration>(
 				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(

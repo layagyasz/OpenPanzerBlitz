@@ -36,19 +36,42 @@ namespace PanzerBlitz
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
-		public override void AutomateMovement(Match Match, bool Vehicle)
+		public override bool UnitMustMove(Unit Unit)
+		{
+			if (Unit.Position == null) return false;
+			if (!_StopAutomatedMovement) return true;
+			return base.UnitMustMove(Unit);
+		}
+
+		public override void ReassessMatch()
+		{
+			if (!_StopAutomatedMovement
+				&& DeploymentConfiguration.MovementAutomator != null
+				&& DeploymentConfiguration.MovementAutomator.StopEarly(Army))
+			{
+				_StopAutomatedMovement = true;
+			}
+		}
+
+		public override void EnterUnits(bool Vehicle)
 		{
 			Unit unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null);
 			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
 			{
-				Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));
+				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));
 			}
+		}
 
+		public override void AutomateMovement(bool Vehicle)
+		{
 			if (DeploymentConfiguration.MovementAutomator != null && !_StopAutomatedMovement)
 			{
 				foreach (Unit u in _ConvoyOrder)
 				{
-					if (u.Position != null && DeploymentConfiguration.MovementAutomator.AutomateMovement(u, Match))
+					if (u.Position != null
+						&& u.CanMove(Vehicle, false) == NoMoveReason.NONE
+						&& !u.Moved
+						&& DeploymentConfiguration.MovementAutomator.AutomateMovement(u, _StopAutomatedMovement))
 					{
 						_StopAutomatedMovement = true;
 					}

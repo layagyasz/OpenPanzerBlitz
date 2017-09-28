@@ -166,7 +166,7 @@
 							unit-has-configuration:matcher {
 								!unit-configuration:unit-configuration { unit-configurations.command-post }
 							}
-							int:distance { 2 }
+							byte:distance { 2 }
 							bool:atleast { true }
 						}
 						tile-elevation:_ {
@@ -189,7 +189,7 @@
 						unit-has-configuration:matcher {
 							!unit-configuration:unit-configuration { unit-configurations.command-post }
 						}
-						int:distance { 0 }
+						byte:distance { 0 }
 					}
 					unit-group:unit-group {
 						string:name { 580th Signal Rgt. Fort 3 }

@@ -12,6 +12,7 @@ namespace PanzerBlitz
 	{
 		public readonly Unit Unit;
 		public readonly bool Combat;
+		public readonly bool Halt;
 		public readonly Path<Tile> Path;
 
 		public Army Army
@@ -22,21 +23,28 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MovementOrder(Unit Unit, Tile To, bool Combat)
+		public MovementOrder(Unit Unit, Tile To, bool Combat, bool Halt = false)
 		{
 			this.Unit = Unit;
 			this.Combat = Combat;
+			this.Halt = Halt;
 			this.Path = Unit.GetPathTo(To, Combat);
 		}
 
 		public MovementOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
+			: this(
+				(Unit)Objects[Stream.ReadInt32()],
+				(Tile)Objects[Stream.ReadInt32()],
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean())
+		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Unit.Id);
 			Stream.Write(Path.Destination.Id);
 			Stream.Write(Combat);
+			Stream.Write(Halt);
 		}
 
 		public NoMoveReason Validate()
@@ -68,6 +76,8 @@ namespace PanzerBlitz
 			if (Validate() == NoMoveReason.NONE)
 			{
 				Unit.MoveTo(Path.Destination, Path);
+				if (Halt) Unit.Halt();
+
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

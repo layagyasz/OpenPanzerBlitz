@@ -81,6 +81,14 @@ namespace PanzerBlitz
 			return Math.Abs(float.MaxValue - GetMoveCost(Unit, To, RoadMovement, IgnoreOccupyingUnits)) > float.Epsilon;
 		}
 
+		public float GetMoveCost(Tile To, bool Vehicle = true, bool RoadMovement = true)
+		{
+			int index = Array.IndexOf(Tile.NeighborTiles, To);
+			return RoadMovement ?
+				_RoadMovement[index]
+					: Vehicle ? _VehicleNonRoadMovement[index] : _NonRoadMovement[index];
+		}
+
 		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
 		{
 			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == NoDeployReason.ENEMY_OCCUPIED) return float.MaxValue;

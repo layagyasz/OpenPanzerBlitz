@@ -263,20 +263,18 @@ namespace PanzerBlitz
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
+			if (Tile == _Position) return;
+
 			float movement = (float)Path.Distance;
 			_RemainingMovement -= movement;
-			_MovedMoreThanOneTile = movement > 1 || _Moved;
+			_MovedMoreThanOneTile = Path.Count > 2 || _Moved;
 			_Moved = true;
 			Place(Tile, Path);
 		}
 
 		public bool MustMove()
 		{
-			if (Deployment is ConvoyDeployment)
-				return _Position != null
-					&& ((ConvoyDeployment)Deployment).EntryTile == _Position
-					 && ((ConvoyDeployment)Deployment).ConvoyOrder.Count() > 0;
-			return false;
+			return Deployment.UnitMustMove(this);
 		}
 
 		public NoLoadReason CanLoad(Unit Unit)
@@ -428,6 +426,12 @@ namespace PanzerBlitz
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
+		public void Halt()
+		{
+			_Moved = true;
+			_RemainingMovement = 0;
+		}
+
 		public void Reset()
 		{
 			_Fired = false;
@@ -435,6 +439,11 @@ namespace PanzerBlitz
 			_MovedMoreThanOneTile = false;
 			_RemainingMovement = Configuration.Movement;
 			if (_Status == UnitStatus.DISRUPTED) _Status = UnitStatus.ACTIVE;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[Unit: Id={0}, Configuration={1}]", Id, Configuration);
 		}
 	}
 }

@@ -29,6 +29,7 @@ namespace PanzerBlitz
 
 			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			IsStrictConvoy = Parse.DefaultIfNull(attributes[(int)Attribute.IS_STRICT_CONVOY], false);
+			MovementAutomator = (ConvoyMovementAutomator)attributes[(int)Attribute.MOVEMENT_AUTOMATOR];
 
 			Matcher<Tile> m = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
 			Matcher<Tile> edge = new TileOnEdge(Direction.ANY);

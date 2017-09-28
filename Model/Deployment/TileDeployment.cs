@@ -26,19 +26,20 @@ namespace PanzerBlitz
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
-		public override bool AutomateDeployment(Match Match)
+		public override bool AutomateDeployment()
 		{
-			bool done = Units.All(i => Match.ExecuteOrder(
+			bool done = Units.All(i => Army.Match.ExecuteOrder(
 				new PositionalDeployOrder(
 					i,
-					Match.Map.Tiles[
+					Army.Match.Map.Tiles[
 						DeploymentConfiguration.Coordinate.X, DeploymentConfiguration.Coordinate.Y])));
 			if (!done) throw new Exception("Deployment order rejected for TileDeployment.");
 			return done;
 		}
 
-		public override void AutomateMovement(Match Match, bool Vehicle)
+		public override bool UnitMustMove(Unit Unit)
 		{
+			return false;
 		}
 
 		public override NoDeployReason Validate(Unit Unit, Tile Tile)

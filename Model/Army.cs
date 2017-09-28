@@ -10,6 +10,7 @@ namespace PanzerBlitz
 	{
 		public EventHandler<NewUnitEventArgs> OnUnitAdded;
 
+		public readonly Match Match;
 		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
 
@@ -34,9 +35,10 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Army(ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
+		public Army(Match Match, ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
 		{
 			_Id = IdGenerator.GenerateId();
+			this.Match = Match;
 			Configuration = ArmyConfiguration;
 			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
 				i => i.GenerateDeployment(this, IdGenerator)).ToList();
@@ -66,6 +68,7 @@ namespace PanzerBlitz
 				foreach (Unit u in Units) u.Reset();
 			}
 			_AttackedTiles.Clear();
+			Deployments.ForEach(i => i.ReassessMatch());
 		}
 
 		public void AttackTile(Tile Tile)

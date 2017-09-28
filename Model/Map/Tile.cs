@@ -276,6 +276,11 @@ namespace PanzerBlitz
 			return RuleSet.GetRules(Configuration.GetPathOverlay(Index));
 		}
 
+		public TileComponentRules GetPathOverlayRules(Tile Neighbor)
+		{
+			return RuleSet.GetRules(GetPathOverlay(Neighbor));
+		}
+
 		public void SetEdge(int Index, TileEdge Edge)
 		{
 			Configuration.SetEdge(Index, Edge);
@@ -291,6 +296,11 @@ namespace PanzerBlitz
 		public void Exit(Unit Unit)
 		{
 			_Units.Remove(Unit);
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[Tile: Coordinate={0}]", Coordinate);
 		}
 	}
 }

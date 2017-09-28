@@ -36,12 +36,15 @@ namespace PanzerBlitz
 
 		void MoveUnit(Unit Unit, Tile Tile)
 		{
+			if (Tile != Unit.Position) return; // Received out-of-date notification.
+
 			UnitView view = _UnitViews[Unit];
 
 			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
 			StackView toStack = _Stacks.FirstOrDefault(i => i.Key == Tile).Value;
 
+			if (toStack != null && toStack == fromStack) return;
 			if (toStack == null)
 			{
 				toStack = new StackView();

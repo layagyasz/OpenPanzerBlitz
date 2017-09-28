@@ -33,8 +33,24 @@ namespace PanzerBlitz
 			return Unit.CanEnter(Tile, true);
 		}
 
-		public abstract bool AutomateDeployment(Match Match);
-		public abstract void AutomateMovement(Match Match, bool Vehicle);
+		public virtual bool AutomateDeployment()
+		{
+			return false;
+		}
+		public virtual bool UnitMustMove(Unit Unit)
+		{
+			return false;
+		}
+		public virtual void EnterUnits(bool Vehicle)
+		{
+		}
+		public virtual void ReassessMatch()
+		{
+		}
+		public virtual void AutomateMovement(bool Vehicle)
+		{
+		}
+
 		public abstract bool IsConfigured();
 	}
 }

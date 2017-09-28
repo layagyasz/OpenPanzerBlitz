@@ -17,7 +17,7 @@ namespace PanzerBlitz
 			Match.Armies.ForEach(
 					i => i.Deployments.ForEach(
 						j => j.Units.ForEach(
-							k => k.OnMove += (sender, e) => j.AutomateMovement(Match, k.Configuration.IsVehicle))));
+						k => k.OnMove += (sender, e) => j.EnterUnits(k.Configuration.IsVehicle))));
 		}
 
 		public bool AutomateTurn(TurnInfo TurnInfo)
@@ -35,19 +35,22 @@ namespace PanzerBlitz
 					return !TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == NoSingleAttackReason.NONE);
 				case TurnComponent.DEPLOYMENT:
-					return TurnInfo.Army.Deployments.All(i => i.AutomateDeployment(Match));
+					return TurnInfo.Army.Deployments.All(i => i.AutomateDeployment());
 				case TurnComponent.MINEFIELD_ATTACK:
 					DoMinefieldAttacks(TurnInfo.Army);
 					return true;
 				case TurnComponent.NON_VEHICLE_MOVEMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(Match, false));
+					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(false));
+					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == NoMoveReason.NONE);
 				case TurnComponent.RESET:
 					return true;
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == NoMoveReason.NONE);
+					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == NoMoveReason.NONE
+													&& i.CanAttack(AttackMethod.OVERRUN) == NoSingleAttackReason.NONE);
 				case TurnComponent.VEHICLE_MOVEMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(Match, true));
+					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(true));
+					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(true));
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == NoMoveReason.NONE);
 			}
 			return false;

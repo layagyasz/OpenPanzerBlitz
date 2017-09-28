@@ -26,13 +26,9 @@ namespace PanzerBlitz
 			this.DeploymentConfiguration = DeploymentConfiguration;
 		}
 
-		public override bool AutomateDeployment(Match Match)
+		public override bool UnitMustMove(Unit Unit)
 		{
 			return false;
-		}
-
-		public override void AutomateMovement(Match Match, bool Vehicle)
-		{
 		}
 
 		public override NoDeployReason Validate(Unit Unit, Tile Tile)
