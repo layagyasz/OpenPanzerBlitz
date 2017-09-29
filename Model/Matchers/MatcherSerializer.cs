@@ -14,6 +14,8 @@ namespace PanzerBlitz
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(EmptyMatcher<Tile>), i => new EmptyMatcher<Tile>(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(InverseMatcher<Tile>), i => new InverseMatcher<Tile>(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(CompositeMatcher<Tile>), i => new CompositeMatcher<Tile>(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(TileDistanceFromUnit), i => new TileDistanceFromUnit(i)),
@@ -28,6 +30,8 @@ namespace PanzerBlitz
 
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(EmptyMatcher<Unit>), i => new EmptyMatcher<Unit>(i)),
+			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
+				typeof(InverseMatcher<Unit>), i => new InverseMatcher<Unit>(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(CompositeMatcher<Unit>), i => new CompositeMatcher<Unit>(i)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(

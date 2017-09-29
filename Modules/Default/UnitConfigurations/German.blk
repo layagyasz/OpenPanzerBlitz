@@ -50,7 +50,7 @@ unit-configuration:20mm_4-aa {
 	byte:movement { 0 }
 	bool:can-anti-aircraft { true }
 }
-unit-configuration:75mm-how {
+unit-configuration:75mm-how-company {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
 
@@ -60,13 +60,34 @@ unit-configuration:75mm-how {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:150mm-how {
+unit-configuration:105mm-how {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 32 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:150mm-how-company {
 	string:name { 150mm }
 	unit-class:unit-class { towed-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 20 }
 	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:150mm-how {
+	string:name { 150mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 36 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }

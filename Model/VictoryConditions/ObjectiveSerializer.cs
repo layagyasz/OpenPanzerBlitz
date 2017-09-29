@@ -13,7 +13,8 @@ namespace PanzerBlitz
 			typeof(UnitsDestroyedObjective),
 			typeof(UnitsMatchedObjective),
 			typeof(PreventEnemyObjective),
-			typeof(RatioObjective)
+			typeof(RatioObjective),
+			typeof(SumObjective)
 		};
 
 		static readonly Func<SerializationInputStream, Objective>[] DESERIALIZERS =
@@ -23,7 +24,8 @@ namespace PanzerBlitz
 			i => new UnitsDestroyedObjective(i),
 			i => new UnitsMatchedObjective(i),
 			i => new PreventEnemyObjective(i),
-			i => new RatioObjective(i)
+			i => new RatioObjective(i),
+			i => new SumObjective(i)
 		};
 
 		public static void Serialize(Objective Objective, SerializationOutputStream Stream)

@@ -31,6 +31,11 @@ unit-render-details:fort-40 {
 	string:image-path { fort.png }
 	color:override-color { #FFFFFF }
 }
+unit-render-details:fort-50 {
+	string:override-display-name { }
+	string:image-path { fort.png }
+	color:override-color { #FFFFFF }
+}
 unit-render-details:wagon {
 	string:image-path { wagon.png }
 }

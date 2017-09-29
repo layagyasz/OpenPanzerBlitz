@@ -31,11 +31,12 @@ namespace PanzerBlitz
 			}
 			catch (Exception e)
 			{
-				string fileName = string.Format("CrashDump-{0}.txt", DateTime.Now.ToString("yyyyMMddHHmmss"));
+				string fileName = string.Format("Logs/CrashDump-{0}.txt", DateTime.Now.ToString("yyyyMMddHHmmss"));
 				StringBuilder log = new StringBuilder();
 				log.AppendFormat("[ProgramState]\n{0}\n\n", flowController);
 				log.AppendFormat("[StackTrace]\n{0}", e);
-				File.WriteAllText("Logs/" + fileName, log.ToString());
+				File.WriteAllText(fileName, log.ToString());
+				Console.WriteLine("CrashDump written to {0}\n\n{1}", fileName, log);
 			}
 		}
 	}

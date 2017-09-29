@@ -88,6 +88,7 @@ namespace PanzerBlitz
 				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
 			Block.AddParser<Matcher<Tile>>(
 				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
+			Block.AddParser<Matcher<Tile>>("tile-not", i => new InverseMatcher<Tile>(i));
 
 			Block.AddParser<Matcher<Unit>>("unit-has-evacuated", i => new UnitHasEvacuated(i));
 			Block.AddParser<Matcher<Unit>>("unit-has-reconned", i => new UnitHasReconned(i));
@@ -99,6 +100,7 @@ namespace PanzerBlitz
 				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
 			Block.AddParser<Matcher<Unit>>(
 				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
+			Block.AddParser<Matcher<Unit>>("unit-not", i => new InverseMatcher<Unit>(i));
 
 			Block.AddParser<UnitGroup>("unit-group", i => new UnitGroup(i));
 			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
@@ -123,6 +125,7 @@ namespace PanzerBlitz
 			Block.AddParser<Objective>("units-matched-objective", i => new UnitsMatchedObjective(i));
 			Block.AddParser<Objective>("prevent-enemy-objective", i => new PreventEnemyObjective(i));
 			Block.AddParser<Objective>("ratio-objective", i => new RatioObjective(i));
+			Block.AddParser<Objective>("sum-objective", i => new SumObjective(i));
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<BoardConfiguration>("board-configuration", i => new BoardConfiguration(i));

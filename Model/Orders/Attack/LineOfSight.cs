@@ -130,20 +130,23 @@ namespace PanzerBlitz
 			// Check for blocks.
 			if (ElevationBlocks(los)) return NoLineOfSightReason.TERRAIN;
 			if (DepressionBlocks(los)) return NoLineOfSightReason.TERRAIN;
-			if (EdgeBlocks(los, edges)) return NoLineOfSightReason.TERRAIN;
+			if (TerrainBlocks(los, edges)) return NoLineOfSightReason.TERRAIN;
 			return NoLineOfSightReason.NONE;
 		}
 
-		static bool EdgeBlocks(Tile[] LineOfSight, TileComponentRules[] Edges)
+		static bool TerrainBlocks(Tile[] LineOfSight, TileComponentRules[] Edges)
 		{
 			if (LineOfSight[0].Configuration.Elevation == LineOfSight[LineOfSight.Length - 1].Configuration.Elevation)
 			{
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (Edges[i] != null
-						&& (Edges[i].BlocksLineOfSight || Edges[i].Elevated)
-						&& (LineOfSight[0].Configuration.Elevation <= LineOfSight[i + 1].Configuration.Elevation))
-						return true;
+					if (LineOfSight[0].Configuration.Elevation <= LineOfSight[i + 1].Configuration.Elevation)
+					{
+						if (i < LineOfSight.Length - 2 && LineOfSight[i + 1].GetBaseRules().BlocksLineOfSight)
+							return true;
+						if (Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
+							return true;
+					}
 				}
 			}
 			else
@@ -151,9 +154,13 @@ namespace PanzerBlitz
 				if (Edges[0] != null && Edges[0].BlocksLineOfSight) return true;
 				for (int i = 0; i < LineOfSight.Length - 1; ++i)
 				{
-					if (LineOfSight[i + 1].Configuration.Elevation > LineOfSight[0].Configuration.Elevation
-						&& Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
-						return true;
+					if (LineOfSight[i + 1].Configuration.Elevation > LineOfSight[0].Configuration.Elevation)
+					{
+						if (i < LineOfSight.Length - 2 && LineOfSight[i + 1].GetBaseRules().BlocksLineOfSight)
+							return true;
+						if (Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
+							return true;
+					}
 				}
 			}
 			return false;

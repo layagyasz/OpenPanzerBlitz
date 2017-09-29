@@ -68,6 +68,16 @@ unit-configuration:fort-40 {
 	byte:defense { 40 }
 	byte:movement { 0 }
 }
+unit-configuration:fort-50 {
+	string:name { Fort }
+	unit-class:unit-class { fort }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 50 }
+	byte:movement { 0 }
+}
 unit-configuration:wagon {
 	string:name { Wagon }
 	unit-class:unit-class { transport }

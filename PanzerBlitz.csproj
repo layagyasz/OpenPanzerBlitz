@@ -290,6 +290,8 @@
     <Compile Include="Model\Map\TileConfiguration.cs" />
     <Compile Include="Model\Map\TileRuleSet.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasCoordinate.cs" />
+    <Compile Include="Model\VictoryConditions\SumObjective.cs" />
+    <Compile Include="Model\Matchers\InverseMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1165,6 +1167,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\Default\Scenario_07.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\Default\Scenario_08.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\Default\Scenario_09.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\Default\Scenario_10.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\Default\Scenario_11.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\Default\Scenario_12.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
