@@ -292,6 +292,7 @@
     <Compile Include="Model\Matchers\TileMatchers\TileHasCoordinate.cs" />
     <Compile Include="Model\VictoryConditions\SumObjective.cs" />
     <Compile Include="Model\Matchers\InverseMatcher.cs" />
+    <Compile Include="Model\Environment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1187,7 +1188,10 @@
     <None Include="Modules\Default\Terrain.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\TerrainRules.blk">
+    <None Include="Modules\Default\Environments.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\TerrainRenderers.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

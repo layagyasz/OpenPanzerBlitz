@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Cardamom.Interface;
 
@@ -13,7 +14,7 @@ namespace PanzerBlitz
 			EditScreen screen = new EditScreen(
 				ProgramContext.ScreenResolution,
 				new Map(11, 33, null, new IdGenerator()),
-				TileRenderer.SUMMER_STEPPE);
+				GameData.TileRenderers.Values.First());
 			_Controller = new EditController(screen);
 
 			return screen;

@@ -3,6 +3,7 @@
 	byte[]:deployment-order { 0 1 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
+	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {

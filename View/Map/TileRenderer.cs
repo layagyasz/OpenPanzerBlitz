@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Planar;
+using Cardamom.Serialization;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -11,114 +12,18 @@ namespace PanzerBlitz
 {
 	public class TileRenderer
 	{
-		public static readonly TileRenderer SUMMER_STEPPE = new TileRenderer(
-				new Color(205, 194, 149),
-				new Color[] { Color.Black, new Color(235, 37, 26) },
-				new Color[]
-				{
-					Color.White,
-					new Color(145, 155, 130),
-					new Color(169, 150, 71)
-				},
-				new Color[]
-				{
-					new Color(0, 0, 0, 0),
-					new Color(115, 112, 103),
-					new Color(94, 111, 56),
-					new Color(188, 126, 53),
-					new Color(43, 122, 119)
-				},
-				new Color[]
-				{
-					new Color(0, 0, 0, 0),
-					new Color(138, 134, 122),
-					new Color(125, 150, 72),
-					new Color(169, 150, 71),
-					new Color(43, 122, 119)
-				},
-				new Color[] {
-					new Color(0, 0, 0, 0),
-					new Color(220, 220, 220),
-					new Color(43, 122, 119),
-					new Color(43, 122, 119)
-				},
-				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160), new Color(160, 160, 160) },
-				new float[] { 0, .15f, .15f },
-				new float[] { 0, .2f, .3f }
-		);
-
-		public static readonly TileRenderer WINTER_STEPPE = new TileRenderer(
-				new Color(217, 211, 195),
-				new Color[] { Color.Black, new Color(235, 37, 26) },
-				new Color[]
-				{
-					Color.White,
-					new Color(145, 155, 130),
-					new Color(160, 160, 160)
-				},
-				new Color[]
-				{
-					new Color(0, 0, 0, 0),
-					new Color(115, 112, 103),
-					new Color(94, 111, 56),
-					new Color(188, 126, 53),
-					new Color(43, 122, 119)
-				},
-				new Color[]
-				{
-					new Color(0, 0, 0, 0),
-					new Color(138, 134, 122),
-					new Color(125, 150, 72),
-					new Color(160, 160, 160),
-					new Color(43, 122, 119)
-				},
-				new Color[] {
-					new Color(0, 0, 0, 0),
-					new Color(195, 159, 109),
-					new Color(140, 200, 200),
-					new Color(140, 200, 200)
-				},
-				new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(160, 160, 160), new Color(160, 160, 160) },
-				new float[] { 0, .15f, .15f },
-				new float[] { 0, .2f, .3f }
-		);
-
-		public static readonly TileRenderer SUMMER_GRASSLAND = new TileRenderer(
-			new Color(201, 205, 95),
-			new Color[] { Color.Black, new Color(235, 37, 26) },
-			new Color[]
-			{
-						Color.White,
-						new Color(145, 155, 130),
-						new Color(121, 130, 41)
-			},
-			new Color[]
-			{
-						new Color(0, 0, 0, 0),
-						new Color(115, 112, 103),
-						new Color(121, 130, 41),
-						new Color(188, 126, 53),
-						new Color(91, 138, 192)
-			},
-			new Color[]
-			{
-						new Color(0, 0, 0, 0),
-						new Color(138, 134, 122),
-						new Color(125, 150, 72),
-						new Color(121, 130, 41),
-						new Color(91, 138, 192)
-			},
-			new Color[] {
-						new Color(0, 0, 0, 0),
-						new Color(220, 220, 220),
-						new Color(91, 138, 192),
-						new Color(91, 138, 192)
-			},
-			new Color[] { new Color(0, 0, 0, 0), Color.Black, new Color(115, 102, 83), new Color(115, 102, 83) },
-			new float[] { 0, .15f, .2f },
-			new float[] { 0, .2f, .4f }
-		);
-
+		enum Attribute
+		{
+			BASE_COLOR,
+			ELEVATION_COLORS,
+			TOP_COLORS,
+			EDGE_COLORS,
+			EDGE_OVERLAY_COLORS,
+			PATH_COLORS,
+			PATH_BORDER_COLORS,
+			PATH_WIDTHS,
+			PATH_BORDER_WIDTHS
+		};
 
 		public readonly Color BaseColor;
 
@@ -151,6 +56,28 @@ namespace PanzerBlitz
 			_PathBorderColors = PathBorderColors;
 			_PathWidths = PathWidths;
 			_PathBorderWidths = PathBorderWidths;
+		}
+
+		public TileRenderer(ParseBlock Block)
+		{
+			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
+			BaseColor = (Color)attributes[(int)Attribute.BASE_COLOR];
+			_ElevationColors = (Color[])attributes[(int)Attribute.ELEVATION_COLORS];
+			_TopColors = Parse.KeyByEnum<TileBase, Color>(
+				(Dictionary<string, Color>)attributes[(int)Attribute.TOP_COLORS]);
+			_EdgeColors = Parse.KeyByEnum<TileEdge, Color>(
+				(Dictionary<string, Color>)attributes[(int)Attribute.EDGE_COLORS]);
+			_OverlayColors = Parse.KeyByEnum<TileEdge, Color>(
+				(Dictionary<string, Color>)attributes[(int)Attribute.EDGE_OVERLAY_COLORS]);
+			_PathColors = Parse.KeyByEnum<TilePathOverlay, Color>(
+				(Dictionary<string, Color>)attributes[(int)Attribute.PATH_COLORS]);
+			_PathBorderColors = Parse.KeyByEnum<TilePathOverlay, Color>(
+				(Dictionary<string, Color>)attributes[(int)Attribute.PATH_BORDER_COLORS]);
+			_PathWidths = Parse.KeyByEnum<TilePathOverlay, float>(
+				(Dictionary<string, float>)attributes[(int)Attribute.PATH_WIDTHS]);
+			_PathBorderWidths = Parse.KeyByEnum<TilePathOverlay, float>(
+				(Dictionary<string, float>)attributes[(int)Attribute.PATH_BORDER_WIDTHS]);
 		}
 
 		public Vertex[] Render(Tile Tile)

@@ -56,7 +56,7 @@ namespace PanzerBlitz
 			Stream.Write(Origin);
 			Stream.Write(Destination);
 			Stream.Write(Speed);
-			Stream.Write(StopCondition);
+			MatcherSerializer.Instance.Serialize(StopCondition, Stream);
 			Stream.Write(ReciprocalStop);
 		}
 

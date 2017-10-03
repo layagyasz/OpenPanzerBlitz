@@ -6,6 +6,6 @@ namespace PanzerBlitz
 {
 	public interface MapConfiguration : Serializable
 	{
-		Map GenerateMap(IdGenerator IdGenerator);
+		Map GenerateMap(TileRuleSet TileRuleSet, IdGenerator IdGenerator);
 	}
 }

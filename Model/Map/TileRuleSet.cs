@@ -10,6 +10,8 @@ namespace PanzerBlitz
 	{
 		enum Attribute { BASES, EDGES, PATHS };
 
+		public readonly string UniqueKey;
+
 		TileComponentRules[] _BaseRules;
 		TileComponentRules[] _EdgeRules;
 		TileComponentRules[] _PathOverlayRules;
@@ -26,20 +28,14 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			_BaseRules = new TileComponentRules[Enum.GetValues(typeof(TileBase)).Length];
-			_EdgeRules = new TileComponentRules[Enum.GetValues(typeof(TileEdge)).Length];
-			_PathOverlayRules = new TileComponentRules[Enum.GetValues(typeof(TilePathOverlay)).Length];
+			UniqueKey = Block.Name;
 
-			Func<string, TileBase> baseParser = Parse.EnumParser<TileBase>(typeof(TileBase));
-			Func<string, TileEdge> edgeParser = Parse.EnumParser<TileEdge>(typeof(TileEdge));
-			Func<string, TilePathOverlay> pathParser = Parse.EnumParser<TilePathOverlay>(typeof(TilePathOverlay));
-
-			foreach (var p in (Dictionary<string, TileComponentRules>)attributes[(int)Attribute.BASES])
-				_BaseRules[(int)baseParser(p.Key)] = p.Value;
-			foreach (var p in (Dictionary<string, TileComponentRules>)attributes[(int)Attribute.EDGES])
-				_EdgeRules[(int)edgeParser(p.Key)] = p.Value;
-			foreach (var p in (Dictionary<string, TileComponentRules>)attributes[(int)Attribute.PATHS])
-				_PathOverlayRules[(int)pathParser(p.Key)] = p.Value;
+			_BaseRules = Parse.KeyByEnum<TileBase, TileComponentRules>(
+				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.BASES]);
+			_EdgeRules = Parse.KeyByEnum<TileEdge, TileComponentRules>(
+				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.EDGES]);
+			_PathOverlayRules = Parse.KeyByEnum<TilePathOverlay, TileComponentRules>(
+				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.PATHS]);
 		}
 
 		public TileComponentRules GetRules(TileBase Type)

@@ -1,0 +1,143 @@
+﻿tile-renderer<>:tile-renderers {
+	tile-renderer:summer-steppe {
+		color:base-color { 205,194,149 }
+		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color<>:top-colors {
+			color:clear { 255,255,255 }
+			color:swamp { 145,155,130 }
+			color:slope { 169,150,71 }
+		}
+		color<>:edge-colors {
+			color:none { 0,0,0,0 }
+			color:town { 115,112,103 }
+			color:forest { 94,111,56 }
+			color:slope { 188,126,53 }
+			color:water { 43,122,119 }
+		}
+		color<>:edge-overlay-colors {
+			color:none { 0,0,0,0 }
+			color:town { 138,134,122 }
+			color:forest { 125,150,72 }
+			color:slope { 169,150,71 }
+			color:water { 43,122,119 }
+		}
+		color<>:path-colors {
+			color:none { 0,0,0,0 }
+			color:road { 220,220,220 }
+			color:stream { 43,122,119 }
+			color:stream-ford { 43,122,119 }
+		}
+		color<>:path-border-colors { 
+			color:none { 0,0,0,0 }
+			color:road { 0,0,0 }
+			color:stream { 160,160,160 }
+			color:stream-ford { 160,160,160 }
+		}
+		float<>:path-widths { 
+			float:none { 0 }
+			float:road { .15 }
+			float:stream { .15 }
+			float:stream-ford { 0 }
+		}
+		float<>:path-border-widths {
+			float:none { 0 }
+			float:road { .2 }
+			float:stream { .3 }
+			float:stream-ford { 0 }
+		}
+	}
+	tile-renderer:winter-steppe {
+		color:base-color { 217,211,195 }
+		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color<>:top-colors {
+			color:clear { 255,255,255 }
+			color:swamp { 145,155,130 }
+			color:slope { 160,160,160 }
+		}
+		color<>:edge-colors {
+			color:none { 0,0,0,0 }
+			color:town { 115,112,103 }
+			color:forest { 94,111,56 }
+			color:slope { 188,126,53 }
+			color:water { 43,122,119 }
+		}
+		color<>:edge-overlay-colors {
+			color:none { 0,0,0,0 }
+			color:town { 138,134,122 }
+			color:forest { 125,150,72 }
+			color:slope { 160,160,160 }
+			color:water { 43,122,119 }
+		}
+		color<>:path-colors {
+			color:none { 0,0,0,0 }
+			color:road { 195,159,109 }
+			color:stream { 140,200,200 }
+			color:stream-ford { 140,200,200 }
+		}
+		color<>:path-border-colors { 
+			color:none { 0,0,0,0 }
+			color:road { 0,0,0 }
+			color:stream { 160,160,160 }
+			color:stream-ford { 160,160,160 }
+		}
+		float<>:path-widths { 
+			float:none { 0 }
+			float:road { .15 }
+			float:stream { .15 }
+			float:stream-ford { 0 }
+		}
+		float<>:path-border-widths { 
+			float:none { 0 }
+			float:road { .2 }
+			float:stream { .3 }
+			float:stream-ford { 0 }
+		}
+	}
+	tile-renderer:summer-grassland {
+		color:base-color { 201,205,95 }
+		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color<>:top-colors {
+			color:clear { 255,255,255 }
+			color:swamp { 145,155,130 }
+			color:slope { 121,130,41 }
+		}
+		color<>:edge-colors {
+			color:none { 0,0,0,0 }
+			color:town { 115,112,103 }
+			color:forest { 121,130,41 }
+			color:slope { 188,126,53 }
+			color:water { 91,138,192 }
+		}
+		color<>:edge-overlay-colors {
+			color:none { 0,0,0,0 }
+			color:town { 138,134,122 }
+			color:forest { 125,150,72 }
+			color:slope { 121,130,41 }
+			color:water { 91,138,192 }
+		}
+		color<>:path-colors {
+			color:none { 0,0,0,0 }
+			color:road { 220,220,220 }
+			color:stream { 91,138,192 }
+			color:stream-ford { 91,138,192 }
+		}
+		color<>:path-border-colors { 
+			color:none { 0,0,0,0 }
+			color:road { 0,0,0 }
+			color:stream { 115,102,83 }
+			color:stream-ford { 115,102,83 }
+		}
+		float<>:path-widths { 
+			float:none { 0 }
+			float:road { .15 }
+			float:stream { .2 }
+			float:stream-ford { 0 }
+		}
+		float<>:path-border-widths {
+			float:none { 0 }
+			float:road { .2 }
+			float:stream { .4 }
+			float:stream-ford { 0 }
+		}
+	}
+}

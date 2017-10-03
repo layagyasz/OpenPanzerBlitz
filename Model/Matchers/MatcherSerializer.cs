@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -9,44 +11,48 @@ namespace PanzerBlitz
 		public static readonly MatcherSerializer Instance = new MatcherSerializer();
 
 		MatcherSerializer()
-			: base(new Tuple<Type, Func<SerializationInputStream, Serializable>>[]
+			: base(new Type[]
 		{
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(EmptyMatcher<Tile>), i => new EmptyMatcher<Tile>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(InverseMatcher<Tile>), i => new InverseMatcher<Tile>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(CompositeMatcher<Tile>), i => new CompositeMatcher<Tile>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(TileDistanceFromUnit), i => new TileDistanceFromUnit(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(TileElevation), i => new TileElevation(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(TileOnEdge), i => new TileOnEdge(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(TileWithin), i => new TileWithin(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(TileHasCoordinate), i => new TileHasCoordinate(i)),
+				typeof(EmptyMatcher<Tile>),
+				typeof(InverseMatcher<Tile>),
+				typeof(CompositeMatcher<Tile>),
+				typeof(TileDistanceFromUnit),
+				typeof(TileElevation),
+				typeof(TileOnEdge),
+				typeof(TileWithin),
+				typeof(TileHasCoordinate),
 
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(EmptyMatcher<Unit>), i => new EmptyMatcher<Unit>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(InverseMatcher<Unit>), i => new InverseMatcher<Unit>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(CompositeMatcher<Unit>), i => new CompositeMatcher<Unit>(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasStatus), i => new UnitHasStatus(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasReconned), i => new UnitHasReconned(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasEvacuated), i => new UnitHasEvacuated(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasPosition), i => new UnitHasPosition(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitHasConfiguration), i => new UnitHasConfiguration(i)),
-			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(UnitIsHostile), i => new UnitIsHostile(i))
+				typeof(EmptyMatcher<Unit>),
+				typeof(InverseMatcher<Unit>),
+				typeof(CompositeMatcher<Unit>),
+				typeof(UnitHasStatus),
+				typeof(UnitHasReconned),
+				typeof(UnitHasEvacuated),
+				typeof(UnitHasPosition),
+				typeof(UnitHasConfiguration),
+				typeof(UnitIsHostile)
 		})
 		{ }
+
+		public override IEnumerable<Tuple<string, Func<ParseBlock, object>>> GetParsers(params Type[] FilterTypes)
+		{
+			foreach (var p in base.GetParsers(
+				Enumerable.Concat(
+					FilterTypes,
+					new Type[] { typeof(InverseMatcher<Tile>), typeof(InverseMatcher<Unit>) }).ToArray()))
+				yield return p;
+
+			yield return new Tuple<string, Func<ParseBlock, object>>(
+				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
+			yield return new Tuple<string, Func<ParseBlock, object>>(
+				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
+			yield return new Tuple<string, Func<ParseBlock, object>>("tile-not", i => new InverseMatcher<Tile>(i));
+
+			yield return new Tuple<string, Func<ParseBlock, object>>(
+				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
+			yield return new Tuple<string, Func<ParseBlock, object>>(
+				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
+			yield return new Tuple<string, Func<ParseBlock, object>>("unit-not", i => new InverseMatcher<Unit>(i));
+		}
 	}
 }

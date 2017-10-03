@@ -8,13 +8,23 @@ namespace PanzerBlitz
 {
 	public class Scenario : Serializable
 	{
-		enum Attribute { NAME, MAP_CONFIGURATION, ARMY_CONFIGURATIONS, DEPLOYMENT_ORDER, TURN_ORDER, TURNS };
+		enum Attribute
+		{
+			NAME,
+			ENVIRONMENT,
+			MAP_CONFIGURATION,
+			ARMY_CONFIGURATIONS,
+			DEPLOYMENT_ORDER,
+			TURN_ORDER,
+			TURNS
+		};
 
 		public readonly string Name;
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly List<ArmyConfiguration> TurnOrder;
 		public readonly byte Turns;
+		public readonly Environment Environment;
 		public readonly BoardCompositeMapConfiguration MapConfiguration;
 
 		public Scenario(IEnumerable<ArmyConfiguration> ArmyConfigurations)
@@ -34,6 +44,7 @@ namespace PanzerBlitz
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
+			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];
 			MapConfiguration = (BoardCompositeMapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
 		}
 
@@ -44,6 +55,7 @@ namespace PanzerBlitz
 			DeploymentOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			Turns = Stream.ReadByte();
+			Environment = GameData.Environments[Stream.ReadString()];
 			MapConfiguration = new BoardCompositeMapConfiguration(Stream);
 		}
 
@@ -54,6 +66,7 @@ namespace PanzerBlitz
 			Stream.Write(DeploymentOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(Turns);
+			Stream.Write(Environment.UniqueKey);
 			Stream.Write(MapConfiguration);
 		}
 	}

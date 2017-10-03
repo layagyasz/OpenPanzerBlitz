@@ -25,13 +25,14 @@ namespace PanzerBlitz
 		public SumObjective(SerializationInputStream Stream)
 			: base(Stream)
 		{
-			Objectives = Stream.ReadEnumerable(i => ObjectiveSerializer.Deserialize(Stream)).ToList();
+			Objectives = Stream.ReadEnumerable(
+				i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream)).ToList();
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			base.Serialize(Stream);
-			Stream.Write(Objectives, i => ObjectiveSerializer.Serialize(i, Stream));
+			Stream.Write(Objectives, i => ObjectiveSerializer.Instance.Serialize(i, Stream));
 		}
 
 		public override int CalculateScore(Army ForArmy, Match Match)

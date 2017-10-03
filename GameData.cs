@@ -21,7 +21,8 @@ namespace PanzerBlitz
 			UNIT_CONFIGURATION_LINKS,
 			SCENARIOS,
 			TILE_COMPONENT_RULES,
-			TILE_RULE_SET
+			ENVIRONMENTS,
+			TILE_RENDERERS
 		};
 
 		public static ushort OnlinePort = 1000;
@@ -33,7 +34,8 @@ namespace PanzerBlitz
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileComponentRules> TileComponentRules;
-		public static TileRuleSet TileRuleSet;
+		public static Dictionary<string, Environment> Environments;
+		public static Dictionary<string, TileRenderer> TileRenderers;
 
 		public static void Load(string Module)
 		{
@@ -54,7 +56,8 @@ namespace PanzerBlitz
 			ParseBlock block = new ParseBlock(new ParseBlock[] {
 				ParseBlock.FromFile(path + "/Factions.blk"),
 				ParseBlock.FromFile(path + "/Terrain.blk"),
-				ParseBlock.FromFile(path + "/TerrainRules.blk"),
+				ParseBlock.FromFile(path + "/Environments.blk"),
+				ParseBlock.FromFile(path + "/TerrainRenderers.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
@@ -87,35 +90,13 @@ namespace PanzerBlitz
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
-			Block.AddParser<UnitRenderDetails>(
-				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
 			Block.AddParser<Direction>("direction", Parse.EnumBlockParser<Direction>(typeof(Direction)));
 			Block.AddParser<TileComponentRules>("tile-component-rules", i => new TileComponentRules(i));
 			Block.AddParser<TileRuleSet>("tile-rule-set", i => new TileRuleSet(i));
+			Block.AddParser<Environment>("environment", i => new Environment(i));
 
-			Block.AddParser<Matcher<Tile>>("tile-has-coordinate", i => new TileHasCoordinate(i));
-			Block.AddParser<Matcher<Tile>>("tile-elevation", i => new TileElevation(i));
-			Block.AddParser<Matcher<Tile>>("tile-within", i => new TileWithin(i));
-			Block.AddParser<Matcher<Tile>>("tile-on-edge", i => new TileOnEdge(i));
-			Block.AddParser<Matcher<Tile>>("tile-distance-from-unit", i => new TileDistanceFromUnit(i));
-			Block.AddParser<Matcher<Tile>>(
-				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
-			Block.AddParser<Matcher<Tile>>(
-				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
-			Block.AddParser<Matcher<Tile>>("tile-not", i => new InverseMatcher<Tile>(i));
-
-			Block.AddParser<Matcher<Unit>>("unit-has-evacuated", i => new UnitHasEvacuated(i));
-			Block.AddParser<Matcher<Unit>>("unit-has-reconned", i => new UnitHasReconned(i));
-			Block.AddParser<Matcher<Unit>>("unit-has-status", i => new UnitHasStatus(i));
-			Block.AddParser<Matcher<Unit>>("unit-has-position", i => new UnitHasPosition(i));
-			Block.AddParser<Matcher<Unit>>("unit-has-configuration", i => new UnitHasConfiguration(i));
-			Block.AddParser<Matcher<Unit>>("unit-is-hostile", i => new UnitIsHostile(i));
-			Block.AddParser<Matcher<Unit>>(
-				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
-			Block.AddParser<Matcher<Unit>>(
-				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
-			Block.AddParser<Matcher<Unit>>("unit-not", i => new InverseMatcher<Unit>(i));
+			Block.AddParsers<object>(MatcherSerializer.Instance.GetParsers());
 
 			Block.AddParser<UnitGroup>("unit-group", i => new UnitGroup(i));
 			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
@@ -134,19 +115,17 @@ namespace PanzerBlitz
 			Block.AddParser<VictoryCondition>("victory-condition", i => new VictoryCondition(i));
 			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
 
-			Block.AddParser<Objective>("units-destroyed-objective", i => new UnitsDestroyedObjective(i));
-			Block.AddParser<Objective>("furthest-advance-objective", i => new FurthestAdvanceObjective(i));
-			Block.AddParser<Objective>("line-of-fire-objective", i => new LineOfFireObjective(i));
-			Block.AddParser<Objective>("units-matched-objective", i => new UnitsMatchedObjective(i));
-			Block.AddParser<Objective>("prevent-enemy-objective", i => new PreventEnemyObjective(i));
-			Block.AddParser<Objective>("ratio-objective", i => new RatioObjective(i));
-			Block.AddParser<Objective>("sum-objective", i => new SumObjective(i));
+			Block.AddParsers<Objective>(ObjectiveSerializer.Instance.GetParsers());
 
 			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
 			Block.AddParser<BoardConfiguration>("board-configuration", i => new BoardConfiguration(i));
 			Block.AddParser<BoardCompositeMapConfiguration>(
 				"map-configuration", i => new BoardCompositeMapConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
+
+			Block.AddParser<UnitRenderDetails>(
+				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
+			Block.AddParser<TileRenderer>("tile-renderer", i => new TileRenderer(i));
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
@@ -158,7 +137,8 @@ namespace PanzerBlitz
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileComponentRules =
 				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.TILE_COMPONENT_RULES];
-			TileRuleSet = (TileRuleSet)attributes[(int)Attribute.TILE_RULE_SET];
+			Environments = (Dictionary<string, Environment>)attributes[(int)Attribute.ENVIRONMENTS];
+			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
 
 			// Emit warnings for units without configured render details.
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)
@@ -170,6 +150,33 @@ namespace PanzerBlitz
 						"[WARNING]: Image {0} missing for UnitConfiguration {1}",
 						UnitRenderDetails[unit].ImagePath,
 						unit.Name);
+			}
+
+			// Debug scenario configurations.
+			foreach (Scenario s in Scenarios)
+			{
+				using (MemoryStream m = new MemoryStream())
+				{
+					try
+					{
+						SerializationOutputStream stream = new SerializationOutputStream(m);
+						stream.Write(s);
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine("There was an error writing scenario {0}\n\n{1}", s.Name, e.Message);
+					}
+					m.Seek(0, SeekOrigin.Begin);
+					try
+					{
+						SerializationInputStream stream = new SerializationInputStream(m);
+						Scenario copy = new Scenario(stream);
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine("There was an error reading scenario {0}\n\n{1}", s.Name, e);
+					}
+				}
 			}
 		}
 	}

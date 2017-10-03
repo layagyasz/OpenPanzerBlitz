@@ -24,7 +24,7 @@ namespace PanzerBlitz
 			MatchScreen screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
 				_Context.Match.Map,
-				TileRenderer.SUMMER_STEPPE,
+				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
 				_Context.Match.Armies.Select(i => new ArmyView(i, renderer)));
 			HumanMatchPlayerController controller =
 				new HumanMatchPlayerController(

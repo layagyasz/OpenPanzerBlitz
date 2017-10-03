@@ -35,15 +35,15 @@ namespace PanzerBlitz
 			else OverrideScores = new Dictionary<UnitConfiguration, int>();
 		}
 
-		public UnitsDestroyedObjective(SerializationInputStream Stream)
-			: this(
-				Stream.ReadString(),
-				Stream.ReadBoolean(),
-				Stream.ReadEnumerable(
-					i => new KeyValuePair<UnitConfiguration, int>(
-						GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32()))
-				.ToDictionary(i => i.Key, i => i.Value))
-		{ }
+		public UnitsDestroyedObjective(SerializationInputStream Stream)
+			: base(Stream)
+		{
+			Friendly = Stream.ReadBoolean();
+			OverrideScores = Stream.ReadEnumerable(
+				i => new KeyValuePair<UnitConfiguration, int>(
+					GameData.UnitConfigurations[Stream.ReadString()], Stream.ReadInt32()))
+								   .ToDictionary(i => i.Key, i => i.Value);
+		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{

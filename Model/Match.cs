@@ -33,7 +33,7 @@ namespace PanzerBlitz
 		public Match(Scenario Scenario, bool AutomateTurns = true)
 		{
 			this.Scenario = Scenario;
-			Map = Scenario.MapConfiguration.GenerateMap(IdGenerator);
+			Map = Scenario.MapConfiguration.GenerateMap(Scenario.Environment.TileRuleSet, IdGenerator);
 
 			Armies = Scenario.TurnOrder.Select(i => new Army(this, i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(

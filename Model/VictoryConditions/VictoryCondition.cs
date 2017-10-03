@@ -29,13 +29,13 @@ namespace PanzerBlitz
 
 		public VictoryCondition(SerializationInputStream Stream)
 		{
-			Scorers = Stream.ReadEnumerable(i => ObjectiveSerializer.Deserialize(Stream)).ToList();
+			Scorers = Stream.ReadEnumerable(i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream)).ToList();
 			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream, Scorers)).ToList();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(Scorers, i => ObjectiveSerializer.Serialize(i, Stream));
+			Stream.Write(Scorers, i => ObjectiveSerializer.Instance.Serialize(i, Stream));
 			Stream.Write(Triggers);
 		}
 

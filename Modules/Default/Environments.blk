@@ -1,0 +1,22 @@
+﻿environment<>:environments {
+	environment:summer-steppe {
+		tile-rule-set:tile-rule-set {
+			tile-component-rules<>:bases {
+				!tile-component-rule:clear { tile-component-rules.base-clear }
+				!tile-component-rule:swamp { tile-component-rules.base-swamp }
+				!tile-component-rule:slope { tile-component-rules.base-slope }
+			}
+			tile-component-rules<>:edges {
+				!tile-component-rules:town { tile-component-rules.edge-town }
+				!tile-component-rules:forest { tile-component-rules.edge-forest }
+				!tile-component-rules:slope { tile-component-rules.edge-slope }
+				!tile-component-rules:water { tile-component-rules.edge-water }
+			}
+			tile-component-rules<>:paths {
+				!tile-component-rules:road { tile-component-rules.path-road }
+				!tile-component-rules:stream { tile-component-rules.path-stream }
+				!tile-component-rules:stream-ford { tile-component-rules.path-stream-ford }
+			}
+		}
+	}
+}
