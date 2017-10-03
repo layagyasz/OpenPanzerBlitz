@@ -27,7 +27,7 @@ namespace PanzerBlitz
 
 		public Map GenerateMap(IdGenerator IdGenerator)
 		{
-			Map map = new Map(_Width, _Height, TileRuleSet.SUMMER_STEPPE, IdGenerator);
+			Map map = new Map(_Width, _Height, GameData.TileRuleSet, IdGenerator);
 
 			LatticeNoiseGenerator thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
 			{

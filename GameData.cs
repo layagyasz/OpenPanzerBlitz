@@ -13,7 +13,16 @@ namespace PanzerBlitz
 {
 	public static class GameData
 	{
-		enum Attribute { FACTIONS, UNIT_CONFIGURATIONS, UNIT_RENDER_DETAILS, UNIT_CONFIGURATION_LINKS, SCENARIOS };
+		enum Attribute
+		{
+			FACTIONS,
+			UNIT_CONFIGURATIONS,
+			UNIT_RENDER_DETAILS,
+			UNIT_CONFIGURATION_LINKS,
+			SCENARIOS,
+			TILE_COMPONENT_RULES,
+			TILE_RULE_SET
+		};
 
 		public static ushort OnlinePort = 1000;
 		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
@@ -23,6 +32,8 @@ namespace PanzerBlitz
 		public static List<UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
+		public static Dictionary<string, TileComponentRules> TileComponentRules;
+		public static TileRuleSet TileRuleSet;
 
 		public static void Load(string Module)
 		{
@@ -42,6 +53,8 @@ namespace PanzerBlitz
 
 			ParseBlock block = new ParseBlock(new ParseBlock[] {
 				ParseBlock.FromFile(path + "/Factions.blk"),
+				ParseBlock.FromFile(path + "/Terrain.blk"),
+				ParseBlock.FromFile(path + "/TerrainRules.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
@@ -69,15 +82,17 @@ namespace PanzerBlitz
 
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
-			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumParser<WeaponClass>(typeof(WeaponClass)));
-			Block.AddParser<UnitClass>("unit-class", Parse.EnumParser<UnitClass>(typeof(UnitClass)));
-			Block.AddParser<UnitStatus>("unit-status", Parse.EnumParser<UnitStatus>(typeof(UnitStatus)));
+			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumBlockParser<WeaponClass>(typeof(WeaponClass)));
+			Block.AddParser<UnitClass>("unit-class", Parse.EnumBlockParser<UnitClass>(typeof(UnitClass)));
+			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
-			Block.AddParser<Direction>("direction", Parse.EnumParser<Direction>(typeof(Direction)));
+			Block.AddParser<Direction>("direction", Parse.EnumBlockParser<Direction>(typeof(Direction)));
+			Block.AddParser<TileComponentRules>("tile-component-rules", i => new TileComponentRules(i));
+			Block.AddParser<TileRuleSet>("tile-rule-set", i => new TileRuleSet(i));
 
 			Block.AddParser<Matcher<Tile>>("tile-has-coordinate", i => new TileHasCoordinate(i));
 			Block.AddParser<Matcher<Tile>>("tile-elevation", i => new TileElevation(i));
@@ -115,7 +130,7 @@ namespace PanzerBlitz
 				"one-of-zone-deployment", i => new OneOfZoneDeploymentConfiguration(i));
 
 			Block.AddParser<ObjectiveSuccessLevel>(
-				"objective-success-level", Parse.EnumParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel)));
+				"objective-success-level", Parse.EnumBlockParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel)));
 			Block.AddParser<VictoryCondition>("victory-condition", i => new VictoryCondition(i));
 			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
 
@@ -141,6 +156,9 @@ namespace PanzerBlitz
 				.ToDictionary(i => i.Key, i => i.Value);
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
+			TileComponentRules =
+				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.TILE_COMPONENT_RULES];
+			TileRuleSet = (TileRuleSet)attributes[(int)Attribute.TILE_RULE_SET];
 
 			// Emit warnings for units without configured render details.
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)

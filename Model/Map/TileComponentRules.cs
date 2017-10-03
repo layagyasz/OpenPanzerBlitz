@@ -1,30 +1,29 @@
 ﻿using System;
+
+using Cardamom.Serialization;
+
 namespace PanzerBlitz
 {
 	public class TileComponentRules
 	{
-		public static readonly TileComponentRules BASE_CLEAR =
-			new TileComponentRules(0, 1, 1, 0, 0, false, false, false, false, false, false, false, false, false, false);
-		public static readonly TileComponentRules BASE_SWAMP =
-			new TileComponentRules(1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, false, false);
-		public static readonly TileComponentRules BASE_SLOPE =
-			new TileComponentRules(0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false, false);
-
-		public static readonly TileComponentRules EDGE_TOWN =
-			new TileComponentRules(1, .5f, .5f, 0, 0, false, false, false, true, true, false, false, false, true, true);
-		public static readonly TileComponentRules EDGE_FOREST =
-			new TileComponentRules(1, 1, 1, 0, 0, false, false, true, false, false, false, false, false, true, true);
-		public static readonly TileComponentRules EDGE_SLOPE =
-			new TileComponentRules(0, 3, 4, 0, 0, false, false, false, false, false, true, false, false, false, false);
-		public static readonly TileComponentRules EDGE_WATER =
-			new TileComponentRules(0, 1, 1, 0, 0, false, true, true, false, false, false, false, false, false, false);
-
-		public static readonly TileComponentRules PATH_ROAD = new TileComponentRules(
-			0, .5f, .5f, 0, 0, true, false, false, false, false, false, false, false, false, false);
-		public static readonly TileComponentRules PATH_STREAM = new TileComponentRules(
-			0, 0, 0, 3, 5, false, false, false, false, false, false, true, false, false, false);
-		public static readonly TileComponentRules PATH_STREAM_FORD = new TileComponentRules(
-			0, 0, 0, 0, 0, false, false, false, false, false, false, false, true, false, false);
+		enum Attribute
+		{
+			DIE_MODIFIER,
+			MOVE_COST,
+			TRUCK_MOVE_COST,
+			LEAVE_COST,
+			TRUCK_LEAVE_COST,
+			ROAD_MOVE,
+			NO_CROSSING,
+			NO_VEHICLE_CROSSING,
+			TREAT_UNITS_AS_ARMORED,
+			MUST_ATTACK_ALL_UNITS,
+			ELEVATED,
+			DEPRESSED,
+			DEPRESSED_TRANSITION,
+			BLOCKS_LINE_OF_SIGHT,
+			CONCEALING
+		};
 
 		public readonly int DieModifier;
 		public readonly float MoveCost;
@@ -74,6 +73,27 @@ namespace PanzerBlitz
 			this.DepressedTransition = DepressedTransition;
 			this.BlocksLineOfSight = BlocksLineOfSight;
 			this.Concealing = Concealing;
+		}
+
+		public TileComponentRules(ParseBlock Block)
+		{
+			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
+			DieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.DIE_MODIFIER], 0);
+			MoveCost = Parse.DefaultIfNull(attributes[(int)Attribute.MOVE_COST], 0f);
+			TruckMoveCost = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVE_COST], MoveCost);
+			LeaveCost = Parse.DefaultIfNull(attributes[(int)Attribute.LEAVE_COST], 0f);
+			TruckLeaveCost = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_LEAVE_COST], LeaveCost);
+			RoadMove = Parse.DefaultIfNull(attributes[(int)Attribute.ROAD_MOVE], false);
+			NoCrossing = Parse.DefaultIfNull(attributes[(int)Attribute.NO_CROSSING], false);
+			NoVehicleCrossing = Parse.DefaultIfNull(attributes[(int)Attribute.NO_VEHICLE_CROSSING], NoCrossing);
+			TreatUnitsAsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED], false);
+			MustAttackAllUnits = Parse.DefaultIfNull(attributes[(int)Attribute.MUST_ATTACK_ALL_UNITS], false);
+			Elevated = Parse.DefaultIfNull(attributes[(int)Attribute.ELEVATED], false);
+			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], false);
+			DepressedTransition = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED_TRANSITION], false);
+			BlocksLineOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT], false);
+			Concealing = Parse.DefaultIfNull(attributes[(int)Attribute.CONCEALING], false);
 		}
 	}
 }

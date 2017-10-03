@@ -1,0 +1,53 @@
+﻿tile-component-rules<>:tile-component-rules {
+	tile-component-rules:base-clear {
+		float:move-cost { 1 }
+	}
+	tile-component-rules:base-swamp {
+		int:die-modifier { 1 }
+		float:move-cost { 1 }
+		bool:no-vehicle-crossing { true }
+	}
+	tile-component-rules:base-slope {
+		float:move-cost { 3 }
+		float:truck-move-cost { 4 }
+		bool:elevated { true }
+	}
+
+	tile-component-rules:edge-town {
+		int:die-modifier { 1 }
+		float:move-cost { .5 }
+		bool:treat-units-as-armored { true }
+		bool:must-attack-all-units { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
+	tile-component-rules:edge-forest {
+		int:die-modifier { 1 }
+		float:move-cost { 1 }
+		bool:no-vehicle-crossing { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
+	tile-component-rules:edge-slope {
+		float:move-cost { 3 }
+		float:truck-move-cost { 4 }
+		bool:elevated { true }
+	}
+	tile-component-rules:edge-water {
+		float:move-cost { 1 }
+		bool:no-crossing { true }
+	}
+
+	tile-component-rules:path-road {
+		float:move-cost { .5 }
+		bool:road-move { true }
+	}
+	tile-component-rules:path-stream {
+		float:leave-cost { 3 }
+		float:truck-leave-cost { 5 }
+		bool:depressed { true }
+	}
+	tile-component-rules:path-stream-ford {
+		bool:depressed-transition { true }
+	}
+}

@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			int width = boards.Max(i => i.Sum(j => j.Item1.Width) - i.Count + 1);
 			int height = boards.Sum(i => i.Max(j => j.Item1.Height)) - Boards.Count + 1;
 
-			Map map = new Map(width, height, TileRuleSet.SUMMER_STEPPE, IdGenerator);
+			Map map = new Map(width, height, GameData.TileRuleSet, IdGenerator);
 
 			int rowY = 0;
 			foreach (List<Tuple<Map, bool>> mapRow in boards)
