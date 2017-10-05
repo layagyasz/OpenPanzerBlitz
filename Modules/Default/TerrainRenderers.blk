@@ -59,14 +59,14 @@
 			color:town { 115,112,103 }
 			color:forest { 94,111,56 }
 			color:slope { 188,126,53 }
-			color:water { 43,122,119 }
+			color:water { 140,200,200 }
 		}
 		color<>:edge-overlay-colors {
 			color:none { 0,0,0,0 }
 			color:town { 138,134,122 }
 			color:forest { 125,150,72 }
 			color:slope { 160,160,160 }
-			color:water { 43,122,119 }
+			color:water { 140,200,200 }
 		}
 		color<>:path-colors {
 			color:none { 0,0,0,0 }

@@ -16,6 +16,9 @@ unit-render-details:20mm_4-aa {
 unit-render-details:75mm-how-company {
 	string:image-path { artillery-company.png }
 }
+unit-render-details:75mm-how {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:105mm-how {
 	string:image-path { artillery-heavy.png }
 }

@@ -13,6 +13,7 @@ namespace PanzerBlitz
 		Vertex[] _FiredRect;
 		Vertex[] _MovedRect;
 
+		UnitConfigurationRenderer _Renderer;
 		UnitConfigurationView _UnitConfigurationView;
 		Rectangle _Bounds;
 		MovementDolly _Movement;
@@ -34,8 +35,11 @@ namespace PanzerBlitz
 			this.Unit = Unit;
 			Unit.OnMove += HandleMove;
 
+			_Renderer = Renderer;
 			_UnitConfigurationView = new UnitConfigurationView(
 				Unit.Configuration, Unit.Army.Configuration.Faction, Renderer, Scale);
+			Unit.OnConfigurationChange += UpdateConfigurationView;
+
 			Vector2f tl = new Vector2f(-.5f, -.15f) * Scale;
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;
 			Vector2f br = new Vector2f(.5f, .15f) * Scale;
@@ -56,6 +60,12 @@ namespace PanzerBlitz
 			};
 
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
+		}
+
+		void UpdateConfigurationView(object Sender, EventArgs E)
+		{
+			_UnitConfigurationView = new UnitConfigurationView(
+				Unit.Configuration, Unit.Army.Configuration.Faction, _Renderer, _UnitConfigurationView.Scale);
 		}
 
 		void HandleMove(object Sender, MovementEventArgs E)

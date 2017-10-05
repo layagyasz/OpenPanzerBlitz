@@ -293,6 +293,7 @@
     <Compile Include="Model\VictoryConditions\SumObjective.cs" />
     <Compile Include="Model\Matchers\InverseMatcher.cs" />
     <Compile Include="Model\Environment.cs" />
+    <Compile Include="Model\Orders\Movement\NoDismountReason.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -343,6 +344,7 @@
     <Folder Include="Modules\Default\" />
     <Folder Include="Modules\Default\UnitSprites\" />
     <Folder Include="Modules\Default\Theme\" />
+    <Folder Include="Modules\Default\Scenarios\WinterWar\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1192,6 +1194,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\TerrainRenderers.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_01.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurations\Finnish.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitRenderDetails\Finnish.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_02.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

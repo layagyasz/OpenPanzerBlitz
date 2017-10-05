@@ -1,6 +1,12 @@
 ﻿unit-render-details:12_7mm-mg {
 	string:image-path { anti-aircraft.png }
 }
+unit-render-details:37mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:45mm-at-early {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:45mm-at {
 	string:image-path { anti-armor.png }
 }
@@ -10,8 +16,8 @@ unit-render-details:57mm-at {
 unit-render-details:76_2mm-at {
 	string:image-path { anti-armor.png }
 }
-unit-render-details:76_2mm-how {
-	string:image-path { artillery.png }
+unit-render-details:76_2mm-how-company {
+	string:image-path { artillery-company.png }
 }
 unit-render-details:122mm-how {
 	string:image-path { artillery-heavy.png }
@@ -25,12 +31,20 @@ unit-render-details:82mm-mortar {
 unit-render-details:120mm-mortar-russian {
 	string:image-path { mortar.png }
 }
+unit-render-details:ski-company {
+	string:override-display-name { SKI }
+	string:image-path { ski-company.png }
+}
 unit-render-details:engineer-company {
 	string:override-display-name { }
 	string:image-path { engineer-company.png }
 }
 unit-render-details:recon-company {
 	string:override-display-name { RECON }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:rifle-company-early {
+	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
 unit-render-details:rifle-company {
@@ -54,9 +68,18 @@ unit-render-details:truck-russian {
 	string:override-display-name { TRUCK }
 	string:image-path { truck.png }
 }
+unit-render-details:nkl-6 {
+	string:image-path { nkl-6.png }
+}
 unit-render-details:sis-33 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sis-33.png }
+}
+unit-render-details:t-26-a {
+	string:image-path { t-26-a.png }
+}
+unit-render-details:t-28-e {
+	string:image-path { t-28-e.png }
 }
 unit-render-details:su-152 {
 	string:image-path { su-152.png }
@@ -72,6 +95,9 @@ unit-render-details:su-100 {
 }
 unit-render-details:jsu-122 {
 	string:image-path { jsu-122.png }
+}
+unit-render-details:t-26-b {
+	string:image-path { t-26-b.png }
 }
 unit-render-details:kv-85 {
 	string:image-path { kv-85.png }

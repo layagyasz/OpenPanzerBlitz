@@ -7,6 +7,11 @@
 		float:move-cost { 1 }
 		bool:no-vehicle-crossing { true }
 	}
+	tile-component-rules:winter-base-swamp {
+		int:die-modifier { -1 }
+		float:move-cost { 1 }
+		bool:no-vehicle-crossing { true }
+	}
 	tile-component-rules:base-slope {
 		float:move-cost { 3 }
 		float:truck-move-cost { 4 }
@@ -34,8 +39,11 @@
 		bool:elevated { true }
 	}
 	tile-component-rules:edge-water {
-		float:move-cost { 1 }
 		bool:no-crossing { true }
+	}
+	tile-component-rules:winter-edge-water {
+		int:die-modifier { -1 }
+		bool:no-vehicle-crossing { true }
 	}
 
 	tile-component-rules:path-road {
@@ -47,7 +55,17 @@
 		float:truck-leave-cost { 5 }
 		bool:depressed { true }
 	}
+	tile-component-rules:winter-path-stream {
+		int:die-modifier { -1 }
+		float:leave-cost { 3 }
+		float:truck-leave-cost { 5 }
+		bool:depressed { true }
+	}
 	tile-component-rules:path-stream-ford {
+		bool:depressed-transition { true }
+	}
+	tile-component-rules:winter-path-stream-ford {
+		int:die-modifier { -1 }
 		bool:depressed-transition { true }
 	}
 }

@@ -13,6 +13,8 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationView : Pod
 	{
+		public readonly float Scale;
+
 		Texture _Texture;
 		Vertex[] _ImageVertices;
 		Vertex[] _Vertices;
@@ -22,6 +24,7 @@ namespace PanzerBlitz
 		public UnitConfigurationView(
 			UnitConfiguration UnitConfiguration, Faction Faction, UnitConfigurationRenderer Renderer, float Scale)
 		{
+			this.Scale = Scale;
 			Color[] colors = UnitConfiguration.UnitClass == UnitClass.BLOCK
 											  || UnitConfiguration.UnitClass == UnitClass.MINEFIELD
 											  ? new Color[] { Color.White } : Faction.Colors;

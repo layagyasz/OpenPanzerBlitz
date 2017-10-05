@@ -1,0 +1,186 @@
+﻿scenario:_ {
+	string:name { Tolvajarvi }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 14 }
+	!environment:environment { environments.winter-steppe }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-evacuated {
+						bool:friendly { false }
+						unit-has-evacuated:matcher {
+							direction:direction { east }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-evacuated }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-evacuated }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 25 }
+						!var:objective { objectives.units-evacuated }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				zone-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 10,0 20,0 20,33 10,33 }
+					}
+					unit-group:unit-group {
+						string:name { 139th Rifle Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-28-e }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-26-a }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-early }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ski-company }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.12_7mm-mg }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.nkl-6 }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:finnish {
+			!faction:faction { factions.finnish }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 15 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 35 }
+						!var:objective { objectives.units-destroyed }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				zone-deployment-configuration:_ {
+					tile-matches-any:matcher {
+						tile-within:_ {
+							zone:zone { 20,0 31,0 31,33 20,33 }
+						}
+						tile-within:_ {
+							zone:zone { 0,0 10,0 10,33 0,33 }
+						}
+					}
+					unit-group:unit-group {
+						string:name { 16th Infantry Rgt. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ski-platoon }
+								int:count { 16 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sissi-ski-platoon }
+								int:count { 24 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-finnish-early 
+								}
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sled }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -9,6 +9,26 @@
 	byte:movement { 0 }
 	bool:can-anti-aircraft { true }
 }
+unit-configuration:37mm-at {
+	string:name { 37mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:45mm-at-early {
+	string:name { 45mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
 unit-configuration:45mm-at {
 	string:name { 45mm }
 	unit-class:unit-class { towed-gun }
@@ -39,7 +59,7 @@ unit-configuration:76_2mm-at {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:76_2mm-how {
+unit-configuration:76_2mm-how-company {
 	string:name { 76.2mm }
 	unit-class:unit-class { towed-gun }
 
@@ -93,6 +113,19 @@ unit-configuration:120mm-mortar-russian {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
+unit-configuration:ski-company {
+	string:name { Ski Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 3 }
+
+	bool:can-close-assault { false }
+	bool:ignores-environment-movement { true }
+}
 unit-configuration:engineer-company {
 	string:name { Engineer Company }
 	unit-class:unit-class { infantry }
@@ -112,6 +145,16 @@ unit-configuration:recon-company {
 	byte:attack { 3 }
 	byte:range { 1 }
 	byte:defense { 4 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-company-early {
+	string:name { Rifle Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 8 }
 	byte:movement { 1 }
 }
 unit-configuration:rifle-company {
@@ -163,7 +206,21 @@ unit-configuration:truck-russian {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 12 }
+
 	bool:truck-movement { true }
+}
+unit-configuration:nkl-6 {
+	string:name { NKL-6 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 2 }
+	byte:movement { 17 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
 }
 unit-configuration:sis-33 {
 	string:name { SIS-33 Halftrack }
@@ -176,6 +233,26 @@ unit-configuration:sis-33 {
 	byte:movement { 10 }
 	bool:is-armored { true }
 	bool:can-only-overrun-unarmored { true }
+}
+unit-configuration:t-26-a {
+	string:name { T-26 A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 6 }	
+}
+unit-configuration:t-28-e {
+	string:name { T-28 E }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 7 }
+	byte:movement { 10 }	
 }
 unit-configuration:su-152 {
 	string:name { SU-152 }
@@ -226,6 +303,16 @@ unit-configuration:jsu-122 {
 	byte:range { 10 }
 	byte:defense { 15 }
 	byte:movement { 7 }
+}
+unit-configuration:t-26-b {
+	string:name { T-26 B }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 6 } 
 }
 unit-configuration:kv-85 {
 	string:name { KV-85 }

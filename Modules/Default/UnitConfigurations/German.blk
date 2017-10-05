@@ -9,7 +9,7 @@
 	byte:movement { 0 }
 }
 unit-configuration:75mm-at {
-	string:name { 75 mm }
+	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
 
 	weapon-class:weapon-class { anti-armor }
@@ -57,6 +57,16 @@ unit-configuration:75mm-how-company {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 2 }
 	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:75mm-how {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 28 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 }

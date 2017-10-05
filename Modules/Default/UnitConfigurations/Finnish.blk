@@ -1,0 +1,82 @@
+﻿unit-configuration:25mm-at {
+	string:name { 25mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:40mm-aa {
+	string:name { 40mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 8 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:ski-platoon {
+	string:name { Ski Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 3 }
+
+	bool:ignores-environment-movement { true }
+}
+unit-configuration:sissi-ski-platoon {
+	string:name { Sissi Ski Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 3 }
+
+	bool:ignores-environment-movement { true }
+}
+unit-configuration:mg-platoon {
+	string:name { MG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 3 }
+
+	bool:can-only-support-close-assault { true }
+}
+unit-configuration:engineer-platoon-finnish-early {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 1 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:aerosan {
+	string:name { Aerosan }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
+}

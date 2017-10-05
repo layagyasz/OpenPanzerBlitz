@@ -1,0 +1,25 @@
+﻿unit-render-details:25mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:40mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:ski-platoon {
+	string:override-display-name { SKI }
+	string:image-path { ski-platoon.png }
+}
+unit-render-details:sissi-ski-platoon {
+	string:override-display-name { SUSSI SKI }
+	string:image-path { ski-platoon.png }
+}
+unit-render-details:mg-platoon {
+	string:override-display-name { MG }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:engineer-platoon-finnish-early {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:aerosan {
+	string:image-path { nkl-26.png }
+}

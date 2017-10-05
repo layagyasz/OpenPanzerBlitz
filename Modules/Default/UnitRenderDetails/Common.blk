@@ -39,3 +39,6 @@ unit-render-details:fort-50 {
 unit-render-details:wagon {
 	string:image-path { wagon.png }
 }
+unit-render-details:sled {
+	string:image-path { sled.png }
+}

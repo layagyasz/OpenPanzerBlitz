@@ -60,7 +60,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how }
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
 								int:count { 2 }
 							}
 							unit-count:_ {

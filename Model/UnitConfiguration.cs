@@ -32,12 +32,16 @@ namespace PanzerBlitz
 			IS_COMMANDO,
 
 			TRUCK_MOVEMENT,
+			IGNORES_ENVIRONMENT_MOVEMENT,
+
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
 			CAN_ONLY_OVERRUN_UNARMORED,
+			CAN_ONLY_SUPPORT_CLOSE_ASSAULT,
 			IS_PASSENGER,
 
-			CAN_SPOT_INDIRECT_FIRE
+			CAN_SPOT_INDIRECT_FIRE,
+			DISMOUNT_AS
 		};
 
 		public readonly string UniqueKey;
@@ -63,13 +67,17 @@ namespace PanzerBlitz
 		public readonly bool IsCommando;
 
 		public readonly bool TruckMovement;
+		public readonly bool IgnoresEnvironmentMovement;
 
 		public readonly bool IsCarrier;
 		public readonly bool CanOnlyCarryInfantry;
 		public readonly bool CanOnlyOverrunUnarmored;
+		public readonly bool CanOnlySupportCloseAssault;
 		public readonly bool IsPassenger;
 
 		public readonly bool CanSpotIndirectFire;
+
+		public readonly UnitConfiguration DismountAs;
 
 		public UnitConfiguration(ParseBlock Block)
 		{
@@ -99,6 +107,8 @@ namespace PanzerBlitz
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
 			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
+			IgnoresEnvironmentMovement = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT], false);
 			IsCarrier = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
@@ -119,10 +129,14 @@ namespace PanzerBlitz
 			CanCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_CLOSE_ASSAULT],
 				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
+			CanOnlySupportCloseAssault = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT], false);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 
 			CanSpotIndirectFire = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
+
+			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 		}
 
 		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
@@ -220,6 +234,13 @@ namespace PanzerBlitz
 			}
 			// Should not end up here.
 			return 0;
+		}
+
+		public float GetMaxMovement(Environment Environment)
+		{
+			if (IgnoresEnvironmentMovement) return Movement;
+			if (Movement == 0) return 0;
+			return Math.Max(1, Environment.MovementMultiplier * Movement);
 		}
 
 		public float GetPointValue()

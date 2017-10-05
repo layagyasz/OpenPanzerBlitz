@@ -11,18 +11,18 @@ namespace PanzerBlitz
 	{
 		public EventHandler<EventArgs> OnLoad;
 		public EventHandler<ValuedEventArgs<Unit>> OnUnload;
+		public EventHandler<EventArgs> OnConfigurationChange;
 		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnFire;
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 
 		public readonly Army Army;
-		public readonly UnitConfiguration Configuration;
 
 		int _Id;
-
 		bool _Deployed;
-
+		UnitConfiguration _BaseConfiguration;
+		bool _Dismounted;
 		float _RemainingMovement;
 		bool _Fired;
 		bool _Moved;
@@ -60,6 +60,13 @@ namespace PanzerBlitz
 			set
 			{
 				_Deployed = value;
+			}
+		}
+		public UnitConfiguration Configuration
+		{
+			get
+			{
+				return _Dismounted ? _BaseConfiguration.DismountAs : _BaseConfiguration;
 			}
 		}
 		public float RemainingMovement
@@ -128,7 +135,7 @@ namespace PanzerBlitz
 		public Unit(Army Army, UnitConfiguration UnitConfiguration, IdGenerator IdGenerator)
 		{
 			this.Army = Army;
-			this.Configuration = UnitConfiguration;
+			_BaseConfiguration = UnitConfiguration;
 			_Id = IdGenerator.GenerateId();
 		}
 
@@ -277,9 +284,22 @@ namespace PanzerBlitz
 			return Deployment.UnitMustMove(this);
 		}
 
+		public NoDismountReason CanDismount()
+		{
+			if (_Carrier != null || Status != UnitStatus.ACTIVE) return NoDismountReason.UNABLE;
+			if (Configuration.DismountAs == null) return NoDismountReason.NO_DISMOUNT;
+			if (Moved || Fired) return NoDismountReason.NO_MOVE;
+			return NoDismountReason.NONE;
+		}
+
+		public NoDismountReason CanMount()
+		{
+			return CanDismount();
+		}
+
 		public NoLoadReason CanLoad(Unit Unit)
 		{
-			if (Unit.Moved || Moved || Unit.Fired) return NoLoadReason.NO_MOVE;
+			if (Unit.Moved || Moved || Unit.Fired || Status != UnitStatus.ACTIVE) return NoLoadReason.NO_MOVE;
 			if (Unit.Army != Army) return NoLoadReason.TEAM;
 			if (Unit.Position != Position) return NoLoadReason.ILLEGAL;
 			if (_Passenger != null) return NoLoadReason.CARRYING;
@@ -291,6 +311,7 @@ namespace PanzerBlitz
 
 		public NoUnloadReason CanUnload()
 		{
+			if (Status != UnitStatus.ACTIVE) return NoUnloadReason.NO_MOVE;
 			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
 			if (_Position != null)
 			{
@@ -304,6 +325,28 @@ namespace PanzerBlitz
 		public bool IsSolitary()
 		{
 			return _Position.Units.Count() == 1 || _Position.Units.All(i => i == this || i == _Passenger);
+		}
+
+		public void Dismount(bool UseMovement)
+		{
+			_Dismounted = true;
+			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
+			if (UseMovement)
+			{
+				_Moved = true;
+				_RemainingMovement = 0;
+			}
+		}
+
+		public void Mount(bool UseMovement)
+		{
+			_Dismounted = false;
+			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
+			if (UseMovement)
+			{
+				_Moved = true;
+				_RemainingMovement = 0;
+			}
 		}
 
 		public void Load(Unit Unit, bool UseMovement)
@@ -437,7 +480,7 @@ namespace PanzerBlitz
 			_Fired = false;
 			_Moved = false;
 			_MovedMoreThanOneTile = false;
-			_RemainingMovement = Configuration.Movement;
+			_RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
 			if (_Status == UnitStatus.DISRUPTED) _Status = UnitStatus.ACTIVE;
 		}
 

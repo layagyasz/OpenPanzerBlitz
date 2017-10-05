@@ -191,8 +191,9 @@ namespace PanzerBlitz
 			{
 				ReconOrder order = new ReconOrder(_SelectedUnit, Direction);
 				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				else UnHighlight();
 			}
+			Clear();
 		}
 
 		void EvacuateDirection(object Sender, ValuedEventArgs<Direction> E)
@@ -206,8 +207,9 @@ namespace PanzerBlitz
 			{
 				EvacuateOrder order = new EvacuateOrder(_SelectedUnit, Direction);
 				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				else UnHighlight();
 			}
+			Clear();
 		}
 	}
 }
