@@ -79,6 +79,15 @@ namespace PanzerBlitz
 
 		public readonly UnitConfiguration DismountAs;
 
+		public IEnumerable<UnitConfiguration> RepresentedConfigurations
+		{
+			get
+			{
+				yield return this;
+				if (DismountAs != null) yield return DismountAs;
+			}
+		}
+
 		public UnitConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));

@@ -6,6 +6,7 @@ namespace PanzerBlitz
 		NONE,
 		NO_DISMOUNT,
 		NO_MOVE,
-		UNABLE
+		UNABLE,
+		MUST_MOVE
 	}
 }

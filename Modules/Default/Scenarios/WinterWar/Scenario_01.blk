@@ -52,7 +52,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				zone-deployment-configuration:_ {
+				positional-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 0,0 20,0 20,33 0,33 }
 					}
@@ -159,7 +159,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				zone-deployment-configuration:_ {
+				positional-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 20,0 31,0 31,33 20,33 }
 					}

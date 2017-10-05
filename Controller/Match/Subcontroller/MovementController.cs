@@ -152,6 +152,9 @@ namespace PanzerBlitz
 					}
 				}
 			}
+			// Mount/Dismount
+			else if (Key == Keyboard.Key.M) Mount();
+			else if (Key == Keyboard.Key.D) Dismount();
 		}
 
 		void LoadUnit(object sender, ValuedEventArgs<Unit> E)
@@ -210,6 +213,27 @@ namespace PanzerBlitz
 				else UnHighlight();
 			}
 			Clear();
+		}
+
+		void Mount()
+		{
+			if (_SelectedUnit != null)
+			{
+				MountOrder order = new MountOrder(_SelectedUnit);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+			}
+		}
+
+		void Dismount()
+		{
+			if (_SelectedUnit != null)
+			{
+				DismountOrder order = new DismountOrder(_SelectedUnit);
+				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				else SetMovementHighlight(_SelectedUnit);
+
+			}
 		}
 	}
 }

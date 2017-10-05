@@ -47,14 +47,30 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-deployment-configuration:_ {
-					coordinate:coordinate { 11, 16 }
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 11, 16 }
+					}
 					unit-group:unit-group {
 						string:name { Russian Test }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
 								int:count { 2 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher { 
+						coordinate:coordinate { 11, 17 }
+					}
+					unit-group:unit-group {
+						string:name { Russian Test 2 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ski-company }
+								int:count { 1 }
 							}
 						}
 					}
@@ -87,10 +103,12 @@
 			!faction:faction { factions.german }
 			byte:team { 2 }
 			var[]:deployment-configurations {
-				tile-deployment-configuration:_ {
-					coordinate:coordinate { 22, 16 }
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 22, 16 }
+					}
 					unit-group:unit-group {
-						string:name { Russian Test }
+						string:name { German Test }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.panther }

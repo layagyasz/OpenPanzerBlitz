@@ -6,20 +6,20 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class ZoneDeploymentConfiguration : DeploymentConfiguration
+	public class PositionalDeploymentConfiguration : DeploymentConfiguration
 	{
 		enum Attribute { UNIT_GROUP, MATCHER }
 
 		public UnitGroup UnitGroup { get; }
 		public readonly Matcher<Tile> Matcher;
 
-		public ZoneDeploymentConfiguration(UnitGroup UnitGroup, Matcher<Tile> Matcher)
+		public PositionalDeploymentConfiguration(UnitGroup UnitGroup, Matcher<Tile> Matcher)
 		{
 			this.UnitGroup = UnitGroup;
 			this.Matcher = Matcher;
 		}
 
-		public ZoneDeploymentConfiguration(ParseBlock Block)
+		public PositionalDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -27,7 +27,7 @@ namespace PanzerBlitz
 			Matcher = Parse.DefaultIfNull<Matcher<Tile>>(attributes[(int)Attribute.MATCHER], new EmptyMatcher<Tile>());
 		}
 
-		public ZoneDeploymentConfiguration(SerializationInputStream Stream)
+		public PositionalDeploymentConfiguration(SerializationInputStream Stream)
 			: this(new UnitGroup(Stream), (Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream)) { }
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -38,7 +38,7 @@ namespace PanzerBlitz
 
 		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)
 		{
-			return new ZoneDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
+			return new PositionalDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
 		}
 	}
 }

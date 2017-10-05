@@ -287,8 +287,9 @@ namespace PanzerBlitz
 		public NoDismountReason CanDismount()
 		{
 			if (_Carrier != null || Status != UnitStatus.ACTIVE) return NoDismountReason.UNABLE;
-			if (Configuration.DismountAs == null) return NoDismountReason.NO_DISMOUNT;
+			if (_BaseConfiguration.DismountAs == null) return NoDismountReason.NO_DISMOUNT;
 			if (Moved || Fired) return NoDismountReason.NO_MOVE;
+			if (MustMove()) return NoDismountReason.MUST_MOVE;
 			return NoDismountReason.NONE;
 		}
 

@@ -8,18 +8,14 @@ namespace PanzerBlitz
 	{
 		static readonly Type[] DEPLOYMENT_CONFIGURATION_TYPES =
 		{
-			typeof(OneOfZoneDeploymentConfiguration),
-			typeof(TileDeploymentConfiguration),
-			typeof(TileEntryDeploymentConfiguration),
-			typeof(ZoneDeploymentConfiguration)
+			typeof(ConvoyDeploymentConfiguration),
+			typeof(PositionalDeploymentConfiguration)
 		};
 
 		static readonly Func<SerializationInputStream, DeploymentConfiguration>[] DESERIALIZERS =
 		{
-			i => new OneOfZoneDeploymentConfiguration(i),
-			i => new TileDeploymentConfiguration(i),
-			i => new TileEntryDeploymentConfiguration(i),
-			i => new ZoneDeploymentConfiguration(i)
+			i => new ConvoyDeploymentConfiguration(i),
+			i => new PositionalDeploymentConfiguration(i)
 		};
 
 		public static void Serialize(DeploymentConfiguration DeploymentConfiguration, SerializationOutputStream Stream)

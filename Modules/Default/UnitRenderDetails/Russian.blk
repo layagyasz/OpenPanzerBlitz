@@ -31,10 +31,6 @@ unit-render-details:82mm-mortar {
 unit-render-details:120mm-mortar-russian {
 	string:image-path { mortar.png }
 }
-unit-render-details:ski-company {
-	string:override-display-name { SKI }
-	string:image-path { ski-company.png }
-}
 unit-render-details:engineer-company {
 	string:override-display-name { }
 	string:image-path { engineer-company.png }
@@ -46,6 +42,10 @@ unit-render-details:recon-company {
 unit-render-details:rifle-company-early {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
+}
+unit-render-details:ski-company {
+	string:override-display-name { SKI }
+	string:image-path { ski-company.png }
 }
 unit-render-details:rifle-company {
 	string:override-display-name { RIFLE }

@@ -20,6 +20,16 @@ unit-configuration:40mm-aa {
 
 	bool:can-anti-aircraft { true }
 }
+unit-configuration:rifle-platoon-finnish-early {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+}
 unit-configuration:ski-platoon {
 	string:name { Ski Platoon }
 	unit-class:unit-class { infantry }
@@ -31,6 +41,17 @@ unit-configuration:ski-platoon {
 	byte:movement { 3 }
 
 	bool:ignores-environment-movement { true }
+	!unit-configuration:dismount-as { rifle-platoon-finnish-early }
+}
+unit-configuration:sissi-platoon {
+	string:name { Sissi Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
 }
 unit-configuration:sissi-ski-platoon {
 	string:name { Sissi Ski Platoon }
@@ -43,16 +64,17 @@ unit-configuration:sissi-ski-platoon {
 	byte:movement { 3 }
 
 	bool:ignores-environment-movement { true }
+	!unit-configuration:dismount-as { sissi-platoon }
 }
 unit-configuration:mg-platoon {
 	string:name { MG Platoon }
 	unit-class:unit-class { infantry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 1 }
-	byte:range { 2 }
-	byte:defense { 8 }
-	byte:movement { 3 }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 1 }
 
 	bool:can-only-support-close-assault { true }
 }

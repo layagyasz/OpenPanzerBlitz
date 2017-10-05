@@ -39,7 +39,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				zone-deployment-configuration:_ {
+				positional-deployment-configuration:_ {
 					unit-group:unit-group {
 						string:name { 119th Rifle Div. Remnants }
 						unit-count[]:unit-counts {
@@ -101,7 +101,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-on-edge:matcher {
 						direction:edge { south }
 					}

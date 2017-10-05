@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileEntryDeploymentConfiguration : DeploymentConfiguration
+	public class ConvoyDeploymentConfiguration : DeploymentConfiguration
 	{
 		enum Attribute { UNIT_GROUP, MATCHER, IS_STRICT_CONVOY, MOVEMENT_AUTOMATOR }
 
@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		public readonly Matcher<Tile> Matcher;
 		public readonly ConvoyMovementAutomator MovementAutomator;
 
-		public TileEntryDeploymentConfiguration(
+		public ConvoyDeploymentConfiguration(
 			UnitGroup UnitGroup, bool IsStrictConvoy, Matcher<Tile> Matcher, ConvoyMovementAutomator MovementAutomator)
 		{
 			this.UnitGroup = UnitGroup;
@@ -23,7 +23,7 @@ namespace PanzerBlitz
 			this.MovementAutomator = MovementAutomator;
 		}
 
-		public TileEntryDeploymentConfiguration(ParseBlock Block)
+		public ConvoyDeploymentConfiguration(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -38,7 +38,7 @@ namespace PanzerBlitz
 			else Matcher = new CompositeMatcher<Tile>(new Matcher<Tile>[] { edge, m }, CompositeMatcher<Tile>.AND);
 		}
 
-		public TileEntryDeploymentConfiguration(SerializationInputStream Stream)
+		public ConvoyDeploymentConfiguration(SerializationInputStream Stream)
 			: this(
 				new UnitGroup(Stream),
 				Stream.ReadBoolean(),
@@ -56,7 +56,7 @@ namespace PanzerBlitz
 
 		public Deployment GenerateDeployment(Army Army, IdGenerator IdGenerator)
 		{
-			return new TileEntryDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
+			return new ConvoyDeployment(Army, UnitGroup.GenerateUnits(Army, IdGenerator), this, IdGenerator);
 		}
 	}
 }

@@ -113,19 +113,6 @@ unit-configuration:120mm-mortar-russian {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:ski-company {
-	string:name { Ski Company }
-	unit-class:unit-class { infantry }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 3 }
-	byte:range { 4 }
-	byte:defense { 4 }
-	byte:movement { 3 }
-
-	bool:can-close-assault { false }
-	bool:ignores-environment-movement { true }
-}
 unit-configuration:engineer-company {
 	string:name { Engineer Company }
 	unit-class:unit-class { infantry }
@@ -156,6 +143,20 @@ unit-configuration:rifle-company-early {
 	byte:range { 4 }
 	byte:defense { 8 }
 	byte:movement { 1 }
+}
+unit-configuration:ski-company {
+	string:name { Ski Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 3 }
+
+	bool:can-close-assault { false }
+	bool:ignores-environment-movement { true }
+	!unit-configuration:dismount-as { rifle-company-early }
 }
 unit-configuration:rifle-company {
 	string:name { Rifle Company }

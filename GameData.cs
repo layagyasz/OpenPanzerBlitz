@@ -102,13 +102,9 @@ namespace PanzerBlitz
 			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
 			Block.AddParser<ConvoyMovementAutomator>("convoy-movement-automator", i => new ConvoyMovementAutomator(i));
 			Block.AddParser<DeploymentConfiguration>(
-				"tile-deployment-configuration", i => new TileDeploymentConfiguration(i));
+				"positional-deployment-configuration", i => new PositionalDeploymentConfiguration(i));
 			Block.AddParser<DeploymentConfiguration>(
-				"zone-deployment-configuration", i => new ZoneDeploymentConfiguration(i));
-			Block.AddParser<DeploymentConfiguration>(
-				"tile-entry-deployment-configuration", i => new TileEntryDeploymentConfiguration(i));
-			Block.AddParser<DeploymentConfiguration>(
-				"one-of-zone-deployment", i => new OneOfZoneDeploymentConfiguration(i));
+				"convoy-deployment-configuration", i => new ConvoyDeploymentConfiguration(i));
 
 			Block.AddParser<ObjectiveSuccessLevel>(
 				"objective-success-level", Parse.EnumBlockParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel)));

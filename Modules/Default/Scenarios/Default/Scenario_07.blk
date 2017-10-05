@@ -64,7 +64,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					bool:is-strict-convoy { true }
 					tile-has-coordinate:matcher {
 						coordinate:coordinate { 0,16 }
@@ -176,7 +176,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					bool:is-strict-convoy { true }
 					tile-has-coordinate:matcher {
 						coordinate:coordinate { 30,16 }

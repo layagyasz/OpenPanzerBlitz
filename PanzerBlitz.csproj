@@ -60,12 +60,8 @@
     <Compile Include="Model\Deployment\DeploymentConfiguration.cs" />
     <Compile Include="Model\Deployment\Deployment.cs" />
     <Compile Include="Model\Deployment\PositionalDeployment.cs" />
-    <Compile Include="Model\Deployment\TileDeploymentConfiguration.cs" />
-    <Compile Include="Model\Deployment\TileEntryDeploymentConfiguration.cs" />
-    <Compile Include="Model\Deployment\ZoneDeployment.cs" />
-    <Compile Include="Model\Deployment\ZoneDeploymentConfiguration.cs" />
-    <Compile Include="Model\Deployment\TileDeployment.cs" />
-    <Compile Include="Model\Deployment\TileEntryDeployment.cs" />
+    <Compile Include="Model\Deployment\ConvoyDeploymentConfiguration.cs" />
+    <Compile Include="Model\Deployment\PositionalDeploymentConfiguration.cs" />
     <Compile Include="Model\Orders\Deployment\PositionalDeployOrder.cs" />
     <Compile Include="Model\Orders\Movement\MovementOrder.cs" />
     <Compile Include="Model\Orders\Deployment\NoDeployReason.cs" />
@@ -99,8 +95,6 @@
     <Compile Include="Model\EnumConverter.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
     <Compile Include="Model\NewUnitEventArgs.cs" />
-    <Compile Include="Model\Deployment\OneOfZoneDeploymentConfiguration.cs" />
-    <Compile Include="Model\Deployment\OneOfZoneDeployment.cs" />
     <Compile Include="Model\VictoryConditions\Objective.cs" />
     <Compile Include="Model\VictoryConditions\UnitsDestroyedObjective.cs" />
     <Compile Include="Model\VictoryConditions\VictoryCondition.cs" />
@@ -294,6 +288,8 @@
     <Compile Include="Model\Matchers\InverseMatcher.cs" />
     <Compile Include="Model\Environment.cs" />
     <Compile Include="Model\Orders\Movement\NoDismountReason.cs" />
+    <Compile Include="Model\Orders\Movement\MountOrder.cs" />
+    <Compile Include="Model\Orders\Movement\DismountOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

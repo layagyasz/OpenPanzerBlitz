@@ -37,7 +37,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				zone-deployment-configuration:_ {
+				positional-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 10,0 20,0 20,33 10,33 }
 					}
@@ -118,7 +118,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-on-edge:matcher {
 						direction:edge { west }
 					}

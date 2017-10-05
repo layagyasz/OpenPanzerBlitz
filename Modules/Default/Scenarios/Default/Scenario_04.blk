@@ -51,7 +51,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-on-edge:matcher {
 						direction:edge { south }
 					}
@@ -147,7 +147,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-matches-all:matcher {
 						tile-within:_ {
 							zone:zone { 0,64 11,64 11,97 0,97 }

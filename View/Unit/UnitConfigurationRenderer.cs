@@ -33,7 +33,8 @@ namespace PanzerBlitz
 				new UnitConfiguration[] { GameData.Wreckage }
 				.Concat(Scenario.ArmyConfigurations
 					.SelectMany(i => i.DeploymentConfigurations)
-						.SelectMany(i => i.UnitGroup.UnitConfigurations).Distinct()));
+						.SelectMany(i => i.UnitGroup.UnitConfigurations
+									.SelectMany(j => j.RepresentedConfigurations)).Distinct()));
 		}
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(UnitConfiguration UnitConfiguration)

@@ -49,7 +49,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 0,0 10,0 10,1 0,1 }
 					}
@@ -87,7 +87,7 @@
 						}
 					}
 				}
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 20,0 30,0 30,1 20,1 }
 					}
@@ -117,7 +117,7 @@
 						}
 					}
 				}
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-within:matcher {
 						zone:zone { 10,0 20,0 20,1 10,1 }
 					}
@@ -179,7 +179,7 @@
 				}
 			}
 			var[]:deployment-configurations {
-				tile-entry-deployment-configuration:_ {
+				convoy-deployment-configuration:_ {
 					tile-on-edge:matcher {
 						direction:edge { south }
 					}
