@@ -91,15 +91,17 @@ namespace PanzerBlitz
 			List<Tile> sinkEdge;
 			if (Vertical)
 			{
-				source = new Tile(new Coordinate(Match.Map.Width / 2, -1), null, new IdGenerator());
-				sink = new Tile(new Coordinate(Match.Map.Width / 2, Match.Map.Height), null, new IdGenerator());
+				source = new Tile(Match.Map, new Coordinate(Match.Map.Width / 2, -1), null, new IdGenerator());
+				sink = new Tile(
+					Match.Map, new Coordinate(Match.Map.Width / 2, Match.Map.Height), null, new IdGenerator());
 				sourceEdge = Match.Map.TilesEnumerable.Where(i => i.OnEdge(Direction.NORTH)).ToList();
 				sinkEdge = Match.Map.TilesEnumerable.Where(i => i.OnEdge(Direction.SOUTH)).ToList();
 			}
 			else
 			{
-				source = new Tile(new Coordinate(-1, Match.Map.Height / 2), null, new IdGenerator());
-				sink = new Tile(new Coordinate(Match.Map.Width, Match.Map.Height / 2), null, new IdGenerator());
+				source = new Tile(Match.Map, new Coordinate(-1, Match.Map.Height / 2), null, new IdGenerator());
+				sink = new Tile(
+					Match.Map, new Coordinate(Match.Map.Width, Match.Map.Height / 2), null, new IdGenerator());
 				sourceEdge = Match.Map.TilesEnumerable.Where(i => i.OnEdge(Direction.WEST)).ToList();
 				sinkEdge = Match.Map.TilesEnumerable.Where(i => i.OnEdge(Direction.EAST)).ToList();
 			}

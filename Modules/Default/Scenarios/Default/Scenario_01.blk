@@ -167,9 +167,11 @@
 						tile-within:_ {
 							zone:zone { 10,0 20,0 20,33 10,33 }
 						}
-						tile-distance-from-unit:_ {
-							unit-has-configuration:matcher {
-								!unit-configuration:unit-configuration { unit-configurations.command-post }
+						tile-distance-from:_ {
+							tile-has-unit:matcher {
+								unit-has-configuration:matcher {
+									!unit-configuration:unit-configuration { unit-configurations.command-post }
+								}
 							}
 							byte:distance { 2 }
 							bool:atleast { true }
@@ -190,9 +192,11 @@
 					}
 				}
 				positional-deployment-configuration:_ {
-					tile-distance-from-unit:matcher {
-						unit-has-configuration:matcher {
-							!unit-configuration:unit-configuration { unit-configurations.command-post }
+					tile-distance-from:matcher {
+						tile-has-unit:matcher {
+							unit-has-configuration:matcher {
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+							}
 						}
 						byte:distance { 0 }
 					}

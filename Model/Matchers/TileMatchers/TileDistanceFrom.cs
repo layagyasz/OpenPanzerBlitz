@@ -6,33 +6,33 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileDistanceFromUnit : Matcher<Tile>
+	public class TileDistanceFrom : Matcher<Tile>
 	{
 		enum Attribute { MATCHER, DISTANCE, ATLEAST };
 
-		public readonly Matcher<Unit> Matcher;
+		public readonly Matcher<Tile> Matcher;
 		public readonly byte Distance;
 		public readonly bool Atleast;
 
-		public TileDistanceFromUnit(Matcher<Unit> Matcher, byte Distance, bool Atleast)
+		public TileDistanceFrom(Matcher<Tile> Matcher, byte Distance, bool Atleast)
 		{
 			this.Matcher = Matcher;
 			this.Distance = Distance;
 			this.Atleast = Atleast;
 		}
 
-		public TileDistanceFromUnit(ParseBlock Block)
+		public TileDistanceFrom(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
+			Matcher = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
 			Distance = (byte)attributes[(int)Attribute.DISTANCE];
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
 		}
 
-		public TileDistanceFromUnit(SerializationInputStream Stream)
+		public TileDistanceFrom(SerializationInputStream Stream)
 			: this(
-				(Matcher<Unit>)MatcherSerializer.Instance.Deserialize(Stream),
+				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream),
 				Stream.ReadByte(),
 				Stream.ReadBoolean())
 		{ }
@@ -50,7 +50,7 @@ namespace PanzerBlitz
 
 			return new Field<Tile>(Tile, Distance, (i, j) => 1)
 				.GetReachableNodes()
-				.Any(i => i.Item1.Units.Any(j => Matcher.Matches(j))) ^ Atleast;
+				.Any(i => Matcher.Matches(i.Item1)) ^ Atleast;
 		}
 	}
 }

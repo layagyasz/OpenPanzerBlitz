@@ -74,10 +74,12 @@
 						coordinate:destination { 30,16 }
 						byte:speed { 12 }
 						bool:reciprocal-stop { true }
-						tile-distance-from-unit:stop-condition {
+						tile-distance-from:stop-condition {
 							byte:distance { 3 }
-							unit-is-hostile:matcher {
-								byte:team { 1 }
+							tile-has-unit:matcher {
+								unit-is-hostile:matcher {
+									byte:team { 1 }
+								}
 							}
 						}
 					}
@@ -186,10 +188,12 @@
 						coordinate:destination { 0,16 }
 						byte:speed { 12 }
 						bool:reciprocal-stop { true }
-						tile-distance-from-unit:stop-condition {
+						tile-distance-from:stop-condition {
 							byte:distance { 3 }
-							unit-is-hostile:matcher {
-								byte:team { 2 }
+							tile-has-unit:matcher {
+								unit-is-hostile:matcher {
+									byte:team { 2 }
+								}
 							}
 						}
 					}

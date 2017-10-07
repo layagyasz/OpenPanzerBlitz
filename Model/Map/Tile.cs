@@ -15,6 +15,7 @@ namespace PanzerBlitz
 		List<Unit> _Units = new List<Unit>();
 
 		public int Id { get; }
+		public readonly Map Map;
 		public readonly Coordinate Coordinate;
 		public readonly HexCoordinate HexCoordinate;
 		public readonly CollisionPolygon Bounds;
@@ -41,8 +42,9 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Tile(Coordinate Coordinate, TileRuleSet RuleSet, IdGenerator IdGenerator)
+		public Tile(Map Map, Coordinate Coordinate, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
+			this.Map = Map;
 			this.Coordinate = Coordinate;
 			this.RuleSet = RuleSet;
 			Id = IdGenerator.GenerateId();
@@ -54,8 +56,9 @@ namespace PanzerBlitz
 			Configuration.OnReconfigure += (sender, e) => RulesCalculator.Recalculate();
 		}
 
-		public Tile(SerializationInputStream Stream, TileRuleSet RuleSet, IdGenerator IdGenerator)
+		public Tile(SerializationInputStream Stream, Map Map, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
+			this.Map = Map;
 			Coordinate = new Coordinate(Stream);
 			HexCoordinate = new HexCoordinate(Coordinate);
 			Id = IdGenerator.GenerateId();

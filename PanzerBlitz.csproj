@@ -50,8 +50,7 @@
     <Compile Include="Model\TurnComponent.cs" />
     <Compile Include="Model\MovementEventArgs.cs" />
     <Compile Include="GameData.cs" />
-    <Compile Include="Model\Match.cs">
-    </Compile>
+    <Compile Include="Model\Match.cs"></Compile>
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\StartTurnComponentEventArgs.cs" />
     <Compile Include="Model\BlockType.cs" />
@@ -211,6 +210,7 @@
     <Compile Include="Model\Map\Coordinate.cs" />
     <Compile Include="Model\Map\Direction.cs" />
     <Compile Include="Model\Map\TileEdge.cs" />
+    <Compile Include="Model\Map\TileRuleSet.cs" />
     <Compile Include="Model\Map\HexCoordinate.cs" />
     <Compile Include="Model\Map\Map.cs" />
     <Compile Include="Model\Map\MapConfiguration.cs" />
@@ -258,7 +258,7 @@
     <Compile Include="Model\Orders\Movement\ReconOrder.cs" />
     <Compile Include="Model\Orders\Movement\EvacuateOrder.cs" />
     <Compile Include="Model\Orders\ResetOrder.cs" />
-    <Compile Include="Model\Matchers\TileMatchers\TileDistanceFromUnit.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileDistanceFrom.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileElevation.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileOnEdge.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileWithin.cs" />
@@ -282,7 +282,6 @@
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasConfiguration.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitIsHostile.cs" />
     <Compile Include="Model\Map\TileConfiguration.cs" />
-    <Compile Include="Model\Map\TileRuleSet.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasCoordinate.cs" />
     <Compile Include="Model\VictoryConditions\SumObjective.cs" />
     <Compile Include="Model\Matchers\InverseMatcher.cs" />
@@ -290,6 +289,9 @@
     <Compile Include="Model\Orders\Movement\NoDismountReason.cs" />
     <Compile Include="Model\Orders\Movement\MountOrder.cs" />
     <Compile Include="Model\Orders\Movement\DismountOrder.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileHasUnit.cs" />
+    <Compile Include="Model\Map\MapRegion.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileInRegion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -371,8 +373,7 @@
     <None Include="Maps\board-01.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Screenshots\screen.jpg">
-    </None>
+    <None Include="Screenshots\screen.jpg"></None>
     <None Include="Maps\board-02.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -11,6 +11,7 @@ namespace PanzerBlitz
 	public class Map : Serializable
 	{
 		public readonly Tile[,] Tiles;
+		public readonly List<MapRegion> Regions;
 
 		public int Height
 		{
@@ -43,12 +44,13 @@ namespace PanzerBlitz
 
 		public Map(int Width, int Height, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
+			Regions = new List<MapRegion>();
 			Tiles = new Tile[Width, Height];
 			for (int i = 0; i < Width; ++i)
 			{
 				for (int j = 0; j < Height; ++j)
 				{
-					Tiles[i, j] = new Tile(new Coordinate(i, j), RuleSet, IdGenerator);
+					Tiles[i, j] = new Tile(this, new Coordinate(i, j), RuleSet, IdGenerator);
 				}
 			}
 			Ready();
@@ -59,7 +61,8 @@ namespace PanzerBlitz
 			int width = Stream.ReadInt32();
 			int height = Stream.ReadInt32();
 			Tiles = new Tile[width, height];
-			IEnumerator<Tile> tiles = Stream.ReadEnumerable(i => new Tile(i, RuleSet, IdGenerator)).GetEnumerator();
+			IEnumerator<Tile> tiles = Stream.ReadEnumerable(
+				i => new Tile(i, this, RuleSet, IdGenerator)).GetEnumerator();
 
 			for (int i = 0; i < width; ++i)
 			{
@@ -77,6 +80,7 @@ namespace PanzerBlitz
 			Stream.Write(Width);
 			Stream.Write(Height);
 			Stream.Write(TilesEnumerable);
+			Stream.Write(Regions);
 		}
 
 		internal void CopyTo(Tile[,] From, int X, int Y, bool Invert)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,24 +13,26 @@ namespace PanzerBlitz
 		MatcherSerializer()
 			: base(new Type[]
 		{
-				typeof(EmptyMatcher<Tile>),
-				typeof(InverseMatcher<Tile>),
-				typeof(CompositeMatcher<Tile>),
-				typeof(TileDistanceFromUnit),
-				typeof(TileElevation),
-				typeof(TileOnEdge),
-				typeof(TileWithin),
-				typeof(TileHasCoordinate),
+			typeof(EmptyMatcher<Tile>),
+			typeof(InverseMatcher<Tile>),
+			typeof(CompositeMatcher<Tile>),
+			typeof(TileDistanceFrom),
+			typeof(TileElevation),
+			typeof(TileOnEdge),
+			typeof(TileWithin),
+			typeof(TileHasCoordinate),
+			typeof(TileHasUnit),
+			typeof(TileInRegion),
 
-				typeof(EmptyMatcher<Unit>),
-				typeof(InverseMatcher<Unit>),
-				typeof(CompositeMatcher<Unit>),
-				typeof(UnitHasStatus),
-				typeof(UnitHasReconned),
-				typeof(UnitHasEvacuated),
-				typeof(UnitHasPosition),
-				typeof(UnitHasConfiguration),
-				typeof(UnitIsHostile)
+			typeof(EmptyMatcher<Unit>),
+			typeof(InverseMatcher<Unit>),
+			typeof(CompositeMatcher<Unit>),
+			typeof(UnitHasStatus),
+			typeof(UnitHasReconned),
+			typeof(UnitHasEvacuated),
+			typeof(UnitHasPosition),
+			typeof(UnitHasConfiguration),
+			typeof(UnitIsHostile)
 		})
 		{ }
 
