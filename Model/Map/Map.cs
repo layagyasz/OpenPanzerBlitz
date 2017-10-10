@@ -11,7 +11,7 @@ namespace PanzerBlitz
 	public class Map : Serializable
 	{
 		public readonly Tile[,] Tiles;
-		public readonly List<MapRegion> Regions = new List<MapRegion>();
+		public readonly List<MapRegion> Regions;
 
 		public int Height
 		{
@@ -72,6 +72,7 @@ namespace PanzerBlitz
 					Tiles[i, j] = tiles.Current;
 				}
 			}
+			Regions = Stream.ReadEnumerable(i => new MapRegion(Stream, Tiles)).ToList();
 			Ready();
 		}
 
@@ -83,24 +84,42 @@ namespace PanzerBlitz
 			Stream.Write(Regions);
 		}
 
-		internal void CopyTo(Tile[,] From, int X, int Y, bool Invert)
+		internal void CopyTo(Map From, int X, int Y, bool Invert)
 		{
-			for (int i = 0; i < From.GetLength(0); ++i)
+			Coordinate max = new Coordinate(From.Tiles.GetLength(0), From.Tiles.GetLength(1));
+
+			foreach (MapRegion m in From.Regions)
 			{
-				for (int j = 0; j < From.GetLength(1); ++j)
+				MapRegion copy = new MapRegion() { Name = m.Name };
+				foreach (Tile t in m.Tiles)
 				{
-					if (Invert)
+					Coordinate c = TransformCoordinate(t.Coordinate, new Coordinate(X, Y), max, Invert);
+					copy.Add(Tiles[c.X + X, c.Y + Y]);
+				}
+				Regions.Add(copy);
+			}
+
+			for (int i = 0; i < From.Tiles.GetLength(0); ++i)
+			{
+				for (int j = 0; j < From.Tiles.GetLength(1); ++j)
+				{
+					Coordinate c = TransformCoordinate(new Coordinate(i, j), new Coordinate(X, Y), max, Invert);
+					if (c.X < From.Tiles.GetLength(0) && c.X >= 0)
 					{
-						int x = From.GetLength(0) - i - 1 - ((Y + j) % 2 == 0 ? 1 : 0);
-						if (x < From.GetLength(0) && x >= 0)
-						{
-							Tiles[X + i, Y + j].Configuration.Merge(new TileConfiguration(
-								From[x, From.GetLength(1) - j - 1].Configuration, Invert));
-						}
+						Tile t = From.Tiles[c.X, c.Y];
+						Tiles[X + i, Y + j].Configuration.Merge(new TileConfiguration(
+							t.Configuration, Invert));
 					}
-					else Tiles[X + i, Y + j].Configuration.Merge(From[i, j].Configuration);
 				}
 			}
+		}
+
+		Coordinate TransformCoordinate(Coordinate Coordinate, Coordinate Offset, Coordinate Max, bool Invert)
+		{
+			return Invert ? new Coordinate(
+								Max.X - Coordinate.X - 1 - ((Offset.X + Coordinate.Y) % 2 == 0 ? 1 : 0),
+								Max.Y - Coordinate.Y - 1)
+									: Coordinate;
 		}
 
 		internal void Ready()

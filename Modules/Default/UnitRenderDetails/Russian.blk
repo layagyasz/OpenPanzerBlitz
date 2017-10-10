@@ -19,8 +19,17 @@ unit-render-details:76_2mm-at {
 unit-render-details:76_2mm-how-company {
 	string:image-path { artillery-company.png }
 }
+unit-render-details:76_2mm-how {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:122mm-how {
 	string:image-path { artillery-heavy.png }
+}
+unit-render-details:152mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:203mm-how {
+	string:image-path { artillery-motorized.png }
 }
 unit-render-details:82mm-mortar-motorized {
 	string:image-path { mortar-motorized.png }
@@ -46,6 +55,7 @@ unit-render-details:rifle-company-early {
 unit-render-details:ski-company {
 	string:override-display-name { SKI }
 	string:image-path { ski-company.png }
+	color:override-color { #FFFFFF }
 }
 unit-render-details:rifle-company {
 	string:override-display-name { RIFLE }
@@ -56,6 +66,10 @@ unit-render-details:guards-company {
 	string:image-path { infantry-company.png }
 	color:override-color { #E24B20 }
 }
+unit-render-details:smg-company-early {
+	string:override-display-name { SMG }
+	string:image-path { infantry-company.png }
+}
 unit-render-details:smg-company {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
@@ -64,12 +78,18 @@ unit-render-details:cavalry {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry.png }
 }
+unit-render-details:tractor {
+	string:image-path { tractor.png }
+}
 unit-render-details:truck-russian {
 	string:override-display-name { TRUCK }
 	string:image-path { truck.png }
 }
 unit-render-details:nkl-6 {
 	string:image-path { nkl-6.png }
+}
+unit-render-details:nkl-6-a {
+	string:image-path { nkl-6-a.png }
 }
 unit-render-details:sis-33 {
 	string:override-display-name { HALFTRK }
@@ -81,8 +101,14 @@ unit-render-details:t-26-a {
 unit-render-details:t-28-e {
 	string:image-path { t-28-e.png }
 }
+unit-render-details:t-35 {
+	string:image-path { t-35.png }
+}
 unit-render-details:su-152 {
 	string:image-path { su-152.png }
+}
+unit-render-details:kv-ii {
+	string:image-path { kv-ii.png }
 }
 unit-render-details:su-76 {
 	string:image-path { su-76.png }
@@ -98,6 +124,9 @@ unit-render-details:jsu-122 {
 }
 unit-render-details:t-26-b {
 	string:image-path { t-26-b.png }
+}
+unit-render-details:bt-5 {
+	string:image-path { bt-5.png }
 }
 unit-render-details:kv-85 {
 	string:image-path { kv-85.png }

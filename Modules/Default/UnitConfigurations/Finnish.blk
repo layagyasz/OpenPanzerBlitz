@@ -89,6 +89,16 @@ unit-configuration:engineer-platoon-finnish-early {
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
+unit-configuration:ft-17 {
+	string:name { FT-17 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 2 }	
+}
 unit-configuration:aerosan {
 	string:name { Aerosan }
 	unit-class:unit-class { transport }

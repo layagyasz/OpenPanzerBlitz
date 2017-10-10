@@ -44,7 +44,7 @@ namespace PanzerBlitz
 				int nextRowY = 0;
 				foreach (Tuple<Map, bool> m in mapRow)
 				{
-					map.CopyTo(m.Item1.Tiles, rowX, rowY, m.Item2);
+					map.CopyTo(m.Item1, rowX, rowY, m.Item2);
 					rowX += m.Item1.Width - 1;
 					nextRowY = Math.Max(nextRowY, rowY + m.Item1.Height - 1);
 				}

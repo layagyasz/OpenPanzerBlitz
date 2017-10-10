@@ -7,7 +7,7 @@ namespace PanzerBlitz
 {
 	public class TileInRegion : Matcher<Tile>
 	{
-		enum Attribute { NAME }
+		enum Attribute { REGION_NAME }
 
 		public readonly string NormalizedRegionName;
 
@@ -19,7 +19,7 @@ namespace PanzerBlitz
 		public TileInRegion(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
-			NormalizedRegionName = (string)attributes[(int)Attribute.NAME];
+			NormalizedRegionName = (string)attributes[(int)Attribute.REGION_NAME];
 		}
 
 		public TileInRegion(SerializationInputStream Stream)

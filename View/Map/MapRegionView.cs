@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		public MapRegionView(MapRegion MapRegion, TileRenderer Renderer)
 		{
 			this.MapRegion = MapRegion;
-			_Text = new Text(MapRegion.Name, Renderer.FontFace, 64);
+			_Text = new Text(MapRegion.Name, Renderer.FontFace, 32);
 			_Text.Color = Renderer.FontColor;
 			_Text.Scale = new Vector2f(1f / 128, 1f / 128);
 

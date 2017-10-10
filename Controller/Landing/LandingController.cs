@@ -25,7 +25,7 @@ namespace PanzerBlitz
 
 		void HandleRemoteConnectionSetup(object Sender, EventArgs E)
 		{
-			_ConnectionPane = new TextPane("Remote Connection", "IP Address");
+			_ConnectionPane = new TextPane("Remote Connection", "IP Address", "Connect");
 			_ConnectionPane.OnValueEntered += HandleRemoteConnect;
 			_LandingScreen.PaneLayer.Add(_ConnectionPane);
 		}

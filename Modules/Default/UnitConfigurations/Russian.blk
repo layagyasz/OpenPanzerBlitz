@@ -69,6 +69,17 @@ unit-configuration:76_2mm-how-company {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
+unit-configuration:76_2mm-how {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 16 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
 unit-configuration:122mm-how {
 	string:name { 122mm }
 	unit-class:unit-class { towed-gun }
@@ -78,6 +89,28 @@ unit-configuration:122mm-how {
 	byte:range { 20 }
 	byte:defense { 1 }
 	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:152mm-how {
+	string:name { 152mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 25 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:203mm-how {
+	string:name { 203mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 30 }
+	byte:defense { 1 }
+	byte:movement { 2 }
 	bool:can-indirect-fire { true }
 }
 unit-configuration:82mm-mortar-motorized {
@@ -178,6 +211,16 @@ unit-configuration:guards-company {
 	byte:defense { 18 }
 	byte:movement { 1 }
 }
+unit-configuration:smg-company-early {
+	string:name { SMG Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 1 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
 unit-configuration:smg-company {
 	string:name { SMG Company }
 	unit-class:unit-class { infantry }
@@ -198,6 +241,16 @@ unit-configuration:cavalry {
 	byte:defense { 8 }
 	byte:movement { 3 }
 }
+unit-configuration:tractor {
+	string:name { Tractor }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 4 }
+}
 unit-configuration:truck-russian {
 	string:name { SIS-5 Truck }
 	unit-class:unit-class { transport }
@@ -217,6 +270,19 @@ unit-configuration:nkl-6 {
 	weapon-class:weapon-class { na }
 	byte:attack { 0 }
 	byte:range { 0 }
+	byte:defense { 2 }
+	byte:movement { 17 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
+}
+unit-configuration:nkl-6-a {
+	string:name { NKL-6 A }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 17 }
 
@@ -255,6 +321,16 @@ unit-configuration:t-28-e {
 	byte:defense { 7 }
 	byte:movement { 10 }	
 }
+unit-configuration:t-35 {
+	string:name { T-35 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 6 }
+	byte:defense { 9 }
+	byte:movement { 6 }	
+}
 unit-configuration:su-152 {
 	string:name { SU-152 }
 	unit-class:unit-class { assault-gun }
@@ -264,6 +340,16 @@ unit-configuration:su-152 {
 	byte:range { 10 }
 	byte:defense { 16 }
 	byte:movement { 7 }
+}
+unit-configuration:kv-ii {
+	string:name { KV-II }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 50 }
+	byte:range { 10 }
+	byte:defense { 10 }
+	byte:movement { 8 }	
 }
 unit-configuration:su-76 {
 	string:name { SU-76 }
@@ -314,6 +400,16 @@ unit-configuration:t-26-b {
 	byte:range { 3 }
 	byte:defense { 4 }
 	byte:movement { 6 } 
+}
+unit-configuration:bt-5 {
+	string:name { BT-5 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 13 } 
 }
 unit-configuration:kv-85 {
 	string:name { KV-85 }

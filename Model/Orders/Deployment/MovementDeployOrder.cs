@@ -45,6 +45,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == NoDeployReason.NONE)
 			{
+				Tile.Control(Unit);
 				Unit.Place(Tile);
 				Unit.Deployed = true;
 				return OrderStatus.FINISHED;

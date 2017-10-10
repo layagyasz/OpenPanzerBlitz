@@ -51,11 +51,13 @@ namespace PanzerBlitz
 
 			if (Tile == null)
 			{
+				if (Unit.Position != null) Unit.Position.ClearControl(Unit);
 				Unit.Remove();
 				Unit.Deployed = false;
 			}
 			else
 			{
+				Tile.Control(Unit);
 				Unit.Place(Tile);
 				Unit.Deployed = true;
 			}

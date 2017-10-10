@@ -27,7 +27,7 @@
 			victory-condition:victory-condition {
 				var<>:objectives {
 					units-matched-objective:units-evacuated {
-						bool:friendly { false }
+						bool:friendly { true }
 						unit-has-evacuated:matcher {
 							direction:direction { east }
 						}

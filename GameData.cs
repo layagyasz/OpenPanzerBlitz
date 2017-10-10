@@ -140,12 +140,13 @@ namespace PanzerBlitz
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)
 			{
 				if (!UnitRenderDetails.ContainsKey(unit))
-					Console.WriteLine("[WARNING]: No render details configured for UnitConfiguration {0}", unit.Name);
+					Console.WriteLine(
+						"[WARNING]: No render details configured for UnitConfiguration {0}", unit.UniqueKey);
 				else if (!File.Exists(UnitRenderDetails[unit].ImagePath))
 					Console.WriteLine(
 						"[WARNING]: Image {0} missing for UnitConfiguration {1}",
 						UnitRenderDetails[unit].ImagePath,
-						unit.Name);
+						unit.UniqueKey);
 			}
 
 			// Debug scenario configurations.

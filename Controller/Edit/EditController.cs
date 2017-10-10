@@ -62,18 +62,23 @@ namespace PanzerBlitz
 			_EditPane.OnMapRegionSelected += (sender, e) => HandleRegionChanged(e.Value, EventArgs.Empty);
 		}
 
-		protected void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
+		void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
 		{
 			_EditScreen.HighlightLayer.RemoveHighlight(_Highlight);
 			_Highlight = new Highlight(Highlight);
 			_EditScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
+		void UnHighlight()
+		{
+			Highlight(Enumerable.Empty<Tuple<Tile, Color>>());
+		}
+
 		void HandleStartAddMapRegion(object Sender, EventArgs E)
 		{
 			if (_NewRegionPane != null) _EditScreen.PaneLayer.Remove(_NewRegionPane);
 
-			_NewRegionPane = new TextPane("New Region", "Region Name");
+			_NewRegionPane = new TextPane("New Region", "Region Name", "Create");
 			_NewRegionPane.OnValueEntered += HandleAddMapRegion;
 			_EditScreen.PaneLayer.Add(_NewRegionPane);
 		}
@@ -85,6 +90,7 @@ namespace PanzerBlitz
 			_EditScreen.MapView.Map.Regions.Add(m);
 			_EditScreen.MapView.MapRegions.Add(new MapRegionView(m, _EditScreen.MapView.TileRenderer));
 			_EditPane.UpdateFromMap(_EditScreen.MapView.Map);
+			UnHighlight();
 
 			_EditScreen.PaneLayer.Remove(_NewRegionPane);
 			_NewRegionPane = null;
@@ -119,6 +125,7 @@ namespace PanzerBlitz
 		{
 			NewMapPane pane = (NewMapPane)Sender;
 			Map newMap = new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap(null, new IdGenerator());
+			_EditPane.UpdateFromMap(newMap);
 			_EditScreen.SetMap(newMap);
 			pane.Visible = false;
 		}
@@ -150,6 +157,8 @@ namespace PanzerBlitz
 							new SerializationInputStream(compressionStream),
 							null,
 							new IdGenerator()));
+					_EditPane.UpdateFromMap(_EditScreen.MapView.Map);
+					UnHighlight();
 					foreach (TileView t in _EditScreen.MapView.TilesEnumerable)
 					{
 						t.OnClick += HandleTileClick;

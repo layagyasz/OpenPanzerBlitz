@@ -17,7 +17,8 @@ namespace PanzerBlitz
 			typeof(UnitsMatchedObjective),
 			typeof(PreventEnemyObjective),
 			typeof(RatioObjective),
-			typeof(SumObjective)
+			typeof(SumObjective),
+			typeof(TilesControlledObjective)
 		})
 		{ }
 	}

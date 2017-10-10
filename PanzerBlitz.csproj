@@ -293,6 +293,7 @@
     <Compile Include="View\Map\MapRegionView.cs" />
     <Compile Include="View\TextPane.cs" />
     <Compile Include="View\SelectPane.cs" />
+    <Compile Include="Model\VictoryConditions\TilesControlledObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1204,6 +1205,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\WinterWar\Scenario_02.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_03.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_04.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,21 +1,21 @@
 ﻿scenario:_ {
-	string:name { Suomussalmi }
+	string:name { Summa }
 	byte[]:deployment-order { 0 1 }
 	byte[]:turn-order { 1 0 }
-	byte:turns { 16 }
+	byte:turns { 12 }
 	!environment:environment { environments.winter-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-02.map }
-				bool:invert { true }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-03.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
 				string:board-path { Maps/board-01.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
 				bool:invert { false }
 			}
 		}
@@ -26,41 +26,56 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-matched-objective:units-evacuated {
-						bool:friendly { true }
-						unit-has-evacuated:matcher {
-							direction:direction { east }
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
 						}
+					}
+					line-of-fire-objective:path-cleared {
+						bool:friendly { false }
+						bool:include-field-of-sight { false }
+						byte:width { 4 }
+						bool:break-through { true }
+						bool:vertical { false }
 					}
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
 						int:threshold { 10 }
-						!var:objective { objectives.units-evacuated }
+						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { tactical-victory }
 						int:threshold { 15 }
-						!var:objective { objectives.units-evacuated }
+						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { decisive-victory }
-						int:threshold { 20 }
-						!var:objective { objectives.units-evacuated }
+						int:threshold { 1 }
+						!var:objective { objectives.path-cleared }
 					}
 				}
 			}
 			var[]:deployment-configurations {
-				positional-deployment-configuration:_ {
-					tile-within:matcher {
-						zone:zone { 0,0 20,0 20,33 0,33 }
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { east }
 					}
 					unit-group:unit-group {
-						string:name { 163rd Rifle Div. }
+						string:name { 100th Rifle Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.t-28-e }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-35 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.kv-ii }
 								int:count { 2 }
 							}
 							unit-count:_ {
@@ -69,11 +84,19 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.t-26-b }
-								int:count { 2 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bt-5 }
+								int:count { 4 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.rifle-company-early }
-								int:count { 11 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-early }
+								int:count { 6 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.ski-company }
@@ -84,43 +107,31 @@
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.12_7mm-mg }
-								int:count { 1 }
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
+								int:count { 4 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.45mm-at-early }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
 								int:count { 2 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.122mm-how }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
-								int:count { 5 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sled }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.wagon }
-								int:count { 8 }
+								!unit-configuration:unit-configuration { unit-configurations.152mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.203mm-how }
+								int:count { 1 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
-								int:count { 9 }
+								int:count { 14 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.nkl-6 }
+								!unit-configuration:unit-configuration { unit-configurations.tractor }
 								int:count { 1 }
 							}
 						}
@@ -143,12 +154,12 @@
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { marginal-victory }
-						int:threshold { 14 }
+						int:threshold { 10 }
 						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { tactical-victory }
-						int:threshold { 17 }
+						int:threshold { 15 }
 						!var:objective { objectives.units-destroyed }
 					}
 					objective-success-trigger:_ {
@@ -160,27 +171,29 @@
 			}
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
-					tile-within:matcher {
-						zone:zone { 20,0 31,0 31,33 20,33 }
+					tile-matches-any:matcher {
+						tile-within:_ {
+							zone:zone { 0,0 20,0 20,33 0,33 }
+						}
 					}
 					unit-group:unit-group {
-						string:name { 27th Infantry Rgt. }
+						string:name { 7th Infantry Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-platoon }
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-finnish-early 
+								}
 								int:count { 16 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sissi-ski-platoon }
-								int:count { 10 }
-							}
-							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
-								int:count { 9 }
+								int:count { 6 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.25mm-at }
-								int:count { 1 }
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-finnish-early 
+								}
+								int:count { 3 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.37mm-at }
@@ -191,16 +204,44 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sled }
-								int:count { 12 }
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.aerosan }
-								int:count { 2 }
+								!unit-configuration:unit-configuration { unit-configurations.ft-17 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-20 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-20 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-30 }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								int:count { 6 }
 							}
 						}
 					}

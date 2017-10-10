@@ -271,12 +271,14 @@ namespace PanzerBlitz
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
 			if (Tile == _Position) return;
+			foreach (Tile t in Path.Nodes) t.Control(this);
 
 			float movement = (float)Path.Distance;
 			_RemainingMovement -= movement;
 			_MovedMoreThanOneTile = Path.Count > 2 || _Moved;
 			_Moved = true;
 			Place(Tile, Path);
+
 		}
 
 		public bool MustMove()

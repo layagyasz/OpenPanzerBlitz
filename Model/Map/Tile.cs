@@ -26,6 +26,8 @@ namespace PanzerBlitz
 		public readonly TileRulesCalculator RulesCalculator;
 		public readonly TileRuleSet RuleSet;
 
+		Army _ControllingArmy;
+
 		public Vector2f Center
 		{
 			get
@@ -33,12 +35,18 @@ namespace PanzerBlitz
 				return new Vector2f(Coordinate.X - (Coordinate.Y % 2 == 0 ? 0 : .5f), Coordinate.Y * .75f);
 			}
 		}
-
 		public IEnumerable<Unit> Units
 		{
 			get
 			{
 				return _Units;
+			}
+		}
+		public Army ControllingArmy
+		{
+			get
+			{
+				return _ControllingArmy;
 			}
 		}
 
@@ -289,6 +297,16 @@ namespace PanzerBlitz
 			Configuration.SetEdge(Index, Edge);
 			if (NeighborTiles[Index] != null && NeighborTiles[Index].Configuration.GetEdge((Index + 3) % 6) != Edge)
 				NeighborTiles[Index].SetEdge((Index + 3) % 6, Edge);
+		}
+
+		public void Control(Unit Unit)
+		{
+			_ControllingArmy = Unit.Army;
+		}
+
+		public void ClearControl(Unit Unit)
+		{
+			if (_ControllingArmy == Unit.Army && Units.All(i => i.Army != Unit.Army)) _ControllingArmy = null;
 		}
 
 		public void Enter(Unit Unit)

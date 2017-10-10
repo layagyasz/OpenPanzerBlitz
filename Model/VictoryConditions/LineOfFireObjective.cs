@@ -9,17 +9,20 @@ namespace PanzerBlitz
 {
 	public class LineOfFireObjective : Objective
 	{
-		enum Attribute { FRIENDLY, BREAK_THROUGH, WIDTH, VERTICAL }
+		enum Attribute { FRIENDLY, INCLUDE_FIELD_OF_SIGHT, BREAK_THROUGH, WIDTH, VERTICAL }
 
 		public readonly bool Friendly;
+		public readonly bool IncludeFieldOfSight;
 		public readonly bool BreakThrough;
 		public readonly byte Width;
 		public readonly bool Vertical;
 
-		public LineOfFireObjective(string UniqueKey, bool Friendly, bool BreakThrough, byte Width, bool Vertical)
+		public LineOfFireObjective(
+			string UniqueKey, bool Friendly, bool IncludeLineOfSight, bool BreakThrough, byte Width, bool Vertical)
 			: base(UniqueKey)
 		{
 			this.Friendly = Friendly;
+			this.IncludeFieldOfSight = IncludeLineOfSight;
 			this.BreakThrough = BreakThrough;
 			this.Width = Width;
 			this.Vertical = Vertical;
@@ -31,6 +34,7 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], true);
+			IncludeFieldOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.INCLUDE_FIELD_OF_SIGHT], true);
 			BreakThrough = Parse.DefaultIfNull(attributes[(int)Attribute.BREAK_THROUGH], false);
 			Width = Parse.DefaultIfNull(attributes[(int)Attribute.WIDTH], (byte)1);
 			Vertical = (bool)attributes[(int)Attribute.VERTICAL];
@@ -41,6 +45,7 @@ namespace PanzerBlitz
 				Stream.ReadString(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
 				Stream.ReadByte(),
 				Stream.ReadBoolean())
 		{ }
@@ -49,6 +54,7 @@ namespace PanzerBlitz
 		{
 			base.Serialize(Stream);
 			Stream.Write(Friendly);
+			Stream.Write(IncludeFieldOfSight);
 			Stream.Write(BreakThrough);
 			Stream.Write(Width);
 			Stream.Write(Vertical);
@@ -56,12 +62,12 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match)
 		{
-			IEnumerable<Tile> losTiles =
-				Match.Armies
-					 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
-					 .SelectMany(i => i.Units)
-					 .SelectMany(i => i.GetFieldOfSight(AttackMethod.NORMAL_FIRE))
-					 .Select(i => i.Item1.Final);
+			IEnumerable<Unit> units = Match.Armies
+								 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
+										   .SelectMany(i => i.Units).Where(i => i.Position != null);
+			IEnumerable<Tile> losTiles = IncludeFieldOfSight
+				? units.SelectMany(i => i.GetFieldOfSight(AttackMethod.NORMAL_FIRE)).Select(i => i.Item1.Final)
+					   : units.Select(i => i.Position);
 
 			HashSet<Tile> image;
 			HashSet<Tile> negative;

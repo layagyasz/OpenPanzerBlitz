@@ -28,6 +28,9 @@ unit-render-details:engineer-platoon-finnish-early {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
+unit-render-details:ft-17 {
+	string:image-path { ft-17.png }
+}
 unit-render-details:aerosan {
 	string:image-path { nkl-26.png }
 }
