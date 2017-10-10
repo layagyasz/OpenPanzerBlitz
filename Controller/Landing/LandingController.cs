@@ -10,7 +10,7 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<MatchLobbyContext>> OnConnectionSetup;
 
 		LandingScreen _LandingScreen;
-		SetupNetworkConnectionPane _ConnectionPane;
+		TextPane _ConnectionPane;
 
 		public LandingController(LandingScreen LandingScreen)
 		{
@@ -25,8 +25,8 @@ namespace PanzerBlitz
 
 		void HandleRemoteConnectionSetup(object Sender, EventArgs E)
 		{
-			_ConnectionPane = new SetupNetworkConnectionPane();
-			_ConnectionPane.OnConnectionSetup += HandleRemoteConnect;
+			_ConnectionPane = new TextPane("Remote Connection", "IP Address");
+			_ConnectionPane.OnValueEntered += HandleRemoteConnect;
 			_LandingScreen.PaneLayer.Add(_ConnectionPane);
 		}
 

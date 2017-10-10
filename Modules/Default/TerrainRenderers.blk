@@ -1,5 +1,7 @@
 ﻿tile-renderer<>:tile-renderers {
 	tile-renderer:summer-steppe {
+		string:font-face { compacta }
+		color:font-color { 80,80,80 }
 		color:base-color { 205,194,149 }
 		color[]:elevation-colors { 0,0,0 235,37,26 }
 		color<>:top-colors {
@@ -47,6 +49,8 @@
 		}
 	}
 	tile-renderer:winter-steppe {
+		string:font-face { compacta }
+		color:font-color { 80,80,80 }
 		color:base-color { 217,211,195 }
 		color[]:elevation-colors { 0,0,0 235,37,26 }
 		color<>:top-colors {
@@ -94,6 +98,8 @@
 		}
 	}
 	tile-renderer:summer-grassland {
+		string:font-face { compacta }
+		color:font-color { 80,80,80 }
 		color:base-color { 201,205,95 }
 		color[]:elevation-colors { 0,0,0 235,37,26 }
 		color<>:top-colors {

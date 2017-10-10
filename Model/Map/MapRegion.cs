@@ -20,7 +20,8 @@ namespace PanzerBlitz
 			}
 			set
 			{
-				_Name = value; if (OnChange != null) OnChange(this, EventArgs.Empty);
+				_Name = value;
+				if (OnChange != null) OnChange(this, EventArgs.Empty);
 			}
 		}
 		public IEnumerable<Tile> Tiles

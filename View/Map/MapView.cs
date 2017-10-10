@@ -10,8 +10,9 @@ namespace PanzerBlitz
 {
 	public class MapView : Pod
 	{
-		private Map _Map;
+		Map _Map;
 		public readonly TileView[,] Tiles;
+		public readonly List<MapRegionView> MapRegions;
 		public readonly TileRenderer TileRenderer;
 
 		public Map Map
@@ -40,6 +41,7 @@ namespace PanzerBlitz
 		{
 			_Map = Map;
 			Tiles = new TileView[_Map.Tiles.GetLength(0), _Map.Tiles.GetLength(1)];
+			MapRegions = Map.Regions.Select(i => new MapRegionView(i, TileRenderer)).ToList();
 			this.TileRenderer = TileRenderer;
 			for (int i = 0; i < _Map.Tiles.GetLength(0); ++i)
 			{
@@ -59,6 +61,7 @@ namespace PanzerBlitz
 		public void Draw(RenderTarget Target, Transform Transform)
 		{
 			foreach (TileView t in TilesEnumerable) t.Draw(Target, Transform);
+			foreach (MapRegionView m in MapRegions) m.Draw(Target, Transform);
 		}
 	}
 }

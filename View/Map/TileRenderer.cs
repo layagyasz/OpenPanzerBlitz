@@ -14,6 +14,8 @@ namespace PanzerBlitz
 	{
 		enum Attribute
 		{
+			FONT_FACE,
+			FONT_COLOR,
 			BASE_COLOR,
 			ELEVATION_COLORS,
 			TOP_COLORS,
@@ -25,6 +27,8 @@ namespace PanzerBlitz
 			PATH_BORDER_WIDTHS
 		};
 
+		public readonly Font FontFace;
+		public readonly Color FontColor;
 		public readonly Color BaseColor;
 
 		Color[] _ElevationColors;
@@ -62,6 +66,8 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
+			FontFace = Cardamom.Interface.ClassLibrary.Instance.GetFont((string)attributes[(int)Attribute.FONT_FACE]);
+			FontColor = (Color)attributes[(int)Attribute.FONT_COLOR];
 			BaseColor = (Color)attributes[(int)Attribute.BASE_COLOR];
 			_ElevationColors = (Color[])attributes[(int)Attribute.ELEVATION_COLORS];
 			_TopColors = Parse.KeyByEnum<TileBase, Color>(

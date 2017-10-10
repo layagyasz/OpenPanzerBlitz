@@ -47,20 +47,20 @@ namespace PanzerBlitz
 			_Texture = renderInfo.Item1;
 			for (int i = 0; i < colors.Length; ++i)
 			{
-				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f) * Scale, colors[i]);
-				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f) * Scale, colors[i]);
-				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f) * Scale, colors[i]);
-				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f) * Scale, colors[i]);
+				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f), colors[i]);
+				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f), colors[i]);
+				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f), colors[i]);
+				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f), colors[i]);
 			}
 			_ImageVertices = new Vertex[4];
 			Color c = Renderer.RenderDetails[UnitConfiguration].OverrideColor;
 			if (c.R == 0 && c.G == 0 && c.B == 0)
 				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
 
-			Vector2f tl = new Vector2f(-.5f, -.5f) * Scale;
-			Vector2f tr = new Vector2f(.5f, -.5f) * Scale;
-			Vector2f br = new Vector2f(.5f, .5f) * Scale;
-			Vector2f bl = new Vector2f(-.5f, .5f) * Scale;
+			Vector2f tl = new Vector2f(-.5f, -.5f);
+			Vector2f tr = new Vector2f(.5f, -.5f);
+			Vector2f br = new Vector2f(.5f, .5f);
+			Vector2f bl = new Vector2f(-.5f, .5f);
 			_ImageVertices[0] = new Vertex(tl, c, renderInfo.Item2[0]);
 			_ImageVertices[1] = new Vertex(tr, c, renderInfo.Item2[1]);
 			_ImageVertices[2] = new Vertex(br, c, renderInfo.Item2[2]);
@@ -76,6 +76,7 @@ namespace PanzerBlitz
 
 		public void Draw(RenderTarget Target, Transform Transform)
 		{
+			Transform.Scale(Scale, Scale);
 			RenderStates r = new RenderStates();
 			r.Transform = Transform;
 

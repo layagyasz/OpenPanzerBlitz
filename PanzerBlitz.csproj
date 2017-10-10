@@ -183,11 +183,9 @@
     <Compile Include="View\Match\ConvoyDeploymentPage.cs" />
     <Compile Include="View\Match\DeploymentPage.cs" />
     <Compile Include="View\Match\DeploymentPane.cs" />
-    <Compile Include="View\Match\SelectPane.cs" />
     <Compile Include="View\Match\PositionalDeploymentPage.cs" />
     <Compile Include="View\Edit\EditPane.cs" />
     <Compile Include="View\Edit\IOPane.cs" />
-    <Compile Include="View\Landing\SetupNetworkConnectionPane.cs" />
     <Compile Include="View\ScenarioSelect\ScenarioSelectScreen.cs" />
     <Compile Include="View\Match\ArmyView.cs" />
     <Compile Include="View\Match\MovementDolly.cs" />
@@ -292,6 +290,9 @@
     <Compile Include="Model\Matchers\TileMatchers\TileHasUnit.cs" />
     <Compile Include="Model\Map\MapRegion.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileInRegion.cs" />
+    <Compile Include="View\Map\MapRegionView.cs" />
+    <Compile Include="View\TextPane.cs" />
+    <Compile Include="View\SelectPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1151,7 +1152,7 @@
     <None Include="Modules\Default\Theme\Components\MatchLobby.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\Theme\Components\NetworkConnect.blk">
+    <None Include="Modules\Default\Theme\Components\TextPane.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Theme\Components\Overlay.blk">

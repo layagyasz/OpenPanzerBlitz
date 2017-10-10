@@ -28,5 +28,10 @@ namespace PanzerBlitz
 		{
 			return TilePathOverlay.ToString();
 		}
+
+		public static string Describe(MapRegion Region)
+		{
+			return Region.Name;
+		}
 	}
 }

@@ -11,7 +11,7 @@ namespace PanzerBlitz
 	public class Map : Serializable
 	{
 		public readonly Tile[,] Tiles;
-		public readonly List<MapRegion> Regions;
+		public readonly List<MapRegion> Regions = new List<MapRegion>();
 
 		public int Height
 		{

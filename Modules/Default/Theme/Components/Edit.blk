@@ -1,7 +1,7 @@
 ﻿class:edit-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 133 }
+		int:height { 165 }
 	}
 }
 class:edit-header-1 {

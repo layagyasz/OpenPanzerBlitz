@@ -7,25 +7,25 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class SetupNetworkConnectionPane : Pane
+	public class TextPane : Pane
 	{
-		public EventHandler<ValuedEventArgs<string>> OnConnectionSetup;
+		public EventHandler<ValuedEventArgs<string>> OnValueEntered;
 
-		SingleColumnTable _Display = new SingleColumnTable("setup-network-connection-display");
-		TextInput _IPInput = new TextInput("setup-network-connection-text-input");
-		Button _Error = new Button("setup-network-connection-error");
+		SingleColumnTable _Display = new SingleColumnTable("text-pane-display");
+		TextInput _IPInput = new TextInput("text-pane-input");
+		Button _Error = new Button("text-pane-error");
 		Button _ConnectButton = new Button("small-button") { DisplayedString = "Connect" };
 
-		public SetupNetworkConnectionPane()
-			: base("setup-network-connection-pane")
+		public TextPane(string Title, string Subtitle)
+			: base("text-pane")
 		{
 			_ConnectButton.Position =
 				new Vector2f(Size.X - _ConnectButton.Size.X - 32, Size.Y - _ConnectButton.Size.Y - 32);
 			_ConnectButton.OnClick += HandleConnectButtonClick;
 			_IPInput.OnSubmitted += HandleConnectButtonClick;
 
-			_Display.Add(new Button("header-1") { DisplayedString = "Remote Connection" });
-			_Display.Add(new Button("header-2") { DisplayedString = "IP Address" });
+			_Display.Add(new Button("header-1") { DisplayedString = Title });
+			_Display.Add(new Button("header-2") { DisplayedString = Subtitle });
 			_Display.Add(_IPInput);
 
 			Add(_Display);
@@ -41,7 +41,7 @@ namespace PanzerBlitz
 
 		void HandleConnectButtonClick(object Sender, EventArgs E)
 		{
-			if (OnConnectionSetup != null) OnConnectionSetup(this, new ValuedEventArgs<string>(_IPInput.Value));
+			if (OnValueEntered != null) OnValueEntered(this, new ValuedEventArgs<string>(_IPInput.Value));
 		}
 	}
 }

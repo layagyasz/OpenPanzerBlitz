@@ -1,19 +1,19 @@
-﻿class:setup-network-connection-pane {
+﻿class:text-pane {
 	!class:parent { pane }
 	mode:default {
 		int:height { 190 }
 	}
 }
-class:setup-network-connection-display {
+class:text-pane-display {
 	!class:parent { pane-display }
 	mode:default {
 		int:height { 114 }
 	}
 }
-class:setup-network-connection-text-input {
+class:text-pane-input {
 	!class:parent { text-input }
 }
-class:setup-network-connection-error {
+class:text-pane-error {
 	!class:parent { header-2 }
 	mode:default {
 		color[]:background-color { #AD4531 #AD4531 #AD4531 #AD4531 }
