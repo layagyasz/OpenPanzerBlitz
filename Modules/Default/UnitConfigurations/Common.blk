@@ -98,3 +98,13 @@ unit-configuration:sled {
 	byte:defense { 1 }
 	byte:movement { 3 }
 }
+unit-configuration:limber {
+	string:name { Limber }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+}

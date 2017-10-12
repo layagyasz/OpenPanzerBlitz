@@ -1,0 +1,252 @@
+﻿scenario:_ {
+	string:name { Kuuterselka }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 12 }
+	!environment:environment { environments.summer-steppe }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+		}
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+		}
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:region-controlled {
+						bool:friendly { true }
+						tile-in-region:matcher {
+							string:region-name { hill-132 }
+						}
+					}
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 44 }
+						!var:objective { objectives.region-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,64 11,64 11,97 0,97 }
+					}
+					unit-group:unit-group {
+						string:name { 109th Rifle Corps }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-70-a }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-60-a }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.kv-85 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.js-ii }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.jsu-152 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 10 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:finnish {
+			!faction:faction { factions.finnish }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:region-controlled {
+						bool:friendly { false }
+						tile-in-region:matcher {
+							string:region-name { hill-132 }
+						}
+					}
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 44 }
+						bool:invert { true }
+						!var:objective { objectives.region-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 11,0 11,33, 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { Tank Division }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.kv-i-a }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-28-e }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-26-c }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-26-e }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bt-42 }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.landsverk }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration {  unit-configurations.rifle-platoon-finnish }
+								int:count { 18 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-finnish }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-20 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-8 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-finnish }
+								int:count { 9 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

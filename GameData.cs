@@ -85,6 +85,10 @@ namespace PanzerBlitz
 
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
 			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
+			Block.AddParser<WeaponClass>("tile-edge", Parse.EnumBlockParser<WeaponClass>(typeof(TileEdge)));
+			Block.AddParser<WeaponClass>(
+				"tile-path-overlay", Parse.EnumBlockParser<WeaponClass>(typeof(TilePathOverlay)));
+			Block.AddParser<WeaponClass>("tile-base", Parse.EnumBlockParser<WeaponClass>(typeof(TileBase)));
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumBlockParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumBlockParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));

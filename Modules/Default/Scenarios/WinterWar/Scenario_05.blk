@@ -49,10 +49,8 @@
 			}
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
-					tile-matches-all:matcher {
-						tile-in-region:matcher {
-							string:region-name { hill-132 }
-						}
+					tile-in-region:matcher {
+						string:region-name { hill-132 }
 					}
 					unit-group:unit-group {
 						string:name { 84th Rifle Div. }

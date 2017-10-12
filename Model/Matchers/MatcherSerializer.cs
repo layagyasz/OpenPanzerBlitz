@@ -23,6 +23,7 @@ namespace PanzerBlitz
 			typeof(TileHasCoordinate),
 			typeof(TileHasUnit),
 			typeof(TileInRegion),
+			typeof(TileHasEdge),
 
 			typeof(EmptyMatcher<Unit>),
 			typeof(InverseMatcher<Unit>),

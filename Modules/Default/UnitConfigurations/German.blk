@@ -176,6 +176,17 @@ unit-configuration:truck-german {
 	byte:movement { 12 }
 	bool:truck-movement { true }
 }
+unit-configuration:sdkfz-8 {
+	string:name { SdKfz. 8 Halftrack }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+	bool:is-armored { true }
+}
 unit-configuration:sdkfz-251 {
 	string:name { SdKfz. 251 Halftrack }
 	unit-class:unit-class { transport }

@@ -42,3 +42,6 @@ unit-render-details:wagon {
 unit-render-details:sled {
 	string:image-path { sled.png }
 }
+unit-render-details:limber {
+	string:image-path { limber.png }
+}

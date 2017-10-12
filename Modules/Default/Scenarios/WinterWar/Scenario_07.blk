@@ -53,10 +53,8 @@
 			}
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
-					tile-matches-all:matcher {
-						tile-within:matcher {
-							zone:zone { 10,0 31,0 31,33 10,33 }
-						}
+					tile-within:matcher {
+						zone:zone { 10,0 31,0 31,33 10,33 }
 					}
 					unit-group:unit-group {
 						string:name { 71st Rifle Div. }

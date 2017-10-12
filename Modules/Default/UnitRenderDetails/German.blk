@@ -54,6 +54,10 @@ unit-render-details:truck-german {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-2.png }
 }
+unit-render-details:sdkfz-8 {
+	string:override-display-name { SdKfz 8 }
+	string:image-path { sdkfz-8.png }
+}
 unit-render-details:sdkfz-251 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sdkfz-251.png }

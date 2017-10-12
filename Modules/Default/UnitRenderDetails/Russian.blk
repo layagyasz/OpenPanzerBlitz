@@ -66,6 +66,10 @@ unit-render-details:ski-company-mid {
 	string:image-path { ski-company.png }
 	color:override-color { #FFFFFF }
 }
+unit-render-details:rifle-company-late-mid {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-company.png }
+}
 unit-render-details:rifle-company {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
@@ -117,6 +121,13 @@ unit-render-details:sis-33 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sis-33.png }
 }
+unit-render-details:zis-42-transport {
+	string:override-display-name { ZIS-42 }
+	string:image-path { zis-42-transport.png }
+}
+unit-render-details:t-20 {
+	string:image-path { t-20.png }
+}
 unit-render-details:ba-10 {
 	string:image-path { ba-10.png }
 }
@@ -143,6 +154,9 @@ unit-render-details:t-100 {
 }
 unit-render-details:su-152 {
 	string:image-path { su-152.png }
+}
+unit-render-details:jsu-152 {
+	string:image-path { jsu-152.png }
 }
 unit-render-details:kv-ii {
 	string:image-path { kv-ii.png }
@@ -174,8 +188,17 @@ unit-render-details:t-46 {
 unit-render-details:t-50 {
 	string:image-path { t-50.png }
 }
+unit-render-details:t-60-a {
+	string:image-path { t-60-a.png }
+}
+unit-render-details:t-70-a {
+	string:image-path { t-70-a.png }
+}
 unit-render-details:bt-5 {
 	string:image-path { bt-5.png }
+}
+unit-render-details:kv-i-a {
+	string:image-path { kv-i.png }
 }
 unit-render-details:kv-85 {
 	string:image-path { kv-85.png }

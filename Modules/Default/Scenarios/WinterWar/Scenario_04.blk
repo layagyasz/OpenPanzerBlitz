@@ -171,10 +171,8 @@
 			}
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
-					tile-matches-any:matcher {
-						tile-within:_ {
-							zone:zone { 0,0 20,0 20,33 0,33 }
-						}
+					tile-within:matcher {
+						zone:zone { 0,0 20,0 20,33 0,33 }
 					}
 					unit-group:unit-group {
 						string:name { 7th Infantry Rgt. }

@@ -215,6 +215,16 @@ unit-configuration:ski-company-mid {
 	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-company-mid }
 }
+unit-configuration:rifle-company-late-mid {
+	string:name { Rifle Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 12 }
+	byte:movement { 1 }
+}
 unit-configuration:rifle-company {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
@@ -374,6 +384,28 @@ unit-configuration:sis-33 {
 	bool:is-armored { true }
 	bool:can-only-overrun-unarmored { true }
 }
+unit-configuration:zis-42-transport {
+	string:name { ZIS-42 Halftrack }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+}
+unit-configuration:t-20 {
+	string:name { T-20 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+	bool:is-armored { true }
+	bool:can-only-overrun-unarmored { true }
+}
 unit-configuration:ba-10 {
 	string:name { BA-10 }
 	unit-class:unit-class { reconnaissance-vehicle }
@@ -462,6 +494,16 @@ unit-configuration:su-152 {
 	byte:attack { 40 }
 	byte:range { 10 }
 	byte:defense { 16 }
+	byte:movement { 7 }
+}
+unit-configuration:jsu-152 {
+	string:name { JSU-152 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 10 }
+	byte:defense { 17 }
 	byte:movement { 7 }
 }
 unit-configuration:kv-ii {
@@ -564,6 +606,26 @@ unit-configuration:t-50 {
 	byte:defense { 7 }
 	byte:movement { 11 } 
 }
+unit-configuration:t-60-a {
+	string:name { T-60 A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 10 } 
+}
+unit-configuration:t-70-a {
+	string:name { T-70 A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 9 } 
+}
 unit-configuration:bt-5 {
 	string:name { BT-5 }
 	unit-class:unit-class { tank }
@@ -573,6 +635,16 @@ unit-configuration:bt-5 {
 	byte:range { 3 }
 	byte:defense { 5 }
 	byte:movement { 13 } 
+}
+unit-configuration:kv-i-a {
+	string:name { KV-I A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 10 }
+	byte:movement { 8 }
 }
 unit-configuration:kv-85 {
 	string:name { KV-85 }
