@@ -1,0 +1,176 @@
+﻿scenario:_ {
+	string:name { Tali }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 16 }
+	!environment:environment { environments.winter-steppe }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					line-of-fire-objective:path-cleared {
+						bool:friendly { false }
+						byte:width { 4 }
+						bool:break-through { true }
+						bool:vertical { true }
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.path-cleared }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { north }
+					}
+					unit-group:unit-group {
+						string:name { 123rd Rifle Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-46 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bt-5 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bt-7-a }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-100 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ba-10 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-early }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-early }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ski-company }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sled }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:finnish {
+			!faction:faction { factions.finnish }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					line-of-fire-objective:line-of-fire {
+						bool:friendly { true }
+						byte:width { 1 }
+						bool:vertical { false }
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.line-of-fire }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					any-tile:matcher {}
+					unit-group:unit-group {
+						string:name { 3rd Infantry Rgt. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-finnish-early 
+								}
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sissi-platoon }
+								int:count { 10 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-finnish-early 
+								}
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

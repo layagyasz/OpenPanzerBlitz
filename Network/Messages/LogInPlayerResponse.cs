@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Cardamom.Network;
 using Cardamom.Serialization;
@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		public LogInPlayerResponse(SerializationInputStream Stream)
 		: base(Stream)
 		{
-			Player = Stream.ReadNullOrObject(i => new Player(Stream));
+			Player = Stream.ReadObject(i => new Player(Stream));
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)

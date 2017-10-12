@@ -57,6 +57,15 @@ unit-render-details:ski-company {
 	string:image-path { ski-company.png }
 	color:override-color { #FFFFFF }
 }
+unit-render-details:rifle-company-mid {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:ski-company-mid {
+	string:override-display-name { SKI }
+	string:image-path { ski-company.png }
+	color:override-color { #FFFFFF }
+}
 unit-render-details:rifle-company {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
@@ -67,6 +76,10 @@ unit-render-details:guards-company {
 	color:override-color { #E24B20 }
 }
 unit-render-details:smg-company-early {
+	string:override-display-name { SMG }
+	string:image-path { infantry-company.png }
+}
+unit-render-details:smg-company-mid {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
 }
@@ -91,18 +104,42 @@ unit-render-details:nkl-6 {
 unit-render-details:nkl-6-a {
 	string:image-path { nkl-6-a.png }
 }
+unit-render-details:nkl-16 {
+	string:image-path { nkl-16.png }
+}
+unit-render-details:nkl-26 {
+	string:image-path { nkl-26.png }
+}
+unit-render-details:rf-8 {
+	string:image-path { rf-8.png }
+}
 unit-render-details:sis-33 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sis-33.png }
 }
+unit-render-details:ba-10 {
+	string:image-path { ba-10.png }
+}
 unit-render-details:t-26-a {
 	string:image-path { t-26-a.png }
+}
+unit-render-details:t-38 {
+	string:image-path { t-38.png }
+}
+unit-render-details:t-40 {
+	string:image-path { t-40.png }
 }
 unit-render-details:t-28-e {
 	string:image-path { t-28-e.png }
 }
+unit-render-details:bt-7-a {
+	string:image-path { bt-7-a.png }
+}
 unit-render-details:t-35 {
 	string:image-path { t-35.png }
+}
+unit-render-details:t-100 {
+	string:image-path { t-100.png }
 }
 unit-render-details:su-152 {
 	string:image-path { su-152.png }
@@ -124,6 +161,18 @@ unit-render-details:jsu-122 {
 }
 unit-render-details:t-26-b {
 	string:image-path { t-26-b.png }
+}
+unit-render-details:t-26-c {
+	string:image-path { t-26-e.png }
+}
+unit-render-details:t-26-e {
+	string:image-path { t-26-e.png }
+}
+unit-render-details:t-46 {
+	string:image-path { t-46.png }
+}
+unit-render-details:t-50 {
+	string:image-path { t-50.png }
 }
 unit-render-details:bt-5 {
 	string:image-path { bt-5.png }

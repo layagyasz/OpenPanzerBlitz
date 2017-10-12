@@ -1,14 +1,31 @@
 ﻿unit-render-details:25mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:47mm-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:40mm-aa {
 	string:image-path { anti-aircraft.png }
+}
+unit-render-details:76_2mm-how-finnish {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:4_5in-how {
+	string:image-path { artillery-heavy.png }
 }
 unit-render-details:rifle-platoon-finnish-early {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
 unit-render-details:ski-platoon {
+	string:override-display-name { SKI }
+	string:image-path { ski-platoon.png }
+}
+unit-render-details:rifle-platoon-finnish-mid {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:ski-platoon-mid {
 	string:override-display-name { SKI }
 	string:image-path { ski-platoon.png }
 }
@@ -28,8 +45,15 @@ unit-render-details:engineer-platoon-finnish-early {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
+unit-render-details:engineer-platoon-finnish-mid {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
 unit-render-details:ft-17 {
 	string:image-path { ft-17.png }
+}
+unit-render-details:vickers-6-ton {
+	string:image-path { vickers-6-ton.png }
 }
 unit-render-details:aerosan {
 	string:image-path { nkl-26.png }

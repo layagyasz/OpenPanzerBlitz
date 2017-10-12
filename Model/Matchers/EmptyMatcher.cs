@@ -8,6 +8,8 @@ namespace PanzerBlitz
 	{
 		public EmptyMatcher() { }
 
+		public EmptyMatcher(ParseBlock Block) { }
+
 		public EmptyMatcher(SerializationInputStream Stream) { }
 
 		public bool Matches(T Object)

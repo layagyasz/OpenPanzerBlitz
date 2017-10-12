@@ -172,6 +172,7 @@ namespace PanzerBlitz
 					catch (Exception e)
 					{
 						Console.WriteLine("There was an error reading scenario {0}\n\n{1}", s.Name, e);
+						Console.WriteLine(new HexDumpWriter(16).Write(m.GetBuffer()));
 					}
 				}
 			}

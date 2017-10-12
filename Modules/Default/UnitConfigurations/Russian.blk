@@ -191,6 +191,30 @@ unit-configuration:ski-company {
 	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-company-early }
 }
+unit-configuration:rifle-company-mid {
+	string:name { Rifle Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 10 }
+	byte:movement { 1 }
+}
+unit-configuration:ski-company-mid {
+	string:name { Ski Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 12 }
+	byte:movement { 3 }
+
+	bool:can-close-assault { false }
+	bool:ignores-environment-movement { true }
+	!unit-configuration:dismount-as { rifle-company-mid }
+}
 unit-configuration:rifle-company {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
@@ -219,6 +243,16 @@ unit-configuration:smg-company-early {
 	byte:attack { 4 }
 	byte:range { 1 }
 	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:smg-company-mid {
+	string:name { SMG Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 1 }
+	byte:defense { 12 }
 	byte:movement { 1 }
 }
 unit-configuration:smg-company {
@@ -289,6 +323,45 @@ unit-configuration:nkl-6-a {
 	bool:truck-movement { true }
 	bool:ignores-environment-movement { true }
 }
+unit-configuration:nkl-16 {
+	string:name { NKL-16 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 3 }
+	byte:movement { 17 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
+}
+unit-configuration:nkl-26 {
+	string:name { NKL-26 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 15 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
+}
+unit-configuration:rf-8 {
+	string:name { RF-8 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 25 }
+
+	bool:truck-movement { true }
+	bool:ignores-environment-movement { true }
+}
 unit-configuration:sis-33 {
 	string:name { SIS-33 Halftrack }
 	unit-class:unit-class { transport }
@@ -301,6 +374,16 @@ unit-configuration:sis-33 {
 	bool:is-armored { true }
 	bool:can-only-overrun-unarmored { true }
 }
+unit-configuration:ba-10 {
+	string:name { BA-10 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 6 }	
+}
 unit-configuration:t-26-a {
 	string:name { T-26 A }
 	unit-class:unit-class { tank }
@@ -310,6 +393,26 @@ unit-configuration:t-26-a {
 	byte:range { 2 }
 	byte:defense { 4 }
 	byte:movement { 6 }	
+}
+unit-configuration:t-38 {
+	string:name { T-38 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 8 }	
+}
+unit-configuration:t-40 {
+	string:name { T-40 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 9 }	
 }
 unit-configuration:t-28-e {
 	string:name { T-28 E }
@@ -321,6 +424,16 @@ unit-configuration:t-28-e {
 	byte:defense { 7 }
 	byte:movement { 10 }	
 }
+unit-configuration:bt-7-a {
+	string:name { BT-7 A }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 13 }	
+}
 unit-configuration:t-35 {
 	string:name { T-35 }
 	unit-class:unit-class { assault-gun }
@@ -329,6 +442,16 @@ unit-configuration:t-35 {
 	byte:attack { 10 }
 	byte:range { 6 }
 	byte:defense { 9 }
+	byte:movement { 6 }	
+}
+unit-configuration:t-100 {
+	string:name { T-100 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 6 }
+	byte:defense { 12 }
 	byte:movement { 6 }	
 }
 unit-configuration:su-152 {
@@ -400,6 +523,46 @@ unit-configuration:t-26-b {
 	byte:range { 3 }
 	byte:defense { 4 }
 	byte:movement { 6 } 
+}
+unit-configuration:t-26-c {
+	string:name { T-26 C }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 6 }	
+}
+unit-configuration:t-26-e {
+	string:name { T-26 E }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 6 }	
+}
+unit-configuration:t-46 {
+	string:name { T-46 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 11 } 
+}
+unit-configuration:t-50 {
+	string:name { T-50 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 7 }
+	byte:movement { 11 } 
 }
 unit-configuration:bt-5 {
 	string:name { BT-5 }

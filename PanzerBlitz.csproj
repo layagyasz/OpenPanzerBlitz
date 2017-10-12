@@ -294,6 +294,8 @@
     <Compile Include="View\TextPane.cs" />
     <Compile Include="View\SelectPane.cs" />
     <Compile Include="Model\VictoryConditions\TilesControlledObjective.cs" />
+    <Compile Include="Model\VictoryConditions\TriggerObjective.cs" />
+    <Compile Include="Model\VictoryConditions\CompositeObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1211,6 +1213,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\WinterWar\Scenario_04.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_05.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_06.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\WinterWar\Scenario_07.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

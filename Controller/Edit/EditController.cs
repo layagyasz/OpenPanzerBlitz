@@ -28,7 +28,9 @@ namespace PanzerBlitz
 
 		public EditController(EditScreen EditScreen)
 		{
+			_EditScreen = EditScreen;
 			_EditPane = new EditPane(EditScreen.MapView.Map);
+			SetMap(EditScreen.MapView.Map);
 
 			_NewPane.OnCancel += (sender, e) => _NewPane.Visible = false;
 			_NewPane.OnCreate += New;
@@ -41,17 +43,10 @@ namespace PanzerBlitz
 			_SavePane.OnCancel += (sender, e) => _SavePane.Visible = false;
 			_SavePane.OnAction += (sender, e) => Save(sender, e);
 
-			_EditScreen = EditScreen;
 			_EditScreen.OnNewClicked += (sender, e) => _NewPane.Visible = true;
 			_EditScreen.OnOpenClicked += (sender, e) => _OpenPane.Visible = true;
 			_EditScreen.OnSaveClicked += (sender, e) => _SavePane.Visible = true;
 			_EditScreen.PaneLayer.Add(_EditPane);
-
-			foreach (TileView t in _EditScreen.MapView.TilesEnumerable)
-			{
-				t.OnClick += HandleTileClick;
-				t.OnRightClick += HandleTileRightClick;
-			}
 
 			_EditScreen.PaneLayer.Add(_NewPane);
 			_EditScreen.PaneLayer.Add(_SavePane);
@@ -121,12 +116,23 @@ namespace PanzerBlitz
 			_EditPane.RightEditTile(((TileView)Sender).Tile, E.Position);
 		}
 
+		void SetMap(Map Map)
+		{
+			_EditPane.UpdateFromMap(Map);
+			_EditScreen.SetMap(Map);
+			UnHighlight();
+			foreach (MapRegion r in Map.Regions) r.OnChange += HandleRegionChanged;
+			foreach (TileView t in _EditScreen.MapView.TilesEnumerable)
+			{
+				t.OnClick += HandleTileClick;
+				t.OnRightClick += HandleTileRightClick;
+			}
+		}
+
 		void New(object Sender, ValuedEventArgs<Vector2i> E)
 		{
 			NewMapPane pane = (NewMapPane)Sender;
-			Map newMap = new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap(null, new IdGenerator());
-			_EditPane.UpdateFromMap(newMap);
-			_EditScreen.SetMap(newMap);
+			SetMap(new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap(null, new IdGenerator()));
 			pane.Visible = false;
 		}
 
@@ -152,19 +158,11 @@ namespace PanzerBlitz
 			{
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))
 				{
-					_EditScreen.SetMap(
+					SetMap(
 						new Map(
 							new SerializationInputStream(compressionStream),
 							null,
 							new IdGenerator()));
-					_EditPane.UpdateFromMap(_EditScreen.MapView.Map);
-					UnHighlight();
-					foreach (TileView t in _EditScreen.MapView.TilesEnumerable)
-					{
-						t.OnClick += HandleTileClick;
-						t.OnRightClick += HandleTileRightClick;
-					}
-
 				}
 			}
 			pane.SetDirectory("./Maps");

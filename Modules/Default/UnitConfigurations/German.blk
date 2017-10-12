@@ -71,7 +71,7 @@ unit-configuration:75mm-how {
 	byte:movement { 0 }
 }
 unit-configuration:105mm-how {
-	string:name { 75mm }
+	string:name { 105mm }
 	unit-class:unit-class { towed-gun }
 
 	weapon-class:weapon-class { high-explosive }

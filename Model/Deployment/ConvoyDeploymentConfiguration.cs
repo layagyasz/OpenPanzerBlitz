@@ -43,7 +43,7 @@ namespace PanzerBlitz
 				new UnitGroup(Stream),
 				Stream.ReadBoolean(),
 				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream),
-				Stream.ReadNullOrObject(i => new ConvoyMovementAutomator(Stream)))
+				Stream.ReadObject(i => new ConvoyMovementAutomator(Stream), true))
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)

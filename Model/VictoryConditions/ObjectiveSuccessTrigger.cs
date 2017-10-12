@@ -38,8 +38,8 @@ namespace PanzerBlitz
 			SuccessLevel = (ObjectiveSuccessLevel)Stream.ReadByte();
 			Threshold = Stream.ReadInt32();
 			Invert = Stream.ReadBoolean();
-			string key = Stream.ReadString();
-			Objective = Scorers.First(i => i.UniqueKey == key);
+			Objective = (Objective)Stream.ReadObject(
+				i => ObjectiveSerializer.Instance.Deserialize(Stream), false, true);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -47,7 +47,7 @@ namespace PanzerBlitz
 			Stream.Write((byte)SuccessLevel);
 			Stream.Write(Threshold);
 			Stream.Write(Invert);
-			Stream.Write(Objective.UniqueKey);
+			Stream.Write(Objective, i => ObjectiveSerializer.Instance.Serialize(Objective, Stream), false, true);
 		}
 
 		public bool IsSatisfied()

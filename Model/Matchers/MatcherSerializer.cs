@@ -41,15 +41,23 @@ namespace PanzerBlitz
 			foreach (var p in base.GetParsers(
 				Enumerable.Concat(
 					FilterTypes,
-					new Type[] { typeof(InverseMatcher<Tile>), typeof(InverseMatcher<Unit>) }).ToArray()))
+					new Type[]
+					{
+						typeof(EmptyMatcher<Tile>),
+						typeof(EmptyMatcher<Unit>),
+						typeof(InverseMatcher<Tile>),
+						typeof(InverseMatcher<Unit>)
+					}).ToArray()))
 				yield return p;
 
+			yield return new Tuple<string, Func<ParseBlock, object>>("any-tile", i => new EmptyMatcher<Tile>());
 			yield return new Tuple<string, Func<ParseBlock, object>>(
 				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
 			yield return new Tuple<string, Func<ParseBlock, object>>(
 				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
 			yield return new Tuple<string, Func<ParseBlock, object>>("tile-not", i => new InverseMatcher<Tile>(i));
 
+			yield return new Tuple<string, Func<ParseBlock, object>>("any-unit", i => new EmptyMatcher<Unit>());
 			yield return new Tuple<string, Func<ParseBlock, object>>(
 				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
 			yield return new Tuple<string, Func<ParseBlock, object>>(
