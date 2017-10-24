@@ -9,7 +9,7 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationRenderer
 	{
-		public readonly Dictionary<UnitConfiguration, UnitRenderDetails> RenderDetails;
+		public readonly Dictionary<string, UnitRenderDetails> RenderDetails;
 		public readonly Font Font;
 		public readonly uint SpriteSize;
 		public readonly uint TextureSize;
@@ -20,7 +20,7 @@ namespace PanzerBlitz
 
 		public UnitConfigurationRenderer(
 			Scenario Scenario,
-			Dictionary<UnitConfiguration, UnitRenderDetails> RenderDetails,
+			Dictionary<string, UnitRenderDetails> RenderDetails,
 			uint TextureSize,
 			uint SpriteSize,
 			Font Font)
@@ -93,7 +93,7 @@ namespace PanzerBlitz
 
 		void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
 		{
-			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration];
+			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration.UniqueKey];
 
 			Sprite image = new Sprite(new Texture(renderDetails.ImagePath));
 			RenderStates r = new RenderStates(Transform);

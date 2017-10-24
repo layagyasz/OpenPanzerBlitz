@@ -16,6 +16,7 @@ namespace PanzerBlitz
 		enum Attribute
 		{
 			FACTIONS,
+			FACTION_RENDER_DETAILS,
 			UNIT_CONFIGURATIONS,
 			UNIT_RENDER_DETAILS,
 			UNIT_CONFIGURATION_LINKS,
@@ -28,8 +29,9 @@ namespace PanzerBlitz
 		public static ushort OnlinePort = 1000;
 		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static Dictionary<string, Faction> Factions;
+		public static Dictionary<string, FactionRenderDetails> FactionRenderDetails;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
-		public static Dictionary<UnitConfiguration, UnitRenderDetails> UnitRenderDetails;
+		public static Dictionary<string, UnitRenderDetails> UnitRenderDetails;
 		public static List<UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
@@ -55,6 +57,7 @@ namespace PanzerBlitz
 
 			ParseBlock block = new ParseBlock(new ParseBlock[] {
 				ParseBlock.FromFile(path + "/Factions.blk"),
+				ParseBlock.FromFile(path + "/FactionRenderDetails.blk"),
 				ParseBlock.FromFile(path + "/Terrain.blk"),
 				ParseBlock.FromFile(path + "/Environments.blk"),
 				ParseBlock.FromFile(path + "/TerrainRenderers.blk"),
@@ -123,16 +126,18 @@ namespace PanzerBlitz
 				"map-configuration", i => new BoardCompositeMapConfiguration(i));
 			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
 
+			Block.AddParser<FactionRenderDetails>(
+				"faction-render-details", i => new FactionRenderDetails(i, Path + "/FactionSymbols/"));
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<TileRenderer>("tile-renderer", i => new TileRenderer(i));
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
+			FactionRenderDetails =
+				(Dictionary<string, FactionRenderDetails>)attributes[(int)Attribute.FACTION_RENDER_DETAILS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
-			UnitRenderDetails = ((Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS])
-				.Select(i => new KeyValuePair<UnitConfiguration, UnitRenderDetails>(UnitConfigurations[i.Key], i.Value))
-				.ToDictionary(i => i.Key, i => i.Value);
+			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileComponentRules =
@@ -143,14 +148,27 @@ namespace PanzerBlitz
 			// Emit warnings for units without configured render details.
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)
 			{
-				if (!UnitRenderDetails.ContainsKey(unit))
+				if (!UnitRenderDetails.ContainsKey(unit.UniqueKey))
 					Console.WriteLine(
 						"[WARNING]: No render details configured for UnitConfiguration {0}", unit.UniqueKey);
-				else if (!File.Exists(UnitRenderDetails[unit].ImagePath))
+				else if (!File.Exists(UnitRenderDetails[unit.UniqueKey].ImagePath))
 					Console.WriteLine(
 						"[WARNING]: Image {0} missing for UnitConfiguration {1}",
-						UnitRenderDetails[unit].ImagePath,
+						UnitRenderDetails[unit.UniqueKey].ImagePath,
 						unit.UniqueKey);
+			}
+
+			// Emit warnings for factions without configured render details.
+			foreach (Faction faction in Factions.Values)
+			{
+				if (!FactionRenderDetails.ContainsKey(faction.UniqueKey))
+					Console.WriteLine(
+						"[WARNING]: No render details configured for Faction {0}", faction.UniqueKey);
+				else if (!File.Exists(FactionRenderDetails[faction.UniqueKey].ImagePath))
+					Console.WriteLine(
+						"[WARNING]: Image {0} missing for Faction {1}",
+						FactionRenderDetails[faction.UniqueKey].ImagePath,
+						faction.UniqueKey);
 			}
 
 			// Debug scenario configurations.

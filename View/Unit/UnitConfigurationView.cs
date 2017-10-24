@@ -53,7 +53,7 @@ namespace PanzerBlitz
 				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f), colors[i]);
 			}
 			_ImageVertices = new Vertex[4];
-			Color c = Renderer.RenderDetails[UnitConfiguration].OverrideColor;
+			Color c = Renderer.RenderDetails[UnitConfiguration.UniqueKey].OverrideColor;
 			if (c.R == 0 && c.G == 0 && c.B == 0)
 				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
 

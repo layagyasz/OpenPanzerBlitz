@@ -1,0 +1,23 @@
+﻿faction-render-details<>:faction-render-details {
+	faction-render-details:finnish {
+		string:image-path { finnish-symbol.png }
+	}
+	faction-render-details:german {
+		string:image-path { german-symbol.png }
+	}
+	faction-render-details:hungarian {
+		string:image-path { hungarian-symbol.png }
+	}
+	faction-render-details:italian {
+		string:image-path { italian-symbol.png }
+	}
+	faction-render-details:polish {
+		string:image-path { polish-symbol.png }
+	}
+	faction-render-details:romanian {
+		string:image-path { romanian-symbol.png }
+	}
+	faction-render-details:russian { 
+		string:image-path { russian-symbol.png }
+	}
+}

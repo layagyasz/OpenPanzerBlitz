@@ -297,6 +297,8 @@
     <Compile Include="Model\VictoryConditions\TriggerObjective.cs" />
     <Compile Include="Model\VictoryConditions\CompositeObjective.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasEdge.cs" />
+    <Compile Include="View\Faction\FactionRenderDetails.cs" />
+    <Compile Include="View\Faction\FactionView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -348,6 +350,8 @@
     <Folder Include="Modules\Default\UnitSprites\" />
     <Folder Include="Modules\Default\Theme\" />
     <Folder Include="Modules\Default\Scenarios\WinterWar\" />
+    <Folder Include="Modules\Default\FactionSymbols\" />
+    <Folder Include="View\Faction\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1232,6 +1236,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\WinterWar\Scenario_10.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\polish-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\italian-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\hungarian-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\romanian-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\russian-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\german-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionSymbols\finnish-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FactionRenderDetails.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
