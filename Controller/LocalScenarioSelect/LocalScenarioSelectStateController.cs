@@ -5,13 +5,19 @@ using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
-	public class LocalScenarioSelectStateController : ProgramStateController
+	public class LocalScenarioSelectStateController : PagedProgramStateController
 	{
+		public LocalScenarioSelectStateController()
+			: base(ProgramState.LANDING) { }
+
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
+			_Context = ProgramStateContext;
+
 			ScenarioSelectScreen scenarioSelect =
 				new ScenarioSelectScreen(ProgramContext.ScreenResolution, GameData.Scenarios);
 			scenarioSelect.OnScenarioSelected += HandleStartScenario;
+			scenarioSelect.OnMainMenuButtonClicked += HandleBack;
 
 			return scenarioSelect;
 		}

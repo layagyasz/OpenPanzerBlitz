@@ -24,10 +24,5 @@ namespace PanzerBlitz
 			: base(WindowSize)
 		{
 		}
-
-		public override void Update(
-			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
-		{
-		}
 	}
 }

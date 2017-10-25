@@ -2,7 +2,7 @@
 	string:name { Test Scenario }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
-	byte:turns { 10 }
+	byte:turns { 1 }
 	!environment:environment { environments.winter-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
@@ -22,7 +22,7 @@
 	}
 	army-configuration[]:army-configurations {
 		army-configuration:russian {
-			!faction:faction { factions.russian }
+			!faction:faction { factions.romanian }
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
@@ -100,7 +100,7 @@
 					}
 				}
 			}
-			!faction:faction { factions.german }
+			!faction:faction { factions.hungarian }
 			byte:team { 2 }
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {

@@ -152,7 +152,6 @@
     <Compile Include="Controller\Landing\LandingController.cs" />
     <Compile Include="Controller\MatchLobby\MatchLobbyStateController.cs" />
     <Compile Include="Controller\ProgramStateController.cs" />
-    <Compile Include="Controller\Match\MatchContext.cs" />
     <Compile Include="Controller\MatchLobby\MatchLobbyContext.cs" />
     <Compile Include="Controller\Match\MatchStateController.cs" />
     <Compile Include="Controller\LocalScenarioSelect\LocalScenarioSelectStateController.cs" />
@@ -299,6 +298,11 @@
     <Compile Include="Model\Matchers\TileMatchers\TileHasEdge.cs" />
     <Compile Include="View\Faction\FactionRenderDetails.cs" />
     <Compile Include="View\Faction\FactionView.cs" />
+    <Compile Include="View\MatchEnd\MatchEndArmyRow.cs" />
+    <Compile Include="View\MatchEnd\MatchEndScreen.cs" />
+    <Compile Include="Controller\MatchContext.cs" />
+    <Compile Include="Controller\MatchEnd\MatchEndStateController.cs" />
+    <Compile Include="Controller\PagedProgramStateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -352,6 +356,8 @@
     <Folder Include="Modules\Default\Scenarios\WinterWar\" />
     <Folder Include="Modules\Default\FactionSymbols\" />
     <Folder Include="View\Faction\" />
+    <Folder Include="View\MatchEnd\" />
+    <Folder Include="Controller\MatchEnd\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1260,6 +1266,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\FactionRenderDetails.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Theme\Components\MatchEnd.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

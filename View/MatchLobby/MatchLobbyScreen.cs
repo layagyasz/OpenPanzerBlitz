@@ -124,6 +124,7 @@ namespace PanzerBlitz
 		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			base.Update(MouseController, KeyController, DeltaT, Transform);
 			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
 			if (_Dirty) DisplayPlayers();
 			_Pane.Update(MouseController, KeyController, DeltaT, Transform);

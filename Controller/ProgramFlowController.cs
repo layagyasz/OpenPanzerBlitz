@@ -20,6 +20,7 @@ namespace PanzerBlitz
 			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
 			{ ProgramState.MATCH, new MatchStateController() },
 			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
+			{ ProgramState.MATCH_END, new MatchEndStateController() },
 			{ ProgramState.LOG_IN_PLAYER, new LogInPlayerStateController() },
 			{ ProgramState.REGISTER_PLAYER, new RegisterPlayerStateController() },
 			{ ProgramState.SERVER, new ServerStateController() }

@@ -81,6 +81,7 @@ namespace PanzerBlitz
 		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			base.Update(MouseController, KeyController, DeltaT, Transform);
 			_Pane.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 

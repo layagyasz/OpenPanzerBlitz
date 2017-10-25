@@ -37,9 +37,15 @@ namespace PanzerBlitz
 			}
 			_MatchController = new MatchController(_Context.Match, playerControllers);
 			screen.OnPulse += (sender, e) => _Context.Match.DoBufferedOrders();
+			_Context.Match.OnMatchEnded += HandleMatchEnd;
 			_Context.Match.Start();
 
 			return screen;
+		}
+
+		void HandleMatchEnd(object Sender, EventArgs E)
+		{
+			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.MATCH_END, _Context));
 		}
 
 		public override string ToString()

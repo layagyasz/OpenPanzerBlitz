@@ -5,16 +5,22 @@ using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
-	public class RegisterPlayerStateController : ProgramStateController
+	public class RegisterPlayerStateController : PagedProgramStateController
 	{
 		RegisterPlayerController _Controller;
 
+		public RegisterPlayerStateController()
+			: base(ProgramState.LANDING) { }
+
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
+			_Context = ProgramStateContext;
+
 			RegisterPlayerScreen screen = new RegisterPlayerScreen(ProgramContext.ScreenResolution);
 			_Controller = new RegisterPlayerController(screen);
 			_Controller.OnRegister += HandleRegister;
 			screen.OnLogIn += HandleLogIn;
+			screen.OnMainMenuButtonClicked += HandleBack;
 			return screen;
 		}
 

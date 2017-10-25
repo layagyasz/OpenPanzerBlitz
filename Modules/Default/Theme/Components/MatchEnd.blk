@@ -1,0 +1,31 @@
+﻿class:match-end-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 636 }
+		int:width { 636 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
+	}
+}
+class:match-end-army-row {
+	mode:default {
+		int:height { 160 }
+		int:width { 636 }
+		int[]:padding { 16 16 16 16 }
+		int[]:margin { 0 3 0 3 }
+		color[]:background-color { #626262 #626262 #626262 #626262 }
+	}
+}
+class:match-end-army-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 444 }
+		int[]:margin { 144 2 8 2 }
+	}
+}
+class:match-end-army-success {
+	!class:parent { detail }
+	mode:default {
+		int:width { 444 }
+		int[]:margin { 144 2 8 2 }
+	}
+}

@@ -22,7 +22,7 @@ namespace PanzerBlitz
 		ScrollCollection<object> _LandingSelect = new ScrollCollection<object>("landing-select", true);
 
 		public LandingScreen(Vector2f WindowSize)
-			: base(WindowSize)
+			: base(WindowSize, false)
 		{
 			_LandingSelect.Position = .5f * (WindowSize - _LandingSelect.Size);
 			_LandingSelect.Add(LocalMatchButton);
@@ -37,6 +37,7 @@ namespace PanzerBlitz
 		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			base.Update(MouseController, KeyController, DeltaT, Transform);
 			_LandingSelect.Update(MouseController, KeyController, DeltaT, Transform);
 			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform);
 		}

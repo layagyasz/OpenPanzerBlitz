@@ -26,10 +26,10 @@ namespace PanzerBlitz
 			_Texture = new Texture(renderDetails.ImagePath);
 			_Vertices = new Vertex[]
 			{
-				new Vertex(new Vector2f(-.5f, -.5f), Color.White, new Vector2f(0, 0)),
-				new Vertex(new Vector2f(.5f, -.5f), Color.White, new Vector2f(_Texture.Size.X, 0)),
-				new Vertex(new Vector2f(.5f, .5f), Color.White, new Vector2f(_Texture.Size.X, _Texture.Size.Y)),
-				new Vertex(new Vector2f(-.5f, .5f), Color.White, new Vector2f(0, _Texture.Size.Y))
+				new Vertex(new Vector2f(0, 0), Color.White, new Vector2f(0, 0)),
+				new Vertex(new Vector2f(1, 0), Color.White, new Vector2f(_Texture.Size.X, 0)),
+				new Vertex(new Vector2f(1, 1), Color.White, new Vector2f(_Texture.Size.X, _Texture.Size.Y)),
+				new Vertex(new Vector2f(0, 1), Color.White, new Vector2f(0, _Texture.Size.Y))
 			};
 		}
 
@@ -41,7 +41,9 @@ namespace PanzerBlitz
 		public void Draw(RenderTarget Target, Transform Transform)
 		{
 			Transform.Translate(Position);
-			RenderStates r = new RenderStates(BlendMode.None, Transform, _Texture, null);
+			Transform.Scale(Scale, Scale);
+			RenderStates r = new RenderStates(_Texture);
+			r.Transform = Transform;
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);
 		}
 	}
