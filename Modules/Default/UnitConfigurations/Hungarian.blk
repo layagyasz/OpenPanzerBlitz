@@ -1,0 +1,154 @@
+﻿unit-configuration:engineer-platoon-hungarian {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:rifle-platoon-hungarian-early {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-hungarian {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:cavalry-hungarian {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:truck-hungarian {
+	string:name { Truck }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:motorcycle-hungarian {
+	string:name { Motorcycle }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+	!unit-configuration:dismount-as { rifle-platoon-hungarian }
+}
+unit-configuration:csaba {
+	string:name { Csaba }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:nimrod {
+	string:name { Nimrod }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 8 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 6 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:zrinyi-i {
+	string:name { Zrinyi I }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:zrinyi-ii {
+	string:name { Zrinyi II }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 12 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:toldi-i {
+	string:name { Toldi I }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:toldi-ii {
+	string:name { Toldi II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:turan-i {
+	string:name { Turan I }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
+unit-configuration:turan-ii {
+	string:name { Turan II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:turan-iii {
+	string:name { Turan III }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}

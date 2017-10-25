@@ -1,0 +1,50 @@
+﻿unit-render-details:engineer-platoon-hungarian {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:rifle-platoon-hungarian-early {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-hungarian {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:cavalry-hungarian {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:truck-hungarian {
+	string:override-display-name { TRUCK }
+	string:image-path { truck-4.png }
+}
+unit-render-details:motorcycle-hungarian {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:csaba {
+	string:image-path { csaba.png }
+}
+unit-render-details:nimrod {
+	string:image-path { nimrod.png }
+}
+unit-render-details:zrinyi-i {
+	string:image-path { zrinyi.png }
+}
+unit-render-details:zrinyi-ii {
+	string:image-path { zrinyi.png }
+}
+unit-render-details:toldi-i {
+	string:image-path { toldi-i.png }
+}
+unit-render-details:toldi-ii {
+	string:image-path { toldi-ii.png }
+}
+unit-render-details:turan-i {
+	string:image-path { turan-i.png }
+}
+unit-render-details:turan-ii {
+	string:image-path { turan-ii.png }
+}
+unit-render-details:turan-iii {
+	string:image-path { turan-iii.png }
+}

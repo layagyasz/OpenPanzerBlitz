@@ -1,0 +1,51 @@
+﻿unit-render-details:engineer-platoon-romanian {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:rifle-platoon-romanian-early {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-romanian {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:mountain-platoon-romanian {
+	string:override-display-name { MOUNTAIN }
+	string:image-path { mountain-platoon.png }
+}
+unit-render-details:cavalry-romanian {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:truck-romanian {
+	string:override-display-name { TRUCK }
+	string:image-path { truck-7.png }
+}
+unit-render-details:motorcycle-romanian {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:malaxa {
+	string:image-path { malaxa.png }
+}
+unit-render-details:r-1 {
+	string:image-path { r-1.png }
+}
+unit-render-details:r-2 {
+	string:image-path { r-2.png }
+}
+unit-render-details:renault-35 {
+	string:image-path { renault-35.png }
+}
+unit-render-details:r-35_45 {
+	string:image-path { r-35_45.png }
+}
+unit-render-details:tacam-t-60 {
+	string:image-path { tacam-t-60.png }
+}
+unit-render-details:tacam-r-2 {
+	string:image-path { tacam-r-2.png }
+}
+unit-render-details:maresal {
+	string:image-path { maresal.png }
+}

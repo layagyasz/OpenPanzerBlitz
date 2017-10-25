@@ -1,0 +1,154 @@
+﻿unit-configuration:engineer-platoon-romanian {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:rifle-platoon-romanian-early {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-romanian {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:mountain-platoon-romanian {
+	string:name { Mountain Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:cavalry-romanian {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:truck-romanian {
+	string:name { Truck }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:motorcycle-romanian {
+	string:name { Motorcycle }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+	!unit-configuration:dismount-as { rifle-platoon-romanian }
+}
+unit-configuration:malaxa {
+	string:name { Malaxa }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+	bool:is-armored { true }
+}
+unit-configuration:r-1 {
+	string:name { R-1 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 11 }
+}
+unit-configuration:r-2 {
+	string:name { R-2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:renault-35 {
+	string:name { Renault 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 7 }
+	byte:movement { 4 }
+}
+unit-configuration:r-35_45 {
+	string:name { R-35/45 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 7 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 4 }
+}
+unit-configuration:tacam-t-60 {
+	string:name { Tacam T-60 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 7 }
+	byte:movement { 9 }
+}
+unit-configuration:tacam-r-2 {
+	string:name { Tacam R-2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
+unit-configuration:maresal {
+	string:name { Maresal }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}

@@ -1,25 +1,4 @@
-﻿unit-render-details:25mm-at {
-	string:image-path { anti-armor.png }
-}
-unit-render-details:47mm-at {
-	string:image-path { anti-armor.png }
-}
-unit-render-details:40mm-aa {
-	string:image-path { anti-aircraft.png }
-}
-unit-render-details:76_2mm-how-finnish {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:18pdr-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:4_5in-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:8in-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:rifle-platoon-finnish-early {
+﻿unit-render-details:rifle-platoon-finnish-early {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

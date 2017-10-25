@@ -1,0 +1,105 @@
+﻿unit-render-details:12_7mm-mg {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:25mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:37mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:45mm-at-early {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:45mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:47mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:50mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:57mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:75mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:76_2mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:88mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:20mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:20mm_4-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:40mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:75mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:80mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:75mm-how-company {
+	string:image-path { artillery-company.png }
+}
+unit-render-details:75mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:76_2mm-how-company {
+	string:image-path { artillery-company.png }
+}
+unit-render-details:76_2mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:76_2mm-how-finnish {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:105mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:122mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:150mm-how-company {
+	string:image-path { artillery-company.png }
+}
+unit-render-details:150mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:152mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:203mm-how {
+	string:image-path { artillery-motorized.png }
+}
+unit-render-details:18pdr-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:4_5in-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:8in-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:81mm-mortar {
+	string:image-path { mortar.png }
+}
+unit-render-details:82mm-mortar-motorized {
+	string:image-path { mortar-motorized.png }
+}
+unit-render-details:82mm-mortar {
+	string:image-path { mortar.png }
+}
+unit-render-details:120mm-mortar-german {
+	string:image-path { mortar.png }
+}
+unit-render-details:120mm-mortar-russian {
+	string:image-path { mortar.png }
+}

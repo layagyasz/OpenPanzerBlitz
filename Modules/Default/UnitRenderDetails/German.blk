@@ -1,40 +1,4 @@
-﻿unit-render-details:50mm-at {
-	string:image-path { anti-armor.png }
-}
-unit-render-details:75mm-at {
-	string:image-path { anti-armor.png }
-}
-unit-render-details:88mm-at {
-	string:image-path { anti-armor.png }
-}
-unit-render-details:20mm-aa {
-	string:image-path { anti-aircraft.png }
-}
-unit-render-details:20mm_4-aa {
-	string:image-path { anti-aircraft.png }
-}
-unit-render-details:75mm-how-company {
-	string:image-path { artillery-company.png }
-}
-unit-render-details:75mm-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:105mm-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:150mm-how-company {
-	string:image-path { artillery-company.png }
-}
-unit-render-details:150mm-how {
-	string:image-path { artillery-heavy.png }
-}
-unit-render-details:81mm-mortar {
-	string:image-path { mortar.png }
-}
-unit-render-details:120mm-mortar-german {
-	string:image-path { mortar.png }
-}
-unit-render-details:engineer-platoon {
+﻿unit-render-details:engineer-platoon {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }

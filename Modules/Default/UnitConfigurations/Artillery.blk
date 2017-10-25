@@ -1,0 +1,377 @@
+﻿unit-configuration:12_7mm-mg {
+	string:name { 12.7mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:25mm-at {
+	string:name { 25mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:37mm-at {
+	string:name { 37mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:45mm-at-early {
+	string:name { 45mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:45mm-at {
+	string:name { 45mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 7 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:47mm-at {
+	string:name { 47mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:50mm-at {
+	string:name { 50mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 8 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:57mm-at {
+	string:name { 57mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
+unit-configuration:75mm-at {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 13 }
+	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:76_2mm-at {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:88mm-at {
+	string:name { 88mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 20 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+}
+unit-configuration:20mm-aa {
+	string:name { 20mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:20mm_4-aa {
+	string:name { 20(4)mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:40mm-aa {
+	string:name { 40mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 8 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:75mm-aa {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:80mm-aa {
+	string:name { 80mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:75mm-how-company {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:75mm-how {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 28 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:76_2mm-how-company {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 3 }
+	byte:range { 10 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:76_2mm-how {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 16 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:76_2mm-how-finnish {
+	string:name { 76.2mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 24 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:105mm-how {
+	string:name { 105mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 32 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:122mm-how {
+	string:name { 122mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 20 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:150mm-how-company {
+	string:name { 150mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:150mm-how {
+	string:name { 150mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 36 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:152mm-how {
+	string:name { 152mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 25 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:203mm-how {
+	string:name { 203mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 30 }
+	byte:defense { 1 }
+	byte:movement { 2 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:18pdr-how {
+	string:name { 18pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 26 }
+	byte:range { 30 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:4_5in-how {
+	string:name { 4.5inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 36 }
+	byte:range { 20 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:8in-how {
+	string:name { 8inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 36 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:81mm-mortar {
+	string:name { 81mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:82mm-mortar-motorized {
+	string:name { 82mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 2 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:82mm-mortar {
+	string:name { 82mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 1 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:120mm-mortar-german {
+	string:name { 120mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { mortar}
+	byte:attack { 15 }
+	byte:range { 20 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
+unit-configuration:120mm-mortar-russian {
+	string:name { 120mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 24 }
+	byte:range { 20 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+	bool:can-indirect-fire { true }
+}
