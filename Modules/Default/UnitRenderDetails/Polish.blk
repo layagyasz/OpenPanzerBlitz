@@ -1,0 +1,71 @@
+﻿unit-render-details:engineer-platoon-polish {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:rifle-platoon-polish-early {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-polish {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:cavalry-polish {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-3.png }
+}
+unit-render-details:truck-polish {
+	string:override-display-name { TRUCK }
+	string:image-path { truck-6.png }
+}
+unit-render-details:c2p {
+	string:image-path { c2p.png }
+}
+unit-render-details:c4p {
+	string:image-path { c4p.png }
+}
+unit-render-details:c7p {
+	string:image-path { c7p.png }
+}
+unit-render-details:motorcycle-polish {
+	string:image-path { motorcycle-3.png }
+}
+unit-render-details:peugeot {
+	string:image-path { peugeot.png }
+}
+unit-render-details:wz-28 {
+	string:image-path { wz-28.png }
+}
+unit-render-details:wz-29 {
+	string:image-path { wz-29.png }
+}
+unit-render-details:wz-34-infantry {
+	string:image-path { wz-34.png }
+}
+unit-render-details:wz-34-he {
+	string:image-path { wz-34.png }
+}
+unit-render-details:tk-3 {
+	string:image-path { tks.png }
+}
+unit-render-details:tks {
+	string:image-path { tks.png }
+}
+unit-render-details:7tp-infantry {
+	string:image-path { 7tp-i.png }
+}
+unit-render-details:7tp-at {
+	string:image-path { 7tp-a.png }
+}
+unit-render-details:4tp {
+	string:image-path { 4tp.png }
+}
+unit-render-details:14tp {
+	string:image-path { 14tp.png }
+}
+unit-render-details:vau-33-infantry {
+	string:image-path { vau-33-i.png }
+}
+unit-render-details:vau-33-at {
+	string:image-path { vau-33-a.png }
+}

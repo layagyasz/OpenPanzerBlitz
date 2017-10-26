@@ -148,7 +148,7 @@
 						string:name { 16th Infantry Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.ski-platoon-early }
 								int:count { 16 }
 							}
 							unit-count:_ {
@@ -156,7 +156,7 @@
 								int:count { 24 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-finnish }
 								int:count { 12 }
 							}
 							unit-count:_ {

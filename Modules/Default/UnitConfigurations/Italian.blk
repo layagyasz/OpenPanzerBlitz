@@ -1,0 +1,400 @@
+﻿unit-configuration:engineer-platoon-italian {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+	bool:is-engineer { true }
+}
+unit-configuration:mg-platoon-italian {
+	string:name { MG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+
+	bool:can-only-support-close-assault { true }
+}
+unit-configuration:rifle-platoon-italian-early {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-italian {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:bersaglieri-platoon {
+	string:name { Bersaglieri Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:alpini-platoon {
+	string:name { Alpini Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:parachute-platoon-italian {
+	string:name { Parachute Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:is-paratroop { true }
+}
+unit-configuration:cavalry-italian {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:wagon-italian {
+	string:name { Wagon }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+}
+unit-configuration:truck-italian {
+	string:name { Truck }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:tl-37 {
+	string:name { TL 37 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 8 }
+}
+unit-configuration:breda-32 {
+	string:name { Breda 32 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 6 }
+}
+unit-configuration:motorcycle-italian {
+	string:name { Motorcycle }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+	!unit-configuration:dismount-as { rifle-platoon-italian }
+}
+unit-configuration:65_17 {
+	string:name { 65/17 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 2 }
+	byte:range { 8 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:76_30 {
+	string:name { 76/30 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 20 }
+	byte:range { 16 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:100_17 {
+	string:name { 100/17 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 40 }
+	byte:range { 16 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+	bool:truck-movement { true }
+}
+unit-configuration:ab-40 {
+	string:name { AB-40 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:ab-41 {
+	string:name { AB-41 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:lince {
+	string:name { Lince }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 15 }
+}
+unit-configuration:ab-43 {
+	string:name { AB-43 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:sahariana-42 {
+	string:name { Sahariana 42 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 15 }
+}
+unit-configuration:desertica-43 {
+	string:name { Desertica 43 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+}
+unit-configuration:47_32 {
+	string:name { 47/32 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+}
+unit-configuration:semovente-43-m {
+	string:name { Semovente 43m }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 12 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:semo-75_18 {
+	string:name { Semo 75/18 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:semo-75_34 {
+	string:name { Semo 75/34 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:semovente-40 {
+	string:name { Semovente 40 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 9 }
+}
+unit-configuration:semo-75_46 {
+	string:name { Semo 75/46 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:semovente-41-m {
+	string:name { Semovente 41m }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 6 }
+}
+unit-configuration:l-3-fiamme {
+	string:name { L-3 Fiamme }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:fiat-3000-21 {
+	string:name { Fiat 3000 21 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 4 }
+}
+unit-configuration:leggero-3 {
+	string:name { Leggero 3 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:leggero-6 {
+	string:name { Leggero 6 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 9 }
+}
+unit-configuration:fiat-3000-30 {
+	string:name { Fiat 3000 30 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 5 }
+}
+unit-configuration:medio-11_39 {
+	string:name { Medio 11/39 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 7 }
+}
+unit-configuration:medio-13_40 {
+	string:name { Medio 13/40 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 6 }
+}
+unit-configuration:medio-14_41 {
+	string:name { Medio 14/41 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
+unit-configuration:medio-15_42 {
+	string:name { Medio 15/42 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:pesante-40 {
+	string:name { Pesante 40 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}

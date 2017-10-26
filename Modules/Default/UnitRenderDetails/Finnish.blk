@@ -2,7 +2,7 @@
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:ski-platoon {
+unit-render-details:ski-platoon-early {
 	string:override-display-name { SKI }
 	string:image-path { ski-platoon.png }
 }
@@ -26,7 +26,7 @@ unit-render-details:sissi-ski-platoon {
 	string:override-display-name { SUSSI SKI }
 	string:image-path { ski-platoon.png }
 }
-unit-render-details:mg-platoon {
+unit-render-details:mg-platoon-finnish {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }

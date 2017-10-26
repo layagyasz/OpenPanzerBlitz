@@ -243,7 +243,7 @@
 								int:count { 10 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.mg-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-finnish }
 								int:count { 5 }
 							}
 							unit-count:_ {

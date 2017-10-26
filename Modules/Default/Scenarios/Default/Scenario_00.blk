@@ -3,7 +3,7 @@
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 1 }
-	!environment:environment { environments.winter-steppe }
+	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
@@ -22,7 +22,7 @@
 	}
 	army-configuration[]:army-configurations {
 		army-configuration:russian {
-			!faction:faction { factions.romanian }
+			!faction:faction { factions.italian }
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
@@ -52,25 +52,11 @@
 						coordinate:coordinate { 11, 16 }
 					}
 					unit-group:unit-group {
-						string:name { Russian Test }
+						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
-								int:count { 2 }
-							}
-						}
-					}
-				}
-				positional-deployment-configuration:_ {
-					tile-has-coordinate:matcher { 
-						coordinate:coordinate { 11, 17 }
-					}
-					unit-group:unit-group {
-						string:name { Russian Test 2 }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-company }
-								int:count { 1 }
+								!unit-configuration:unit-configuration { unit-configurations.medio-11_39 }
+								int:count { 3 }
 							}
 						}
 					}
@@ -100,7 +86,7 @@
 					}
 				}
 			}
-			!faction:faction { factions.hungarian }
+			!faction:faction { factions.polish }
 			byte:team { 2 }
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
@@ -108,10 +94,10 @@
 						coordinate:coordinate { 22, 16 }
 					}
 					unit-group:unit-group {
-						string:name { German Test }
+						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.panther }
+								!unit-configuration:unit-configuration { unit-configurations.4tp }
 								int:count { 3 }
 							}
 						}

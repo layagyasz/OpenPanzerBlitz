@@ -1,0 +1,126 @@
+﻿unit-render-details:engineer-platoon-italian {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:mg-platoon-italian {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:rifle-platoon-italian-early {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-italian {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:bersaglieri-platoon {
+	string:override-display-name { BERSAGLIERI }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:alpini-platoon {
+	string:override-display-name { ALPINI }
+	string:image-path { mountain-platoon.png }
+}
+unit-render-details:parachute-platoon-italian {
+	string:override-display-name { PARACHUTE }
+	string:image-path { airborne-platoon.png }
+}
+unit-render-details:cavalry-italian {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-4.png }
+}
+unit-render-details:wagon-italian {
+	string:image-path { wagon-2.png }
+}
+unit-render-details:truck-italian {
+	string:override-display-name { TRUCK }
+	string:image-path { truck-3.png }
+}
+unit-render-details:tl-37 {
+	string:image-path { tl-37.png }
+}
+unit-render-details:breda-32 {
+	string:image-path { breda-32.png }
+}
+unit-render-details:motorcycle-italian {
+	string:image-path { motorcycle-3.png }
+}
+unit-render-details:65_17 {
+	string:image-path { 65_17.png }
+}
+unit-render-details:76_30 {
+	string:image-path { 76_30.png }
+}
+unit-render-details:100_17 {
+	string:image-path { 100_17.png }
+}
+unit-render-details:ab-40 {
+	string:image-path { ab-40.png }
+}
+unit-render-details:ab-41 {
+	string:image-path { ab-41.png }
+}
+unit-render-details:lince {
+	string:image-path { lince.png }
+}
+unit-render-details:ab-43 {
+	string:image-path { ab-43.png }
+}
+unit-render-details:sahariana-42 {
+	string:image-path { sahariana-42.png }
+}
+unit-render-details:desertica-43 {
+	string:image-path { desertica-43.png }
+}
+unit-render-details:47_32 {
+	string:image-path {47_32.png }
+}
+unit-render-details:semovente-43-m {
+	string:image-path { semovente-43m.png }
+}
+unit-render-details:semo-75_18 {
+	string:image-path { semo-75_18.png }
+}
+unit-render-details:semo-75_34 {
+	string:image-path { semo-75_34.png }
+}
+unit-render-details:semovente-40 {
+	string:image-path { semovente-40.png }
+}
+unit-render-details:semo-75_46 {
+	string:image-path { semo-75_46.png }
+}
+unit-render-details:semovente-41-m {
+	string:image-path { semovente-41m.png }
+}
+unit-render-details:l-3-fiamme {
+	string:image-path { l-3-fiamme.png }
+}
+unit-render-details:fiat-3000-21 {
+	string:image-path { fiat-3000-21.png }
+}
+unit-render-details:leggero-3 {
+	string:image-path { leggero-3.png }
+}
+unit-render-details:leggero-6 {
+	string:image-path { leggero-6.png }
+}
+unit-render-details:fiat-3000-30 {
+	string:image-path { fiat-3000-30.png }
+}
+unit-render-details:medio-11_39 {
+	string:image-path { medio-11_39.png }
+}
+unit-render-details:medio-13_40 {
+	string:image-path { medio-13_40.png }
+}
+unit-render-details:medio-14_41 {
+	string:image-path { medio-14_41.png }
+}
+unit-render-details:medio-15_42 {
+	string:image-path { medio-15_42.png }
+}
+unit-render-details:pesante-40 {
+	string:image-path { pesante-40.png }
+}
