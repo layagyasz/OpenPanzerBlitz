@@ -16,29 +16,30 @@ namespace PanzerBlitz
 
 		UnitConfigurationRenderer _Renderer;
 
-		public DeploymentController(MatchAdapter Match, UnitConfigurationRenderer Renderer, MatchScreen GameScreen)
-			: base(Match, GameScreen)
+		public DeploymentController(HumanMatchPlayerController Controller, UnitConfigurationRenderer Renderer)
+			: base(Controller)
 		{
 			_Renderer = Renderer;
 		}
 
-		public override void Begin(Army Army)
+		public override void Begin()
 		{
-			base.Begin(Army);
+			base.Begin();
+
 			_DeploymentPane = new DeploymentPane();
 			_DeploymentPane.OnDeploymentSelected += HandleDeploymentSelected;
 			_DeploymentMicrocontrollers.Clear();
-			foreach (Deployment d in Army.Deployments.Where(i => !i.IsConfigured()))
+			foreach (Deployment d in _Controller.CurrentTurn.Army.Deployments.Where(i => !i.IsConfigured()))
 			{
 				DeploymentMicrocontroller c;
 				if (d is PositionalDeployment)
 					c = new PositionalDeploymentMicrocontroller(
-						_Match, _GameScreen, (PositionalDeployment)d);
-				else c = new ConvoyDeploymentMicrocontroller(_Match, _GameScreen, (ConvoyDeployment)d);
+						_Controller, (PositionalDeployment)d);
+				else c = new ConvoyDeploymentMicrocontroller(_Controller, (ConvoyDeployment)d);
 				_DeploymentMicrocontrollers.Add(d, c);
 				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Renderer));
 			}
-			_GameScreen.PaneLayer.Add(_DeploymentPane);
+			_Controller.AddPane(_DeploymentPane);
 		}
 
 		public override bool Finish()
@@ -51,7 +52,6 @@ namespace PanzerBlitz
 			base.End();
 			if (_WorkingDeployment != null) _DeploymentMicrocontrollers[_WorkingDeployment].End();
 			_WorkingDeployment = null;
-			_GameScreen.PaneLayer.Remove(_DeploymentPane);
 		}
 
 		public override void HandleTileLeftClick(Tile Tile)
@@ -84,7 +84,7 @@ namespace PanzerBlitz
 		{
 			if (_WorkingDeployment != null) _DeploymentMicrocontrollers[_WorkingDeployment].End();
 			_WorkingDeployment = _DeploymentPane.SelectedDeployment;
-			_DeploymentMicrocontrollers[_WorkingDeployment].Begin(_Army);
+			_DeploymentMicrocontrollers[_WorkingDeployment].Begin();
 		}
 	}
 }

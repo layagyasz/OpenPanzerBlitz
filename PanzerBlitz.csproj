@@ -303,6 +303,7 @@
     <Compile Include="Controller\MatchContext.cs" />
     <Compile Include="Controller\MatchEnd\MatchEndStateController.cs" />
     <Compile Include="Controller\PagedProgramStateController.cs" />
+    <Compile Include="View\Match\MatchInfoDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

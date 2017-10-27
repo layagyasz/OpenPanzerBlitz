@@ -13,15 +13,30 @@ namespace PanzerBlitz
 {
 	public class HumanMatchPlayerController : MatchPlayerController
 	{
-		MatchScreen _GameScreen;
-		Highlight _MovementHighlight = new Highlight();
-
-		Dictionary<TurnComponent, Subcontroller> _Controllers;
-
 		public readonly MatchAdapter Match;
 		public readonly HashSet<Army> AllowedArmies;
 
-		TurnComponent _CurrentTurn;
+		MatchScreen _GameScreen;
+		UnitConfigurationRenderer _Renderer;
+		Dictionary<TurnComponent, Subcontroller> _Controllers;
+		TurnInfo _CurrentTurn;
+		Unit _SelectedUnit;
+		Highlight _Highlight;
+
+		public TurnInfo CurrentTurn
+		{
+			get
+			{
+				return _CurrentTurn;
+			}
+		}
+		public Unit SelectedUnit
+		{
+			get
+			{
+				return _SelectedUnit;
+			}
+		}
 
 		public HumanMatchPlayerController(
 			MatchAdapter Match,
@@ -33,17 +48,18 @@ namespace PanzerBlitz
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
 			_GameScreen = GameScreen;
-
 			_GameScreen.OnFinishClicked += EndTurn;
+
+			_Renderer = Renderer;
 
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
 			{
-				{ TurnComponent.DEPLOYMENT, new DeploymentController(Match, Renderer, GameScreen) },
-				{ TurnComponent.ATTACK, new AttackController(Match, GameScreen) },
-				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(Match, GameScreen) },
-				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(true, Match, GameScreen) },
-				{ TurnComponent.CLOSE_ASSAULT, new CloseAssaultController(Match, GameScreen) },
-				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(false, Match, GameScreen) }
+				{ TurnComponent.DEPLOYMENT, new DeploymentController(this, Renderer) },
+				{ TurnComponent.ATTACK, new AttackController(this) },
+				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
+				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },
+				{ TurnComponent.CLOSE_ASSAULT, new CloseAssaultController(this) },
+				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(this, false) }
 			};
 
 			foreach (TileView t in GameScreen.MapView.TilesEnumerable)
@@ -65,13 +81,14 @@ namespace PanzerBlitz
 		public void DoTurn(TurnInfo TurnInfo)
 		{
 			TurnComponent t = AllowedArmies.Contains(TurnInfo.Army) ? TurnInfo.TurnComponent : TurnComponent.SPECTATE;
-			_GameScreen.SetInfoMessage(string.Format("{0}\n{1}", TurnInfo.Army.Configuration.Faction.Name, t));
+			_GameScreen.InfoDisplay.SetTurnInfo(TurnInfo);
+			_GameScreen.InfoDisplay.SetViewItem(new FactionView(TurnInfo.Army.Configuration.Faction, 80));
 			_GameScreen.SetEnabled(AllowedArmies.Contains(TurnInfo.Army));
-			if (_Controllers.ContainsKey(_CurrentTurn))
-				_Controllers[_CurrentTurn].End();
-			_CurrentTurn = t;
+			if (_Controllers.ContainsKey(TurnInfo.TurnComponent))
+				_Controllers[TurnInfo.TurnComponent].End();
+			_CurrentTurn = TurnInfo;
 			if (_Controllers.ContainsKey(t))
-				_Controllers[t].Begin(TurnInfo.Army);
+				_Controllers[t].Begin();
 		}
 
 		void EndTurn(object sender, EventArgs e)
@@ -79,8 +96,49 @@ namespace PanzerBlitz
 			TurnComponent t = Match.GetTurnInfo().TurnComponent;
 			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
 			{
+				UnHighlight();
+				SelectUnit(null);
+				_GameScreen.PaneLayer.Clear();
 				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurnInfo().Army));
 			}
+		}
+
+		public void AddPane(Pane Pane)
+		{
+			_GameScreen.PaneLayer.Add(Pane);
+		}
+
+		public void RemovePane(Pane Pane)
+		{
+			_GameScreen.PaneLayer.Remove(Pane);
+		}
+
+		public void SelectUnit(Unit Unit)
+		{
+			_SelectedUnit = Unit;
+			if (Unit != null)
+				_GameScreen.InfoDisplay.SetViewItem(
+					new UnitView(Unit, _Renderer, 80, false) { Position = new Vector2f(40, 40) });
+			else _GameScreen.InfoDisplay.SetViewItem(new FactionView(_CurrentTurn.Army.Configuration.Faction, 80));
+		}
+
+		public void Alert(object Alert)
+		{
+			_GameScreen.Alert(ObjectDescriber.Describe(Alert));
+		}
+
+		public void UnHighlight()
+		{
+			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
+			_Highlight = new Highlight();
+			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
+		}
+
+		public void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
+		{
+			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
+			_Highlight = new Highlight(Highlight);
+			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
 		void OnTileClick(object sender, MouseEventArgs e)

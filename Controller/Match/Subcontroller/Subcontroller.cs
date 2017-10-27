@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public interface Subcontroller
 	{
-		void Begin(Army Army);
+		void Begin();
 		bool Finish();
 		void End();
 		void HandleTileLeftClick(Tile Tile);

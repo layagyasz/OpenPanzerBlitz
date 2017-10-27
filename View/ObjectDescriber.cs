@@ -14,6 +14,11 @@ namespace PanzerBlitz
 			return Faction.Name;
 		}
 
+		public static string Describe(Army Army)
+		{
+			return Describe(Army.Configuration.Faction);
+		}
+
 		public static string Describe(ObjectiveSuccessLevel ObjectiveSuccessLevel)
 		{
 			return ObjectiveSuccessLevel.ToString();

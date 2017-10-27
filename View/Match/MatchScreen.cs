@@ -17,9 +17,9 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnFinishClicked;
 
 		public readonly List<ArmyView> ArmyViews;
+		public readonly MatchInfoDisplay InfoDisplay = new MatchInfoDisplay();
 
 		StackLayer _StackLayer = new StackLayer();
-		TextBox _InfoDisplay = new TextBox("info-display");
 		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
 
 		public MatchScreen(Vector2f WindowSize, Map Map, TileRenderer TileRenderer, IEnumerable<ArmyView> ArmyViews)
@@ -34,14 +34,9 @@ namespace PanzerBlitz
 
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
 			_FinishButton.OnClick += HandleFinishClicked;
-			_InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
+			InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, InfoDisplay.Size.Y + 16);
 			_Items.Add(_FinishButton);
-			_Items.Add(_InfoDisplay);
-		}
-
-		public void SetInfoMessage(string Message)
-		{
-			_InfoDisplay.DisplayedString = Message;
+			_Items.Add(InfoDisplay);
 		}
 
 		public void SetEnabled(bool Enabled)

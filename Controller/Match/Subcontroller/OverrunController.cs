@@ -11,8 +11,8 @@ namespace PanzerBlitz
 	{
 		Path<Tile> _InitialMovement;
 
-		public OverrunController(MatchAdapter Match, MatchScreen GameScreen)
-			: base(Match, GameScreen)
+		public OverrunController(HumanMatchPlayerController Controller)
+			: base(Controller)
 		{
 		}
 
@@ -26,7 +26,7 @@ namespace PanzerBlitz
 				}
 				else SetPathTo(Tile);
 			}
-			else if (_InitialMovement == null && _SelectedUnit != null)
+			else if (_InitialMovement == null && _Controller.SelectedUnit != null)
 			{
 				SetPathTo(Tile);
 			}
@@ -38,11 +38,12 @@ namespace PanzerBlitz
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
-			if (Unit.Army == _Army && Unit.CanAttack(AttackMethod.OVERRUN) == NoSingleAttackReason.NONE)
+			if (Unit.Army == _Controller.CurrentTurn.Army
+				&& Unit.CanAttack(AttackMethod.OVERRUN) == NoSingleAttackReason.NONE)
 			{
-				_SelectedUnit = Unit;
+				_Controller.SelectUnit(Unit);
 
-				Highlight(
+				_Controller.Highlight(
 					Unit.GetFieldOfMovement(true).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
@@ -53,36 +54,37 @@ namespace PanzerBlitz
 			}
 		}
 
-		private void DeselectUnit()
+		void DeselectUnit()
 		{
-			_SelectedUnit = null;
+			_Controller.SelectUnit(null);
 			_InitialMovement = null;
-			UnHighlight();
+			_Controller.UnHighlight();
 		}
 
-		private void FinishSingleOverrunMove(Tile Tile)
+		void FinishSingleOverrunMove(Tile Tile)
 		{
-			if (_SelectedUnit != null && _InitialMovement != null)
+			if (_Controller.SelectedUnit != null && _InitialMovement != null)
 			{
 				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Tile)
-					StartAttack(new AttackOrder(_Army, Tile, AttackMethod.OVERRUN));
+					StartAttack(new AttackOrder(_Controller.CurrentTurn.Army, Tile, AttackMethod.OVERRUN));
 
 				NoSingleAttackReason r =
 					_AttackBuilder.AddAttacker(
 						new OverrunSingleAttackOrder(
-							new MovementOrder(_SelectedUnit, _InitialMovement.Destination, true), Tile));
+							new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
 				_AttackPane.UpdateDescription();
-				if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
+				if (r != NoSingleAttackReason.NONE) _Controller.Alert(r);
 			}
 			DeselectUnit();
 		}
 
-		private void SetPathTo(Tile Tile)
+		void SetPathTo(Tile Tile)
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				_InitialMovement = _SelectedUnit.GetPathTo(Tile, true);
-				Highlight(_InitialMovement.Nodes.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+				_InitialMovement = _Controller.SelectedUnit.GetPathTo(Tile, true);
+				_Controller.Highlight(
+					_InitialMovement.Nodes.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
 			}
 		}
 	}

@@ -21,7 +21,7 @@ namespace PanzerBlitz
 		{
 			this.Unit = Unit;
 
-			_StackView.Add(new UnitView(Unit, Renderer, UNIT_VIEW_SCALE));
+			_StackView.Add(new UnitView(Unit, Renderer, UNIT_VIEW_SCALE, false));
 			_StackView.Position = Size / 2;
 			_StackView.Parent = this;
 			Value = _StackView;

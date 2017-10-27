@@ -24,26 +24,15 @@ namespace PanzerBlitz
 			new Color(255, 0, 0, 120)
 		};
 
-		protected Army _Army;
-		protected MatchAdapter _Match;
-		protected MatchScreen _GameScreen;
+		protected HumanMatchPlayerController _Controller;
 
-		protected Unit _SelectedUnit;
-
-		Highlight _Highlight;
-
-		public BaseController(MatchAdapter Match, MatchScreen GameScreen)
+		public BaseController(HumanMatchPlayerController Controller)
 		{
-			_Match = Match;
-			_GameScreen = GameScreen;
+			_Controller = Controller;
 		}
 
-		public virtual void Begin(Army Army)
+		public virtual void Begin()
 		{
-			_Army = Army;
-
-			_Highlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
 		public virtual bool Finish()
@@ -53,7 +42,6 @@ namespace PanzerBlitz
 
 		public virtual void End()
 		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
 		}
 
 		public abstract void HandleTileLeftClick(Tile Tile);
@@ -61,19 +49,5 @@ namespace PanzerBlitz
 		public abstract void HandleUnitLeftClick(Unit Unit);
 		public abstract void HandleUnitRightClick(Unit Unit);
 		public abstract void HandleKeyPress(Keyboard.Key Key);
-
-		protected void UnHighlight()
-		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
-			_Highlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
-		}
-
-		protected void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
-		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
-			_Highlight = new Highlight(Highlight);
-			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
-		}
 	}
 }

@@ -27,7 +27,7 @@ namespace PanzerBlitz
 
 		public void AddUnit(Unit Unit)
 		{
-			UnitView unitView = new UnitView(Unit, _Renderer, .625f);
+			UnitView unitView = new UnitView(Unit, _Renderer, .625f, true);
 			UnitViews.Add(unitView);
 			if (OnNewUnitView != null) OnNewUnitView(this, new NewUnitViewEventArgs(unitView));
 		}

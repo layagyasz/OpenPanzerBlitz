@@ -20,10 +20,8 @@ namespace PanzerBlitz
 		}
 
 		public PositionalDeploymentMicrocontroller(
-			MatchAdapter Match,
-			MatchScreen GameScreen,
-			PositionalDeployment Deployment)
-			: base(Match, GameScreen)
+			HumanMatchPlayerController Controller, PositionalDeployment Deployment)
+			: base(Controller)
 		{
 			_Deployment = Deployment;
 		}
@@ -35,9 +33,9 @@ namespace PanzerBlitz
 			return _DeploymentPage;
 		}
 
-		public override void Begin(Army Army)
+		public override void Begin()
 		{
-			base.Begin(Army);
+			base.Begin();
 			HighlightDeploymentArea(null, EventArgs.Empty);
 		}
 
@@ -47,12 +45,12 @@ namespace PanzerBlitz
 			{
 				Unit unit = _DeploymentPage.Peek();
 				PositionalDeployOrder o = new PositionalDeployOrder(unit, Tile);
-				if (_Match.ExecuteOrder(o))
+				if (_Controller.Match.ExecuteOrder(o))
 				{
 					_DeploymentPage.Remove(unit);
 					HighlightDeploymentArea(null, EventArgs.Empty);
 				}
-				else _GameScreen.Alert(o.Validate().ToString());
+				else _Controller.Alert(o.Validate());
 			}
 		}
 
@@ -67,7 +65,7 @@ namespace PanzerBlitz
 		public override void HandleUnitRightClick(Unit Unit)
 		{
 			PositionalDeployOrder o = new PositionalDeployOrder(Unit, null);
-			if (_Match.ExecuteOrder(o))
+			if (_Controller.Match.ExecuteOrder(o))
 			{
 				_DeploymentPage.Add(Unit);
 				HighlightDeploymentArea(null, EventArgs.Empty);
@@ -82,10 +80,11 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedStack != null)
 			{
-				Highlight(_DeploymentPage.SelectedStack.Peek().GetFieldOfDeployment(
-					_Match.GetMap().TilesEnumerable).Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+				_Controller.Highlight(_DeploymentPage.SelectedStack.Peek().GetFieldOfDeployment(
+					_Controller.Match.GetMap().TilesEnumerable).Select(
+						i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
 			}
-			else UnHighlight();
+			else _Controller.UnHighlight();
 		}
 	}
 }

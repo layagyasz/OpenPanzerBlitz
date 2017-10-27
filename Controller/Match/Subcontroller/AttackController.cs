@@ -8,8 +8,8 @@ namespace PanzerBlitz
 {
 	public class AttackController : BaseAttackController
 	{
-		public AttackController(MatchAdapter Match, MatchScreen GameScreen)
-			: base(Match, GameScreen)
+		public AttackController(HumanMatchPlayerController Controller)
+			: base(Controller)
 		{
 		}
 
@@ -23,11 +23,12 @@ namespace PanzerBlitz
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
-			if (Unit.Army == _Army && Unit.CanAttack(AttackMethod.NORMAL_FIRE) == NoSingleAttackReason.NONE)
+			if (Unit.Army == _Controller.CurrentTurn.Army
+				&& Unit.CanAttack(AttackMethod.NORMAL_FIRE) == NoSingleAttackReason.NONE)
 			{
-				_SelectedUnit = Unit;
+				_Controller.SelectUnit(Unit);
 
-				Highlight(
+				_Controller.Highlight(
 					Unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1.Final,
@@ -36,15 +37,16 @@ namespace PanzerBlitz
 								i.Item1.Range,
 								Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE)))));
 			}
-			else if (Unit.Army != _Army)
+			else if (Unit.Army != _Controller.CurrentTurn.Army)
 			{
-				if (_SelectedUnit != null)
+				if (_Controller.SelectedUnit != null)
 				{
 					if (_AttackBuilder == null || _AttackBuilder.AttackAt != Unit.Position)
-						StartAttack(new AttackOrder(_Army, Unit.Position, AttackMethod.NORMAL_FIRE));
+						StartAttack(
+							new AttackOrder(_Controller.CurrentTurn.Army, Unit.Position, AttackMethod.NORMAL_FIRE));
 					NoSingleAttackReason r = _AttackBuilder.AddAttacker(
-						new NormalSingleAttackOrder(_SelectedUnit, Unit, AttackMethod.NORMAL_FIRE));
-					if (r != NoSingleAttackReason.NONE) _GameScreen.Alert(r.ToString());
+						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, AttackMethod.NORMAL_FIRE));
+					if (r != NoSingleAttackReason.NONE) _Controller.Alert(r);
 					_AttackPane.UpdateDescription();
 				}
 			}

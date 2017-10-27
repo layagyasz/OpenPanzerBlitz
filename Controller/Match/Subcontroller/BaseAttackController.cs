@@ -12,8 +12,8 @@ namespace PanzerBlitz
 		protected AttackOrder _AttackBuilder;
 		protected AttackPane _AttackPane;
 
-		public BaseAttackController(MatchAdapter Match, MatchScreen GameScreen)
-			: base(Match, GameScreen)
+		public BaseAttackController(HumanMatchPlayerController Controller)
+			: base(Controller)
 		{
 		}
 
@@ -21,7 +21,7 @@ namespace PanzerBlitz
 		{
 			if (_AttackBuilder != null)
 			{
-				_GameScreen.PaneLayer.Remove(_AttackPane);
+				_Controller.RemovePane(_AttackPane);
 				_AttackBuilder = null;
 			}
 		}
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 
 			_AttackBuilder = Attack;
 			_AttackPane = new AttackPane(_AttackBuilder);
-			_GameScreen.PaneLayer.Add(_AttackPane);
+			_Controller.AddPane(_AttackPane);
 			_AttackPane.UpdateDescription();
 			_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
 			_AttackPane.OnExecute += ExecuteAttack;
@@ -64,9 +64,9 @@ namespace PanzerBlitz
 
 		void ExecuteAttack(object sender, EventArgs e)
 		{
-			if (_Match.ExecuteOrder(_AttackBuilder))
+			if (_Controller.Match.ExecuteOrder(_AttackBuilder))
 			{
-				_GameScreen.PaneLayer.Remove(_AttackPane);
+				_Controller.RemovePane(_AttackPane);
 				_AttackBuilder = null;
 			}
 			else _AttackPane.UpdateDescription();

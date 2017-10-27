@@ -24,11 +24,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public ConvoyDeploymentMicrocontroller(
-			MatchAdapter Match,
-			MatchScreen GameScreen,
-			ConvoyDeployment Deployment)
-			: base(Match, GameScreen)
+		public ConvoyDeploymentMicrocontroller(HumanMatchPlayerController Controller, ConvoyDeployment Deployment)
+			: base(Controller)
 		{
 			_Deployment = Deployment;
 		}
@@ -45,23 +42,23 @@ namespace PanzerBlitz
 		{
 			if (_LoadUnitPane != null)
 			{
-				_GameScreen.PaneLayer.Remove(_LoadUnitPane);
+				_Controller.RemovePane(_LoadUnitPane);
 				_LoadUnitPane = null;
 			}
 		}
 
-		public override void Begin(Army Army)
+		public override void Begin()
 		{
-			base.Begin(Army);
+			base.Begin();
 			HighlightDeploymentArea(null, EventArgs.Empty);
 		}
 
 		public override bool Finish()
 		{
 			ConvoyOrderDeployOrder order = new ConvoyOrderDeployOrder(_Deployment, _DeploymentPage.GetConvoyOrder());
-			if (!_Match.ExecuteOrder(order))
+			if (!_Controller.Match.ExecuteOrder(order))
 			{
-				_GameScreen.Alert(order.Validate().ToString());
+				_Controller.Alert(order.Validate());
 				return false;
 			}
 			return true;
@@ -77,8 +74,8 @@ namespace PanzerBlitz
 		{
 			Clear();
 			EntryTileDeployOrder o = new EntryTileDeployOrder(_Deployment, Tile);
-			if (_Match.ExecuteOrder(o)) HighlightDeploymentArea(null, EventArgs.Empty);
-			else _GameScreen.Alert(o.Validate().ToString());
+			if (_Controller.Match.ExecuteOrder(o)) HighlightDeploymentArea(null, EventArgs.Empty);
+			else _Controller.Alert(o.Validate());
 		}
 
 		public override void HandleTileRightClick(Tile Tile)
@@ -112,7 +109,7 @@ namespace PanzerBlitz
 					SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", units); ;
 					pane.OnItemSelected += LoadUnit;
 					_LoadUnitPane = pane;
-					_GameScreen.PaneLayer.Add(_LoadUnitPane);
+					_Controller.AddPane(_LoadUnitPane);
 				}
 			}
 		}
@@ -124,8 +121,8 @@ namespace PanzerBlitz
 
 		void HighlightDeploymentArea(object Sender, EventArgs E)
 		{
-			Highlight(
-				_Match.GetMap().TilesEnumerable.Where(
+			_Controller.Highlight(
+				_Controller.Match.GetMap().TilesEnumerable.Where(
 					i => _Deployment.Validate(i) == NoDeployReason.NONE)
 				.Select(i => new Tuple<Tile, Color>(
 					i, _Deployment.EntryTile == i
@@ -143,7 +140,8 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedUnit != null)
 			{
 				LoadOrder order = new LoadOrder(_DeploymentPage.SelectedUnit, Unit, false);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				if (!_Controller.Match.ExecuteOrder(order))
+					_Controller.Alert(order.Validate());
 			}
 			Clear();
 		}
@@ -153,7 +151,7 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedUnit != null)
 			{
 				UnloadOrder order = new UnloadOrder(_DeploymentPage.SelectedUnit, false);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate().ToString());
 			}
 		}
 	}

@@ -16,8 +16,8 @@ namespace PanzerBlitz
 
 		Pane _SelectPane;
 
-		public MovementController(bool VehicleMovement, MatchAdapter Match, MatchScreen GameScreen)
-			: base(Match, GameScreen)
+		public MovementController(HumanMatchPlayerController Controller, bool VehicleMovement)
+			: base(Controller)
 		{
 			this.VehicleMovement = VehicleMovement;
 		}
@@ -26,7 +26,7 @@ namespace PanzerBlitz
 		{
 			if (_SelectPane != null)
 			{
-				_GameScreen.PaneLayer.Remove(_SelectPane);
+				_Controller.RemovePane(_SelectPane);
 				_SelectPane = null;
 			}
 		}
@@ -34,11 +34,11 @@ namespace PanzerBlitz
 		public override void HandleTileLeftClick(Tile Tile)
 		{
 			Clear();
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				MovementOrder order = new MovementOrder(_SelectedUnit, Tile, false);
-				if (_Match.ExecuteOrder(order)) SetMovementHighlight(_SelectedUnit);
-				else _GameScreen.Alert(order.Validate().ToString());
+				MovementOrder order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
+				if (_Controller.Match.ExecuteOrder(order)) SetMovementHighlight(_Controller.SelectedUnit);
+				else _Controller.Alert(order.Validate());
 			}
 		}
 
@@ -56,11 +56,11 @@ namespace PanzerBlitz
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			Clear();
-			if (Unit.Army == _Army
+			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& (Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE
 					|| Unit.CanUnload() == NoUnloadReason.NONE))
 			{
-				_SelectedUnit = Unit;
+				_Controller.SelectUnit(Unit);
 				SetMovementHighlight(Unit);
 			}
 		}
@@ -74,7 +74,7 @@ namespace PanzerBlitz
 		{
 			if (Unit.RemainingMovement > 0)
 			{
-				Highlight(
+				_Controller.Highlight(
 					Unit.GetFieldOfMovement(false).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
@@ -83,7 +83,7 @@ namespace PanzerBlitz
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
 									HIGHLIGHT_COLORS.Length - 1)])));
 			}
-			else UnHighlight();
+			else _Controller.UnHighlight();
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key)
@@ -91,10 +91,11 @@ namespace PanzerBlitz
 			// Load/Unload
 			if (Key == Keyboard.Key.L)
 			{
-				if (_SelectedUnit != null)
+				if (_Controller.SelectedUnit != null)
 				{
 					List<Unit> canLoad =
-						_SelectedUnit.Position.Units.Where(i => _SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
+						_Controller.SelectedUnit.Position.Units.Where(
+							i => _Controller.SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
 					if (canLoad.Count == 1)
 					{
 						LoadUnit(canLoad.First());
@@ -105,7 +106,7 @@ namespace PanzerBlitz
 						SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", canLoad); ;
 						pane.OnItemSelected += LoadUnit;
 						_SelectPane = pane;
-						_GameScreen.PaneLayer.Add(_SelectPane);
+						_Controller.AddPane(_SelectPane);
 					}
 				}
 			}
@@ -113,12 +114,12 @@ namespace PanzerBlitz
 			// Recon
 			else if (Key == Keyboard.Key.R)
 			{
-				if (_SelectedUnit != null)
+				if (_Controller.SelectedUnit != null)
 				{
 					List<Direction> directions =
 						Enum.GetValues(typeof(Direction))
 							.Cast<Direction>()
-							.Where(i => _SelectedUnit.CanExitDirection(i))
+							.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
 							.ToList();
 					if (directions.Count == 1) ReconDirection(directions.First());
 					else if (directions.Count > 1)
@@ -127,19 +128,19 @@ namespace PanzerBlitz
 						SelectPane<Direction> pane = new SelectPane<Direction>("Recon", directions);
 						pane.OnItemSelected += ReconDirection;
 						_SelectPane = pane;
-						_GameScreen.PaneLayer.Add(_SelectPane);
+						_Controller.AddPane(_SelectPane);
 					}
 				}
 			}
 			// Evacuate
 			else if (Key == Keyboard.Key.E)
 			{
-				if (_SelectedUnit != null)
+				if (_Controller.SelectedUnit != null)
 				{
 					List<Direction> directions =
 						Enum.GetValues(typeof(Direction))
 							.Cast<Direction>()
-							.Where(i => _SelectedUnit.CanExitDirection(i))
+							.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
 							.ToList();
 					if (directions.Count == 1) EvacuateDirection(directions.First());
 					else if (directions.Count > 1)
@@ -148,7 +149,7 @@ namespace PanzerBlitz
 						SelectPane<Direction> pane = new SelectPane<Direction>("Evacuate", directions);
 						pane.OnItemSelected += EvacuateDirection;
 						_SelectPane = pane;
-						_GameScreen.PaneLayer.Add(_SelectPane);
+						_Controller.AddPane(_SelectPane);
 					}
 				}
 			}
@@ -164,22 +165,22 @@ namespace PanzerBlitz
 
 		void LoadUnit(Unit Unit)
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				LoadOrder order = new LoadOrder(_SelectedUnit, Unit);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				LoadOrder order = new LoadOrder(_Controller.SelectedUnit, Unit);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else SetMovementHighlight(_Controller.SelectedUnit);
 			}
 			Clear();
 		}
 
 		void UnloadUnit()
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				UnloadOrder order = new UnloadOrder(_SelectedUnit);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				UnloadOrder order = new UnloadOrder(_Controller.SelectedUnit);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
 
@@ -190,11 +191,11 @@ namespace PanzerBlitz
 
 		void ReconDirection(Direction Direction)
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				ReconOrder order = new ReconOrder(_SelectedUnit, Direction);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else UnHighlight();
+				ReconOrder order = new ReconOrder(_Controller.SelectedUnit, Direction);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else _Controller.UnHighlight();
 			}
 			Clear();
 		}
@@ -206,32 +207,32 @@ namespace PanzerBlitz
 
 		void EvacuateDirection(Direction Direction)
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				EvacuateOrder order = new EvacuateOrder(_SelectedUnit, Direction);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else UnHighlight();
+				EvacuateOrder order = new EvacuateOrder(_Controller.SelectedUnit, Direction);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else _Controller.UnHighlight();
 			}
 			Clear();
 		}
 
 		void Mount()
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				MountOrder order = new MountOrder(_SelectedUnit);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				MountOrder order = new MountOrder(_Controller.SelectedUnit);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
 
 		void Dismount()
 		{
-			if (_SelectedUnit != null)
+			if (_Controller.SelectedUnit != null)
 			{
-				DismountOrder order = new DismountOrder(_SelectedUnit);
-				if (!_Match.ExecuteOrder(order)) _GameScreen.Alert(order.Validate().ToString());
-				else SetMovementHighlight(_SelectedUnit);
+				DismountOrder order = new DismountOrder(_Controller.SelectedUnit);
+				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
+				else SetMovementHighlight(_Controller.SelectedUnit);
 
 			}
 		}

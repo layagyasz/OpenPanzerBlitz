@@ -31,6 +31,7 @@ namespace PanzerBlitz
 		MovementDolly _Movement;
 
 		public readonly Unit Unit;
+		public readonly bool Reactive;
 
 		public override Vector2f Size
 		{
@@ -40,10 +41,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Scale)
+		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Scale, bool Reactive)
 		{
 			this.Unit = Unit;
-			Unit.OnMove += HandleMove;
+			this.Reactive = Reactive;
+			if (Reactive) Unit.OnMove += HandleMove;
 
 			_Renderer = Renderer;
 			_UnitConfigurationView = new UnitConfigurationView(
@@ -54,7 +56,6 @@ namespace PanzerBlitz
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;
 			Vector2f br = new Vector2f(.5f, .15f) * Scale;
 			Vector2f bl = new Vector2f(-.5f, .15f) * Scale;
-
 
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
 		}
@@ -95,13 +96,16 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 
-			_UnitConfigurationView.Flipped = Unit.Status == UnitStatus.DISRUPTED;
+			_UnitConfigurationView.Flipped = Unit.Status == UnitStatus.DISRUPTED && Reactive;
 			_UnitConfigurationView.Draw(Target, Transform);
 
-			Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
-			RenderStates r = new RenderStates(Transform);
-			if (Unit.Moved) Target.Draw(MovedRect, PrimitiveType.Quads, r);
-			if (Unit.Fired) Target.Draw(FiredRect, PrimitiveType.Quads, r);
+			if (Reactive)
+			{
+				Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
+				RenderStates r = new RenderStates(Transform);
+				if (Unit.Moved) Target.Draw(MovedRect, PrimitiveType.Quads, r);
+				if (Unit.Fired) Target.Draw(FiredRect, PrimitiveType.Quads, r);
+			}
 		}
 	}
 }

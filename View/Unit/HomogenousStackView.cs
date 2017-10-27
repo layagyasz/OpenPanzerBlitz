@@ -38,7 +38,7 @@ namespace PanzerBlitz
 		{
 			_Text = new Text("", Font, FONT_SIZE) { Color = Color.Red };
 			_Renderer = Renderer;
-			_UnitViews = new Stack<UnitView>(Units.Select(i => new UnitView(i, Renderer, UNIT_VIEW_SCALE)));
+			_UnitViews = new Stack<UnitView>(Units.Select(i => new UnitView(i, Renderer, UNIT_VIEW_SCALE, false)));
 			foreach (UnitView u in _UnitViews) u.Parent = this;
 		}
 
@@ -49,7 +49,7 @@ namespace PanzerBlitz
 
 		public void Push(Unit Unit)
 		{
-			_UnitViews.Push(new UnitView(Unit, _Renderer, UNIT_VIEW_SCALE));
+			_UnitViews.Push(new UnitView(Unit, _Renderer, UNIT_VIEW_SCALE, false));
 		}
 
 		public Unit Pop()

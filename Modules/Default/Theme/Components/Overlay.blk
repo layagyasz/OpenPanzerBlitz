@@ -18,3 +18,17 @@ class:info-display {
 		int[]:padding { 8 8 8 8 }
 	}
 }
+class:info-display-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 184 }
+		int[]:margin { 88 2 8 2 }
+	}
+}
+class:info-display-info {
+	!class:parent { regular }
+	mode:default {
+		int:width { 184 }
+		int[]:margin { 88 2 8 2 }
+	}
+}
