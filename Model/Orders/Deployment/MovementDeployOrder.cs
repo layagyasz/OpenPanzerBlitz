@@ -34,16 +34,16 @@ namespace PanzerBlitz
 			Stream.Write(Tile.Id);
 		}
 
-		public override NoDeployReason Validate()
+		public override OrderInvalidReason Validate()
 		{
 			if (Unit.Deployment is ConvoyDeployment)
 				return ((ConvoyDeployment)Unit.Deployment).Validate(Unit, Tile);
-			return NoDeployReason.DEPLOYMENT_RULE;
+			return OrderInvalidReason.DEPLOYMENT_RULE;
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoDeployReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Tile.Control(Unit);
 				Unit.Place(Tile);

@@ -33,14 +33,14 @@ namespace PanzerBlitz
 			Stream.Write(UseMovement);
 		}
 
-		public NoDismountReason Validate()
+		public OrderInvalidReason Validate()
 		{
 			return Unit.CanDismount();
 		}
 
 		public OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoDismountReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Unit.Dismount(UseMovement);
 				return OrderStatus.FINISHED;

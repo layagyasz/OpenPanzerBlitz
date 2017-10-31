@@ -57,8 +57,8 @@ namespace PanzerBlitz
 		{
 			Clear();
 			if (Unit.Army == _Controller.CurrentTurn.Army
-				&& (Unit.CanMove(VehicleMovement, false) == NoMoveReason.NONE
-					|| Unit.CanUnload() == NoUnloadReason.NONE))
+				&& (Unit.CanMove(VehicleMovement, false) == OrderInvalidReason.NONE
+					|| Unit.CanUnload() == OrderInvalidReason.NONE))
 			{
 				_Controller.SelectUnit(Unit);
 				SetMovementHighlight(Unit);
@@ -95,7 +95,7 @@ namespace PanzerBlitz
 				{
 					List<Unit> canLoad =
 						_Controller.SelectedUnit.Position.Units.Where(
-							i => _Controller.SelectedUnit.CanLoad(i) == NoLoadReason.NONE).ToList();
+							i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE).ToList();
 					if (canLoad.Count == 1)
 					{
 						LoadUnit(canLoad.First());

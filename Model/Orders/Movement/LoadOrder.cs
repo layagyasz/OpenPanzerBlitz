@@ -36,14 +36,14 @@ namespace PanzerBlitz
 			Stream.Write(UseMovement);
 		}
 
-		public NoLoadReason Validate()
+		public OrderInvalidReason Validate()
 		{
 			return Carrier.CanLoad(Passenger);
 		}
 
 		public OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoLoadReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Carrier.Load(Passenger, UseMovement);
 				return OrderStatus.FINISHED;

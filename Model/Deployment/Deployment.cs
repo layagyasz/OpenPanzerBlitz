@@ -27,9 +27,9 @@ namespace PanzerBlitz
 			_Id = IdGenerator.GenerateId();
 		}
 
-		public virtual NoDeployReason Validate(Unit Unit, Tile Tile)
+		public virtual OrderInvalidReason Validate(Unit Unit, Tile Tile)
 		{
-			if (Tile == null) return NoDeployReason.NONE;
+			if (Tile == null) return OrderInvalidReason.NONE;
 			return Unit.CanEnter(Tile, true);
 		}
 

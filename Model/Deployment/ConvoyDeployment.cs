@@ -55,7 +55,7 @@ namespace PanzerBlitz
 		public override bool AutomateDeployment()
 		{
 			List<Tile> validTiles = Army.Match.Map.TilesEnumerable.Where(
-				i => Validate(i) == NoDeployReason.NONE).ToList();
+				i => Validate(i) == OrderInvalidReason.NONE).ToList();
 			if (validTiles.Count == 1) Army.Match.ExecuteOrder(new EntryTileDeployOrder(this, validTiles.First()));
 			if (validTiles.Count == 0) throw new Exception("No valid entry tiles for ConvoyDeployment.");
 			return false;
@@ -94,7 +94,7 @@ namespace PanzerBlitz
 				foreach (Unit u in _ConvoyOrder)
 				{
 					if (u.Position != null
-						&& u.CanMove(Vehicle, false) == NoMoveReason.NONE
+						&& u.CanMove(Vehicle, false) == OrderInvalidReason.NONE
 						&& !u.Moved
 						&& DeploymentConfiguration.MovementAutomator.AutomateMovement(u, _StopAutomatedMovement))
 					{
@@ -106,45 +106,46 @@ namespace PanzerBlitz
 
 		public override bool IsConfigured()
 		{
-			return Validate(_EntryTile) == NoDeployReason.NONE && Validate(_ConvoyOrder) == NoDeployReason.NONE;
+			return Validate(_EntryTile) == OrderInvalidReason.NONE && Validate(_ConvoyOrder) == OrderInvalidReason.NONE;
 		}
 
-		public override NoDeployReason Validate(Unit Unit, Tile Tile)
+		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)
 		{
-			NoDeployReason r = base.Validate(Unit, Tile);
-			if (r != NoDeployReason.NONE) return r;
+			OrderInvalidReason r = base.Validate(Unit, Tile);
+			if (r != OrderInvalidReason.NONE) return r;
 
-			if (_EntryTile.Units.Count() > 0) return NoDeployReason.DEPLOYMENT_RULE;
-			if (Tile != _EntryTile) return NoDeployReason.DEPLOYMENT_RULE;
-			return NoDeployReason.NONE;
+			if (_EntryTile.Units.Count() > 0) return OrderInvalidReason.DEPLOYMENT_RULE;
+			if (Tile != _EntryTile) return OrderInvalidReason.DEPLOYMENT_RULE;
+			return OrderInvalidReason.NONE;
 		}
 
-		public virtual NoDeployReason Validate(Tile EntryTile)
+		public virtual OrderInvalidReason Validate(Tile EntryTile)
 		{
 			if (!DeploymentConfiguration.Matcher.Matches(EntryTile))
-				return NoDeployReason.DEPLOYMENT_RULE;
+				return OrderInvalidReason.DEPLOYMENT_RULE;
 
-			return NoDeployReason.NONE;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoDeployReason Validate(IEnumerable<Unit> ConvoyOrder)
+		public OrderInvalidReason Validate(IEnumerable<Unit> ConvoyOrder)
 		{
-			if (_ConvoyOrder == null) return NoDeployReason.CONVOY_ORDER;
-			if (!Units.All(i => ConvoyOrder.Any(j => i == j || j.Passenger == i))) return NoDeployReason.CONVOY_ORDER;
+			if (_ConvoyOrder == null) return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
+			if (!Units.All(i => ConvoyOrder.Any(j => i == j || j.Passenger == i)))
+				return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
 			if (Units.Where(i => i.Configuration.IsPassenger)
 					.Any(i => (i.Configuration.Movement == 0 || IsStrictConvoy) && i.Carrier == null))
-				return NoDeployReason.CONVOY_ORDER;
-			return NoDeployReason.NONE;
+				return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
+			return OrderInvalidReason.NONE;
 		}
 
 		public void SetEntryTile(Tile Tile)
 		{
-			if (Validate(Tile) == NoDeployReason.NONE) _EntryTile = Tile;
+			if (Validate(Tile) == OrderInvalidReason.NONE) _EntryTile = Tile;
 		}
 
 		public void SetConvoyOrder(IEnumerable<Unit> ConvoyOrder)
 		{
-			if (Validate(ConvoyOrder) == NoDeployReason.NONE) _ConvoyOrder = ConvoyOrder.ToList();
+			if (Validate(ConvoyOrder) == OrderInvalidReason.NONE) _ConvoyOrder = ConvoyOrder.ToList();
 		}
 	}
 }

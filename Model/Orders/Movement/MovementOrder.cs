@@ -47,33 +47,33 @@ namespace PanzerBlitz
 			Stream.Write(Halt);
 		}
 
-		public NoMoveReason Validate()
+		public OrderInvalidReason Validate()
 		{
-			if (Unit.CanMove(Combat) != NoMoveReason.NONE) return NoMoveReason.NO_MOVE;
+			if (Unit.CanMove(Combat) != OrderInvalidReason.NONE) return OrderInvalidReason.UNIT_NO_MOVE;
 
-			NoDeployReason noEnter = Unit.CanEnter(Path.Destination, true);
-			if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
+			OrderInvalidReason noEnter = Unit.CanEnter(Path.Destination, true);
+			if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
 			for (int i = 0; i < Path.Count - 1; ++i)
 			{
 				noEnter = Unit.CanEnter(Path[i + 1]);
-				if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
+				if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
 				float d = Path[i].RulesCalculator.GetMoveCost(Unit, Path[i + 1], !Combat);
-				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
+				if (Math.Abs(d - float.MaxValue) < float.Epsilon) return OrderInvalidReason.MOVEMENT_TERRAIN;
 			}
 			if (Path.Distance > Unit.RemainingMovement)
 			{
-				if (!Unit.Moved && Path.Count <= 2) return NoMoveReason.NONE;
-				return NoMoveReason.NO_MOVE;
+				if (!Unit.Moved && Path.Count <= 2) return OrderInvalidReason.NONE;
+				return OrderInvalidReason.UNIT_NO_MOVE;
 			}
-			if (Combat && Unit.Configuration.CanCloseAssault && Path.Count > 2) return NoMoveReason.NO_MOVE;
-			return NoMoveReason.NONE;
+			if (Combat && Unit.Configuration.CanCloseAssault && Path.Count > 2) return OrderInvalidReason.UNIT_NO_MOVE;
+			return OrderInvalidReason.NONE;
 		}
 
 		public OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoMoveReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Unit.MoveTo(Path.Destination, Path);
 				if (Halt) Unit.Halt();

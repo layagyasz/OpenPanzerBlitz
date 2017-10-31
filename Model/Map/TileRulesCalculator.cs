@@ -91,7 +91,8 @@ namespace PanzerBlitz
 
 		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
 		{
-			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == NoDeployReason.ENEMY_OCCUPIED) return float.MaxValue;
+			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == OrderInvalidReason.TILE_ENEMY_OCCUPIED)
+				return float.MaxValue;
 
 			BlockType toBlock = To.GetBlockType();
 			BlockType fromBlock = Tile.GetBlockType();

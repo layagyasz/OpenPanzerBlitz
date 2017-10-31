@@ -148,13 +148,13 @@ namespace PanzerBlitz
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 		}
 
-		public NoLoadReason CanLoad(UnitConfiguration UnitConfiguration)
+		public OrderInvalidReason CanLoad(UnitConfiguration UnitConfiguration)
 		{
 			if (!IsCarrier
 				|| !UnitConfiguration.IsPassenger
 				|| (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY))
-				return NoLoadReason.NO_CARRY;
-			return NoLoadReason.NONE;
+				return OrderInvalidReason.UNIT_NO_CARRY;
+			return OrderInvalidReason.NONE;
 		}
 
 		public int GetStackSize()
@@ -190,46 +190,47 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.WRECKAGE;
 		}
 
-		public NoSingleAttackReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
+		public OrderInvalidReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
-			if (!CanDirectFire) return NoSingleAttackReason.UNABLE;
-			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
+			if (!CanDirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Range > Range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
-				return NoSingleAttackReason.NO_ARMOR_ATTACK;
-			return NoSingleAttackReason.NONE;
+				return OrderInvalidReason.TARGET_ARMORED;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoSingleAttackReason CanIndirectFireAt(LineOfSight LineOfSight)
+		public OrderInvalidReason CanIndirectFireAt(LineOfSight LineOfSight)
 		{
-			if (!CanIndirectFire) return NoSingleAttackReason.UNABLE;
-			if (LineOfSight.Range > Range) return NoSingleAttackReason.OUT_OF_RANGE;
-			return NoSingleAttackReason.NONE;
+			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Range > Range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoSingleAttackReason CanOverrunAt(bool EnemyArmored)
+		public OrderInvalidReason CanOverrunAt(bool EnemyArmored)
 		{
-			if (CanOnlyOverrunUnarmored && EnemyArmored) return NoSingleAttackReason.NO_ARMOR_ATTACK;
-			return NoSingleAttackReason.NONE;
+			if (CanOnlyOverrunUnarmored && EnemyArmored) return OrderInvalidReason.TARGET_ARMORED;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoSingleAttackReason CanCloseAssaultAt(LineOfSight LineOfSight)
+		public OrderInvalidReason CanCloseAssaultAt(LineOfSight LineOfSight)
 		{
-			if (!CanCloseAssault) return NoSingleAttackReason.UNABLE;
-			if (LineOfSight.Range > 1) return NoSingleAttackReason.OUT_OF_RANGE;
-			return NoSingleAttackReason.NONE;
+			if (!CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Range > 1) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
+		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
 			switch (AttackMethod)
 			{
 				case AttackMethod.OVERRUN:
-					return CanOverrun ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
+					return CanOverrun ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
 				case AttackMethod.NORMAL_FIRE:
-					return CanDirectFire || CanIndirectFire ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
+					return CanDirectFire || CanIndirectFire
+						? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
 				case AttackMethod.CLOSE_ASSAULT:
-					return CanCloseAssault ? NoSingleAttackReason.NONE : NoSingleAttackReason.UNABLE;
-				default: return NoSingleAttackReason.NONE;
+					return CanCloseAssault ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+				default: return OrderInvalidReason.NONE;
 			}
 		}
 

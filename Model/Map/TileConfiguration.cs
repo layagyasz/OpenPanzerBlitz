@@ -97,14 +97,6 @@ namespace PanzerBlitz
 			TriggerReconfigure();
 		}
 
-		public NoAttackReason CanBeAttacked(AttackMethod AttackMethod)
-		{
-			if (AttackMethod == AttackMethod.OVERRUN)
-			{
-			}
-			return NoAttackReason.NONE;
-		}
-
 		public void SetPathOverlay(int Index, TilePathOverlay PathOverlay)
 		{
 			_PathOverlays[Index] = PathOverlay;

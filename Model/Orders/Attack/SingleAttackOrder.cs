@@ -13,9 +13,9 @@ namespace PanzerBlitz
 
 		public abstract void Serialize(SerializationOutputStream Stream);
 
-		public virtual NoSingleAttackReason Validate()
+		public virtual OrderInvalidReason Validate()
 		{
-			if (Defender == null) return NoSingleAttackReason.NONE;
+			if (Defender == null) return OrderInvalidReason.NONE;
 			return Defender.CanBeAttackedBy(Attacker.Army);
 		}
 

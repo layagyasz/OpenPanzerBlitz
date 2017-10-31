@@ -32,16 +32,16 @@ namespace PanzerBlitz
 			Stream.Write((byte)Direction);
 		}
 
-		public NoMoveReason Validate()
+		public OrderInvalidReason Validate()
 		{
-			if (!Unit.CanExitDirection(Direction)) return NoMoveReason.ILLEGAL;
-			if (Unit.CanMove(false) != NoMoveReason.NONE) return Unit.CanMove(false);
-			return NoMoveReason.NONE;
+			if (!Unit.CanExitDirection(Direction)) return OrderInvalidReason.ILLEGAL;
+			if (Unit.CanMove(false) != OrderInvalidReason.NONE) return Unit.CanMove(false);
+			return OrderInvalidReason.NONE;
 		}
 
 		public OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoMoveReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Unit.Remove();
 				Unit.Evacuated = Direction;

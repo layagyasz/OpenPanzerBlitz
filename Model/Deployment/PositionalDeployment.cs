@@ -31,7 +31,7 @@ namespace PanzerBlitz
 			foreach (Unit u in Units)
 			{
 				List<Tile> validTiles = Army.Match.Map.TilesEnumerable.Where(
-					i => Validate(u, i) == NoDeployReason.NONE).ToList();
+					i => Validate(u, i) == OrderInvalidReason.NONE).ToList();
 				if (validTiles.Count == 1) Army.Match.ExecuteOrder(new PositionalDeployOrder(u, validTiles.First()));
 				if (validTiles.Count == 0) throw new Exception("No valid entry tiles for ConvoyDeployment.");
 			}
@@ -43,17 +43,17 @@ namespace PanzerBlitz
 			return Units.All(i => i.Deployed);
 		}
 
-		public override NoDeployReason Validate(Unit Unit, Tile Tile)
+		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)
 		{
-			NoDeployReason v = base.Validate(Unit, Tile);
-			if (v != NoDeployReason.NONE) return v;
+			OrderInvalidReason v = base.Validate(Unit, Tile);
+			if (v != OrderInvalidReason.NONE) return v;
 
 			if (Tile != null)
 			{
 				if (DeploymentConfiguration.Matcher != null && !DeploymentConfiguration.Matcher.Matches(Tile))
-					return NoDeployReason.DEPLOYMENT_RULE;
+					return OrderInvalidReason.DEPLOYMENT_RULE;
 			}
-			return NoDeployReason.NONE;
+			return OrderInvalidReason.NONE;
 		}
 	}
 }

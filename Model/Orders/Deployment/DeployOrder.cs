@@ -8,7 +8,7 @@ namespace PanzerBlitz
 	{
 		public abstract void Serialize(SerializationOutputStream Stream);
 		public abstract Army Army { get; }
-		public abstract NoDeployReason Validate();
+		public abstract OrderInvalidReason Validate();
 		public abstract OrderStatus Execute(Random Random);
 	}
 }

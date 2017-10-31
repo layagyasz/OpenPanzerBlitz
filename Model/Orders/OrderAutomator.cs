@@ -30,10 +30,10 @@ namespace PanzerBlitz
 			{
 				case TurnComponent.ATTACK:
 					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == NoSingleAttackReason.NONE);
+						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE);
 				case TurnComponent.CLOSE_ASSAULT:
 					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == NoSingleAttackReason.NONE);
+						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE);
 				case TurnComponent.DEPLOYMENT:
 					return TurnInfo.Army.Deployments.All(i => i.AutomateDeployment());
 				case TurnComponent.MINEFIELD_ATTACK:
@@ -42,16 +42,16 @@ namespace PanzerBlitz
 				case TurnComponent.NON_VEHICLE_MOVEMENT:
 					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(false));
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == NoMoveReason.NONE);
+					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
 				case TurnComponent.RESET:
 					return true;
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == NoMoveReason.NONE
-													&& i.CanAttack(AttackMethod.OVERRUN) == NoSingleAttackReason.NONE);
+					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
+													&& i.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE);
 				case TurnComponent.VEHICLE_MOVEMENT:
 					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(true));
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(true));
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == NoMoveReason.NONE);
+					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == OrderInvalidReason.NONE);
 			}
 			return false;
 		}

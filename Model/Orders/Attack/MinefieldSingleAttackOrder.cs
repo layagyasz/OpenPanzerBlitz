@@ -53,17 +53,17 @@ namespace PanzerBlitz
 				new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.MINEFIELD });
 		}
 
-		public override NoSingleAttackReason Validate()
+		public override OrderInvalidReason Validate()
 		{
-			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != NoSingleAttackReason.NONE)
-				return NoSingleAttackReason.UNABLE;
-			if (_Attacker.Position != _Defender.Position) return NoSingleAttackReason.OUT_OF_RANGE;
-			return NoSingleAttackReason.NONE;
+			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)
+				return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (_Attacker.Position != _Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			return OrderInvalidReason.NONE;
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
-			return Validate() == NoSingleAttackReason.NONE ? OrderStatus.FINISHED : OrderStatus.ILLEGAL;
+			return Validate() == OrderInvalidReason.NONE ? OrderStatus.FINISHED : OrderStatus.ILLEGAL;
 		}
 	}
 }

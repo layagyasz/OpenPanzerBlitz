@@ -83,7 +83,7 @@ namespace PanzerBlitz
 
 		public bool MustMove(bool Vehicle)
 		{
-			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == NoMoveReason.NONE);
+			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == OrderInvalidReason.NONE);
 		}
 
 		public bool CanSeeUnit(Unit Unit)

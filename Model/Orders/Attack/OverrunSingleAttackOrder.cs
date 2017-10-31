@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		public readonly Tile AttackTile;
 		public readonly Tile ExitTile;
 
-		NoMoveReason _Validate;
+		OrderInvalidReason _Validate;
 		bool _TreatStackAsArmored;
 
 		public override Unit Attacker
@@ -52,26 +52,26 @@ namespace PanzerBlitz
 			Stream.Write(AttackTile.Id);
 		}
 
-		private NoMoveReason InitialValidate()
+		OrderInvalidReason InitialValidate()
 		{
-			NoMoveReason r = _InitialMovement.Validate();
-			if (r != NoMoveReason.NONE) return r;
+			OrderInvalidReason r = _InitialMovement.Validate();
+			if (r != OrderInvalidReason.NONE) return r;
 
-			NoDeployReason noEnter = _InitialMovement.Unit.CanEnter(ExitTile, true);
-			if (noEnter != NoDeployReason.NONE) return EnumConverter.ConvertToNoMoveReason(noEnter);
+			OrderInvalidReason noEnter = _InitialMovement.Unit.CanEnter(ExitTile, true);
+			if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
 			float distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);
 			float distance2 = AttackTile.RulesCalculator.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
 			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
-				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return NoMoveReason.TERRAIN;
+				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return OrderInvalidReason.MOVEMENT_TERRAIN;
 
 			_MovementPath = new Path<Tile>(_InitialMovement.Path);
 			_MovementPath.Add(AttackTile, distance1);
 			_MovementPath.Add(ExitTile, distance2);
-			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement) return NoMoveReason.NO_MOVE;
+			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement) return OrderInvalidReason.UNIT_NO_MOVE;
 
-			return NoMoveReason.NONE;
+			return OrderInvalidReason.NONE;
 		}
 
 		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)
@@ -81,24 +81,24 @@ namespace PanzerBlitz
 
 		public override AttackFactorCalculation GetAttack()
 		{
-			if (Validate() == NoSingleAttackReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, _TreatStackAsArmored, null);
 			else return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
-		public override NoSingleAttackReason Validate()
+		public override OrderInvalidReason Validate()
 		{
-			if (_Validate != NoMoveReason.NONE) return NoSingleAttackReason.TERRAIN;
-			NoSingleAttackReason r = _InitialMovement.Unit.CanAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
-			if (r != NoSingleAttackReason.NONE) return r;
+			if (_Validate != OrderInvalidReason.NONE) return _Validate;
+			OrderInvalidReason r = _InitialMovement.Unit.CanAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			return base.Validate();
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoSingleAttackReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Attacker.Fire();
 				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);

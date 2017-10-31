@@ -51,7 +51,7 @@ namespace PanzerBlitz
 		{
 			_Description.Clear();
 			foreach (OddsCalculation o in Attack.OddsCalculations) DescribeOddsCalculation(o);
-			if (Attack.Validate() != NoAttackReason.NONE)
+			if (Attack.Validate() != OrderInvalidReason.NONE)
 				_Description.Add(new Button("attack-error-box")
 				{
 					DisplayedString = Attack.Validate().ToString()

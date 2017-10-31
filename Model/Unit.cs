@@ -139,14 +139,15 @@ namespace PanzerBlitz
 			_Id = IdGenerator.GenerateId();
 		}
 
-		public NoSingleAttackReason CanBeAttackedBy(Army Army)
+		public OrderInvalidReason CanBeAttackedBy(Army Army)
 		{
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
-				return NoSingleAttackReason.TEAM;
-			if (_Carrier != null) return NoSingleAttackReason.PASSENGER;
-			if (_Position == null) return NoSingleAttackReason.ILLEGAL;
-			if (_Position.RulesCalculator.Concealing && !Army.CanSeeUnit(this)) return NoSingleAttackReason.CONCEALED;
-			return NoSingleAttackReason.NONE;
+				return OrderInvalidReason.TARGET_TEAM;
+			if (_Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
+			if (_Position == null) return OrderInvalidReason.ILLEGAL;
+			if (_Position.RulesCalculator.Concealing && !Army.CanSeeUnit(this))
+				return OrderInvalidReason.TARGET_CONCEALED;
+			return OrderInvalidReason.NONE;
 		}
 
 		public bool CanExitDirection(Direction Direction)
@@ -156,69 +157,69 @@ namespace PanzerBlitz
 					|| Direction == Direction.SOUTH) && Position.OnEdge(Direction);
 		}
 
-		public NoDeployReason CanEnter(Tile Tile, bool Terminal = false)
+		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false)
 		{
 			if (Tile.GetBlockType() == BlockType.STANDARD
 				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && i.Army != Army))
-				return NoDeployReason.ENEMY_OCCUPIED;
+				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
-				return NoDeployReason.UNIQUE;
+				return OrderInvalidReason.UNIT_UNIQUE;
 			if (Terminal
 				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
 				&& !Tile.Units.Contains(this))
-				return NoDeployReason.STACK_LIMIT;
-			return NoDeployReason.NONE;
+				return OrderInvalidReason.UNIT_STACK_LIMIT;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoMoveReason CanMove(bool Combat)
+		public OrderInvalidReason CanMove(bool Combat)
 		{
 			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
-				return NoMoveReason.NO_MOVE;
+				return OrderInvalidReason.UNIT_NO_MOVE;
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
 				{
-					if (Configuration.CanOverrun) return NoMoveReason.NONE;
+					if (Configuration.CanOverrun) return OrderInvalidReason.NONE;
 					if (Configuration.CanCloseAssault)
-						return _MovedMoreThanOneTile ? NoMoveReason.NO_MOVE : NoMoveReason.NONE;
-					return NoMoveReason.NO_MOVE;
+						return _MovedMoreThanOneTile ? OrderInvalidReason.UNIT_NO_MOVE : OrderInvalidReason.NONE;
+					return OrderInvalidReason.UNIT_NO_MOVE;
 				}
-				return NoMoveReason.NONE;
+				return OrderInvalidReason.NONE;
 			}
-			return NoMoveReason.NO_MOVE;
+			return OrderInvalidReason.UNIT_NO_MOVE;
 		}
 
-		public NoMoveReason CanMove(bool Vehicle, bool Combat)
+		public OrderInvalidReason CanMove(bool Vehicle, bool Combat)
 		{
-			if (Vehicle != Configuration.IsVehicle) return NoMoveReason.NO_MOVE;
+			if (Vehicle != Configuration.IsVehicle) return OrderInvalidReason.UNIT_NO_MOVE;
 			return CanMove(Combat);
 		}
 
-		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod)
+		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
 			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
-				return NoSingleAttackReason.UNABLE;
-			if (MustMove()) return NoSingleAttackReason.MUST_MOVE;
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
 		}
 
-		public NoSingleAttackReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
+		public OrderInvalidReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
-			NoSingleAttackReason r = CanAttack(AttackMethod);
-			if (r != NoSingleAttackReason.NONE) return r;
+			OrderInvalidReason r = CanAttack(AttackMethod);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
-				return NoSingleAttackReason.NO_LOS;
+				return OrderInvalidReason.ATTACK_NO_LOS;
 
 			if (AttackMethod == AttackMethod.NORMAL_FIRE)
 			{
-				if (Configuration.CanDirectFireAt(EnemyArmored, LineOfSight) == NoSingleAttackReason.NONE)
-					return NoSingleAttackReason.NONE;
+				if (Configuration.CanDirectFireAt(EnemyArmored, LineOfSight) == OrderInvalidReason.NONE)
+					return OrderInvalidReason.NONE;
 				r = Configuration.CanIndirectFireAt(LineOfSight);
-				if (r != NoSingleAttackReason.NONE) return r;
+				if (r != OrderInvalidReason.NONE) return r;
 				if (!Army.CanIndirectFireAtTile(LineOfSight.Final))
-					return NoSingleAttackReason.NO_INDIRECT_FIRE_SPOTTER;
-				return NoSingleAttackReason.NONE;
+					return OrderInvalidReason.ATTACK_NO_SPOTTER;
+				return OrderInvalidReason.NONE;
 			}
 			if (AttackMethod == AttackMethod.OVERRUN) return Configuration.CanOverrunAt(EnemyArmored);
 			return Configuration.CanCloseAssaultAt(LineOfSight);
@@ -286,43 +287,44 @@ namespace PanzerBlitz
 			return Deployment.UnitMustMove(this);
 		}
 
-		public NoDismountReason CanDismount()
+		public OrderInvalidReason CanDismount()
 		{
-			if (_Carrier != null || Status != UnitStatus.ACTIVE) return NoDismountReason.UNABLE;
-			if (_BaseConfiguration.DismountAs == null) return NoDismountReason.NO_DISMOUNT;
-			if (Moved || Fired) return NoDismountReason.NO_MOVE;
-			if (MustMove()) return NoDismountReason.MUST_MOVE;
-			return NoDismountReason.NONE;
+			if (_Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (_BaseConfiguration.DismountAs == null) return OrderInvalidReason.UNIT_NO_DISMOUNT;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			return OrderInvalidReason.NONE;
 		}
 
-		public NoDismountReason CanMount()
+		public OrderInvalidReason CanMount()
 		{
 			return CanDismount();
 		}
 
-		public NoLoadReason CanLoad(Unit Unit)
+		public OrderInvalidReason CanLoad(Unit Unit)
 		{
-			if (Unit.Moved || Moved || Unit.Fired || Status != UnitStatus.ACTIVE) return NoLoadReason.NO_MOVE;
-			if (Unit.Army != Army) return NoLoadReason.TEAM;
-			if (Unit.Position != Position) return NoLoadReason.ILLEGAL;
-			if (_Passenger != null) return NoLoadReason.CARRYING;
-			if (Unit.Carrier != null) return NoLoadReason.CARRIED;
-			if (MustMove()) return NoLoadReason.MUST_MOVE;
+			if (Unit.Moved || Moved || Unit.Fired || Status != UnitStatus.ACTIVE)
+				return OrderInvalidReason.UNIT_NO_MOVE;
+			if (Unit.Army != Army) return OrderInvalidReason.TARGET_TEAM;
+			if (Unit.Position != Position) return OrderInvalidReason.ILLEGAL;
+			if (_Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
+			if (Unit.Carrier != null) return OrderInvalidReason.TARGET_CARRIED;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 
 			return Configuration.CanLoad(Unit.Configuration);
 		}
 
-		public NoUnloadReason CanUnload()
+		public OrderInvalidReason CanUnload()
 		{
-			if (Status != UnitStatus.ACTIVE) return NoUnloadReason.NO_MOVE;
-			if (_Passenger == null) return NoUnloadReason.NO_PASSENGER;
+			if (Status != UnitStatus.ACTIVE) return OrderInvalidReason.UNIT_NO_MOVE;
+			if (_Passenger == null) return OrderInvalidReason.UNIT_NO_PASSENGER;
 			if (_Position != null)
 			{
-				NoDeployReason r = _Passenger.CanEnter(_Position);
-				if (r != NoDeployReason.NONE) return EnumConverter.ConvertToNoUnloadReason(r);
+				OrderInvalidReason r = _Passenger.CanEnter(_Position);
+				if (r != OrderInvalidReason.NONE) return r;
 			}
-			if (MustMove()) return NoUnloadReason.MUST_MOVE;
-			return NoUnloadReason.NONE;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			return OrderInvalidReason.NONE;
 		}
 
 		public bool IsSolitary()
@@ -412,13 +414,14 @@ namespace PanzerBlitz
 		public IEnumerable<Tile> GetFieldOfDeployment(IEnumerable<Tile> Tiles)
 		{
 			if (Deployment is PositionalDeployment)
-				return Tiles.Where(i => ((PositionalDeployment)Deployment).Validate(this, i) == NoDeployReason.NONE);
+				return Tiles.Where(
+					i => ((PositionalDeployment)Deployment).Validate(this, i) == OrderInvalidReason.NONE);
 			return Enumerable.Empty<Tile>();
 		}
 
 		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			if (_Position != null && CanAttack(AttackMethod) == NoSingleAttackReason.NONE)
+			if (_Position != null && CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
 				foreach (LineOfSight l in new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
 						 .GetReachableNodes()
@@ -426,7 +429,7 @@ namespace PanzerBlitz
 						  .Where(i => i.Final != _Position))
 				{
 					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
-					else if (CanAttack(AttackMethod, false, l) == NoSingleAttackReason.NONE)
+					else if (CanAttack(AttackMethod, false, l) == OrderInvalidReason.NONE)
 						yield return new Tuple<LineOfSight, bool>(l, false);
 				}
 			}
@@ -435,7 +438,7 @@ namespace PanzerBlitz
 		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)
 		{
 			if (_Position == null) return null;
-			if (CanMove(Combat) != NoMoveReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
+			if (CanMove(Combat) != OrderInvalidReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
 				_Position.NeighborTiles

@@ -39,7 +39,7 @@ namespace PanzerBlitz
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Controller.CurrentTurn.Army
-				&& Unit.CanAttack(AttackMethod.OVERRUN) == NoSingleAttackReason.NONE)
+				&& Unit.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE)
 			{
 				_Controller.SelectUnit(Unit);
 
@@ -68,12 +68,12 @@ namespace PanzerBlitz
 				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Tile)
 					StartAttack(new AttackOrder(_Controller.CurrentTurn.Army, Tile, AttackMethod.OVERRUN));
 
-				NoSingleAttackReason r =
+				OrderInvalidReason r =
 					_AttackBuilder.AddAttacker(
 						new OverrunSingleAttackOrder(
 							new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
 				_AttackPane.UpdateDescription();
-				if (r != NoSingleAttackReason.NONE) _Controller.Alert(r);
+				if (r != OrderInvalidReason.NONE) _Controller.Alert(r);
 			}
 			DeselectUnit();
 		}

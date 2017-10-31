@@ -59,24 +59,24 @@ namespace PanzerBlitz
 
 		public override AttackFactorCalculation GetAttack()
 		{
-			if (Validate() == NoSingleAttackReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(_Attacker, AttackMethod, _TreatStackAsArmored, LineOfSight);
 			return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
-		public override NoSingleAttackReason Validate()
+		public override OrderInvalidReason Validate()
 		{
-			if (_Defender == null) return NoSingleAttackReason.ILLEGAL;
-			NoSingleAttackReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
-			if (r != NoSingleAttackReason.NONE) return r;
+			if (_Defender == null) return OrderInvalidReason.ILLEGAL;
+			OrderInvalidReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			return base.Validate();
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoSingleAttackReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				_Attacker.Fire();
 				return OrderStatus.FINISHED;

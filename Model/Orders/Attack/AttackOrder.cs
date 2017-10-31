@@ -158,18 +158,18 @@ namespace PanzerBlitz
 			Recalculate();
 		}
 
-		public NoSingleAttackReason AddAttacker(SingleAttackOrder AttackOrder)
+		public OrderInvalidReason AddAttacker(SingleAttackOrder AttackOrder)
 		{
 			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
-				NoSingleAttackReason canAttack = AttackOrder.Validate();
-				if (canAttack != NoSingleAttackReason.NONE) return canAttack;
+				OrderInvalidReason canAttack = AttackOrder.Validate();
+				if (canAttack != OrderInvalidReason.NONE) return canAttack;
 
 				_Attackers.Add(AttackOrder);
 				Recalculate();
-				return NoSingleAttackReason.NONE;
+				return OrderInvalidReason.NONE;
 			}
-			return NoSingleAttackReason.DUPLICATE;
+			return OrderInvalidReason.UNIT_DUPLICATE;
 		}
 
 		public void RemoveAttacker(Unit Attacker)
@@ -189,7 +189,7 @@ namespace PanzerBlitz
 				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers,
-						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE),
+						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE),
 						AttackMethod,
 						AttackAt));
 			}
@@ -197,7 +197,7 @@ namespace PanzerBlitz
 			{
 				_OddsCalculations.Add(
 					AttackAt.Units
-						.Where(i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE)
+						.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE)
 						.Select(
 							i => new OddsCalculation(
 								_Attackers,
@@ -217,41 +217,45 @@ namespace PanzerBlitz
 			}
 		}
 
-		public virtual NoAttackReason Validate()
+		public virtual OrderInvalidReason Validate()
 		{
-			if (AttackingArmy.HasAttackedTile(AttackAt)) return NoAttackReason.ALREADY_ATTACKED;
-			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return NoAttackReason.MUST_ATTACK_ALL;
-			if (_Attackers.Any(i => i.Validate() != NoSingleAttackReason.NONE)) return NoAttackReason.ILLEGAL;
-			if (AttackAt.CanBeAttacked(AttackMethod) != NoAttackReason.NONE) return AttackAt.CanBeAttacked(AttackMethod);
+			if (AttackingArmy.HasAttackedTile(AttackAt)) return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
+			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
+			foreach (SingleAttackOrder order in _Attackers)
+			{
+				OrderInvalidReason r = order.Validate();
+				if (r != OrderInvalidReason.NONE) return r;
+			}
+			if (AttackAt.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE) return AttackAt.CanBeAttacked(AttackMethod);
 			if (_AttackTarget == AttackTarget.EACH)
 			{
 				if (_OddsCalculations.Count != AttackAt.Units.Count(
-					i => i.CanBeAttackedBy(AttackingArmy) == NoSingleAttackReason.NONE))
-					return NoAttackReason.ILLEGAL_EACH;
+					i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE))
+					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
 				if (_OddsCalculations.Any(i => OddsIndex(i.Odds, i.OddsAgainst) < 3))
-					return NoAttackReason.ILLEGAL_EACH;
+					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
 			}
 
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
-				if (!_Attackers.All(i => i is OverrunSingleAttackOrder)) return NoAttackReason.ILLEGAL;
+				if (!_Attackers.All(i => i is OverrunSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
 				foreach (var g in _Attackers.Cast<OverrunSingleAttackOrder>().GroupBy(i => i.ExitTile))
 				{
 					if (g.Key.GetStackSize() + g.Sum(i => i.Attacker.GetStackSize())
 						> AttackingArmy.Configuration.Faction.StackLimit)
-						return NoAttackReason.OVERRUN_EXIT;
+						return OrderInvalidReason.OVERRUN_EXIT;
 				}
 			}
 			else if (AttackMethod == AttackMethod.MINEFIELD)
 			{
-				if (!_Attackers.All(i => i is MinefieldSingleAttackOrder)) return NoAttackReason.ILLEGAL;
+				if (!_Attackers.All(i => i is MinefieldSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
 			}
 			else
 			{
-				if (!_Attackers.All(i => i is NormalSingleAttackOrder)) return NoAttackReason.ILLEGAL;
+				if (!_Attackers.All(i => i is NormalSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
 			}
 
-			return NoAttackReason.NONE;
+			return OrderInvalidReason.NONE;
 		}
 
 		bool MustAttackAllUnits()
@@ -263,7 +267,7 @@ namespace PanzerBlitz
 
 		public virtual OrderStatus Execute(Random Random)
 		{
-			if (Validate() != NoAttackReason.NONE) return OrderStatus.ILLEGAL;
+			if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
 
 			AttackingArmy.AttackTile(AttackAt);
 			_Attackers.ForEach(i => i.Execute(Random));

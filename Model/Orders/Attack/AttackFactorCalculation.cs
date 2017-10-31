@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			if (AttackMethod == AttackMethod.NORMAL_FIRE) GetNormalAttack(Unit, EnemyArmored, LineOfSight);
 			else
 			{
-				if (Unit.CanAttack(AttackMethod, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
+				if (Unit.CanAttack(AttackMethod, EnemyArmored, LineOfSight) != OrderInvalidReason.NONE)
 				{
 					Attack = 0;
 					Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
@@ -32,7 +32,7 @@ namespace PanzerBlitz
 
 		void GetNormalAttack(Unit Unit, bool EnemyArmored, LineOfSight LineOfSight)
 		{
-			if (Unit.CanAttack(AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight) != NoSingleAttackReason.NONE)
+			if (Unit.CanAttack(AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight) != OrderInvalidReason.NONE)
 			{
 				Attack = 0;
 				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };

@@ -102,7 +102,7 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedUnit != null)
 			{
 				IEnumerable<Unit> units =
-					Deployment.Units.Where(i => _DeploymentPage.SelectedUnit.CanLoad(i) == NoLoadReason.NONE);
+					Deployment.Units.Where(i => _DeploymentPage.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
 				if (units.Count() > 0)
 				{
 					Clear();
@@ -123,7 +123,7 @@ namespace PanzerBlitz
 		{
 			_Controller.Highlight(
 				_Controller.Match.GetMap().TilesEnumerable.Where(
-					i => _Deployment.Validate(i) == NoDeployReason.NONE)
+					i => _Deployment.Validate(i) == OrderInvalidReason.NONE)
 				.Select(i => new Tuple<Tile, Color>(
 					i, _Deployment.EntryTile == i
 					? HIGHLIGHT_COLORS[HIGHLIGHT_COLORS.Length - 1]

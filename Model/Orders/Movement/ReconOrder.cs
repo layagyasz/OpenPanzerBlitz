@@ -48,23 +48,23 @@ namespace PanzerBlitz
 			Stream.Write(_RemainingTurns);
 		}
 
-		public NoMoveReason Validate()
+		public OrderInvalidReason Validate()
 		{
-			if (!Unit.CanExitDirection(Direction)) return NoMoveReason.ILLEGAL;
-			if (Unit.CanMove(false) != NoMoveReason.NONE) return Unit.CanMove(false);
-			return NoMoveReason.NONE;
+			if (!Unit.CanExitDirection(Direction)) return OrderInvalidReason.ILLEGAL;
+			if (Unit.CanMove(false) != OrderInvalidReason.NONE) return Unit.CanMove(false);
+			return OrderInvalidReason.NONE;
 		}
 
 		public OrderStatus Execute(Random Random)
 		{
 			if (_RemainingTurns == Turns)
 			{
-				if (Validate() != NoMoveReason.NONE) return OrderStatus.ILLEGAL;
+				if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
 				Unit.Remove();
 			}
 			if (_RemainingTurns-- <= 0)
 			{
-				if (Unit.CanEnter(ExitTile, true) != NoDeployReason.NONE)
+				if (Unit.CanEnter(ExitTile, true) != OrderInvalidReason.NONE)
 				{
 					Unit.Recon(Direction);
 					Unit.Place(ExitTile);

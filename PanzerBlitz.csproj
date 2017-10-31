@@ -63,35 +63,28 @@
     <Compile Include="Model\Deployment\PositionalDeploymentConfiguration.cs" />
     <Compile Include="Model\Orders\Deployment\PositionalDeployOrder.cs" />
     <Compile Include="Model\Orders\Movement\MovementOrder.cs" />
-    <Compile Include="Model\Orders\Deployment\NoDeployReason.cs" />
     <Compile Include="Model\Orders\Movement\LoadOrder.cs" />
     <Compile Include="Model\Orders\Movement\UnloadOrder.cs" />
-    <Compile Include="Model\Orders\Movement\NoMoveReason.cs" />
-    <Compile Include="Model\Orders\Movement\NoLoadReason.cs" />
     <Compile Include="Model\Orders\Attack\AttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AttackMethod.cs" />
     <Compile Include="Model\Orders\Attack\AttackFactorCalculation.cs" />
     <Compile Include="Model\Orders\Attack\AttackFactorCalculationFactor.cs" />
     <Compile Include="Model\Orders\Attack\CombatResult.cs" />
     <Compile Include="Model\Orders\Attack\LineOfSight.cs" />
-    <Compile Include="Model\Orders\Attack\NoSingleAttackReason.cs" />
     <Compile Include="Model\Orders\Attack\OddsCalculation.cs" />
     <Compile Include="Model\Orders\Attack\OddsCalculationFactor.cs" />
     <Compile Include="Model\Orders\Order.cs" />
     <Compile Include="Model\Orders\NextPhaseOrder.cs" />
     <Compile Include="Model\Orders\Attack\OverrunSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\SingleAttackOrder.cs" />
-    <Compile Include="Model\Orders\Attack\NoAttackReason.cs" />
     <Compile Include="Model\Orders\Attack\NormalSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\NoLineOfSightReason.cs" />
-    <Compile Include="Model\Orders\Movement\NoUnloadReason.cs" />
     <Compile Include="Model\Orders\Attack\AttackTarget.cs" />
     <Compile Include="Model\Orders\Deployment\EntryTileDeployOrder.cs" />
     <Compile Include="Model\Orders\Deployment\DeployOrder.cs" />
     <Compile Include="Model\Orders\Deployment\ConvoyOrderDeployOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\Orders\Deployment\MovementDeployOrder.cs" />
-    <Compile Include="Model\EnumConverter.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
     <Compile Include="Model\NewUnitEventArgs.cs" />
     <Compile Include="Model\VictoryConditions\Objective.cs" />
@@ -283,7 +276,6 @@
     <Compile Include="Model\VictoryConditions\SumObjective.cs" />
     <Compile Include="Model\Matchers\InverseMatcher.cs" />
     <Compile Include="Model\Environment.cs" />
-    <Compile Include="Model\Orders\Movement\NoDismountReason.cs" />
     <Compile Include="Model\Orders\Movement\MountOrder.cs" />
     <Compile Include="Model\Orders\Movement\DismountOrder.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasUnit.cs" />
@@ -304,6 +296,7 @@
     <Compile Include="Controller\MatchEnd\MatchEndStateController.cs" />
     <Compile Include="Controller\PagedProgramStateController.cs" />
     <Compile Include="View\Match\MatchInfoDisplay.cs" />
+    <Compile Include="Model\Orders\OrderInvalidReason.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -36,14 +36,14 @@ namespace PanzerBlitz
 			Stream.Write(ConvoyOrder, i => Stream.Write(i.Id));
 		}
 
-		public override NoDeployReason Validate()
+		public override OrderInvalidReason Validate()
 		{
 			return Deployment.Validate(ConvoyOrder);
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == NoDeployReason.NONE)
+			if (Validate() == OrderInvalidReason.NONE)
 			{
 				Deployment.SetConvoyOrder(ConvoyOrder);
 				return OrderStatus.FINISHED;

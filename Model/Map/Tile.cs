@@ -197,18 +197,19 @@ namespace PanzerBlitz
 			return NeighborTiles[(int)Edge] == null;
 		}
 
-		public NoAttackReason CanBeAttacked(AttackMethod AttackMethod)
+		public OrderInvalidReason CanBeAttacked(AttackMethod AttackMethod)
 		{
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
-				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)) return NoAttackReason.OVERRUN_FORT;
+				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT))
+					return OrderInvalidReason.OVERRUN_FORT;
 				if (Configuration.TileBase != TileBase.CLEAR
 					|| Configuration.Edges.Any(i => i != TileEdge.NONE)
 					|| Configuration.PathOverlays.Any(
 						i => i != TilePathOverlay.NONE && !RuleSet.GetRules(i).RoadMove))
-					return NoAttackReason.OVERRUN_TERRAIN;
+					return OrderInvalidReason.OVERRUN_TERRAIN;
 			}
-			return NoAttackReason.NONE;
+			return OrderInvalidReason.NONE;
 		}
 
 		public int GetStackSize()
