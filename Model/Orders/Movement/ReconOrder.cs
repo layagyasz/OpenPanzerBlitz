@@ -48,6 +48,13 @@ namespace PanzerBlitz
 			Stream.Write(_RemainingTurns);
 		}
 
+		public bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return Unit.Configuration.IsVehicle
+					   ? TurnComponent == TurnComponent.VEHICLE_MOVEMENT
+							: TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			if (!Unit.CanExitDirection(Direction)) return OrderInvalidReason.ILLEGAL;

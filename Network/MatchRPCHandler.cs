@@ -23,7 +23,7 @@ namespace PanzerBlitz
 
 		protected virtual RPCResponse ValidateOrder(ValidateOrderRequest Request, TCPConnection Connection)
 		{
-			return new BooleanResponse(_Match.ValidateOrder(Request.Order));
+			return new ByteResponse((byte)_Match.ValidateOrder(Request.Order));
 		}
 	}
 }

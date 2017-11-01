@@ -64,7 +64,7 @@ namespace PanzerBlitz
 
 		void ExecuteAttack(object sender, EventArgs e)
 		{
-			if (_Controller.Match.ExecuteOrder(_AttackBuilder))
+			if (_Controller.ExecuteOrderAndAlert(_AttackBuilder))
 			{
 				_Controller.RemovePane(_AttackPane);
 				_AttackBuilder = null;

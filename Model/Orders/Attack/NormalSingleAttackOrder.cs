@@ -65,6 +65,12 @@ namespace PanzerBlitz
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			if (AttackMethod == AttackMethod.CLOSE_ASSAULT) return TurnComponent == TurnComponent.CLOSE_ASSAULT;
+			return TurnComponent == TurnComponent.ATTACK;
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			if (_Defender == null) return OrderInvalidReason.ILLEGAL;

@@ -22,9 +22,20 @@ namespace PanzerBlitz
 			Stream.Write(Army.Id);
 		}
 
-		public bool Validate()
+		public bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
-			return true;
+			switch (TurnComponent)
+			{
+				case TurnComponent.DEPLOYMENT: return Army.IsDeploymentConfigured();
+				case TurnComponent.NON_VEHICLE_MOVEMENT: return !Army.MustMove(false);
+				case TurnComponent.VEHICLE_MOVEMENT: return !Army.MustMove(true);
+				default: return true;
+			}
+		}
+
+		public OrderInvalidReason Validate()
+		{
+			return OrderInvalidReason.NONE;
 		}
 
 		public OrderStatus Execute(Random Random)

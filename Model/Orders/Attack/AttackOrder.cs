@@ -217,6 +217,18 @@ namespace PanzerBlitz
 			}
 		}
 
+		public bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			switch (AttackMethod)
+			{
+				case AttackMethod.CLOSE_ASSAULT: return TurnComponent == TurnComponent.CLOSE_ASSAULT;
+				case AttackMethod.MINEFIELD: return TurnComponent == TurnComponent.MINEFIELD_ATTACK;
+				case AttackMethod.NORMAL_FIRE: return TurnComponent == TurnComponent.ATTACK;
+				case AttackMethod.OVERRUN: return TurnComponent == TurnComponent.VEHICLE_COMBAT_MOVEMENT;
+				default: return false;
+			}
+		}
+
 		public virtual OrderInvalidReason Validate()
 		{
 			if (AttackingArmy.HasAttackedTile(AttackAt)) return OrderInvalidReason.TARGET_ALREADY_ATTACKED;

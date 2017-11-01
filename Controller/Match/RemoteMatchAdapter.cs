@@ -28,14 +28,16 @@ namespace PanzerBlitz
 			return _LocalMatch.CurrentPhase;
 		}
 
-		public bool ValidateOrder(Order Order)
+		public OrderInvalidReason ValidateOrder(Order Order)
 		{
-			return ((BooleanResponse)_Client.Call(new ValidateOrderRequest(Order, _Serializer)).Get()).Value;
+			return (OrderInvalidReason)((ByteResponse)_Client.Call(
+				new ValidateOrderRequest(Order, _Serializer)).Get()).Value;
 		}
 
-		public bool ExecuteOrder(Order Order)
+		public OrderInvalidReason ExecuteOrder(Order Order)
 		{
-			return ((BooleanResponse)_Client.Call(new ExecuteOrderRequest(Order, _Serializer)).Get()).Value;
+			return (OrderInvalidReason)((ByteResponse)_Client.Call(
+				new ExecuteOrderRequest(Order, _Serializer)).Get()).Value;
 		}
 	}
 }

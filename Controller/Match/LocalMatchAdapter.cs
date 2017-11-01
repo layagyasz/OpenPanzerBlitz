@@ -20,12 +20,12 @@ namespace PanzerBlitz
 			return Match.CurrentPhase;
 		}
 
-		public bool ValidateOrder(Order Order)
+		public OrderInvalidReason ValidateOrder(Order Order)
 		{
 			return Match.ValidateOrder(Order);
 		}
 
-		public bool ExecuteOrder(Order Order)
+		public OrderInvalidReason ExecuteOrder(Order Order)
 		{
 			return Match.ExecuteOrder(Order);
 		}

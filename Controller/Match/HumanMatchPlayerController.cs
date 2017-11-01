@@ -84,9 +84,15 @@ namespace PanzerBlitz
 			_GameScreen.InfoDisplay.SetTurnInfo(TurnInfo);
 			_GameScreen.InfoDisplay.SetViewItem(new FactionView(TurnInfo.Army.Configuration.Faction, 80));
 			_GameScreen.SetEnabled(AllowedArmies.Contains(TurnInfo.Army));
-			if (_Controllers.ContainsKey(TurnInfo.TurnComponent))
-				_Controllers[TurnInfo.TurnComponent].End();
+			if (_CurrentTurn != null && _Controllers.ContainsKey(_CurrentTurn.TurnComponent))
+			{
+				_Controllers[_CurrentTurn.TurnComponent].End();
+				UnHighlight();
+				SelectUnit(null);
+				_GameScreen.PaneLayer.Clear();
+			}
 			_CurrentTurn = TurnInfo;
+
 			if (_Controllers.ContainsKey(t))
 				_Controllers[t].Begin();
 		}
@@ -95,12 +101,7 @@ namespace PanzerBlitz
 		{
 			TurnComponent t = Match.GetTurnInfo().TurnComponent;
 			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
-			{
-				UnHighlight();
-				SelectUnit(null);
-				_GameScreen.PaneLayer.Clear();
 				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurnInfo().Army));
-			}
 		}
 
 		public void AddPane(Pane Pane)
@@ -119,7 +120,16 @@ namespace PanzerBlitz
 			if (Unit != null)
 				_GameScreen.InfoDisplay.SetViewItem(
 					new UnitView(Unit, _Renderer, 80, false) { Position = new Vector2f(40, 40) });
-			else _GameScreen.InfoDisplay.SetViewItem(new FactionView(_CurrentTurn.Army.Configuration.Faction, 80));
+			else if (Match.GetTurnInfo() != null)
+				_GameScreen.InfoDisplay.SetViewItem(
+					new FactionView(Match.GetTurnInfo().Army.Configuration.Faction, 80));
+		}
+
+		public bool ExecuteOrderAndAlert(Order Order)
+		{
+			OrderInvalidReason r = Match.ExecuteOrder(Order);
+			if (r != OrderInvalidReason.NONE) Alert(r);
+			return r == OrderInvalidReason.NONE;
 		}
 
 		public void Alert(object Alert)

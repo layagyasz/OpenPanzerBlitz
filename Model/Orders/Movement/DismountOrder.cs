@@ -33,6 +33,15 @@ namespace PanzerBlitz
 			Stream.Write(UseMovement);
 		}
 
+		public bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			if (TurnComponent == TurnComponent.DEPLOYMENT) return UseMovement;
+
+			return Unit.Configuration.IsVehicle
+					   ? TurnComponent == TurnComponent.VEHICLE_MOVEMENT
+							: TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			return Unit.CanDismount();

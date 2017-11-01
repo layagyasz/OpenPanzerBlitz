@@ -53,6 +53,11 @@ namespace PanzerBlitz
 				new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.MINEFIELD });
 		}
 
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return true;
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)

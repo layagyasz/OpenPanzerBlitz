@@ -83,8 +83,13 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, _TreatStackAsArmored, null);
-			else return new AttackFactorCalculation(
+			return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
+		}
+
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return true;
 		}
 
 		public override OrderInvalidReason Validate()

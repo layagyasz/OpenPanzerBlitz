@@ -18,8 +18,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				MovementOrder order = new MovementOrder(_Controller.SelectedUnit, Tile, true);
-				if (_Controller.Match.ExecuteOrder(order)) SetCloseAssaultHighlight(_Controller.SelectedUnit);
-				else _Controller.Alert(order.Validate());
+				if (_Controller.ExecuteOrderAndAlert(order)) SetCloseAssaultHighlight(_Controller.SelectedUnit);
 			}
 		}
 

@@ -38,6 +38,11 @@ namespace PanzerBlitz
 			if (Tile != null) Stream.Write(Tile.Id);
 		}
 
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return TurnComponent == TurnComponent.DEPLOYMENT;
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			if (Unit.Deployment is PositionalDeployment)

@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		NONE,
 		ILLEGAL,
+		ORDER_TURN_COMPONENT,
 
 		TILE_ENEMY_OCCUPIED,
 		UNIT_NO_ACTION,

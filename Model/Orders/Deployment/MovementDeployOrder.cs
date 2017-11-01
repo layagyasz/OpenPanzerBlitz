@@ -34,6 +34,13 @@ namespace PanzerBlitz
 			Stream.Write(Tile.Id);
 		}
 
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return Unit.Configuration.IsVehicle
+					   ? TurnComponent == TurnComponent.VEHICLE_MOVEMENT
+						   : TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			if (Unit.Deployment is ConvoyDeployment)

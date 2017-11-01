@@ -107,7 +107,7 @@ namespace PanzerBlitz
 			}
 
 			MovementOrder o = new MovementOrder(Unit, path[i], false, !Halted);
-			if (!Unit.Army.Match.ExecuteOrder(o))
+			if (Unit.Army.Match.ExecuteOrder(o) != OrderInvalidReason.NONE)
 				throw new Exception(string.Format("Could not move unit {0} to {1}: {2}", Unit, path[i], o.Validate()));
 			return Halted;
 		}

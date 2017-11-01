@@ -44,13 +44,11 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedStack != null)
 			{
 				Unit unit = _DeploymentPage.Peek();
-				PositionalDeployOrder o = new PositionalDeployOrder(unit, Tile);
-				if (_Controller.Match.ExecuteOrder(o))
+				if (_Controller.ExecuteOrderAndAlert(new PositionalDeployOrder(unit, Tile)))
 				{
 					_DeploymentPage.Remove(unit);
 					HighlightDeploymentArea(null, EventArgs.Empty);
 				}
-				else _Controller.Alert(o.Validate());
 			}
 		}
 
@@ -64,8 +62,7 @@ namespace PanzerBlitz
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
-			PositionalDeployOrder o = new PositionalDeployOrder(Unit, null);
-			if (_Controller.Match.ExecuteOrder(o))
+			if (_Controller.ExecuteOrderAndAlert(new PositionalDeployOrder(Unit, null)))
 			{
 				_DeploymentPage.Add(Unit);
 				HighlightDeploymentArea(null, EventArgs.Empty);

@@ -25,6 +25,16 @@ namespace PanzerBlitz
 			Stream.Write(CompleteReset);
 		}
 
+		public bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return CompleteReset ? TurnComponent == TurnComponent.RESET : true;
+		}
+
+		public OrderInvalidReason Validate()
+		{
+			return OrderInvalidReason.NONE;
+		}
+
 		public OrderStatus Execute(Random Random)
 		{
 			Army.Reset(CompleteReset);

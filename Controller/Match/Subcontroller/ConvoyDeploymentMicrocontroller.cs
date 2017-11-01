@@ -56,7 +56,7 @@ namespace PanzerBlitz
 		public override bool Finish()
 		{
 			ConvoyOrderDeployOrder order = new ConvoyOrderDeployOrder(_Deployment, _DeploymentPage.GetConvoyOrder());
-			if (!_Controller.Match.ExecuteOrder(order))
+			if (!_Controller.ExecuteOrderAndAlert(order))
 			{
 				_Controller.Alert(order.Validate());
 				return false;
@@ -74,8 +74,7 @@ namespace PanzerBlitz
 		{
 			Clear();
 			EntryTileDeployOrder o = new EntryTileDeployOrder(_Deployment, Tile);
-			if (_Controller.Match.ExecuteOrder(o)) HighlightDeploymentArea(null, EventArgs.Empty);
-			else _Controller.Alert(o.Validate());
+			if (_Controller.ExecuteOrderAndAlert(o)) HighlightDeploymentArea(null, EventArgs.Empty);
 		}
 
 		public override void HandleTileRightClick(Tile Tile)
@@ -140,7 +139,7 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedUnit != null)
 			{
 				LoadOrder order = new LoadOrder(_DeploymentPage.SelectedUnit, Unit, false);
-				if (!_Controller.Match.ExecuteOrder(order))
+				if (!_Controller.ExecuteOrderAndAlert(order))
 					_Controller.Alert(order.Validate());
 			}
 			Clear();
@@ -151,7 +150,7 @@ namespace PanzerBlitz
 			if (_DeploymentPage.SelectedUnit != null)
 			{
 				UnloadOrder order = new UnloadOrder(_DeploymentPage.SelectedUnit, false);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate().ToString());
+				if (!_Controller.ExecuteOrderAndAlert(order)) _Controller.Alert(order.Validate().ToString());
 			}
 		}
 	}

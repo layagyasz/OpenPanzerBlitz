@@ -36,6 +36,11 @@ namespace PanzerBlitz
 			Stream.Write(ConvoyOrder, i => Stream.Write(i.Id));
 		}
 
+		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
+		{
+			return TurnComponent == TurnComponent.DEPLOYMENT;
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			return Deployment.Validate(ConvoyOrder);

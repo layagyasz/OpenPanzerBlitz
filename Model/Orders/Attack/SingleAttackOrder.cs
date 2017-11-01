@@ -11,6 +11,13 @@ namespace PanzerBlitz
 		public abstract void SetTreatStackAsArmored(bool TreatStackAsArmored);
 		public abstract AttackFactorCalculation GetAttack();
 
+		public Army Army
+		{
+			get
+			{
+				return Attacker.Army;
+			}		}
+
 		public abstract void Serialize(SerializationOutputStream Stream);
 
 		public virtual OrderInvalidReason Validate()
@@ -19,14 +26,7 @@ namespace PanzerBlitz
 			return Defender.CanBeAttackedBy(Attacker.Army);
 		}
 
-		public Army Army
-		{
-			get
-			{
-				return Attacker.Army;
-			}
-		}
-
+		public abstract bool MatchesTurnComponent(TurnComponent TurnComponent);
 		public abstract OrderStatus Execute(Random Random);
 	}
 }

@@ -5,7 +5,7 @@ namespace PanzerBlitz
 	{
 		Map GetMap();
 		TurnInfo GetTurnInfo();
-		bool ValidateOrder(Order Order);
-		bool ExecuteOrder(Order Order);
+		OrderInvalidReason ValidateOrder(Order Order);
+		OrderInvalidReason ExecuteOrder(Order Order);
 	}
 }

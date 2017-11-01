@@ -37,8 +37,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				MovementOrder order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
-				if (_Controller.Match.ExecuteOrder(order)) SetMovementHighlight(_Controller.SelectedUnit);
-				else _Controller.Alert(order.Validate());
+				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
 
@@ -168,8 +167,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				LoadOrder order = new LoadOrder(_Controller.SelectedUnit, Unit);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else SetMovementHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 			}
 			Clear();
 		}
@@ -179,8 +177,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				UnloadOrder order = new UnloadOrder(_Controller.SelectedUnit);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else SetMovementHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
 
@@ -194,8 +191,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				ReconOrder order = new ReconOrder(_Controller.SelectedUnit, Direction);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else _Controller.UnHighlight();
+				if (_Controller.ExecuteOrderAndAlert(order)) _Controller.UnHighlight();
 			}
 			Clear();
 		}
@@ -210,8 +206,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				EvacuateOrder order = new EvacuateOrder(_Controller.SelectedUnit, Direction);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else _Controller.UnHighlight();
+				if (_Controller.ExecuteOrderAndAlert(order)) _Controller.UnHighlight();
 			}
 			Clear();
 		}
@@ -221,8 +216,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				MountOrder order = new MountOrder(_Controller.SelectedUnit);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else SetMovementHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
 
@@ -231,8 +225,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				DismountOrder order = new DismountOrder(_Controller.SelectedUnit);
-				if (!_Controller.Match.ExecuteOrder(order)) _Controller.Alert(order.Validate());
-				else SetMovementHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 
 			}
 		}

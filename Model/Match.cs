@@ -88,55 +88,11 @@ namespace PanzerBlitz
 			return false;
 		}
 
-		public bool ValidateOrder(Order Order)
+		public OrderInvalidReason ValidateOrder(Order Order)
 		{
-			if (CurrentPhase == null) return false;
-			if (Order.Army != CurrentPhase.Army) return false;
-			if (Order is AttackOrder)
-			{
-				if (!ValidateAttackOrder((AttackOrder)Order)) return false;
-			}
-			else if (Order is MovementOrder)
-			{
-				if (!ValidateMovementOrder((MovementOrder)Order)) return false;
-			}
-			else if (Order is MountOrder)
-			{
-				if (!ValidateMountOrder((MountOrder)Order)) return false;
-			}
-			else if (Order is DismountOrder)
-			{
-				if (!ValidateDismountOrder((DismountOrder)Order)) return false;
-			}
-			else if (Order is LoadOrder)
-			{
-				if (!ValidateLoadOrder((LoadOrder)Order)) return false;
-			}
-			else if (Order is UnloadOrder)
-			{
-				if (!ValidateUnloadOrder((UnloadOrder)Order)) return false;
-			}
-			else if (Order is ReconOrder)
-			{
-				if (!ValidateReconOrder((ReconOrder)Order)) return false;
-			}
-			else if (Order is EvacuateOrder)
-			{
-				if (!ValidateEvacuateOrder((EvacuateOrder)Order)) return false;
-			}
-			else if (Order is DeployOrder)
-			{
-				if (!ValidateDeployOrder((DeployOrder)Order)) return false;
-			}
-			else if (Order is ResetOrder)
-			{
-				if (!ValidateResetOrder((ResetOrder)Order)) return false;
-			}
-			else if (Order is NextPhaseOrder)
-			{
-				if (!ValidateNextPhaseOrder()) return false;
-			}
-			return true;
+			if (CurrentPhase == null) return OrderInvalidReason.ORDER_TURN_COMPONENT;
+			return Order.Army == CurrentPhase.Army && Order.MatchesTurnComponent(CurrentPhase.TurnComponent)
+						? Order.Validate() : OrderInvalidReason.ORDER_TURN_COMPONENT;
 		}
 
 		public bool BufferOrder(Order Order)
@@ -145,7 +101,7 @@ namespace PanzerBlitz
 			{
 				_OrderBuffer.Add(Order);
 			}
-			return ValidateOrder(Order);
+			return ValidateOrder(Order) == OrderInvalidReason.NONE;
 		}
 
 		public void DoBufferedOrders()
@@ -157,16 +113,17 @@ namespace PanzerBlitz
 			}
 		}
 
-		public bool ExecuteOrder(Order Order)
+		public OrderInvalidReason ExecuteOrder(Order Order)
 		{
-			if (!ValidateOrder(Order)) return false;
+			OrderInvalidReason r = ValidateOrder(Order);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			if (Order is NextPhaseOrder)
 			{
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 				ExecutedOrders.Add(Order);
 				NextPhase();
-				return true;
+				return OrderInvalidReason.NONE;
 			}
 			OrderStatus executed = Order.Execute(_Random);
 			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
@@ -176,105 +133,9 @@ namespace PanzerBlitz
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 				ExecutedOrders.Add(Order);
 			}
-			return executed != OrderStatus.ILLEGAL;
-		}
-
-		bool ValidateNextPhaseOrder()
-		{
-			if (CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT)
-				return CurrentPhase.Army.IsDeploymentConfigured();
-			if (CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT)
-				return !CurrentPhase.Army.MustMove(true);
-			if (CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT)
-				return !CurrentPhase.Army.MustMove(false);
-			return true;
-		}
-
-		bool ValidateAttackOrder(AttackOrder Order)
-		{
-			if (Order.AttackMethod == AttackMethod.OVERRUN
-				&& CurrentPhase.TurnComponent != TurnComponent.VEHICLE_COMBAT_MOVEMENT)
-				return false;
-			if (Order.AttackMethod == AttackMethod.NORMAL_FIRE
-				&& CurrentPhase.TurnComponent != TurnComponent.ATTACK)
-				return false;
-			if (Order.AttackMethod == AttackMethod.CLOSE_ASSAULT
-				&& CurrentPhase.TurnComponent != TurnComponent.CLOSE_ASSAULT)
-				return false;
-			return true;
-		}
-
-		bool ValidateMountOrder(MountOrder Order)
-		{
-			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
-			if (Order.Unit.Configuration.IsVehicle)
-				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateDismountOrder(DismountOrder Order)
-		{
-			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
-			if (Order.Unit.Configuration.IsVehicle)
-				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateUnloadOrder(UnloadOrder Order)
-		{
-			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
-			if (Order.Carrier.Configuration.IsVehicle)
-				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateLoadOrder(LoadOrder Order)
-		{
-			if (!Order.UseMovement) return CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
-			if (Order.Carrier.Configuration.IsVehicle)
-				return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateMovementOrder(MovementOrder Order)
-		{
-			if (Order.Combat && !Order.Unit.Configuration.IsVehicle)
-				return CurrentPhase.TurnComponent == TurnComponent.CLOSE_ASSAULT;
-			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateDeployOrder(DeployOrder Order)
-		{
-			if (Order is MovementDeployOrder)
-			{
-				if (CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT)
-					return ((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
-				if (CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT)
-					return !((MovementDeployOrder)Order).Unit.Configuration.IsVehicle;
-				return false;
-			}
-			return (Order.Army == CurrentPhase.Army || CurrentPhase.Army == null)
-				&& CurrentPhase.TurnComponent == TurnComponent.DEPLOYMENT;
-		}
-
-		bool ValidateReconOrder(ReconOrder Order)
-		{
-			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateEvacuateOrder(EvacuateOrder Order)
-		{
-			if (Order.Unit.Configuration.IsVehicle) return CurrentPhase.TurnComponent == TurnComponent.VEHICLE_MOVEMENT;
-			return CurrentPhase.TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
-		}
-
-		bool ValidateResetOrder(ResetOrder Order)
-		{
-			if (Order.CompleteReset) return CurrentPhase.TurnComponent == TurnComponent.RESET;
-			return true;
+			if (executed == OrderStatus.ILLEGAL)
+				throw new Exception("Tried to execute illegal order.");
+			return OrderInvalidReason.NONE;
 		}
 
 		void UpdateUnitVisibilityFromMove(object Sender, MovementEventArgs E)
