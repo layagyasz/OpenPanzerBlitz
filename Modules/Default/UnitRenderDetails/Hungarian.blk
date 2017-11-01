@@ -2,11 +2,19 @@
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
+unit-render-details:hmg-platoon-hungarian {
+	string:override-display-name { HMG }
+	string:image-path { hmg-platoon.png }
+}
 unit-render-details:rifle-platoon-hungarian-early {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
 unit-render-details:rifle-platoon-hungarian {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-hungarian-late {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
@@ -34,6 +42,9 @@ unit-render-details:zrinyi-ii {
 	string:image-path { zrinyi.png }
 }
 unit-render-details:toldi-i {
+	string:image-path { toldi-i.png }
+}
+unit-render-details:toldi-i-corrected {
 	string:image-path { toldi-i.png }
 }
 unit-render-details:toldi-ii {

@@ -201,8 +201,8 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanIndirectFireAt(LineOfSight LineOfSight)
 		{
-			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
 			if (LineOfSight.Range > Range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
 			return OrderInvalidReason.NONE;
 		}
 

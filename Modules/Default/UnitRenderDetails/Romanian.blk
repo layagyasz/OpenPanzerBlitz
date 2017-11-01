@@ -2,6 +2,10 @@
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
+unit-render-details:hmg-platoon-romanian {
+	string:override-display-name { HMG }
+	string:image-path { hmg-platoon.png }
+}
 unit-render-details:rifle-platoon-romanian-early {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
@@ -31,10 +35,19 @@ unit-render-details:malaxa {
 unit-render-details:r-1 {
 	string:image-path { r-1.png }
 }
+unit-render-details:r-1-corrected {
+	string:image-path { r-1.png }
+}
 unit-render-details:r-2 {
-	string:image-path { r-2.png }
+	string:image-path { lt-35.png }
+}
+unit-render-details:r-2-corrected {
+	string:image-path { lt-35.png }
 }
 unit-render-details:renault-35 {
+	string:image-path { renault-35.png }
+}
+unit-render-details:renault-35-corrected {
 	string:image-path { renault-35.png }
 }
 unit-render-details:r-35_45 {

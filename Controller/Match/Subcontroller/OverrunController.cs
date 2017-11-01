@@ -65,15 +65,12 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null && _InitialMovement != null)
 			{
-				if (_AttackBuilder == null || _AttackBuilder.AttackAt != Tile)
-					StartAttack(new AttackOrder(_Controller.CurrentTurn.Army, Tile, AttackMethod.OVERRUN));
-
-				OrderInvalidReason r =
-					_AttackBuilder.AddAttacker(
-						new OverrunSingleAttackOrder(
-							new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
-				_AttackPane.UpdateDescription();
-				if (r != OrderInvalidReason.NONE) _Controller.Alert(r);
+				AddAttack(
+					_Controller.CurrentTurn.Army,
+					Tile,
+					AttackMethod.OVERRUN,
+					new OverrunSingleAttackOrder(
+						new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
 			}
 			DeselectUnit();
 		}

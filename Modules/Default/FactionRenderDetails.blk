@@ -20,4 +20,7 @@
 	faction-render-details:russian { 
 		string:image-path { russian-symbol.png }
 	}
+	faction-render-details:slovak { 
+		string:image-path { slovak-symbol.png }
+	}
 }

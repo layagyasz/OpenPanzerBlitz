@@ -44,7 +44,7 @@ unit-render-details:breda-32 {
 	string:image-path { breda-32.png }
 }
 unit-render-details:motorcycle-italian {
-	string:image-path { motorcycle-3.png }
+	string:image-path { motorcycle.png }
 }
 unit-render-details:65_17 {
 	string:image-path { 65_17.png }

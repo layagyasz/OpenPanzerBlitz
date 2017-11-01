@@ -9,6 +9,18 @@
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
+unit-configuration:hmg-platoon-german {
+	string:name { HMG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+
+	bool:can-only-support-close-assault { true }
+}
 unit-configuration:security-platoon {
 	string:name { Security Platoon }
 	unit-class:unit-class { infantry }
@@ -241,6 +253,16 @@ unit-configuration:lynx {
 	byte:attack { 2 }
 	byte:range { 4 }
 	byte:defense { 6 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-ii-d-corrected {
+	string:name { PzKw II D }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
 	byte:movement { 10 }
 }
 unit-configuration:pzkw-iii-g {

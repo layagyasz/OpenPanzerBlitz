@@ -41,13 +41,11 @@ namespace PanzerBlitz
 			{
 				if (_Controller.SelectedUnit != null)
 				{
-					if (_AttackBuilder == null || _AttackBuilder.AttackAt != Unit.Position)
-						StartAttack(
-							new AttackOrder(_Controller.CurrentTurn.Army, Unit.Position, AttackMethod.NORMAL_FIRE));
-					OrderInvalidReason r = _AttackBuilder.AddAttacker(
+					AddAttack(
+						_Controller.CurrentTurn.Army,
+						Unit.Position,
+						AttackMethod.NORMAL_FIRE,
 						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, AttackMethod.NORMAL_FIRE));
-					if (r != OrderInvalidReason.NONE) _Controller.Alert(r);
-					_AttackPane.UpdateDescription();
 				}
 			}
 		}

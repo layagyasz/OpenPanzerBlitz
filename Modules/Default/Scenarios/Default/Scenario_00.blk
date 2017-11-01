@@ -2,7 +2,7 @@
 	string:name { Test Scenario }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
-	byte:turns { 1 }
+	byte:turns { 2 }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
@@ -21,8 +21,8 @@
 		}
 	}
 	army-configuration[]:army-configurations {
-		army-configuration:russian {
-			!faction:faction { factions.italian }
+		army-configuration:army-a {
+			!faction:faction { factions.slovak }
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
@@ -55,7 +55,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.medio-11_39 }
+								!unit-configuration:unit-configuration { unit-configurations.lt-38-corrected }
 								int:count { 3 }
 							}
 						}
@@ -63,7 +63,7 @@
 				}
 			}
 		}
-		army-configuration:german {
+		army-configuration:army-b {
 			victory-condition:victory-condition {
 				var<>:objectives {
 					units-destroyed-objective:units-destroyed { }
@@ -97,7 +97,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.4tp }
+								!unit-configuration:unit-configuration { unit-configurations.10tp-corrected }
 								int:count { 3 }
 							}
 						}

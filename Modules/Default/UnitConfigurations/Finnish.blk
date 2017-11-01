@@ -164,6 +164,16 @@ unit-configuration:ft-17 {
 	byte:defense { 4 }
 	byte:movement { 2 }	
 }
+unit-configuration:ft-17-corrected {
+	string:name { FT-17 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }	
+}
 unit-configuration:vickers-6-ton {
 	string:name { Vickers 6 Ton }
 	unit-class:unit-class { tank }

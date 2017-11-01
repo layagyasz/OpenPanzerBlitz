@@ -9,6 +9,18 @@
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
+unit-configuration:hmg-platoon-romanian {
+	string:name { HMG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+
+	bool:can-only-support-close-assault { true }
+}
 unit-configuration:rifle-platoon-romanian-early {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
@@ -92,6 +104,16 @@ unit-configuration:r-1 {
 	byte:defense { 3 }
 	byte:movement { 11 }
 }
+unit-configuration:r-1-corrected {
+	string:name { R-1 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 11 }
+}
 unit-configuration:r-2 {
 	string:name { R-2 }
 	unit-class:unit-class { tank }
@@ -102,6 +124,16 @@ unit-configuration:r-2 {
 	byte:defense { 5 }
 	byte:movement { 9 }
 }
+unit-configuration:r-2-corrected {
+	string:name { R-2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 7 }
+}
 unit-configuration:renault-35 {
 	string:name { Renault 35 }
 	unit-class:unit-class { tank }
@@ -110,6 +142,16 @@ unit-configuration:renault-35 {
 	byte:attack { 4 }
 	byte:range { 2 }
 	byte:defense { 7 }
+	byte:movement { 4 }
+}
+unit-configuration:renault-35-corrected {
+	string:name { Renault 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 5 }
 	byte:movement { 4 }
 }
 unit-configuration:r-35_45 {

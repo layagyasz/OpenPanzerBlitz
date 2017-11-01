@@ -30,6 +30,16 @@ unit-configuration:25mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 }
+unit-configuration:28mm-at {
+	string:name { 28mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+}
 unit-configuration:37mm-at {
 	string:name { 37mm }
 	unit-class:unit-class { towed-gun }
@@ -120,6 +130,16 @@ unit-configuration:76_2mm-at {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
+unit-configuration:88mm-at-early {
+	string:name { 88mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 20 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+}
 unit-configuration:88mm-at {
 	string:name { 88mm }
 	unit-class:unit-class { towed-gun }
@@ -187,6 +207,18 @@ unit-configuration:40mm-aa {
 }
 unit-configuration:75mm-aa {
 	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:76_2mm-aa {
+	string:name { 76.2mm }
 	unit-class:unit-class { towed-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -335,16 +367,6 @@ unit-configuration:122mm-how {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:150mm-how-company {
-	string:name { 150mm }
-	unit-class:unit-class { towed-gun }
-
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 20 }
-	byte:range { 12 }
-	byte:defense { 2 }
-	byte:movement { 0 }
-}
 unit-configuration:149mm-how {
 	string:name { 149mm }
 	unit-class:unit-class { towed-gun }
@@ -355,6 +377,16 @@ unit-configuration:149mm-how {
 	byte:defense { 2 }
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
+}
+unit-configuration:150mm-how-company {
+	string:name { 150mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 0 }
 }
 unit-configuration:150mm-how {
 	string:name { 150mm }

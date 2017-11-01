@@ -9,8 +9,8 @@ namespace PanzerBlitz
 {
 	public abstract class BaseAttackController : BaseController
 	{
-		protected AttackOrder _AttackBuilder;
-		protected AttackPane _AttackPane;
+		AttackOrder _AttackBuilder;
+		AttackPane _AttackPane;
 
 		public BaseAttackController(HumanMatchPlayerController Controller)
 			: base(Controller)
@@ -45,16 +45,28 @@ namespace PanzerBlitz
 		{
 		}
 
-		protected void StartAttack(AttackOrder Attack)
+		protected void AddAttack(Army Army, Tile Tile, AttackMethod AttackMethod, SingleAttackOrder NewAttack)
 		{
-			Clear();
+			AttackOrder attack = _AttackBuilder == null || _AttackBuilder.AttackAt != Tile
+																		 ? new AttackOrder(Army, Tile, AttackMethod)
+																		 : _AttackBuilder;
+			OrderInvalidReason r = attack.AddAttacker(NewAttack);
+			if (r == OrderInvalidReason.NONE)
+			{
+				if (attack != _AttackBuilder)
+				{
+					Clear();
 
-			_AttackBuilder = Attack;
-			_AttackPane = new AttackPane(_AttackBuilder);
-			_Controller.AddPane(_AttackPane);
-			_AttackPane.UpdateDescription();
-			_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
-			_AttackPane.OnExecute += ExecuteAttack;
+					_AttackBuilder = attack;
+					_AttackPane = new AttackPane(_AttackBuilder);
+					_Controller.AddPane(_AttackPane);
+
+					_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
+					_AttackPane.OnExecute += ExecuteAttack;
+				}
+				_AttackPane.UpdateDescription();
+			}
+			else _Controller.Alert(r);
 		}
 
 		protected Color GetRangeColor(Color[] ColorSet, int Range, int MaxRange)

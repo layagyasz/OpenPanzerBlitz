@@ -184,6 +184,26 @@ unit-configuration:7tp-at {
 	byte:defense { 5 }
 	byte:movement { 6 }
 }
+unit-configuration:7tp-infantry-corrected {
+	string:name { 7TP }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 6 }
+}
+unit-configuration:7tp-at-corrected {
+	string:name { 7TP }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 6 }
+}
 unit-configuration:4tp {
 	string:name { 4TP }
 	unit-class:unit-class { tank }
@@ -194,6 +214,26 @@ unit-configuration:4tp {
 	byte:defense { 4 }
 	byte:movement { 12 }
 }
+unit-configuration:4tp-corrected {
+	string:name { 4TP }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+}
+unit-configuration:10tp-corrected {
+	string:name { 10TP }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
 unit-configuration:14tp {
 	string:name { 14TP }
 	unit-class:unit-class { tank }
@@ -203,6 +243,16 @@ unit-configuration:14tp {
 	byte:range { 3 }
 	byte:defense { 6 }
 	byte:movement { 8 }
+}
+unit-configuration:14tp-corrected {
+	string:name { 14TP }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 10 }
 }
 unit-configuration:vau-33-infantry {
 	string:name { VAU-33 }
@@ -222,5 +272,25 @@ unit-configuration:vau-33-at {
 	byte:attack { 4 }
 	byte:range { 2 }
 	byte:defense { 4 }
+	byte:movement { 6 }
+}
+unit-configuration:vau-33-infantry-corrected {
+	string:name { VAU-33 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 6 }
+}
+unit-configuration:vau-33-at-corrected {
+	string:name { VAU-33 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 2 }
 	byte:movement { 6 }
 }

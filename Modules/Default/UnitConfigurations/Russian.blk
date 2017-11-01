@@ -127,7 +127,17 @@ unit-configuration:smg-company {
 	byte:defense { 12 }
 	byte:movement { 1 }
 }
-unit-configuration:cavalry {
+unit-configuration:cavalry-russian-early {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-russian {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
@@ -158,6 +168,16 @@ unit-configuration:truck-russian {
 	byte:movement { 12 }
 
 	bool:truck-movement { true }
+}
+unit-configuration:t-27-tractor {
+	string:name { T-27 Tractor }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
 }
 unit-configuration:nkl-6 {
 	string:name { NKL-6 }
@@ -258,7 +278,7 @@ unit-configuration:t-20 {
 	bool:is-armored { true }
 	bool:can-only-overrun-unarmored { true }
 }
-unit-configuration:ba-10 {
+unit-configuration:ba-10-infantry {
 	string:name { BA-10 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
@@ -267,6 +287,26 @@ unit-configuration:ba-10 {
 	byte:range { 2 }
 	byte:defense { 4 }
 	byte:movement { 6 }	
+}
+unit-configuration:ba-10-at {
+	string:name { BA-10 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 3 }
+	byte:defense { 2 }
+	byte:movement { 10 }	
+}
+unit-configuration:ba-20 {
+	string:name { BA-20 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
 }
 unit-configuration:t-26-a {
 	string:name { T-26 A }

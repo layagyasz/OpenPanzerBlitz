@@ -2,6 +2,10 @@
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
+unit-render-details:hmg-platoon-german {
+	string:override-display-name { HMG }
+	string:image-path { hmg-platoon.png }
+}
 unit-render-details:security-platoon {
 	string:override-display-name { SECURITY }
 	string:image-path { infantry-platoon.png }
@@ -85,6 +89,9 @@ unit-render-details:jgdpz-vi {
 unit-render-details:lynx {
 	string:override-display-name { LYNX }
 	string:image-path { lynx.png }
+}
+unit-render-details:pzkw-ii-d-corrected {
+	string:image-path { pzkw-ii.png }
 }
 unit-render-details:pzkw-iii-g {
 	string:override-display-name { PzKw III G }

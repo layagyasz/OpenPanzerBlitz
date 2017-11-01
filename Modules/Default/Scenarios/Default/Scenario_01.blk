@@ -87,7 +87,7 @@
 								int:count { 4 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.cavalry }
+								!unit-configuration:unit-configuration { unit-configurations.cavalry-russian }
 								int:count { 4 }
 							}
 						}

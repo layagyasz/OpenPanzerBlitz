@@ -7,6 +7,9 @@ unit-render-details:wz-30 {
 unit-render-details:25mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:28mm-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:37mm-at {
 	string:image-path { anti-armor.png }
 }
@@ -34,6 +37,9 @@ unit-render-details:75mm-at-italian {
 unit-render-details:76_2mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:88mm-at-early {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:88mm-at {
 	string:image-path { anti-armor.png }
 }
@@ -53,6 +59,9 @@ unit-render-details:40mm-aa {
 	string:image-path { anti-aircraft.png }
 }
 unit-render-details:75mm-aa {
+	string:image-path { anti-aircraft.png }
+}
+unit-render-details:76_2mm-aa {
 	string:image-path { anti-aircraft.png }
 }
 unit-render-details:80mm-aa {

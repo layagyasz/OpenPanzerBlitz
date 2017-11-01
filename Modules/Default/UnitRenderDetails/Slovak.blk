@@ -1,0 +1,52 @@
+﻿unit-render-details:engineer-platoon-slovak {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:mg-platoon-slovak {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:rifle-platoon-slovak-early {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-slovak {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-slovak-late {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:cavalry-slovak {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-4.png }
+}
+unit-render-details:truck-slovak {
+	string:override-display-name { TRUCK }
+	string:image-path { truck.png }
+}
+unit-render-details:praga-iv {
+	string:image-path { praga-iv.png }
+}
+unit-render-details:motorcycle-slovak {
+	string:image-path { motorcycle.png }
+}
+unit-render-details:oa-27{
+	string:image-path { oa-27.png }
+}
+unit-render-details:oa-30 {
+	string:image-path { oa-30.png }
+}
+unit-render-details:tancik-33-corrected {
+	string:image-path { tancik-33.png }
+}
+unit-render-details:lt-34-corrected {
+	string:image-path { lt-34.png }
+}
+unit-render-details:lt-35-corrected {
+	string:image-path { lt-35.png }
+}
+unit-render-details:lt-38-corrected {
+	string:image-path { lt-38.png }
+}

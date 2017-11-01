@@ -49,7 +49,11 @@ unit-render-details:smg-company {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:cavalry {
+unit-render-details:cavalry-russian-early {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry.png }
+}
+unit-render-details:cavalry-russian {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry.png }
 }
@@ -59,6 +63,9 @@ unit-render-details:tractor {
 unit-render-details:truck-russian {
 	string:override-display-name { TRUCK }
 	string:image-path { truck.png }
+}
+unit-render-details:t-27-tractor {
+	string:image-path { t-27-tractor.png }
 }
 unit-render-details:nkl-6 {
 	string:image-path { nkl-6.png }
@@ -86,8 +93,14 @@ unit-render-details:zis-42-transport {
 unit-render-details:t-20 {
 	string:image-path { t-20.png }
 }
-unit-render-details:ba-10 {
+unit-render-details:ba-10-infantry {
 	string:image-path { ba-10.png }
+}
+unit-render-details:ba-10-at {
+	string:image-path { ba-10.png }
+}
+unit-render-details:ba-20 {
+	string:image-path { ba-20.png }
 }
 unit-render-details:t-26-a {
 	string:image-path { t-26-a.png }

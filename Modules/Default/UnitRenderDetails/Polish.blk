@@ -28,7 +28,7 @@ unit-render-details:c7p {
 	string:image-path { c7p.png }
 }
 unit-render-details:motorcycle-polish {
-	string:image-path { motorcycle-3.png }
+	string:image-path { motorcycle.png }
 }
 unit-render-details:peugeot {
 	string:image-path { peugeot.png }
@@ -57,15 +57,36 @@ unit-render-details:7tp-infantry {
 unit-render-details:7tp-at {
 	string:image-path { 7tp-a.png }
 }
+unit-render-details:7tp-infantry-corrected {
+	string:image-path { 7tp-i.png }
+}
+unit-render-details:7tp-at-corrected {
+	string:image-path { 7tp-a.png }
+}
 unit-render-details:4tp {
 	string:image-path { 4tp.png }
 }
+unit-render-details:4tp-corrected {
+	string:image-path { 4tp.png }
+}
+unit-render-details:10tp-corrected {
+	string:image-path { 7tp-a.png }
+}
 unit-render-details:14tp {
+	string:image-path { 14tp.png }
+}
+unit-render-details:14tp-corrected {
 	string:image-path { 14tp.png }
 }
 unit-render-details:vau-33-infantry {
 	string:image-path { vau-33-i.png }
 }
 unit-render-details:vau-33-at {
+	string:image-path { vau-33-a.png }
+}
+unit-render-details:vau-33-infantry-corrected {
+	string:image-path { vau-33-i.png }
+}
+unit-render-details:vau-33-at-corrected {
 	string:image-path { vau-33-a.png }
 }

@@ -34,4 +34,9 @@
 		color[]:colors { 153,108,29 }
 		byte:stack-limit { 2 }
 	}
+	faction:slovak { 
+		string:name { Slovak }
+		color[]:colors { 201,77,43 }
+		byte:stack-limit { 3 }
+	}
 }
