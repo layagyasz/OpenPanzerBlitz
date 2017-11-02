@@ -217,7 +217,7 @@ namespace PanzerBlitz
 			return _Units.Sum(i => i.GetStackSize());
 		}
 
-		public BlockType GetBlockType()
+		public BlockType GetUnitBlockType()
 		{
 			foreach (Unit u in _Units)
 			{

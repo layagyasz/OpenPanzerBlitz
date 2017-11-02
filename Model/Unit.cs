@@ -159,7 +159,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false)
 		{
-			if (Tile.GetBlockType() == BlockType.STANDARD
+			if (Tile.GetUnitBlockType() == BlockType.STANDARD
 				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && i.Army != Army))
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))

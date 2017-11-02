@@ -129,7 +129,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason Validate(IEnumerable<Unit> ConvoyOrder)
 		{
-			if (_ConvoyOrder == null) return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
+			if (ConvoyOrder == null) return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
 			if (!Units.All(i => ConvoyOrder.Any(j => i == j || j.Passenger == i)))
 				return OrderInvalidReason.DEPLOYMENT_CONVOY_ORDER;
 			if (Units.Where(i => i.Configuration.IsPassenger)

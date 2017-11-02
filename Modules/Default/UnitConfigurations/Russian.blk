@@ -40,8 +40,8 @@ unit-configuration:ski-company {
 	byte:movement { 3 }
 
 	bool:can-close-assault { false }
-	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-company-early }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:rifle-company-mid {
 	string:name { Rifle Company }
@@ -64,8 +64,8 @@ unit-configuration:ski-company-mid {
 	byte:movement { 3 }
 
 	bool:can-close-assault { false }
-	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-company-mid }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:rifle-company-late-mid {
 	string:name { Rifle Company }
@@ -167,7 +167,7 @@ unit-configuration:truck-russian {
 	byte:defense { 1 }
 	byte:movement { 12 }
 
-	bool:truck-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:t-27-tractor {
 	string:name { T-27 Tractor }
@@ -178,6 +178,8 @@ unit-configuration:t-27-tractor {
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 8 }
+
+	bool:is-armored { true }
 }
 unit-configuration:nkl-6 {
 	string:name { NKL-6 }
@@ -189,8 +191,7 @@ unit-configuration:nkl-6 {
 	byte:defense { 2 }
 	byte:movement { 17 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-6-a {
 	string:name { NKL-6 A }
@@ -202,8 +203,7 @@ unit-configuration:nkl-6-a {
 	byte:defense { 2 }
 	byte:movement { 17 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-16 {
 	string:name { NKL-16 }
@@ -215,8 +215,7 @@ unit-configuration:nkl-16 {
 	byte:defense { 3 }
 	byte:movement { 17 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-26 {
 	string:name { NKL-26 }
@@ -228,8 +227,7 @@ unit-configuration:nkl-26 {
 	byte:defense { 4 }
 	byte:movement { 15 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:rf-8 {
 	string:name { RF-8 }
@@ -241,8 +239,7 @@ unit-configuration:rf-8 {
 	byte:defense { 4 }
 	byte:movement { 25 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:sis-33 {
 	string:name { SIS-33 Halftrack }
@@ -253,8 +250,8 @@ unit-configuration:sis-33 {
 	byte:range { 1 }
 	byte:defense { 2 }
 	byte:movement { 10 }
+
 	bool:is-armored { true }
-	bool:can-only-overrun-unarmored { true }
 }
 unit-configuration:zis-42-transport {
 	string:name { ZIS-42 Halftrack }
@@ -275,8 +272,8 @@ unit-configuration:t-20 {
 	byte:range { 1 }
 	byte:defense { 2 }
 	byte:movement { 10 }
+
 	bool:is-armored { true }
-	bool:can-only-overrun-unarmored { true }
 }
 unit-configuration:ba-10-infantry {
 	string:name { BA-10 }

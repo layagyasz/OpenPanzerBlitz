@@ -31,8 +31,7 @@ namespace PanzerBlitz
 			IS_PARATROOP,
 			IS_COMMANDO,
 
-			TRUCK_MOVEMENT,
-			IGNORES_ENVIRONMENT_MOVEMENT,
+			MOVEMENT_RULES,
 
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
@@ -66,8 +65,7 @@ namespace PanzerBlitz
 		public readonly bool IsParatroop;
 		public readonly bool IsCommando;
 
-		public readonly bool TruckMovement;
-		public readonly bool IgnoresEnvironmentMovement;
+		public readonly UnitMovementRules MovementRules;
 
 		public readonly bool IsCarrier;
 		public readonly bool CanOnlyCarryInfantry;
@@ -115,9 +113,13 @@ namespace PanzerBlitz
 				(IsVehicle && UnitClass != UnitClass.TRANSPORT) || UnitClass == UnitClass.FORT);
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
-			TruckMovement = Parse.DefaultIfNull(attributes[(int)Attribute.TRUCK_MOVEMENT], false);
-			IgnoresEnvironmentMovement = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT], false);
+
+			MovementRules = Parse.DefaultIfNull(
+				attributes[(int)Attribute.MOVEMENT_RULES],
+				IsVehicle
+					? Block.Get<UnitMovementRules>("unit-movement-rules.default-vehicle")
+					: Block.Get<UnitMovementRules>("unit-movement-rules.default-non-vehicle"));
+
 			IsCarrier = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
@@ -248,7 +250,7 @@ namespace PanzerBlitz
 
 		public float GetMaxMovement(Environment Environment)
 		{
-			if (IgnoresEnvironmentMovement) return Movement;
+			if (MovementRules.IgnoresEnvironmentMovement) return Movement;
 			if (Movement == 0) return 0;
 			return Math.Max(1, Environment.MovementMultiplier * Movement);
 		}

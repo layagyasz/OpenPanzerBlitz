@@ -60,7 +60,8 @@ unit-configuration:truck-german {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:sdkfz-8 {
 	string:name { SdKfz. 8 Halftrack }

@@ -102,7 +102,8 @@ unit-configuration:truck-italian {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:tl-37 {
 	string:name { TL 37 }
@@ -144,7 +145,8 @@ unit-configuration:65_17 {
 	byte:range { 8 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:76_30 {
 	string:name { 76/30 }
@@ -155,7 +157,8 @@ unit-configuration:76_30 {
 	byte:range { 16 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:100_17 {
 	string:name { 100/17 }
@@ -166,7 +169,8 @@ unit-configuration:100_17 {
 	byte:range { 16 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:ab-40 {
 	string:name { AB-40 }

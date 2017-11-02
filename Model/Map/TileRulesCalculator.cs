@@ -15,11 +15,6 @@ namespace PanzerBlitz
 		int _DieModifier;
 		int _TrueElevation;
 
-		float[] _RoadMovement = new float[6];
-		float[] _NonRoadMovement = new float[6];
-		float[] _TruckNonRoadMovement = new float[6];
-		float[] _VehicleNonRoadMovement = new float[6];
-
 		public bool MustAttackAllUnits
 		{
 			get
@@ -81,38 +76,34 @@ namespace PanzerBlitz
 			return Math.Abs(float.MaxValue - GetMoveCost(Unit, To, RoadMovement, IgnoreOccupyingUnits)) > float.Epsilon;
 		}
 
-		public float GetMoveCost(Tile To, bool Vehicle = true, bool RoadMovement = true)
-		{
-			int index = Array.IndexOf(Tile.NeighborTiles, To);
-			return RoadMovement ?
-				_RoadMovement[index]
-					: Vehicle ? _VehicleNonRoadMovement[index] : _NonRoadMovement[index];
-		}
-
 		public float GetMoveCost(Unit Unit, Tile To, bool RoadMovement, bool IgnoreOccupyingUnits = false)
 		{
 			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == OrderInvalidReason.TILE_ENEMY_OCCUPIED)
 				return float.MaxValue;
 
-			BlockType toBlock = To.GetBlockType();
-			BlockType fromBlock = Tile.GetBlockType();
+			BlockType toBlock = To.GetUnitBlockType();
+			BlockType fromBlock = Tile.GetUnitBlockType();
 
-			if (toBlock == BlockType.HARD_BLOCK && (Unit.Moved || !To.NeighborTiles.Any(i => i.Units.Contains(Unit))))
+			bool adjacent = !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
+
+			if (toBlock == BlockType.HARD_BLOCK && !adjacent)
 				return float.MaxValue;
 			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && Unit.Moved)
 				return float.MaxValue;
 
-			int index = Array.IndexOf(Tile.NeighborTiles, To);
-			TileComponentRules pathOverlay = Tile.RuleSet.GetRules(Tile.Configuration.GetPathOverlay(index));
+			bool useRoadMovement = RoadMovement
+				&& !Unit.Configuration.MovementRules.CannotUseRoadMovement
+				&& (toBlock == BlockType.CLEAR || (Tile == Unit.Position && Unit.IsSolitary()));
 
-			if (RoadMovement
-				&& pathOverlay != null
-				&& pathOverlay.RoadMove
-				&& (Tile.Units.Count() == 0 || (Tile == Unit.Position && Unit.IsSolitary())))
-				return _RoadMovement[index];
-			if (Unit.Configuration.TruckMovement) return _TruckNonRoadMovement[index];
-			if (Unit.Configuration.IsVehicle) return _VehicleNonRoadMovement[index];
-			return _NonRoadMovement[index];
+			return CalculateMovement(
+				Tile,
+				To,
+				Tile.GetEdgeRules(To),
+				Tile.GetPathOverlayRules(To),
+				useRoadMovement,
+				adjacent,
+				Unit.Moved,
+				Unit.Configuration.MovementRules);
 		}
 
 		public void Recalculate()
@@ -145,76 +136,108 @@ namespace PanzerBlitz
 									 + (Tile.GetBaseRules().Elevated
 										|| Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
 										|| Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated) ? 1 : 0);
-
-			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
-			{
-				Tile n = Tile.NeighborTiles[i];
-				if (n == null) continue;
-
-				TileComponentRules e = Tile.GetEdgeRules(i);
-
-				_RoadMovement[i] = CalculateMovement(
-					Tile, n, e, true, false, false);
-				_NonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, false);
-				_TruckNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, true, true);
-				_VehicleNonRoadMovement[i] = CalculateMovement(Tile, n, e, false, false, true);
-			}
 		}
 
 		float CalculateMovement(
-			Tile From, Tile To, TileComponentRules Edge, bool RoadMovement, bool TruckMovement, bool VehicleMovement)
+			Tile From,
+			Tile To,
+			TileComponentRules Edge,
+			TileComponentRules Path,
+			bool CanUseRoadMovement,
+			bool Adjacent,
+			bool UnitMoved,
+			UnitMovementRules MovementRules)
 		{
-			bool blockingEdge = Edge != null && (Edge.NoCrossing || (VehicleMovement && Edge.NoVehicleCrossing));
+			bool roaded = Path != null && Path.RoadMove;
 
-			if (!RoadMovement
-				&& (blockingEdge
-					|| To.GetBaseRules().NoCrossing
-					|| (VehicleMovement && To.GetBaseRules().NoVehicleCrossing)))
-				return float.MaxValue;
+			if (CanUseRoadMovement && roaded && Path.BaseMoveCost > 0) return Path.BaseMoveCost;
 
-			float move = TruckMovement ? To.GetBaseRules().TruckMoveCost : To.GetBaseRules().MoveCost;
+			bool leavingDepressed = From.RulesCalculator.Depressed
+										&& (Path == null || !Path.Depressed)
+										&& (Path == null || !Path.DepressedTransition)
+										&& !roaded;
 
-			float edgeMove = float.MaxValue;
+			float leaveCost = 0;
+			if (leavingDepressed)
+			{
+				float maxLeaveCost = 0;
+				for (int i = 0; i < 6; ++i)
+				{
+					TileComponentRules rules = From.GetPathOverlayRules(i);
+					if (rules != null) maxLeaveCost = Math.Max(maxLeaveCost, rules.BaseLeaveCost);
+				}
+				leaveCost = GetBlockTypeMoveCost(MovementRules.Sloped, Adjacent, UnitMoved)
+					+ GetBlockTypeMoveCost(MovementRules.Rough, Adjacent, UnitMoved)
+					+ maxLeaveCost;
+			}
+
+			float crossCost = GetRulesMoveCost(Edge, MovementRules, Adjacent, UnitMoved, roaded, true);
+
+			float enterCost = GetRulesMoveCost(To.GetBaseRules(), MovementRules, Adjacent, UnitMoved, roaded, false);
+
+			float edgeCost = float.MaxValue;
 			for (int i = 0; i < 6; ++i)
 			{
 				TileComponentRules e = To.GetEdgeRules(i);
 				if (e == null) continue;
 
-				float eMove = TruckMovement ? e.TruckMoveCost : e.MoveCost;
-				if (eMove > 0 && (!e.RoadMove || RoadMovement)) edgeMove = Math.Min(edgeMove, eMove);
+				float eMove = GetRulesMoveCost(e, MovementRules, Adjacent, UnitMoved, roaded, false);
+				if (eMove > 0) edgeCost = Math.Min(edgeCost, eMove);
 			}
+			float pathCost = 0;
+			if (Path != null && (!Path.RoadMove || CanUseRoadMovement))
+				pathCost = GetRulesMoveCost(Path, MovementRules, Adjacent, UnitMoved, roaded, false);
 
-			float pathMove = float.MaxValue;
-			float pathLeave = float.MaxValue;
-			bool roaded = false;
-			for (int i = 0; i < 6; ++i)
+			enterCost += crossCost;
+			if (edgeCost < float.MaxValue) enterCost = edgeCost + crossCost;
+			if (To.RulesCalculator.Depressed)
+				enterCost += GetBlockTypeMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
+
+			if (pathCost > 0) enterCost = pathCost;
+
+			return enterCost + leaveCost;
+		}
+
+		float GetRulesMoveCost(
+			TileComponentRules TileRules,
+			UnitMovementRules MovementRules,
+			bool Adjacent,
+			bool UnitMoved,
+			bool Roaded,
+			bool IsEdge)
+		{
+			if (TileRules == null) return 0;
+
+			float cost = 0;
+			if (TileRules.Water && !Roaded) cost += GetBlockTypeMoveCost(MovementRules.Water, Adjacent, UnitMoved);
+			if (IsEdge)
 			{
-				TileComponentRules p = To.GetPathOverlayRules(i);
-				if (p != null)
-				{
-					float pMove = TruckMovement ? p.TruckMoveCost : p.MoveCost;
-					if (pMove > 0 && (!p.RoadMove || RoadMovement)) pathMove = Math.Min(pathMove, pMove);
-					if (p.RoadMove) roaded = true;
-				}
-
-				TileComponentRules p2 = From.GetPathOverlayRules(i);
-				if (p2 != null)
-				{
-					float pLeave = TruckMovement ? p2.TruckLeaveCost : p2.LeaveCost;
-					if (pLeave > 0 && (!p2.RoadMove || RoadMovement)) pathLeave = Math.Min(pathLeave, pLeave);
-				}
+				if (TileRules.DenseEdge && !Roaded)
+					cost += GetBlockTypeMoveCost(MovementRules.DenseEdge, Adjacent, UnitMoved);
+				return cost;
 			}
+			cost += TileRules.BaseMoveCost;
+			if (TileRules.Depressed && !Roaded)
+				cost += GetBlockTypeMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
+			if (TileRules.Elevated) cost += GetBlockTypeMoveCost(MovementRules.Sloped, Adjacent, UnitMoved);
+			if (TileRules.Rough) cost += GetBlockTypeMoveCost(MovementRules.Rough, Adjacent, UnitMoved);
+			if (TileRules.Swamp) cost += GetBlockTypeMoveCost(MovementRules.Swamp, Adjacent, UnitMoved);
+			return cost;
+		}
 
-			if (edgeMove < float.MaxValue) move = edgeMove;
-			if (pathMove < float.MaxValue) move = Math.Min(pathMove, move);
-			if (From.RulesCalculator.Depressed
-				&& !To.RulesCalculator.Depressed
-				&& !To.RulesCalculator.DepressedTransition
-				&& !roaded
-				&& pathLeave < float.MaxValue)
-				move += pathLeave;
-
-			return move;
+		float GetBlockTypeMoveCost(BlockType BlockType, bool Adjacent, bool UnitMoved)
+		{
+			switch (BlockType)
+			{
+				case BlockType.CLEAR: return 0f;
+				case BlockType.HARD_BLOCK: return Adjacent ? (UnitMoved ? float.MaxValue : 0f) : float.MaxValue;
+				case BlockType.IMPASSABLE: return float.MaxValue;
+				case BlockType.SLOW: return 1;
+				case BlockType.SOFT_BLOCK: return UnitMoved ? float.MaxValue : 0;
+				case BlockType.SPEED: return -1;
+				case BlockType.STANDARD: return 0;
+				default: throw new Exception(string.Format("No movement cost for {0}", BlockType));
+			}
 		}
 	}
 }

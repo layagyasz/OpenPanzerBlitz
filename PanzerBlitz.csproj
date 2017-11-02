@@ -297,6 +297,7 @@
     <Compile Include="Controller\PagedProgramStateController.cs" />
     <Compile Include="View\Match\MatchInfoDisplay.cs" />
     <Compile Include="Model\Orders\OrderInvalidReason.cs" />
+    <Compile Include="Model\UnitMovementRules.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1342,6 +1343,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitSprites\ba-20.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitMovementRules.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

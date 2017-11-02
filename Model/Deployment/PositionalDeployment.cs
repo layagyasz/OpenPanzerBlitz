@@ -33,7 +33,7 @@ namespace PanzerBlitz
 				List<Tile> validTiles = Army.Match.Map.TilesEnumerable.Where(
 					i => Validate(u, i) == OrderInvalidReason.NONE).ToList();
 				if (validTiles.Count == 1) Army.Match.ExecuteOrder(new PositionalDeployOrder(u, validTiles.First()));
-				if (validTiles.Count == 0) throw new Exception("No valid entry tiles for ConvoyDeployment.");
+				if (validTiles.Count == 0) throw new Exception("No valid entry tiles for PositionalDeployment.");
 			}
 			return IsConfigured();
 		}

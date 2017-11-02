@@ -48,7 +48,8 @@ unit-configuration:truck-polish {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 12 }
-	bool:truck-movement { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:c2p {
 	string:name { C2P }

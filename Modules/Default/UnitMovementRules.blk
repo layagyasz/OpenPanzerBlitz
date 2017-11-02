@@ -1,0 +1,26 @@
+﻿unit-movement-rules<>:unit-movement-rules {
+	unit-movement-rules:default-non-vehicle { }
+	unit-movement-rules:default-vehicle {
+		block-type:dense-edge { impassable }
+		block-type:swamp { impassable }
+	}
+	unit-movement-rules:truck {
+		block-type:dense-edge { impassable }
+		block-type:rough { slow }
+		block-type:sloped { slow }
+		block-type:swamp { impassable }
+	}
+	unit-movement-rules:aerosan {
+		block-type:dense-edge { impassable }
+		block-type:depressed { impassable }
+		block-type:rough { slow }
+		block-type:sloped { slow }
+		block-type:swamp { impassable }
+		bool:ignores-environment-movement { true }
+		bool:cannot-use-road-movement { true }
+	}
+	unit-movement-rules:ski {
+		bool:ignores-environment-movement { true }
+		bool:cannot-use-road-movement { true }
+	}
+}

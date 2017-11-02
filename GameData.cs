@@ -15,6 +15,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute
 		{
+			UNIT_MOVEMENT_RULES,
 			FACTIONS,
 			FACTION_RENDER_DETAILS,
 			UNIT_CONFIGURATIONS,
@@ -27,7 +28,9 @@ namespace PanzerBlitz
 		};
 
 		public static ushort OnlinePort = 1000;
-		public static Player Player = new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
+		public static Player Player =
+			new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
+		public static Dictionary<string, UnitMovementRules> UnitMovementRules;
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, FactionRenderDetails> FactionRenderDetails;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
@@ -56,6 +59,7 @@ namespace PanzerBlitz
 				}));
 
 			ParseBlock block = new ParseBlock(new ParseBlock[] {
+				ParseBlock.FromFile(path + "/UnitMovementRules.blk"),
 				ParseBlock.FromFile(path + "/Factions.blk"),
 				ParseBlock.FromFile(path + "/FactionRenderDetails.blk"),
 				ParseBlock.FromFile(path + "/Terrain.blk"),
@@ -95,6 +99,9 @@ namespace PanzerBlitz
 			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumBlockParser<WeaponClass>(typeof(WeaponClass)));
 			Block.AddParser<UnitClass>("unit-class", Parse.EnumBlockParser<UnitClass>(typeof(UnitClass)));
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));
+			Block.AddParser<BlockType>("block-type", Parse.EnumBlockParser<BlockType>(typeof(BlockType)));
+
+			Block.AddParser<UnitMovementRules>("unit-movement-rules", i => new UnitMovementRules(i));
 			Block.AddParser<Faction>("faction", i => new Faction(i));
 			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
 			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
@@ -133,6 +140,7 @@ namespace PanzerBlitz
 			Block.AddParser<TileRenderer>("tile-renderer", i => new TileRenderer(i));
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
+			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
 			FactionRenderDetails =
 				(Dictionary<string, FactionRenderDetails>)attributes[(int)Attribute.FACTION_RENDER_DETAILS];

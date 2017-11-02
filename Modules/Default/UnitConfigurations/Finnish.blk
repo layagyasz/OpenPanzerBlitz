@@ -18,8 +18,8 @@ unit-configuration:ski-platoon-early {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
-	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-platoon-finnish-early }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:rifle-platoon-finnish-mid {
 	string:name { Rifle Platoon }
@@ -51,8 +51,8 @@ unit-configuration:ski-platoon-mid {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
-	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { rifle-platoon-finnish-mid }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:sissi-platoon {
 	string:name { Sissi Platoon }
@@ -74,8 +74,8 @@ unit-configuration:sissi-ski-platoon {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
-	bool:ignores-environment-movement { true }
 	!unit-configuration:dismount-as { sissi-platoon }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:mg-platoon-finnish {
 	string:name { MG Platoon }
@@ -142,7 +142,7 @@ unit-configuration:truck-finnish {
 	byte:defense { 1 }
 	byte:movement { 12 }
 
-	bool:truck-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:bt-42 {
 	string:name { BT-42 }
@@ -204,6 +204,5 @@ unit-configuration:aerosan {
 	byte:defense { 2 }
 	byte:movement { 12 }
 
-	bool:truck-movement { true }
-	bool:ignores-environment-movement { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }

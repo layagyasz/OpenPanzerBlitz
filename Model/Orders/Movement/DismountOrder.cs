@@ -35,11 +35,13 @@ namespace PanzerBlitz
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
-			if (TurnComponent == TurnComponent.DEPLOYMENT) return UseMovement;
-
-			return Unit.Configuration.IsVehicle
+			if (UseMovement)
+			{
+				return Unit.Configuration.IsVehicle
 					   ? TurnComponent == TurnComponent.VEHICLE_MOVEMENT
 							: TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+			}
+			return TurnComponent == TurnComponent.DEPLOYMENT;
 		}
 
 		public OrderInvalidReason Validate()

@@ -3,9 +3,12 @@ namespace PanzerBlitz
 {
 	public enum BlockType
 	{
-		STANDARD,
 		CLEAR,
+		STANDARD,
+		SPEED,
+		SLOW,
 		SOFT_BLOCK,
-		HARD_BLOCK
+		HARD_BLOCK,
+		IMPASSABLE
 	}
 }
