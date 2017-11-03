@@ -84,25 +84,33 @@ namespace PanzerBlitz
 			BlockType toBlock = To.GetUnitBlockType();
 			BlockType fromBlock = Tile.GetUnitBlockType();
 
-			bool adjacent = !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
+			bool unitMoved = !Unit.Moved && Tile.Units.Contains(Unit);
+			bool adjacent = !unitMoved && !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
 
 			if (toBlock == BlockType.HARD_BLOCK && !adjacent)
 				return float.MaxValue;
-			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && Unit.Moved)
+			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && unitMoved)
 				return float.MaxValue;
 
 			bool useRoadMovement = RoadMovement
-				&& !Unit.Configuration.MovementRules.CannotUseRoadMovement
-				&& (toBlock == BlockType.CLEAR || (Tile == Unit.Position && Unit.IsSolitary()));
+						&& !Unit.Configuration.MovementRules.CannotUseRoadMovement
+						&& (toBlock == BlockType.NONE || (Tile == Unit.Position && Unit.IsSolitary()));
+			if (Unit.Configuration.CannotUseRoadMovementWithOversizedPassenger
+				&& Unit.Passenger != null
+				&& Unit.Passenger.Configuration.IsOversizedPassenger)
+				useRoadMovement = false;
 
-			return CalculateMovement(
+			float multiplier = Unit.Passenger != null && Unit.Passenger.Configuration.IsOversizedPassenger
+								   ? Unit.Configuration.OversizedPassengerMovementMultiplier : 1;
+
+			return multiplier * CalculateMovement(
 				Tile,
 				To,
 				Tile.GetEdgeRules(To),
 				Tile.GetPathOverlayRules(To),
 				useRoadMovement,
 				adjacent,
-				Unit.Moved,
+				unitMoved,
 				Unit.Configuration.MovementRules);
 		}
 
@@ -132,7 +140,7 @@ namespace PanzerBlitz
 					Math.Max(
 						Tile.GetEdgeRules().Max(i => i == null ? 0 : i.DieModifier),
 						Tile.GetPathOverlayRules().Max(i => i == null ? 0 : i.DieModifier)));
-			_TrueElevation = 2 * Tile.Configuration.Elevation
+			_TrueElevation = Tile.Configuration.Elevation
 									 + (Tile.GetBaseRules().Elevated
 										|| Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
 										|| Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated) ? 1 : 0);
@@ -150,8 +158,6 @@ namespace PanzerBlitz
 		{
 			bool roaded = Path != null && Path.RoadMove;
 
-			if (CanUseRoadMovement && roaded && Path.BaseMoveCost > 0) return Path.BaseMoveCost;
-
 			bool leavingDepressed = From.RulesCalculator.Depressed
 										&& (Path == null || !Path.Depressed)
 										&& (Path == null || !Path.DepressedTransition)
@@ -160,42 +166,38 @@ namespace PanzerBlitz
 			float leaveCost = 0;
 			if (leavingDepressed)
 			{
-				float maxLeaveCost = 0;
-				for (int i = 0; i < 6; ++i)
-				{
-					TileComponentRules rules = From.GetPathOverlayRules(i);
-					if (rules != null) maxLeaveCost = Math.Max(maxLeaveCost, rules.BaseLeaveCost);
-				}
-				leaveCost = GetBlockTypeMoveCost(MovementRules.Sloped, Adjacent, UnitMoved)
-					+ GetBlockTypeMoveCost(MovementRules.Rough, Adjacent, UnitMoved)
-					+ maxLeaveCost;
+				leaveCost = 1 + GetMoveCost(MovementRules.Sloped, Adjacent, UnitMoved)
+					+ GetMoveCost(MovementRules.Rough, Adjacent, UnitMoved)
+					+ GetMoveCost(MovementRules.Uphill, Adjacent, UnitMoved);
 			}
 
-			float crossCost = GetRulesMoveCost(Edge, MovementRules, Adjacent, UnitMoved, roaded, true);
+			float crossCost = GetRulesMoveCost(
+				Edge, MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, true);
 
-			float enterCost = GetRulesMoveCost(To.GetBaseRules(), MovementRules, Adjacent, UnitMoved, roaded, false);
+			float enterCost = GetRulesMoveCost(
+				To.GetBaseRules(), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
 
 			float edgeCost = float.MaxValue;
 			for (int i = 0; i < 6; ++i)
 			{
-				TileComponentRules e = To.GetEdgeRules(i);
-				if (e == null) continue;
-
-				float eMove = GetRulesMoveCost(e, MovementRules, Adjacent, UnitMoved, roaded, false);
+				float eMove = GetRulesMoveCost(
+					To.GetEdgeRules(i), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
 				if (eMove > 0) edgeCost = Math.Min(edgeCost, eMove);
 			}
 			float pathCost = 0;
 			if (Path != null && (!Path.RoadMove || CanUseRoadMovement))
-				pathCost = GetRulesMoveCost(Path, MovementRules, Adjacent, UnitMoved, roaded, false);
+				pathCost = GetRulesMoveCost(Path, MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
 
-			enterCost += crossCost;
-			if (edgeCost < float.MaxValue) enterCost = edgeCost + crossCost;
-			if (To.RulesCalculator.Depressed)
-				enterCost += GetBlockTypeMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
-
+			if (edgeCost < float.MaxValue) enterCost = edgeCost;
 			if (pathCost > 0) enterCost = pathCost;
+			if (To.RulesCalculator.Depressed && !roaded)
+				enterCost += GetMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
+			if (From.RulesCalculator.TrueElevation < To.RulesCalculator.TrueElevation)
+				enterCost += GetMoveCost(MovementRules.Uphill, Adjacent, UnitMoved);
+			if (From.Configuration.Elevation > To.Configuration.Elevation)
+				enterCost += GetMoveCost(MovementRules.Downhill, Adjacent, UnitMoved);
 
-			return enterCost + leaveCost;
+			return enterCost + leaveCost + crossCost;
 		}
 
 		float GetRulesMoveCost(
@@ -204,37 +206,43 @@ namespace PanzerBlitz
 			bool Adjacent,
 			bool UnitMoved,
 			bool Roaded,
+			bool UseRoad,
 			bool IsEdge)
 		{
 			if (TileRules == null) return 0;
 
-			float cost = 0;
-			if (TileRules.Water && !Roaded) cost += GetBlockTypeMoveCost(MovementRules.Water, Adjacent, UnitMoved);
+			float cost = IsEdge ? 0 : 1;
+			if (TileRules.Frozen && !Roaded) cost += GetMoveCost(MovementRules.Frozen, Adjacent, UnitMoved);
+			if (TileRules.Water && !Roaded) cost += GetMoveCost(MovementRules.Water, Adjacent, UnitMoved);
 			if (IsEdge)
 			{
 				if (TileRules.DenseEdge && !Roaded)
-					cost += GetBlockTypeMoveCost(MovementRules.DenseEdge, Adjacent, UnitMoved);
+					cost += GetMoveCost(MovementRules.DenseEdge, Adjacent, UnitMoved);
 				return cost;
 			}
-			cost += TileRules.BaseMoveCost;
 			if (TileRules.Depressed && !Roaded)
-				cost += GetBlockTypeMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
-			if (TileRules.Elevated) cost += GetBlockTypeMoveCost(MovementRules.Sloped, Adjacent, UnitMoved);
-			if (TileRules.Rough) cost += GetBlockTypeMoveCost(MovementRules.Rough, Adjacent, UnitMoved);
-			if (TileRules.Swamp) cost += GetBlockTypeMoveCost(MovementRules.Swamp, Adjacent, UnitMoved);
+				cost += GetMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
+			if (TileRules.Elevated) cost += GetMoveCost(MovementRules.Sloped, Adjacent, UnitMoved);
+			if (TileRules.Paved && UseRoad) cost += GetMoveCost(MovementRules.Paved, Adjacent, UnitMoved);
+			if (TileRules.Rough) cost += GetMoveCost(MovementRules.Rough, Adjacent, UnitMoved);
+			if (TileRules.Swamp) cost += GetMoveCost(MovementRules.Swamp, Adjacent, UnitMoved);
 			return cost;
+		}
+
+		float GetMoveCost(MovementCost MovementCost, bool Adjacent, bool UnitMoved)
+		{
+			if (MovementCost.BlockType == BlockType.NONE) return MovementCost.Cost;
+			return GetBlockTypeMoveCost(MovementCost.BlockType, Adjacent, UnitMoved);
 		}
 
 		float GetBlockTypeMoveCost(BlockType BlockType, bool Adjacent, bool UnitMoved)
 		{
 			switch (BlockType)
 			{
-				case BlockType.CLEAR: return 0f;
+				case BlockType.NONE: return 0f;
 				case BlockType.HARD_BLOCK: return Adjacent ? (UnitMoved ? float.MaxValue : 0f) : float.MaxValue;
 				case BlockType.IMPASSABLE: return float.MaxValue;
-				case BlockType.SLOW: return 1;
 				case BlockType.SOFT_BLOCK: return UnitMoved ? float.MaxValue : 0;
-				case BlockType.SPEED: return -1;
 				case BlockType.STANDARD: return 0;
 				default: throw new Exception(string.Format("No movement cost for {0}", BlockType));
 			}

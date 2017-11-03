@@ -298,6 +298,7 @@
     <Compile Include="View\Match\MatchInfoDisplay.cs" />
     <Compile Include="Model\Orders\OrderInvalidReason.cs" />
     <Compile Include="Model\UnitMovementRules.cs" />
+    <Compile Include="Model\MovementCost.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

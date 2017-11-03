@@ -296,8 +296,9 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
-		public OrderInvalidReason CanMount()
+		public OrderInvalidReason CanMount(bool Deployment)
 		{
+			if (!Deployment && !Configuration.CanRemount) return OrderInvalidReason.UNIT_NO_REMOUNT;
 			return CanDismount();
 		}
 

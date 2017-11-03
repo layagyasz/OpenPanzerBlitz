@@ -10,21 +10,29 @@ namespace PanzerBlitz
 		{
 			DENSE_EDGE,
 			DEPRESSED,
+			DOWNHILL,
+			FROZEN,
+			PAVED,
 			ROUGH,
 			SLOPED,
 			SWAMP,
+			UPHILL,
 			WATER,
 
 			IGNORES_ENVIRONMENT_MOVEMENT,
 			CANNOT_USE_ROAD_MOVEMENT
 		};
 
-		public readonly BlockType DenseEdge;
-		public readonly BlockType Depressed;
-		public readonly BlockType Rough;
-		public readonly BlockType Sloped;
-		public readonly BlockType Swamp;
-		public readonly BlockType Water;
+		public readonly MovementCost DenseEdge;
+		public readonly MovementCost Depressed;
+		public readonly MovementCost Downhill;
+		public readonly MovementCost Frozen;
+		public readonly MovementCost Paved;
+		public readonly MovementCost Rough;
+		public readonly MovementCost Sloped;
+		public readonly MovementCost Swamp;
+		public readonly MovementCost Uphill;
+		public readonly MovementCost Water;
 
 		public readonly bool IgnoresEnvironmentMovement;
 		public readonly bool CannotUseRoadMovement;
@@ -33,12 +41,16 @@ namespace PanzerBlitz
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], BlockType.CLEAR);
-			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], BlockType.CLEAR);
-			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], BlockType.CLEAR);
-			Sloped = Parse.DefaultIfNull(attributes[(int)Attribute.SLOPED], BlockType.CLEAR);
-			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], BlockType.CLEAR);
-			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], BlockType.IMPASSABLE);
+			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], default(MovementCost));
+			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], default(MovementCost));
+			Downhill = Parse.DefaultIfNull(attributes[(int)Attribute.DOWNHILL], default(MovementCost));
+			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], default(MovementCost));
+			Paved = Parse.DefaultIfNull(attributes[(int)Attribute.PAVED], default(MovementCost));
+			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], default(MovementCost));
+			Sloped = Parse.DefaultIfNull(attributes[(int)Attribute.SLOPED], default(MovementCost));
+			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], default(MovementCost));
+			Uphill = Parse.DefaultIfNull(attributes[(int)Attribute.UPHILL], default(MovementCost));
+			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], default(MovementCost));
 
 			IgnoresEnvironmentMovement = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT], false);

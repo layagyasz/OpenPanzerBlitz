@@ -222,10 +222,10 @@ namespace PanzerBlitz
 			foreach (Unit u in _Units)
 			{
 				BlockType t = u.Configuration.GetBlockType();
-				if (t == BlockType.CLEAR || t == BlockType.HARD_BLOCK || t == BlockType.SOFT_BLOCK) return t;
+				if (t == BlockType.NONE || t == BlockType.HARD_BLOCK || t == BlockType.SOFT_BLOCK) return t;
 			}
 			if (_Units.Count > 0) return BlockType.STANDARD;
-			return BlockType.CLEAR;
+			return BlockType.NONE;
 		}
 
 		public Tile GetOppositeNeighbor(Tile Neighbor)

@@ -18,6 +18,7 @@ unit-configuration:ski-platoon-early {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
+	bool:is-oversized-passenger { true }
 	!unit-configuration:dismount-as { rifle-platoon-finnish-early }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
@@ -51,6 +52,7 @@ unit-configuration:ski-platoon-mid {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
+	bool:is-oversized-passenger { true }
 	!unit-configuration:dismount-as { rifle-platoon-finnish-mid }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
@@ -74,6 +76,7 @@ unit-configuration:sissi-ski-platoon {
 	byte:defense { 8 }
 	byte:movement { 3 }
 
+	bool:is-oversized-passenger { true }
 	!unit-configuration:dismount-as { sissi-platoon }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
@@ -204,5 +207,7 @@ unit-configuration:aerosan {
 	byte:defense { 2 }
 	byte:movement { 12 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }

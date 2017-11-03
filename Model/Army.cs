@@ -152,7 +152,7 @@ namespace PanzerBlitz
 		void UnitDestroyed(object Sender, EventArgs E)
 		{
 			Unit unit = (Unit)Sender;
-			if (unit.Configuration.IsArmored && unit.Configuration.IsVehicle)
+			if (unit.Configuration.LeavesWreckWhenDestroyed)
 			{
 				Unit wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));

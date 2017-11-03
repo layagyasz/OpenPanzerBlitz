@@ -35,8 +35,8 @@
 			}
 			tile-component-rules<>:paths {
 				!tile-component-rules:road { tile-component-rules.path-road }
-				!tile-component-rules:stream { tile-component-rules.winter-path-stream }
-				!tile-component-rules:stream-ford { tile-component-rules.winter-path-stream-ford }
+				!tile-component-rules:stream { tile-component-rules.path-stream }
+				!tile-component-rules:stream-ford { tile-component-rules.path-stream-ford }
 			}
 		}
 	}

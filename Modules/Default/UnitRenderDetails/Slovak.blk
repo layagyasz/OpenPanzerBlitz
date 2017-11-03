@@ -29,6 +29,9 @@ unit-render-details:truck-slovak {
 unit-render-details:praga-iv {
 	string:image-path { praga-iv.png }
 }
+unit-render-details:bicycle-slovak {
+	string:image-path { bicycle.png }
+}
 unit-render-details:motorcycle-slovak {
 	string:image-path { motorcycle.png }
 }

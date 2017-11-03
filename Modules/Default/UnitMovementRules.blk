@@ -1,25 +1,53 @@
 ﻿unit-movement-rules<>:unit-movement-rules {
-	unit-movement-rules:default-non-vehicle { }
+	unit-movement-rules:default-non-vehicle { 
+		movement-cost:paved { -.5 }
+	}
 	unit-movement-rules:default-vehicle {
-		block-type:dense-edge { impassable }
-		block-type:swamp { impassable }
+		movement-cost:dense-edge { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:paved { -.5 }
+		movement-cost:sloped { 2 }
+		movement-cost:swamp { impassable }
 	}
 	unit-movement-rules:truck {
-		block-type:dense-edge { impassable }
-		block-type:rough { slow }
-		block-type:sloped { slow }
-		block-type:swamp { impassable }
+		movement-cost:dense-edge { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:paved { -.5 }
+		movement-cost:rough { 1 }
+		movement-cost:sloped { 3 }
+		movement-cost:swamp { impassable }
+	}
+	unit-movement-rules:bicycle {
+		movement-cost:dense-edge { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:paved { -.5 }
+		movement-cost:rough { 1 }
+		movement-cost:sloped { 1 }
+		movement-cost:swamp { impassable }
+		movement-cost:uphill { 2 }
 	}
 	unit-movement-rules:aerosan {
-		block-type:dense-edge { impassable }
-		block-type:depressed { impassable }
-		block-type:rough { slow }
-		block-type:sloped { slow }
-		block-type:swamp { impassable }
+		movement-cost:dense-edge { impassable }
+		movement-cost:depressed { impassable }
+		movement-cost:downhill { -2 }
+		movement-cost:rough { 1 }
+		movement-cost:sloped { 4 }
+		movement-cost:swamp { impassable }
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}
 	unit-movement-rules:ski {
+		movement-cost:downhill { -1 }
+		movement-cost:sloped { 1 }
+		bool:ignores-environment-movement { true }
+		bool:cannot-use-road-movement { true }
+	}
+	unit-movement-rules:sled {
+		movement-cost:dense-edge { impassable }
+		movement-cost:depressed { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:sloped { 2 }
+		movement-cost:swamp { impassable }
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}

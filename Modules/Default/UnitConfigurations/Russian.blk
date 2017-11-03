@@ -40,6 +40,7 @@ unit-configuration:ski-company {
 	byte:movement { 3 }
 
 	bool:can-close-assault { false }
+	bool:is-oversized-passenger { true }
 	!unit-configuration:dismount-as { rifle-company-early }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
@@ -64,6 +65,7 @@ unit-configuration:ski-company-mid {
 	byte:movement { 3 }
 
 	bool:can-close-assault { false }
+	bool:is-oversized-passenger { true }
 	!unit-configuration:dismount-as { rifle-company-mid }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
@@ -191,6 +193,8 @@ unit-configuration:nkl-6 {
 	byte:defense { 2 }
 	byte:movement { 17 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-6-a {
@@ -203,6 +207,9 @@ unit-configuration:nkl-6-a {
 	byte:defense { 2 }
 	byte:movement { 17 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
+	bool:can-overrun { true }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-16 {
@@ -215,6 +222,8 @@ unit-configuration:nkl-16 {
 	byte:defense { 3 }
 	byte:movement { 17 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:nkl-26 {
@@ -227,6 +236,10 @@ unit-configuration:nkl-26 {
 	byte:defense { 4 }
 	byte:movement { 15 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
+	bool:is-armored { true }
+	bool:leaves-wreck-when-destroyed { false }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:rf-8 {
@@ -239,6 +252,10 @@ unit-configuration:rf-8 {
 	byte:defense { 4 }
 	byte:movement { 25 }
 
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
+	bool:is-armored { true }
+	bool:leaves-wreck-when-destroyed { false }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:sis-33 {

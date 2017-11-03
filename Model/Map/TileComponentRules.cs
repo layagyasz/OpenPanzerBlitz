@@ -9,8 +9,6 @@ namespace PanzerBlitz
 		enum Attribute
 		{
 			DIE_MODIFIER,
-			BASE_MOVE_COST,
-			BASE_LEAVE_COST,
 			ROAD_MOVE,
 			TREAT_UNITS_AS_ARMORED,
 			MUST_ATTACK_ALL_UNITS,
@@ -18,6 +16,8 @@ namespace PanzerBlitz
 			DENSE_EDGE,
 			DEPRESSED,
 			ELEVATED,
+			FROZEN,
+			PAVED,
 			ROUGH,
 			SWAMP,
 			WATER,
@@ -28,8 +28,6 @@ namespace PanzerBlitz
 		};
 
 		public readonly int DieModifier;
-		public readonly float BaseMoveCost;
-		public readonly float BaseLeaveCost;
 		public readonly bool RoadMove;
 		public readonly bool TreatUnitsAsArmored;
 		public readonly bool MustAttackAllUnits;
@@ -37,6 +35,8 @@ namespace PanzerBlitz
 		public readonly bool DenseEdge;
 		public readonly bool Depressed;
 		public readonly bool Elevated;
+		public readonly bool Frozen;
+		public readonly bool Paved;
 		public readonly bool Rough;
 		public readonly bool Swamp;
 		public readonly bool Water;
@@ -48,7 +48,6 @@ namespace PanzerBlitz
 
 		public TileComponentRules(
 			int DieModifier,
-			float BaseMoveCost,
 			bool RoadMove,
 			bool TreatUnitsAsArmored,
 			bool MustAttackAllUnits,
@@ -56,6 +55,8 @@ namespace PanzerBlitz
 			bool DenseEdge,
 			bool Depressed,
 			bool Elevated,
+			bool Frozen,
+			bool Paved,
 			bool Rough,
 			bool Swamp,
 			bool Water,
@@ -65,7 +66,6 @@ namespace PanzerBlitz
 			bool Concealing)
 		{
 			this.DieModifier = DieModifier;
-			this.BaseMoveCost = BaseMoveCost;
 			this.RoadMove = RoadMove;
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;
 			this.MustAttackAllUnits = MustAttackAllUnits;
@@ -73,6 +73,8 @@ namespace PanzerBlitz
 			this.DenseEdge = DenseEdge;
 			this.Depressed = Depressed;
 			this.Elevated = Elevated;
+			this.Frozen = Frozen;
+			this.Paved = Paved;
 			this.Rough = Rough;
 			this.Swamp = Swamp;
 			this.Water = Water;
@@ -87,8 +89,6 @@ namespace PanzerBlitz
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			DieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.DIE_MODIFIER], 0);
-			BaseMoveCost = Parse.DefaultIfNull(attributes[(int)Attribute.BASE_MOVE_COST], 0f);
-			BaseLeaveCost = Parse.DefaultIfNull(attributes[(int)Attribute.BASE_LEAVE_COST], 0f);
 			RoadMove = Parse.DefaultIfNull(attributes[(int)Attribute.ROAD_MOVE], false);
 			TreatUnitsAsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED], false);
 			MustAttackAllUnits = Parse.DefaultIfNull(attributes[(int)Attribute.MUST_ATTACK_ALL_UNITS], false);
@@ -96,6 +96,8 @@ namespace PanzerBlitz
 			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], false);
 			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], false);
 			Elevated = Parse.DefaultIfNull(attributes[(int)Attribute.ELEVATED], false);
+			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], false);
+			Paved = Parse.DefaultIfNull(attributes[(int)Attribute.PAVED], false);
 			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], false);
 			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], false);
 			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], false);

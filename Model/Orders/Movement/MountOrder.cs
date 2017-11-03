@@ -46,7 +46,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason Validate()
 		{
-			return Unit.CanMount();
+			return Unit.CanMount(!UseMovement);
 		}
 
 		public OrderStatus Execute(Random Random)

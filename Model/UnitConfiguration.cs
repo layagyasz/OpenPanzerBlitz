@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Cardamom.Serialization;
@@ -9,7 +9,7 @@ namespace PanzerBlitz
 {
 	public class UnitConfiguration
 	{
-		private enum Attribute
+		enum Attribute
 		{
 			NAME,
 			UNIT_CLASS,
@@ -27,6 +27,7 @@ namespace PanzerBlitz
 
 			IS_VEHICLE,
 			IS_ARMORED,
+			LEAVES_WRECK_WHEN_DESTROYED,
 			IS_ENGINEER,
 			IS_PARATROOP,
 			IS_COMMANDO,
@@ -35,12 +36,18 @@ namespace PanzerBlitz
 
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
+			CAN_ONLY_CARRY_LIGHT,
 			CAN_ONLY_OVERRUN_UNARMORED,
 			CAN_ONLY_SUPPORT_CLOSE_ASSAULT,
 			IS_PASSENGER,
+			IS_LIGHT_PASSENGER,
+			IS_OVERSIZED_PASSENGER,
+			CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER,
+			OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER,
 
 			CAN_SPOT_INDIRECT_FIRE,
-			DISMOUNT_AS
+			DISMOUNT_AS,
+			CAN_REMOUNT
 		};
 
 		public readonly string UniqueKey;
@@ -61,6 +68,7 @@ namespace PanzerBlitz
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
+		public readonly bool LeavesWreckWhenDestroyed;
 		public readonly bool IsEngineer;
 		public readonly bool IsParatroop;
 		public readonly bool IsCommando;
@@ -69,13 +77,19 @@ namespace PanzerBlitz
 
 		public readonly bool IsCarrier;
 		public readonly bool CanOnlyCarryInfantry;
+		public readonly bool CanOnlyCarryLight;
 		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool CanOnlySupportCloseAssault;
 		public readonly bool IsPassenger;
+		public readonly bool IsLightPassenger;
+		public readonly bool IsOversizedPassenger;
+		public readonly bool CannotUseRoadMovementWithOversizedPassenger;
+		public readonly float OversizedPassengerMovementMultiplier;
 
 		public readonly bool CanSpotIndirectFire;
 
 		public readonly UnitConfiguration DismountAs;
+		public readonly bool CanRemount;
 
 		public IEnumerable<UnitConfiguration> RepresentedConfigurations
 		{
@@ -111,6 +125,8 @@ namespace PanzerBlitz
 			IsArmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_ARMORED],
 				(IsVehicle && UnitClass != UnitClass.TRANSPORT) || UnitClass == UnitClass.FORT);
+			LeavesWreckWhenDestroyed = Parse.DefaultIfNull(
+				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED], IsArmored && IsVehicle);
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
 
@@ -124,9 +140,20 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsCarrier && UnitClass != UnitClass.TRANSPORT);
+			CanOnlyCarryLight = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT], false);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
+											  || UnitClass == UnitClass.COMMAND_POST
 											  || UnitClass == UnitClass.TOWED_GUN);
+			IsLightPassenger = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_LIGHT_PASSENGER],
+				IsPassenger && (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST));
+			IsOversizedPassenger = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_OVERSIZED_PASSENGER], false);
+			CannotUseRoadMovementWithOversizedPassenger = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER], CanOnlyCarryInfantry);
+			OversizedPassengerMovementMultiplier = Parse.DefaultIfNull(
+				attributes[(int)Attribute.OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER], 1f);
 
 			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
@@ -148,13 +175,15 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
+			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
 		}
 
 		public OrderInvalidReason CanLoad(UnitConfiguration UnitConfiguration)
 		{
 			if (!IsCarrier
 				|| !UnitConfiguration.IsPassenger
-				|| (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY))
+				|| (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY)
+				|| (CanOnlyCarryLight && !UnitConfiguration.IsLightPassenger))
 				return OrderInvalidReason.UNIT_NO_CARRY;
 			return OrderInvalidReason.NONE;
 		}
@@ -179,7 +208,7 @@ namespace PanzerBlitz
 
 		public BlockType GetBlockType()
 		{
-			if (UnitClass == UnitClass.FORT) return BlockType.CLEAR;
+			if (UnitClass == UnitClass.FORT) return BlockType.NONE;
 			if (UnitClass == UnitClass.MINEFIELD) return BlockType.SOFT_BLOCK;
 			if (UnitClass == UnitClass.BLOCK) return BlockType.HARD_BLOCK;
 			return BlockType.STANDARD;

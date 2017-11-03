@@ -97,6 +97,9 @@ unit-configuration:sled {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 3 }
+
+	bool:can-only-carry-light { true }
+	!unit-movement-rules:movement-rules { unit-movement-rules.sled }
 }
 unit-configuration:limber {
 	string:name { Limber }
