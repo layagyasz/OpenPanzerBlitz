@@ -25,9 +25,9 @@ namespace PanzerBlitz
 		public RandomMapConfiguration(SerializationInputStream Stream)
 			: this(Stream.ReadInt32(), Stream.ReadInt32()) { }
 
-		public Map GenerateMap(TileRuleSet TileRuleSet, IdGenerator IdGenerator)
+		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
-			Map map = new Map(_Width, _Height, TileRuleSet, IdGenerator);
+			Map map = new Map(_Width, _Height, Environment, IdGenerator);
 
 			LatticeNoiseGenerator thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
 			{

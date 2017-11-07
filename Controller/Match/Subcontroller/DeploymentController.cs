@@ -78,6 +78,7 @@ namespace PanzerBlitz
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
+			_DeploymentMicrocontrollers[_DeploymentPane.SelectedDeployment].HandleKeyPress(Key);
 		}
 
 		void HandleDeploymentSelected(object Sender, EventArgs E)

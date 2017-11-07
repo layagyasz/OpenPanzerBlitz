@@ -12,7 +12,8 @@ namespace PanzerBlitz
 			DEPRESSED,
 			DOWNHILL,
 			FROZEN,
-			PAVED,
+			LOOSE,
+			ROADED,
 			ROUGH,
 			SLOPED,
 			SWAMP,
@@ -27,7 +28,8 @@ namespace PanzerBlitz
 		public readonly MovementCost Depressed;
 		public readonly MovementCost Downhill;
 		public readonly MovementCost Frozen;
-		public readonly MovementCost Paved;
+		public readonly MovementCost Loose;
+		public readonly MovementCost Roaded;
 		public readonly MovementCost Rough;
 		public readonly MovementCost Sloped;
 		public readonly MovementCost Swamp;
@@ -45,7 +47,8 @@ namespace PanzerBlitz
 			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], default(MovementCost));
 			Downhill = Parse.DefaultIfNull(attributes[(int)Attribute.DOWNHILL], default(MovementCost));
 			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], default(MovementCost));
-			Paved = Parse.DefaultIfNull(attributes[(int)Attribute.PAVED], default(MovementCost));
+			Loose = Parse.DefaultIfNull(attributes[(int)Attribute.LOOSE], default(MovementCost));
+			Roaded = Parse.DefaultIfNull(attributes[(int)Attribute.ROADED], default(MovementCost));
 			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], default(MovementCost));
 			Sloped = Parse.DefaultIfNull(attributes[(int)Attribute.SLOPED], default(MovementCost));
 			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], default(MovementCost));

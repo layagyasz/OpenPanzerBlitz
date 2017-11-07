@@ -10,6 +10,7 @@ namespace PanzerBlitz
 {
 	public class Map : Serializable
 	{
+		public readonly Environment Environment;
 		public readonly Tile[,] Tiles;
 		public readonly List<MapRegion> Regions;
 
@@ -42,15 +43,18 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Map(int Width, int Height, TileRuleSet RuleSet, IdGenerator IdGenerator)
+		public Map(int Width, int Height, Environment Environment, IdGenerator IdGenerator)
 		{
+			this.Environment = Environment;
 			Regions = new List<MapRegion>();
 			Tiles = new Tile[Width, Height];
+
+			TileRuleSet ruleSet = Environment == null ? null : Environment.TileRuleSet;
 			for (int i = 0; i < Width; ++i)
 			{
 				for (int j = 0; j < Height; ++j)
 				{
-					Tiles[i, j] = new Tile(this, new Coordinate(i, j), RuleSet, IdGenerator);
+					Tiles[i, j] = new Tile(this, new Coordinate(i, j), ruleSet, IdGenerator);
 				}
 			}
 			Ready();

@@ -17,7 +17,8 @@ namespace PanzerBlitz
 			DEPRESSED,
 			ELEVATED,
 			FROZEN,
-			PAVED,
+			LOOSE,
+			ROADED,
 			ROUGH,
 			SWAMP,
 			WATER,
@@ -36,7 +37,8 @@ namespace PanzerBlitz
 		public readonly bool Depressed;
 		public readonly bool Elevated;
 		public readonly bool Frozen;
-		public readonly bool Paved;
+		public readonly bool Loose;
+		public readonly bool Roaded;
 		public readonly bool Rough;
 		public readonly bool Swamp;
 		public readonly bool Water;
@@ -56,7 +58,8 @@ namespace PanzerBlitz
 			bool Depressed,
 			bool Elevated,
 			bool Frozen,
-			bool Paved,
+			bool Loose,
+			bool Roaded,
 			bool Rough,
 			bool Swamp,
 			bool Water,
@@ -74,7 +77,8 @@ namespace PanzerBlitz
 			this.Depressed = Depressed;
 			this.Elevated = Elevated;
 			this.Frozen = Frozen;
-			this.Paved = Paved;
+			this.Loose = Loose;
+			this.Roaded = Roaded;
 			this.Rough = Rough;
 			this.Swamp = Swamp;
 			this.Water = Water;
@@ -97,7 +101,8 @@ namespace PanzerBlitz
 			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], false);
 			Elevated = Parse.DefaultIfNull(attributes[(int)Attribute.ELEVATED], false);
 			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], false);
-			Paved = Parse.DefaultIfNull(attributes[(int)Attribute.PAVED], false);
+			Loose = Parse.DefaultIfNull(attributes[(int)Attribute.LOOSE], false);
+			Roaded = Parse.DefaultIfNull(attributes[(int)Attribute.ROADED], false);
 			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], false);
 			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], false);
 			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], false);

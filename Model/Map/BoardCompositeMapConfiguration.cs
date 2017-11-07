@@ -28,14 +28,14 @@ namespace PanzerBlitz
 					j => new BoardConfiguration(Stream.ReadString(), Stream.ReadBoolean()))))
 		{ }
 
-		public Map GenerateMap(TileRuleSet TileRuleSet, IdGenerator IdGenerator)
+		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
 			List<List<Tuple<Map, bool>>> boards = Boards.Select(i => i.Select(j => j.LoadMap()).ToList()).ToList();
 
 			int width = boards.Max(i => i.Sum(j => j.Item1.Width) - i.Count + 1);
 			int height = boards.Sum(i => i.Max(j => j.Item1.Height)) - Boards.Count + 1;
 
-			Map map = new Map(width, height, TileRuleSet, IdGenerator);
+			Map map = new Map(width, height, Environment, IdGenerator);
 
 			int rowY = 0;
 			foreach (List<Tuple<Map, bool>> mapRow in boards)

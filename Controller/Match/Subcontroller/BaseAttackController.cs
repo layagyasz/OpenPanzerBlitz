@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		{
 		}
 
-		void Clear()
+		public override void Clear()
 		{
 			if (_AttackBuilder != null)
 			{

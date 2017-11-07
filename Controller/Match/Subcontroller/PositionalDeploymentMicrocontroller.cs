@@ -46,6 +46,7 @@ namespace PanzerBlitz
 				Unit unit = _DeploymentPage.Peek();
 				if (_Controller.ExecuteOrderAndAlert(new PositionalDeployOrder(unit, Tile)))
 				{
+					_Controller.SelectUnit(unit);
 					_DeploymentPage.Remove(unit);
 					HighlightDeploymentArea(null, EventArgs.Empty);
 				}
@@ -58,6 +59,7 @@ namespace PanzerBlitz
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
+			if (_Controller.CurrentTurn.Army == Unit.Army) _Controller.SelectUnit(Unit);
 		}
 
 		public override void HandleUnitRightClick(Unit Unit)
@@ -69,8 +71,14 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void HandleKeyPress(Keyboard.Key key)
+		public override void HandleKeyPress(Keyboard.Key Key)
 		{
+			// Load/Unload
+			if (Key == Keyboard.Key.L) LoadUnit();
+			else if (Key == Keyboard.Key.U) UnloadUnit();
+			// Mount/Dismount
+			else if (Key == Keyboard.Key.M) Mount();
+			else if (Key == Keyboard.Key.D) Dismount();
 		}
 
 		void HighlightDeploymentArea(object Sender, EventArgs E)

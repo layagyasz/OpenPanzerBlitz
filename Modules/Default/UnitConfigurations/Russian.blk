@@ -244,7 +244,7 @@ unit-configuration:nkl-26 {
 }
 unit-configuration:rf-8 {
 	string:name { RF-8 }
-	unit-class:unit-class { transport }
+	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
@@ -252,9 +252,7 @@ unit-configuration:rf-8 {
 	byte:defense { 4 }
 	byte:movement { 25 }
 
-	bool:can-only-carry-light { true }
 	float:oversized-passenger-movement-multiplier { 2 }
-	bool:is-armored { true }
 	bool:leaves-wreck-when-destroyed { false }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }

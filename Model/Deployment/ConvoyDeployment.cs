@@ -64,7 +64,6 @@ namespace PanzerBlitz
 		public override bool UnitMustMove(Unit Unit)
 		{
 			if (Unit.Position == null) return false;
-			if (!_StopAutomatedMovement) return true;
 			return Unit.Position == _EntryTile && _ConvoyOrder.Any(i => !i.Deployed);
 		}
 

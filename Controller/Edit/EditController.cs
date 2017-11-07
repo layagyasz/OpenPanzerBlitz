@@ -132,7 +132,7 @@ namespace PanzerBlitz
 		void New(object Sender, ValuedEventArgs<Vector2i> E)
 		{
 			NewMapPane pane = (NewMapPane)Sender;
-			SetMap(new RandomMapConfiguration(E.Value.X, E.Value.Y).GenerateMap(null, new IdGenerator()));
+			SetMap(new Map(E.Value.X, E.Value.Y, null, new IdGenerator()));
 			pane.Visible = false;
 		}
 
