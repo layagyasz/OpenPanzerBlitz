@@ -24,6 +24,8 @@ namespace PanzerBlitz
 			CANNOT_USE_ROAD_MOVEMENT
 		};
 
+		public readonly string UniqueKey;
+
 		public readonly MovementCost DenseEdge;
 		public readonly MovementCost Depressed;
 		public readonly MovementCost Downhill;
@@ -41,6 +43,8 @@ namespace PanzerBlitz
 
 		public UnitMovementRules(ParseBlock Block)
 		{
+			UniqueKey = Block.Name;
+
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], default(MovementCost));

@@ -92,6 +92,8 @@ unit-configuration:wagon-italian {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 3 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.wagon }
 }
 unit-configuration:truck-italian {
 	string:name { Truck }
@@ -127,13 +129,16 @@ unit-configuration:breda-32 {
 }
 unit-configuration:motorcycle-italian {
 	string:name { Motorcycle }
-	unit-class:unit-class { cavalry }
+	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
 	!unit-configuration:dismount-as { rifle-platoon-italian }
 }
 unit-configuration:65_17 {

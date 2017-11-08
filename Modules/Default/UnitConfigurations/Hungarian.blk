@@ -75,13 +75,16 @@ unit-configuration:truck-hungarian {
 }
 unit-configuration:motorcycle-hungarian {
 	string:name { Motorcycle }
-	unit-class:unit-class { cavalry }
+	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
 	!unit-configuration:dismount-as { rifle-platoon-hungarian }
 }
 unit-configuration:csaba {

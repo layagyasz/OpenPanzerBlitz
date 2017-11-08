@@ -87,6 +87,8 @@ unit-configuration:wagon {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 3 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.wagon }
 }
 unit-configuration:sled {
 	string:name { Sled }
@@ -110,4 +112,6 @@ unit-configuration:limber {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 3 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.wagon }
 }

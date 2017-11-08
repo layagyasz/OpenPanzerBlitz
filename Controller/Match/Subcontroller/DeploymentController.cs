@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -14,13 +13,8 @@ namespace PanzerBlitz
 		DeploymentPane _DeploymentPane;
 		Deployment _WorkingDeployment;
 
-		UnitConfigurationRenderer _Renderer;
-
-		public DeploymentController(HumanMatchPlayerController Controller, UnitConfigurationRenderer Renderer)
-			: base(Controller)
-		{
-			_Renderer = Renderer;
-		}
+		public DeploymentController(HumanMatchPlayerController Controller)
+			: base(Controller) { }
 
 		public override void Begin()
 		{
@@ -37,7 +31,7 @@ namespace PanzerBlitz
 						_Controller, (PositionalDeployment)d);
 				else c = new ConvoyDeploymentMicrocontroller(_Controller, (ConvoyDeployment)d);
 				_DeploymentMicrocontrollers.Add(d, c);
-				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Renderer));
+				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Controller.Renderer));
 			}
 			_Controller.AddPane(_DeploymentPane);
 		}

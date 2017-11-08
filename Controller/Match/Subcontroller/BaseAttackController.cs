@@ -19,6 +19,7 @@ namespace PanzerBlitz
 
 		public override void Clear()
 		{
+			base.Clear();
 			if (_AttackBuilder != null)
 			{
 				_Controller.RemovePane(_AttackPane);

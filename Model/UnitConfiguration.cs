@@ -156,7 +156,7 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER], 1f);
 
 			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
-			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], true);
+			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], Attack > 0);
 			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE],
 												  UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY);
 			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN],
@@ -285,6 +285,12 @@ namespace PanzerBlitz
 		}
 
 		public float GetPointValue()
+		{
+			if (DismountAs == null) return GetPointValueInternal();
+			return Math.Max(GetPointValueInternal(), DismountAs.GetPointValue());
+		}
+
+		float GetPointValueInternal()
 		{
 			switch (UnitClass)
 			{

@@ -85,7 +85,7 @@ unit-configuration:praga-iv {
 }
 unit-configuration:bicycle-slovak {
 	string:name { Bicycle }
-	unit-class:unit-class { cavalry }
+	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
@@ -93,7 +93,7 @@ unit-configuration:bicycle-slovak {
 	byte:defense { 2 }
 	byte:movement { 2 }
 
-	bool:can-close-assault { false }
+	bool:is-vehicle { false }
 	bool:can-remount { false }
 	!unit-configuration:dismount-as { rifle-platoon-slovak }
 	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }

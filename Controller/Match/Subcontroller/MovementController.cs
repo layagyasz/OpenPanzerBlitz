@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
 using SFML.Graphics;
@@ -67,9 +66,9 @@ namespace PanzerBlitz
 						i => new Tuple<Tile, Color>(
 							i.Item1,
 							HIGHLIGHT_COLORS[
-								Math.Min(
+								Math.Max(0, Math.Min(
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
-									HIGHLIGHT_COLORS.Length - 1)])));
+									HIGHLIGHT_COLORS.Length - 1))])));
 			}
 			else _Controller.UnHighlight();
 		}
@@ -95,8 +94,8 @@ namespace PanzerBlitz
 						Clear();
 						SelectPane<Direction> pane = new SelectPane<Direction>("Recon", directions);
 						pane.OnItemSelected += ReconDirection;
-						_SelectPane = pane;
-						_Controller.AddPane(_SelectPane);
+						_Pane = pane;
+						_Controller.AddPane(_Pane);
 					}
 				}
 			}
@@ -116,8 +115,8 @@ namespace PanzerBlitz
 						Clear();
 						SelectPane<Direction> pane = new SelectPane<Direction>("Evacuate", directions);
 						pane.OnItemSelected += EvacuateDirection;
-						_SelectPane = pane;
-						_Controller.AddPane(_SelectPane);
+						_Pane = pane;
+						_Controller.AddPane(_Pane);
 					}
 				}
 			}

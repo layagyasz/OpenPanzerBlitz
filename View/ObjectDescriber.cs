@@ -26,7 +26,12 @@ namespace PanzerBlitz
 
 		public static string Describe(Unit Unit)
 		{
-			return Unit.Configuration.Name;
+			return string.Format("{0} (#{1})", Unit.Configuration.Name, Unit.Id);
+		}
+
+		public static string Describe(UnitConfiguration Configuration)
+		{
+			return Configuration.Name;
 		}
 
 		public static string Describe(TileBase TileBase)

@@ -15,9 +15,9 @@ namespace PanzerBlitz
 	{
 		public readonly MatchAdapter Match;
 		public readonly HashSet<Army> AllowedArmies;
+		public readonly UnitConfigurationRenderer Renderer;
 
 		MatchScreen _GameScreen;
-		UnitConfigurationRenderer _Renderer;
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
 		TurnInfo _CurrentTurn;
 		Unit _SelectedUnit;
@@ -47,14 +47,13 @@ namespace PanzerBlitz
 		{
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
+			this.Renderer = Renderer;
 			_GameScreen = GameScreen;
 			_GameScreen.OnFinishClicked += EndTurn;
 
-			_Renderer = Renderer;
-
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
 			{
-				{ TurnComponent.DEPLOYMENT, new DeploymentController(this, Renderer) },
+				{ TurnComponent.DEPLOYMENT, new DeploymentController(this) },
 				{ TurnComponent.ATTACK, new AttackController(this) },
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },
@@ -119,7 +118,7 @@ namespace PanzerBlitz
 			_SelectedUnit = Unit;
 			if (Unit != null)
 				_GameScreen.InfoDisplay.SetViewItem(
-					new UnitView(Unit, _Renderer, 80, false) { Position = new Vector2f(40, 40) });
+					new UnitView(Unit, Renderer, 80, false) { Position = new Vector2f(40, 40) });
 			else if (Match.GetTurnInfo() != null)
 				_GameScreen.InfoDisplay.SetViewItem(
 					new FactionView(Match.GetTurnInfo().Army.Configuration.Faction, 80));
@@ -169,7 +168,11 @@ namespace PanzerBlitz
 		{
 			TurnInfo phase = Match.GetTurnInfo();
 			if (AllowedArmies.Contains(phase.Army))
-				_Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
+			{
+				if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+					_Controllers[phase.TurnComponent].HandleUnitShiftLeftClick(((UnitView)sender).Unit);
+				else _Controllers[phase.TurnComponent].HandleUnitLeftClick(((UnitView)sender).Unit);
+			}
 		}
 
 		void OnUnitRightClick(object sender, MouseEventArgs e)

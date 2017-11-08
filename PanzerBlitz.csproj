@@ -299,6 +299,7 @@
     <Compile Include="Model\Orders\OrderInvalidReason.cs" />
     <Compile Include="Model\UnitMovementRules.cs" />
     <Compile Include="Model\MovementCost.cs" />
+    <Compile Include="View\Unit\UnitInfoPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1347,6 +1348,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitMovementRules.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Theme\Components\UnitInfo.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

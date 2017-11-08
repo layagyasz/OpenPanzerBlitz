@@ -45,6 +45,12 @@ class:small-button {
 		int:width { 140 }
 	}
 }
+class:square-button {
+	!class:parent { normal-button }
+	mode:default {
+		int:width { 24 }
+	}
+}
 class:large-button {
 	!class:parent { normal-button }
 	mode:default {

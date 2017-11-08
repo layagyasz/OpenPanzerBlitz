@@ -54,7 +54,9 @@ namespace PanzerBlitz
 
 			_Selection = new ScrollCollection<StackView>("deployment-select");
 
-			foreach (Unit u in Deployment.Units)
+			List<Unit> units = Deployment.Units.ToList();
+			units.Sort(SortUnits);
+			foreach (Unit u in units)
 			{
 				u.OnLoad += HandleLoad;
 				u.OnUnload += HandleUnload;
@@ -76,6 +78,13 @@ namespace PanzerBlitz
 			Add(_UnloadButton);
 			Add(_MoveUpButton);
 			Add(_MoveDownButton);
+		}
+
+		int SortUnits(Unit a, Unit b)
+		{
+			if (b.Configuration.IsVehicle.CompareTo(a.Configuration.IsVehicle) != 0)
+				return b.Configuration.IsVehicle.CompareTo(a.Configuration.IsVehicle);
+			return b.Configuration.Movement.CompareTo(a.Configuration.Movement);
 		}
 
 		public IEnumerable<Unit> GetConvoyOrder()

@@ -1,0 +1,21 @@
+﻿class:unit-info-pane {
+	!class:parent { pane }
+}
+class:unit-info-display {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 502 }
+	}
+}
+class:unit-info-header {
+	!class:parent { header-1 }
+}
+class:unit-info-header-2 {
+	!class:parent { header-2 }
+}
+class:unit-info-attribute {
+	!class:parent { regular }
+}
+class:unit-info-close-button {
+	!class:parent { square-button }
+}

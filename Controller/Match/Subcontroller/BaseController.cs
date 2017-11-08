@@ -27,7 +27,7 @@ namespace PanzerBlitz
 			new Color(255, 0, 0, 120)
 		};
 
-		protected Pane _SelectPane;
+		protected Pane _Pane;
 
 		protected HumanMatchPlayerController _Controller;
 
@@ -38,10 +38,10 @@ namespace PanzerBlitz
 
 		public virtual void Clear()
 		{
-			if (_SelectPane != null)
+			if (_Pane != null)
 			{
-				_Controller.RemovePane(_SelectPane);
-				_SelectPane = null;
+				_Controller.RemovePane(_Pane);
+				_Pane = null;
 			}
 		}
 
@@ -64,6 +64,15 @@ namespace PanzerBlitz
 		public abstract void HandleUnitRightClick(Unit Unit);
 		public abstract void HandleKeyPress(Keyboard.Key Key);
 
+		public void HandleUnitShiftLeftClick(Unit Unit)
+		{
+			Clear();
+			UnitInfoPane pane = new UnitInfoPane(Unit, _Controller.Renderer);
+			pane.OnClose += (sender, e) => Clear();
+			_Pane = pane;
+			_Controller.AddPane(_Pane);
+		}
+
 		protected void LoadUnit()
 		{
 			if (_Controller.SelectedUnit != null)
@@ -80,8 +89,8 @@ namespace PanzerBlitz
 					Clear();
 					SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", canLoad);
 					pane.OnItemSelected += LoadUnit;
-					_SelectPane = pane;
-					_Controller.AddPane(_SelectPane);
+					_Pane = pane;
+					_Controller.AddPane(_Pane);
 				}
 			}
 		}

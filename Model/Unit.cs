@@ -197,8 +197,9 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
+			if (_Position == null || Fired || _MovedMoreThanOneTile || _Status != UnitStatus.ACTIVE || _Carrier != null)
 				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (AttackMethod != AttackMethod.CLOSE_ASSAULT && Moved) return OrderInvalidReason.UNIT_NO_ACTION;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
 		}
@@ -323,6 +324,10 @@ namespace PanzerBlitz
 			{
 				OrderInvalidReason r = _Passenger.CanEnter(_Position);
 				if (r != OrderInvalidReason.NONE) return r;
+
+				if (_Position.GetStackSize() + _Passenger.Configuration.GetStackSize()
+					> Army.Configuration.Faction.StackLimit)
+					return OrderInvalidReason.UNIT_STACK_LIMIT;
 			}
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			return OrderInvalidReason.NONE;
@@ -364,6 +369,7 @@ namespace PanzerBlitz
 			{
 				_Moved = true;
 				Unit._Moved = true;
+				Unit._MovedMoreThanOneTile = true;
 				_RemainingMovement = 0;
 				Unit._RemainingMovement = 0;
 			}
@@ -377,6 +383,7 @@ namespace PanzerBlitz
 			{
 				_Moved = true;
 				_Passenger._Moved = true;
+				_Passenger._MovedMoreThanOneTile = true;
 				_RemainingMovement = 0;
 				_Passenger._RemainingMovement = 0;
 			}
@@ -427,7 +434,7 @@ namespace PanzerBlitz
 				foreach (LineOfSight l in new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
 						 .GetReachableNodes()
 						 .Select(i => GetLineOfSight(i.Item1))
-						  .Where(i => i.Final != _Position))
+						 .Where(i => i.Final != _Position))
 				{
 					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
 					else if (CanAttack(AttackMethod, false, l) == OrderInvalidReason.NONE)
