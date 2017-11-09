@@ -11,19 +11,16 @@ namespace PanzerBlitz
 		public readonly List<Objective> Objectives;
 
 		public SumObjective(string UniqueKey, IEnumerable<Objective> Objectives)
-			: base(UniqueKey)
 		{
 			this.Objectives = Objectives.ToList();
 		}
 
 		public SumObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			Objectives = Block.BreakToList<Objective>();
 		}
 
 		public SumObjective(SerializationInputStream Stream)
-			: base(Stream)
 		{
 			Objectives = Stream.ReadEnumerable(
 				i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream)).ToList();
@@ -31,14 +28,12 @@ namespace PanzerBlitz
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			Stream.Write(Objectives, i => ObjectiveSerializer.Instance.Serialize(i, Stream));
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			_Score = Objectives.Sum(i => i.CalculateScore(ForArmy, Match));
-			return _Score;
+			return Objectives.Sum(i => i.GetScore(ForArmy, Match, Cache));
 		}
 	}
 }

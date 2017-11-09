@@ -6,15 +6,11 @@ unit-render-details:hmg-platoon-hungarian {
 	string:override-display-name { HMG }
 	string:image-path { hmg-platoon.png }
 }
-unit-render-details:rifle-platoon-hungarian-early {
+unit-render-details:rifle-platoon-hungarian-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-hungarian {
-	string:override-display-name { RIFLE }
-	string:image-path { infantry-platoon.png }
-}
-unit-render-details:rifle-platoon-hungarian-late {
+unit-render-details:rifle-platoon-hungarian-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

@@ -21,7 +21,7 @@ unit-configuration:mg-platoon-italian {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:rifle-platoon-italian-early {
+unit-configuration:rifle-platoon-italian-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -31,7 +31,7 @@ unit-configuration:rifle-platoon-italian-early {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-italian {
+unit-configuration:rifle-platoon-italian-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -139,7 +139,7 @@ unit-configuration:motorcycle-italian {
 
 	bool:is-armored { false }
 	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-platoon-italian }
+	!unit-configuration:dismount-as { rifle-platoon-italian-41 }
 }
 unit-configuration:65_17 {
 	string:name { 65/17 }

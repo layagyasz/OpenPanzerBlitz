@@ -28,6 +28,9 @@ unit-render-details:50mm-at {
 unit-render-details:57mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:75mm-at-early {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:75mm-at {
 	string:image-path { anti-armor.png }
 }
@@ -145,6 +148,6 @@ unit-render-details:120mm-mortar-german {
 unit-render-details:120mm-mortar-russian {
 	string:image-path { mortar.png }
 }
-unit-render-details:120mm-mortar-polish {
+unit-render-details:120mm-mortar-early {
 	string:image-path { mortar.png }
 }

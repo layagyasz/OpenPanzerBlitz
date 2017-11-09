@@ -13,16 +13,13 @@ namespace PanzerBlitz
 		public readonly bool Friendly;
 		public readonly Dictionary<UnitConfiguration, int> OverrideScores;
 
-		public UnitsDestroyedObjective(
-			string UniqueKey, bool Friendly, Dictionary<UnitConfiguration, int> OverrideScores)
-			: base(UniqueKey)
+		public UnitsDestroyedObjective(bool Friendly, Dictionary<UnitConfiguration, int> OverrideScores)
 		{
 			this.Friendly = Friendly;
 			this.OverrideScores = OverrideScores;
 		}
 
 		public UnitsDestroyedObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -36,7 +33,6 @@ namespace PanzerBlitz
 		}
 
 		public UnitsDestroyedObjective(SerializationInputStream Stream)
-			: base(Stream)
 		{
 			Friendly = Stream.ReadBoolean();
 			OverrideScores = Stream.ReadEnumerable(
@@ -47,7 +43,6 @@ namespace PanzerBlitz
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			Stream.Write(Friendly);
 			Stream.Write(OverrideScores, i =>
 			{
@@ -56,15 +51,14 @@ namespace PanzerBlitz
 			});
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			IEnumerable<Unit> countedUnits =
 				Match.Armies.Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Status == UnitStatus.DESTROYED);
-			_Score = countedUnits.Sum(
+			return countedUnits.Sum(
 				i => OverrideScores.ContainsKey(i.Configuration) ? OverrideScores[i.Configuration] : 1);
-			return _Score;
 		}
 	}
 }

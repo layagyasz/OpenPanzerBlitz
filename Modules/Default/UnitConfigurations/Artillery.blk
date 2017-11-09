@@ -120,6 +120,16 @@ unit-configuration:57mm-at {
 
 	bool:is-light-passenger { true }
 }
+unit-configuration:75mm-at-early {
+	string:name { 75mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
 unit-configuration:75mm-at {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
@@ -146,7 +156,7 @@ unit-configuration:76_2mm-at {
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
-	byte:range { 5 }
+	byte:range { 6 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
@@ -226,7 +236,7 @@ unit-configuration:40mm-aa {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 8 }
 	byte:range { 12 }
-	byte:defense { 1 }
+	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
@@ -556,7 +566,7 @@ unit-configuration:120mm-mortar-russian {
 	byte:movement { 0 }
 	bool:can-indirect-fire { true }
 }
-unit-configuration:120mm-mortar-polish {
+unit-configuration:120mm-mortar-early {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
 

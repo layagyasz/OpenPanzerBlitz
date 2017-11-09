@@ -21,7 +21,7 @@ unit-configuration:mg-platoon-slovak {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:rifle-platoon-slovak-early {
+unit-configuration:rifle-platoon-slovak-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -31,7 +31,7 @@ unit-configuration:rifle-platoon-slovak-early {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-slovak {
+unit-configuration:rifle-platoon-slovak-40 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -41,7 +41,7 @@ unit-configuration:rifle-platoon-slovak {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-slovak-late {
+unit-configuration:rifle-platoon-slovak-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -95,7 +95,7 @@ unit-configuration:bicycle-slovak {
 
 	bool:is-vehicle { false }
 	bool:can-remount { false }
-	!unit-configuration:dismount-as { rifle-platoon-slovak }
+	!unit-configuration:dismount-as { rifle-platoon-slovak-41 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
 }
 unit-configuration:motorcycle-slovak {
@@ -107,7 +107,7 @@ unit-configuration:motorcycle-slovak {
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 12 }
-	!unit-configuration:dismount-as { rifle-platoon-slovak }
+	!unit-configuration:dismount-as { rifle-platoon-slovak-41 }
 }
 unit-configuration:oa-27{
 	string:name { OA-27 }

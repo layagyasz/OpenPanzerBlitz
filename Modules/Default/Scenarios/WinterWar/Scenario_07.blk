@@ -68,15 +68,15 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company-mid }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-41 }
 								int:count { 6 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company-mid }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-41 }
 								int:count { 4 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-company-mid }
+								!unit-configuration:unit-configuration { unit-configurations.ski-company-41 }
 								int:count { 6 }
 							}
 							unit-count:_ {
@@ -203,7 +203,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-platoon-mid }
+								!unit-configuration:unit-configuration { unit-configurations.ski-platoon-41 }
 								int:count { 18 }
 							}
 							unit-count:_ {
@@ -212,7 +212,7 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-finnish-early 
+									unit-configurations.engineer-platoon-finnish-41
 								}
 								int:count { 3 }
 							}

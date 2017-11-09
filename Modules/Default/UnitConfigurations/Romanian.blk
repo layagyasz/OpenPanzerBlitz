@@ -21,7 +21,7 @@ unit-configuration:hmg-platoon-romanian {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:rifle-platoon-romanian-early {
+unit-configuration:rifle-platoon-romanian-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -31,7 +31,7 @@ unit-configuration:rifle-platoon-romanian-early {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-romanian {
+unit-configuration:rifle-platoon-romanian-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -85,7 +85,7 @@ unit-configuration:motorcycle-romanian {
 
 	bool:is-armored { false }
 	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-platoon-romanian }
+	!unit-configuration:dismount-as { rifle-platoon-romanian-41 }
 }
 unit-configuration:malaxa {
 	string:name { Malaxa }

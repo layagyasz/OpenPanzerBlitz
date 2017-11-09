@@ -138,11 +138,13 @@
 						string:name { 20th Infantry Bgde. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish-44 }
 								int:count { 18 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-finnish }
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-finnish-44 
+								}
 								int:count { 3 }
 							}
 							unit-count:_ {

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
@@ -11,15 +11,13 @@ namespace PanzerBlitz
 		public readonly Objective Numerator;
 		public readonly Objective Denominator;
 
-		public RatioObjective(string UniqueKey, Objective Numerator, Objective Denominator)
-			: base(UniqueKey)
+		public RatioObjective(Objective Numerator, Objective Denominator)
 		{
 			this.Numerator = Numerator;
 			this.Denominator = Denominator;
 		}
 
 		public RatioObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -28,7 +26,6 @@ namespace PanzerBlitz
 		}
 
 		public RatioObjective(SerializationInputStream Stream)
-			: base(Stream)
 		{
 			Numerator = (Objective)ObjectiveSerializer.Instance.Deserialize(Stream);
 			Denominator = (Objective)ObjectiveSerializer.Instance.Deserialize(Stream);
@@ -36,14 +33,13 @@ namespace PanzerBlitz
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			ObjectiveSerializer.Instance.Serialize(Numerator, Stream);
 			ObjectiveSerializer.Instance.Serialize(Denominator, Stream);
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			return Numerator.CalculateScore(ForArmy, Match) / Denominator.CalculateScore(ForArmy, Match);
+			return Numerator.GetScore(ForArmy, Match, Cache) / Denominator.GetScore(ForArmy, Match, Cache);
 		}
 	}
 }

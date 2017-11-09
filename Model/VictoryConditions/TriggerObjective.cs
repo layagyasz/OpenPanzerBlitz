@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -12,8 +13,7 @@ namespace PanzerBlitz
 		public readonly int Threshold;
 		public readonly bool Invert;
 
-		public TriggerObjective(string UniqueKey, Objective Objective, int Threshold, bool Invert)
-			: base(UniqueKey)
+		public TriggerObjective(Objective Objective, int Threshold, bool Invert)
 		{
 			this.Objective = Objective;
 			this.Threshold = Threshold;
@@ -21,7 +21,6 @@ namespace PanzerBlitz
 		}
 
 		public TriggerObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -32,7 +31,6 @@ namespace PanzerBlitz
 
 		public TriggerObjective(SerializationInputStream Stream)
 			: this(
-				Stream.ReadString(),
 				(Objective)ObjectiveSerializer.Instance.Deserialize(Stream),
 				Stream.ReadInt32(),
 				Stream.ReadBoolean())
@@ -40,18 +38,16 @@ namespace PanzerBlitz
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			ObjectiveSerializer.Instance.Serialize(Objective, Stream);
 			Stream.Write(Threshold);
 			Stream.Write(Invert);
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			bool t = Invert ? Objective.CalculateScore(ForArmy, Match) <= Threshold
-									   : Objective.CalculateScore(ForArmy, Match) >= Threshold;
-			_Score = t ? 1 : 0;
-			return _Score;
+			bool t = Invert ? Objective.GetScore(ForArmy, Match, Cache) <= Threshold
+									   : Objective.GetScore(ForArmy, Match, Cache) >= Threshold;
+			return t ? 1 : 0;
 		}
 	}
 }

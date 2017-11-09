@@ -33,7 +33,7 @@ namespace PanzerBlitz
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
 		}
 
-		public ObjectiveSuccessTrigger(SerializationInputStream Stream, List<Objective> Scorers)
+		public ObjectiveSuccessTrigger(SerializationInputStream Stream)
 		{
 			SuccessLevel = (ObjectiveSuccessLevel)Stream.ReadByte();
 			Threshold = Stream.ReadInt32();
@@ -50,9 +50,10 @@ namespace PanzerBlitz
 			Stream.Write(Objective, i => ObjectiveSerializer.Instance.Serialize(Objective, Stream), false, true);
 		}
 
-		public bool IsSatisfied()
+		public bool IsSatisfied(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			return Invert ? Objective.GetScore() <= Threshold : Objective.GetScore() >= Threshold;
+			return Invert ? Objective.GetScore(ForArmy, Match, Cache) <= Threshold
+										 : Objective.GetScore(ForArmy, Match, Cache) >= Threshold;
 		}
 	}
 }

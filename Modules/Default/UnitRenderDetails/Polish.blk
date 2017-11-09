@@ -2,11 +2,11 @@
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
-unit-render-details:rifle-platoon-polish-early {
+unit-render-details:rifle-platoon-polish-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-polish {
+unit-render-details:rifle-platoon-polish-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

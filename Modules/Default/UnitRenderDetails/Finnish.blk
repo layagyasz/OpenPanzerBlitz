@@ -1,20 +1,24 @@
-﻿unit-render-details:rifle-platoon-finnish-early {
+﻿unit-render-details:rifle-platoon-finnish-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:ski-platoon-early {
+unit-render-details:ski-platoon-39 {
 	string:override-display-name { SKI }
 	string:image-path { ski-platoon.png }
 }
-unit-render-details:rifle-platoon-finnish-mid {
+unit-render-details:rifle-platoon-finnish-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-finnish {
+unit-render-details:ski-platoon-41 {
+	string:override-display-name { SKI }
+	string:image-path { ski-platoon.png }
+}
+unit-render-details:rifle-platoon-finnish-44 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:ski-platoon-mid {
+unit-render-details:ski-platoon-44 {
 	string:override-display-name { SKI }
 	string:image-path { ski-platoon.png }
 }
@@ -30,25 +34,36 @@ unit-render-details:mg-platoon-finnish {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
-unit-render-details:engineer-platoon-finnish-early {
+unit-render-details:engineer-platoon-finnish-39 {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
-unit-render-details:engineer-platoon-finnish-mid {
+unit-render-details:engineer-platoon-finnish-41 {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
-unit-render-details:engineer-platoon-finnish {
+unit-render-details:engineer-platoon-finnish-44 {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
-unit-render-details:cavalry-finnish {
+unit-render-details:cavalry-finnish-39 {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-3.png }
+}
+unit-render-details:cavalry-finnish-41 {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-3.png }
+}
+unit-render-details:cavalry-finnish-44 {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry-3.png }
 }
 unit-render-details:truck-finnish {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-3.png }
+}
+unit-render-details:bicycle-finnish {
+	string:image-path { bicycle.png }
 }
 unit-render-details:bt-42 {
 	string:image-path { bt-42.png }

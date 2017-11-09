@@ -6,25 +6,25 @@ unit-render-details:recon-company {
 	string:override-display-name { RECON }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:rifle-company-early {
+unit-render-details:rifle-company-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:ski-company {
+unit-render-details:ski-company-39 {
 	string:override-display-name { SKI }
 	string:image-path { ski-company.png }
 	color:override-color { #FFFFFF }
 }
-unit-render-details:rifle-company-mid {
+unit-render-details:rifle-company-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:ski-company-mid {
+unit-render-details:ski-company-41 {
 	string:override-display-name { SKI }
 	string:image-path { ski-company.png }
 	color:override-color { #FFFFFF }
 }
-unit-render-details:rifle-company-late-mid {
+unit-render-details:rifle-company-42 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
@@ -32,16 +32,21 @@ unit-render-details:rifle-company {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
+unit-render-details:guards-company-41 {
+	string:override-display-name { GUARDS }
+	string:image-path { infantry-company.png }
+	color:override-color { #E24B20 }
+}
 unit-render-details:guards-company {
 	string:override-display-name { GUARDS }
 	string:image-path { infantry-company.png }
 	color:override-color { #E24B20 }
 }
-unit-render-details:smg-company-early {
+unit-render-details:smg-company-40 {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:smg-company-mid {
+unit-render-details:smg-company-41 {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
 }
@@ -49,7 +54,11 @@ unit-render-details:smg-company {
 	string:override-display-name { SMG }
 	string:image-path { infantry-company.png }
 }
-unit-render-details:cavalry-russian-early {
+unit-render-details:cavalry-russian-39 {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry.png }
+}
+unit-render-details:cavalry-russian-41 {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry.png }
 }
@@ -79,6 +88,9 @@ unit-render-details:nkl-16 {
 unit-render-details:nkl-26 {
 	string:image-path { nkl-26.png }
 }
+unit-render-details:asd-400 {
+	string:image-path { asd-400.png }
+}
 unit-render-details:rf-8 {
 	string:image-path { rf-8.png }
 }
@@ -93,6 +105,12 @@ unit-render-details:zis-42-transport {
 unit-render-details:t-20 {
 	string:image-path { t-20.png }
 }
+unit-render-details:motorcycle-russian-39 {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:motorcycle-russian-42 {
+	string:image-path { motorcycle-2.png }
+}
 unit-render-details:ba-10-infantry {
 	string:image-path { ba-10.png }
 }
@@ -101,6 +119,9 @@ unit-render-details:ba-10-at {
 }
 unit-render-details:ba-20 {
 	string:image-path { ba-20.png }
+}
+unit-render-details:ba-32-a {
+	string:image-path { ba-32-a.png }
 }
 unit-render-details:t-26-a {
 	string:image-path { t-26-a.png }

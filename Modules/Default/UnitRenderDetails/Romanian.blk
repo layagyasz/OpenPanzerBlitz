@@ -6,11 +6,11 @@ unit-render-details:hmg-platoon-romanian {
 	string:override-display-name { HMG }
 	string:image-path { hmg-platoon.png }
 }
-unit-render-details:rifle-platoon-romanian-early {
+unit-render-details:rifle-platoon-romanian-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-romanian {
+unit-render-details:rifle-platoon-romanian-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -7,20 +8,18 @@ namespace PanzerBlitz
 {
 	public class PreventEnemyObjective : Objective
 	{
-		public PreventEnemyObjective(string UniqueKey)
-			: base(UniqueKey) { }
+		public PreventEnemyObjective() { }
 
-		public PreventEnemyObjective(ParseBlock Block)
-			: base(Block.Name) { }
+		public PreventEnemyObjective(ParseBlock Block) { }
 
-		public PreventEnemyObjective(SerializationInputStream Stream)
-			: base(Stream) { }
+		public PreventEnemyObjective(SerializationInputStream Stream) { }
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			_Score = Match.Armies.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
+			return Match.Armies.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
 						  .All(i => i.GetObjectiveSuccessLevel(Match) == ObjectiveSuccessLevel.DEFEAT) ? 1 : 0;
-			return _Score;
 		}
+
+		public override void Serialize(SerializationOutputStream Stream) { }
 	}
 }

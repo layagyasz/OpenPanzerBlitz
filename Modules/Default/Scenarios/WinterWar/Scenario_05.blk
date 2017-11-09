@@ -56,7 +56,7 @@
 						string:name { 84th Rifle Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company-early }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-39 }
 								int:count { 8 }
 							}
 							unit-count:_ {
@@ -155,7 +155,7 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-finnish-early 
+									unit-configurations.engineer-platoon-finnish-39 
 								}
 								int:count { 1 }
 							}

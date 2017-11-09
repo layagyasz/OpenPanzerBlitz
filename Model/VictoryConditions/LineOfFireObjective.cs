@@ -17,9 +17,7 @@ namespace PanzerBlitz
 		public readonly byte Width;
 		public readonly bool Vertical;
 
-		public LineOfFireObjective(
-			string UniqueKey, bool Friendly, bool IncludeLineOfSight, bool BreakThrough, byte Width, bool Vertical)
-			: base(UniqueKey)
+		public LineOfFireObjective(bool Friendly, bool IncludeLineOfSight, bool BreakThrough, byte Width, bool Vertical)
 		{
 			this.Friendly = Friendly;
 			this.IncludeFieldOfSight = IncludeLineOfSight;
@@ -29,7 +27,6 @@ namespace PanzerBlitz
 		}
 
 		public LineOfFireObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -42,7 +39,6 @@ namespace PanzerBlitz
 
 		public LineOfFireObjective(SerializationInputStream Stream)
 			: this(
-				Stream.ReadString(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
@@ -52,7 +48,6 @@ namespace PanzerBlitz
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			Stream.Write(Friendly);
 			Stream.Write(IncludeFieldOfSight);
 			Stream.Write(BreakThrough);
@@ -60,7 +55,7 @@ namespace PanzerBlitz
 			Stream.Write(Vertical);
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			IEnumerable<Unit> units = Match.Armies
 								 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
@@ -122,8 +117,7 @@ namespace PanzerBlitz
 				i => GetNeighbors(source, sink, sourceEdge, sinkEdge, i),
 				(i, j) => i == j);
 
-			_Score = p.Distance < double.MaxValue ? 1 : 0;
-			return _Score;
+			return p.Distance < double.MaxValue ? 1 : 0;
 		}
 
 		IEnumerable<Tile> GetNeighbors(Tile Source, Tile Sink, List<Tile> SourceEdge, List<Tile> SinkEdge, Tile Tile)

@@ -21,7 +21,7 @@ unit-configuration:hmg-platoon-hungarian {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:rifle-platoon-hungarian-early {
+unit-configuration:rifle-platoon-hungarian-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -31,7 +31,7 @@ unit-configuration:rifle-platoon-hungarian-early {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-hungarian {
+unit-configuration:rifle-platoon-hungarian-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -39,16 +39,6 @@ unit-configuration:rifle-platoon-hungarian {
 	byte:attack { 2 }
 	byte:range { 4 }
 	byte:defense { 5 }
-	byte:movement { 1 }
-}
-unit-configuration:rifle-platoon-hungarian-late {
-	string:name { Rifle Platoon }
-	unit-class:unit-class { infantry }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
-	byte:range { 4 }
-	byte:defense { 8 }
 	byte:movement { 1 }
 }
 unit-configuration:cavalry-hungarian {
@@ -85,7 +75,7 @@ unit-configuration:motorcycle-hungarian {
 
 	bool:is-armored { false }
 	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-platoon-hungarian }
+	!unit-configuration:dismount-as { rifle-platoon-hungarian-41 }
 }
 unit-configuration:csaba {
 	string:name { Csaba }

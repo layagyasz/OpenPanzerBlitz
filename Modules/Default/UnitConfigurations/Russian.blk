@@ -19,7 +19,7 @@ unit-configuration:recon-company {
 	byte:defense { 4 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-company-early {
+unit-configuration:rifle-company-39 {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
 
@@ -29,7 +29,7 @@ unit-configuration:rifle-company-early {
 	byte:defense { 8 }
 	byte:movement { 1 }
 }
-unit-configuration:ski-company {
+unit-configuration:ski-company-39 {
 	string:name { Ski Company }
 	unit-class:unit-class { infantry }
 
@@ -41,10 +41,10 @@ unit-configuration:ski-company {
 
 	bool:can-close-assault { false }
 	bool:is-oversized-passenger { true }
-	!unit-configuration:dismount-as { rifle-company-early }
+	!unit-configuration:dismount-as { rifle-company-39 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
-unit-configuration:rifle-company-mid {
+unit-configuration:rifle-company-41 {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
 
@@ -54,7 +54,17 @@ unit-configuration:rifle-company-mid {
 	byte:defense { 10 }
 	byte:movement { 1 }
 }
-unit-configuration:ski-company-mid {
+unit-configuration:rifle-company-42 {
+	string:name { Rifle Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 12 }
+	byte:movement { 1 }
+}
+unit-configuration:ski-company-41 {
 	string:name { Ski Company }
 	unit-class:unit-class { infantry }
 
@@ -66,18 +76,8 @@ unit-configuration:ski-company-mid {
 
 	bool:can-close-assault { false }
 	bool:is-oversized-passenger { true }
-	!unit-configuration:dismount-as { rifle-company-mid }
+	!unit-configuration:dismount-as { rifle-company-42 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
-}
-unit-configuration:rifle-company-late-mid {
-	string:name { Rifle Company }
-	unit-class:unit-class { infantry }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 4 }
-	byte:range { 4 }
-	byte:defense { 12 }
-	byte:movement { 1 }
 }
 unit-configuration:rifle-company {
 	string:name { Rifle Company }
@@ -87,6 +87,16 @@ unit-configuration:rifle-company {
 	byte:attack { 5 }
 	byte:range { 4 }
 	byte:defense { 16 }
+	byte:movement { 1 }
+}
+unit-configuration:guards-company-41 {
+	string:name { Guards Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 13 }
 	byte:movement { 1 }
 }
 unit-configuration:guards-company {
@@ -99,7 +109,7 @@ unit-configuration:guards-company {
 	byte:defense { 18 }
 	byte:movement { 1 }
 }
-unit-configuration:smg-company-early {
+unit-configuration:smg-company-40 {
 	string:name { SMG Company }
 	unit-class:unit-class { infantry }
 
@@ -109,7 +119,7 @@ unit-configuration:smg-company-early {
 	byte:defense { 6 }
 	byte:movement { 1 }
 }
-unit-configuration:smg-company-mid {
+unit-configuration:smg-company-41 {
 	string:name { SMG Company }
 	unit-class:unit-class { infantry }
 
@@ -129,7 +139,7 @@ unit-configuration:smg-company {
 	byte:defense { 12 }
 	byte:movement { 1 }
 }
-unit-configuration:cavalry-russian-early {
+unit-configuration:cavalry-russian-39 {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
@@ -137,6 +147,16 @@ unit-configuration:cavalry-russian-early {
 	byte:attack { 6 }
 	byte:range { 3 }
 	byte:defense { 4 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-russian-41 {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 8 }
+	byte:range { 3 }
+	byte:defense { 8 }
 	byte:movement { 3 }
 }
 unit-configuration:cavalry-russian {
@@ -242,6 +262,22 @@ unit-configuration:nkl-26 {
 	bool:leaves-wreck-when-destroyed { false }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
+unit-configuration:asd-400 {
+	string:name { ASD-400 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 2 }
+	byte:movement { 26 }
+
+	bool:can-only-carry-light { true }
+	float:oversized-passenger-movement-multiplier { 2 }
+	bool:is-armored { true }
+	bool:leaves-wreck-when-destroyed { false }
+	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
+}
 unit-configuration:rf-8 {
 	string:name { RF-8 }
 	unit-class:unit-class { reconnaissance-vehicle }
@@ -290,15 +326,43 @@ unit-configuration:t-20 {
 
 	bool:is-armored { true }
 }
+unit-configuration:motorcycle-russian-39 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-company-39 }
+}
+unit-configuration:motorcycle-russian-42 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-company-42 }
+}
 unit-configuration:ba-10-infantry {
 	string:name { BA-10 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 6 }	
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
 }
 unit-configuration:ba-10-at {
 	string:name { BA-10 }
@@ -317,6 +381,16 @@ unit-configuration:ba-20 {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
+}
+unit-configuration:ba-32-a {
+	string:name { BA-32a }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
 	byte:defense { 2 }
 	byte:movement { 12 }	
 }

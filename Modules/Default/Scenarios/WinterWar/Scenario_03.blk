@@ -42,7 +42,7 @@
 						string:name { 112th Rifle Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-company }
+								!unit-configuration:unit-configuration { unit-configurations.ski-company-39 }
 								int:count { 6 }
 							}
 							unit-count:_ {

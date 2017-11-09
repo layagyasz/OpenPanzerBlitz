@@ -9,7 +9,7 @@
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
-unit-configuration:rifle-platoon-polish-early {
+unit-configuration:rifle-platoon-polish-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -19,7 +19,7 @@ unit-configuration:rifle-platoon-polish-early {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-polish {
+unit-configuration:rifle-platoon-polish-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -96,7 +96,7 @@ unit-configuration:motorcycle-polish {
 
 	bool:is-armored { false }
 	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-platoon-polish }
+	!unit-configuration:dismount-as { rifle-platoon-polish-41 }
 }
 unit-configuration:peugeot {
 	string:name { Peugeot }

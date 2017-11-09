@@ -6,11 +6,11 @@ unit-render-details:mg-platoon-italian {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
-unit-render-details:rifle-platoon-italian-early {
+unit-render-details:rifle-platoon-italian-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-italian {
+unit-render-details:rifle-platoon-italian-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

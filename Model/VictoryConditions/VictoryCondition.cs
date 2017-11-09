@@ -31,7 +31,7 @@ namespace PanzerBlitz
 		{
 			Scorers = Stream.ReadEnumerable(
 				i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream, false, true)).ToList();
-			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream, Scorers)).ToList();
+			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream)).ToList();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -42,12 +42,12 @@ namespace PanzerBlitz
 
 		public ObjectiveSuccessLevel GetMatchResult(Army ForArmy, Match Match)
 		{
-			Scorers.ForEach(i => i.CalculateScore(ForArmy, Match));
+			Dictionary<Objective, int> cache = new Dictionary<Objective, int>();
 
 			ObjectiveSuccessLevel result = ObjectiveSuccessLevel.DEFEAT;
 			foreach (ObjectiveSuccessTrigger t in Triggers)
 			{
-				if (t.IsSatisfied() && (int)t.SuccessLevel > (int)result) result = t.SuccessLevel;
+				if (t.IsSatisfied(ForArmy, Match, cache) && (int)t.SuccessLevel > (int)result) result = t.SuccessLevel;
 			}
 			return result;
 		}

@@ -6,15 +6,15 @@ unit-render-details:mg-platoon-slovak {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
-unit-render-details:rifle-platoon-slovak-early {
+unit-render-details:rifle-platoon-slovak-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-slovak {
+unit-render-details:rifle-platoon-slovak-40 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon-slovak-late {
+unit-render-details:rifle-platoon-slovak-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

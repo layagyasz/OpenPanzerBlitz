@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -12,15 +13,13 @@ namespace PanzerBlitz
 		public readonly bool Friendly;
 		public readonly Matcher<Tile> Matcher;
 
-		public TilesControlledObjective(string UniqueKey, bool Friendly, Matcher<Tile> Matcher)
-			: base(UniqueKey)
+		public TilesControlledObjective(bool Friendly, Matcher<Tile> Matcher)
 		{
 			this.Friendly = Friendly;
 			this.Matcher = Matcher;
 		}
 
 		public TilesControlledObjective(ParseBlock Block)
-			: base(Block.Name)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -30,23 +29,20 @@ namespace PanzerBlitz
 
 		public TilesControlledObjective(SerializationInputStream Stream)
 			: this(
-				Stream.ReadString(),
 				Stream.ReadBoolean(),
 				(Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream))
 		{ }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			base.Serialize(Stream);
 			Stream.Write(Friendly);
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
-		public override int CalculateScore(Army ForArmy, Match Match)
+		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			_Score = Match.Map.TilesEnumerable.Count(
+			return Match.Map.TilesEnumerable.Count(
 				i => Friendly == (i.ControllingArmy == ForArmy) && Matcher.Matches(i));
-			return _Score;
 		}
 	}
 }

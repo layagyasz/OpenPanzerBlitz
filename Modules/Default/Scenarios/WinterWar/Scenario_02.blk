@@ -68,11 +68,11 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company-early }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-39 }
 								int:count { 12 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-company }
+								!unit-configuration:unit-configuration { unit-configurations.ski-company-39 }
 								int:count { 8 }
 							}
 							unit-count:_ {
@@ -148,7 +148,7 @@
 						string:name { 16th Infantry Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ski-platoon-early }
+								!unit-configuration:unit-configuration { unit-configurations.ski-platoon-39 }
 								int:count { 16 }
 							}
 							unit-count:_ {
@@ -161,7 +161,7 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-finnish-early 
+									unit-configurations.engineer-platoon-finnish-39 
 								}
 								int:count { 3 }
 							}

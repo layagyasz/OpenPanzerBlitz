@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -6,28 +7,17 @@ namespace PanzerBlitz
 {
 	public abstract class Objective : Serializable
 	{
-		public readonly string UniqueKey;
+		public abstract int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache);
 
-		protected int _Score;
-
-		public Objective(string UniqueKey)
+		public int GetScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			this.UniqueKey = UniqueKey;
+			if (Cache.ContainsKey(this)) return Cache[this];
+
+			int score = CalculateScore(ForArmy, Match, Cache);
+			Cache.Add(this, score);
+			return score;
 		}
 
-		public Objective(SerializationInputStream Stream)
-			: this(Stream.ReadString()) { }
-
-		public abstract int CalculateScore(Army ForArmy, Match Match);
-
-		public int GetScore()
-		{
-			return _Score;
-		}
-
-		public virtual void Serialize(SerializationOutputStream Stream)
-		{
-			Stream.Write(UniqueKey);
-		}
+		public abstract void Serialize(SerializationOutputStream Stream);
 	}
 }

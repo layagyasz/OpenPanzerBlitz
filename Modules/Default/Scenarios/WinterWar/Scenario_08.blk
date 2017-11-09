@@ -88,7 +88,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company-late-mid }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-42 }
 								int:count { 6 }
 							}
 							unit-count:_ {
@@ -238,7 +238,7 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { 
-									unit-configurations.rifle-platoon-finnish-mid 
+									unit-configurations.rifle-platoon-finnish-41
 								}
 								int:count { 10 }
 							}
@@ -248,12 +248,12 @@
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-finnish-mid 
+									unit-configurations.engineer-platoon-finnish-41
 								}
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.cavalry-finnish }
+								!unit-configuration:unit-configuration { unit-configurations.cavalry-finnish-41 }
 								int:count { 12 }
 							}
 							unit-count:_ {

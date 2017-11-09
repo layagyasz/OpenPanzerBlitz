@@ -1,4 +1,4 @@
-﻿unit-configuration:rifle-platoon-finnish-early {
+﻿unit-configuration:rifle-platoon-finnish-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -8,7 +8,7 @@
 	byte:defense { 8 }
 	byte:movement { 1 }
 }
-unit-configuration:ski-platoon-early {
+unit-configuration:ski-platoon-39 {
 	string:name { Ski Platoon }
 	unit-class:unit-class { infantry }
 
@@ -19,10 +19,10 @@ unit-configuration:ski-platoon-early {
 	byte:movement { 3 }
 
 	bool:is-oversized-passenger { true }
-	!unit-configuration:dismount-as { rifle-platoon-finnish-early }
+	!unit-configuration:dismount-as { rifle-platoon-finnish-39 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
-unit-configuration:rifle-platoon-finnish-mid {
+unit-configuration:rifle-platoon-finnish-41 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -32,7 +32,21 @@ unit-configuration:rifle-platoon-finnish-mid {
 	byte:defense { 8 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon-finnish {
+unit-configuration:ski-platoon-41 {
+	string:name { Ski Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 8 }
+	byte:movement { 3 }
+
+	bool:is-oversized-passenger { true }
+	!unit-configuration:dismount-as { rifle-platoon-finnish-41 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
+}
+unit-configuration:rifle-platoon-finnish-44 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -42,18 +56,18 @@ unit-configuration:rifle-platoon-finnish {
 	byte:defense { 8 }
 	byte:movement { 1 }
 }
-unit-configuration:ski-platoon-mid {
+unit-configuration:ski-platoon-44 {
 	string:name { Ski Platoon }
 	unit-class:unit-class { infantry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 3 }
-	byte:range { 4 }
+	byte:attack { 4 }
+	byte:range { 3 }
 	byte:defense { 8 }
 	byte:movement { 3 }
 
 	bool:is-oversized-passenger { true }
-	!unit-configuration:dismount-as { rifle-platoon-finnish-mid }
+	!unit-configuration:dismount-as { rifle-platoon-finnish-44 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
 unit-configuration:sissi-platoon {
@@ -92,7 +106,7 @@ unit-configuration:mg-platoon-finnish {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:engineer-platoon-finnish-early {
+unit-configuration:engineer-platoon-finnish-39 {
 	string:name { Engineer Platoon }
 	unit-class:unit-class { infantry }
 
@@ -103,7 +117,7 @@ unit-configuration:engineer-platoon-finnish-early {
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
-unit-configuration:engineer-platoon-finnish-mid {
+unit-configuration:engineer-platoon-finnish-41 {
 	string:name { Engineer Platoon }
 	unit-class:unit-class { infantry }
 
@@ -114,7 +128,7 @@ unit-configuration:engineer-platoon-finnish-mid {
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
-unit-configuration:engineer-platoon-finnish {
+unit-configuration:engineer-platoon-finnish-44 {
 	string:name { Engineer Platoon }
 	unit-class:unit-class { infantry }
 
@@ -125,12 +139,32 @@ unit-configuration:engineer-platoon-finnish {
 	byte:movement { 1 }
 	bool:is-engineer { true }
 }
-unit-configuration:cavalry-finnish {
+unit-configuration:cavalry-finnish-39 {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-finnish-41 {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-finnish-44 {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 3 }
@@ -146,6 +180,21 @@ unit-configuration:truck-finnish {
 	byte:movement { 12 }
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:bicycle-finnish {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { sissi-platoon }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
 }
 unit-configuration:bt-42 {
 	string:name { BT-42 }
