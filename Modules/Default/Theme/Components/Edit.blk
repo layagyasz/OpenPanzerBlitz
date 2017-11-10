@@ -16,17 +16,23 @@ class:new-map-header-2 {
 class:new-map-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 242 }
+		int:height { 293 }
 	}
 }
 class:new-map-display {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 114 }
+		int:height { 263 }
 	}
 }
 class:new-map-text-input {
 	!class:parent { text-input }
+}
+class:new-map-checkbox {
+	!class:parent { checkbox }
+	mode:default {
+		int:width { 288 }
+	}
 }
 class:new-map-error {
 	!class:parent { header-2 }

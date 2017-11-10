@@ -33,15 +33,15 @@ namespace PanzerBlitz
 			SetMap(EditScreen.MapView.Map);
 
 			_NewPane.OnCancel += (sender, e) => _NewPane.Visible = false;
-			_NewPane.OnCreate += New;
+			_NewPane.OnCreate += NewMap;
 
 			_OpenPane.SetDirectory("./Maps");
 			_OpenPane.OnCancel += (sender, e) => _OpenPane.Visible = false;
-			_OpenPane.OnAction += (sender, e) => Open(sender, e);
+			_OpenPane.OnAction += (sender, e) => OpenMap(sender, e);
 
 			_SavePane.SetDirectory("./Maps");
 			_SavePane.OnCancel += (sender, e) => _SavePane.Visible = false;
-			_SavePane.OnAction += (sender, e) => Save(sender, e);
+			_SavePane.OnAction += (sender, e) => SaveMap(sender, e);
 
 			_EditScreen.OnNewClicked += (sender, e) => _NewPane.Visible = true;
 			_EditScreen.OnOpenClicked += (sender, e) => _OpenPane.Visible = true;
@@ -129,14 +129,14 @@ namespace PanzerBlitz
 			}
 		}
 
-		void New(object Sender, ValuedEventArgs<Vector2i> E)
+		void NewMap(object Sender, ValuedEventArgs<MapConfiguration> E)
 		{
 			NewMapPane pane = (NewMapPane)Sender;
-			SetMap(new Map(E.Value.X, E.Value.Y, null, new IdGenerator()));
+			SetMap(E.Value.GenerateMap(null, new IdGenerator()));
 			pane.Visible = false;
 		}
 
-		void Save(object Sender, EventArgs E)
+		void SaveMap(object Sender, EventArgs E)
 		{
 			IOPane pane = (IOPane)Sender;
 			using (FileStream stream = new FileStream(pane.InputPath, FileMode.Create))
@@ -151,7 +151,7 @@ namespace PanzerBlitz
 			pane.Visible = false;
 		}
 
-		void Open(object Sender, EventArgs E)
+		void OpenMap(object Sender, EventArgs E)
 		{
 			IOPane pane = (IOPane)Sender;
 			using (FileStream stream = new FileStream(pane.InputPath, FileMode.Open))

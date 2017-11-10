@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<string>> OnTextSubmitted;
 
 		Chat _Chat;
-		ScrollCollection<string> _Display;
+		ScrollCollection<ClassedGuiItem> _Display;
 		TextInput _TextInput;
 		string _MessageClassName;
 
@@ -28,7 +28,7 @@ namespace PanzerBlitz
 			string TextInputClassName)
 			: base(ContainerClassName)
 		{
-			_Display = new ScrollCollection<string>(PanelClassName);
+			_Display = new ScrollCollection<ClassedGuiItem>(PanelClassName);
 			_TextInput = new TextInput(TextInputClassName);
 			_TextInput.OnSubmitted += HandleTextSubmitted;
 			_MessageClassName = MessageClassName;

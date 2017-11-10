@@ -155,8 +155,8 @@ class:text-input {
 	}
 }
 class:checkbox {
+	!class:parent { text-input }
 	mode:default {
-		int:height { 24 }
 		int:width { 24 }
 		color[]:background-color { #969696 #969696 #969696 #969696 }
 	}

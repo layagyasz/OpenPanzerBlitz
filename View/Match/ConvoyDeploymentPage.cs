@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
@@ -16,7 +17,7 @@ namespace PanzerBlitz
 
 		ConvoyDeployment _Deployment;
 		UnitConfigurationRenderer _Renderer;
-		ScrollCollection<StackView> _Selection;
+		ValuedScrollCollection<SingularUnitSelectionOption, StackView> _Selection;
 
 		Button _MoveUpButton = new Button("small-button") { DisplayedString = "Up" };
 		Button _MoveDownButton = new Button("small-button") { DisplayedString = "Down" };
@@ -52,7 +53,7 @@ namespace PanzerBlitz
 			_LoadButton.OnClick += HandleLoadButton;
 			_UnloadButton.OnClick += HandleUnloadButton;
 
-			_Selection = new ScrollCollection<StackView>("deployment-select");
+			_Selection = new ValuedScrollCollection<SingularUnitSelectionOption, StackView>("deployment-select");
 
 			List<Unit> units = Deployment.Units.ToList();
 			units.Sort(SortUnits);
@@ -119,12 +120,8 @@ namespace PanzerBlitz
 		void HandleLoad(object Sender, EventArgs E)
 		{
 			Unit u = (Unit)Sender;
-			SingularUnitSelectionOption carrierOption =
-				(SingularUnitSelectionOption)_Selection.FirstOrDefault(
-					i => ((SingularUnitSelectionOption)i).Unit == u);
-			SingularUnitSelectionOption passengerOption =
-							(SingularUnitSelectionOption)_Selection.FirstOrDefault(
-								i => ((SingularUnitSelectionOption)i).Unit == u.Passenger);
+			SingularUnitSelectionOption carrierOption = _Selection.FirstOrDefault(i => i.Unit == u);
+			SingularUnitSelectionOption passengerOption = _Selection.FirstOrDefault(i => i.Unit == u.Passenger);
 			_Selection.Remove(passengerOption);
 			carrierOption.Value.Merge(passengerOption.Value);
 		}
@@ -132,9 +129,7 @@ namespace PanzerBlitz
 		void HandleUnload(object Sender, ValuedEventArgs<Unit> E)
 		{
 			Unit u = (Unit)Sender;
-			SingularUnitSelectionOption carrierOption =
-				(SingularUnitSelectionOption)_Selection.FirstOrDefault(
-					i => ((SingularUnitSelectionOption)i).Unit == u);
+			SingularUnitSelectionOption carrierOption = _Selection.FirstOrDefault(i => i.Unit == u);
 			SingularUnitSelectionOption option =
 				new SingularUnitSelectionOption("deployment-selection-option", E.Value, _Renderer);
 			_Selection.Insert(Math.Min(_Selection.Count() - 1, _Selection.ToList().IndexOf(carrierOption) + 1), option);

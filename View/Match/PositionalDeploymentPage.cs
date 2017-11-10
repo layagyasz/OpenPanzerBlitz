@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Window;
@@ -13,7 +14,7 @@ namespace PanzerBlitz
 
 		PositionalDeployment _Deployment;
 		UnitConfigurationRenderer _Renderer;
-		ScrollCollection<HomogenousStackView> _Selection;
+		ValuedScrollCollection<GroupedUnitSelectionOption, HomogenousStackView> _Selection;
 
 		public override Deployment Deployment
 		{
@@ -38,7 +39,8 @@ namespace PanzerBlitz
 			_Deployment = Deployment;
 			_Renderer = Renderer;
 
-			_Selection = new ScrollCollection<HomogenousStackView>("deployment-select");
+			_Selection =
+				new ValuedScrollCollection<GroupedUnitSelectionOption, HomogenousStackView>("deployment-select");
 			_Selection.OnChange +=
 				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
 
@@ -52,8 +54,7 @@ namespace PanzerBlitz
 		public void Add(Unit Unit)
 		{
 			GroupedUnitSelectionOption option =
-							(GroupedUnitSelectionOption)_Selection.FirstOrDefault(
-								i => ((GroupedUnitSelectionOption)i).UnitConfiguration == Unit.Configuration);
+				_Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
 			if (option == null) _Selection.Add(
 				new GroupedUnitSelectionOption("deployment-selection-option", new Unit[] { Unit }, _Renderer));
 			else option.Push(Unit);
@@ -62,8 +63,7 @@ namespace PanzerBlitz
 		public void Remove(Unit Unit)
 		{
 			GroupedUnitSelectionOption option =
-				(GroupedUnitSelectionOption)_Selection.FirstOrDefault(
-					i => ((GroupedUnitSelectionOption)i).UnitConfiguration == Unit.Configuration);
+				_Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
 			if (option != null) option.Pop();
 			if (option.Count == 0) _Selection.Remove(option);
 		}

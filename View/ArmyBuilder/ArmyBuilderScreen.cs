@@ -12,9 +12,10 @@ namespace PanzerBlitz
 {
 	public class ArmyBuilderScreen : ScreenBase
 	{
-		ScrollCollection<StackView> _AvailableUnits = new ScrollCollection<StackView>("army-builder-select");
-		ScrollCollection<HomogenousStackView> _SelectedUnits =
-			new ScrollCollection<HomogenousStackView>("army-builder-select");
+		ScrollCollection<SingularUnitSelectionOption> _AvailableUnits =
+			new ScrollCollection<SingularUnitSelectionOption>("army-builder-select");
+		ScrollCollection<GroupedUnitSelectionOption> _SelectedUnits =
+			new ScrollCollection<GroupedUnitSelectionOption>("army-builder-select");
 
 		public ArmyBuilderScreen(
 			Vector2f WindowSize,

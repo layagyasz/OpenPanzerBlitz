@@ -19,7 +19,7 @@ namespace PanzerBlitz
 		public readonly Button JoinServerButton = new Button("landing-button") { DisplayedString = "Join Server" };
 		public readonly Button StartServerButton = new Button("landing-button") { DisplayedString = "Start Server" };
 
-		ScrollCollection<object> _LandingSelect = new ScrollCollection<object>("landing-select", true);
+		ScrollCollection<ClassedGuiItem> _LandingSelect = new ScrollCollection<ClassedGuiItem>("landing-select", true);
 
 		public LandingScreen(Vector2f WindowSize)
 			: base(WindowSize, false)

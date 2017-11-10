@@ -10,11 +10,12 @@ namespace PanzerBlitz
 	public class NewMapPane : Pane
 	{
 		public EventHandler<EventArgs> OnCancel;
-		public EventHandler<ValuedEventArgs<Vector2i>> OnCreate;
+		public EventHandler<ValuedEventArgs<MapConfiguration>> OnCreate;
 
 		SingleColumnTable _Display = new SingleColumnTable("new-map-display");
 		TextInput _HeightInput = new TextInput("new-map-text-input");
 		TextInput _WidthInput = new TextInput("new-map-text-input");
+		Checkbox _GenerateRandomCheckbox = new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
 		Button _Error = new Button("new-map-error");
 		Button _CancelButton = new Button("small-button") { DisplayedString = "Cancel" };
 		Button _CreateButton = new Button("small-button") { DisplayedString = "Create" };
@@ -33,6 +34,8 @@ namespace PanzerBlitz
 			_Display.Add(_HeightInput);
 			_Display.Add(new Button("new-map-header-2") { DisplayedString = "Width" });
 			_Display.Add(_WidthInput);
+			_Display.Add(new Button("new-map-header-2") { DisplayedString = "Random Map Generation" });
+			_Display.Add(_GenerateRandomCheckbox);
 
 			Add(_Display);
 			Add(_CancelButton);
@@ -63,8 +66,10 @@ namespace PanzerBlitz
 				int width = Convert.ToInt32(_WidthInput.Value);
 				if (height < 1 || width < 1) throw new FormatException();
 
-				Vector2i size = new Vector2i(width, height);
-				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<Vector2i>(size));
+				MapConfiguration configuration = null;
+				if (_GenerateRandomCheckbox.Value) configuration = new RandomMapConfiguration(width, height);
+				else configuration = new BlankMapConfiguration(width, height);
+				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<MapConfiguration>(configuration));
 
 				ClearError();
 			}

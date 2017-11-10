@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
@@ -13,7 +14,7 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<AttackTarget>> OnAttackTargetChanged;
 		public EventHandler<EventArgs> OnExecute;
 
-		ScrollCollection<object> _Description = new ScrollCollection<object>("attack-display");
+		ScrollCollection<ClassedGuiItem> _Description = new ScrollCollection<ClassedGuiItem>("attack-display");
 		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select");
 		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
 

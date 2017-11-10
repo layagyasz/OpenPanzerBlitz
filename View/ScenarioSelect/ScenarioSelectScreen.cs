@@ -14,7 +14,8 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<Scenario>> OnScenarioSelected;
 
-		ScrollCollection<Scenario> _ScenarioSelect = new ScrollCollection<Scenario>("scenario-select");
+		ValuedScrollCollection<SelectionOption<Scenario>, Scenario> _ScenarioSelect =
+			new ValuedScrollCollection<SelectionOption<Scenario>, Scenario>("scenario-select");
 
 		public ScenarioSelectScreen(Vector2f WindowSize, IEnumerable<Scenario> Scenarios)
 			: base(WindowSize)
@@ -32,7 +33,7 @@ namespace PanzerBlitz
 			_ScenarioSelect.Position = .5f * (WindowSize - _ScenarioSelect.Size);
 		}
 
-		void HandleSelect(object Sender, ValuedEventArgs<ClassedGuiInput<Scenario>> E)
+		void HandleSelect(object Sender, ValuedEventArgs<SelectionOption<Scenario>> E)
 		{
 			if (OnScenarioSelected != null)
 				OnScenarioSelected(this, new ValuedEventArgs<Scenario>(E.Value.Value));

@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Window;
@@ -12,8 +13,8 @@ namespace PanzerBlitz
 
 		Button _CloseButton = new Button("unit-info-close-button") { DisplayedString = "X" };
 		UnitView _UnitView;
-		ScrollCollection<object> _Info =
-			new ScrollCollection<object>("unit-info-display") { Position = new Vector2f(0, 208) };
+		ScrollCollection<ClassedGuiItem> _Info =
+			new ScrollCollection<ClassedGuiItem>("unit-info-display") { Position = new Vector2f(0, 208) };
 
 		public UnitInfoPane(Unit Unit, UnitConfigurationRenderer Renderer)
 			: base("unit-info-pane")

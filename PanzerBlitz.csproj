@@ -209,7 +209,6 @@
     <Compile Include="Model\Map\TileComponentRules.cs" />
     <Compile Include="Model\Map\TileRulesCalculator.cs" />
     <Compile Include="Model\Map\TilePathOverlay.cs" />
-    <Compile Include="Model\Map\RandomMapConfiguration.cs" />
     <Compile Include="Server\UnitConfigurationLock.cs" />
     <Compile Include="IdGenerator.cs" />
     <Compile Include="Server\UnitConfigurationPack.cs" />
@@ -280,6 +279,7 @@
     <Compile Include="Model\Orders\Movement\DismountOrder.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasUnit.cs" />
     <Compile Include="Model\Map\MapRegion.cs" />
+    <Compile Include="Model\Map\RandomMapConfiguration.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileInRegion.cs" />
     <Compile Include="View\Map\MapRegionView.cs" />
     <Compile Include="View\TextPane.cs" />
@@ -300,6 +300,7 @@
     <Compile Include="Model\UnitMovementRules.cs" />
     <Compile Include="Model\MovementCost.cs" />
     <Compile Include="View\Unit\UnitInfoPane.cs" />
+    <Compile Include="Model\Map\BlankMapConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
