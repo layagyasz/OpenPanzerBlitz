@@ -95,7 +95,7 @@ namespace PanzerBlitz
 
 				for (int i = 0; i < 6; ++i)
 				{
-					if (t.Configuration.TileBase == TileBase.SLOPE)
+					if (t.Configuration.TileBase == TileBase.SLOPE || t.Configuration.GetEdge(i) == TileEdge.WATER)
 						continue;
 
 					Tile neighbor = t.NeighborTiles[i];
@@ -115,6 +115,31 @@ namespace PanzerBlitz
 				}
 			}
 
+			// Rivers
+			HashSet<Tile> riverNodes = new HashSet<Tile>();
+			for (int i = 0; i < Math.Max(1, _Width * _Height / 160); ++i)
+			{
+				Tile t = GetRandomTile(map);
+				if (!IsElevated(t)) riverNodes.Add(t);
+			}
+			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
+			{
+				Tile t = GetRandomEdgeTile(map);
+				if (!IsElevated(t))
+				{
+					EdgePathOverlay(t, TilePathOverlay.STREAM);
+					riverNodes.Add(t);
+				}
+			}
+			MinimalSpanning<Tile> mst =
+				new MinimalSpanning<Tile>(riverNodes, i => riverNodes, (i, j) => i.HeuristicDistanceTo(j));
+			List<Tuple<Tile, Tile>> edges = mst.GetEdges().ToList();
+			for (int i = 0; i < edges.Count / 4; ++i)
+				edges.RemoveAt(_Random.Next(0, edges.Count));
+			foreach (Tuple<Tile, Tile> edge in edges)
+				MakePath(edge.Item1, edge.Item2, TilePathOverlay.STREAM, RiverDistanceFunction);
+
+			// Roads and Towns
 			Partitioning<Tile> towns = new Partitioning<Tile>(
 				map.TilesEnumerable, (i, j) => i.GetEdge(j) == TileEdge.TOWN);
 			HashSet<Tile> roadNodes = new HashSet<Tile>();
@@ -126,30 +151,25 @@ namespace PanzerBlitz
 					roadNodes.Add(tiles[_Random.Next(0, tiles.Count)]);
 			}
 			for (int i = 0; i < Math.Max(1, _Width * _Height / 160); ++i)
-				roadNodes.Add(map.Tiles[_Random.Next(0, _Width), _Random.Next(0, _Height)]);
+				roadNodes.Add(GetRandomTile(map));
 			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
 			{
-				bool xEdge = _Random.Next(0, 2) == 0;
-				bool yEdge = _Random.Next(0, 2) == 0;
-				int x = 0;
-				int y = 0;
-				if (xEdge)
-				{
-					x = _Random.Next(0, _Width);
-					y = yEdge ? 0 : _Height - 1;
-					map.Tiles[x, y].SetPathOverlay(yEdge ? 2 : 4, TilePathOverlay.ROAD);
-				}
-				else
-				{
-					x = yEdge ? 0 : _Width - 1;
-					y = _Random.Next(0, _Height);
-					map.Tiles[x, y].SetPathOverlay(yEdge ? 0 : 3, TilePathOverlay.ROAD);
-				}
-				roadNodes.Add(map.Tiles[x, y]);
+				Tile t = GetRandomEdgeTile(map);
+				EdgePathOverlay(t, TilePathOverlay.ROAD);
+				roadNodes.Add(t);
 			}
 
-			List<Tile> points = roadNodes.ToList();
-			for (int i = 0; i < points.Count - 1; ++i) MakeRoad(points[i], points[i + 1]);
+			mst = new MinimalSpanning<Tile>(roadNodes, i => roadNodes, (i, j) => i.HeuristicDistanceTo(j));
+			edges = mst.GetEdges().ToList();
+			List<Tile> nodes = roadNodes.ToList();
+			for (int i = 0; i < edges.Count / 4; ++i)
+			{
+				edges.Add(
+					new Tuple<Tile, Tile>(nodes[_Random.Next(0, nodes.Count)], nodes[_Random.Next(0, nodes.Count)]));
+			}
+			double m = _Random.NextDouble() * 10;
+			foreach (Tuple<Tile, Tile> edge in edges)
+				MakePath(edge.Item1, edge.Item2, TilePathOverlay.ROAD, (i, j) => RoadDistanceFunction(i, j, m));
 
 			map.Ready();
 			return map;
@@ -170,7 +190,7 @@ namespace PanzerBlitz
 			return new LatticeNoiseGenerator(_Random, settings);
 		}
 
-		void MakeRoad(Tile Start, Tile End)
+		void MakePath(Tile Start, Tile End, TilePathOverlay Path, Func<Tile, Tile, double> DistanceFunction)
 		{
 			Path<Tile> path = new Path<Tile>(
 				Start,
@@ -181,20 +201,70 @@ namespace PanzerBlitz
 				i => i.Neighbors(),
 				(i, j) => i == j);
 			for (int i = 0; i < path.Count - 1; ++i)
-				path[i].SetPathOverlay(Array.IndexOf(path[i].NeighborTiles, path[i + 1]), TilePathOverlay.ROAD);
+				path[i].SetPathOverlay(Array.IndexOf(path[i].NeighborTiles, path[i + 1]), Path);
 		}
 
-		double DistanceFunction(Tile a, Tile b)
+		Tile GetRandomTile(Map Map)
 		{
-			if (a.GetPathOverlay(b) == TilePathOverlay.ROAD) return .5;
-			if (a.GetEdge(b) == TileEdge.WATER) return 20;
-			if (b.Configuration.TileBase == TileBase.SWAMP) return 6;
-			if (b.Configuration.Edges.Count(i => i == TileEdge.TOWN) > 0) return .5;
-			if (b.Configuration.Edges.Count(i => i == TileEdge.SLOPE) > 0) return 3;
-			if (b.Configuration.TileBase == TileBase.SLOPE) return 3;
-			if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return 1.5;
+			return Map.Tiles[_Random.Next(0, _Width), _Random.Next(0, _Height)];
+		}
 
-			return 3 * _Random.NextDouble() + 1;
+		Tile GetRandomEdgeTile(Map Map)
+		{
+			bool xEdge = _Random.Next(0, 2) == 0;
+			bool yEdge = _Random.Next(0, 2) == 0;
+			int x = 0;
+			int y = 0;
+			if (xEdge)
+			{
+				x = _Random.Next(0, _Width);
+				y = yEdge ? 0 : _Height - 1;
+			}
+			else
+			{
+				x = yEdge ? 0 : _Width - 1;
+				y = _Random.Next(0, _Height);
+			}
+			return Map.Tiles[x, y];
+		}
+
+		void EdgePathOverlay(Tile Tile, TilePathOverlay Path)
+		{
+			if (Tile.OnEdge(Direction.NORTH)) Tile.SetPathOverlay(2, Path);
+			else if (Tile.OnEdge(Direction.SOUTH)) Tile.SetPathOverlay(4, Path);
+			else if (Tile.OnEdge(Direction.WEST)) Tile.SetPathOverlay(0, Path);
+			else if (Tile.OnEdge(Direction.EAST)) Tile.SetPathOverlay(3, Path);
+		}
+
+		double RoadDistanceFunction(Tile a, Tile b, double TerrainMultiplier)
+		{
+			if (a.GetPathOverlay(b) == TilePathOverlay.ROAD) return 0;
+			if (a.GetPathOverlay(b) != TilePathOverlay.NONE) return float.MaxValue;
+			if (a.GetEdge(b) == TileEdge.WATER) return 40;
+			if (b.Configuration.TileBase == TileBase.SWAMP) return 12;
+			if (b.Configuration.Edges.Count(i => i == TileEdge.TOWN) > 0) return 1;
+			if (b.Configuration.Edges.Count(i => i == TileEdge.SLOPE) > 0) return 6 * TerrainMultiplier;
+			if (b.Configuration.TileBase == TileBase.SLOPE) return 6 * TerrainMultiplier;
+			if (b.Configuration.PathOverlays.Count(i => i == TilePathOverlay.STREAM) > 0) return 6 * TerrainMultiplier;
+			if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return 3;
+
+			return 6 * _Random.NextDouble() + 2;
+		}
+
+		bool IsElevated(Tile Tile)
+		{
+			return Tile.Configuration.Elevation > 0
+					   || Tile.Configuration.TileBase == TileBase.SLOPE
+					   || Tile.Configuration.Edges.Count(i => i == TileEdge.SLOPE) > 0;
+		}
+
+		double RiverDistanceFunction(Tile a, Tile b)
+		{
+			if (a.GetPathOverlay(b) == TilePathOverlay.STREAM) return 0;
+			if (IsElevated(b)) return float.MaxValue;
+			if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return .5;
+
+			return 6 * _Random.NextDouble() + 2;
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

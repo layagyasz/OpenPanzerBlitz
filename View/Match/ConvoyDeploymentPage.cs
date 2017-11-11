@@ -85,6 +85,12 @@ namespace PanzerBlitz
 		{
 			if (b.Configuration.IsVehicle.CompareTo(a.Configuration.IsVehicle) != 0)
 				return b.Configuration.IsVehicle.CompareTo(a.Configuration.IsVehicle);
+			if (b.Configuration.IsArmored.CompareTo(a.Configuration.IsArmored) != 0)
+				return b.Configuration.IsArmored.CompareTo(a.Configuration.IsArmored);
+			bool aTransport = a.Configuration.UnitClass == UnitClass.TRANSPORT;
+			bool bTransport = b.Configuration.UnitClass == UnitClass.TRANSPORT;
+			if (aTransport.CompareTo(bTransport) != 0)
+				return aTransport.CompareTo(bTransport);
 			return b.Configuration.Movement.CompareTo(a.Configuration.Movement);
 		}
 

@@ -50,6 +50,7 @@ namespace PanzerBlitz
 			: base(Army, Units, IdGenerator)
 		{
 			this.DeploymentConfiguration = DeploymentConfiguration;
+			_StopAutomatedMovement = DeploymentConfiguration.MovementAutomator == null;
 		}
 
 		public override bool AutomateDeployment()
@@ -64,6 +65,7 @@ namespace PanzerBlitz
 		public override bool UnitMustMove(Unit Unit)
 		{
 			if (Unit.Position == null) return false;
+			if (!_StopAutomatedMovement) return true;
 			return Unit.Position == _EntryTile && _ConvoyOrder.Any(i => !i.Deployed);
 		}
 

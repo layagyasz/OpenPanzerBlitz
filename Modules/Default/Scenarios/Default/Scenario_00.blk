@@ -86,19 +86,23 @@
 					}
 				}
 			}
-			!faction:faction { factions.slovak }
+			!faction:faction { factions.german }
 			byte:team { 2 }
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 18, 18 }
+						coordinate:coordinate { 11,17 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.bicycle-slovak }
-								int:count { 3 }
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 1 }
 							}
 						}
 					}

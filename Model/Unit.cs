@@ -214,8 +214,9 @@ namespace PanzerBlitz
 
 			if (AttackMethod == AttackMethod.NORMAL_FIRE)
 			{
-				if (Configuration.CanDirectFireAt(EnemyArmored, LineOfSight) == OrderInvalidReason.NONE)
-					return OrderInvalidReason.NONE;
+				r = Configuration.CanDirectFireAt(EnemyArmored, LineOfSight);
+				if (r != OrderInvalidReason.UNIT_NO_ATTACK)
+					return r;
 				r = Configuration.CanIndirectFireAt(LineOfSight);
 				if (r != OrderInvalidReason.NONE) return r;
 				if (!Army.CanIndirectFireAtTile(LineOfSight.Final))

@@ -162,8 +162,8 @@ namespace PanzerBlitz
 		{
 			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
 			{
-				OrderInvalidReason canAttack = AttackOrder.Validate();
-				if (canAttack != OrderInvalidReason.NONE) return canAttack;
+				// OrderInvalidReason canAttack = AttackOrder.Validate();
+				// if (canAttack != OrderInvalidReason.NONE) return canAttack;
 
 				_Attackers.Add(AttackOrder);
 				Recalculate();
@@ -204,7 +204,7 @@ namespace PanzerBlitz
 								new Unit[] { i },
 								AttackMethod,
 								AttackAt))
-						.ArgMax(i => OddsIndex(i.Odds, i.OddsAgainst)));
+					.ArgMax(i => i.TotalAttack));
 			}
 			else
 			{
@@ -215,6 +215,9 @@ namespace PanzerBlitz
 				_OddsCalculations.Sort(
 					(x, y) => OddsIndex(x.Odds, x.OddsAgainst).CompareTo(OddsIndex(y.Odds, y.OddsAgainst)));
 			}
+			// Sync TreatStackAsArmored
+			foreach (OddsCalculation odds in _OddsCalculations)
+				odds.AttackFactorCalculations.ForEach(i => i.Item1.SetTreatStackAsArmored(odds.StackArmored));
 		}
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)

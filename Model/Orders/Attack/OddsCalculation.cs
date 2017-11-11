@@ -47,7 +47,7 @@ namespace PanzerBlitz
 		{
 			StackArmored = Defenders.Any(i => i.Configuration.UnitClass == UnitClass.FORT)
 					 			|| Tile.RulesCalculator.TreatUnitsAsArmored
-								|| TreatStackAsArmored(AttackOrders, Defenders, AttackMethod);
+								|| TreatStackAsArmored(AttackOrders, Defenders);
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
@@ -132,26 +132,22 @@ namespace PanzerBlitz
 
 		public static bool TreatStackAsArmored(
 			IEnumerable<SingleAttackOrder> Attackers,
-			IEnumerable<Unit> Defenders,
-			AttackMethod AttackMethod)
+			IEnumerable<Unit> Defenders)
 		{
 			int armoredCount = Defenders.Count(i => i.Configuration.IsArmored);
 			int unArmoredCount = Defenders.Count(i => !i.Configuration.IsArmored);
 			if (armoredCount > unArmoredCount) return true;
-			else if (armoredCount < unArmoredCount) return false;
-			else
-			{
-				foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(true);
-				int armoredAttack = Attackers.Sum(
-					i => i.GetAttack().Attack);
+			if (armoredCount < unArmoredCount) return false;
 
-				foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(false);
-				int unArmoredAttack = Attackers.Sum(
-					i => i.GetAttack().Attack);
+			foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(true);
+			int armoredAttack = Attackers.Sum(
+				i => i.GetAttack().Attack);
 
-				if (armoredAttack > unArmoredAttack) return false;
-				else return true;
-			}
+			foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(false);
+			int unArmoredAttack = Attackers.Sum(
+				i => i.GetAttack().Attack);
+
+			return armoredAttack < unArmoredAttack;
 		}
 	}
 }

@@ -386,7 +386,6 @@
     <None Include="Maps\board-01.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Screenshots\screen.jpg"></None>
     <None Include="Maps\board-02.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1354,6 +1353,14 @@
     <None Include="Modules\Default\Theme\Components\UnitInfo.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Screenshots\osnovets.png" />
+    <None Include="Screenshots\scenario-04.png" />
+    <None Include="Screenshots\viipuri.png" />
+    <None Include="Screenshots\saija.png" />
+    <None Include="Screenshots\scenario-07.png" />
+    <None Include="Screenshots\scenario-01.png" />
+    <None Include="Screenshots\edit.png" />
+    <None Include="Screenshots\scenario-11.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
