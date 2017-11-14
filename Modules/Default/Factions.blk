@@ -1,4 +1,10 @@
 ﻿faction<>:factions {
+	faction:american {
+		string:name { American }
+		color[]:colors { 106,126,38 }
+		byte:stack-limit { 3 }
+		bool:half-price-trucks { true }
+	}
 	faction:finnish {
 		string:name { Finnish }
 		color[]:colors { 255,255,255 131,166,220 255,255,255 }

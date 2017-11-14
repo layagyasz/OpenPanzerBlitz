@@ -1,4 +1,7 @@
 ﻿faction-render-details<>:faction-render-details {
+	faction-render-details:american {
+		string:image-path { american-symbol.png }
+	}
 	faction-render-details:finnish {
 		string:image-path { finnish-symbol.png }
 	}

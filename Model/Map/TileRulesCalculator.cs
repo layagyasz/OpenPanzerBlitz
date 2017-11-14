@@ -13,7 +13,8 @@ namespace PanzerBlitz
 		bool _DepressedTransition;
 		bool _Concealing;
 		int _DieModifier;
-		int _TrueElevation;
+		int _TieredElevation;
+		int _SubTieredElevation;
 
 		public bool MustAttackAllUnits
 		{
@@ -57,11 +58,18 @@ namespace PanzerBlitz
 				return _DieModifier;
 			}
 		}
-		public int TrueElevation
+		public int TieredElevation
 		{
 			get
 			{
-				return _TrueElevation;
+				return _TieredElevation;
+			}
+		}
+		public int SubTieredElevation
+		{
+			get
+			{
+				return _SubTieredElevation;
 			}
 		}
 
@@ -141,10 +149,12 @@ namespace PanzerBlitz
 					Math.Max(
 						Tile.GetEdgeRules().Max(i => i == null ? 0 : i.DieModifier),
 						Tile.GetPathOverlayRules().Max(i => i == null ? 0 : i.DieModifier)));
-			_TrueElevation = Tile.Configuration.Elevation
-									 + (Tile.GetBaseRules().Elevated
-										|| Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
-										|| Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated) ? 1 : 0);
+
+			bool elevated = Tile.GetBaseRules().Elevated
+							 || Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
+							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated);
+			_TieredElevation = Tile.Configuration.Elevation + (elevated ? 1 : 0);
+			_SubTieredElevation = 2 * Tile.Configuration.Elevation + (elevated ? 1 : 0);
 		}
 
 		float CalculateMovement(
@@ -194,7 +204,7 @@ namespace PanzerBlitz
 			if (pathCost > 0) enterCost = pathCost;
 			if (To.RulesCalculator.Depressed && !roaded)
 				enterCost += GetMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
-			if (From.RulesCalculator.TrueElevation < To.RulesCalculator.TrueElevation)
+			if (From.RulesCalculator.TieredElevation < To.RulesCalculator.TieredElevation)
 				enterCost += GetMoveCost(MovementRules.Uphill, Adjacent, UnitMoved);
 			if (From.Configuration.Elevation > To.Configuration.Elevation)
 				enterCost += GetMoveCost(MovementRules.Downhill, Adjacent, UnitMoved);
