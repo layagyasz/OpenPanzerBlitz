@@ -24,6 +24,7 @@ namespace PanzerBlitz
 			CAN_OVERRUN,
 			CAN_CLOSE_ASSAULT,
 			CAN_ANTI_AIRCRAFT,
+			CAN_DOUBLE_RANGE,
 
 			IS_VEHICLE,
 			IS_ARMORED,
@@ -65,6 +66,7 @@ namespace PanzerBlitz
 		public readonly bool CanOverrun;
 		public readonly bool CanCloseAssault;
 		public readonly bool CanAntiAircraft;
+		public readonly bool CanDoubleRange;
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
@@ -170,6 +172,7 @@ namespace PanzerBlitz
 			CanOnlySupportCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT], false);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
+			CanDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
 
 			CanSpotIndirectFire = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
@@ -221,10 +224,15 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.WRECKAGE;
 		}
 
+		public byte GetAdjustedRange()
+		{
+			return (byte)(CanDoubleRange ? 2 * Range : Range);
+		}
+
 		public OrderInvalidReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight)
 		{
 			if (!CanDirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
-			if (LineOfSight.Range > Range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (LineOfSight.Range > GetAdjustedRange()) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
 				return OrderInvalidReason.TARGET_ARMORED;
 			return OrderInvalidReason.NONE;
@@ -232,7 +240,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanIndirectFireAt(LineOfSight LineOfSight)
 		{
-			if (LineOfSight.Range > Range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (LineOfSight.Range > GetAdjustedRange()) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
 			return OrderInvalidReason.NONE;
 		}
@@ -270,7 +278,7 @@ namespace PanzerBlitz
 			switch (AttackMethod)
 			{
 				case AttackMethod.OVERRUN: return 0;
-				case AttackMethod.NORMAL_FIRE: return Range;
+				case AttackMethod.NORMAL_FIRE: return GetAdjustedRange();
 				case AttackMethod.CLOSE_ASSAULT: return CanCloseAssault ? 1 : 0;
 			}
 			// Should not end up here.

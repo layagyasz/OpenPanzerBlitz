@@ -1,6 +1,9 @@
 ﻿unit-render-details:12_7mm-mg {
 	string:image-path { anti-aircraft.png }
 }
+unit-render-details:50cal-mg {
+	string:image-path { anti-aircraft.png }
+}
 unit-render-details:wz-30 {
 	string:image-path { anti-aircraft.png }
 }
@@ -28,6 +31,9 @@ unit-render-details:50mm-at {
 unit-render-details:57mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:57mm-at-american {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:75mm-at-early {
 	string:image-path { anti-armor.png }
 }
@@ -35,6 +41,9 @@ unit-render-details:75mm-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:75mm-at-italian {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:76mm-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:76_2mm-at {
@@ -79,6 +88,9 @@ unit-render-details:75mm-how-company {
 unit-render-details:75mm-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:75mm-how-american {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:75mm-how-italian {
 	string:image-path { artillery-heavy.png }
 }
@@ -99,6 +111,9 @@ unit-render-details:76_2mm-how-polish {
 }
 unit-render-details:100mm-how {
 	string:image-path { artillery-heavy.png }
+}
+unit-render-details:105mm-how-company {
+	string:image-path { artillery-heavy-company.png }
 }
 unit-render-details:105mm-how {
 	string:image-path { artillery-heavy.png }
@@ -133,6 +148,9 @@ unit-render-details:4_5in-how {
 unit-render-details:8in-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:8in-how-american {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:81mm-mortar {
 	string:image-path { mortar.png }
 }
@@ -140,6 +158,9 @@ unit-render-details:82mm-mortar-motorized {
 	string:image-path { mortar-motorized.png }
 }
 unit-render-details:82mm-mortar {
+	string:image-path { mortar.png }
+}
+unit-render-details:107mm-mortar {
 	string:image-path { mortar.png }
 }
 unit-render-details:120mm-mortar-german {

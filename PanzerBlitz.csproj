@@ -356,6 +356,7 @@
     <Folder Include="View\Faction\" />
     <Folder Include="View\MatchEnd\" />
     <Folder Include="Controller\MatchEnd\" />
+    <Folder Include="Modules\Default\Scenarios\PanzerLeader\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1539,6 +1540,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\FactionSymbols\american-symbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurations\American.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitRenderDetails\American.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

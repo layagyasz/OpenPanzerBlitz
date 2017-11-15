@@ -95,7 +95,8 @@ namespace PanzerBlitz
 				|| Unit.Configuration.CanOnlyOverrunUnarmored
 				|| Unit.Configuration.CanCloseAssault
 				|| Unit.Configuration.CanOnlySupportCloseAssault
-				|| Unit.Configuration.CanAntiAircraft)
+				|| Unit.Configuration.CanAntiAircraft
+				|| Unit.Configuration.CanDoubleRange)
 				AddSection("Combat Capabilities");
 			if (Unit.Configuration.IsEngineer) AddAttribute("Engineers");
 			if (Unit.Configuration.IsParatroop) AddAttribute("Paratroops");
@@ -108,6 +109,7 @@ namespace PanzerBlitz
 			if (Unit.Configuration.CanCloseAssault) AddAttribute("Close Assault");
 			if (Unit.Configuration.CanOnlySupportCloseAssault) AddAttribute("Close Assault Support");
 			if (Unit.Configuration.CanAntiAircraft) AddAttribute("Anti-Aircraft");
+			if (Unit.Configuration.CanDoubleRange) AddAttribute("Can Double Range");
 		}
 
 		void AddTransportCapabilities(Unit Unit)

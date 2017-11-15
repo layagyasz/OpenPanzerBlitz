@@ -1,0 +1,40 @@
+﻿unit-render-details:engineer-platoon-american {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:scout-platoon-american {
+	string:override-display-name { SCOUT }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:mg-platoon-american {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:rifle-platoon-american {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:airborne-platoon-american {
+	string:override-display-name { AIRBORNE }
+	string:image-path { airborne-platoon.png }
+}
+unit-render-details:armored-platoon-american {
+	string:override-display-name { ARMORED }
+	string:image-path { armored-platoon.png }
+}
+unit-render-details:ranger-platoon-american {
+	string:override-display-name { RANGER }
+	string:image-path { commando-platoon.png }
+}
+unit-render-details:truck-american {
+	string:image-path { truck-8.png }
+}
+unit-render-details:m-3-scout {
+	string:image-path { m-3-scout.png }
+}
+unit-render-details:m-8-jeep {
+	string:image-path { m-8-jeep.png }
+}
+unit-render-details:m-3 {
+	string:image-path { m-3.png }
+}

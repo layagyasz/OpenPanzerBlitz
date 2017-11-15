@@ -22,7 +22,7 @@
 	}
 	army-configuration[]:army-configurations {
 		army-configuration:army-a {
-			!faction:faction { factions.russian }
+			!faction:faction { factions.american }
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
@@ -55,7 +55,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
 								int:count { 2 }
 							}
 						}

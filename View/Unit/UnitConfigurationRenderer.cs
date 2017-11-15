@@ -119,7 +119,8 @@ namespace PanzerBlitz
 			attackText.Color = Color.Black;
 			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
 
-			Text rangeText = new Text(UnitConfiguration.Range.ToString(), Font, 36);
+			Text rangeText = new Text(
+				UnitConfiguration.Range.ToString() + (UnitConfiguration.CanDoubleRange ? "*" : ""), Font, 36);
 			rangeText.Color = Color.Black;
 			rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
 

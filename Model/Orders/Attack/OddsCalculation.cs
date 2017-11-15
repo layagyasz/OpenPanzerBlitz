@@ -76,7 +76,7 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				_Odds = TotalDefense / TotalAttack + 1;
+				_Odds = (int)Math.Ceiling((float)TotalDefense / TotalAttack);
 				_OddsAgainst = true;
 			}
 
