@@ -8,6 +8,7 @@
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 169,150,71 }
+			color:village { 138,134,122 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
@@ -57,6 +58,7 @@
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 160,160,160 }
+			color:village { 138,134,122 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
@@ -106,6 +108,7 @@
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 121,130,41 }
+			color:village { 138,134,122 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }

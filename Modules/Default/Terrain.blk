@@ -19,6 +19,14 @@
 		bool:elevated { true }
 		bool:loose { true }
 	}
+	tile-component-rules:base-village {
+		int:die-modifier { 1 }
+		bool:roaded { true }
+		bool:treat-units-as-armored { true }
+		bool:must-attack-all-units { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
 
 	tile-component-rules:edge-town {
 		int:die-modifier { 1 }
@@ -64,16 +72,25 @@
 	}
 	tile-component-rules:path-stream {
 		bool:depressed { true }
+		bool:override-base-movement { false }
+	}
+	tile-component-rules:grassland-path-stream {
+		bool:depressed { true }
+		bool:swamp { true }
+		bool:override-base-movement { false }
 	}
 	tile-component-rules:winter-path-stream {
 		bool:depressed { true }
 		bool:loose { true }
+		bool:override-base-movement { false }
 	}
 	tile-component-rules:path-stream-ford {
 		bool:depressed-transition { true }
+		bool:override-base-movement { false }
 	}
 	tile-component-rules:winter-path-stream-ford {
 		bool:depressed-transition { true }
 		bool:loose { true }
+		bool:override-base-movement { false }
 	}
 }

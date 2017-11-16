@@ -48,9 +48,9 @@ namespace PanzerBlitz
 						i => new Tuple<Tile, Color>(
 							i.Item1,
 							HIGHLIGHT_COLORS[
-								Math.Min(
+								Math.Max(0, Math.Min(
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
-									HIGHLIGHT_COLORS.Length - 1)])));
+									HIGHLIGHT_COLORS.Length - 1))])));
 			}
 		}
 

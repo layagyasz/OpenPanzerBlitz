@@ -38,3 +38,45 @@ unit-render-details:m-8-jeep {
 unit-render-details:m-3 {
 	string:image-path { m-3.png }
 }
+unit-render-details:m-20 {
+	string:image-path { m-20.png }
+}
+unit-render-details:m-8 {
+	string:image-path { m-8.png }
+}
+unit-render-details:m-15 {
+	string:image-path { m-15.png }
+}
+unit-render-details:m-16 {
+	string:image-path { m-16.png }
+}
+unit-render-details:m-8-hmc {
+	string:image-path { m-8-hmc.png }
+}
+unit-render-details:m-21 {
+	string:image-path { m-21.png }
+}
+unit-render-details:m-7-priest {
+	string:image-path { m-7-priest.png }
+}
+unit-render-details:m-12 {
+	string:image-path { m-12.png }
+}
+unit-render-details:m4-poa-cws-h1 {
+	string:image-path { m4-poa-cws-h1.png }
+}
+unit-render-details:m-3a1-satan {
+	string:image-path { m-3a1-satan.png }
+}
+unit-render-details:m-4_105 {
+	string:image-path { m-4_105.png }
+}
+unit-render-details:m-10 {
+	string:image-path { m-10.png }
+}
+unit-render-details:m-18 {
+	string:image-path { m-18.png }
+}
+unit-render-details:m-36 {
+	string:image-path { m-36.png }
+}

@@ -143,7 +143,7 @@ unit-configuration:motorcycle-italian {
 }
 unit-configuration:65_17 {
 	string:name { 65/17 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { na }
 	byte:attack { 2 }
@@ -155,7 +155,7 @@ unit-configuration:65_17 {
 }
 unit-configuration:76_30 {
 	string:name { 76/30 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { na }
 	byte:attack { 20 }
@@ -167,7 +167,7 @@ unit-configuration:76_30 {
 }
 unit-configuration:100_17 {
 	string:name { 100/17 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { na }
 	byte:attack { 40 }

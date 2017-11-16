@@ -186,30 +186,42 @@ namespace PanzerBlitz
 				Edge, MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, true);
 
 			float enterCost = GetRulesMoveCost(
-				To.GetBaseRules(), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
+				To.GetBaseRules(), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement);
 
-			float edgeCost = float.MaxValue;
+			float edgeCost = 0;
+			float intersectCost = 0;
 			for (int i = 0; i < 6; ++i)
 			{
 				float eMove = GetRulesMoveCost(
-					To.GetEdgeRules(i), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
-				if (eMove > 0) edgeCost = Math.Min(edgeCost, eMove);
-			}
-			float pathCost = 0;
-			if (Path != null && (!Path.RoadMove || CanUseRoadMovement))
-				pathCost = GetRulesMoveCost(
-					Path, MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement, false);
+					To.GetEdgeRules(i), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement);
+				if (eMove > 0)
+				{
+					if (edgeCost > 0) edgeCost = Math.Min(edgeCost, eMove);
+					else edgeCost = eMove;
+				}
 
-			if (edgeCost < float.MaxValue) enterCost = edgeCost;
-			if (pathCost > 0) enterCost = pathCost;
-			if (To.RulesCalculator.Depressed && !roaded)
-				enterCost += GetMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
+				float pMove = GetRulesMoveCost(
+					To.GetPathOverlayRules(i), MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement);
+				if (pMove > 0)
+				{
+					if (intersectCost > 0) intersectCost = Math.Min(intersectCost, pMove);
+					else intersectCost = pMove;
+				}
+			}
+
+			enterCost = (edgeCost > 0 ? Math.Min(edgeCost, enterCost) : enterCost) + intersectCost;
+			if (Path != null && Path.OverrideBaseMovement && (!Path.RoadMove || CanUseRoadMovement))
+			{
+				enterCost = GetRulesMoveCost(
+					Path, MovementRules, Adjacent, UnitMoved, roaded, CanUseRoadMovement);
+				crossCost = 0;
+			}
 			if (From.RulesCalculator.TieredElevation < To.RulesCalculator.TieredElevation)
 				enterCost += GetMoveCost(MovementRules.Uphill, Adjacent, UnitMoved);
 			if (From.Configuration.Elevation > To.Configuration.Elevation)
 				enterCost += GetMoveCost(MovementRules.Downhill, Adjacent, UnitMoved);
 
-			return enterCost + leaveCost + crossCost;
+			return 1 + enterCost + leaveCost + crossCost;
 		}
 
 		float GetRulesMoveCost(
@@ -219,26 +231,25 @@ namespace PanzerBlitz
 			bool UnitMoved,
 			bool Roaded,
 			bool UseRoad,
-			bool IsEdge)
+			bool CrossesEdge = false)
 		{
 			if (TileRules == null) return 0;
 
-			float cost = IsEdge ? 0 : 1;
-			if (TileRules.Frozen && !Roaded) cost += GetMoveCost(MovementRules.Frozen, Adjacent, UnitMoved);
-			if (TileRules.Water && !Roaded) cost += GetMoveCost(MovementRules.Water, Adjacent, UnitMoved);
-			if (IsEdge)
-			{
-				if (TileRules.DenseEdge && !Roaded)
-					cost += GetMoveCost(MovementRules.DenseEdge, Adjacent, UnitMoved);
-				return cost;
-			}
+			float cost = 0;
+
+			if (TileRules.DenseEdge && !Roaded && CrossesEdge)
+				cost += GetMoveCost(MovementRules.DenseEdge, Adjacent, UnitMoved);
 			if (TileRules.Depressed && !Roaded)
 				cost += GetMoveCost(MovementRules.Depressed, Adjacent, UnitMoved);
-			if (TileRules.Elevated) cost += GetMoveCost(MovementRules.Sloped, Adjacent, UnitMoved);
-			if (TileRules.Loose) cost += GetMoveCost(MovementRules.Loose, Adjacent, UnitMoved);
+			if (TileRules.Elevated && !Roaded) cost += GetMoveCost(MovementRules.Sloped, Adjacent, UnitMoved);
+			if (TileRules.Frozen && !Roaded) cost += GetMoveCost(MovementRules.Frozen, Adjacent, UnitMoved);
+			if (TileRules.Loose && !Roaded) cost += GetMoveCost(MovementRules.Loose, Adjacent, UnitMoved);
 			if (TileRules.Roaded && UseRoad) cost += GetMoveCost(MovementRules.Roaded, Adjacent, UnitMoved);
-			if (TileRules.Rough) cost += GetMoveCost(MovementRules.Rough, Adjacent, UnitMoved);
-			if (TileRules.Swamp) cost += GetMoveCost(MovementRules.Swamp, Adjacent, UnitMoved);
+			if (TileRules.Rough && !Roaded) cost += GetMoveCost(MovementRules.Rough, Adjacent, UnitMoved);
+			if (TileRules.Swamp && !Roaded) cost += GetMoveCost(MovementRules.Swamp, Adjacent, UnitMoved);
+			if (TileRules.Water && !Roaded) cost += GetMoveCost(MovementRules.Water, Adjacent, UnitMoved);
+
+			if (!TileRules.OverrideBaseMovement && cost < float.MaxValue) return 0;
 			return cost;
 		}
 

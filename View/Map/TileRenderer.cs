@@ -114,26 +114,39 @@ namespace PanzerBlitz
 					(i, j) => j != null && j.Configuration.TileBase == TileBase.SWAMP,
 					vertices,
 					TopColor(Tile.Configuration.TileBase));
+			// Village.
+			if (Tile.Configuration.TileBase == TileBase.VILLAGE)
+				RenderTile(
+					Tile,
+					(i, j) => j != null && j.Configuration.TileBase == TileBase.VILLAGE,
+					vertices,
+					TopColor(Tile.Configuration.TileBase));
 
 			// Forest.
 			if (Tile.Configuration.HasEdge(TileEdge.FOREST))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == TileEdge.FOREST,
-					vertices, OverlayColor(TileEdge.FOREST));
+					vertices,
+					OverlayColor(TileEdge.FOREST),
+					true);
 			// Town.
 			if (Tile.Configuration.HasEdge(TileEdge.TOWN))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == TileEdge.TOWN,
-					vertices, OverlayColor(TileEdge.TOWN));
+					vertices,
+					OverlayColor(TileEdge.TOWN),
+					false);
 
 			// Ridges.
 			if (Tile.Configuration.TileBase != TileBase.SLOPE && Tile.Configuration.HasEdge(TileEdge.SLOPE))
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == TileEdge.SLOPE,
-					vertices, OverlayColor(TileEdge.SLOPE));
+					vertices,
+					OverlayColor(TileEdge.SLOPE),
+					false);
 
 			// Stream Gully.
 			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.STREAM))
@@ -161,7 +174,9 @@ namespace PanzerBlitz
 				RenderEdges(
 					Tile,
 					(i, j) => j != null && i.GetEdge(j) == TileEdge.WATER,
-					vertices, OverlayColor(TileEdge.WATER));
+					vertices,
+					OverlayColor(TileEdge.WATER),
+					false);
 
 			// Road.
 			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.ROAD))
@@ -222,14 +237,15 @@ namespace PanzerBlitz
 			RenderPoints(Tile, points, Vertices, Color);
 		}
 
-		static void RenderEdges(Tile Tile, Func<Tile, Tile, bool> Matched, List<Vertex> Vertices, Color Color)
+		static void RenderEdges(
+			Tile Tile, Func<Tile, Tile, bool> Matched, List<Vertex> Vertices, Color Color, bool Segmented)
 		{
 			List<List<int>> indices = new List<List<int>>();
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
 				if (Tile.NeighborTiles[i] != null && Matched(Tile, Tile.NeighborTiles[i]))
 				{
-					if (indices.Count > 0 && indices.Last().Last() == i - 1) indices.Last().Add(i);
+					if (indices.Count > 0 && (indices.Last().Last() == i - 1 || !Segmented)) indices.Last().Add(i);
 					else indices.Add(new List<int>() { i });
 				}
 			}

@@ -129,3 +129,147 @@ unit-configuration:m-3 {
 
 	bool:is-armored { true }
 }
+unit-configuration:m-20 {
+	string:name { M-20 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 15 }
+}
+unit-configuration:m-8 {
+	string:name { M-8 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 3 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 15 }
+}
+unit-configuration:m-15 {
+	string:name { M-15 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:m-16 {
+	string:name { M-16 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 8 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:m-8-hmc {
+	string:name { M-8 HMC }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 5 }
+	byte:movement { 11 }
+
+	bool:can-indirect-fire { false }
+}
+unit-configuration:m-21 {
+	string:name { M-12 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:m-7-priest {
+	string:name { M-7 Priest }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 32 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:m-12 {
+	string:name { M-12 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 36 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:m4-poa-cws-h1 {
+	string:name { M4 POA HWS H1 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:m-3a1-satan {
+	string:name { M-3A1 Satan }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+}
+unit-configuration:m-4_105 {
+	string:name { M-4/105 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:m-10 {
+	string:name { M-10 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 9 }
+}
+unit-configuration:m-18 {
+	string:name { M-18 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+}
+unit-configuration:m-36 {
+	string:name { M-36 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 12 }
+	byte:defense { 6 }
+	byte:movement { 9 }
+}

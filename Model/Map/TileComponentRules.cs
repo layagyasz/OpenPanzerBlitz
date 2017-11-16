@@ -23,6 +23,7 @@ namespace PanzerBlitz
 			SWAMP,
 			WATER,
 
+			OVERRIDE_BASE_MOVEMENT,
 			DEPRESSED_TRANSITION,
 			BLOCKS_LINE_OF_SIGHT,
 			CONCEALING
@@ -43,7 +44,7 @@ namespace PanzerBlitz
 		public readonly bool Swamp;
 		public readonly bool Water;
 
-
+		public readonly bool OverrideBaseMovement;
 		public readonly bool DepressedTransition;
 		public readonly bool BlocksLineOfSight;
 		public readonly bool Concealing;
@@ -64,6 +65,7 @@ namespace PanzerBlitz
 			bool Swamp,
 			bool Water,
 
+			bool OverrideBaseMovement,
 			bool DepressedTransition,
 			bool BlocksLineOfSight,
 			bool Concealing)
@@ -83,6 +85,7 @@ namespace PanzerBlitz
 			this.Swamp = Swamp;
 			this.Water = Water;
 
+			this.OverrideBaseMovement = OverrideBaseMovement;
 			this.DepressedTransition = DepressedTransition;
 			this.BlocksLineOfSight = BlocksLineOfSight;
 			this.Concealing = Concealing;
@@ -107,6 +110,7 @@ namespace PanzerBlitz
 			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], false);
 			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], false);
 
+			OverrideBaseMovement = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_BASE_MOVEMENT], true);
 			DepressedTransition = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED_TRANSITION], false);
 			BlocksLineOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT], false);
 			Concealing = Parse.DefaultIfNull(attributes[(int)Attribute.CONCEALING], false);

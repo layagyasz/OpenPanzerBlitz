@@ -41,10 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Unit.cs" />
-    <Compile Include="Model\UnitClass.cs" />
-    <Compile Include="Model\UnitConfiguration.cs" />
-    <Compile Include="Model\WeaponClass.cs" />
     <Compile Include="Model\Faction.cs" />
     <Compile Include="Model\Army.cs" />
     <Compile Include="Model\TurnComponent.cs" />
@@ -94,7 +90,6 @@
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
     <Compile Include="Model\VictoryConditions\FurthestAdvanceObjective.cs" />
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
-    <Compile Include="Model\UnitStatus.cs" />
     <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Model\Orders\Attack\SingleAttackOrderSerializer.cs" />
@@ -232,7 +227,6 @@
     <Compile Include="View\RegisterPlayer\RegisterPlayerScreen.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerController.cs" />
-    <Compile Include="Model\UnitConfigurationLink.cs" />
     <Compile Include="View\Unit\StackView.cs" />
     <Compile Include="View\Unit\StackViewUnitComparator.cs" />
     <Compile Include="View\Unit\UnitConfigurationRenderer.cs" />
@@ -264,8 +258,6 @@
     <Compile Include="Model\VictoryConditions\PreventEnemyObjective.cs" />
     <Compile Include="Model\VictoryConditions\RatioObjective.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasPosition.cs" />
-    <Compile Include="Model\UnitGroup.cs" />
-    <Compile Include="Model\UnitCount.cs" />
     <Compile Include="Model\Map\BoardConfiguration.cs" />
     <Compile Include="Model\Deployment\ConvoyMovementAutomator.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasConfiguration.cs" />
@@ -297,10 +289,18 @@
     <Compile Include="Controller\PagedProgramStateController.cs" />
     <Compile Include="View\Match\MatchInfoDisplay.cs" />
     <Compile Include="Model\Orders\OrderInvalidReason.cs" />
-    <Compile Include="Model\UnitMovementRules.cs" />
     <Compile Include="Model\MovementCost.cs" />
     <Compile Include="View\Unit\UnitInfoPane.cs" />
     <Compile Include="Model\Map\BlankMapConfiguration.cs" />
+    <Compile Include="Model\Unit\Unit.cs" />
+    <Compile Include="Model\Unit\UnitClass.cs" />
+    <Compile Include="Model\Unit\UnitConfiguration.cs" />
+    <Compile Include="Model\Unit\UnitConfigurationLink.cs" />
+    <Compile Include="Model\Unit\UnitCount.cs" />
+    <Compile Include="Model\Unit\UnitGroup.cs" />
+    <Compile Include="Model\Unit\UnitMovementRules.cs" />
+    <Compile Include="Model\Unit\UnitStatus.cs" />
+    <Compile Include="Model\Unit\WeaponClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -357,6 +357,7 @@
     <Folder Include="View\MatchEnd\" />
     <Folder Include="Controller\MatchEnd\" />
     <Folder Include="Modules\Default\Scenarios\PanzerLeader\" />
+    <Folder Include="Model\Unit\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1546,6 +1547,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitRenderDetails\American.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-a.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-c.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-d.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

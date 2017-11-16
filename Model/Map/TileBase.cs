@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		CLEAR,
 		SWAMP,
-		SLOPE
+		SLOPE,
+		VILLAGE
 	}
 }
