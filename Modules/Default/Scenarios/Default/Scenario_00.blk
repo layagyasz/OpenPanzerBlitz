@@ -55,8 +55,14 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
-								int:count { 2 }
+								!unit-configuration:unit-configuration { unit-configurations.lvt-4 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.assault-platoon-american-44 
+								}
+								int:count { 1 }
 							}
 						}
 					}

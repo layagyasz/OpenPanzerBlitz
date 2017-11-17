@@ -106,7 +106,11 @@ namespace PanzerBlitz
 			{
 				LoadOrder order = new LoadOrder(
 					_Controller.SelectedUnit, Unit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
-				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement) _Controller.SelectUnit(null);
+				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
+				{
+					_Controller.SelectUnit(null);
+					_Controller.UnHighlight();
+				}
 			}
 			Clear();
 		}
@@ -117,7 +121,11 @@ namespace PanzerBlitz
 			{
 				UnloadOrder order = new UnloadOrder(
 					_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
-				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement) _Controller.SelectUnit(null);
+				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
+				{
+					_Controller.SelectUnit(null);
+					_Controller.UnHighlight();
+				}
 			}
 		}
 
@@ -127,7 +135,11 @@ namespace PanzerBlitz
 			{
 				MountOrder order = new MountOrder(
 					_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
-				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement) _Controller.SelectUnit(null);
+				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
+				{
+					_Controller.SelectUnit(null);
+					_Controller.UnHighlight();
+				}
 			}
 		}
 
@@ -137,7 +149,11 @@ namespace PanzerBlitz
 			{
 				DismountOrder order = new DismountOrder(
 					_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
-				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement) _Controller.SelectUnit(null);
+				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
+				{
+					_Controller.SelectUnit(null);
+					_Controller.UnHighlight();
+				}
 			}
 		}
 	}

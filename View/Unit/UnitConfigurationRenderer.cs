@@ -158,7 +158,7 @@ namespace PanzerBlitz
 
 		static string WeaponClassString(UnitConfiguration UnitConfiguration)
 		{
-			if (UnitConfiguration.UnitClass == UnitClass.TRANSPORT)
+			if (!UnitConfiguration.CanOnlyCarryInfantry)
 			{
 				if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "C";
 				else return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);

@@ -357,7 +357,7 @@ namespace PanzerBlitz
 				case UnitClass.COMMAND_POST:
 					return 5;
 				case UnitClass.AMPHIBIOUS_VEHICLE:
-					if (IsCarrier || WeaponClass == WeaponClass.INFANTRY) return Defense + 1.5f * Movement;
+					if (!CanOnlyCarryInfantry || WeaponClass == WeaponClass.INFANTRY) return Defense + 1.5f * Movement;
 					else if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
 						return Attack + Math.Min((int)Range, 6) + Defense + 1.5f * Movement;
 					else return Attack + Range + Defense + 1.5f * Movement;

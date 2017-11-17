@@ -26,6 +26,18 @@ unit-render-details:ranger-platoon-american {
 	string:override-display-name { RANGER }
 	string:image-path { commando-platoon.png }
 }
+unit-render-details:assault-platoon-american-41 {
+	string:override-display-name { USMC }
+	string:image-path { marine-platoon.png }
+}
+unit-render-details:assault-platoon-american-43 {
+	string:override-display-name { USMC }
+	string:image-path { marine-platoon.png }
+}
+unit-render-details:assault-platoon-american-44 {
+	string:override-display-name { USMC }
+	string:image-path { marine-platoon.png }
+}
 unit-render-details:truck-american {
 	string:image-path { truck-8.png }
 }
@@ -79,4 +91,88 @@ unit-render-details:m-18 {
 }
 unit-render-details:m-36 {
 	string:image-path { m-36.png }
+}
+unit-render-details:m-5 {
+	string:image-path { m-5.png }
+}
+unit-render-details:m-4_75 {
+	string:image-path { m-4_75.png }
+}
+unit-render-details:m-4_76 {
+	string:image-path { m-4_76.png }
+}
+unit-render-details:m-24 {
+	string:image-path { m-24.png }
+}
+unit-render-details:m-4a3e2_75 {
+	string:image-path { m-4a3e2_75.png }
+}
+unit-render-details:m-4a3e2_76 {
+	string:image-path { m-4a3e2_76.png }
+}
+unit-render-details:m-26 {
+	string:image-path { m-26.png }
+}
+unit-render-details:m-2a4 {
+	string:image-path { m-2a4.png }
+}
+unit-render-details:m-4a2 {
+	string:image-path { m-4a2.png }
+}
+unit-render-details:sherman-flail {
+	string:image-path { sherman-flail.png }
+}
+unit-render-details:lvt-1 {
+	string:image-path { lvt-1.png }
+}
+unit-render-details:lvt_a-1 {
+	string:image-path { lvt_a-1.png }
+}
+unit-render-details:lvt_a-2 {
+	string:image-path { lvt_a-2.png }
+}
+unit-render-details:lvt-4 {
+	string:image-path { lvt-4.png }
+}
+unit-render-details:lvt_a-4 {
+	string:image-path { lvt_a-4.png }
+}
+unit-render-details:dukw {
+	string:image-path { dukw.png }
+}
+unit-render-details:d-8 {
+	string:image-path { d-8.png }
+}
+unit-render-details:m-3-arv {
+	string:image-path { m-3-arv.png }
+}
+unit-render-details:m-32-arv {
+	string:image-path { m-32-arv.png }
+}
+unit-render-details:t-28e1 {
+	string:image-path { t-28e1.png }
+}
+unit-render-details:t-19 {
+	string:image-path { t-19.png }
+}
+unit-render-details:m-15-special {
+	string:image-path { m-15-special.png }
+}
+unit-render-details:t-27 {
+	string:image-path { t-27.png }
+}
+unit-render-details:scorpion {
+	string:image-path { scorpion.png }
+}
+unit-render-details:calliope {
+	string:image-path { calliope.png }
+}
+unit-render-details:m-8-hmc-2 {
+	string:image-path { m-8-hmc.png }
+}
+unit-render-details:t-30 {
+	string:image-path { t-30.png }
+}
+unit-render-details:m-3-gmc {
+	string:image-path { m-3-gmc.png }
 }

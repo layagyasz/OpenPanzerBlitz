@@ -73,6 +73,18 @@ unit-configuration:37mm-at {
 
 	bool:is-light-passenger { true }
 }
+unit-configuration:37mm-at-american {
+	string:name { 37mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+
+	bool:is-light-passenger { true }
+}
 unit-configuration:45mm-at-early {
 	string:name { 45mm }
 	unit-class:unit-class { towed-gun }

@@ -81,6 +81,42 @@ unit-configuration:ranger-platoon-american {
 
 	bool:is-commando { true }
 }
+unit-configuration:assault-platoon-american-41 {
+	string:name { Assault Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:assault-platoon-american-43 {
+	string:name { Assault Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:assault-platoon-american-44 {
+	string:name { Assault Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 10 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
 unit-configuration:truck-american {
 	string:name { Truck }
 	unit-class:unit-class { transport }
@@ -272,4 +308,307 @@ unit-configuration:m-36 {
 	byte:range { 12 }
 	byte:defense { 6 }
 	byte:movement { 9 }
+}
+unit-configuration:m-5 {
+	string:name { M-5 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 11 }
+}
+unit-configuration:m-4_75 {
+	string:name { M-4/75 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:m-4_76 {
+	string:name { M-4/76 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 10 }
+	byte:movement { 9 }
+}
+unit-configuration:m-24 {
+	string:name { M-24 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 11 }
+}
+unit-configuration:m-4a3e2_75 {
+	string:name { M-4A3E2/75 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 15 }
+	byte:movement { 7 }
+}
+unit-configuration:m-4a3e2_76 {
+	string:name { M-4A3E2/76 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 17 }
+	byte:movement { 7 }
+}
+unit-configuration:m-26 {
+	string:name { M-26 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:m-2a4 {
+	string:name { M-2A4 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 13 }
+}
+unit-configuration:m-4a2 {
+	string:name { M-4A2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 9 }
+	byte:movement { 9 }
+}
+unit-configuration:sherman-flail {
+	string:name { Sherman Flail }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:lvt-1 {
+	string:name { LVT-1 }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 1 }
+	byte:movement { 4 }
+
+	bool:can-only-carry-infantry { false }
+	bool:can-double-range { true }
+}
+unit-configuration:lvt_a-1 {
+	string:name { LVT(A)-1 }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+
+	bool:can-only-carry-infantry { false }
+}
+unit-configuration:lvt_a-2 {
+	string:name { LVT(A)-2 }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+
+	bool:can-only-carry-infantry { false }
+	bool:can-double-range { true }
+}
+unit-configuration:lvt-4 {
+	string:name { LVT-4 }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 1 }
+	byte:movement { 8 }
+
+	bool:can-only-carry-infantry { false }
+	bool:can-double-range { true }
+}
+unit-configuration:lvt_a-4 {
+	string:name { LVT(A)-4 }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 4 }
+	byte:movement { 8 }
+
+	bool:can-only-carry-infantry { false }
+}
+unit-configuration:dukw {
+	string:name { DUKW }
+	unit-class:unit-class { amphibious-vehicle }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 14 }
+
+	bool:can-only-carry-infantry { false }
+}
+unit-configuration:d-8 {
+	string:name { D-8 }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+}
+unit-configuration:m-3-arv {
+	string:name { M-3 ARV }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 7 }
+}
+unit-configuration:m-32-arv {
+	string:name { M-32 ARV }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 9 }
+	byte:movement { 7 }
+}
+unit-configuration:t-28e1 {
+	string:name { T-28E1 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:t-19 {
+	string:name { T-19 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 32 }
+	byte:defense { 3 }
+	byte:movement { 9 }
+}
+unit-configuration:m-15-special {
+	string:name { M-15 Special }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 8 }
+	byte:range { 12 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:t-27 {
+	string:name { T-27 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 14 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:scorpion {
+	string:name { Scorpion }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 14 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:calliope {
+	string:name { Calliope }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 12 }
+	byte:defense { 6 }
+	byte:movement { 7 }
+}
+unit-configuration:m-8-hmc-2 {
+	string:name { M-8 HMC }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 25 }
+	byte:defense { 5 }
+	byte:movement { 11 }
+}
+unit-configuration:t-30 {
+	string:name { T-30 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:m-3-gmc {
+	string:name {M-3 GMC }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 10 }
 }

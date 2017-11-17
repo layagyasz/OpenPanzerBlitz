@@ -16,6 +16,9 @@ unit-render-details:28mm-at {
 unit-render-details:37mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:37mm-at-american {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:45mm-at-early {
 	string:image-path { anti-armor.png }
 }

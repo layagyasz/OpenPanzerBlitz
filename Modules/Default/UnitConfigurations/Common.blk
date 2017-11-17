@@ -115,3 +115,15 @@ unit-configuration:limber {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.wagon }
 }
+unit-configuration:mule {
+	string:name { Mule }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 3 }
+
+	bool:is-vehicle { false }
+}

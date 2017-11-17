@@ -45,3 +45,6 @@ unit-render-details:sled {
 unit-render-details:limber {
 	string:image-path { limber.png }
 }
+unit-render-details:mule {
+	string:image-path { mule.png }
+}
