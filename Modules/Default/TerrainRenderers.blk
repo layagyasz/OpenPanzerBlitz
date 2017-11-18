@@ -3,12 +3,15 @@
 		string:font-face { univers }
 		color:font-color { 0,0,0 }
 		color:base-color { 205,194,149 }
-		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color[]:elevation-colors { 0,0,0 235,37,26 118,53,61 }
 		color<>:top-colors {
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 169,150,71 }
 			color:village { 138,134,122 }
+			color:fort { 200,50,36 }
+			color:wheat-field { 150,102,40 }
+			color:copse { 125,150,72 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
@@ -29,36 +32,47 @@
 			color:road { 220,220,220 }
 			color:stream { 43,122,119 }
 			color:stream-ford { 43,122,119 }
+			color:dirt-road { 177,146,118 }
+			color:rail-road { 96,87,78 }
 		}
 		color<>:path-border-colors { 
 			color:none { 0,0,0,0 }
 			color:road { 0,0,0 }
 			color:stream { 160,160,160 }
 			color:stream-ford { 160,160,160 }
+			color:dirt-road { 0,0,0 }
+			color:rail-road { 168,138,102 }
 		}
 		float<>:path-widths { 
 			float:none { 0 }
 			float:road { .15 }
 			float:stream { .15 }
 			float:stream-ford { 0 }
+			float:dirt-road { .1 }
+			float:rail-road { .1 }
 		}
 		float<>:path-border-widths {
 			float:none { 0 }
 			float:road { .2 }
 			float:stream { .3 }
 			float:stream-ford { 0 }
+			float:dirt-road { .15 }
+			float:rail-road { .3 }
 		}
 	}
 	tile-renderer:winter-steppe {
 		string:font-face { univers }
 		color:font-color { 0,0,0 }
 		color:base-color { 217,211,195 }
-		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color[]:elevation-colors { 0,0,0 235,37,26 118,53,61 }
 		color<>:top-colors {
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 160,160,160 }
 			color:village { 138,134,122 }
+			color:fort { 200,50,36 }
+			color:wheat-field { 0,0,0 }
+			color:copse { 125,150,72 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
@@ -79,36 +93,47 @@
 			color:road { 195,159,109 }
 			color:stream { 140,200,200 }
 			color:stream-ford { 140,200,200 }
+			color:dirt-road { 192,175,151 }
+			color:rail-road { 96,87,78 }
 		}
 		color<>:path-border-colors { 
 			color:none { 0,0,0,0 }
 			color:road { 0,0,0 }
 			color:stream { 160,160,160 }
 			color:stream-ford { 160,160,160 }
+			color:dirt-road { 0,0,0 }
+			color:rail-road { 190,190,190 }
 		}
 		float<>:path-widths { 
 			float:none { 0 }
 			float:road { .15 }
 			float:stream { .15 }
 			float:stream-ford { 0 }
+			float:dirt-road { .1 }
+			float:rail-road { .1 }
 		}
 		float<>:path-border-widths { 
 			float:none { 0 }
 			float:road { .2 }
 			float:stream { .3 }
 			float:stream-ford { 0 }
+			float:dirt-road { .15 }
+			float:rail-road { .3 }
 		}
 	}
 	tile-renderer:summer-grassland {
 		string:font-face { univers }
 		color:font-color { 0,0,0 }
 		color:base-color { 201,205,95 }
-		color[]:elevation-colors { 0,0,0 235,37,26 }
+		color[]:elevation-colors { 0,0,0 235,37,26 118,53,61 }
 		color<>:top-colors {
 			color:clear { 255,255,255 }
 			color:swamp { 145,155,130 }
 			color:slope { 121,130,41 }
 			color:village { 138,134,122 }
+			color:fort { 200,50,36 }
+			color:wheat-field { 150,102,40 }
+			color:copse { 121,130,41 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
@@ -129,24 +154,32 @@
 			color:road { 220,220,220 }
 			color:stream { 91,138,192 }
 			color:stream-ford { 91,138,192 }
+			color:dirt-road { 177,146,118 }
+			color:rail-road { 96,87,78 }
 		}
 		color<>:path-border-colors { 
 			color:none { 0,0,0,0 }
 			color:road { 0,0,0 }
 			color:stream { 115,102,83 }
 			color:stream-ford { 115,102,83 }
+			color:dirt-road { 0,0,0 }
+			color:rail-road { 121,130,41 }
 		}
 		float<>:path-widths { 
 			float:none { 0 }
 			float:road { .15 }
 			float:stream { .2 }
 			float:stream-ford { 0 }
+			float:dirt-road { .1 }
+			float:rail-road { .1 }
 		}
 		float<>:path-border-widths {
 			float:none { 0 }
 			float:road { .2 }
 			float:stream { .4 }
 			float:stream-ford { 0 }
+			float:dirt-road { .15 }
+			float:rail-road { .3 }
 		}
 	}
 }

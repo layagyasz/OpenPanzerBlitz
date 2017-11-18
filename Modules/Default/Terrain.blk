@@ -27,6 +27,30 @@
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
 	}
+	tile-component-rules:base-fort {
+		int:die-modifier { 1 }
+		bool:roaded { true }
+		bool:treat-units-as-armored { true }
+		bool:must-attack-all-units { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
+	tile-component-rules:base-wheat-field {
+		bool:rough { true }
+	}
+	tile-component-rules:base-copse {
+		int:die-modifier { 1 }
+		bool:rough { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
+	tile-component-rules:winter-base-copse {
+		int:die-modifier { 1 }
+		bool:loose { true }
+		bool:rough { true }
+		bool:blocks-line-of-sight { true }
+		bool:concealing { true }
+	}
 
 	tile-component-rules:edge-town {
 		int:die-modifier { 1 }
@@ -92,5 +116,11 @@
 		bool:depressed-transition { true }
 		bool:loose { true }
 		bool:override-base-movement { false }
+	}
+	tile-component-rules:winter-path-dirt-road {
+		bool:road-move { true }
+	}
+	tile-component-rules:path-rail-road {
+		bool:rough { true }
 	}
 }

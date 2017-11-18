@@ -6,6 +6,8 @@ namespace PanzerBlitz
 		NONE,
 		ROAD,
 		STREAM,
-		STREAM_FORD
+		STREAM_FORD,
+		DIRT_ROAD,
+		RAIL_ROAD
 	}
 }

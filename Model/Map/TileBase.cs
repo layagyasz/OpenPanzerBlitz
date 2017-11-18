@@ -6,6 +6,9 @@ namespace PanzerBlitz
 		CLEAR,
 		SWAMP,
 		SLOPE,
-		VILLAGE
+		VILLAGE,
+		FORT,
+		WHEAT_FIELD,
+		COPSE
 	}
 }

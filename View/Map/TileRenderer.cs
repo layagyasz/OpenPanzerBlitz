@@ -121,6 +121,27 @@ namespace PanzerBlitz
 					(i, j) => j != null && j.Configuration.TileBase == TileBase.VILLAGE,
 					vertices,
 					TopColor(Tile.Configuration.TileBase));
+			// Fort.
+			if (Tile.Configuration.TileBase == TileBase.FORT)
+				RenderTile(
+					Tile,
+					(i, j) => false,
+					vertices,
+					TopColor(Tile.Configuration.TileBase));
+			// Wheatfield
+			if (Tile.Configuration.TileBase == TileBase.WHEAT_FIELD)
+				RenderTile(
+					Tile,
+					(i, j) => false,
+					vertices,
+					TopColor(Tile.Configuration.TileBase));
+			// Copse.
+			if (Tile.Configuration.TileBase == TileBase.COPSE)
+				RenderTile(
+					Tile,
+					(i, j) => false,
+					vertices,
+					TopColor(Tile.Configuration.TileBase));
 
 			// Forest.
 			if (Tile.Configuration.HasEdge(TileEdge.FOREST))
@@ -178,6 +199,23 @@ namespace PanzerBlitz
 					OverlayColor(TileEdge.WATER),
 					false);
 
+			// Dirt Road.
+			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.DIRT_ROAD))
+			{
+				RenderPath(
+					Tile,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.DIRT_ROAD,
+					vertices,
+					PathBorderColor(TilePathOverlay.DIRT_ROAD),
+					PathBorderWidth(TilePathOverlay.DIRT_ROAD));
+				RenderPath(
+					Tile,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.DIRT_ROAD,
+					vertices,
+					PathColor(TilePathOverlay.DIRT_ROAD),
+					PathWidth(TilePathOverlay.DIRT_ROAD));
+			}
+
 			// Road.
 			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.ROAD))
 			{
@@ -193,6 +231,23 @@ namespace PanzerBlitz
 					vertices,
 					PathColor(TilePathOverlay.ROAD),
 					PathWidth(TilePathOverlay.ROAD));
+			}
+
+			// Railroad.
+			if (Tile.Configuration.PathOverlays.Contains(TilePathOverlay.RAIL_ROAD))
+			{
+				RenderPath(
+					Tile,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.RAIL_ROAD,
+					vertices,
+					PathBorderColor(TilePathOverlay.RAIL_ROAD),
+					PathBorderWidth(TilePathOverlay.RAIL_ROAD));
+				RenderPath(
+					Tile,
+					(i, j) => i.Configuration.GetPathOverlay(j) == TilePathOverlay.RAIL_ROAD,
+					vertices,
+					PathColor(TilePathOverlay.RAIL_ROAD),
+					PathWidth(TilePathOverlay.RAIL_ROAD));
 			}
 
 			// IsHilltop.

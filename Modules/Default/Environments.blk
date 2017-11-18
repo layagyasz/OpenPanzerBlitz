@@ -6,6 +6,9 @@
 				!tile-component-rule:swamp { tile-component-rules.base-swamp }
 				!tile-component-rule:slope { tile-component-rules.base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
+				!tile-component-rules:fort { tile-component-rules.base-fort }
+				!tile-component-rules:wheat-field { tile-component-rules.base-wheat-field }
+				!tile-component-rules:copse { tile-component-rules.base-copse }
 			}
 			tile-component-rules<>:edges {
 				!tile-component-rules:town { tile-component-rules.edge-town }
@@ -17,6 +20,8 @@
 				!tile-component-rules:road { tile-component-rules.path-road }
 				!tile-component-rules:stream { tile-component-rules.path-stream }
 				!tile-component-rules:stream-ford { tile-component-rules.path-stream-ford }
+				!tile-component-rules:dirt-road { tile-component-rules.path-road }
+				!tile-component-rules:rail-road { tile-component-rules.path-rail-road }
 			}
 		}
 	}
@@ -32,6 +37,9 @@
 				!tile-component-rule:swamp { tile-component-rules.winter-base-swamp }
 				!tile-component-rule:slope { tile-component-rules.winter-base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
+				!tile-component-rules:fort { tile-component-rules.base-fort }
+				!tile-component-rules:wheat-field { tile-component-rules.winter-base-clear }
+				!tile-component-rules:copse { tile-component-rules.winter-base-copse }
 			}
 			tile-component-rules<>:edges {
 				!tile-component-rules:town { tile-component-rules.edge-town }
@@ -43,6 +51,8 @@
 				!tile-component-rules:road { tile-component-rules.path-road }
 				!tile-component-rules:stream { tile-component-rules.winter-path-stream }
 				!tile-component-rules:stream-ford { tile-component-rules.winter-path-stream-ford }
+				!tile-component-rules:dirt-road { tile-component-rules.winter-path-dirt-road }
+				!tile-component-rules:rail-road { tile-component-rules.path-rail-road }
 			}
 		}
 	}
@@ -54,6 +64,9 @@
 				!tile-component-rule:swamp { tile-component-rules.base-swamp }
 				!tile-component-rule:slope { tile-component-rules.base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
+				!tile-component-rules:fort { tile-component-rules.base-fort }
+				!tile-component-rules:wheat-field { tile-component-rules.base-wheat-field }
+				!tile-component-rules:copse { tile-component-rules.base-copse }
 			}
 			tile-component-rules<>:edges {
 				!tile-component-rules:town { tile-component-rules.edge-town }
@@ -65,6 +78,8 @@
 				!tile-component-rules:road { tile-component-rules.path-road }
 				!tile-component-rules:stream { tile-component-rules.grassland-path-stream }
 				!tile-component-rules:stream-ford { tile-component-rules.path-stream-ford }
+				!tile-component-rules:dirt-road { tile-component-rules.path-road }
+				!tile-component-rules:rail-road { tile-component-rules.path-rail-road }
 			}
 		}
 	}
