@@ -194,7 +194,7 @@ namespace PanzerBlitz
 			if (Tile.Configuration.HasEdge(TileEdge.WATER))
 				RenderEdges(
 					Tile,
-					(i, j) => j != null && i.GetEdge(j) == TileEdge.WATER,
+					(i, j) => j == null || i.GetEdge(j) == TileEdge.WATER,
 					vertices,
 					OverlayColor(TileEdge.WATER),
 					false);
@@ -298,7 +298,7 @@ namespace PanzerBlitz
 			List<List<int>> indices = new List<List<int>>();
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
-				if (Tile.NeighborTiles[i] != null && Matched(Tile, Tile.NeighborTiles[i]))
+				if (Matched(Tile, Tile.NeighborTiles[i]))
 				{
 					if (indices.Count > 0 && (indices.Last().Last() == i - 1 || !Segmented)) indices.Last().Add(i);
 					else indices.Add(new List<int>() { i });

@@ -108,12 +108,16 @@ namespace PanzerBlitz
 
 		void HandleTileClick(object Sender, MouseEventArgs E)
 		{
-			_EditPane.EditTile(((TileView)Sender).Tile, E.Position);
+			if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+				_EditPane.ShiftEditTile(((TileView)Sender).Tile, E.Position);
+			else _EditPane.EditTile(((TileView)Sender).Tile, E.Position);
 		}
 
 		void HandleTileRightClick(object Sender, MouseEventArgs E)
 		{
-			_EditPane.RightEditTile(((TileView)Sender).Tile, E.Position);
+			if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+				_EditPane.ShiftRightEditTile(((TileView)Sender).Tile, E.Position);
+			else _EditPane.RightEditTile(((TileView)Sender).Tile, E.Position);
 		}
 
 		void SetMap(Map Map)

@@ -187,6 +187,14 @@ namespace PanzerBlitz
 			}
 		}
 
+		public void ShiftEditTile(Tile Tile, Vector2f Point)
+		{
+			if (_ModeSelect.Value.Value == _EdgePage)
+			{
+				for (int i = 0; i < 6; ++i) Tile.SetEdge(i, _EdgeSelect.Value.Value);
+			}
+		}
+
 		public void RightEditTile(Tile Tile, Vector2f Point)
 		{
 			if (_ModeSelect.Value.Value == _EdgePage)
@@ -210,6 +218,14 @@ namespace PanzerBlitz
 			else if (_ModeSelect.Value.Value == _MapRegionPage)
 			{
 				if (_MapRegionSelect.Value != null) _MapRegionSelect.Value.Value.Remove(Tile);
+			}
+		}
+
+		public void ShiftRightEditTile(Tile Tile, Vector2f Point)
+		{
+			if (_ModeSelect.Value.Value == _EdgePage)
+			{
+				for (int i = 0; i < 6; ++i) Tile.SetEdge(i, TileEdge.NONE);
 			}
 		}
 	}

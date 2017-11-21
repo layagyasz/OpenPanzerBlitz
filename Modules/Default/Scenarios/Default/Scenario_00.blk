@@ -7,15 +7,15 @@
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
-				string:board-path { Maps/board-04.map }
+				string:board-path { Maps/board-07.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-05.map }
+				string:board-path { Maps/board-08.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-06.map }
+				string:board-path { Maps/board-09.map }
 				bool:invert { false }
 			}
 		}
