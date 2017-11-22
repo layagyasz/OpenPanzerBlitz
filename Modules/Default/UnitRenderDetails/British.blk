@@ -1,0 +1,31 @@
+﻿unit-render-details:engineer-platoon-british {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:engineer-platoon-british-44 {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:scout-platoon-british {
+	string:override-display-name { SCOUT }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:mg-platoon-british {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:rifle-platoon-british {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:parachute-platoon-british {
+	string:override-display-name { PARACHUTE }
+	string:image-path { airborne-platoon.png }
+}
+unit-render-details:commando-platoon-british {
+	string:override-display-name { COMMANDO }
+	string:image-path { commando-platoon.png }
+}
+unit-render-details:truck-british {
+	string:image-path { truck-9.png }
+}

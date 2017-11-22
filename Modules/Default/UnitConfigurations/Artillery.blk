@@ -157,6 +157,18 @@ unit-configuration:57mm-at-american {
 
 	bool:is-light-passenger { true }
 }
+unit-configuration:6pdr-at {
+	string:name { 6pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 5 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:is-light-passenger { true }
+}
 unit-configuration:75mm-at-early {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
@@ -204,6 +216,16 @@ unit-configuration:76_2mm-at {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
 	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
+unit-configuration:17pdr-at {
+	string:name { 17pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
@@ -355,7 +377,7 @@ unit-configuration:75mm-how {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
-unit-configuration:75mm-how-american {
+unit-configuration:75mm-how-allied {
 	string:name { 75mm }
 	unit-class:unit-class { towed-gun }
 
@@ -553,6 +575,18 @@ unit-configuration:18pdr-how {
 
 	bool:can-indirect-fire { true }
 }
+unit-configuration:25pdr-how {
+	string:name { 25pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 35 }
+	byte:range { 35 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
 unit-configuration:4_5in-how {
 	string:name { 4.5inch }
 	unit-class:unit-class { towed-gun }
@@ -565,7 +599,43 @@ unit-configuration:4_5in-how {
 
 	bool:can-indirect-fire { true }
 }
-unit-configuration:8in-how {
+unit-configuration:5_5in-how {
+	string:name { 5.5inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 48 }
+	byte:range { 42 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:7_2in-how {
+	string:name { 7.2inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 70 }
+	byte:range { 40 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:8in-how-allied {
+	string:name { 8inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 40 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:8in-how-finnish {
 	string:name { 8inch }
 	unit-class:unit-class { towed-gun }
 
@@ -577,17 +647,18 @@ unit-configuration:8in-how {
 
 	bool:can-indirect-fire { true }
 }
-unit-configuration:8in-how-american {
-	string:name { 8inch }
+unit-configuration:76mm-mortar {
+	string:name { 76mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 80 }
-	byte:range { 40 }
-	byte:defense { 2 }
-	byte:movement { 0 }
+	weapon-class:weapon-class { mortar}
+	byte:attack { 3 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 1 }
 
 	bool:can-indirect-fire { true }
+	bool:is-light-passenger { true }
 }
 unit-configuration:81mm-mortar {
 	string:name { 81mm }

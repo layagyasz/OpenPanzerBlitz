@@ -94,7 +94,8 @@ namespace PanzerBlitz
 
 			foreach (MapRegion m in From.Regions)
 			{
-				MapRegion copy = new MapRegion() { Name = m.Name };
+				MapRegion copy = Regions.FirstOrDefault(i => i.Name == m.Name);
+				if (copy == null) copy = new MapRegion() { Name = m.Name };
 				foreach (Tile t in m.Tiles)
 				{
 					Coordinate c = TransformCoordinate(t.Coordinate, new Coordinate(X, Y), max, Invert);

@@ -37,6 +37,9 @@ unit-render-details:57mm-at {
 unit-render-details:57mm-at-american {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:6pdr-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:75mm-at-early {
 	string:image-path { anti-armor.png }
 }
@@ -50,6 +53,9 @@ unit-render-details:76mm-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:76_2mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:17pdr-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:88mm-at-early {
@@ -91,7 +97,7 @@ unit-render-details:75mm-how-company {
 unit-render-details:75mm-how {
 	string:image-path { artillery-heavy.png }
 }
-unit-render-details:75mm-how-american {
+unit-render-details:75mm-how-allied {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:75mm-how-italian {
@@ -145,14 +151,26 @@ unit-render-details:203mm-how {
 unit-render-details:18pdr-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:25pdr-how {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:4_5in-how {
 	string:image-path { artillery-heavy.png }
 }
-unit-render-details:8in-how {
+unit-render-details:5_5in-how {
 	string:image-path { artillery-heavy.png }
 }
-unit-render-details:8in-how-american {
+unit-render-details:7_2in-how {
 	string:image-path { artillery-heavy.png }
+}
+unit-render-details:8in-how-allied {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:8in-how-finnish {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:76mm-mortar {
+	string:image-path { mortar.png }
 }
 unit-render-details:81mm-mortar {
 	string:image-path { mortar.png }

@@ -277,7 +277,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.8in-how }
+								!unit-configuration:unit-configuration { unit-configurations.8in-how-finnish }
 								int:count { 1 }
 							}
 							unit-count:_ {

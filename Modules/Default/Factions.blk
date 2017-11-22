@@ -5,6 +5,12 @@
 		byte:stack-limit { 3 }
 		bool:half-price-trucks { true }
 	}
+	faction:british {
+		string:name { British }
+		color[]:colors { 206,129,41 }
+		byte:stack-limit { 3 }
+		bool:half-price-trucks { true }
+	}
 	faction:finnish {
 		string:name { Finnish }
 		color[]:colors { 255,255,255 131,166,220 255,255,255 }

@@ -2,6 +2,9 @@
 	faction-render-details:american {
 		string:image-path { american-symbol.png }
 	}
+	faction-render-details:british {
+		string:image-path { british-symbol.png }
+	}
 	faction-render-details:finnish {
 		string:image-path { finnish-symbol.png }
 	}

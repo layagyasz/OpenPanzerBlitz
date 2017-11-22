@@ -133,7 +133,7 @@
 			color:village { 138,134,122 }
 			color:fort { 200,50,36 }
 			color:wheat-field { 150,102,40 }
-			color:copse { 121,130,41 }
+			color:copse { 125,150,72 }
 		}
 		color<>:edge-colors {
 			color:none { 0,0,0,0 }
