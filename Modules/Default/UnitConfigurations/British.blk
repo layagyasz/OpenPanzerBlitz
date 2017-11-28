@@ -93,3 +93,536 @@ unit-configuration:truck-british {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
+unit-configuration:matador {
+	string:name { Matador }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:bren {
+	string:name { Bren }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+	bool:can-double-range { true }
+}
+unit-configuration:lp-carrier {
+	string:name { LP Carrier }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+}
+unit-configuration:kangaroo {
+	string:name { Kangaroo }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 9 }
+
+	bool:is-armored { true }
+}
+unit-configuration:valentine-bridgelayer {
+	string:name { Valentine Bridgelayer }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 10 }
+	byte:movement { 6 }
+}
+unit-configuration:humber-sc {
+	string:name { Humber SC }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 15 }
+}
+unit-configuration:daimler {
+	string:name { Daimler }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 3 }
+	byte:range { 5 }
+	byte:defense { 3 }
+	byte:movement { 16 }
+}
+unit-configuration:aec-6pdr {
+	string:name { AEC 6pdr }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 7 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 16 }
+}
+unit-configuration:aec-75mm {
+	string:name { AEC 75mm }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 10 }
+	byte:range { 8 }
+	byte:defense { 5 }
+	byte:movement { 16 }
+}
+unit-configuration:recon-hq {
+	string:name { Recon HQ }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 12 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:lanchester {
+	string:name { Lanchester }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:rolls-royce {
+	string:name { Rolls Royce }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:crocodile {
+	string:name { Crocodile }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 11 }
+	byte:movement { 5 }
+}
+unit-configuration:wasp {
+	string:name { Wasp }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:badger {
+	string:name { Badger }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 8 }
+	byte:movement { 9 }
+}
+unit-configuration:frog {
+	string:name { Frog }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 8 }
+	byte:movement { 5 }
+}
+unit-configuration:crusader-aa {
+	string:name { Crusader AA }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 10 }
+	byte:defense { 5 }
+	byte:movement { 9 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:skink {
+	string:name { Skink }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:mk-vi-b {
+	string:name { Mk VI B }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 11 }
+}
+unit-configuration:matilda {
+	string:name { Matilda }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 8 }
+	byte:movement { 5 }
+}
+unit-configuration:a-13 {
+	string:name { A-13 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:archer {
+	string:name { Archer }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:achilles {
+	string:name { Achilles }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 9 }
+}
+unit-configuration:cromwell-cs {
+	string:name { Cromwell CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 13 }
+	byte:range { 10 }
+	byte:defense { 8 }
+	byte:movement { 12 }
+}
+unit-configuration:churchill-cs {
+	string:name { Churchill CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 13 }
+	byte:range { 10 }
+	byte:defense { 11 }
+	byte:movement { 5 }
+}
+unit-configuration:sexton {
+	string:name { Sexton }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 35 }
+	byte:range { 35 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:bishop {
+	string:name { Bishop }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 35 }
+	byte:range { 18 }
+	byte:defense { 6 }
+	byte:movement { 6 }
+}
+unit-configuration:m-3a3 {
+	string:name { M-3A3 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 11 }
+}
+unit-configuration:sherman-uk {
+	string:name { Sherman UK }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 10 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:sherman-uk-a {
+	string:name { Sherman UKa }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:firefly {
+	string:name { Firefly }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:cromwell {
+	string:name { Cromwell }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 12 }
+}
+unit-configuration:comet {
+	string:name { Comet }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 10 }
+	byte:defense { 9 }
+	byte:movement { 10 }
+}
+unit-configuration:challenger {
+	string:name { Challenger }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 9 }
+}
+unit-configuration:centurion {
+	string:name { Centurion }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 12 }
+	byte:movement { 7 }
+}
+unit-configuration:churchill-6pdr {
+	string:name { Achilles }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 5 }
+	byte:defense { 10 }
+	byte:movement { 5 }
+}
+unit-configuration:churchill-75 {
+	string:name { Churchill 75 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 8 }
+	byte:defense { 11 }
+	byte:movement { 5 }
+}
+unit-configuration:matilda-cs {
+	string:name { Matilda CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 5 }
+}
+unit-configuration:crusader-cs {
+	string:name { Crusader CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 4 }
+	byte:movement { 9 }
+}
+unit-configuration:crusader-ii {
+	string:name { Crusader II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 9 }
+}
+unit-configuration:crusader-iii {
+	string:name { Crusader III }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 9 }
+	byte:range { 5 }
+	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:valentine-ix {
+	string:name { Valentine IX }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 9 }
+	byte:range { 5 }
+	byte:defense { 6 }
+	byte:movement { 6 }
+}
+unit-configuration:matilda-baron {
+	string:name { Matilda Baron }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 8 }
+	byte:movement { 5 }
+}
+unit-configuration:grant {
+	string:name { Grant }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 8 }
+	byte:range { 8 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:ram-i {
+	string:name { RAM I }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:ram-ii {
+	string:name { RAM II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 9 }
+	byte:range { 5 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:tetrarch {
+	string:name { Tetrarch }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:honey {
+	string:name { Honey }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+}
+unit-configuration:sentinel {
+	string:name { Sentinel }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 5 }
+	byte:movement { 10 }
+}
+unit-configuration:churchill-engineer {
+	string:name { Churchill Engineer }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 11 }
+	byte:movement { 5 }
+}
+unit-configuration:centaur-arv {
+	string:name { Centaur ARV }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 7 }
+	byte:movement { 9 }
+}
+unit-configuration:churchill-arv {
+	string:name { Churchill ARV }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 10 }
+	byte:movement { 4 }
+}

@@ -1588,9 +1588,6 @@
     <None Include="Modules\Default\UnitSprites\truck-9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitSprites\crusader-iii.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Modules\Default\UnitSprites\matilda-baron.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1633,9 +1630,6 @@
     <None Include="Modules\Default\UnitSprites\gladiator.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitSprites\crusader-ii.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Modules\Default\UnitSprites\a-13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1657,7 +1651,7 @@
     <None Include="Modules\Default\UnitSprites\matilda-cs.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitSprites\crusader-cs.png">
+    <None Include="Modules\Default\UnitSprites\crusader.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitSprites\mk-vi-b.png">

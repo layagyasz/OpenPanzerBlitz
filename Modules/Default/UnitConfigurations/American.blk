@@ -273,7 +273,7 @@ unit-configuration:m-4_105 {
 	string:name { M-4/105 }
 	unit-class:unit-class { tank }
 
-	weapon-class:weapon-class { anti-armor }
+	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
 	byte:range { 10 }
 	byte:defense { 9 }

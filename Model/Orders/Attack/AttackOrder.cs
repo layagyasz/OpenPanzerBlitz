@@ -256,7 +256,8 @@ namespace PanzerBlitz
 				if (!_Attackers.All(i => i is OverrunSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
 				foreach (var g in _Attackers.Cast<OverrunSingleAttackOrder>().GroupBy(i => i.ExitTile))
 				{
-					if (g.Key.GetStackSize() + g.Sum(i => i.Attacker.GetStackSize())
+					if (g.Key.GetStackSize() +
+						g.Sum(i => i.ExitTile.Units.Contains(i.Attacker) ? 0 : i.Attacker.GetStackSize())
 						> AttackingArmy.Configuration.Faction.StackLimit)
 						return OrderInvalidReason.OVERRUN_EXIT;
 				}

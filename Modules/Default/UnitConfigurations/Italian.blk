@@ -105,7 +105,7 @@ unit-configuration:truck-italian {
 	byte:defense { 1 }
 	byte:movement { 12 }
 
-	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
 unit-configuration:tl-37 {
 	string:name { TL 37 }

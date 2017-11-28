@@ -587,6 +587,18 @@ unit-configuration:25pdr-how {
 
 	bool:can-indirect-fire { true }
 }
+unit-configuration:25pdr-short-how {
+	string:name { Short 25pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 18 }
+	byte:range { 25 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
 unit-configuration:4_5in-how {
 	string:name { 4.5inch }
 	unit-class:unit-class { towed-gun }
@@ -742,6 +754,18 @@ unit-configuration:120mm-mortar-early {
 	byte:attack { 12 }
 	byte:range { 20 }
 	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:land-mattress {
+	string:name { Land Mattress }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 25 }
+	byte:range { 25 }
+	byte:defense { 1 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }

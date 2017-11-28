@@ -95,11 +95,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-british }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.commando-platoon-british }
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
 								int:count { 1 }
 							}
 						}

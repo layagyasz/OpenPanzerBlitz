@@ -84,6 +84,7 @@ unit-configuration:sdkfz-251 {
 	byte:range { 4 }
 	byte:defense { 4 }
 	byte:movement { 10 }
+
 	bool:is-armored { true }
 }
 unit-configuration:sdkfz-234_1 {
@@ -165,6 +166,7 @@ unit-configuration:wirbelwind {
 	byte:range { 10 }
 	byte:defense { 6 }
 	byte:movement { 8 }
+
 	bool:can-anti-aircraft { true }
 }
 unit-configuration:stuh-42 {

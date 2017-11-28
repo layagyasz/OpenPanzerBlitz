@@ -29,3 +29,161 @@ unit-render-details:commando-platoon-british {
 unit-render-details:truck-british {
 	string:image-path { truck-9.png }
 }
+unit-render-details:matador {
+	string:image-path { matador.png }
+}
+unit-render-details:bren {
+	string:image-path { bren.png }
+}
+unit-render-details:lp-carrier {
+	string:image-path { bren.png }
+}
+unit-render-details:kangaroo {
+	string:image-path { kangaroo.png }
+}
+unit-render-details:valentine-bridgelayer {
+	string:override-display-name { Valentine }
+	string:image-path { valentine-bridgelayer.png }
+}
+unit-render-details:humber-sc {
+	string:image-path { humber-sc.png }
+}
+unit-render-details:daimler {
+	string:image-path { daimler.png }
+}
+unit-render-details:aec-6pdr {
+	string:image-path { aec-6pdr.png }
+}
+unit-render-details:aec-75mm {
+	string:image-path { aec-75mm.png }
+}
+unit-render-details:recon-hq {
+	string:image-path { m-3-scout.png }
+}
+unit-render-details:lanchester {
+	string:image-path { lanchester.png }
+}
+unit-render-details:rolls-royce {
+	string:image-path { rolls-royce.png }
+}
+unit-render-details:crocodile {
+	string:image-path { crocodile.png }
+}
+unit-render-details:wasp {
+	string:image-path { wasp.png }
+}
+unit-render-details:badger {
+	string:image-path { badger.png }
+}
+unit-render-details:frog {
+	string:image-path { frog.png }
+}
+unit-render-details:crusader-aa {
+	string:image-path { crusader-aa.png }
+}
+unit-render-details:skink {
+	string:image-path { skink.png }
+}
+unit-render-details:mk-vi-b {
+	string:image-path { mk-vi-b.png }
+}
+unit-render-details:matilda {
+	string:image-path { matilda.png }
+}
+unit-render-details:a-13 {
+	string:image-path { a-13.png }
+}
+unit-render-details:archer {
+	string:image-path { archer.png }
+}
+unit-render-details:achilles {
+	string:image-path { achilles.png }
+}
+unit-render-details:cromwell-cs {
+	string:image-path { cromwell-cs.png }
+}
+unit-render-details:churchill-cs {
+	string:image-path { churchill-cs.png }
+}
+unit-render-details:sexton {
+	string:image-path { sexton.png }
+}
+unit-render-details:bishop {
+	string:image-path { bishop.png }
+}
+unit-render-details:m-3a3 {
+	string:image-path { m-3a3.png }
+}
+unit-render-details:sherman-uk {
+	string:image-path { m-4_105.png }
+}
+unit-render-details:sherman-uk-a {
+	string:image-path { m-4_75.png }
+}
+unit-render-details:firefly {
+	string:image-path { m-4_105.png }
+}
+unit-render-details:cromwell {
+	string:image-path { cromwell.png }
+}
+unit-render-details:comet {
+	string:image-path { comet.png }
+}
+unit-render-details:challenger {
+	string:image-path { challenger.png }
+}
+unit-render-details:centurion {
+	string:image-path { centurion.png }
+}
+unit-render-details:churchill-6pdr {
+	string:image-path { churchill.png }
+}
+unit-render-details:churchill-75 {
+	string:image-path { churchill.png }
+}
+unit-render-details:matilda-cs {
+	string:image-path { matilda-cs.png }
+}
+unit-render-details:crusader-cs {
+	string:image-path { crusader.png }
+}
+unit-render-details:crusader-ii {
+	string:image-path { crusader.png }
+}
+unit-render-details:crusader-iii {
+	string:image-path { crusader.png }
+}
+unit-render-details:valentine-ix {
+	string:image-path { valentine-ix.png }
+}
+unit-render-details:matilda-baron {
+	string:image-path { matilda-baron.png }
+}
+unit-render-details:grant {
+	string:image-path { grant.png }
+}
+unit-render-details:ram-i {
+	string:image-path { ram-i.png }
+}
+unit-render-details:ram-ii {
+	string:image-path { ram-ii.png }
+}
+unit-render-details:tetrarch {
+	string:image-path { tetrarch.png }
+}
+unit-render-details:honey {
+	string:image-path { m-5.png }
+}
+unit-render-details:sentinel {
+	string:image-path { sentinel.png }
+}
+unit-render-details:churchill-engineer {
+	string:override-display-name { Churchill }
+	string:image-path { churchill-engineer.png }
+}
+unit-render-details:centaur-arv {
+	string:image-path { centaur-arv.png }
+}
+unit-render-details:churchill-arv {
+	string:image-path { churchill-arv.png }
+}

@@ -154,6 +154,9 @@ unit-render-details:18pdr-how {
 unit-render-details:25pdr-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:25pdr-short-how {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:4_5in-how {
 	string:image-path { artillery-heavy.png }
 }
@@ -192,4 +195,8 @@ unit-render-details:120mm-mortar-russian {
 }
 unit-render-details:120mm-mortar-early {
 	string:image-path { mortar.png }
+}
+unit-render-details:land-mattress {
+	string:override-display-name { LM }
+	string:image-path { rocket.png }
 }

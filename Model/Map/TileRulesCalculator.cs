@@ -92,7 +92,7 @@ namespace PanzerBlitz
 			BlockType toBlock = To.GetUnitBlockType();
 			BlockType fromBlock = Tile.GetUnitBlockType();
 
-			bool unitMoved = !Unit.Moved && Tile.Units.Contains(Unit);
+			bool unitMoved = Unit.Moved || !Tile.Units.Contains(Unit);
 			bool adjacent = !unitMoved && !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
 
 			if (toBlock == BlockType.HARD_BLOCK && !adjacent)
@@ -101,9 +101,12 @@ namespace PanzerBlitz
 				return float.MaxValue;
 
 			bool useRoadMovement = RoadMovement
-						&& !Tile.Map.Environment.IsRoadMovementRestricted(Unit.Configuration.UnitClass)
-						&& !Unit.Configuration.MovementRules.CannotUseRoadMovement
-						&& (toBlock == BlockType.NONE || (Tile == Unit.Position && Unit.IsSolitary()));
+				&& !Tile.Map.Environment.IsRoadMovementRestricted(Unit.Configuration.UnitClass)
+						&& !Unit.Configuration.MovementRules.CannotUseRoadMovement;
+			if (toBlock == BlockType.STANDARD && (!To.Units.Contains(Unit) || To.Units.Count() > 1))
+				useRoadMovement = false;
+			if (fromBlock == BlockType.STANDARD && (!Tile.Units.Contains(Unit) || Tile.Units.Count() > 1))
+				useRoadMovement = false;
 			if (Unit.Configuration.CannotUseRoadMovementWithOversizedPassenger
 				&& Unit.Passenger != null
 				&& Unit.Passenger.Configuration.IsOversizedPassenger)
