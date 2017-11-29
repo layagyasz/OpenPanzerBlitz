@@ -32,6 +32,7 @@ namespace PanzerBlitz
 			IS_ENGINEER,
 			IS_PARATROOP,
 			IS_COMMANDO,
+			HAS_LOW_PROFILE,
 
 			MOVEMENT_RULES,
 
@@ -74,6 +75,7 @@ namespace PanzerBlitz
 		public readonly bool IsEngineer;
 		public readonly bool IsParatroop;
 		public readonly bool IsCommando;
+		public readonly bool HasLowProfile;
 
 		public readonly UnitMovementRules MovementRules;
 
@@ -131,6 +133,9 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED], IsArmored && IsVehicle);
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
 			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
+			HasLowProfile = Parse.DefaultIfNull(
+				attributes[(int)Attribute.HAS_LOW_PROFILE],
+				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST || UnitClass == UnitClass.FORT);
 
 			MovementRules = Parse.DefaultIfNull(
 				attributes[(int)Attribute.MOVEMENT_RULES],

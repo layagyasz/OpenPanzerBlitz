@@ -26,7 +26,8 @@ namespace PanzerBlitz
 			OVERRIDE_BASE_MOVEMENT,
 			DEPRESSED_TRANSITION,
 			BLOCKS_LINE_OF_SIGHT,
-			CONCEALING
+			CONCEALING,
+			LOW_PROFILE_CONCEALING
 		};
 
 		public readonly int DieModifier;
@@ -48,6 +49,7 @@ namespace PanzerBlitz
 		public readonly bool DepressedTransition;
 		public readonly bool BlocksLineOfSight;
 		public readonly bool Concealing;
+		public readonly bool LowProfileConcealing;
 
 		public TileComponentRules(
 			int DieModifier,
@@ -68,7 +70,8 @@ namespace PanzerBlitz
 			bool OverrideBaseMovement,
 			bool DepressedTransition,
 			bool BlocksLineOfSight,
-			bool Concealing)
+			bool Concealing,
+			bool LowProfileConcealing)
 		{
 			this.DieModifier = DieModifier;
 			this.RoadMove = RoadMove;
@@ -89,6 +92,7 @@ namespace PanzerBlitz
 			this.DepressedTransition = DepressedTransition;
 			this.BlocksLineOfSight = BlocksLineOfSight;
 			this.Concealing = Concealing;
+			this.LowProfileConcealing = LowProfileConcealing;
 		}
 
 		public TileComponentRules(ParseBlock Block)
@@ -114,6 +118,7 @@ namespace PanzerBlitz
 			DepressedTransition = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED_TRANSITION], false);
 			BlocksLineOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT], false);
 			Concealing = Parse.DefaultIfNull(attributes[(int)Attribute.CONCEALING], false);
+			LowProfileConcealing = Parse.DefaultIfNull(attributes[(int)Attribute.LOW_PROFILE_CONCEALING], false);
 		}
 	}
 }

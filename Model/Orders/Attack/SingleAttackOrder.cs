@@ -22,8 +22,7 @@ namespace PanzerBlitz
 
 		public virtual OrderInvalidReason Validate()
 		{
-			if (Defender == null) return OrderInvalidReason.NONE;
-			return Defender.CanBeAttackedBy(Attacker.Army);
+			return OrderInvalidReason.NONE;
 		}
 
 		public abstract bool MatchesTurnComponent(TurnComponent TurnComponent);

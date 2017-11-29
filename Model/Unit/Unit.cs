@@ -145,8 +145,13 @@ namespace PanzerBlitz
 				return OrderInvalidReason.TARGET_TEAM;
 			if (_Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			if (_Position == null) return OrderInvalidReason.ILLEGAL;
-			if (_Position.RulesCalculator.Concealing && !Army.CanSeeUnit(this))
-				return OrderInvalidReason.TARGET_CONCEALED;
+			if (Configuration.UnitClass == UnitClass.FORT)
+			{
+				if (Position.Units.Any(
+					i => i != this && i.Army == this.Army && i.CanBeAttackedBy(Army) == OrderInvalidReason.NONE))
+					return OrderInvalidReason.NONE;
+			}
+			if (!Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
 			return OrderInvalidReason.NONE;
 		}
 

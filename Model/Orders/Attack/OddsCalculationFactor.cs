@@ -9,6 +9,7 @@ namespace PanzerBlitz
 		OVERRUN,
 		ARMORED_STACK,
 		UNARMORED_STACK,
-		FORT
+		FORT,
+		DISRUPTED,
 	}
 }

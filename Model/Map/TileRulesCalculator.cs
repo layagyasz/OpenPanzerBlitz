@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		bool _Depressed;
 		bool _DepressedTransition;
 		bool _Concealing;
+		bool _LowProfileConcealing;
 		int _DieModifier;
 		int _TieredElevation;
 		int _SubTieredElevation;
@@ -49,6 +50,13 @@ namespace PanzerBlitz
 			get
 			{
 				return _Concealing;
+			}
+		}
+		public bool LowProfileConcealing
+		{
+			get
+			{
+				return _LowProfileConcealing;
 			}
 		}
 		public int DieModifier
@@ -145,6 +153,9 @@ namespace PanzerBlitz
 			_Concealing = Tile.GetBaseRules().Concealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.Concealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.Concealing);
+			_LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
+							  || Tile.GetEdgeRules().Any(i => i != null && i.LowProfileConcealing)
+							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
 
 			_DieModifier =
 				Math.Max(

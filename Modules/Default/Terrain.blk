@@ -37,6 +37,7 @@
 	}
 	tile-component-rules:base-wheat-field {
 		bool:rough { true }
+		bool:low-profile-concealing { true }
 	}
 	tile-component-rules:base-copse {
 		int:die-modifier { 1 }

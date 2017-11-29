@@ -45,28 +45,30 @@ namespace PanzerBlitz
 			AttackMethod AttackMethod,
 			Tile Tile)
 		{
+			OddsCalculationFactors = new List<OddsCalculationFactor>();
+
 			StackArmored = Defenders.Any(i => i.Configuration.UnitClass == UnitClass.FORT)
 					 			|| Tile.RulesCalculator.TreatUnitsAsArmored
 								|| TreatStackAsArmored(AttackOrders, Defenders);
+			// If there is a fort, only use its defense.
+			Unit fort = Defenders.First().Position.Units.FirstOrDefault(
+							i => i.Configuration.UnitClass == UnitClass.FORT && i.Army == Defenders.First().Army);
+			if (fort != null)
+			{
+				TotalDefense = fort.Configuration.Defense;
+				StackArmored = fort.Configuration.IsArmored;
+				OddsCalculationFactors.Add(OddsCalculationFactor.FORT);
+			}
+			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
+
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
 					i, i.GetAttack())).ToList();
 			this.Defenders = Defenders.ToList();
 
-			OddsCalculationFactors = new List<OddsCalculationFactor>();
-
 			// Calculate Initial Odds
 			TotalAttack = AttackFactorCalculations.Sum(i => i.Item2.Attack);
-
-			// If there is a fort, only use its defense.
-			Unit fort = Defenders.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.FORT);
-			if (fort != null)
-			{
-				TotalDefense = fort.Configuration.Defense;
-				OddsCalculationFactors.Add(OddsCalculationFactor.FORT);
-			}
-			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
 
 			if (TotalAttack == 0 || TotalDefense == 0) return;
 
@@ -108,6 +110,13 @@ namespace PanzerBlitz
 			{
 				_DieModifier += Defenders.First().Position.RulesCalculator.DieModifier;
 				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
+			}
+
+			// Disrupted modifier.
+			if (Defenders.Any(i => i.Status == UnitStatus.DISRUPTED))
+			{
+				_DieModifier -= 1;
+				OddsCalculationFactors.Add(OddsCalculationFactor.DISRUPTED);
 			}
 
 			// Clamp the die modifier.

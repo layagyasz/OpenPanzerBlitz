@@ -51,7 +51,7 @@ namespace PanzerBlitz
 				From,
 				To,
 				i => true,
-				(i, j) => 1,
+				(i, j) => 0,
 				(i, j) => s.DistanceSquared(i.Center),
 				i => i.Neighbors(),
 				(i, j) => i == j).Nodes.ToArray();
@@ -75,7 +75,7 @@ namespace PanzerBlitz
 					To,
 					From,
 					i => true,
-					(i, j) => 1,
+					(i, j) => 0,
 					(i, j) => s.DistanceSquared(i.Center),
 					i => i.Neighbors(),
 					(i, j) => i == j).Nodes.Reverse().ToArray();

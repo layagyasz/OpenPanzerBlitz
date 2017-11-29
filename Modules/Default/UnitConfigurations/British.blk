@@ -600,7 +600,7 @@ unit-configuration:churchill-engineer {
 	string:name { Churchill Engineer }
 	unit-class:unit-class { engineer-vehicle }
 
-	weapon-class:weapon-class { infantry }
+	weapon-class:weapon-class { na }
 	byte:attack { 0 }
 	byte:range { 0 }
 	byte:defense { 11 }

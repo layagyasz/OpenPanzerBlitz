@@ -185,19 +185,25 @@ namespace PanzerBlitz
 
 			if (AttackTarget == AttackTarget.ALL)
 			{
+				List<Unit> defenders =
+					AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE).ToList();
+				if (defenders.Count == 0) return;
 
 				_OddsCalculations.Add(
 					new OddsCalculation(
 						_Attackers,
-						AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE),
+						defenders,
 						AttackMethod,
 						AttackAt));
 			}
 			else if (AttackTarget == AttackTarget.WEAKEST)
 			{
+				List<Unit> defenders =
+					AttackAt.Units.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE).ToList();
+				if (defenders.Count == 0) return;
+
 				_OddsCalculations.Add(
-					AttackAt.Units
-						.Where(i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE)
+					defenders
 						.Select(
 							i => new OddsCalculation(
 								_Attackers,
@@ -234,6 +240,12 @@ namespace PanzerBlitz
 
 		public virtual OrderInvalidReason Validate()
 		{
+			if (_OddsCalculations.Count == 0)
+			{
+				if (AttackAt.Units.Count() == 0) return OrderInvalidReason.TARGET_EMPTY;
+				return AttackAt.Units.First().CanBeAttackedBy(AttackingArmy);
+			}
+
 			if (AttackingArmy.HasAttackedTile(AttackAt)) return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
 			if (MustAttackAllUnits() && AttackTarget != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
 			foreach (SingleAttackOrder order in _Attackers)
@@ -241,9 +253,15 @@ namespace PanzerBlitz
 				OrderInvalidReason r = order.Validate();
 				if (r != OrderInvalidReason.NONE) return r;
 			}
-			if (AttackAt.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE) return AttackAt.CanBeAttacked(AttackMethod);
+			if (AttackAt.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE)
+				return AttackAt.CanBeAttacked(AttackMethod);
 			if (_AttackTarget == AttackTarget.EACH)
 			{
+				foreach (SingleAttackOrder attacker in _Attackers)
+				{
+					OrderInvalidReason r = attacker.Defender.CanBeAttackedBy(AttackingArmy);
+					if (r != OrderInvalidReason.NONE) return r;
+				}
 				if (_OddsCalculations.Count != AttackAt.Units.Count(
 					i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
@@ -265,6 +283,18 @@ namespace PanzerBlitz
 			else if (AttackMethod == AttackMethod.MINEFIELD)
 			{
 				if (!_Attackers.All(i => i is MinefieldSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
+			}
+			else if (AttackMethod == AttackMethod.CLOSE_ASSAULT)
+			{
+				if (!_Attackers.All(i => i is NormalSingleAttackOrder)) return OrderInvalidReason.ILLEGAL;
+				foreach (SingleAttackOrder attacker in _Attackers)
+				{
+					if (attacker.Attacker.Configuration.CanOnlySupportCloseAssault
+						&& !_Attackers.Any(
+							i => i.Attacker.Position == attacker.Attacker.Position
+							&& !i.Attacker.Configuration.CanOnlySupportCloseAssault))
+						return OrderInvalidReason.UNIT_CLOSE_ASSAULT_SUPPORT;
+				}
 			}
 			else
 			{

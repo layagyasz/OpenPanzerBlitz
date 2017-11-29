@@ -47,15 +47,15 @@
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-03.map }
+				string:board-path { Maps/board-13.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-c.map }
+				string:board-path { Maps/board-14.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-01.map }
+				string:board-path { Maps/board-15.map }
 				bool:invert { false }
 			}
 		}
@@ -89,13 +89,17 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 11, 16 }
+						coordinate:coordinate { 18,1 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sherman-uk-a }
 								int:count { 1 }
 							}
 						}
@@ -131,17 +135,25 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 11,17 }
+						coordinate:coordinate { 16,1 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hmg-platoon-german }
 								int:count { 1 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.stuh-42 }
 								int:count { 1 }
 							}
 						}

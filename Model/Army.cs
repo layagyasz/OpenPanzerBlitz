@@ -89,9 +89,15 @@ namespace PanzerBlitz
 		public bool CanSeeUnit(Unit Unit)
 		{
 			if (Unit.Position == null) return false;
-			return !Unit.Position.RulesCalculator.Concealing
-						|| CanSpotTile(Unit.Position)
-						|| _OverrideVisibleUnits.Contains(Unit);
+
+			bool lowProfile = Unit.Configuration.HasLowProfile
+								  || Unit.Position.Units.Any(
+									  i => i.Configuration.UnitClass == UnitClass.FORT
+									  && i.Army == Unit.Army
+									  && i.Configuration.HasLowProfile);
+			bool concealed = Unit.Position.RulesCalculator.Concealing
+								 || (Unit.Position.RulesCalculator.LowProfileConcealing && lowProfile);
+			return !concealed || CanSpotTile(Unit.Position) || _OverrideVisibleUnits.Contains(Unit);
 		}
 
 		public bool CanSeeTile(Tile Tile, bool OverrideConcealment = false)
@@ -121,13 +127,12 @@ namespace PanzerBlitz
 		public bool CanSpotTile(Tile Tile)
 		{
 			if (Tile == null) return false;
-			if (!Tile.RulesCalculator.Concealing) return true;
 			return Units.Any(i => i.Position != null && (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
 		}
 
 		public void SetUnitVisibility(Unit Unit, bool Visible)
 		{
-			if (Unit.Army == this || Unit.Position == null || !Unit.Position.RulesCalculator.Concealing) return;
+			if (Unit.Army == this || Unit.Position == null || CanSeeUnit(Unit)) return;
 
 			if (Unit.Position != null && CanSeeTile(Unit.Position, true))
 			{
