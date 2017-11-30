@@ -17,6 +17,9 @@
 	faction-render-details:italian {
 		string:image-path { italian-symbol.png }
 	}
+	faction-render-details:japanese {
+		string:image-path { japanese-symbol.png }
+	}
 	faction-render-details:polish {
 		string:image-path { polish-symbol.png }
 	}

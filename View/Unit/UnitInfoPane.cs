@@ -80,7 +80,7 @@ namespace PanzerBlitz
 				AddSection("Composition");
 			if (Unit.Configuration.IsVehicle) AddAttribute("Vehicular");
 			if (Unit.Configuration.IsArmored) AddAttribute("Armored");
-			if (Unit.Configuration.LeavesWreckWhenDestroyed) AddAttribute("Wreck when Destroyed");
+			if (Unit.Configuration.LeavesWreckWhenDestroyed) AddAttribute("Wreck When Destroyed");
 		}
 
 		void AddCombatCapabilities(Unit Unit)
@@ -127,8 +127,8 @@ namespace PanzerBlitz
 			if (Unit.Configuration.IsLightPassenger) AddAttribute("Light Passenger");
 			if (Unit.Configuration.IsOversizedPassenger) AddAttribute("Oversized Passenger");
 			if (Unit.Configuration.IsCarrier) AddAttribute("Carrier");
-			if (Unit.Configuration.CanOnlyCarryLight) AddAttribute("Carry Light Units");
-			if (Unit.Configuration.CanOnlyCarryInfantry) AddAttribute("Carry Infantry");
+			if (Unit.Configuration.CanOnlyCarryLight) AddAttribute("Carry Only Light Units");
+			if (Unit.Configuration.CanOnlyCarryInfantry) AddAttribute("Carry Only Infantry");
 		}
 
 		void AddMovementAttributes(Unit Unit)

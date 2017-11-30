@@ -1,0 +1,99 @@
+﻿unit-render-details:engineer-platoon-japanese {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:mg-platoon-japanese {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
+unit-render-details:rifle-platoon-japanese-39 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-japanese-41 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:assault-platoon-japanese {
+	string:override-display-name { SMLF }
+	string:image-path { marine-platoon.png }
+}
+unit-render-details:cavalry-japanese {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-4.png }
+}
+unit-render-details:wagon-japanese {
+	string:image-path { wagon-3.png }
+}
+unit-render-details:truck-japanese {
+	string:image-path { truck-10.png }
+}
+unit-render-details:type-1-ho-ki {
+	string:image-path { type-1-ho-ki.png }
+}
+unit-render-details:type-92 {
+	string:image-path { type-92.png }
+}
+unit-render-details:type-93 {
+	string:image-path { type-93.png }
+}
+unit-render-details:ho-ni-1-sph {
+	string:image-path { ho-ni-1.png }
+}
+unit-render-details:ho-ni-1 {
+	string:image-path { ho-ni-1.png }
+}
+unit-render-details:ho-ni-2 {
+	string:image-path { ho-ni-2.png }
+}
+unit-render-details:ho-ro {
+	string:image-path { ho-ni-2.png }
+}
+unit-render-details:ho-ni-3 {
+	string:image-path { ho-ni-3.png }
+}
+unit-render-details:ss-ki {
+	string:image-path { ss-ki.png }
+}
+unit-render-details:tk {
+	string:image-path { tk.png }
+}
+unit-render-details:ke-ni {
+	string:image-path { ke-ni.png }
+}
+unit-render-details:ha-go-early {
+	string:image-path { ha-go.png }
+}
+unit-render-details:ha-go {
+	string:image-path { ha-go.png }
+}
+unit-render-details:otsu {
+	string:image-path { ke-ni.png }
+}
+unit-render-details:chi-ha-he {
+	string:image-path { chi-ha-h.png }
+}
+unit-render-details:chi-ha-at {
+	string:image-path { chi-ha-a.png }
+}
+unit-render-details:te-ke {
+	string:image-path { te-ke.png }
+}
+unit-render-details:chi-he {
+	string:image-path { chi-he.png }
+}
+unit-render-details:chi-nu {
+	string:image-path { chi-nu.png }
+}
+unit-render-details:chi-to {
+	string:image-path { chi-to.png }
+}
+unit-render-details:ss-ki-engineer {
+	string:image-path { ss-ki-engineer.png }
+}
+unit-render-details:ka-mi {
+	string:image-path { ka-mi.png }
+}
+unit-render-details:ka-chi {
+	string:image-path { ka-chi.png }
+}

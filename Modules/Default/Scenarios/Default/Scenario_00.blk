@@ -7,11 +7,11 @@
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
-				string:board-path { Maps/board-02.map }
+				string:board-path { Maps/board-16.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-09.map }
+				string:board-path { Maps/board-17.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
@@ -99,7 +99,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sherman-uk-a }
+								!unit-configuration:unit-configuration { unit-configurations.badger }
 								int:count { 1 }
 							}
 						}
@@ -130,12 +130,12 @@
 					}
 				}
 			}
-			!faction:faction { factions.german }
+			!faction:faction { factions.japanese }
 			byte:team { 2 }
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 16,1 }
+						coordinate:coordinate { 15,2 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
@@ -145,15 +145,15 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.hmg-platoon-german }
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-japanese }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.assault-platoon-japanese }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.stuh-42 }
+								!unit-configuration:unit-configuration { unit-configurations.chi-nu }
 								int:count { 1 }
 							}
 						}

@@ -41,12 +41,6 @@ namespace PanzerBlitz
 
 			Factors = new List<AttackFactorCalculationFactor>();
 			Attack = Unit.Configuration.Attack;
-			if (LineOfSight.Initial.RulesCalculator.SubTieredElevation
-				< LineOfSight.Final.RulesCalculator.SubTieredElevation)
-			{
-				Attack /= 2;
-				Factors.Add(AttackFactorCalculationFactor.ELEVATION);
-			}
 
 			if (EnemyArmored)
 			{
@@ -73,6 +67,13 @@ namespace PanzerBlitz
 			{
 				Attack /= 2;
 				Factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
+			}
+
+			if (LineOfSight.Initial.RulesCalculator.SubTieredElevation
+				< LineOfSight.Final.RulesCalculator.SubTieredElevation)
+			{
+				Attack /= 2;
+				Factors.Add(AttackFactorCalculationFactor.ELEVATION);
 			}
 
 			if (Unit.Configuration.Range < LineOfSight.Range && Unit.Configuration.CanDoubleRange)
