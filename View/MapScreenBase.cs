@@ -54,6 +54,7 @@ namespace PanzerBlitz
 			};
 			_MapView = MapView;
 			_AlertText.Position = new Vector2f(.5f * WindowSize.X, 0);
+			_Items.Add(_AlertText);
 		}
 
 		Color MakeBackdropColor(Color BaseColor)
@@ -89,7 +90,6 @@ namespace PanzerBlitz
 			HighlightLayer.Update(MouseController, KeyController, DeltaT, Transform);
 
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
-			_AlertText.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 		}
 
@@ -102,7 +102,6 @@ namespace PanzerBlitz
 			HighlightLayer.Draw(Target, Transform);
 
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
-			_AlertText.Draw(Target, Transform.Identity);
 			PaneLayer.Draw(Target, Transform.Identity);
 		}
 	}

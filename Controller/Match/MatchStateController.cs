@@ -23,6 +23,7 @@ namespace PanzerBlitz
 
 			MatchScreen screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
+				_Context.Match.Scenario,
 				_Context.Match.Map,
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
 				_Context.Match.Armies.Select(i => new ArmyView(i, renderer)));
@@ -45,6 +46,7 @@ namespace PanzerBlitz
 
 		void HandleMatchEnd(object Sender, EventArgs E)
 		{
+			_MatchController.Unhook();
 			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.MATCH_END, _Context));
 		}
 

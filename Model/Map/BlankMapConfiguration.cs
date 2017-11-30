@@ -22,7 +22,8 @@ namespace PanzerBlitz
 		{
 			Map map = new Map(_Width, _Height, Environment, IdGenerator);
 			map.Ready();
-			return map;		}
+			return map;
+		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{

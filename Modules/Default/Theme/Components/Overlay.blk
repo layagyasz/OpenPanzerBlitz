@@ -32,3 +32,18 @@ class:info-display-info {
 		int[]:margin { 88 2 8 2 }
 	}
 }
+class:overlay-turn-counter {
+	!class:parent { screen-alert }
+	mode:default {
+		int[]:padding { 16 16 0 0 }
+	}
+}
+class:overlay-turn-counter-box {
+	!class:parent { checkbox }
+	mode:default {
+		int[]:margin { 8 0 8 0 }
+	}
+	mode:selected-disabled {
+		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}

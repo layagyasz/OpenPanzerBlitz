@@ -55,10 +55,12 @@ namespace PanzerBlitz
 		OrderInvalidReason InitialValidate()
 		{
 			OrderInvalidReason r = _InitialMovement.Validate();
-			if (r != OrderInvalidReason.NONE) return r;
+			// Unit is not stopping in this tile.  Ignore stack limit.
+			if (r != OrderInvalidReason.NONE && r != OrderInvalidReason.UNIT_STACK_LIMIT)
+				return r;
 
-			OrderInvalidReason noEnter = _InitialMovement.Unit.CanEnter(ExitTile, true);
-			if (noEnter != OrderInvalidReason.NONE) return noEnter;
+			r = _InitialMovement.Unit.CanEnter(ExitTile, true);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			float distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);

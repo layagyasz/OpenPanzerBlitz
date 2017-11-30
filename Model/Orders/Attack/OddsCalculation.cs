@@ -158,5 +158,12 @@ namespace PanzerBlitz
 
 			return armoredAttack < unArmoredAttack;
 		}
+
+		// Map 4, 3, 2, 1, 2, 3, 4 => 0 -> 6
+		public int GetOddsIndex()
+		{
+			if (OddsAgainst) return 4 - Odds;
+			return 2 + Odds;
+		}
 	}
 }

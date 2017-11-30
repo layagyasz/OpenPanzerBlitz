@@ -18,14 +18,19 @@ namespace PanzerBlitz
 			Match.OnStartPhase += HandleTurn;
 		}
 
-		public void DoTurn(TurnInfo TurnInfo)
+		public void DoTurn(Turn Turn)
 		{
-			_PlayerControllers[TurnInfo.Army].DoTurn(TurnInfo);
+			_PlayerControllers[Turn.TurnInfo.Army].DoTurn(Turn);
 		}
 
 		void HandleTurn(object Sender, StartTurnComponentEventArgs E)
 		{
-			DoTurn(E.TurnInfo);
+			DoTurn(E.Turn);
+		}
+
+		public void Unhook()
+		{
+			foreach (MatchPlayerController controller in _PlayerControllers.Values) controller.Unhook();
 		}
 	}
 }

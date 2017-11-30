@@ -9,88 +9,6 @@ namespace PanzerBlitz
 {
 	public class AttackOrder : Order
 	{
-		static readonly CombatResult[,] COMBAT_RESULTS =
-		{
-			{
-				CombatResult.DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS
-			},
-			{
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS
-			},
-			{
-				CombatResult.DESTROY,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS
-			},
-			{
-				CombatResult.DESTROY,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS,
-				CombatResult.MISS
-
-			},
-			{
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS
-			},
-			{
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.DOUBLE_DISRUPT,
-				CombatResult.MISS,
-				CombatResult.MISS
-			},
-			{
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.DESTROY,
-				CombatResult.MISS
-			},
-		};
-
 		public readonly Army AttackingArmy;
 		public readonly Tile AttackAt;
 		public readonly AttackMethod AttackMethod;
@@ -219,7 +137,7 @@ namespace PanzerBlitz
 						.GroupBy(i => i.Defender)
 						.Select(i => new OddsCalculation(i, new Unit[] { i.Key }, AttackMethod, AttackAt)));
 				_OddsCalculations.Sort(
-					(x, y) => OddsIndex(x.Odds, x.OddsAgainst).CompareTo(OddsIndex(y.Odds, y.OddsAgainst)));
+					(x, y) => x.GetOddsIndex().CompareTo(y.GetOddsIndex()));
 			}
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)
@@ -265,7 +183,7 @@ namespace PanzerBlitz
 				if (_OddsCalculations.Count != AttackAt.Units.Count(
 					i => i.CanBeAttackedBy(AttackingArmy) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
-				if (_OddsCalculations.Any(i => OddsIndex(i.Odds, i.OddsAgainst) < 3))
+				if (_OddsCalculations.Any(i => i.GetOddsIndex() < 3))
 					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
 			}
 
@@ -315,26 +233,18 @@ namespace PanzerBlitz
 		{
 			if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
 
-			AttackingArmy.AttackTile(AttackAt);
-			_Attackers.ForEach(i => i.Execute(Random));
-
 			if (_Results.Length == 0) _Results = new CombatResult[_OddsCalculations.Count];
 			for (int i = 0; i < _OddsCalculations.Count; ++i)
 			{
 				OddsCalculation c = _OddsCalculations[i];
-				if (_Results[i] == CombatResult.NONE) _Results[i] = COMBAT_RESULTS[
-					OddsIndex(c.Odds, c.OddsAgainst),
-					Random.Next(2, 7) + c.DieModifier];
+				if (_Results[i] == CombatResult.NONE)
+					_Results[i] = CombatResultsTable.STANDARD_CRT.GetCombatResult(c, Random.Next(0, 5));
 				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
 			}
-			return OrderStatus.FINISHED;
-		}
+			AttackingArmy.AttackTile(AttackAt);
+			_Attackers.ForEach(i => i.Execute(Random));
 
-		// Map 4, 3, 2, 1, 2, 3, 4 => 0 -> 6
-		int OddsIndex(int Odds, bool OddsAgainst)
-		{
-			if (OddsAgainst) return 4 - Odds;
-			return 2 + Odds;
+			return OrderStatus.FINISHED;
 		}
 	}
 }

@@ -103,9 +103,8 @@ namespace PanzerBlitz
 		public bool CanSeeTile(Tile Tile, bool OverrideConcealment = false)
 		{
 			if (Tile == null) return false;
-			if (Tile.RulesCalculator.Concealing && !OverrideConcealment)
-				return CanSpotTile(Tile);
-			foreach (Unit u in Units)
+			if (Tile.RulesCalculator.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
+			foreach (Unit u in Units.Where(i => i.Configuration.UnitClass != UnitClass.WRECKAGE))
 			{
 				LineOfSight s = u.GetLineOfSight(Tile);
 				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;

@@ -21,6 +21,19 @@ unit-configuration:mg-platoon-italian {
 
 	bool:can-only-support-close-assault { true }
 }
+unit-configuration:mg-platoon-italian-west {
+	string:name { MG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+
+	bool:can-only-support-close-assault { true }
+	bool:can-double-range { true }
+}
 unit-configuration:rifle-platoon-italian-39 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
@@ -28,6 +41,16 @@ unit-configuration:rifle-platoon-italian-39 {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 1 }
 	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-italian-39-west {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
@@ -41,6 +64,16 @@ unit-configuration:rifle-platoon-italian-41 {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
+unit-configuration:rifle-platoon-italian-41-west {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
 unit-configuration:bersaglieri-platoon {
 	string:name { Bersaglieri Platoon }
 	unit-class:unit-class { infantry }
@@ -51,6 +84,18 @@ unit-configuration:bersaglieri-platoon {
 	byte:defense { 6 }
 	byte:movement { 1 }
 }
+unit-configuration:bersaglieri-platoon-west {
+	string:name { Bersaglieri Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
 unit-configuration:alpini-platoon {
 	string:name { Alpini Platoon }
 	unit-class:unit-class { infantry }
@@ -60,6 +105,18 @@ unit-configuration:alpini-platoon {
 	byte:range { 4 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+}
+unit-configuration:alpini-platoon-west {
+	string:name { Alpini Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
 }
 unit-configuration:parachute-platoon-italian {
 	string:name { Parachute Platoon }
@@ -72,6 +129,19 @@ unit-configuration:parachute-platoon-italian {
 	byte:movement { 1 }
 
 	bool:is-paratroop { true }
+}
+unit-configuration:parachute-platoon-italian-west {
+	string:name { Parachute Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:is-paratroop { true }
+	bool:can-double-range { true }
 }
 unit-configuration:cavalry-italian {
 	string:name { Cavalry }
@@ -140,6 +210,21 @@ unit-configuration:motorcycle-italian {
 	bool:is-armored { false }
 	bool:can-overrun { false }
 	!unit-configuration:dismount-as { rifle-platoon-italian-41 }
+}
+unit-configuration:motorcycle-italian-west {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	bool:can-double-range { true }
+	!unit-configuration:dismount-as { rifle-platoon-italian-41-west }
 }
 unit-configuration:65_17 {
 	string:name { 65/17 }

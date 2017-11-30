@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		protected virtual RPCResponse ExecuteOrder(ExecuteOrderRequest Request, TCPConnection Connection)
 		{
-			return new BooleanResponse(_Match.BufferOrder(Request.Order));
+			return new ByteResponse((byte)_Match.BufferOrder(Request.Order));
 		}
 
 		protected virtual RPCResponse ValidateOrder(ValidateOrderRequest Request, TCPConnection Connection)

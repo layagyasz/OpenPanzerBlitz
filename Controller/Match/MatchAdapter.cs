@@ -3,8 +3,9 @@ namespace PanzerBlitz
 {
 	public interface MatchAdapter
 	{
+		Scenario GetScenario();
 		Map GetMap();
-		TurnInfo GetTurnInfo();
+		Turn GetTurn();
 		OrderInvalidReason ValidateOrder(Order Order);
 		OrderInvalidReason ExecuteOrder(Order Order);
 	}

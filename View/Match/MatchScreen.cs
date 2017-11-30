@@ -21,8 +21,10 @@ namespace PanzerBlitz
 
 		StackLayer _StackLayer = new StackLayer();
 		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
+		TableRow _TurnCounter = new TableRow("overlay-turn-counter");
 
-		public MatchScreen(Vector2f WindowSize, Map Map, TileRenderer TileRenderer, IEnumerable<ArmyView> ArmyViews)
+		public MatchScreen(
+			Vector2f WindowSize, Scenario Scenario, Map Map, TileRenderer TileRenderer, IEnumerable<ArmyView> ArmyViews)
 			: base(WindowSize, Map, TileRenderer)
 		{
 			this.ArmyViews = ArmyViews.ToList();
@@ -32,11 +34,15 @@ namespace PanzerBlitz
 				a.OnNewUnitView += (sender, e) => _StackLayer.AddUnitView(e.UnitView);
 			}
 
+			for (int i = 0; i < Scenario.Turns; ++i)
+				_TurnCounter.Add(new Checkbox("overlay-turn-counter-box") { Enabled = false });
+
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
 			_FinishButton.OnClick += HandleFinishClicked;
 			InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, InfoDisplay.Size.Y + 16);
 			_Items.Add(_FinishButton);
 			_Items.Add(InfoDisplay);
+			_Items.Add(_TurnCounter);
 		}
 
 		public void SetEnabled(bool Enabled)
@@ -47,6 +53,18 @@ namespace PanzerBlitz
 		void HandleFinishClicked(object Sender, EventArgs E)
 		{
 			if (OnFinishClicked != null) OnFinishClicked(this, E);
+		}
+
+		public void SetTurn(Turn Turn)
+		{
+			int i = 0;
+			foreach (ClassedGuiItem box in _TurnCounter)
+			{
+				((Checkbox)box).Value = i < Turn.TurnNumber;
+				i++;
+			}
+
+			InfoDisplay.SetTurn(Turn);
 		}
 
 		public override void Update(
@@ -65,7 +83,6 @@ namespace PanzerBlitz
 			_StackLayer.Update(MouseController, KeyController, DeltaT, Transform);
 
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
-			_AlertText.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 		}
 
@@ -79,7 +96,6 @@ namespace PanzerBlitz
 			_StackLayer.Draw(Target, Transform);
 
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
-			_AlertText.Draw(Target, Transform.Identity);
 			PaneLayer.Draw(Target, Transform.Identity);
 		}
 	}

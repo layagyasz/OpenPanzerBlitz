@@ -23,6 +23,8 @@ namespace PanzerBlitz
 		Unit _SelectedUnit;
 		Highlight _Highlight;
 
+		KeyController _KeyController;
+
 		public TurnInfo CurrentTurn
 		{
 			get
@@ -74,23 +76,25 @@ namespace PanzerBlitz
 					u.OnRightClick += OnUnitRightClick;
 				}
 			}
+			_KeyController = KeyController;
 			KeyController.OnKeyPressed += OnKeyPressed;
 		}
 
-		public void DoTurn(TurnInfo TurnInfo)
+		public void DoTurn(Turn Turn)
 		{
-			TurnComponent t = AllowedArmies.Contains(TurnInfo.Army) ? TurnInfo.TurnComponent : TurnComponent.SPECTATE;
-			_GameScreen.InfoDisplay.SetTurnInfo(TurnInfo);
-			_GameScreen.InfoDisplay.SetViewItem(new FactionView(TurnInfo.Army.Configuration.Faction, 80));
-			_GameScreen.SetEnabled(AllowedArmies.Contains(TurnInfo.Army));
-			if (_CurrentTurn != null && _Controllers.ContainsKey(_CurrentTurn.TurnComponent))
+			TurnComponent t = AllowedArmies.Contains(Turn.TurnInfo.Army)
+										   ? Turn.TurnInfo.TurnComponent : TurnComponent.SPECTATE;
+			_GameScreen.SetTurn(Turn);
+			_GameScreen.InfoDisplay.SetViewItem(new FactionView(Turn.TurnInfo.Army.Configuration.Faction, 80));
+			_GameScreen.SetEnabled(AllowedArmies.Contains(Turn.TurnInfo.Army));
+			if (_CurrentTurn.Army != null && _Controllers.ContainsKey(_CurrentTurn.TurnComponent))
 			{
 				_Controllers[_CurrentTurn.TurnComponent].End();
 				UnHighlight();
 				SelectUnit(null);
 				_GameScreen.PaneLayer.Clear();
 			}
-			_CurrentTurn = TurnInfo;
+			_CurrentTurn = Turn.TurnInfo;
 
 			if (_Controllers.ContainsKey(t))
 				_Controllers[t].Begin();
@@ -98,9 +102,9 @@ namespace PanzerBlitz
 
 		void EndTurn(object sender, EventArgs e)
 		{
-			TurnComponent t = Match.GetTurnInfo().TurnComponent;
+			TurnComponent t = Match.GetTurn().TurnInfo.TurnComponent;
 			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
-				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurnInfo().Army));
+				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurn().TurnInfo.Army));
 		}
 
 		public void AddPane(Pane Pane)
@@ -119,9 +123,9 @@ namespace PanzerBlitz
 			if (Unit != null)
 				_GameScreen.InfoDisplay.SetViewItem(
 					new UnitView(Unit, Renderer, 80, false) { Position = new Vector2f(40, 40) });
-			else if (Match.GetTurnInfo() != null)
+			else if (Match.GetTurn().TurnInfo.Army != null)
 				_GameScreen.InfoDisplay.SetViewItem(
-					new FactionView(Match.GetTurnInfo().Army.Configuration.Faction, 80));
+					new FactionView(Match.GetTurn().TurnInfo.Army.Configuration.Faction, 80));
 		}
 
 		public bool ExecuteOrderAndAlert(Order Order)
@@ -152,21 +156,21 @@ namespace PanzerBlitz
 
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.GetTurnInfo();
+			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 				_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);
 		}
 
 		void OnTileRightClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.GetTurnInfo();
+			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 				_Controllers[phase.TurnComponent].HandleTileRightClick(((TileView)sender).Tile);
 		}
 
 		void OnUnitClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.GetTurnInfo();
+			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 			{
 				if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
@@ -177,16 +181,21 @@ namespace PanzerBlitz
 
 		void OnUnitRightClick(object sender, MouseEventArgs e)
 		{
-			TurnInfo phase = Match.GetTurnInfo();
+			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 				_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
 		}
 
 		void OnKeyPressed(object sender, KeyPressedEventArgs E)
 		{
-			TurnInfo phase = Match.GetTurnInfo();
+			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 				_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+		}
+
+		public void Unhook()
+		{
+			_KeyController.OnKeyPressed -= OnKeyPressed;
 		}
 	}
 }

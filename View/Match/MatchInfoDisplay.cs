@@ -21,13 +21,16 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void SetTurnInfo(TurnInfo TurnInfo)
+		public void SetTurn(Turn Turn)
 		{
 			_InfoDisplay.Clear();
 			_InfoDisplay.Add(
-				new Button("info-display-header") { DisplayedString = ObjectDescriber.Describe(TurnInfo.Army) });
+				new Button("info-display-header") { DisplayedString = ObjectDescriber.Describe(Turn.TurnInfo.Army) });
 			_InfoDisplay.Add(
-				new Button("info-display-info") { DisplayedString = ObjectDescriber.Describe(TurnInfo.TurnComponent) });
+				new Button("info-display-info")
+				{
+					DisplayedString = ObjectDescriber.Describe(Turn.TurnInfo.TurnComponent)
+				});
 		}
 
 		public void SetViewItem(Pod ViewItem)

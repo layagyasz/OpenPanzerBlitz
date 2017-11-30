@@ -16,13 +16,13 @@ namespace PanzerBlitz
 		public readonly List<Order> ExecutedOrders = new List<Order>();
 		public readonly IdGenerator IdGenerator = new IdGenerator();
 
-		IEnumerator<TurnInfo> _TurnOrder;
+		IEnumerator<Turn> _TurnOrder;
 
 		OrderAutomator _OrderAutomater;
 		List<Order> _OrderBuffer = new List<Order>();
 		Random _Random = new Random();
 
-		public TurnInfo CurrentPhase
+		public Turn CurrentTurn
 		{
 			get
 			{
@@ -37,11 +37,12 @@ namespace PanzerBlitz
 
 			Armies = Scenario.TurnOrder.Select(i => new Army(this, i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
-				i => new TurnInfo(
-					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT))
-								 .Concat(Armies.Select(i => new TurnInfo(i, TurnComponent.RESET)))
+				i => new Turn((byte)0, new TurnInfo(
+					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT)))
+								 .Concat(Armies.Select(i => new Turn((byte)0, new TurnInfo(i, TurnComponent.RESET))))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
-									.SelectMany(i => i)).GetEnumerator();
+										 .SelectMany((i, j) => i.Select(k => new Turn((byte)(j + 1), k))))
+								 .GetEnumerator();
 			foreach (Unit u in Armies.SelectMany(i => i.Units))
 			{
 				u.OnMove += UpdateUnitVisibilityFromMove;
@@ -74,8 +75,8 @@ namespace PanzerBlitz
 		void NextPhase()
 		{
 			if (!AdvancePhaseIterator()) return;
-			if (_OrderAutomater != null && _OrderAutomater.AutomateTurn(_TurnOrder.Current))
-				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.Army));
+			if (_OrderAutomater != null && _OrderAutomater.AutomateTurn(_TurnOrder.Current.TurnInfo))
+				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.TurnInfo.Army));
 			else if (OnStartPhase != null)
 				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 		}
@@ -90,18 +91,19 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason ValidateOrder(Order Order)
 		{
-			if (CurrentPhase == null) return OrderInvalidReason.ORDER_TURN_COMPONENT;
-			return Order.Army == CurrentPhase.Army && Order.MatchesTurnComponent(CurrentPhase.TurnComponent)
+			if (CurrentTurn.TurnInfo.Army == null) return OrderInvalidReason.ORDER_TURN_COMPONENT;
+			return Order.Army == CurrentTurn.TurnInfo.Army
+						&& Order.MatchesTurnComponent(CurrentTurn.TurnInfo.TurnComponent)
 						? Order.Validate() : OrderInvalidReason.ORDER_TURN_COMPONENT;
 		}
 
-		public bool BufferOrder(Order Order)
+		public OrderInvalidReason BufferOrder(Order Order)
 		{
 			lock (_OrderBuffer)
 			{
 				_OrderBuffer.Add(Order);
 			}
-			return ValidateOrder(Order) == OrderInvalidReason.NONE;
+			return ValidateOrder(Order);
 		}
 
 		public void DoBufferedOrders()
@@ -127,7 +129,7 @@ namespace PanzerBlitz
 			}
 			OrderStatus executed = Order.Execute(_Random);
 			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
-				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current);
+				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current.TurnInfo);
 			if (executed != OrderStatus.ILLEGAL)
 			{
 				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
@@ -176,7 +178,7 @@ namespace PanzerBlitz
 		public override string ToString()
 		{
 			return string.Format(
-				"[Match: CurrentPhase={0}, Scenario={1}]", CurrentPhase, Scenario.Name);
+				"[Match: CurrentPhase={0}, Scenario={1}]", CurrentTurn, Scenario.Name);
 		}
 	}
 }

@@ -6,7 +6,15 @@ unit-render-details:mg-platoon-italian {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
+unit-render-details:mg-platoon-italian-west {
+	string:override-display-name { M-G }
+	string:image-path { mg-platoon.png }
+}
 unit-render-details:rifle-platoon-italian-39 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-italian-39-west {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
@@ -14,7 +22,15 @@ unit-render-details:rifle-platoon-italian-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
+unit-render-details:rifle-platoon-italian-41-west {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
 unit-render-details:bersaglieri-platoon {
+	string:override-display-name { BERSAGLIERI }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:bersaglieri-platoon-west {
 	string:override-display-name { BERSAGLIERI }
 	string:image-path { infantry-platoon.png }
 }
@@ -22,7 +38,15 @@ unit-render-details:alpini-platoon {
 	string:override-display-name { ALPINI }
 	string:image-path { mountain-platoon.png }
 }
+unit-render-details:alpini-platoon-west {
+	string:override-display-name { ALPINI }
+	string:image-path { mountain-platoon.png }
+}
 unit-render-details:parachute-platoon-italian {
+	string:override-display-name { PARACHUTE }
+	string:image-path { airborne-platoon.png }
+}
+unit-render-details:parachute-platoon-italian-west {
 	string:override-display-name { PARACHUTE }
 	string:image-path { airborne-platoon.png }
 }
@@ -44,6 +68,9 @@ unit-render-details:breda-32 {
 	string:image-path { breda-32.png }
 }
 unit-render-details:motorcycle-italian {
+	string:image-path { motorcycle.png }
+}
+unit-render-details:motorcycle-italian-west {
 	string:image-path { motorcycle.png }
 }
 unit-render-details:65_17 {

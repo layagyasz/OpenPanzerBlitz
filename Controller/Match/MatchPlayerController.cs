@@ -3,6 +3,7 @@ namespace PanzerBlitz
 {
 	public interface MatchPlayerController
 	{
-		void DoTurn(TurnInfo TurnInfo);
+		void DoTurn(Turn Turn);
+		void Unhook();
 	}
 }

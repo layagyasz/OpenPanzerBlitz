@@ -18,14 +18,19 @@ namespace PanzerBlitz
 			_Serializer = Serializer;
 		}
 
+		public Scenario GetScenario()
+		{
+			return _LocalMatch.Scenario;
+		}
+
 		public Map GetMap()
 		{
 			return _LocalMatch.Map;
 		}
 
-		public TurnInfo GetTurnInfo()
+		public Turn GetTurn()
 		{
-			return _LocalMatch.CurrentPhase;
+			return _LocalMatch.CurrentTurn;
 		}
 
 		public OrderInvalidReason ValidateOrder(Order Order)

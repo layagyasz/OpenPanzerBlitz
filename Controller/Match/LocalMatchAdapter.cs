@@ -10,14 +10,19 @@ namespace PanzerBlitz
 			this.Match = Match;
 		}
 
+		public Scenario GetScenario()
+		{
+			return Match.Scenario;
+		}
+
 		public Map GetMap()
 		{
 			return Match.Map;
 		}
 
-		public TurnInfo GetTurnInfo()
+		public Turn GetTurn()
 		{
-			return Match.CurrentPhase;
+			return Match.CurrentTurn;
 		}
 
 		public OrderInvalidReason ValidateOrder(Order Order)

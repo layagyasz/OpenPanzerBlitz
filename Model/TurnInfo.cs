@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TurnInfo : Serializable
+	public struct TurnInfo : Serializable
 	{
 		public readonly Army Army;
 		public readonly TurnComponent TurnComponent;

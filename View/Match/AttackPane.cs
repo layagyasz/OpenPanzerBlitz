@@ -62,6 +62,19 @@ namespace PanzerBlitz
 		void DescribeOddsCalculation(OddsCalculation OddsCalculation)
 		{
 			_Description.Add(new Button("attack-odds-box") { DisplayedString = OddsString(OddsCalculation) });
+
+			double[] p = CombatResultsTable.STANDARD_CRT.GetCombatResultProbabilities(OddsCalculation);
+			for (int i = 0; i < p.Length; ++i)
+			{
+				if (p[i] > 0)
+				{
+					_Description.Add(new Button("attack-factor-box")
+					{
+						DisplayedString = string.Format("{0} - {1}%", (CombatResult)i, Math.Round(p[i] * 100))
+					});
+				}
+			}
+
 			_Description.Add(new Button("attack-odds-section")
 			{
 				DisplayedString = string.Format("{0} Total Attack Factor", OddsCalculation.TotalAttack)

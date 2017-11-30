@@ -172,7 +172,6 @@
     <Compile Include="View\Match\DeploymentPane.cs" />
     <Compile Include="View\Match\PositionalDeploymentPage.cs" />
     <Compile Include="View\Edit\EditPane.cs" />
-    <Compile Include="View\Edit\IOPane.cs" />
     <Compile Include="View\ScenarioSelect\ScenarioSelectScreen.cs" />
     <Compile Include="View\Match\ArmyView.cs" />
     <Compile Include="View\Match\MovementDolly.cs" />
@@ -301,6 +300,9 @@
     <Compile Include="Model\Unit\UnitMovementRules.cs" />
     <Compile Include="Model\Unit\UnitStatus.cs" />
     <Compile Include="Model\Unit\WeaponClass.cs" />
+    <Compile Include="Model\Orders\Attack\CombatResultsTable.cs" />
+    <Compile Include="Model\Turn.cs" />
+    <Compile Include="View\IOPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
