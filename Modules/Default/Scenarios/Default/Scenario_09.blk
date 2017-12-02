@@ -170,7 +170,7 @@
 						string:name { 514th Infantry Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
 								int:count { 14 }
 							}
 							unit-count:_ {
@@ -210,7 +210,7 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german }
 								int:count { 2 }
 							}
 						}

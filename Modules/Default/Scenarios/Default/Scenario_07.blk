@@ -201,7 +201,7 @@
 						string:name { 19th Pz. Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 								int:count { 6 }
 							}
 							unit-count:_ {
@@ -209,11 +209,11 @@
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.stug-iii }
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 								int:count { 4 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
 								int:count { 4 }
 							}
 							unit-count:_ {

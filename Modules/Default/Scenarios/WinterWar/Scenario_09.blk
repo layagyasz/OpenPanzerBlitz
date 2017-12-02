@@ -192,7 +192,7 @@
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.stug-iii }
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 								int:count { 3 }
 							}
 							unit-count:_ {

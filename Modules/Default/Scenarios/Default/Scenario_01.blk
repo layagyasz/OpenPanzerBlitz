@@ -218,15 +218,15 @@
 						string:name { 286th Sec. Rgt. & 10th Flak Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.security-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.security-platoon-german }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german }
 								int:count { 2 }
 							}
 							unit-count:_ {

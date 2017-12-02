@@ -1,4 +1,8 @@
-﻿unit-render-details:engineer-platoon {
+﻿unit-render-details:engineer-platoon-german {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:engineer-platoon-german-west {
 	string:override-display-name { }
 	string:image-path { engineer-platoon.png }
 }
@@ -6,21 +10,62 @@ unit-render-details:hmg-platoon-german {
 	string:override-display-name { HMG }
 	string:image-path { hmg-platoon.png }
 }
-unit-render-details:security-platoon {
+unit-render-details:security-platoon-german {
 	string:override-display-name { SECURITY }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:rifle-platoon {
+unit-render-details:security-platoon-german-west {
+	string:override-display-name { SECURITY }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-german-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
-unit-render-details:smg-platoon {
+unit-render-details:rifle-platoon-german-40 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-german-42 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-german-42-west {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:smg-platoon-german {
 	string:override-display-name { SMG }
 	string:image-path { infantry-platoon.png }
+}
+unit-render-details:smg-platoon-german-west {
+	string:override-display-name { SMG }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:parachute-platoon-german {
+	string:override-display-name { PARACHUTE }
+	string:image-path { airborne-platoon.png }
+}
+unit-render-details:cavalry-german {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:cavalry-german-west {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
 }
 unit-render-details:truck-german {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-2.png }
+}
+unit-render-details:motorcycle-german-40-west {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:motorcycle-german-42 {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:motorcycle-german-42-west {
+	string:image-path { motorcycle-2.png }
 }
 unit-render-details:sdkfz-8 {
 	string:override-display-name { SdKfz 8 }
@@ -30,17 +75,79 @@ unit-render-details:sdkfz-251 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sdkfz-251.png }
 }
+unit-render-details:sdkfz-251-west {
+	string:override-display-name { HALFTRK }
+	string:image-path { sdkfz-251.png }
+}
+unit-render-details:sdkfz-250_1 {
+	string:image-path { sdkfz-250_1.png }
+}
+unit-render-details:sdkfz-250_1-west {
+	string:image-path { sdkfz-250_1.png }
+}
+unit-render-details:sdkfz-250_10 {
+	string:image-path { sdkfz-250_10.png }
+}
+unit-render-details:sdkfz-251_10 {
+	string:image-path { sdkfz-251_10.png }
+}
+unit-render-details:kfz-13 {
+	string:image-path { kfz-13.png }
+}
+unit-render-details:sdkfz-6_2 {
+	string:image-path { sdkfz-6_2.png }
+}
+unit-render-details:sdkfz-7_1 {
+	string:image-path { sdkfz-7_1.png }
+}
+unit-render-details:sdkfz-10_4 {
+	string:image-path { sdkfz-10_4.png }
+}
+unit-render-details:sdkfz-221 {
+	string:image-path { sdkfz-221.png }
+}
+unit-render-details:sdkfz-222 {
+	string:image-path { sdkfz-222.png }
+}
+unit-render-details:sdkfz-231_8 {
+	string:image-path { sdkfz-231_8.png }
+}
+unit-render-details:sdkfz-233 {
+	string:image-path { sdkfz-233.png }
+}
+unit-render-details:sdkfz-231_6 {
+	string:image-path { sdkfz-231_6.png }
+}
 unit-render-details:sdkfz-234_1 {
-	string:override-display-name { SdKfz 234/1 }
 	string:image-path { sdkfz-234_1.png }
 }
 unit-render-details:puma {
 	string:override-display-name { PUMA }
 	string:image-path { sdkfz-234_2.png }
 }
+unit-render-details:sdkfz-234_3 {
+	string:image-path { sdkfz-234_3.png }
+}
 unit-render-details:sdkfz-234_4 {
-	string:override-display-name { SdKfz 234/4 }
 	string:image-path { sdkfz-234_4.png }
+}
+unit-render-details:sdkfz-250_7 {
+	string:image-path { sdkfz-250_7.png }
+}
+unit-render-details:sdkfz-250_8 {
+	string:image-path { sdkfz-250_8.png }
+}
+unit-render-details:sdkfz-250_9 {
+	string:image-path { sdkfz-250_9.png }
+}
+unit-render-details:sdkfz-251_2 {
+	string:image-path { sdkfz-251_2.png }
+}
+unit-render-details:sdkfz-251_9 {
+	string:image-path { sdkfz-251_9.png }
+}
+unit-render-details:sdkfz-251_16 {
+	string:image-path { sdkfz-251_16.png }
 }
 unit-render-details:maultier {
 	string:override-display-name { MAULTIER }
@@ -54,21 +161,38 @@ unit-render-details:hummel {
 	string:override-display-name { HUMMEL }
 	string:image-path { hummel.png }
 }
+unit-render-details:gw-1 {
+	string:image-path { gw-1.png }
+}
 unit-render-details:gw-38_m {
 	string:image-path { gw-38_m.png }
 }
+unit-render-details:ostwind {
+	string:image-path { ostwind.png }
+}
 unit-render-details:wirbelwind {
-	string:override-display-name { WIRBELWIND }
 	string:image-path { wirbelwind.png }
 }
 unit-render-details:stuh-42 {
 	string:image-path { stuh-42.png }
 }
+unit-render-details:marder-ii {
+	string:image-path { marder-ii.png }
+}
 unit-render-details:marder-iii {
 	string:image-path { marder-iii.png }
 }
-unit-render-details:stug-iii {
+unit-render-details:stug-iii-b {
+	string:image-path { stug-iii-short.png }
+}
+unit-render-details:stug-iii-g {
 	string:image-path { stug-iii-long.png }
+}
+unit-render-details:stupz-iv {
+	string:image-path { stupz-iv.png }
+}
+unit-render-details:flamingo {
+	string:image-path { flamingo.png }
 }
 unit-render-details:hetzer {
 	string:image-path { hetzer.png }
@@ -76,9 +200,27 @@ unit-render-details:hetzer {
 unit-render-details:jgdpz-iv {
 	string:image-path { pzjd-iv_70.png }
 }
+unit-render-details:ferdinand  {
+	string:image-path { ferdinand.png }
+}
+unit-render-details:elefant {
+	string:image-path { elefant.png }
+}
 unit-render-details:nashorn {
 	string:override-display-name { NASHORN }
 	string:image-path { nashorn.png }
+}
+unit-render-details:pzjg-47 {
+	string:image-path { pzjg-47.png }
+}
+unit-render-details:pzjd-iv_48 {
+	string:image-path { pzjd-iv_48.png }
+}
+unit-render-details:pzjd-iv_70 {
+	string:image-path { pzjd-iv_70.png }
+}
+unit-render-details:jgdpz-38-t-flame {
+	string:image-path { jgdpz-38-t-fl.png }
 }
 unit-render-details:jgdpz-v {
 	string:image-path { jgdpz-v.png }
@@ -86,22 +228,96 @@ unit-render-details:jgdpz-v {
 unit-render-details:jgdpz-vi {
 	string:image-path { jgdpz-vi.png }
 }
+unit-render-details:pzkw-35_t {
+	string:image-path { lt-35.png }
+}
+unit-render-details:pzkw-38_t {
+	string:image-path { lt-38.png }
+}
 unit-render-details:lynx {
 	string:override-display-name { LYNX }
 	string:image-path { lynx.png }
 }
+unit-render-details:pzkw-i {
+	string:image-path { pzkw-i.png }
+}
+unit-render-details:pzkw-i-a {
+	string:image-path { pzkw-i.png }
+}
+unit-render-details:pzkw-i-b {
+	string:image-path { pzkw-i.png }
+}
+unit-render-details:pzkw-ii {
+	string:image-path { pzkw-ii.png }
+}
+unit-render-details:pzkw-ii-c {
+	string:image-path { pzkw-ii.png }
+}
+unit-render-details:pzkw-ii-d {
+	string:image-path { pzkw-ii.png }
+}
 unit-render-details:pzkw-ii-d-corrected {
 	string:image-path { pzkw-ii.png }
 }
+unit-render-details:pzkw-ii-f {
+	string:image-path { pzkw-ii.png }
+}
+unit-render-details:pzkw-iii-d {
+	string:image-path { pzkw-iii-early.png }
+}
+unit-render-details:pzkw-iii-d-corrected {
+	string:image-path { pzkw-iii-early.png }
+}
+unit-render-details:pzkw-iii-f {
+	string:image-path { pzkw-iii-early.png }
+}
 unit-render-details:pzkw-iii-g {
-	string:override-display-name { PzKw III G }
 	string:image-path { pzkw-iii-medium.png }
 }
-unit-render-details:pzkw-iv {
+unit-render-details:pzkw-iii-g-corrected {
+	string:image-path { pzkw-iii-medium.png }
+}
+unit-render-details:pzkw-iii-j {
+	string:image-path { pzkw-iii-long.png }
+}
+unit-render-details:pzkw-iii-n {
+	string:image-path { pzkw-iii-short.png }
+}
+unit-render-details:pzkw-iii-flame {
+	string:image-path { pzkw-iii-fl.png }
+}
+unit-render-details:pzkw-iv-a {
+	string:image-path { pzkw-iv-early.png }
+}
+unit-render-details:pzkw-iv-d {
+	string:image-path { pzkw-iv-early.png }
+}
+unit-render-details:pzkw-iv-e {
+	string:image-path { pzkw-iv-short.png }
+}
+unit-render-details:pzkw-iv-f_2 {
+	string:image-path { pzkw-iv-medium.png }
+}
+unit-render-details:pzkw-iv-h {
+	string:image-path { pzkw-iv-long.png }
+}
+unit-render-details:pzkw-iv-how {
+	string:image-path { pzkw-iv-early.png }
+}
+unit-render-details:pzkw-iv_ss {
+	string:image-path { pzkw-iv-long.png }
+}
+unit-render-details:pzkw-iv_w {
 	string:image-path { pzkw-iv-long.png }
 }
 unit-render-details:panther {
 	string:override-display-name { PANTH }
+	string:image-path { panther.png }
+}
+unit-render-details:pzkw-v_ss {
+	string:image-path { panther.png }
+}
+unit-render-details:pzkw-v_w {
 	string:image-path { panther.png }
 }
 unit-render-details:tiger-i {

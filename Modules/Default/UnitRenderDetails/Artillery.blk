@@ -79,6 +79,9 @@ unit-render-details:20mm_2-aa {
 unit-render-details:20mm_4-aa {
 	string:image-path { anti-aircraft.png }
 }
+unit-render-details:37mm-aa {
+	string:image-path { anti-aircraft.png }
+}
 unit-render-details:40mm-aa {
 	string:image-path { anti-aircraft.png }
 }
@@ -154,6 +157,9 @@ unit-render-details:152mm-how {
 unit-render-details:155mm-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:170mm-how {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:203mm-how {
 	string:image-path { artillery-motorized.png }
 }
@@ -213,5 +219,9 @@ unit-render-details:150mm-mortar {
 }
 unit-render-details:land-mattress {
 	string:override-display-name { LM }
+	string:image-path { rocket.png }
+}
+unit-render-details:nebelwerfer {
+	string:override-display-name { NW }
 	string:image-path { rocket.png }
 }

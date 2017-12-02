@@ -1,4 +1,4 @@
-﻿unit-configuration:engineer-platoon {
+﻿unit-configuration:engineer-platoon-german {
 	string:name { Engineer Platoon }
 	unit-class:unit-class { infantry }
 
@@ -7,6 +7,19 @@
 	byte:range { 4 }
 	byte:defense { 10 }
 	byte:movement { 1 }
+
+	bool:is-engineer { true }
+}
+unit-configuration:engineer-platoon-german-west {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 10 }
+	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:hmg-platoon-german {
@@ -21,7 +34,7 @@ unit-configuration:hmg-platoon-german {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:security-platoon {
+unit-configuration:security-platoon-german {
 	string:name { Security Platoon }
 	unit-class:unit-class { infantry }
 
@@ -31,7 +44,37 @@ unit-configuration:security-platoon {
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
-unit-configuration:rifle-platoon {
+unit-configuration:security-platoon-german-west {
+	string:name { Security Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-german-39 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-german-40 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-german-42 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -41,7 +84,19 @@ unit-configuration:rifle-platoon {
 	byte:defense { 8 }
 	byte:movement { 1 }
 }
-unit-configuration:smg-platoon {
+unit-configuration:rifle-platoon-german-42-west {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:smg-platoon-german {
 	string:name { SMG Platoon }
 	unit-class:unit-class { infantry }
 
@@ -50,6 +105,50 @@ unit-configuration:smg-platoon {
 	byte:range { 3 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+}
+unit-configuration:smg-platoon-german-west {
+	string:name { SMG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 1 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:parachute-platoon-german {
+	string:name { Parachute Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+
+	bool:is-paratroop { true }
+}
+unit-configuration:cavalry-german {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-german-west {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+
+	bool:can-double-range { true }
 }
 unit-configuration:truck-german {
 	string:name { Truck }
@@ -63,8 +162,52 @@ unit-configuration:truck-german {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
+unit-configuration:motorcycle-german-40-west {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-40 }
+	bool:can-double-range { true }
+}
+unit-configuration:motorcycle-german-42 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-42 }
+}
+unit-configuration:motorcycle-german-42-west {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-42-west }
+	bool:can-double-range { true }
+}
 unit-configuration:sdkfz-8 {
-	string:name { SdKfz. 8 Halftrack }
+	string:name { SdKfz 8 Halftrack }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { na }
@@ -76,7 +219,7 @@ unit-configuration:sdkfz-8 {
 	bool:is-armored { true }
 }
 unit-configuration:sdkfz-251 {
-	string:name { SdKfz. 251 Halftrack }
+	string:name { SdKfz 251 Halftrack }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { infantry }
@@ -87,8 +230,168 @@ unit-configuration:sdkfz-251 {
 
 	bool:is-armored { true }
 }
+unit-configuration:sdkfz-251-west {
+	string:name { SdKfz 251 Halftrack }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+}
+unit-configuration:sdkfz-250_1 {
+	string:name { SdKfz 250/1 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { true }
+}
+unit-configuration:sdkfz-250_1-west {
+	string:name { SdKfz 250/1 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { true }
+}
+unit-configuration:sdkfz-250_10 {
+	string:name { SdKfz 250/10 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { true }
+}
+unit-configuration:sdkfz-251_10 {
+	string:name { SdKfz 251/10 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+}
+unit-configuration:kfz-13 {
+	string:name { Kfz 13 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:sdkfz-6_2 {
+	string:name { SdKfz 6/2 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:sdkfz-7_1 {
+	string:name { SdKfz 7/1 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:sdkfz-10_4 {
+	string:name { SdKfz 10/4 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:sdkfz-221 {
+	string:name { SdKfz 221 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:sdkfz-222 {
+	string:name { SdKfz 222 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:sdkfz-231_6 {
+	string:name { SdKfz 231/6 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:sdkfz-231_8 {
+	string:name { SdKfz 231/8 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:sdkfz-233 {
+	string:name { SdKfz 233 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 2 }
+	byte:movement { 14 }
+}
 unit-configuration:sdkfz-234_1 {
-	string:name { SdKfz. 234/1 }
+	string:name { SdKfz 234/1 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { high-explosive }
@@ -97,8 +400,18 @@ unit-configuration:sdkfz-234_1 {
 	byte:defense { 3 }
 	byte:movement { 16 }
 }
+unit-configuration:sdkfz-234_3 {
+	string:name { SdKfz 234/3 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 14 }
+}
 unit-configuration:puma {
-	string:name { Puma SdKfz. 234/2 }
+	string:name { Puma SdKfz 234/2 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -108,7 +421,7 @@ unit-configuration:puma {
 	byte:movement { 14 }
 }
 unit-configuration:sdkfz-234_4 {
-	string:name { SdKfz. 234/4 }
+	string:name { SdKfz 234/4 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -116,6 +429,68 @@ unit-configuration:sdkfz-234_4 {
 	byte:range { 8 }
 	byte:defense { 3 }
 	byte:movement { 14 }
+}
+unit-configuration:sdkfz-250_7 {
+	string:name { SdKfz 250/7 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 1 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+}
+unit-configuration:sdkfz-250_8 {
+	string:name { SdKfz 250/8 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 8 }
+	byte:defense { 2 }
+	byte:movement { 11 }
+}
+unit-configuration:sdkfz-250_9 {
+	string:name { SdKfz 250/9 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:sdkfz-251_2 {
+	string:name { SdKfz 251/2 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { mortar }
+	byte:attack { 3 }
+	byte:range { 12 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:sdkfz-251_9 {
+	string:name { SdKfz 251/9 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:sdkfz-251_16 {
+	string:name { SdKfz 251/16 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 4 }
+	byte:movement { 10 }
 }
 unit-configuration:maultier {
 	string:name { Maultier }
@@ -142,10 +517,20 @@ unit-configuration:hummel {
 	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { high-explosive }
-	byte:attack { 50 }
+	byte:attack { 60 }
+	byte:range { 24 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:gw-1 {
+	string:name { GW 1 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
 	byte:range { 12 }
-	byte:defense { 4 }
-	byte:movement { 10 }
+	byte:defense { 2 }
+	byte:movement { 6 }
 }
 unit-configuration:gw-38_m {
 	string:name { GW 38(M) }
@@ -156,6 +541,18 @@ unit-configuration:gw-38_m {
 	byte:range { 12 }
 	byte:defense { 5 }
 	byte:movement { 6 }
+}
+unit-configuration:ostwind {
+	string:name { Ostwind }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+
+	bool:can-anti-aircraft { true }
 }
 unit-configuration:wirbelwind {
 	string:name { Wirbelwind }
@@ -179,6 +576,16 @@ unit-configuration:stuh-42 {
 	byte:defense { 12 }
 	byte:movement { 8 }
 }
+unit-configuration:marder-ii {
+	string:name { Marder II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
 unit-configuration:marder-iii {
 	string:name { Marder III }
 	unit-class:unit-class { tank }
@@ -189,15 +596,45 @@ unit-configuration:marder-iii {
 	byte:defense { 7 }
 	byte:movement { 8 }
 }
-unit-configuration:stug-iii {
-	string:name { StuG III }
-	unit-class:unit-class { tank }
+unit-configuration:stug-iii-b {
+	string:name { StuG III B }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:stug-iii-g {
+	string:name { StuG III G }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
 	byte:range { 8 }
 	byte:defense { 12 }
 	byte:movement { 8 }
+}
+unit-configuration:stupz-iv {
+	string:name { StuPz IV }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 8 }
+}
+unit-configuration:flamingo {
+	string:name { Flamingo }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 10 }
 }
 unit-configuration:hetzer {
 	string:name { Hetzer }
@@ -219,6 +656,26 @@ unit-configuration:jgdpz-iv {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
+unit-configuration:ferdinand {
+	string:name { Ferdinand }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 18 }
+	byte:range { 14 }
+	byte:defense { 10 }
+	byte:movement { 6 }
+}
+unit-configuration:elefant {
+	string:name { Elefant }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 20 }
+	byte:range { 12 }
+	byte:defense { 15 }
+	byte:movement { 4 }
+}
 unit-configuration:nashorn {
 	string:name { Nashorn }
 	unit-class:unit-class { tank }
@@ -228,6 +685,46 @@ unit-configuration:nashorn {
 	byte:range { 20 }
 	byte:defense { 6 }
 	byte:movement { 8 }
+}
+unit-configuration:pzjg-47 {
+	string:name { JgdPz V }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 8 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 6 }
+}
+unit-configuration:pzjd-iv_48 {
+	string:name { PzJd IV/48 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:pzjd-iv_70 {
+	string:name { PzJd IV/70}
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 12 }
+	byte:defense { 9 }
+	byte:movement { 8 }
+}
+unit-configuration:jgdpz-38-t-flame {
+	string:name { JgdPz 38t (FL) }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 12 }
+	byte:movement { 6 }
 }
 unit-configuration:jgdpz-v {
 	string:name { JgdPz V }
@@ -259,7 +756,77 @@ unit-configuration:lynx {
 	byte:defense { 6 }
 	byte:movement { 10 }
 }
-unit-configuration:pzkw-ii-d-corrected {
+unit-configuration:pzkw-35_t {
+	string:name { PzKw 35 (T) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 7 }
+}
+unit-configuration:pzkw-38_t {
+	string:name { PzKw 38 (T) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:pzkw-i {
+	string:name { PzKw I }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-i-a {
+	string:name { PzKw I A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 7 }
+}
+unit-configuration:pzkw-i-b {
+	string:name { PzKw I B }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-ii {
+	string:name { PzKw II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-ii-c {
+	string:name { PzKw II C }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-ii-d {
 	string:name { PzKw II D }
 	unit-class:unit-class { tank }
 
@@ -268,6 +835,56 @@ unit-configuration:pzkw-ii-d-corrected {
 	byte:range { 4 }
 	byte:defense { 5 }
 	byte:movement { 10 }
+}
+unit-configuration:pzkw-ii-d-corrected {
+	string:name { PzKw II D }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-ii-f {
+	string:name { PzKw II F }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-iii-d {
+	string:name { PzKw III D }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iii-d-corrected {
+	string:name { PzKw III D }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iii-f {
+	string:name { PzKw III F }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 2 }
+	byte:defense { 3 }
+	byte:movement { 8 }
 }
 unit-configuration:pzkw-iii-g {
 	string:name { PzKw III G }
@@ -279,8 +896,98 @@ unit-configuration:pzkw-iii-g {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
-unit-configuration:pzkw-iv {
+unit-configuration:pzkw-iii-g-corrected {
+	string:name { PzKw III G }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 8 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iii-j {
+	string:name { PzKw III J }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 10 }
+	byte:range { 6 }
+	byte:defense { 7 }
+	byte:movement { 9 }
+}
+unit-configuration:pzkw-iii-n {
+	string:name { PzKw III N }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 9 }
+}
+unit-configuration:pzkw-iii-flame {
+	string:name { PzKw III (FL) }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv-how {
 	string:name { PzKw IV }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 5 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv-a {
+	string:name { PzKw IV A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 2 }
+	byte:movement { 7 }
+}
+unit-configuration:pzkw-iv-d {
+	string:name { PzKw IV D }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv-e {
+	string:name { PzKw IV E }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv-f_2 {
+	string:name { PzKw IV F/2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv-h {
+	string:name { PzKw IV H }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -289,8 +996,48 @@ unit-configuration:pzkw-iv {
 	byte:defense { 8 }
 	byte:movement { 8 }
 }
+unit-configuration:pzkw-iv_ss {
+	string:name { PzKw IV (SS) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
+unit-configuration:pzkw-iv_w {
+	string:name { PzKw IV (W) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 8 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+}
 unit-configuration:panther {
 	string:name { Panther }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 12 }
+	byte:defense { 12 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-v_w {
+	string:name { PzKw V (W) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 13 }
+	byte:range { 12 }
+	byte:defense { 11 }
+	byte:movement { 10 }
+}
+unit-configuration:pzkw-v_ss {
+	string:name { PzKw V (SS) }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

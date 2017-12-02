@@ -311,6 +311,19 @@ unit-configuration:20mm_4-aa {
 	bool:can-anti-aircraft { true }
 	bool:is-light-passenger { true }
 }
+unit-configuration:37mm-aa {
+	string:name { 37mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+	bool:is-light-passenger { true }
+}
 unit-configuration:40mm-aa {
 	string:name { 40mm }
 	unit-class:unit-class { towed-gun }
@@ -561,6 +574,7 @@ unit-configuration:150mm-how {
 	byte:range { 36 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:152mm-how {
@@ -572,6 +586,7 @@ unit-configuration:152mm-how {
 	byte:range { 25 }
 	byte:defense { 1 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:155mm-how {
@@ -583,6 +598,19 @@ unit-configuration:155mm-how {
 	byte:range { 36 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:170mm-how {
+	string:name { 170mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 50 }
+	byte:range { 80 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:203mm-how {
@@ -822,6 +850,18 @@ unit-configuration:land-mattress {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 25 }
 	byte:range { 25 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:nebelwerfer {
+	string:name { Nebelwerfer }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 16 }
 	byte:defense { 1 }
 	byte:movement { 0 }
 

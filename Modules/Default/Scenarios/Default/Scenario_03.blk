@@ -117,7 +117,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
 								int:count { 3 }
 							}
 							unit-count:_ {

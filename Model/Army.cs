@@ -104,7 +104,8 @@ namespace PanzerBlitz
 		{
 			if (Tile == null) return false;
 			if (Tile.RulesCalculator.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
-			foreach (Unit u in Units.Where(i => i.Configuration.UnitClass != UnitClass.WRECKAGE))
+			foreach (Unit u in Units.Where(
+				i => i.Status == UnitStatus.ACTIVE && i.Configuration.UnitClass != UnitClass.WRECKAGE))
 			{
 				LineOfSight s = u.GetLineOfSight(Tile);
 				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
@@ -126,7 +127,11 @@ namespace PanzerBlitz
 		public bool CanSpotTile(Tile Tile)
 		{
 			if (Tile == null) return false;
-			return Units.Any(i => i.Position != null && (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
+			return Units.Any(
+				i => i.Position != null
+				&& i.Status == UnitStatus.ACTIVE
+				&& i.Configuration.UnitClass != UnitClass.WRECKAGE
+				&& (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
 		}
 
 		public void SetUnitVisibility(Unit Unit, bool Visible)

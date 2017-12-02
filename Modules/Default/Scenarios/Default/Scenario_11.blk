@@ -126,7 +126,7 @@
 						string:name { 9th SS Pz. Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 								int:count { 12 }
 							}
 							unit-count:_ {
@@ -134,7 +134,7 @@
 								int:count { 12 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
 								int:count { 9 }
 							}
 							unit-count:_ {
@@ -146,7 +146,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.stug-iii }
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 								int:count { 3 }
 							}
 							unit-count:_ {
