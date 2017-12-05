@@ -44,15 +44,15 @@
 						string:name { 119th Rifle Div. Remnants }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.guards-company }
+								!unit-configuration:unit-configuration { unit-configurations.guards-company-43 }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 								int:count { 8 }
 							}
 							unit-count:_ {

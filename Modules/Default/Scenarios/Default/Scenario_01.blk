@@ -71,7 +71,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 2 }
 							}
 							unit-count:_ {
@@ -87,7 +87,7 @@
 								int:count { 4 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.cavalry-russian }
+								!unit-configuration:unit-configuration { unit-configurations.cavalry-russian-43 }
 								int:count { 4 }
 							}
 						}

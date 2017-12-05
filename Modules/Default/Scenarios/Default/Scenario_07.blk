@@ -95,7 +95,7 @@
 								int:count { 12 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 6 }
 							}
 							unit-count:_ {

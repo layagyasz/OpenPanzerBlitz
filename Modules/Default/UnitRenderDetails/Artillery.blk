@@ -187,6 +187,9 @@ unit-render-details:8in-how-allied {
 unit-render-details:8in-how-finnish {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:b-4-203mm-how {
+	string:image-path { b-4-203mm.png }
+}
 unit-render-details:76mm-mortar {
 	string:image-path { mortar.png }
 }
@@ -215,6 +218,9 @@ unit-render-details:120mm-mortar-early {
 	string:image-path { mortar.png }
 }
 unit-render-details:150mm-mortar {
+	string:image-path { mortar.png }
+}
+unit-render-details:160mm-mortar {
 	string:image-path { mortar.png }
 }
 unit-render-details:land-mattress {

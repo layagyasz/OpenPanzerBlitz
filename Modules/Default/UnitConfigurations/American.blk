@@ -269,6 +269,26 @@ unit-configuration:m-3a1-satan {
 	byte:defense { 4 }
 	byte:movement { 12 }
 }
+unit-configuration:m-3a1 {
+	string:name { M-3A1 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+}
+unit-configuration:m-3-lee {
+	string:name { M-3 Lee }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 10 }
+	byte:range { 8 }
+	byte:defense { 8 }
+	byte:movement { 8 }
+}
 unit-configuration:m-4_105 {
 	string:name { M-4/105 }
 	unit-class:unit-class { tank }
@@ -389,14 +409,24 @@ unit-configuration:m-2a4 {
 	byte:defense { 3 }
 	byte:movement { 13 }
 }
-unit-configuration:m-4a2 {
-	string:name { M-4A2 }
+unit-configuration:m-4a2_75 {
+	string:name { M-4A2/75 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 11 }
 	byte:range { 8 }
 	byte:defense { 9 }
+	byte:movement { 9 }
+}
+unit-configuration:m-4a2_76 {
+	string:name { M-4A2/76 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 10 }
 	byte:movement { 9 }
 }
 unit-configuration:sherman-flail {

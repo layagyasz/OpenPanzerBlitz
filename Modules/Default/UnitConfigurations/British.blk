@@ -306,6 +306,16 @@ unit-configuration:matilda {
 	byte:defense { 8 }
 	byte:movement { 5 }
 }
+unit-configuration:matilda-ii {
+	string:name { Matilda II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 10 }
+	byte:movement { 5 }
+}
 unit-configuration:a-13 {
 	string:name { A-13 }
 	unit-class:unit-class { tank }
@@ -457,7 +467,7 @@ unit-configuration:centurion {
 	byte:movement { 7 }
 }
 unit-configuration:churchill-6pdr {
-	string:name { Achilles }
+	string:name { Churchill 6pdr }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -473,6 +483,16 @@ unit-configuration:churchill-75 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 9 }
 	byte:range { 8 }
+	byte:defense { 11 }
+	byte:movement { 5 }
+}
+unit-configuration:churchill-iv {
+	string:name { Churchill IV }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 11 }
+	byte:range { 5 }
 	byte:defense { 11 }
 	byte:movement { 5 }
 }
@@ -515,6 +535,26 @@ unit-configuration:crusader-iii {
 	byte:range { 5 }
 	byte:defense { 5 }
 	byte:movement { 9 }
+}
+unit-configuration:valentine-iii {
+	string:name { Valentine III }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 7 }
+	byte:movement { 6 }
+}
+unit-configuration:valentine-viii {
+	string:name { Valentine VIII }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 11 }
+	byte:range { 5 }
+	byte:defense { 7 }
+	byte:movement { 6 }
 }
 unit-configuration:valentine-ix {
 	string:name { Valentine IX }

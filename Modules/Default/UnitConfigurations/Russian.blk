@@ -54,6 +54,21 @@ unit-configuration:rifle-company-41 {
 	byte:defense { 10 }
 	byte:movement { 1 }
 }
+unit-configuration:ski-company-41 {
+	string:name { Ski Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 10 }
+	byte:movement { 3 }
+
+	bool:can-close-assault { false }
+	bool:is-oversized-passenger { true }
+	!unit-configuration:dismount-as { rifle-company-41 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
+}
 unit-configuration:rifle-company-42 {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
@@ -64,7 +79,7 @@ unit-configuration:rifle-company-42 {
 	byte:defense { 12 }
 	byte:movement { 1 }
 }
-unit-configuration:ski-company-41 {
+unit-configuration:ski-company-42 {
 	string:name { Ski Company }
 	unit-class:unit-class { infantry }
 
@@ -79,7 +94,7 @@ unit-configuration:ski-company-41 {
 	!unit-configuration:dismount-as { rifle-company-42 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.ski }
 }
-unit-configuration:rifle-company {
+unit-configuration:rifle-company-43 {
 	string:name { Rifle Company }
 	unit-class:unit-class { infantry }
 
@@ -99,7 +114,7 @@ unit-configuration:guards-company-41 {
 	byte:defense { 13 }
 	byte:movement { 1 }
 }
-unit-configuration:guards-company {
+unit-configuration:guards-company-43 {
 	string:name { Guards Company }
 	unit-class:unit-class { infantry }
 
@@ -129,7 +144,7 @@ unit-configuration:smg-company-41 {
 	byte:defense { 12 }
 	byte:movement { 1 }
 }
-unit-configuration:smg-company {
+unit-configuration:smg-company-43 {
 	string:name { SMG Company }
 	unit-class:unit-class { infantry }
 
@@ -159,7 +174,7 @@ unit-configuration:cavalry-russian-41 {
 	byte:defense { 8 }
 	byte:movement { 3 }
 }
-unit-configuration:cavalry-russian {
+unit-configuration:cavalry-russian-43 {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
@@ -168,6 +183,20 @@ unit-configuration:cavalry-russian {
 	byte:range { 3 }
 	byte:defense { 8 }
 	byte:movement { 3 }
+}
+unit-configuration:motorcycle-russian {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-company-43 }
 }
 unit-configuration:tractor {
 	string:name { Tractor }
@@ -385,7 +414,7 @@ unit-configuration:ba-20 {
 	byte:movement { 12 }	
 }
 unit-configuration:ba-32-a {
-	string:name { BA-32a }
+	string:name { BA-32 A }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -393,6 +422,62 @@ unit-configuration:ba-32-a {
 	byte:range { 3 }
 	byte:defense { 2 }
 	byte:movement { 12 }	
+}
+unit-configuration:ba-64-b {
+	string:name { BA-64 B }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 16 }	
+}
+unit-configuration:su-57 {
+	string:name { SU-57 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 9 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 10 }
+}
+unit-configuration:zis-42 {
+	string:name { ZIS-42 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:gaz-aa {
+	string:name { GAZ AA }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:yag-10 {
+	string:name { YAG-10 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	bool:can-anti-aircraft { true }
 }
 unit-configuration:t-26-a {
 	string:name { T-26 A }
@@ -411,6 +496,16 @@ unit-configuration:t-38 {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 8 }	
+}
+unit-configuration:t-38-m2 {
+	string:name { T-38 M2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 4 }
 	byte:defense { 3 }
 	byte:movement { 8 }	
 }
@@ -464,6 +559,16 @@ unit-configuration:t-100 {
 	byte:defense { 12 }
 	byte:movement { 6 }	
 }
+unit-configuration:su-122 {
+	string:name { SU-122 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 8 }
+	byte:defense { 11 }
+	byte:movement { 11 }
+}
 unit-configuration:su-152 {
 	string:name { SU-152 }
 	unit-class:unit-class { assault-gun }
@@ -494,6 +599,66 @@ unit-configuration:kv-ii {
 	byte:defense { 10 }
 	byte:movement { 8 }	
 }
+unit-configuration:m-13 {
+	string:name { M-13 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 24 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
+}
+unit-configuration:m-31 {
+	string:name { M-31 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 12 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
+}
+unit-configuration:ot-133 {
+	string:name { OT-133 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 30 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 6 }
+}
+unit-configuration:ot-34 {
+	string:name { OT-34 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 9 }
+	byte:movement { 11 }
+}
+unit-configuration:ot-34_85 {
+	string:name { OT-34/85 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 10 }
+	byte:movement { 11 }
+}
+unit-configuration:kv-8 {
+	string:name { KV-8 }
+	unit-class:unit-class { flame-tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 40 }
+	byte:range { 1 }
+	byte:defense { 13 }
+	byte:movement { 7 }
+}
 unit-configuration:su-76 {
 	string:name { SU-76 }
 	unit-class:unit-class { tank }
@@ -513,6 +678,16 @@ unit-configuration:su-85 {
 	byte:range { 8 }
 	byte:defense { 12 }
 	byte:movement { 11 }
+}
+unit-configuration:t-44 {
+	string:name { T-44 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 8 }
+	byte:defense { 13 }
+	byte:movement { 10 }
 }
 unit-configuration:su-100 {
 	string:name { SU-100 }
@@ -541,7 +716,7 @@ unit-configuration:t-26-b {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 4 }
+	byte:defense { 5 }
 	byte:movement { 6 } 
 }
 unit-configuration:t-26-c {
@@ -624,6 +799,26 @@ unit-configuration:kv-i-a {
 	byte:defense { 10 }
 	byte:movement { 8 }
 }
+unit-configuration:kv-i-c {
+	string:name { KV-I C }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 6 }
+	byte:defense { 13 }
+	byte:movement { 7 }
+}
+unit-configuration:kv-i-s {
+	string:name { KV-I S }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 6 }
+	byte:defense { 11 }
+	byte:movement { 9 }
+}
 unit-configuration:kv-85 {
 	string:name { KV-85 }
 	unit-class:unit-class { tank }
@@ -634,8 +829,18 @@ unit-configuration:kv-85 {
 	byte:defense { 13 }
 	byte:movement { 10 }
 }
+unit-configuration:t-34-a {
+	string:name { T-34 A }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 5 }
+	byte:defense { 9 }
+	byte:movement { 11 }	
+}
 unit-configuration:t-34-c {
-	string:name { T-34c }
+	string:name { T-34 C }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

@@ -57,7 +57,7 @@
 						string:name { 203rd Rifle Div. Vanguard }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 								int:count { 6 }
 							}
 							unit-count:_ {
@@ -73,7 +73,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 1 }
 							}
 							unit-count:_ {
@@ -95,7 +95,7 @@
 						string:name { 33rd Rifle Div. Vanguard }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 								int:count { 3 }
 							}
 							unit-count:_ {
@@ -103,7 +103,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 2 }
 							}
 							unit-count:_ {
@@ -125,7 +125,7 @@
 						string:name { 266th Rifle Div. Vanguard }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.guards-company }
+								!unit-configuration:unit-configuration { unit-configurations.guards-company-43 }
 								int:count { 3 }
 							}
 							unit-count:_ {
@@ -133,7 +133,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 2 }
 							}
 							unit-count:_ {

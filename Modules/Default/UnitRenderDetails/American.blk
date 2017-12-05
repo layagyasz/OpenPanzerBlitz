@@ -80,6 +80,12 @@ unit-render-details:m4-poa-cws-h1 {
 unit-render-details:m-3a1-satan {
 	string:image-path { m-3a1-satan.png }
 }
+unit-render-details:m-3a1 {
+	string:image-path { m-5.png }
+}
+unit-render-details:m-3-lee {
+	string:image-path { m-3-lee.png }
+}
 unit-render-details:m-4_105 {
 	string:image-path { m-4_105.png }
 }
@@ -116,7 +122,10 @@ unit-render-details:m-26 {
 unit-render-details:m-2a4 {
 	string:image-path { m-2a4.png }
 }
-unit-render-details:m-4a2 {
+unit-render-details:m-4a2_75 {
+	string:image-path { m-4a2.png }
+}
+unit-render-details:m-4a2_76 {
 	string:image-path { m-4a2.png }
 }
 unit-render-details:sherman-flail {

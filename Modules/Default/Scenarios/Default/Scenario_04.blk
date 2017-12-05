@@ -75,7 +75,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 4 }
 							}
 							unit-count:_ {
@@ -87,7 +87,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 								int:count { 6 }
 							}
 							unit-count:_ {

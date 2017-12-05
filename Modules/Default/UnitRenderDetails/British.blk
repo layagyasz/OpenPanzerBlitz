@@ -90,6 +90,9 @@ unit-render-details:mk-vi-b {
 unit-render-details:matilda {
 	string:image-path { matilda.png }
 }
+unit-render-details:matilda-ii {
+	string:image-path { matilda.png }
+}
 unit-render-details:a-13 {
 	string:image-path { a-13.png }
 }
@@ -141,6 +144,9 @@ unit-render-details:churchill-6pdr {
 unit-render-details:churchill-75 {
 	string:image-path { churchill.png }
 }
+unit-render-details:churchill-iv {
+	string:image-path { churchill.png }
+}
 unit-render-details:matilda-cs {
 	string:image-path { matilda-cs.png }
 }
@@ -152,6 +158,12 @@ unit-render-details:crusader-ii {
 }
 unit-render-details:crusader-iii {
 	string:image-path { crusader.png }
+}
+unit-render-details:valentine-iii {
+	string:image-path { valentine-iii.png }
+}
+unit-render-details:valentine-viii {
+	string:image-path { valentine-viii.png }
 }
 unit-render-details:valentine-ix {
 	string:image-path { valentine-ix.png }

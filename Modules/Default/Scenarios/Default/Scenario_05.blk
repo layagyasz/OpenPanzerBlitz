@@ -45,7 +45,7 @@
 						string:name { 842nd Rifle Rgt. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-company }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 								int:count { 8 }
 							}
 							unit-count:_ {
@@ -53,7 +53,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-company }
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 								int:count { 1 }
 							}
 							unit-count:_ {
