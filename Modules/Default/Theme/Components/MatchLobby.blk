@@ -42,7 +42,7 @@ class:match-lobby-chat-display {
 }
 class:match-lobby-chat {
 	mode:default {
-		int:height { 704 }
+		int:height { 696 }
 		int:width { 288 }
 		color[]:background-color { #969696 #969696 #969696 #969696 }
 		int[]:margin { 0 0 0 8 }
