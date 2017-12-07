@@ -125,7 +125,7 @@ unit-configuration:truck-american {
 	byte:attack { 0 }
 	byte:range { 0 }
 	byte:defense { 1 }
-	byte:movement { 12 }
+	byte:movement { 14 }
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }

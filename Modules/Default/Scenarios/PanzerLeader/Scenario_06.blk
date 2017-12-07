@@ -1,0 +1,200 @@
+﻿scenario:_ {
+	string:name { The Reichswald }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:british {
+			!faction:faction { factions.british }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-destroyed-objective:units-destroyed {
+						bool:friendly { true }
+					}
+					trigger-objective:nece-controlled {
+						int:threshold { 4 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { nece }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.nece-controlled }
+							trigger-objective:_ {
+								int:threshold { 10 }
+								bool:invert { true }
+								!var:objective { objectives.units-destroyed }
+							}
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.nece-controlled }
+							trigger-objective:_ {
+								int:threshold { 6 }
+								bool:invert { true }
+								!var:objective { objectives.units-destroyed }
+							}
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.nece-controlled }
+							trigger-objective:_ {
+								int:threshold { 3 }
+								bool:invert { true }
+								!var:objective { objectives.units-destroyed }
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,9 11,9 11,33 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { 2nd Canadian Infantry }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british }
+								int:count { 18 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-british }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.scout-platoon-british }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-british-44
+								}
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25pdr-how }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-british }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bren }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-destroyed-objective:units-destroyed {
+						bool:friendly { false }
+					}
+					tiles-controlled-objective:nece-controlled {
+						bool:friendly { true }
+						tile-in-region:matcher {
+							string:region-name { nece }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						!var:objective { objectives.nece-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 11,0 11,7 0,7 }
+					}
+					unit-group:unit-group {
+						string:name { 84th Infantry Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

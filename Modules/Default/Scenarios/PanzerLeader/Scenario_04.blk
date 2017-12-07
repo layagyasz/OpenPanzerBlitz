@@ -1,0 +1,223 @@
+﻿scenario:_ {
+	string:name { St. Lo }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 15 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { true }
+			}
+		}
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-c.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.american }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:grancelles-controlled {
+						int:threshold { 15 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { grancelles }
+							}
+						}
+					}
+					trigger-objective:sambleu-controlled {
+						int:threshold { 15 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { sambleu }
+							}
+						}
+					}
+					trigger-objective:caverge-controlled {
+						int:threshold { 2 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { caverge }
+							}
+						}
+					}
+					trigger-objective:kuhn-controlled {
+						int:threshold { 1 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { kuhn }
+							}
+						}
+					}
+					trigger-objective:east-grancelles-controlled {
+						int:threshold { 5 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-matches-all:matcher {
+								tile-within:_ {
+									zone:zone { 1,9 5,13 0,13 }
+								}
+								tile-in-region:_ {
+									string:region-name { grancelles }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						achieve-any:objective {
+							!var:_ { objectives.grancelles-controlled }
+							achieve-all:_ {
+								!var:_ { objectives.sambleu-controlled }
+								!var:_ { objectives.caverge-controlled }
+								!var:_ { objectives.kuhn-controlled }
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 11,0 11,32 0,32 }
+					}
+					unit-group:unit-group {
+						string:name { 116th Inf. Div. & 737th Tk. Bn. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-american }
+								int:count { 18 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-american }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_105 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-5 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_75 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-american }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy-objective { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy-objective }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,33 11,33 11,65 0,65 }
+					}
+					unit-group:unit-group {
+						string:name { 3rd FschJg. Bn. & 12th StuG. Bgde. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 10 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west 
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hetzer }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
