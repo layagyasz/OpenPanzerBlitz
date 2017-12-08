@@ -10,7 +10,10 @@ namespace PanzerBlitz
 {
 	public class MatchEndScreen : ScreenBase
 	{
+		public EventHandler<EventArgs> OnSaveClicked;
+
 		SingleColumnTable _Table = new SingleColumnTable("match-end-display");
+		Button _SaveButton = new Button("small-button") { DisplayedString = "Save Record" };
 
 		public MatchEndScreen(Match Match, Vector2f WindowSize)
 			: base(WindowSize)
@@ -20,19 +23,17 @@ namespace PanzerBlitz
 			{
 				_Table.Add(new MatchEndArmyRow(Match, a));
 			}
+
+			_SaveButton.Position = new Vector2f(_Table.Size.X - _SaveButton.Size.X, 0);
+			_SaveButton.OnClick += HandleSaveClicked;
+			_Table.Add(_SaveButton);
+
+			_Items.Add(_Table);
 		}
 
-		public override void Update(
-			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
+		void HandleSaveClicked(object Sender, EventArgs E)
 		{
-			base.Update(MouseController, KeyController, DeltaT, Transform);
-			_Table.Update(MouseController, KeyController, DeltaT, Transform);
-		}
-
-		public override void Draw(RenderTarget Target, Transform Transform)
-		{
-			base.Draw(Target, Transform);
-			_Table.Draw(Target, Transform);
+			if (OnSaveClicked != null) OnSaveClicked(this, E);
 		}
 	}
 }

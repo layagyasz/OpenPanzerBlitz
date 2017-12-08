@@ -6,6 +6,8 @@ namespace PanzerBlitz
 {
 	public class MatchEndStateController : PagedProgramStateController
 	{
+		MatchEndController _Controller;
+
 		public MatchEndStateController()
 			: base(ProgramState.LANDING) { }
 
@@ -16,6 +18,7 @@ namespace PanzerBlitz
 			MatchContext context = (MatchContext)ProgramStateContext;
 			MatchEndScreen screen = new MatchEndScreen(context.Match, ProgramContext.ScreenResolution);
 			screen.OnMainMenuButtonClicked += HandleBack;
+			_Controller = new MatchEndController(screen, context);
 			return screen;
 		}
 	}

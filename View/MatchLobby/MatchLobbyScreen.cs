@@ -17,7 +17,6 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<Tuple<Player, ArmyConfiguration>>> OnArmyConfigurationSelected;
 		public EventHandler<ValuedEventArgs<Tuple<Player, bool>>> OnPlayerReadyStateChanged;
 		public EventHandler<EventArgs> OnLaunched;
-		public EventHandler<EventArgs> OnPulse;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("match-lobby-pane");
 		SingleColumnTable _Display = new SingleColumnTable("match-lobby-display");
@@ -99,6 +98,9 @@ namespace PanzerBlitz
 				_Display.Add(section);
 			}
 			_Dirty = false;
+
+			OnPulse += HandlePulse;
+			_Items.Add(_Pane);
 		}
 
 		void HandleScenarioSelected(object Sender, ValuedEventArgs<StandardItem<Scenario>> E)
@@ -121,19 +123,9 @@ namespace PanzerBlitz
 			if (OnLaunched != null) OnLaunched(this, EventArgs.Empty);
 		}
 
-		public override void Update(
-			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
+		void HandlePulse(object Sender, EventArgs E)
 		{
-			base.Update(MouseController, KeyController, DeltaT, Transform);
-			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
 			if (_Dirty) DisplayPlayers();
-			_Pane.Update(MouseController, KeyController, DeltaT, Transform);
-		}
-
-		public override void Draw(RenderTarget Target, Transform Transform)
-		{
-			base.Draw(Target, Transform);
-			_Pane.Draw(Target, Transform);
 		}
 	}
 }

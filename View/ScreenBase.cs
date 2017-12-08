@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
@@ -11,12 +12,15 @@ namespace PanzerBlitz
 	public abstract class ScreenBase : Pod
 	{
 		public EventHandler OnMainMenuButtonClicked;
+		public EventHandler<EventArgs> OnPulse;
 
 		static Color ORANGE = new Color(172, 107, 26);
 		static Color DARK_GRAY = new Color(10, 10, 10);
-		Vertex[] _Backdrop;
 
-		Button _MainMenuButton;
+		public readonly PaneLayer PaneLayer = new PaneLayer();
+
+		Vertex[] _Backdrop;
+		protected List<Pod> _Items = new List<Pod>();
 
 		public ScreenBase(Vector2f WindowSize, bool HasMainMenuButton = true)
 		{
@@ -34,9 +38,10 @@ namespace PanzerBlitz
 			};
 			if (HasMainMenuButton)
 			{
-				_MainMenuButton = new Button("normal-button") { DisplayedString = "Main Menu" };
-				_MainMenuButton.Position = WindowSize - _MainMenuButton.Size - new Vector2f(32, 32);
-				_MainMenuButton.OnClick += HandleMainMenuButtonClicked;
+				Button mainMenuButton = new Button("normal-button") { DisplayedString = "Main Menu" };
+				mainMenuButton.Position = WindowSize - mainMenuButton.Size - new Vector2f(32, 32);
+				mainMenuButton.OnClick += HandleMainMenuButtonClicked;
+				_Items.Add(mainMenuButton);
 			}
 		}
 
@@ -48,13 +53,17 @@ namespace PanzerBlitz
 		public virtual void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			if (_MainMenuButton != null) _MainMenuButton.Update(MouseController, KeyController, DeltaT, Transform);
+			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
+
+			foreach (Pod item in _Items) item.Update(MouseController, KeyController, DeltaT, Transform);
+			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 
 		public virtual void Draw(RenderTarget Target, Transform Transform)
 		{
 			Target.Draw(_Backdrop, PrimitiveType.Quads);
-			if (_MainMenuButton != null) _MainMenuButton.Draw(Target, Transform);
+			foreach (Pod item in _Items) item.Draw(Target, Transform);
+			PaneLayer.Draw(Target, Transform);
 		}
 	}
 }

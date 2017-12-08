@@ -67,6 +67,8 @@ namespace PanzerBlitz
 			_Pane.Add(_Display);
 			_Pane.Add(_LogInButton);
 			_Pane.Add(_RegisterButton);
+
+			_Items.Add(_Pane);
 		}
 
 		public void SetError(string Message)
@@ -74,19 +76,6 @@ namespace PanzerBlitz
 			_Error.DisplayedString = Message;
 			_Display.Remove(_Error);
 			_Display.Add(_Error);
-		}
-
-		public override void Update(
-			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
-		{
-			base.Update(MouseController, KeyController, DeltaT, Transform);
-			_Pane.Update(MouseController, KeyController, DeltaT, Transform);
-		}
-
-		public override void Draw(RenderTarget Target, Transform Transform)
-		{
-			base.Draw(Target, Transform);
-			_Pane.Draw(Target, Transform);
 		}
 
 		void HandleLogIn(object Sender, EventArgs E)

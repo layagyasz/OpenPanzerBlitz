@@ -10,7 +10,6 @@ namespace PanzerBlitz
 {
 	public class LandingScreen : ScreenBase
 	{
-		public readonly PaneLayer PaneLayer = new PaneLayer();
 		public readonly Button LocalMatchButton = new Button("landing-button") { DisplayedString = "Local Match" };
 		public readonly Button JoinRemoteMatchButton =
 			new Button("landing-button") { DisplayedString = "Join Remote Match" };
@@ -32,6 +31,8 @@ namespace PanzerBlitz
 			// Commenting these out for now.  Maybe one day in the future work on PanzerBlitz online will continue!
 			//_LandingSelect.Add(JoinServerButton);
 			//_LandingSelect.Add(StartServerButton);
+
+			_Items.Add(_LandingSelect);
 		}
 
 		public override void Update(
@@ -39,7 +40,7 @@ namespace PanzerBlitz
 		{
 			base.Update(MouseController, KeyController, DeltaT, Transform);
 			_LandingSelect.Update(MouseController, KeyController, DeltaT, Transform);
-			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform);
+
 		}
 
 		public override void Draw(RenderTarget Target, Transform Transform)

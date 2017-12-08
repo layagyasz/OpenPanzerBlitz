@@ -53,6 +53,9 @@ namespace PanzerBlitz
 		{
 			_Directory = Path;
 			_FileSelect.Clear();
+
+			if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
+
 			foreach (FileInfo f in Directory.EnumerateFiles(Path).Select(i => new FileInfo(i)))
 			{
 				SelectionOption<FileInfo> option =

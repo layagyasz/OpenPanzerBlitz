@@ -30,6 +30,7 @@ namespace PanzerBlitz
 		public static ushort OnlinePort = 1000;
 		public static Player Player =
 			new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
+		public static string LoadedModule;
 		public static Dictionary<string, UnitMovementRules> UnitMovementRules;
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, FactionRenderDetails> FactionRenderDetails;
@@ -44,6 +45,7 @@ namespace PanzerBlitz
 
 		public static void Load(string Module)
 		{
+			LoadedModule = Module;
 			string path = "./Modules/" + Module;
 
 			ClassLibrary.Instance.ReadBlock(new ParseBlock(new ParseBlock[]

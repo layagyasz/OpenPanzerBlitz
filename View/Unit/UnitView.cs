@@ -30,6 +30,9 @@ namespace PanzerBlitz
 		Rectangle _Bounds;
 		MovementDolly _Movement;
 
+		EventBuffer<MovementEventArgs> _UnitMovedBuffer;
+		EventBuffer<EventArgs> _UnitConfigurationChangedBuffer;
+
 		public readonly Unit Unit;
 		public readonly bool Reactive;
 
@@ -43,14 +46,17 @@ namespace PanzerBlitz
 
 		public UnitView(Unit Unit, UnitConfigurationRenderer Renderer, float Scale, bool Reactive)
 		{
+			_UnitConfigurationChangedBuffer = new EventBuffer<EventArgs>(UpdateConfigurationView);
+			_UnitMovedBuffer = new EventBuffer<MovementEventArgs>(HandleMove);
+
 			this.Unit = Unit;
 			this.Reactive = Reactive;
-			if (Reactive) Unit.OnMove += HandleMove;
+			if (Reactive) Unit.OnMove += _UnitMovedBuffer.QueueEvent;
 
 			_Renderer = Renderer;
 			_UnitConfigurationView = new UnitConfigurationView(
 				Unit.Configuration, Unit.Army.Configuration.Faction, Renderer, Scale);
-			Unit.OnConfigurationChange += UpdateConfigurationView;
+			Unit.OnConfigurationChange += _UnitConfigurationChangedBuffer.QueueEvent;
 
 			Vector2f tl = new Vector2f(-.5f, -.15f) * Scale;
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;
@@ -90,6 +96,9 @@ namespace PanzerBlitz
 			}
 			Transform.Translate(Position);
 			base.Update(MouseController, KeyController, DeltaT, Transform);
+
+			_UnitMovedBuffer.DispatchEvents();
+			_UnitConfigurationChangedBuffer.DispatchEvents();
 		}
 
 		public override void Draw(RenderTarget Target, Transform Transform)

@@ -303,6 +303,9 @@
     <Compile Include="Model\Orders\Attack\CombatResultsTable.cs" />
     <Compile Include="Model\Turn.cs" />
     <Compile Include="View\IOPane.cs" />
+    <Compile Include="Controller\MatchEnd\MatchEndController.cs" />
+    <Compile Include="Model\MatchRecord.cs" />
+    <Compile Include="EventBuffer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

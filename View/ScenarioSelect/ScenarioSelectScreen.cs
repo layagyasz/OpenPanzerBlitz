@@ -31,25 +31,14 @@ namespace PanzerBlitz
 			}
 			_ScenarioSelect.OnChange += HandleSelect;
 			_ScenarioSelect.Position = .5f * (WindowSize - _ScenarioSelect.Size);
+
+			_Items.Add(_ScenarioSelect);
 		}
 
 		void HandleSelect(object Sender, ValuedEventArgs<SelectionOption<Scenario>> E)
 		{
 			if (OnScenarioSelected != null)
 				OnScenarioSelected(this, new ValuedEventArgs<Scenario>(E.Value.Value));
-		}
-
-		public override void Update(
-			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
-		{
-			base.Update(MouseController, KeyController, DeltaT, Transform);
-			_ScenarioSelect.Update(MouseController, KeyController, DeltaT, Transform);
-		}
-
-		public override void Draw(RenderTarget Target, Transform Transform)
-		{
-			base.Draw(Target, Transform);
-			_ScenarioSelect.Draw(Target, Transform);
 		}
 	}
 }
