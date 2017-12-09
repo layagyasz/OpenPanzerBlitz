@@ -12,6 +12,9 @@ namespace PanzerBlitz
 		public readonly OrderSerializer OrderSerializer;
 		public readonly Army Army;
 
+		Dictionary<Army, MatchPlayerController> _OverridePlayerControllers =
+			new Dictionary<Army, MatchPlayerController>();
+
 		public MatchContext(Match Match)
 		{
 			this.Match = Match;
@@ -39,10 +42,20 @@ namespace PanzerBlitz
 			return new RemoteMatchAdapter(Match, Client, OrderSerializer);
 		}
 
-		public IEnumerable<Army> GetArmies()
+		public void OverridePlayerController(Army Army, MatchPlayerController Controller)
 		{
-			if (Client != null || Server != null) return Enumerable.Repeat(Army, 1);
-			return Match.Armies;
+			_OverridePlayerControllers.Add(Army, Controller);
+		}
+
+		public MatchPlayerController GetOverridePlayerController(Army Army)
+		{
+			return _OverridePlayerControllers.ContainsKey(Army) ? _OverridePlayerControllers[Army] : null;
+		}
+
+		public IEnumerable<Army> GetPlayerControlledArmies()
+		{
+			if (Army == null) return Match.Armies.Where(i => !_OverridePlayerControllers.ContainsKey(i));
+			return Enumerable.Repeat(Army, 1);
 		}
 
 		public override string ToString()

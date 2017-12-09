@@ -14,41 +14,58 @@ namespace PanzerBlitz
 
 		List<KeyValuePair<Tile, StackView>> _Stacks = new List<KeyValuePair<Tile, StackView>>();
 
-		public void AddArmyView(ArmyView ArmyView)
+		EventBuffer<EventArgs> _UpdateStackBuffer;
+		EventBuffer<MovementEventArgs> _MoveUnitBuffer;
+		EventBuffer<EventArgs> _RemoveUnitBuffer;
+
+		public IEnumerable<UnitView> UnitViews
 		{
-			ArmyView.UnitViews.ForEach(i => AddUnitView(i));
+			get
+			{
+				return _UnitViews.Values;
+			}
+		}
+
+		public StackLayer()
+		{
+			_UpdateStackBuffer = new EventBuffer<EventArgs>(UpdateStack);
+			_MoveUnitBuffer = new EventBuffer<MovementEventArgs>(MoveUnit);
+			_RemoveUnitBuffer = new EventBuffer<EventArgs>(RemoveUnit);
 		}
 
 		public void AddUnitView(UnitView UnitView)
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
-			UnitView.Unit.OnLoad += UpdateStack;
-			UnitView.Unit.OnUnload += UpdateStack;
-			UnitView.Unit.OnMove += MoveUnit;
-			UnitView.Unit.OnRemove += RemoveUnit;
-			if (UnitView.Unit.Position != null) MoveUnit(UnitView.Unit, UnitView.Unit.Position);
+			UnitView.Unit.OnLoad += _UpdateStackBuffer.QueueEvent;
+			UnitView.Unit.OnUnload += _UpdateStackBuffer.QueueEvent;
+			UnitView.Unit.OnMove += _MoveUnitBuffer.QueueEvent;
+			UnitView.Unit.OnRemove += _RemoveUnitBuffer.QueueEvent;
+			if (UnitView.Unit.Position != null)
+				MoveUnit(UnitView.Unit, new MovementEventArgs(UnitView.Unit.Position, null));
 		}
 
 		void MoveUnit(object Sender, MovementEventArgs E)
 		{
-			MoveUnit((Unit)Sender, E.Tile);
+			MoveUnit((Unit)Sender, E);
 		}
 
-		void MoveUnit(Unit Unit, Tile Tile)
+		void MoveUnit(Unit Unit, MovementEventArgs E)
 		{
-			if (Tile != Unit.Position) return; // Received out-of-date notification.
+			Tile tile = E.Tile;
+			if (tile != Unit.Position) return; // Received out-of-date notification.
 
 			UnitView view = _UnitViews[Unit];
+			view.Move(E);
 
 			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
-			StackView toStack = _Stacks.FirstOrDefault(i => i.Key == Tile).Value;
+			StackView toStack = _Stacks.FirstOrDefault(i => i.Key == tile).Value;
 
 			if (toStack != null && toStack == fromStack) return;
 			if (toStack == null)
 			{
 				toStack = new StackView();
-				_Stacks.Add(new KeyValuePair<Tile, StackView>(Tile, toStack));
+				_Stacks.Add(new KeyValuePair<Tile, StackView>(tile, toStack));
 			}
 			toStack.Add(view);
 			if (fromStack != null)
@@ -89,6 +106,10 @@ namespace PanzerBlitz
 		public void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
+			_MoveUnitBuffer.DispatchEvents();
+			_RemoveUnitBuffer.DispatchEvents();
+			_UpdateStackBuffer.DispatchEvents();
+
 			foreach (var s in _Stacks) s.Value.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-using Cardamom.Graphing;
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -17,13 +16,14 @@ namespace PanzerBlitz
 		public readonly HashSet<Army> AllowedArmies;
 		public readonly UnitConfigurationRenderer Renderer;
 
-		MatchScreen _GameScreen;
+		MatchScreen _MatchScreen;
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
 		TurnInfo _CurrentTurn;
 		Unit _SelectedUnit;
 		Highlight _Highlight;
 
 		KeyController _KeyController;
+		EventBuffer<ValuedEventArgs<UnitView>> _NewUnitBuffer;
 
 		public TurnInfo CurrentTurn
 		{
@@ -44,14 +44,19 @@ namespace PanzerBlitz
 			MatchAdapter Match,
 			IEnumerable<Army> AllowedArmies,
 			UnitConfigurationRenderer Renderer,
-			MatchScreen GameScreen,
+			MatchScreen MatchScreen,
 			KeyController KeyController)
 		{
+			_NewUnitBuffer = new EventBuffer<ValuedEventArgs<UnitView>>(AddUnit);
+
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
 			this.Renderer = Renderer;
-			_GameScreen = GameScreen;
-			_GameScreen.OnFinishClicked += EndTurn;
+
+			_MatchScreen = MatchScreen;
+			_MatchScreen.OnFinishClicked += EndTurn;
+			_MatchScreen.OnUnitAdded += _NewUnitBuffer.QueueEvent;
+			_MatchScreen.OnPulse += (sender, e) => _NewUnitBuffer.DispatchEvents();
 
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
 			{
@@ -63,36 +68,41 @@ namespace PanzerBlitz
 				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(this, false) }
 			};
 
-			foreach (TileView t in GameScreen.MapView.TilesEnumerable)
+			foreach (TileView t in MatchScreen.MapView.TilesEnumerable)
 			{
 				t.OnClick += OnTileClick;
 				t.OnRightClick += OnTileRightClick;
 			}
-			foreach (ArmyView a in GameScreen.ArmyViews)
+			foreach (UnitView u in _MatchScreen.UnitViews)
 			{
-				foreach (UnitView u in a.UnitViews)
-				{
-					u.OnClick += OnUnitClick;
-					u.OnRightClick += OnUnitRightClick;
-				}
+				AddUnit(u);
 			}
 			_KeyController = KeyController;
 			KeyController.OnKeyPressed += OnKeyPressed;
+		}
+
+		void AddUnit(object Sender, ValuedEventArgs<UnitView> E)
+		{
+			AddUnit(E.Value);
+		}
+
+		void AddUnit(UnitView UnitView)
+		{
+			UnitView.OnClick += OnUnitClick;
+			UnitView.OnRightClick += OnUnitRightClick;
 		}
 
 		public void DoTurn(Turn Turn)
 		{
 			TurnComponent t = AllowedArmies.Contains(Turn.TurnInfo.Army)
 										   ? Turn.TurnInfo.TurnComponent : TurnComponent.SPECTATE;
-			_GameScreen.SetTurn(Turn);
-			_GameScreen.InfoDisplay.SetViewItem(new FactionView(Turn.TurnInfo.Army.Configuration.Faction, 80));
-			_GameScreen.SetEnabled(AllowedArmies.Contains(Turn.TurnInfo.Army));
+			_MatchScreen.SetEnabled(AllowedArmies.Contains(Turn.TurnInfo.Army));
 			if (_CurrentTurn.Army != null && _Controllers.ContainsKey(_CurrentTurn.TurnComponent))
 			{
 				_Controllers[_CurrentTurn.TurnComponent].End();
 				UnHighlight();
 				SelectUnit(null);
-				_GameScreen.PaneLayer.Clear();
+				_MatchScreen.PaneLayer.Clear();
 			}
 			_CurrentTurn = Turn.TurnInfo;
 
@@ -109,22 +119,22 @@ namespace PanzerBlitz
 
 		public void AddPane(Pane Pane)
 		{
-			_GameScreen.PaneLayer.Add(Pane);
+			_MatchScreen.PaneLayer.Add(Pane);
 		}
 
 		public void RemovePane(Pane Pane)
 		{
-			_GameScreen.PaneLayer.Remove(Pane);
+			_MatchScreen.PaneLayer.Remove(Pane);
 		}
 
 		public void SelectUnit(Unit Unit)
 		{
 			_SelectedUnit = Unit;
 			if (Unit != null)
-				_GameScreen.InfoDisplay.SetViewItem(
+				_MatchScreen.InfoDisplay.SetViewItem(
 					new UnitView(Unit, Renderer, 80, false) { Position = new Vector2f(40, 40) });
 			else if (Match.GetTurn().TurnInfo.Army != null)
-				_GameScreen.InfoDisplay.SetViewItem(
+				_MatchScreen.InfoDisplay.SetViewItem(
 					new FactionView(Match.GetTurn().TurnInfo.Army.Configuration.Faction, 80));
 		}
 
@@ -137,21 +147,21 @@ namespace PanzerBlitz
 
 		public void Alert(object Alert)
 		{
-			_GameScreen.Alert(ObjectDescriber.Describe(Alert));
+			_MatchScreen.Alert(ObjectDescriber.Describe(Alert));
 		}
 
 		public void UnHighlight()
 		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
+			_MatchScreen.HighlightLayer.RemoveHighlight(_Highlight);
 			_Highlight = new Highlight();
-			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
+			_MatchScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
 		public void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
 		{
-			_GameScreen.HighlightLayer.RemoveHighlight(_Highlight);
+			_MatchScreen.HighlightLayer.RemoveHighlight(_Highlight);
 			_Highlight = new Highlight(Highlight);
-			_GameScreen.HighlightLayer.AddHighlight(_Highlight);
+			_MatchScreen.HighlightLayer.AddHighlight(_Highlight);
 		}
 
 		void OnTileClick(object sender, MouseEventArgs e)

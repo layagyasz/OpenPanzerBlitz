@@ -1,0 +1,11 @@
+﻿class:match-record-select {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 636 }
+		int:width { 636 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+	}
+}
+class:match-record-selection-option {
+	!class:parent { large-selection-option }
+}

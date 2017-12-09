@@ -13,20 +13,22 @@ namespace PanzerBlitz
 		MatchContext _Context;
 		MatchController _MatchController;
 
+		EventBuffer<EventArgs> _MatchEndBuffer;
+
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
 			_Context = (MatchContext)ProgramStateContext;
+			_MatchEndBuffer = new EventBuffer<EventArgs>(HandleMatchEnd);
 
 			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
 				_Context.Match.Scenario, GameData.UnitRenderDetails, 1024, 128, new Font("Compacta Std Regular.otf"));
-			HashSet<Army> armies = new HashSet<Army>(_Context.GetArmies());
+			HashSet<Army> armies = new HashSet<Army>(_Context.GetPlayerControlledArmies());
 
 			MatchScreen screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
-				_Context.Match.Scenario,
-				_Context.Match.Map,
+				_Context.Match,
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
-				_Context.Match.Armies.Select(i => new ArmyView(i, renderer)));
+				renderer);
 			HumanMatchPlayerController controller =
 				new HumanMatchPlayerController(
 					_Context.MakeMatchAdapter(), armies, renderer, screen, ProgramContext.KeyController);
@@ -34,14 +36,21 @@ namespace PanzerBlitz
 			Dictionary<Army, MatchPlayerController> playerControllers = new Dictionary<Army, MatchPlayerController>();
 			foreach (Army a in _Context.Match.Armies)
 			{
-				playerControllers.Add(a, controller);
+				MatchPlayerController overrideController = _Context.GetOverridePlayerController(a);
+				playerControllers.Add(a, overrideController == null ? controller : overrideController);
 			}
 			_MatchController = new MatchController(_Context.Match, playerControllers);
-			screen.OnPulse += (sender, e) => _Context.Match.DoBufferedOrders();
-			_Context.Match.OnMatchEnded += HandleMatchEnd;
+			screen.OnPulse += HandlePulse;
+			_Context.Match.OnMatchEnded += _MatchEndBuffer.QueueEvent;
 			_Context.Match.Start();
 
 			return screen;
+		}
+
+		void HandlePulse(object Sender, EventArgs E)
+		{
+			_Context.Match.DoBufferedOrders();
+			_MatchEndBuffer.DispatchEvents();
 		}
 
 		void HandleMatchEnd(object Sender, EventArgs E)

@@ -32,16 +32,19 @@ namespace PanzerBlitz
 		}
 
 		public MovementOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this(
-				(Unit)Objects[Stream.ReadInt32()],
-				(Tile)Objects[Stream.ReadInt32()],
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean())
-		{ }
+		{
+			Unit = (Unit)Objects[Stream.ReadInt32()];
+			Tile from = (Tile)Objects[Stream.ReadInt32()];
+			Tile to = (Tile)Objects[Stream.ReadInt32()];
+			Combat = Stream.ReadBoolean();
+			Halt = Stream.ReadBoolean();
+			Path = Unit.GetPathTo(from, to, Combat);
+		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Unit.Id);
+			Stream.Write(Path.Nodes.First().Id);
 			Stream.Write(Path.Destination.Id);
 			Stream.Write(Combat);
 			Stream.Write(Halt);
@@ -63,6 +66,7 @@ namespace PanzerBlitz
 		public OrderInvalidReason Validate()
 		{
 			if (Unit.CanMove(Combat) != OrderInvalidReason.NONE) return OrderInvalidReason.UNIT_NO_MOVE;
+			if (Unit.Position != Path.Nodes.First()) return OrderInvalidReason.ILLEGAL;
 
 			OrderInvalidReason noEnter = Unit.CanEnter(Path.Destination, true);
 			if (noEnter != OrderInvalidReason.NONE) return noEnter;
@@ -94,6 +98,16 @@ namespace PanzerBlitz
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[MovementOrder: Unit={0}, From={1}, To={2}, Distance={3}]",
+				Unit,
+				Path.Nodes.First(),
+				Path.Destination,
+				Path.Distance);
 		}
 	}
 }

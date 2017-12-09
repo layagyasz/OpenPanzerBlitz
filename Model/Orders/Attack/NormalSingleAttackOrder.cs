@@ -39,16 +39,19 @@ namespace PanzerBlitz
 		}
 
 		public NormalSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this(
-				(Unit)Objects[Stream.ReadInt32()],
-				(Unit)Objects[Stream.ReadInt32()],
-				(AttackMethod)Stream.ReadByte())
-		{ }
+		{
+			_Attacker = (Unit)Objects[Stream.ReadInt32()];
+			_Defender = (Unit)Objects[Stream.ReadInt32()];
+			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
+			AttackMethod = (AttackMethod)Stream.ReadByte();
+		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
 			Stream.Write(Defender.Id);
+			Stream.Write(LineOfSight.Initial.Id);
+			Stream.Write(LineOfSight.Final.Id);
 			Stream.Write((byte)AttackMethod);
 		}
 
@@ -76,7 +79,6 @@ namespace PanzerBlitz
 			if (_Defender == null) return OrderInvalidReason.ILLEGAL;
 			OrderInvalidReason r = _Attacker.CanAttack(AttackMethod, _TreatStackAsArmored, LineOfSight);
 			if (r != OrderInvalidReason.NONE) return r;
-
 			return base.Validate();
 		}
 
@@ -88,6 +90,11 @@ namespace PanzerBlitz
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[NormalSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);
 		}
 	}
 }

@@ -173,7 +173,6 @@
     <Compile Include="View\Match\PositionalDeploymentPage.cs" />
     <Compile Include="View\Edit\EditPane.cs" />
     <Compile Include="View\ScenarioSelect\ScenarioSelectScreen.cs" />
-    <Compile Include="View\Match\ArmyView.cs" />
     <Compile Include="View\Match\MovementDolly.cs" />
     <Compile Include="View\Match\NewUnitViewEventArgs.cs" />
     <Compile Include="View\Match\StackLayer.cs" />
@@ -306,6 +305,9 @@
     <Compile Include="Controller\MatchEnd\MatchEndController.cs" />
     <Compile Include="Model\MatchRecord.cs" />
     <Compile Include="EventBuffer.cs" />
+    <Compile Include="View\MatchRecordSelect\MatchRecordSelectScreen.cs" />
+    <Compile Include="Controller\LocalMatchRecordSelect\LocalMatchRecordSelectStateController.cs" />
+    <Compile Include="Controller\Match\MatchRecordReplayPlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -363,6 +365,8 @@
     <Folder Include="Controller\MatchEnd\" />
     <Folder Include="Modules\Default\Scenarios\PanzerLeader\" />
     <Folder Include="Model\Unit\" />
+    <Folder Include="View\MatchRecordSelect\" />
+    <Folder Include="Controller\LocalMatchRecordSelect\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1928,6 +1932,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_07.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Theme\Components\MatchRecordSelect.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -15,13 +15,14 @@ namespace PanzerBlitz
 		Dictionary<ProgramState, ProgramStateController> _ProgramStateControllers =
 			new Dictionary<ProgramState, ProgramStateController>
 		{
-			{ ProgramState.LANDING, new LandingStateController() },
 			{ ProgramState.EDIT, new EditStateController() },
+			{ ProgramState.LANDING, new LandingStateController() },
+			{ ProgramState.LOCAL_MATCH_RECORD_SELECT, new LocalMatchRecordSelectStateController() },
 			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
-			{ ProgramState.MATCH, new MatchStateController() },
-			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
-			{ ProgramState.MATCH_END, new MatchEndStateController() },
 			{ ProgramState.LOG_IN_PLAYER, new LogInPlayerStateController() },
+			{ ProgramState.MATCH, new MatchStateController() },
+			{ ProgramState.MATCH_END, new MatchEndStateController() },
+			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
 			{ ProgramState.REGISTER_PLAYER, new RegisterPlayerStateController() },
 			{ ProgramState.SERVER, new ServerStateController() }
 		};

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace PanzerBlitz
 {
-	public class StartTurnComponentEventArgs
+	public class StartTurnComponentEventArgs : EventArgs
 	{
 		public readonly Turn Turn;
 

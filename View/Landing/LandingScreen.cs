@@ -11,6 +11,8 @@ namespace PanzerBlitz
 	public class LandingScreen : ScreenBase
 	{
 		public readonly Button LocalMatchButton = new Button("landing-button") { DisplayedString = "Local Match" };
+		public readonly Button LocalMatchRecordButton =
+			new Button("landing-button") { DisplayedString = "Play Match Record" };
 		public readonly Button JoinRemoteMatchButton =
 			new Button("landing-button") { DisplayedString = "Join Remote Match" };
 		public readonly Button HostMatchButton = new Button("landing-button") { DisplayedString = "Host Match" };
@@ -27,6 +29,7 @@ namespace PanzerBlitz
 			_LandingSelect.Add(LocalMatchButton);
 			_LandingSelect.Add(JoinRemoteMatchButton);
 			_LandingSelect.Add(HostMatchButton);
+			_LandingSelect.Add(LocalMatchRecordButton);
 			_LandingSelect.Add(EditButton);
 			// Commenting these out for now.  Maybe one day in the future work on PanzerBlitz online will continue!
 			//_LandingSelect.Add(JoinServerButton);

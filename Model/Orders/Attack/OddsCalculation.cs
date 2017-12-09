@@ -61,7 +61,6 @@ namespace PanzerBlitz
 			}
 			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
 			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
-
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
 					i, i.GetAttack())).ToList();
@@ -83,7 +82,6 @@ namespace PanzerBlitz
 			}
 
 			_DieModifier = 0;
-
 			// Modifiers for special attacks.
 			if (AttackMethod == AttackMethod.CLOSE_ASSAULT)
 			{
@@ -111,7 +109,6 @@ namespace PanzerBlitz
 				_DieModifier += Defenders.First().Position.RulesCalculator.DieModifier;
 				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
 			}
-
 			// Disrupted modifier.
 			if (Defenders.Any(i => i.Status == UnitStatus.DISRUPTED))
 			{

@@ -15,6 +15,7 @@ namespace PanzerBlitz
 			LandingScreen screen = new LandingScreen(ProgramContext.ScreenResolution);
 			screen.LocalMatchButton.OnClick += HandleLocalMatch;
 			screen.HostMatchButton.OnClick += HandleHostMatch;
+			screen.LocalMatchRecordButton.OnClick += HandleLocalMatchRecord;
 			screen.EditButton.OnClick += HandleEdit;
 			screen.JoinServerButton.OnClick += HandleJoinServer;
 			screen.StartServerButton.OnClick += HandleStartServer;
@@ -29,6 +30,12 @@ namespace PanzerBlitz
 		{
 			OnProgramStateTransition(
 				this, new ProgramStateTransitionEventArgs(ProgramState.LOCAL_SCENARIO_SELECT, null));
+		}
+
+		void HandleLocalMatchRecord(object Sender, EventArgs E)
+		{
+			OnProgramStateTransition(
+				this, new ProgramStateTransitionEventArgs(ProgramState.LOCAL_MATCH_RECORD_SELECT, null));
 		}
 
 		void HandleJoinRemoteMatch(object Sender, ValuedEventArgs<MatchLobbyContext> E)

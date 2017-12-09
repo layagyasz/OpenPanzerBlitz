@@ -415,8 +415,13 @@ namespace PanzerBlitz
 		public Path<Tile> GetPathTo(Tile Tile, bool Combat)
 		{
 			if (_Position == null) return null;
+			return GetPathTo(_Position, Tile, Combat);
+		}
+
+		public Path<Tile> GetPathTo(Tile From, Tile Tile, bool Combat)
+		{
 			return new Path<Tile>(
-				_Position,
+				From,
 				Tile,
 				i => true,
 				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat),

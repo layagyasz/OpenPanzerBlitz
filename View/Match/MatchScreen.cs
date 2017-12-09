@@ -4,8 +4,7 @@ using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
-
-using Cence;
+using Cardamom.Utilities;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -15,34 +14,70 @@ namespace PanzerBlitz
 	public class MatchScreen : MapScreenBase
 	{
 		public EventHandler<EventArgs> OnFinishClicked;
+		public EventHandler<ValuedEventArgs<UnitView>> OnUnitAdded;
 
-		public readonly List<ArmyView> ArmyViews;
+		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly MatchInfoDisplay InfoDisplay = new MatchInfoDisplay();
+
+		EventBuffer<StartTurnComponentEventArgs> _NewTurnBuffer;
+		EventBuffer<NewUnitEventArgs> _NewUnitBuffer;
 
 		StackLayer _StackLayer = new StackLayer();
 		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
 		TableRow _TurnCounter = new TableRow("overlay-turn-counter");
 
-		public MatchScreen(
-			Vector2f WindowSize, Scenario Scenario, Map Map, TileRenderer TileRenderer, IEnumerable<ArmyView> ArmyViews)
-			: base(WindowSize, Map, TileRenderer)
+		public IEnumerable<UnitView> UnitViews
 		{
-			this.ArmyViews = ArmyViews.ToList();
-			foreach (ArmyView a in this.ArmyViews)
+			get
 			{
-				_StackLayer.AddArmyView(a);
-				a.OnNewUnitView += (sender, e) => _StackLayer.AddUnitView(e.UnitView);
+				return _StackLayer.UnitViews;
+			}
+		}
+
+		public MatchScreen(
+			Vector2f WindowSize, Match Match, TileRenderer TileRenderer, UnitConfigurationRenderer UnitRenderer)
+			: base(WindowSize, Match.Map, TileRenderer)
+		{
+			_NewTurnBuffer = new EventBuffer<StartTurnComponentEventArgs>(HandleNewTurn);
+			_NewUnitBuffer = new EventBuffer<NewUnitEventArgs>(AddUnit);
+
+			Match.OnStartPhase += _NewTurnBuffer.QueueEvent;
+
+			this.UnitRenderer = UnitRenderer;
+			foreach (Army a in Match.Armies)
+			{
+				a.OnUnitAdded += _NewUnitBuffer.QueueEvent;
+				foreach (Unit u in a.Units) AddUnit(u);
 			}
 
-			for (int i = 0; i < Scenario.Turns; ++i)
+			for (int i = 0; i < Match.Scenario.Turns; ++i)
 				_TurnCounter.Add(new Checkbox("overlay-turn-counter-box") { Enabled = false });
 
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
 			_FinishButton.OnClick += HandleFinishClicked;
 			InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, InfoDisplay.Size.Y + 16);
+
 			_Items.Add(_FinishButton);
 			_Items.Add(InfoDisplay);
 			_Items.Add(_TurnCounter);
+		}
+
+		void HandleNewTurn(object Sender, StartTurnComponentEventArgs E)
+		{
+			SetTurn(E.Turn);
+			InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, 80));
+		}
+
+		void AddUnit(object Sender, NewUnitEventArgs E)
+		{
+			AddUnit(E.Unit);
+		}
+
+		public void AddUnit(Unit Unit)
+		{
+			UnitView unitView = new UnitView(Unit, UnitRenderer, .625f, true);
+			_StackLayer.AddUnitView(unitView);
+			if (OnUnitAdded != null) OnUnitAdded(this, new ValuedEventArgs<UnitView>(unitView));
 		}
 
 		public void SetEnabled(bool Enabled)
@@ -73,6 +108,9 @@ namespace PanzerBlitz
 			int DeltaT,
 			Transform Transform)
 		{
+			_NewTurnBuffer.DispatchEvents();
+			_NewUnitBuffer.DispatchEvents();
+
 			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
 
 			Camera.Update(MouseController, KeyController, DeltaT, PaneLayer.Any(i => i.Hover));

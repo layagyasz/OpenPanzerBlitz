@@ -57,7 +57,6 @@ namespace PanzerBlitz
 			_AttackTarget = (AttackTarget)Stream.ReadByte();
 			_Attackers = Stream.ReadEnumerable(i => SingleAttackOrderSerializer.Deserialize(Stream, Objects)).ToList();
 			_Results = Stream.ReadEnumerable(i => (CombatResult)Stream.ReadByte()).ToArray();
-			Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -158,6 +157,8 @@ namespace PanzerBlitz
 
 		public virtual OrderInvalidReason Validate()
 		{
+			Recalculate();
+
 			if (_OddsCalculations.Count == 0)
 			{
 				if (AttackAt.Units.Count() == 0) return OrderInvalidReason.TARGET_EMPTY;
@@ -245,6 +246,16 @@ namespace PanzerBlitz
 			_Attackers.ForEach(i => i.Execute(Random));
 
 			return OrderStatus.FINISHED;
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[AttackOrder: Army={0}, AttackTarget={1}, AttackMethod={2}, Attackers={3}]",
+				Army,
+				AttackTarget,
+				AttackMethod,
+				string.Join(",", _Attackers.Select(i => i.ToString())));
 		}
 	}
 }
