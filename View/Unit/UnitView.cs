@@ -27,7 +27,6 @@ namespace PanzerBlitz
 
 		UnitConfigurationRenderer _Renderer;
 		UnitConfigurationView _UnitConfigurationView;
-		Rectangle _Bounds;
 		MovementDolly _Movement;
 
 		EventBuffer<EventArgs> _UnitConfigurationChangedBuffer;
@@ -39,7 +38,7 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return _Bounds.Size;
+				return _UnitConfigurationView.Size;
 			}
 		}
 
@@ -59,8 +58,6 @@ namespace PanzerBlitz
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;
 			Vector2f br = new Vector2f(.5f, .15f) * Scale;
 			Vector2f bl = new Vector2f(-.5f, .15f) * Scale;
-
-			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
 		}
 
 		void UpdateConfigurationView(object Sender, EventArgs E)
@@ -77,7 +74,7 @@ namespace PanzerBlitz
 
 		public override bool IsCollision(Vector2f Point)
 		{
-			return _Bounds.ContainsPoint(Point);
+			return _UnitConfigurationView.IsCollision(Point);
 		}
 
 		public override void Update(

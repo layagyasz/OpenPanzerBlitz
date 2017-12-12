@@ -225,13 +225,8 @@
     <Compile Include="View\RegisterPlayer\RegisterPlayerScreen.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerController.cs" />
-    <Compile Include="View\Unit\StackView.cs" />
-    <Compile Include="View\Unit\StackViewUnitComparator.cs" />
     <Compile Include="View\Unit\UnitConfigurationRenderer.cs" />
     <Compile Include="View\Unit\UnitView.cs" />
-    <Compile Include="View\Unit\HomogenousStackView.cs" />
-    <Compile Include="View\Unit\SingularUnitSelectionOption.cs" />
-    <Compile Include="View\Unit\GroupedUnitSelectionOption.cs" />
     <Compile Include="View\ArmyBuilder\ArmyBuilderScreen.cs" />
     <Compile Include="View\Unit\UnitConfigurationView.cs" />
     <Compile Include="Model\Orders\OrderAutomator.cs" />
@@ -308,6 +303,15 @@
     <Compile Include="View\MatchRecordSelect\MatchRecordSelectScreen.cs" />
     <Compile Include="Controller\LocalMatchRecordSelect\LocalMatchRecordSelectStateController.cs" />
     <Compile Include="Controller\Match\MatchRecordReplayPlayerController.cs" />
+    <Compile Include="View\Match\HomogenousStackView.cs" />
+    <Compile Include="View\Match\GroupedUnitSelectionOption.cs" />
+    <Compile Include="View\Match\StackView.cs" />
+    <Compile Include="View\Match\SingularUnitSelectionOption.cs" />
+    <Compile Include="View\Match\StackViewUnitComparator.cs" />
+    <Compile Include="View\ArmyBuilder\UnitConfigurationTable.cs" />
+    <Compile Include="View\ArmyBuilder\UnitConfigurationSelectionOption.cs" />
+    <Compile Include="View\ArmyBuilder\UnitConfigurationStackView.cs" />
+    <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -367,6 +371,7 @@
     <Folder Include="Model\Unit\" />
     <Folder Include="View\MatchRecordSelect\" />
     <Folder Include="Controller\LocalMatchRecordSelect\" />
+    <Folder Include="Controller\ArmyBuilder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1153,7 +1158,9 @@
     <None Include="Modules\Default\Theme\Base.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\Theme\Components\ArmyBuilder.blk" />
+    <None Include="Modules\Default\Theme\Components\ArmyBuilder.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Modules\Default\Theme\Components\Attack.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

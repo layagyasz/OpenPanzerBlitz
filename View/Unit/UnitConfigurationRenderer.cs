@@ -19,7 +19,7 @@ namespace PanzerBlitz
 			new Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>>();
 
 		public UnitConfigurationRenderer(
-			Scenario Scenario,
+			IEnumerable<UnitConfiguration> UnitConfigurations,
 			Dictionary<string, UnitRenderDetails> RenderDetails,
 			uint TextureSize,
 			uint SpriteSize,
@@ -29,13 +29,26 @@ namespace PanzerBlitz
 			this.TextureSize = TextureSize;
 			this.SpriteSize = SpriteSize;
 			this.Font = Font;
-			RenderAll(
-				new UnitConfiguration[] { GameData.Wreckage }
-				.Concat(Scenario.ArmyConfigurations
-					.SelectMany(i => i.DeploymentConfigurations)
-						.SelectMany(i => i.UnitGroup.UnitConfigurations
-									.SelectMany(j => j.RepresentedConfigurations)).Distinct()));
+			RenderAll(UnitConfigurations);
 		}
+
+		public UnitConfigurationRenderer(
+			Scenario Scenario,
+			Dictionary<string, UnitRenderDetails> RenderDetails,
+			uint TextureSize,
+			uint SpriteSize,
+			Font Font)
+			: this(
+				new UnitConfiguration[] { GameData.Wreckage }
+					.Concat(Scenario.ArmyConfigurations
+						.SelectMany(i => i.DeploymentConfigurations)
+							.SelectMany(i => i.UnitGroup.UnitConfigurations
+										.SelectMany(j => j.RepresentedConfigurations)).Distinct()),
+				   RenderDetails,
+				   TextureSize,
+				   SpriteSize,
+				   Font)
+		{ }
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(UnitConfiguration UnitConfiguration)
 		{
@@ -77,7 +90,7 @@ namespace PanzerBlitz
 					renderedTexture = new Texture(texture.Texture);
 					foreach (KeyValuePair<UnitConfiguration, Vector2f[]> k in renderInfoCache)
 						_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
-					_RenderInfo.Clear();
+					renderInfoCache.Clear();
 					_Textures.Add(renderedTexture);
 					texture = new RenderTexture(TextureSize, TextureSize);
 					i = 0;

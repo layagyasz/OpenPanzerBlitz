@@ -6,6 +6,8 @@ using Cardamom.Utilities;
 
 using Cence;
 
+using Cardamom.Planar;
+
 using SFML.Graphics;
 using SFML.Window;
 
@@ -16,10 +18,19 @@ namespace PanzerBlitz
 		public readonly float Scale;
 
 		Texture _Texture;
+		Rectangle _Bounds;
 		Vertex[] _ImageVertices;
 		Vertex[] _Vertices;
 
 		public bool Flipped;
+
+		public Vector2f Size
+		{
+			get
+			{
+				return _Bounds.Size;
+			}
+		}
 
 		public UnitConfigurationView(
 			UnitConfiguration UnitConfiguration, Faction Faction, UnitConfigurationRenderer Renderer, float Scale)
@@ -65,6 +76,13 @@ namespace PanzerBlitz
 			_ImageVertices[1] = new Vertex(tr, c, renderInfo.Item2[1]);
 			_ImageVertices[2] = new Vertex(br, c, renderInfo.Item2[2]);
 			_ImageVertices[3] = new Vertex(bl, c, renderInfo.Item2[3]);
+
+			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
+		}
+
+		public bool IsCollision(Vector2f Point)
+		{
+			return _Bounds.ContainsPoint(Point);
 		}
 
 		public void Update(

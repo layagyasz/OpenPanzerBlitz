@@ -3,6 +3,7 @@ namespace PanzerBlitz
 {
 	public enum ProgramState
 	{
+		BUILD_ARMY,
 		EDIT,
 		LANDING,
 		LOCAL_MATCH_RECORD_SELECT,

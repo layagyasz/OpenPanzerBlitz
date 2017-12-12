@@ -687,7 +687,7 @@ unit-configuration:nashorn {
 	byte:movement { 8 }
 }
 unit-configuration:pzjg-47 {
-	string:name { JgdPz V }
+	string:name { PzJg 47 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

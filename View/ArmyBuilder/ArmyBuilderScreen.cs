@@ -12,10 +12,7 @@ namespace PanzerBlitz
 {
 	public class ArmyBuilderScreen : ScreenBase
 	{
-		ScrollCollection<SingularUnitSelectionOption> _AvailableUnits =
-			new ScrollCollection<SingularUnitSelectionOption>("army-builder-select");
-		ScrollCollection<GroupedUnitSelectionOption> _SelectedUnits =
-			new ScrollCollection<GroupedUnitSelectionOption>("army-builder-select");
+		UnitConfigurationTable _AvailableUnits;
 
 		public ArmyBuilderScreen(
 			Vector2f WindowSize,
@@ -24,6 +21,15 @@ namespace PanzerBlitz
 			UnitConfigurationRenderer Renderer)
 			: base(WindowSize)
 		{
+			_AvailableUnits = new UnitConfigurationTable(
+				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer);
+			_AvailableUnits.Position = .5f * (WindowSize - _AvailableUnits.Size);
+
+			foreach (UnitConfigurationLink link in UnitConfigurations.OrderBy(i => i.UnitConfiguration.Name))
+			{
+				if (link.Faction == Faction) _AvailableUnits.Add(link.UnitConfiguration);
+			}
+			_Items.Add(_AvailableUnits);
 		}
 	}
 }

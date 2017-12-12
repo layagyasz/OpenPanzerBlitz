@@ -4,17 +4,28 @@
 class:army-builder-pane {
 	!class:parent { pane }
 }
-class:army-builder-select {
-	!class:parent { pane-display }
+class:army-builder-table {
 	mode:default {
-		int:height { 636 }
+		int:height { 616 }
+		int:width { 376 }
+		int[]:padding { 12 12 0 0 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+
+		int:item-width { 4 }
 	}
 }
-class:army-builder-selection-option {
+class:army-builder-table-row {
 	mode:default {
-		int:height { 100 }
-		int:width { 288 }
-		int[]:margin { 0 3 0 3 }
+		int:height { 88 }
+		int:width { 352 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+	}
+}
+class:army-builder-table-cell {
+	mode:default {
+		int:height { 80 }
+		int:width { 80 }
+		int[]:margin { 4 4 4 4 }
 		!font:unit-stack-font { fonts.univers }
 		color[]:background-color { #484848 #484848 #484848 #484848 }
 	}

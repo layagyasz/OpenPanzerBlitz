@@ -73,6 +73,11 @@ namespace PanzerBlitz
 					Directory.EnumerateFiles(path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
+					"unit-configuration-link[]",
+					"unit-configuration-links",
+					Directory.EnumerateFiles(path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
+						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
 					"unit-render-details<>",
 					"unit-render-details",
 					Directory.EnumerateFiles(path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
@@ -148,6 +153,7 @@ namespace PanzerBlitz
 			FactionRenderDetails =
 				(Dictionary<string, FactionRenderDetails>)attributes[(int)Attribute.FACTION_RENDER_DETAILS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
+			UnitConfigurationLinks = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
