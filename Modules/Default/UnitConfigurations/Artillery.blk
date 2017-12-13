@@ -720,18 +720,6 @@ unit-configuration:8in-how-finnish {
 
 	bool:can-indirect-fire { true }
 }
-unit-configuration:b-4-203mm-how {
-	string:name { B-4 203mm }
-	unit-class:unit-class { towed-gun }
-
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 80 }
-	byte:range { 30 }
-	byte:defense { 1 }
-	byte:movement { 2 }
-
-	bool:can-indirect-fire { true }
-}
 unit-configuration:76mm-mortar {
 	string:name { 76mm }
 	unit-class:unit-class { towed-gun }

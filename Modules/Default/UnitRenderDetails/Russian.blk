@@ -71,7 +71,13 @@ unit-render-details:cavalry-russian-43 {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry.png }
 }
-unit-render-details:motorcycle-russian {
+unit-render-details:motorcycle-russian-39 {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:motorcycle-russian-42 {
+	string:image-path { motorcycle-2.png }
+}
+unit-render-details:motorcycle-russian-43 {
 	string:image-path { motorcycle.png }
 }
 unit-render-details:tractor {
@@ -112,12 +118,6 @@ unit-render-details:zis-42-transport {
 }
 unit-render-details:t-20 {
 	string:image-path { t-20.png }
-}
-unit-render-details:motorcycle-russian-39 {
-	string:image-path { motorcycle-2.png }
-}
-unit-render-details:motorcycle-russian-42 {
-	string:image-path { motorcycle-2.png }
 }
 unit-render-details:ba-10-infantry {
 	string:image-path { ba-10.png }
@@ -187,6 +187,9 @@ unit-render-details:m-13 {
 }
 unit-render-details:m-31 {
 	string:image-path { m-31.png }
+}
+unit-render-details:b-4-203mm-how {
+	string:image-path { b-4-203mm.png }
 }
 unit-render-details:ot-133 {
 	string:image-path { ot-133.png }

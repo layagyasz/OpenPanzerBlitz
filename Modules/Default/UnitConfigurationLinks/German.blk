@@ -1,10 +1,14 @@
 ﻿unit-configuration-link:engineer-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german }
+
+	front:front { east }
 }
 unit-configuration-link:engineer-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german-west }
+
+	front:front { west }
 }
 unit-configuration-link:hmg-platoon-german {
 	!faction:faction { factions.german }
@@ -13,34 +17,53 @@ unit-configuration-link:hmg-platoon-german {
 unit-configuration-link:security-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.security-platoon-german }
+
+	front:front { east }
 }
 unit-configuration-link:security-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.security-platoon-german-west }
+
+	front:front { west }
 }
 unit-configuration-link:rifle-platoon-german-39 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-39 }
+
+	int:obsolete-year { 1939 }
 }
 unit-configuration-link:rifle-platoon-german-40 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:rifle-platoon-german-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
+
+	int:introduce-year { 1942 }
+	front:front { east }
 }
 unit-configuration-link:rifle-platoon-german-42-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42-west }
+
+	int:introduce-year { 1942 }
+	front:front { west }
 }
 unit-configuration-link:smg-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german }
+
+	front:front { east }
 }
 unit-configuration-link:smg-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
+
+	front:front { west }
 }
 unit-configuration-link:parachute-platoon-german {
 	!faction:faction { factions.german }
@@ -49,10 +72,14 @@ unit-configuration-link:parachute-platoon-german {
 unit-configuration-link:cavalry-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-german }
+
+	front:front { east }
 }
 unit-configuration-link:cavalry-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-west }
+
+	front:front { west }
 }
 unit-configuration-link:truck-german {
 	!faction:faction { factions.german }
@@ -61,14 +88,24 @@ unit-configuration-link:truck-german {
 unit-configuration-link:motorcycle-german-40-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-40-west }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+	front:front { west }
 }
 unit-configuration-link:motorcycle-german-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-42 }
+
+	int:introduce-year { 1942 }
+	front:front { east }
 }
 unit-configuration-link:motorcycle-german-42-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-42-west }
+
+	int:introduce-year { 1942 }
+	front:front { west }
 }
 unit-configuration-link:sdkfz-8 {
 	!faction:faction { factions.german }
@@ -77,18 +114,26 @@ unit-configuration-link:sdkfz-8 {
 unit-configuration-link:sdkfz-251 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+
+	front:front { east }
 }
 unit-configuration-link:sdkfz-251-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+
+	front:front { west }
 }
 unit-configuration-link:sdkfz-250_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1 }
+
+	front:front { east }
 }
 unit-configuration-link:sdkfz-250_1-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1-west }
+
+	front:front { west }
 }
 unit-configuration-link:sdkfz-250_10 {
 	!faction:faction { factions.german }

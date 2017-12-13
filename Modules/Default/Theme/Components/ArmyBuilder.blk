@@ -3,13 +3,28 @@
 }
 class:army-builder-pane {
 	!class:parent { pane }
+	mode:default {
+		int:height { 688 }
+		int:width { 734 }
+	}
+}
+class:army-builder-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 352 }
+	}
+}
+class:army-builder-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 352 }
+	}
 }
 class:army-builder-table {
 	mode:default {
-		int:height { 616 }
-		int:width { 376 }
-		int[]:padding { 12 12 0 0 }
-		color[]:background-color { #000000 #000000 #000000 #000000 }
+		int:height { 617 }
+		int:width { 352 }
+		color[]:background-color { #969696 #969696 #969696 #969696 }
 
 		int:item-width { 4 }
 	}
@@ -18,7 +33,7 @@ class:army-builder-table-row {
 	mode:default {
 		int:height { 88 }
 		int:width { 352 }
-		color[]:background-color { #000000 #000000 #000000 #000000 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
 	}
 }
 class:army-builder-table-cell {

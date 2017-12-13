@@ -312,6 +312,8 @@
     <Compile Include="View\ArmyBuilder\UnitConfigurationSelectionOption.cs" />
     <Compile Include="View\ArmyBuilder\UnitConfigurationStackView.cs" />
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
+    <Compile Include="Model\Front.cs" />
+    <Compile Include="Model\ArmyParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -184,7 +184,35 @@ unit-configuration:cavalry-russian-43 {
 	byte:defense { 8 }
 	byte:movement { 3 }
 }
-unit-configuration:motorcycle-russian {
+unit-configuration:motorcycle-russian-39 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-company-39 }
+}
+unit-configuration:motorcycle-russian-42 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-company-42 }
+}
+unit-configuration:motorcycle-russian-43 {
 	string:name { Motorcycle }
 	unit-class:unit-class { reconnaissance-vehicle }
 
@@ -355,34 +383,6 @@ unit-configuration:t-20 {
 
 	bool:is-armored { true }
 }
-unit-configuration:motorcycle-russian-39 {
-	string:name { Motorcycle }
-	unit-class:unit-class { reconnaissance-vehicle }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 3 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 12 }
-
-	bool:is-armored { false }
-	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-company-39 }
-}
-unit-configuration:motorcycle-russian-42 {
-	string:name { Motorcycle }
-	unit-class:unit-class { reconnaissance-vehicle }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 4 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 12 }
-
-	bool:is-armored { false }
-	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-company-42 }
-}
 unit-configuration:ba-10-infantry {
 	string:name { BA-10 }
 	unit-class:unit-class { reconnaissance-vehicle }
@@ -521,7 +521,7 @@ unit-configuration:t-40 {
 }
 unit-configuration:t-28-e {
 	string:name { T-28 E }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 6 }
@@ -531,7 +531,7 @@ unit-configuration:t-28-e {
 }
 unit-configuration:bt-7-a {
 	string:name { BT-7 A }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -541,7 +541,7 @@ unit-configuration:bt-7-a {
 }
 unit-configuration:t-35 {
 	string:name { T-35 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -551,7 +551,7 @@ unit-configuration:t-35 {
 }
 unit-configuration:t-100 {
 	string:name { T-100 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -591,7 +591,7 @@ unit-configuration:jsu-152 {
 }
 unit-configuration:kv-ii {
 	string:name { KV-II }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 50 }
@@ -618,6 +618,16 @@ unit-configuration:m-31 {
 	byte:range { 12 }
 	byte:defense { 2 }
 	byte:movement { 12 }	
+}
+unit-configuration:b-4-203mm-how {
+	string:name { B-4 203mm }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 80 }
+	byte:range { 30 }
+	byte:defense { 1 }
+	byte:movement { 2 }
 }
 unit-configuration:ot-133 {
 	string:name { OT-133 }
