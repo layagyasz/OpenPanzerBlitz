@@ -711,7 +711,7 @@ unit-configuration:su-100 {
 }
 unit-configuration:jsu-122 {
 	string:name { JSU-122 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 17 }

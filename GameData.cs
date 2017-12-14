@@ -32,6 +32,8 @@ namespace PanzerBlitz
 			new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static string LoadedModule;
 		public static Dictionary<string, UnitMovementRules> UnitMovementRules;
+		public static Dictionary<string, TileComponentRules> TileComponentRules;
+		public static Dictionary<string, Environment> Environments;
 		public static Dictionary<string, Faction> Factions;
 		public static Dictionary<string, FactionRenderDetails> FactionRenderDetails;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
@@ -39,8 +41,6 @@ namespace PanzerBlitz
 		public static List<UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
-		public static Dictionary<string, TileComponentRules> TileComponentRules;
-		public static Dictionary<string, Environment> Environments;
 		public static Dictionary<string, TileRenderer> TileRenderers;
 
 		public static void Load(string Module)
@@ -150,6 +150,9 @@ namespace PanzerBlitz
 
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];
+			TileComponentRules =
+				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.TILE_COMPONENT_RULES];
+			Environments = (Dictionary<string, Environment>)attributes[(int)Attribute.ENVIRONMENTS];
 			Factions = (Dictionary<string, Faction>)attributes[(int)Attribute.FACTIONS];
 			FactionRenderDetails =
 				(Dictionary<string, FactionRenderDetails>)attributes[(int)Attribute.FACTION_RENDER_DETAILS];
@@ -158,9 +161,6 @@ namespace PanzerBlitz
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
-			TileComponentRules =
-				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.TILE_COMPONENT_RULES];
-			Environments = (Dictionary<string, Environment>)attributes[(int)Attribute.ENVIRONMENTS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
 
 			// Emit warnings for units without configured render details.

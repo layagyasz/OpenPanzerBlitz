@@ -9,20 +9,29 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationSelectionOption : Button
 	{
-		UnitConfigurationStackView _StackView;
+		public readonly UnitConfiguration UnitConfiguration;
+
+		public UnitConfigurationStackView StackView;
 
 		public UnitConfigurationSelectionOption(
 			string ClassName,
 			UnitConfiguration UnitConfiguration,
 			Faction Faction,
-			UnitConfigurationRenderer Renderer)
+			UnitConfigurationRenderer Renderer,
+			bool DisplayCount)
 			: base(ClassName)
 		{
-			_StackView = new UnitConfigurationStackView(
-				UnitConfiguration, Faction, Renderer, Class.GetAttributeWithDefault<Font>("unit-stack-font", null));
-			_StackView.Position = Size / 2;
-			_StackView.Parent = this;
-			Value = _StackView;
+			this.UnitConfiguration = UnitConfiguration;
+
+			StackView = new UnitConfigurationStackView(
+				UnitConfiguration,
+				Faction,
+				Renderer,
+				Class.GetAttributeWithDefault<Font>("unit-stack-font", null),
+				DisplayCount);
+			StackView.Position = Size / 2;
+			StackView.Parent = this;
+			Value = StackView;
 		}
 
 		public override void Update(
@@ -30,14 +39,14 @@ namespace PanzerBlitz
 		{
 			base.Update(MouseController, KeyController, DeltaT, Transform);
 
-			_StackView.Update(MouseController, KeyController, DeltaT, Transform);
+			StackView.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
 			base.Draw(Target, Transform);
 
-			_StackView.Draw(Target, Transform);
+			StackView.Draw(Target, Transform);
 		}
 	}
 }

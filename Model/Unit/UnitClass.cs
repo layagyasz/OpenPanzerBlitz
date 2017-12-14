@@ -3,6 +3,7 @@ namespace PanzerBlitz
 {
 	public enum UnitClass
 	{
+		NONE,
 
 		AMPHIBIOUS_VEHICLE,
 		ASSAULT_GUN,

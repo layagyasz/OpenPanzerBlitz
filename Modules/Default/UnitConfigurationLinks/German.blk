@@ -127,17 +127,21 @@ unit-configuration-link:sdkfz-250_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1 }
 
+	int:introduce-year { 1941 }
 	front:front { east }
 }
 unit-configuration-link:sdkfz-250_1-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1-west }
 
+	int:introduce-year { 1941 }
 	front:front { west }
 }
 unit-configuration-link:sdkfz-250_10 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_10 }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:sdkfz-251_10 {
 	!faction:faction { factions.german }
@@ -146,6 +150,9 @@ unit-configuration-link:sdkfz-251_10 {
 unit-configuration-link:kfz-13 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.kfz-13 }
+
+	int:obsolete-year { 1941 }
+	front:front { west }
 }
 unit-configuration-link:sdkfz-6_2 {
 	!faction:faction { factions.german }
@@ -162,50 +169,74 @@ unit-configuration-link:sdkfz-10_4 {
 unit-configuration-link:sdkfz-221 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
+
+	int:obsolete-year { 1944 }
 }
 unit-configuration-link:sdkfz-222 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-222 }
+
+	int:obsolete-year { 1944 }
 }
 unit-configuration-link:sdkfz-231_6 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
+
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:sdkfz-231_8 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_8 }
+
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:sdkfz-233 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-233 }
+
+	int:obsolete-year { 1944 }
 }
 unit-configuration-link:sdkfz-234_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_1 }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:sdkfz-234_3 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_3 }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:puma {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.puma }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:sdkfz-234_4 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_4 }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:sdkfz-250_7 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_7 }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:sdkfz-250_8 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_8 }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:sdkfz-250_9 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_9 }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:sdkfz-251_2 {
 	!faction:faction { factions.german }
@@ -222,54 +253,83 @@ unit-configuration-link:sdkfz-251_16 {
 unit-configuration-link:maultier {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.maultier }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:wespe {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.wespe }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:hummel {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hummel }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:gw-1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.gw-1 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:gw-38_m {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.gw-38_m }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:ostwind {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ostwind }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:wirbelwind {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.wirbelwind }
+
+	int:introduce-year { 1945 }
 }
 unit-configuration-link:stuh-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stuh-42 }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:marder-ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.marder-ii }
+
+	int:introduce-year { 1943 }
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:marder-iii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.marder-iii }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:stug-iii-b {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-b }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:stug-iii-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:stupz-iv {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stupz-iv }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:flamingo {
 	!faction:faction { factions.german }
@@ -278,54 +338,82 @@ unit-configuration-link:flamingo {
 unit-configuration-link:hetzer {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hetzer }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:jgdpz-iv {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:ferdinand {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ferdinand }
+
+	int:introduce-year { 1943 }
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:elefant {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.elefant }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:nashorn {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.nashorn }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:pzjg-47 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzjg-47 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:pzjd-iv_48 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzjd-iv_48 }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:pzjd-iv_70 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzjd-iv_70 }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:jgdpz-38-t-flame {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-38-t-flame }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:jgdpz-v {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-v }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:jgdpz-vi {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-vi }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:lynx {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.lynx }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:pzkw-35_t {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-35_t }
+
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:pzkw-38_t {
 	!faction:faction { factions.german }
@@ -378,22 +466,32 @@ unit-configuration-link:pzkw-iii-f {
 unit-configuration-link:pzkw-iii-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-g }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:pzkw-iii-g-corrected {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-g-corrected }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:pzkw-iii-j {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-j }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:pzkw-iii-n {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:pzkw-iii-flame {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-flame }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:pzkw-iv-how {
 	!faction:faction { factions.german }
@@ -406,44 +504,72 @@ unit-configuration-link:pzkw-iv-a {
 unit-configuration-link:pzkw-iv-d {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:pzkw-iv-e {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-e }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:pzkw-iv-f_2 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-f_2 }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:pzkw-iv-h {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
+
+	int:introduce-year { 1944 }
+	front:front { east }
 }
 unit-configuration-link:pzkw-iv_ss {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+
+	int:introduce-year { 1944 }
+	front:front { west }
 }
 unit-configuration-link:pzkw-iv_w {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_w }
+
+	int:introduce-year { 1944 }
+	front:front { west }
 }
 unit-configuration-link:panther {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.panther }
+
+	int:introduce-year { 1943 }
+	front:front { east }
 }
 unit-configuration-link:pzkw-v_w {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-v_w }
+
+	int:introduce-year { 1943 }
+	front:front { west }
 }
 unit-configuration-link:pzkw-v_ss {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-v_ss }
+
+	int:introduce-year { 1943 }
+	front:front { west }
 }
 unit-configuration-link:tiger-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.tiger-i }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:tiger-ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.tiger-ii }
+
+	int:introduce-year { 1944 }
 }

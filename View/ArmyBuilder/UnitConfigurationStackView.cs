@@ -12,10 +12,11 @@ namespace PanzerBlitz
 		static readonly int UNIT_VIEW_SCALE = 64;
 		static readonly uint FONT_SIZE = 18;
 
+		bool _DisplayCount;
 		UnitConfigurationView _UnitConfigurationView;
 		Text _Text;
 
-		public int Count { get; set; }
+		public int Count { get; set; } = 1;
 
 		public override Vector2f Size
 		{
@@ -26,10 +27,15 @@ namespace PanzerBlitz
 		}
 
 		public UnitConfigurationStackView(
-			UnitConfiguration UnitConfiguration, Faction Faction, UnitConfigurationRenderer Renderer, Font Font)
+			UnitConfiguration UnitConfiguration,
+			Faction Faction,
+			UnitConfigurationRenderer Renderer,
+			Font Font,
+			bool DisplayCount)
 		{
+			_DisplayCount = DisplayCount;
 			_UnitConfigurationView = new UnitConfigurationView(UnitConfiguration, Faction, Renderer, UNIT_VIEW_SCALE);
-			_Text = new Text("", Font, FONT_SIZE) { Color = Color.Red };
+			if (_DisplayCount) _Text = new Text("", Font, FONT_SIZE) { Color = Color.Red };
 		}
 
 		public override bool IsCollision(Vector2f Point)
@@ -41,7 +47,7 @@ namespace PanzerBlitz
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
 			Transform.Translate(Position);
-			if (Count == 0) _Text.DisplayedString = "x" + Count;
+			if (_DisplayCount) _Text.DisplayedString = "x" + Count;
 			_UnitConfigurationView.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 
@@ -49,7 +55,7 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 			_UnitConfigurationView.Draw(Target, Transform);
-			if (Count > 0)
+			if (_DisplayCount)
 			{
 				_Text.Position = -.5f * new Vector2f(_Text.GetLocalBounds().Width, _Text.GetLocalBounds().Height);
 				_Text.Draw(Target, new RenderStates(Transform));

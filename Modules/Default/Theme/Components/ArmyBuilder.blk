@@ -5,7 +5,7 @@ class:army-builder-pane {
 	!class:parent { pane }
 	mode:default {
 		int:height { 688 }
-		int:width { 734 }
+		int:width { 752 }
 	}
 }
 class:army-builder-select {

@@ -18,7 +18,7 @@ namespace PanzerBlitz
 		public readonly Button HostMatchButton = new Button("landing-button") { DisplayedString = "Host Match" };
 		public readonly Button EditButton = new Button("landing-button") { DisplayedString = "Edit" };
 		public readonly Button ArmyBuilderButton =
-			new Button("landing-button") { DisplayedString = "Army Builder (Test)" };
+			new Button("landing-button") { DisplayedString = "Army Builder (Alpha)" };
 		public readonly Button JoinServerButton = new Button("landing-button") { DisplayedString = "Join Server" };
 		public readonly Button StartServerButton = new Button("landing-button") { DisplayedString = "Start Server" };
 

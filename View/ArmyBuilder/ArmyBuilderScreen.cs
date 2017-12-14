@@ -4,6 +4,7 @@ using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
+using Cardamom.Utilities;
 
 using SFML.Window;
 
@@ -18,6 +19,7 @@ namespace PanzerBlitz
 		IEnumerable<UnitConfigurationLink> _Links;
 		Select<UnitClass> _UnitClassSelect = new Select<UnitClass>("army-builder-select");
 		UnitConfigurationTable _AvailableUnits;
+		UnitConfigurationTable _SelectedUnits;
 
 		public ArmyBuilderScreen(
 			Vector2f WindowSize,
@@ -34,8 +36,14 @@ namespace PanzerBlitz
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
 			_AvailableUnits = new UnitConfigurationTable(
-				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer);
+				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, false);
 			_AvailableUnits.Position = new Vector2f(0, _UnitClassSelect.Size.Y + 16);
+			_AvailableUnits.OnUnitClicked += HandleAddUnit;
+
+			_SelectedUnits = new UnitConfigurationTable(
+				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, true);
+			_SelectedUnits.Position = new Vector2f(_AvailableUnits.Size.X + 16, _UnitClassSelect.Size.Y + 16);
+			_SelectedUnits.OnUnitRightClicked += HandleRemoveUnit;
 
 			foreach (UnitClass c in Enum.GetValues(typeof(UnitClass)))
 				_UnitClassSelect.Add(
@@ -49,6 +57,7 @@ namespace PanzerBlitz
 			FilterUnits();
 
 			_Pane.Add(_AvailableUnits);
+			_Pane.Add(_SelectedUnits);
 			_Pane.Add(_UnitClassSelect);
 			_Items.Add(_Pane);
 		}
@@ -61,13 +70,24 @@ namespace PanzerBlitz
 		void FilterUnits()
 		{
 			_AvailableUnits.Clear();
+			UnitClass filterClass = _UnitClassSelect.Value.Value;
 			foreach (UnitConfigurationLink link in _Links.OrderBy(i => i.UnitConfiguration.Name))
 			{
 				if (link.Faction == _Faction
-					&& link.UnitConfiguration.UnitClass == _UnitClassSelect.Value.Value
+					&& (filterClass == UnitClass.NONE || link.UnitConfiguration.UnitClass == filterClass)
 					&& _Parameters.Matches(link))
 					_AvailableUnits.Add(link.UnitConfiguration);
 			}
+		}
+
+		void HandleAddUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
+		{
+			_SelectedUnits.Add(E.Value);
+		}
+
+		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
+		{
+			_SelectedUnits.Remove(E.Value);
 		}
 	}
 }
