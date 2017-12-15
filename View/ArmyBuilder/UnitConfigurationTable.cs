@@ -63,7 +63,13 @@ namespace PanzerBlitz
 
 			UnitConfigurationSelectionOption option =
 				new UnitConfigurationSelectionOption(
-					_CellClassName, UnitConfiguration, _Faction, _Renderer, _StackDuplicates);
+					_CellClassName,
+					_CellClassName + "-details",
+					_CellClassName + "-overlay",
+					UnitConfiguration,
+					_Faction,
+					_Renderer,
+					_StackDuplicates);
 			option.OnClick += HandleClick;
 			option.OnRightClick += HandleRightClick;
 			t.Add(option);

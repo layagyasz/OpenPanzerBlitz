@@ -23,13 +23,14 @@ namespace PanzerBlitz
 			}
 		}
 
-		public GroupedUnitSelectionOption(string ClassName, IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
+		public GroupedUnitSelectionOption(
+			string ClassName, string OverlayClassName, IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer)
 			: base(ClassName)
 		{
 			UnitConfiguration = Units.First().Configuration;
 
 			_StackView = new HomogenousStackView(
-				Units, Renderer, Class.GetAttributeWithDefault<Font>("unit-stack-font", null));
+				Units, Renderer, Class.GetAttributeWithDefault<int>("unit-scale", 0), OverlayClassName);
 			_StackView.Position = Size / 2;
 			_StackView.Parent = this;
 			Value = _StackView;

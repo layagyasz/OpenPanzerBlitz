@@ -4,17 +4,21 @@ using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
 	public class UnitConfigurationSelectionOption : Button
 	{
 		public readonly UnitConfiguration UnitConfiguration;
+		public readonly UnitConfigurationStackView StackView;
 
-		public UnitConfigurationStackView StackView;
+		Button _PointText;
 
 		public UnitConfigurationSelectionOption(
 			string ClassName,
+			string DetailsClassName,
+			string OverlayClassName,
 			UnitConfiguration UnitConfiguration,
 			Faction Faction,
 			UnitConfigurationRenderer Renderer,
@@ -27,11 +31,17 @@ namespace PanzerBlitz
 				UnitConfiguration,
 				Faction,
 				Renderer,
-				Class.GetAttributeWithDefault<Font>("unit-stack-font", null),
+				Class.GetAttributeWithDefault("unit-scale", 0),
+				OverlayClassName,
 				DisplayCount);
-			StackView.Position = Size / 2;
+			StackView.Position = .5f * StackView.Size + new Vector2f(12, 12);
 			StackView.Parent = this;
 			Value = StackView;
+
+			_PointText = new Button(DetailsClassName);
+			_PointText.Position = new Vector2f(12, StackView.Size.Y + 16);
+			_PointText.Parent = this;
+			_PointText.DisplayedString = UnitConfiguration.GetPointValue().ToString();
 		}
 
 		public override void Update(
@@ -40,6 +50,7 @@ namespace PanzerBlitz
 			base.Update(MouseController, KeyController, DeltaT, Transform);
 
 			StackView.Update(MouseController, KeyController, DeltaT, Transform);
+			_PointText.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 
 		public override void Draw(RenderTarget Target, Transform Transform)
@@ -47,6 +58,7 @@ namespace PanzerBlitz
 			base.Draw(Target, Transform);
 
 			StackView.Draw(Target, Transform);
+			_PointText.Draw(Target, Transform);
 		}
 	}
 }

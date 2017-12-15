@@ -47,3 +47,21 @@ class:overlay-turn-counter-box {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
 	}
 }
+class:overlay-moved-box {
+	mode:default {
+		color[]:background-color { #0000FFAA #0000FFAA #0000FFAA #0000FFAA }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 3 3 0 0 }
+	}
+}
+class:overlay-fired-box {
+	!class:parent { overlay-moved-box }
+	mode:default {
+		color[]:background-color { #FF0000AA #FF0000AA #FF0000AA #FF0000AA }
+		int[]:padding { 10 3 0 0 }
+	}
+}

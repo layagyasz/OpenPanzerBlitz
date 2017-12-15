@@ -12,7 +12,7 @@ class:deployment-selection-option {
 		int:height { 100 }
 		int:width { 288 }
 		int[]:margin { 0 3 0 3 }
-		!font:unit-stack-font { fonts.univers }
+		int:unit-scale { 64 }
 		color[]:background-color { #484848 #484848 #484848 #484848 }
 	}
 	mode:hover {
@@ -26,5 +26,16 @@ class:deployment-selection-option {
 	}
 	mode:selected-focus {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}
+class:deployment-selection-option-overlay {
+	mode:default {
+		color[]:background-color { #000000AA #000000AA #000000AA #000000AA }
+		!font:font-face { fonts.univers }
+		color:font-color { #FF0000 }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 24 3 0 0 }
 	}
 }

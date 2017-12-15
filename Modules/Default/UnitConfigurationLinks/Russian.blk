@@ -336,10 +336,6 @@ unit-configuration-link:m-31 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:b-4-203mm-how {
-	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.b-4-203mm-how }
-}
 unit-configuration-link:ot-133 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ot-133 }

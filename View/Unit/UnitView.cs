@@ -1,7 +1,7 @@
 using System;
 
 using Cardamom.Interface;
-using Cardamom.Planar;
+using Cardamom.Interface.Items;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -24,6 +24,10 @@ namespace PanzerBlitz
 			new Vertex(new Vector2f(.5f, .15f) , Color.Blue),
 			new Vertex( new Vector2f(-.5f, .15f), Color.Blue)
 		};
+
+		Button MOVED_DISPLAY;
+		Button FIRED_DISPLAY;
+		bool DISPLAYED = false;
 
 		UnitConfigurationRenderer _Renderer;
 		UnitConfigurationView _UnitConfigurationView;
@@ -58,6 +62,17 @@ namespace PanzerBlitz
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;
 			Vector2f br = new Vector2f(.5f, .15f) * Scale;
 			Vector2f bl = new Vector2f(-.5f, .15f) * Scale;
+
+			if (MOVED_DISPLAY == null)
+			{
+				MOVED_DISPLAY = new Button("overlay-moved-box") { DisplayedString = "MOVED" };
+				MOVED_DISPLAY.Position = -.5f * new Vector2f(64, MOVED_DISPLAY.Size.Y);
+			}
+			if (FIRED_DISPLAY == null)
+			{
+				FIRED_DISPLAY = new Button("overlay-fired-box") { DisplayedString = "FIRED" };
+				FIRED_DISPLAY.Position = -.5f * new Vector2f(64, FIRED_DISPLAY.Size.Y);
+			}
 		}
 
 		void UpdateConfigurationView(object Sender, EventArgs E)
@@ -91,6 +106,15 @@ namespace PanzerBlitz
 			Transform.Translate(Position);
 			base.Update(MouseController, KeyController, DeltaT, Transform);
 
+			// Display overlays since the text will not show up otherwise.
+			if (!DISPLAYED)
+			{
+				Transform.Scale(1 / 64f, 1 / 64f);
+				MOVED_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
+				FIRED_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
+				DISPLAYED = true;
+			}
+
 			_UnitConfigurationChangedBuffer.DispatchEvents();
 		}
 
@@ -105,8 +129,10 @@ namespace PanzerBlitz
 			{
 				Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
 				RenderStates r = new RenderStates(Transform);
-				if (Unit.Moved) Target.Draw(MovedRect, PrimitiveType.Quads, r);
-				if (Unit.Fired) Target.Draw(FiredRect, PrimitiveType.Quads, r);
+
+				if (Unit.Moved || Unit.Fired) Transform.Scale(1 / 64f, 1 / 64f);
+				if (Unit.Moved && !Unit.Fired) MOVED_DISPLAY.Draw(Target, Transform);
+				if (Unit.Fired) FIRED_DISPLAY.Draw(Target, Transform);
 			}
 		}
 	}

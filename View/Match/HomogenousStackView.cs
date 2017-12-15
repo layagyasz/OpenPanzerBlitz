@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface;
+using Cardamom.Interface.Items;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -11,12 +12,10 @@ namespace PanzerBlitz
 {
 	public class HomogenousStackView : Interactive
 	{
-		static readonly int UNIT_VIEW_SCALE = 64;
-		static readonly uint FONT_SIZE = 18;
-
-		Text _Text;
+		Button _Text;
 		UnitConfigurationRenderer _Renderer;
 		Stack<UnitView> _UnitViews;
+		int _UnitScale;
 
 		public override Vector2f Size
 		{
@@ -34,11 +33,16 @@ namespace PanzerBlitz
 			}
 		}
 
-		public HomogenousStackView(IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer, Font Font)
+		public HomogenousStackView(
+			IEnumerable<Unit> Units, UnitConfigurationRenderer Renderer, int UnitScale, string OverlayClassName)
 		{
-			_Text = new Text("", Font, FONT_SIZE) { Color = Color.Red };
+			_Text = new Button(OverlayClassName);
+			_Text.Position = -.5f * new Vector2f(UnitScale, _Text.Size.Y);
+			_Text.Parent = this;
+
+			_UnitScale = UnitScale;
 			_Renderer = Renderer;
-			_UnitViews = new Stack<UnitView>(Units.Select(i => new UnitView(i, Renderer, UNIT_VIEW_SCALE, false)));
+			_UnitViews = new Stack<UnitView>(Units.Select(i => new UnitView(i, Renderer, _UnitScale, false)));
 			foreach (UnitView u in _UnitViews) u.Parent = this;
 		}
 
@@ -49,7 +53,7 @@ namespace PanzerBlitz
 
 		public void Push(Unit Unit)
 		{
-			_UnitViews.Push(new UnitView(Unit, _Renderer, UNIT_VIEW_SCALE, false));
+			_UnitViews.Push(new UnitView(Unit, _Renderer, _UnitScale, false));
 		}
 
 		public Unit Pop()
@@ -68,14 +72,14 @@ namespace PanzerBlitz
 			Transform.Translate(Position);
 			_Text.DisplayedString = "x" + _UnitViews.Count().ToString();
 			_UnitViews.First().Update(MouseController, KeyController, DeltaT, Transform);
+			_Text.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
 			Transform.Translate(Position);
 			_UnitViews.First().Draw(Target, Transform);
-			_Text.Position = -.5f * new Vector2f(_Text.GetLocalBounds().Width, _Text.GetLocalBounds().Height);
-			_Text.Draw(Target, new RenderStates(Transform));
+			_Text.Draw(Target, Transform);
 		}
 	}
 }

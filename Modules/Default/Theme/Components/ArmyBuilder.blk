@@ -4,7 +4,7 @@
 class:army-builder-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 688 }
+		int:height { 768 }
 		int:width { 752 }
 	}
 }
@@ -22,7 +22,7 @@ class:army-builder-select-option {
 }
 class:army-builder-table {
 	mode:default {
-		int:height { 617 }
+		int:height { 697 }
 		int:width { 352 }
 		color[]:background-color { #969696 #969696 #969696 #969696 }
 
@@ -31,18 +31,19 @@ class:army-builder-table {
 }
 class:army-builder-table-row {
 	mode:default {
-		int:height { 88 }
+		int:height { 116 }
 		int:width { 352 }
 		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
 	}
 }
 class:army-builder-table-cell {
 	mode:default {
-		int:height { 80 }
+		int:height { 108 }
 		int:width { 80 }
 		int[]:margin { 4 4 4 4 }
 		!font:unit-stack-font { fonts.univers }
-		color[]:background-color { #484848 #484848 #484848 #484848 }
+		int:unit-scale { 64 }
+		color[]:background-color { #626262 #626262 #626262 #626262 }
 	}
 	mode:hover {
 		color[]:background-color { #AE8430 #AE8430 #AE8430 #AE8430 }
@@ -55,5 +56,27 @@ class:army-builder-table-cell {
 	}
 	mode:selected-focus {
 		color[]:background-color { #AC6B1A #AC6B1A #AC6B1A #AC6B1A }
+	}
+}
+class:army-builder-table-cell-details {
+	mode:default {
+		color[]:background-color { #484848 #484848 #484848 #484848 }
+		!font:font-face { fonts.univers }
+		color:font-color { #FFFFFF }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 24 3 0 0 }
+	}
+}
+class:army-builder-table-cell-overlay {
+	mode:default {
+		color[]:background-color { #000000AA #000000AA #000000AA #000000AA }
+		!font:font-face { fonts.univers }
+		color:font-color { #FF0000 }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 24 3 0 0 }
 	}
 }

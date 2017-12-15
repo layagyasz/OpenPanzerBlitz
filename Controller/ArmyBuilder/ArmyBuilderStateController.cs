@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		{
 			Faction faction = GameData.Factions["russian"];
 			ArmyParameters parameters =
-				new ArmyParameters(20, 1940, Front.EAST, GameData.Environments["summer-steppe"]);
+				new ArmyParameters(20, 1945, Front.EAST, GameData.Environments["summer-steppe"]);
 			ArmyBuilderScreen screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,

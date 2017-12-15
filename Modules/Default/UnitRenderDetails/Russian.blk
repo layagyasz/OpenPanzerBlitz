@@ -188,17 +188,14 @@ unit-render-details:m-13 {
 unit-render-details:m-31 {
 	string:image-path { m-31.png }
 }
-unit-render-details:b-4-203mm-how {
-	string:image-path { b-4-203mm.png }
-}
 unit-render-details:ot-133 {
 	string:image-path { ot-133.png }
 }
 unit-render-details:ot-34 {
-	string:image-path { ot-34.png }
+	string:image-path { t-34-c.png }
 }
 unit-render-details:ot-34_85 {
-	string:image-path { ot-34_85.png }
+	string:image-path { t-34_85.png }
 }
 unit-render-details:kv-8 {
 	string:image-path { KV-8.png }

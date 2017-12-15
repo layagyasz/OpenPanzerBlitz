@@ -81,7 +81,7 @@ namespace PanzerBlitz
 
 		public override void EnterUnits(bool Vehicle)
 		{
-			Unit unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null);
+			Unit unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
 			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
 			{
 				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));

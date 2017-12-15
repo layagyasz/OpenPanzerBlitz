@@ -25,11 +25,15 @@ namespace PanzerBlitz
 		{
 			try
 			{
+				bool didAnything = false;
 				while (!(_Orders.Peek() is NextPhaseOrder))
 				{
-					_Match.ExecuteOrder(_Orders.Dequeue());
+					Order o = _Orders.Dequeue();
+					Console.WriteLine("[DEBUG CONTROLLER] {0} {1}", o, o.Validate());
+					_Match.ExecuteOrder(o);
+					if (!(o is ResetOrder)) didAnything = true;
 				}
-				Thread.Sleep(WaitMillis(Turn.TurnInfo.TurnComponent));
+				if (didAnything) Thread.Sleep(WaitMillis(Turn.TurnInfo.TurnComponent));
 				_Match.ExecuteOrder(_Orders.Dequeue());
 			}
 			catch (Exception e) { Console.WriteLine(e); }
@@ -42,7 +46,7 @@ namespace PanzerBlitz
 				case TurnComponent.RESET: return 0;
 				case TurnComponent.MINEFIELD_ATTACK: return 0;
 				case TurnComponent.DEPLOYMENT: return 0;
-				default: return 1000;
+				default: return 2000;
 			}
 		}
 

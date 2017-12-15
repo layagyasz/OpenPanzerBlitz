@@ -564,7 +564,7 @@ unit-configuration:su-122 {
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
-	byte:attack { 80 }
+	byte:attack { 30 }
 	byte:range { 8 }
 	byte:defense { 11 }
 	byte:movement { 11 }
@@ -618,16 +618,6 @@ unit-configuration:m-31 {
 	byte:range { 12 }
 	byte:defense { 2 }
 	byte:movement { 12 }	
-}
-unit-configuration:b-4-203mm-how {
-	string:name { B-4 203mm }
-	unit-class:unit-class { self-propelled-artillery }
-
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 80 }
-	byte:range { 30 }
-	byte:defense { 1 }
-	byte:movement { 2 }
 }
 unit-configuration:ot-133 {
 	string:name { OT-133 }
@@ -711,7 +701,7 @@ unit-configuration:su-100 {
 }
 unit-configuration:jsu-122 {
 	string:name { JSU-122 }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 17 }

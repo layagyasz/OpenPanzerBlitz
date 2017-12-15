@@ -59,5 +59,10 @@ namespace PanzerBlitz
 			}
 			return OrderStatus.ILLEGAL;
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[MovementDeployOrder: Unit={0}, Tile={1}]", Unit, Tile);
+		}
 	}
 }

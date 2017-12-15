@@ -143,7 +143,6 @@ namespace PanzerBlitz
 		{
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
 				return OrderInvalidReason.TARGET_TEAM;
-			if (_Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			if (_Position == null) return OrderInvalidReason.ILLEGAL;
 			if (Configuration.UnitClass == UnitClass.FORT)
 			{
@@ -152,6 +151,7 @@ namespace PanzerBlitz
 					return OrderInvalidReason.NONE;
 			}
 			if (!Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
+			if (_Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
 		}
 

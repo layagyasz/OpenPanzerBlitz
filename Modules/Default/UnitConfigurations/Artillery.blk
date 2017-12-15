@@ -412,6 +412,8 @@ unit-configuration:75mm-how {
 	byte:range { 28 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:75mm-how-allied {
 	string:name { 75mm }
@@ -422,6 +424,8 @@ unit-configuration:75mm-how-allied {
 	byte:range { 25 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:75mm-how-italian {
 	string:name { 75mm }
@@ -432,6 +436,8 @@ unit-configuration:75mm-how-italian {
 	byte:range { 24 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:75mm-how-long {
 	string:name { 75mm }
@@ -442,6 +448,8 @@ unit-configuration:75mm-how-long {
 	byte:range { 32 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:75mm-how-mountain {
 	string:name { 75mm }
@@ -452,6 +460,8 @@ unit-configuration:75mm-how-mountain {
 	byte:range { 25 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:76_2mm-how-company {
 	string:name { 76.2mm }
@@ -472,6 +482,7 @@ unit-configuration:76_2mm-how {
 	byte:range { 16 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:76_2mm-how-polish {
@@ -483,6 +494,7 @@ unit-configuration:76_2mm-how-polish {
 	byte:range { 32 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:76_2mm-how-finnish {
@@ -494,6 +506,7 @@ unit-configuration:76_2mm-how-finnish {
 	byte:range { 24 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:100mm-how {
@@ -505,6 +518,7 @@ unit-configuration:100mm-how {
 	byte:range { 32 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:105mm-how-company {
@@ -622,6 +636,7 @@ unit-configuration:203mm-how {
 	byte:range { 30 }
 	byte:defense { 1 }
 	byte:movement { 2 }
+
 	bool:can-indirect-fire { true }
 }
 unit-configuration:18pdr-how {

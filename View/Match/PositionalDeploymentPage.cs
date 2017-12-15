@@ -45,7 +45,9 @@ namespace PanzerBlitz
 				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
 
 			foreach (var g in Deployment.Units.GroupBy(i => i.Configuration))
-				_Selection.Add(new GroupedUnitSelectionOption("deployment-selection-option", g, _Renderer));
+				_Selection.Add(
+					new GroupedUnitSelectionOption(
+						"deployment-selection-option", "deployment-selection-option-overlay", g, _Renderer));
 
 			_Selection.Position = new Vector2f(0, 48);
 			Add(_Selection);
@@ -56,7 +58,11 @@ namespace PanzerBlitz
 			GroupedUnitSelectionOption option =
 				_Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
 			if (option == null) _Selection.Add(
-				new GroupedUnitSelectionOption("deployment-selection-option", new Unit[] { Unit }, _Renderer));
+				new GroupedUnitSelectionOption(
+					"deployment-selection-option",
+					"deployment-selection-option-overlay",
+					new Unit[] { Unit },
+					_Renderer));
 			else option.Push(Unit);
 		}
 

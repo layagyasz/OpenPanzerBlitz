@@ -120,23 +120,21 @@ namespace PanzerBlitz
 			OrderInvalidReason r = ValidateOrder(Order);
 			if (r != OrderInvalidReason.NONE) return r;
 
+			ExecutedOrders.Add(Order);
+
 			if (Order is NextPhaseOrder)
 			{
-				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
-				ExecutedOrders.Add(Order);
 				NextPhase();
 				return OrderInvalidReason.NONE;
 			}
+
 			OrderStatus executed = Order.Execute(_Random);
 			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
 				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current.TurnInfo);
-			if (executed != OrderStatus.ILLEGAL)
-			{
-				if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
-				ExecutedOrders.Add(Order);
-			}
 			if (executed == OrderStatus.ILLEGAL)
 				throw new Exception("Tried to execute illegal order.");
+
+			if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 			return OrderInvalidReason.NONE;
 		}
 
