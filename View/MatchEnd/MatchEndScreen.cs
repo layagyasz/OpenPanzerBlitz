@@ -15,13 +15,13 @@ namespace PanzerBlitz
 		SingleColumnTable _Table = new SingleColumnTable("match-end-display");
 		Button _SaveButton = new Button("small-button") { DisplayedString = "Save Record" };
 
-		public MatchEndScreen(Match Match, Vector2f WindowSize)
+		public MatchEndScreen(Match Match, Vector2f WindowSize, FactionRenderer FactionRenderer)
 			: base(WindowSize)
 		{
 			_Table.Position = .5f * (WindowSize - _Table.Size);
 			foreach (Army a in Match.Armies)
 			{
-				_Table.Add(new MatchEndArmyRow(Match, a));
+				_Table.Add(new MatchEndArmyRow(Match, a, FactionRenderer));
 			}
 
 			_SaveButton.Position = new Vector2f(_Table.Size.X - _SaveButton.Size.X, 0);

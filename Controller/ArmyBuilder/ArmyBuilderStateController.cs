@@ -26,8 +26,8 @@ namespace PanzerBlitz
 						GameData.UnitConfigurationLinks.Where(
 							i => i.Faction == faction && parameters.Matches(i)).Select(i => i.UnitConfiguration),
 						GameData.UnitRenderDetails,
-						1024,
 						128,
+						1024,
 						new Font("Compacta Std Regular.otf")));
 			screen.OnMainMenuButtonClicked += HandleBack;
 			return screen;

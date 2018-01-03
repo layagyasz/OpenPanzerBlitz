@@ -31,7 +31,7 @@ namespace PanzerBlitz
 						_Controller, (PositionalDeployment)d);
 				else c = new ConvoyDeploymentMicrocontroller(_Controller, (ConvoyDeployment)d);
 				_DeploymentMicrocontrollers.Add(d, c);
-				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Controller.Renderer));
+				_DeploymentPane.AddPage(c.MakePage(_DeploymentPane, _Controller.UnitConfigurationRenderer));
 			}
 			_Controller.AddPane(_DeploymentPane);
 		}

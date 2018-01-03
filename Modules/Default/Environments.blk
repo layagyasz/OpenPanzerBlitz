@@ -2,9 +2,9 @@
 	environment:summer-steppe {
 		tile-rule-set:tile-rule-set {
 			tile-component-rules<>:bases {
-				!tile-component-rule:clear { tile-component-rules.base-clear }
-				!tile-component-rule:swamp { tile-component-rules.base-swamp }
-				!tile-component-rule:slope { tile-component-rules.base-slope }
+				!tile-component-rules:clear { tile-component-rules.base-clear }
+				!tile-component-rules:swamp { tile-component-rules.base-swamp }
+				!tile-component-rules:slope { tile-component-rules.base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
 				!tile-component-rules:fort { tile-component-rules.base-fort }
 				!tile-component-rules:wheat-field { tile-component-rules.base-wheat-field }
@@ -33,9 +33,9 @@
 		}
 		tile-rule-set:tile-rule-set {
 			tile-component-rules<>:bases {
-				!tile-component-rule:clear { tile-component-rules.winter-base-clear }
-				!tile-component-rule:swamp { tile-component-rules.winter-base-swamp }
-				!tile-component-rule:slope { tile-component-rules.winter-base-slope }
+				!tile-component-rules:clear { tile-component-rules.winter-base-clear }
+				!tile-component-rules:swamp { tile-component-rules.winter-base-swamp }
+				!tile-component-rules:slope { tile-component-rules.winter-base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
 				!tile-component-rules:fort { tile-component-rules.base-fort }
 				!tile-component-rules:wheat-field { tile-component-rules.winter-base-clear }
@@ -60,9 +60,9 @@
 	environment:summer-grassland {
 		tile-rule-set:tile-rule-set {
 			tile-component-rules<>:bases {
-				!tile-component-rule:clear { tile-component-rules.base-clear }
-				!tile-component-rule:swamp { tile-component-rules.base-swamp }
-				!tile-component-rule:slope { tile-component-rules.base-slope }
+				!tile-component-rules:clear { tile-component-rules.base-clear }
+				!tile-component-rules:swamp { tile-component-rules.base-swamp }
+				!tile-component-rules:slope { tile-component-rules.base-slope }
 				!tile-component-rules:village { tile-component-rules.base-village }
 				!tile-component-rules:fort { tile-component-rules.base-fort }
 				!tile-component-rules:wheat-field { tile-component-rules.base-wheat-field }

@@ -14,7 +14,7 @@ namespace PanzerBlitz
 	{
 		public readonly MatchAdapter Match;
 		public readonly HashSet<Army> AllowedArmies;
-		public readonly UnitConfigurationRenderer Renderer;
+		public readonly UnitConfigurationRenderer UnitConfigurationRenderer;
 
 		MatchScreen _MatchScreen;
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 		public HumanMatchPlayerController(
 			MatchAdapter Match,
 			IEnumerable<Army> AllowedArmies,
-			UnitConfigurationRenderer Renderer,
+			UnitConfigurationRenderer UnitConfigurationRenderer,
 			MatchScreen MatchScreen,
 			KeyController KeyController)
 		{
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
-			this.Renderer = Renderer;
+			this.UnitConfigurationRenderer = UnitConfigurationRenderer;
 
 			_MatchScreen = MatchScreen;
 			_MatchScreen.OnFinishClicked += EndTurn;
@@ -131,11 +131,9 @@ namespace PanzerBlitz
 		{
 			_SelectedUnit = Unit;
 			if (Unit != null)
-				_MatchScreen.InfoDisplay.SetViewItem(
-					new UnitView(Unit, Renderer, 80, false) { Position = new Vector2f(40, 40) });
+				_MatchScreen.SetViewUnit(Unit);
 			else if (Match.GetTurn().TurnInfo.Army != null)
-				_MatchScreen.InfoDisplay.SetViewItem(
-					new FactionView(Match.GetTurn().TurnInfo.Army.Configuration.Faction, 80));
+				_MatchScreen.SetViewFaction(Match.GetTurn().TurnInfo.Army.Configuration.Faction);
 		}
 
 		public bool ExecuteOrderAndAlert(Order Order)

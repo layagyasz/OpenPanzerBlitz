@@ -17,19 +17,19 @@ namespace PanzerBlitz
 		Texture _Texture;
 		Vertex[] _Vertices;
 
-		public FactionView(Faction Faction, float Scale)
+		public FactionView(Faction Faction, FactionRenderer Renderer, float Scale)
 		{
 			this.Faction = Faction;
 			this.Scale = Scale;
 
-			FactionRenderDetails renderDetails = GameData.FactionRenderDetails[Faction.UniqueKey];
-			_Texture = new Texture(renderDetails.ImagePath);
+			var renderInfo = Renderer.GetRenderInfo(Faction);
+			_Texture = renderInfo.Item1;
 			_Vertices = new Vertex[]
 			{
-				new Vertex(new Vector2f(0, 0), Color.White, new Vector2f(0, 0)),
-				new Vertex(new Vector2f(1, 0), Color.White, new Vector2f(_Texture.Size.X, 0)),
-				new Vertex(new Vector2f(1, 1), Color.White, new Vector2f(_Texture.Size.X, _Texture.Size.Y)),
-				new Vertex(new Vector2f(0, 1), Color.White, new Vector2f(0, _Texture.Size.Y))
+				new Vertex(new Vector2f(0, 0), Color.White, renderInfo.Item2[0]),
+				new Vertex(new Vector2f(1, 0), Color.White, renderInfo.Item2[1]),
+				new Vertex(new Vector2f(1, 1), Color.White, renderInfo.Item2[2]),
+				new Vertex(new Vector2f(0, 1), Color.White, renderInfo.Item2[3])
 			};
 		}
 

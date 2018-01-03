@@ -10,10 +10,10 @@ namespace PanzerBlitz
 	{
 		FactionView _FactionView;
 
-		public MatchEndArmyRow(Match Match, Army Army)
+		public MatchEndArmyRow(Match Match, Army Army, FactionRenderer FactionRenderer)
 			: base("match-end-army-row")
 		{
-			_FactionView = new FactionView(Army.Configuration.Faction, 128) { Position = LeftPadding };
+			_FactionView = new FactionView(Army.Configuration.Faction, FactionRenderer, 128) { Position = LeftPadding };
 			Add(new Button("match-end-army-header")
 			{
 				DisplayedString = ObjectDescriber.Describe(Army.Configuration.Faction)

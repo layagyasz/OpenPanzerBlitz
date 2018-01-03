@@ -17,11 +17,12 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<UnitView>> OnUnitAdded;
 
 		public readonly UnitConfigurationRenderer UnitRenderer;
-		public readonly MatchInfoDisplay InfoDisplay = new MatchInfoDisplay();
+		public readonly FactionRenderer FactionRenderer;
 
 		EventBuffer<StartTurnComponentEventArgs> _NewTurnBuffer;
 		EventBuffer<NewUnitEventArgs> _NewUnitBuffer;
 
+		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
 		StackLayer _StackLayer = new StackLayer();
 		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
 		TableRow _TurnCounter = new TableRow("overlay-turn-counter");
@@ -35,7 +36,7 @@ namespace PanzerBlitz
 		}
 
 		public MatchScreen(
-			Vector2f WindowSize, Match Match, TileRenderer TileRenderer, UnitConfigurationRenderer UnitRenderer)
+			Vector2f WindowSize, Match Match, TileRenderer TileRenderer, UnitConfigurationRenderer UnitRenderer, FactionRenderer FactionRenderer)
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
 			_NewTurnBuffer = new EventBuffer<StartTurnComponentEventArgs>(HandleNewTurn);
@@ -44,6 +45,7 @@ namespace PanzerBlitz
 			Match.OnStartPhase += _NewTurnBuffer.QueueEvent;
 
 			this.UnitRenderer = UnitRenderer;
+			this.FactionRenderer = FactionRenderer;
 			foreach (Army a in Match.Armies)
 			{
 				a.OnUnitAdded += _NewUnitBuffer.QueueEvent;
@@ -55,17 +57,17 @@ namespace PanzerBlitz
 
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
 			_FinishButton.OnClick += HandleFinishClicked;
-			InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, InfoDisplay.Size.Y + 16);
+			_InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
 
 			_Items.Add(_FinishButton);
-			_Items.Add(InfoDisplay);
+			_Items.Add(_InfoDisplay);
 			_Items.Add(_TurnCounter);
 		}
 
 		void HandleNewTurn(object Sender, StartTurnComponentEventArgs E)
 		{
 			SetTurn(E.Turn);
-			InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, 80));
+			_InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, FactionRenderer, 80));
 		}
 
 		void AddUnit(object Sender, NewUnitEventArgs E)
@@ -85,6 +87,16 @@ namespace PanzerBlitz
 			_FinishButton.Enabled = Enabled;
 		}
 
+		public void SetViewUnit(Unit Unit)
+		{
+			_InfoDisplay.SetViewItem(new UnitView(Unit, UnitRenderer, 80, false) { Position = new Vector2f(40, 40) });
+		}
+
+		public void SetViewFaction(Faction Faction)
+		{
+			_InfoDisplay.SetViewItem(new FactionView(Faction, FactionRenderer, 80));
+		}
+
 		void HandleFinishClicked(object Sender, EventArgs E)
 		{
 			if (OnFinishClicked != null) OnFinishClicked(this, E);
@@ -99,7 +111,7 @@ namespace PanzerBlitz
 				i++;
 			}
 
-			InfoDisplay.SetTurn(Turn);
+			_InfoDisplay.SetTurn(Turn);
 		}
 
 		public override void Update(

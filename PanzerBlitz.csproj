@@ -314,6 +314,8 @@
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
     <Compile Include="Model\Front.cs" />
     <Compile Include="Model\ArmyParameters.cs" />
+    <Compile Include="View\SquareSpriteSheetRenderer.cs" />
+    <Compile Include="View\Faction\FactionRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

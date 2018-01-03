@@ -7,12 +7,11 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class UnitConfigurationRenderer
+	public class UnitConfigurationRenderer : SquareSpriteSheetRenderer<UnitConfiguration>
 	{
 		public readonly Dictionary<string, UnitRenderDetails> RenderDetails;
 		public readonly Font Font;
 		public readonly uint SpriteSize;
-		public readonly uint TextureSize;
 
 		List<Texture> _Textures = new List<Texture>();
 		Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>> _RenderInfo =
@@ -21,22 +20,22 @@ namespace PanzerBlitz
 		public UnitConfigurationRenderer(
 			IEnumerable<UnitConfiguration> UnitConfigurations,
 			Dictionary<string, UnitRenderDetails> RenderDetails,
-			uint TextureSize,
 			uint SpriteSize,
+			uint TextureSize,
 			Font Font)
 		{
 			this.RenderDetails = RenderDetails;
-			this.TextureSize = TextureSize;
-			this.SpriteSize = SpriteSize;
 			this.Font = Font;
-			RenderAll(UnitConfigurations);
+			this.SpriteSize = SpriteSize;
+
+			RenderAll(UnitConfigurations, SpriteSize, TextureSize);
 		}
 
 		public UnitConfigurationRenderer(
 			Scenario Scenario,
 			Dictionary<string, UnitRenderDetails> RenderDetails,
-			uint TextureSize,
 			uint SpriteSize,
+			uint TextureSize,
 			Font Font)
 			: this(
 				new UnitConfiguration[] { GameData.Wreckage }
@@ -44,67 +43,13 @@ namespace PanzerBlitz
 						.SelectMany(i => i.DeploymentConfigurations)
 							.SelectMany(i => i.UnitGroup.UnitConfigurations
 										.SelectMany(j => j.RepresentedConfigurations)).Distinct()),
-				   RenderDetails,
-				   TextureSize,
-				   SpriteSize,
-				   Font)
+  	 			RenderDetails,
+				SpriteSize,
+				TextureSize,
+				Font)
 		{ }
 
-		public Tuple<Texture, Vector2f[]> GetRenderInfo(UnitConfiguration UnitConfiguration)
-		{
-			return _RenderInfo[UnitConfiguration];
-		}
-
-		private void RenderAll(IEnumerable<UnitConfiguration> UnitConfigurations)
-		{
-			RenderTexture texture = new RenderTexture(TextureSize, TextureSize);
-			Texture renderedTexture;
-
-			List<KeyValuePair<UnitConfiguration, Vector2f[]>> renderInfoCache =
-				new List<KeyValuePair<UnitConfiguration, Vector2f[]>>();
-			int i = 0;
-			int j = 0;
-			uint rowSprites = TextureSize / SpriteSize;
-			foreach (UnitConfiguration u in UnitConfigurations)
-			{
-				Transform t = Transform.Identity;
-				t.Translate(new Vector2f(i * SpriteSize, j * SpriteSize));
-				Render(texture, t, u);
-				renderInfoCache.Add(new KeyValuePair<UnitConfiguration, Vector2f[]>(u, new Vector2f[]
-				{
-					new Vector2f(SpriteSize * i, SpriteSize * j),
-					new Vector2f(SpriteSize* (i + 1), SpriteSize * j),
-					new Vector2f(SpriteSize* (i + 1), SpriteSize * (j + 1)),
-					new Vector2f(SpriteSize * i, SpriteSize * (j + 1))
-				}));
-
-				i++;
-				if (i >= rowSprites)
-				{
-					i = 0;
-					j++;
-				}
-				if (j >= rowSprites)
-				{
-					texture.Display();
-					renderedTexture = new Texture(texture.Texture);
-					foreach (KeyValuePair<UnitConfiguration, Vector2f[]> k in renderInfoCache)
-						_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
-					renderInfoCache.Clear();
-					_Textures.Add(renderedTexture);
-					texture = new RenderTexture(TextureSize, TextureSize);
-					i = 0;
-					j = 0;
-				}
-			}
-			texture.Display();
-			renderedTexture = new Texture(texture.Texture);
-			foreach (KeyValuePair<UnitConfiguration, Vector2f[]> k in renderInfoCache)
-				_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
-			_Textures.Add(renderedTexture);
-		}
-
-		void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
+		public override void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
 		{
 			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration.UniqueKey];
 

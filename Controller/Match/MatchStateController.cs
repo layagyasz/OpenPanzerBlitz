@@ -21,14 +21,17 @@ namespace PanzerBlitz
 			_MatchEndBuffer = new EventBuffer<EventArgs>(HandleMatchEnd);
 
 			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
-				_Context.Match.Scenario, GameData.UnitRenderDetails, 1024, 128, new Font("Compacta Std Regular.otf"));
+				_Context.Match.Scenario, GameData.UnitRenderDetails, 128, 1024, new Font("Compacta Std Regular.otf"));
+			FactionRenderer factionRenderer =
+				new FactionRenderer(_Context.Match.Scenario, GameData.FactionRenderDetails, 512, 1024);
 			HashSet<Army> armies = new HashSet<Army>(_Context.GetPlayerControlledArmies());
 
 			MatchScreen screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
 				_Context.Match,
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
-				renderer);
+				renderer,
+				factionRenderer);
 			HumanMatchPlayerController controller =
 				new HumanMatchPlayerController(
 					_Context.MakeMatchAdapter(), armies, renderer, screen, ProgramContext.KeyController);
