@@ -39,18 +39,23 @@ namespace PanzerBlitz
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
+			Button header = new Button("army-builder-header") { DisplayedString = Faction.Name };
+
+			_UnitClassSelect.Position = new Vector2f(0, header.Size.Y);
+
 			_AvailableUnits = new UnitConfigurationTable(
 				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, false);
-			_AvailableUnits.Position = new Vector2f(0, _UnitClassSelect.Size.Y + 16);
+			_AvailableUnits.Position = new Vector2f(0, _UnitClassSelect.Position.Y + _UnitClassSelect.Size.Y + 16);
 			_AvailableUnits.OnUnitClicked += HandleAddUnit;
 
 			_PointTotalButton = new Button("army-builder-point-total");
-			_PointTotalButton.Position = new Vector2f(_AvailableUnits.Size.X + 16, 0);
+			_PointTotalButton.Position = new Vector2f(_AvailableUnits.Size.X + 16, header.Size.Y);
 			SetPointTotal(0);
 
 			_SelectedUnits = new UnitConfigurationTable(
 				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, true);
-			_SelectedUnits.Position = new Vector2f(_AvailableUnits.Size.X + 16, _PointTotalButton.Size.Y + 16);
+			_SelectedUnits.Position =
+				new Vector2f(_AvailableUnits.Size.X + 16, _PointTotalButton.Position.Y + _PointTotalButton.Size.Y + 16);
 			_SelectedUnits.OnUnitRightClicked += HandleRemoveUnit;
 
 			foreach (UnitClass c in Enum.GetValues(typeof(UnitClass)))
@@ -64,6 +69,7 @@ namespace PanzerBlitz
 			_UnitClassSelect.OnChange += FilterUnits;
 			FilterUnits();
 
+			_Pane.Add(header);
 			_Pane.Add(_AvailableUnits);
 			_Pane.Add(_SelectedUnits);
 			_Pane.Add(_PointTotalButton);
@@ -92,19 +98,19 @@ namespace PanzerBlitz
 		void SetPointTotal(float Total)
 		{
 			_PointTotal = Total;
-			_PointTotalButton.DisplayedString = "Point Total: " + _PointTotal;
+			_PointTotalButton.DisplayedString = string.Format("Point Total: {0}/{1}", _PointTotal, _Parameters.Points);
 		}
 
 		void HandleAddUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
 		{
 			_SelectedUnits.Add(E.Value);
-			SetPointTotal(E.Value.GetPointValue() + _PointTotal);
+			SetPointTotal(_PointTotal + E.Value.GetPointValue());
 		}
 
 		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
 		{
 			_SelectedUnits.Remove(E.Value);
-			SetPointTotal(E.Value.GetPointValue() - _PointTotal);
+			SetPointTotal(_PointTotal - E.Value.GetPointValue());
 		}
 	}
 }

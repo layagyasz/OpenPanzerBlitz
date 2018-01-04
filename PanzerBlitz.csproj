@@ -1942,6 +1942,9 @@
     <None Include="Modules\Default\Theme\Components\MatchRecordSelect.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\UnitConfigurationLinks\American.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

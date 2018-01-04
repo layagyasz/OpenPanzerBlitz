@@ -633,7 +633,7 @@ unit-configuration:t-30 {
 	byte:movement { 10 }
 }
 unit-configuration:m-3-gmc {
-	string:name {M-3 GMC }
+	string:name { M-3 GMC }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }

@@ -1,0 +1,341 @@
+﻿unit-configuration-link:engineer-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-american }
+}
+unit-configuration-link:scout-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.scout-platoon-american }
+}
+unit-configuration-link:mg-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-american }
+}
+unit-configuration-link:rifle-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-american }
+}
+unit-configuration-link:airborne-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.airborne-platoon-american }
+}
+unit-configuration-link:armored-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
+}
+unit-configuration-link:ranger-platoon-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.ranger-platoon-american }
+}
+unit-configuration-link:assault-platoon-american-41 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.assault-platoon-american-41 }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1942 }
+}
+unit-configuration-link:assault-platoon-american-43 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.assault-platoon-american-43 }
+
+	int:introduce-year { 1943 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:assault-platoon-american-44 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.assault-platoon-american-44 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:truck-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.truck-american }
+}
+unit-configuration-link:m-3-scout {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3-scout }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:m-8-jeep {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-8-jeep }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:m-3 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:m-20 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-20 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-8 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-8 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-15 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-15 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-16 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-16 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-8-hmc {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-8-hmc }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-21 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-21 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-7-priest {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-12 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-12 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m4-poa-cws-h1 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m4-poa-cws-h1 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-3a1-satan {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3a1-satan }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-3a1 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3a1 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:m-3-lee {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3-lee }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:m-4_105 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4_105 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-10 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-10 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-18 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-18 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-36 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-36 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-5 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-5 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-4_75 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4_75 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-4_76 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-24 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-24 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-4a3e2_75 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4a3e2_75 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-4a3e2_76 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4a3e2_76 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-26 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-26 }
+
+	int:introduce-year { 1945 }
+}
+unit-configuration-link:m-2a4 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-2a4 }
+
+	int:obsolete-year { 1942 }
+}
+unit-configuration-link:m-4a2_75 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4a2_75 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-4a2_76 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4a2_76 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:sherman-flail {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.sherman-flail }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:lvt-1 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.lvt-1 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:lvt_a-1 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.lvt_a-1 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:lvt_a-2 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.lvt_a-2 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:lvt-4 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.lvt-4 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:lvt_a-4 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.lvt_a-4 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:dukw {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.dukw }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:d-8 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.d-8 }
+}
+unit-configuration-link:m-3-arv {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3-arv }
+
+	int:introduce-year { 1941 }
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-32-arv {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-32-arv }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:t-28e1 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.t-28e1 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:t-19 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.t-19 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-15-special {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-15-special }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:t-27 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.t-27 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:scorpion {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.scorpion }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:calliope {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.calliope }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:m-8-hmc-2 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-8-hmc-2 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:t-30 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.t-30 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:m-3-gmc {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-3-gmc }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1942 }
+}
