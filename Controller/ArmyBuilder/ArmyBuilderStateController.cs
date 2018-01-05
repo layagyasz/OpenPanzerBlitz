@@ -13,7 +13,7 @@ namespace PanzerBlitz
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			Faction faction = GameData.Factions["american"];
+			Faction faction = GameData.Factions["romanian"];
 			ArmyParameters parameters =
 				new ArmyParameters(1000, 1945, Front.EAST, GameData.Environments["summer-steppe"]);
 			ArmyBuilderScreen screen =

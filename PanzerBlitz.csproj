@@ -1945,6 +1945,15 @@
     <None Include="Modules\Default\UnitConfigurationLinks\American.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\UnitConfigurationLinks\British.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLinks\Hungarian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLinks\Romanian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

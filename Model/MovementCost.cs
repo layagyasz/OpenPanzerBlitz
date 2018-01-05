@@ -4,7 +4,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public struct MovementCost
+	public struct MovementCost : Serializable
 	{
 		public readonly BlockType BlockType;
 		public readonly float Cost;
@@ -21,6 +21,20 @@ namespace PanzerBlitz
 			this.Cost = Cost;
 		}
 
+		public MovementCost(SerializationInputStream Stream)
+		{
+			if (Stream.ReadBoolean())
+			{
+				Cost = Stream.ReadFloat();
+				BlockType = BlockType.NONE;
+			}
+			else
+			{
+				Cost = 0;
+				BlockType = (BlockType)Stream.ReadByte();
+			}
+		}
+
 		public MovementCost(ParseBlock Block)
 		{
 			try
@@ -33,6 +47,13 @@ namespace PanzerBlitz
 				BlockType = Parse.EnumParser<BlockType>(typeof(BlockType))(Block.String);
 				Cost = 0;
 			}
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Cost > 0);
+			if (Cost > 0) Stream.Write(Cost);
+			else Stream.Write((byte)BlockType);
 		}
 	}
 }

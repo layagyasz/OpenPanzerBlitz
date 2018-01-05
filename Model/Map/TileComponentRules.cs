@@ -4,7 +4,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileComponentRules
+	public class TileComponentRules : Serializable
 	{
 		enum Attribute
 		{
@@ -30,6 +30,8 @@ namespace PanzerBlitz
 			LOW_PROFILE_CONCEALING
 		};
 
+		public readonly string UniqueKey;
+
 		public readonly int DieModifier;
 		public readonly bool RoadMove;
 		public readonly bool TreatUnitsAsArmored;
@@ -52,6 +54,8 @@ namespace PanzerBlitz
 		public readonly bool LowProfileConcealing;
 
 		public TileComponentRules(
+			string UniqueKey,
+
 			int DieModifier,
 			bool RoadMove,
 			bool TreatUnitsAsArmored,
@@ -73,6 +77,8 @@ namespace PanzerBlitz
 			bool Concealing,
 			bool LowProfileConcealing)
 		{
+			this.UniqueKey = UniqueKey;
+
 			this.DieModifier = DieModifier;
 			this.RoadMove = RoadMove;
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;
@@ -95,8 +101,36 @@ namespace PanzerBlitz
 			this.LowProfileConcealing = LowProfileConcealing;
 		}
 
+		public TileComponentRules(SerializationInputStream Stream)
+			: this(
+				Stream.ReadString(),
+
+			   	Stream.ReadInt32(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean(),
+				Stream.ReadBoolean())
+		{ }
+
 		public TileComponentRules(ParseBlock Block)
 		{
+			UniqueKey = Block.Name;
+
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			DieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.DIE_MODIFIER], 0);
@@ -119,6 +153,32 @@ namespace PanzerBlitz
 			BlocksLineOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT], false);
 			Concealing = Parse.DefaultIfNull(attributes[(int)Attribute.CONCEALING], false);
 			LowProfileConcealing = Parse.DefaultIfNull(attributes[(int)Attribute.LOW_PROFILE_CONCEALING], false);
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+
+			Stream.Write(DieModifier);
+			Stream.Write(RoadMove);
+			Stream.Write(TreatUnitsAsArmored);
+			Stream.Write(MustAttackAllUnits);
+
+			Stream.Write(DenseEdge);
+			Stream.Write(Depressed);
+			Stream.Write(Elevated);
+			Stream.Write(Frozen);
+			Stream.Write(Loose);
+			Stream.Write(Roaded);
+			Stream.Write(Rough);
+			Stream.Write(Swamp);
+			Stream.Write(Water);
+
+			Stream.Write(OverrideBaseMovement);
+			Stream.Write(DepressedTransition);
+			Stream.Write(BlocksLineOfSight);
+			Stream.Write(Concealing);
+			Stream.Write(LowProfileConcealing);
 		}
 	}
 }

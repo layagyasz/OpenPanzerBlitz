@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class TileRuleSet
+	public class TileRuleSet : Serializable
 	{
 		enum Attribute { BASES, EDGES, PATHS };
 
@@ -17,12 +17,28 @@ namespace PanzerBlitz
 		TileComponentRules[] _PathOverlayRules;
 
 		public TileRuleSet(
-			TileComponentRules[] BaseRules, TileComponentRules[] EdgeRules, TileComponentRules[] PathOverlayRules)
+			string UniqueKey,
+			TileComponentRules[] BaseRules,
+			TileComponentRules[] EdgeRules,
+			TileComponentRules[] PathOverlayRules)
 		{
+			this.UniqueKey = UniqueKey;
+
 			_BaseRules = BaseRules;
 			_EdgeRules = EdgeRules;
 			_PathOverlayRules = PathOverlayRules;
 		}
+
+		static Func<SerializationInputStream, TileComponentRules> PARSER =
+					i => i.ReadObject(j => new TileComponentRules(j), false, true);
+
+		public TileRuleSet(SerializationInputStream Stream)
+			: this(
+				Stream.ReadString(),
+			   	Stream.ReadEnumerable(PARSER).ToArray(),
+				Stream.ReadEnumerable(PARSER).ToArray(),
+				Stream.ReadEnumerable(PARSER).ToArray())
+		{ }
 
 		public TileRuleSet(ParseBlock Block)
 		{
@@ -51,6 +67,14 @@ namespace PanzerBlitz
 		public TileComponentRules GetRules(TilePathOverlay Type)
 		{
 			return _PathOverlayRules[(int)Type];
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+			Stream.Write(_BaseRules, i => Stream.Write(i, false, true));
+			Stream.Write(_EdgeRules, i => Stream.Write(i, false, true));
+			Stream.Write(_PathOverlayRules, i => Stream.Write(i, false, true));
 		}
 	}
 }

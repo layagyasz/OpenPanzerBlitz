@@ -4,7 +4,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitMovementRules
+	public class UnitMovementRules : Serializable
 	{
 		enum Attribute
 		{
@@ -63,6 +63,46 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT], false);
 			CannotUseRoadMovement = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT], false);
+		}
+
+		public UnitMovementRules(SerializationInputStream Stream)
+		{
+			UniqueKey = Stream.ReadString();
+
+			DenseEdge = new MovementCost(Stream);
+			Depressed = new MovementCost(Stream);
+			Downhill = new MovementCost(Stream);
+			Frozen = new MovementCost(Stream);
+			Loose = new MovementCost(Stream);
+			Roaded = new MovementCost(Stream);
+			Rough = new MovementCost(Stream);
+			Sloped = new MovementCost(Stream);
+			Swamp = new MovementCost(Stream);
+			Uphill = new MovementCost(Stream);
+			Water = new MovementCost(Stream);
+
+			IgnoresEnvironmentMovement = Stream.ReadBoolean();
+			CannotUseRoadMovement = Stream.ReadBoolean();
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+
+			Stream.Write(DenseEdge);
+			Stream.Write(Depressed);
+			Stream.Write(Downhill);
+			Stream.Write(Frozen);
+			Stream.Write(Loose);
+			Stream.Write(Roaded);
+			Stream.Write(Rough);
+			Stream.Write(Sloped);
+			Stream.Write(Swamp);
+			Stream.Write(Uphill);
+			Stream.Write(Water);
+
+			Stream.Write(IgnoresEnvironmentMovement);
+			Stream.Write(CannotUseRoadMovement);
 		}
 	}
 }

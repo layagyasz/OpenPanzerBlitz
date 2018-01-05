@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -6,7 +7,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class Faction
+	public class Faction : Serializable
 	{
 		private enum Attribute { NAME, COLORS, STACK_LIMIT, HALF_PRICE_TRUCKS };
 
@@ -24,6 +25,14 @@ namespace PanzerBlitz
 			this.HalfPriceTrucks = HalfPriceTrucks;
 		}
 
+		public Faction(SerializationInputStream Stream)
+			: this(
+				Stream.ReadString(),
+				Stream.ReadString(),
+				Stream.ReadEnumerable(FileUtils.DeserializeColor).ToArray(),
+				Stream.ReadBoolean())
+		{ }
+
 		public Faction(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
@@ -32,6 +41,14 @@ namespace PanzerBlitz
 			Colors = (Color[])attributes[(int)Attribute.COLORS];
 			StackLimit = (byte)attributes[(int)Attribute.STACK_LIMIT];
 			HalfPriceTrucks = Parse.DefaultIfNull(attributes[(int)Attribute.HALF_PRICE_TRUCKS], false);
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+			Stream.Write(Name);
+			Stream.Write(Colors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(HalfPriceTrucks);
 		}
 	}
 }

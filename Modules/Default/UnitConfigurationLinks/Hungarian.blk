@@ -1,0 +1,88 @@
+﻿unit-configuration-link:engineer-platoon-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-hungarian }
+}
+unit-configuration-link:hmg-platoon-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.hmg-platoon-hungarian }
+}
+unit-configuration-link:rifle-platoon-hungarian-39 {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-hungarian-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-hungarian-41 {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-hungarian-41 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:cavalry-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-hungarian }
+}
+unit-configuration-link:truck-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.truck-hungarian }
+}
+unit-configuration-link:motorcycle-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.motorcycle-hungarian }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:csaba {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.csaba }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:nimrod {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.nimrod }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:zrinyi-i {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.zrinyi-i }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:zrinyi-ii {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.zrinyi-ii }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:toldi-i {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.toldi-i }
+}
+unit-configuration-link:toldi-i-corrected {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.toldi-i-corrected }
+}
+unit-configuration-link:toldi-ii {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.toldi-ii }
+}
+unit-configuration-link:turan-i {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.turan-i }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:turan-ii {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.turan-ii }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:turan-iii {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.turan-iii }
+
+	int:introduce-year { 1943 }
+}

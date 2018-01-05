@@ -31,6 +31,7 @@ namespace PanzerBlitz
 		public static Player Player =
 			new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
 		public static string LoadedModule;
+
 		public static Dictionary<string, UnitMovementRules> UnitMovementRules;
 		public static Dictionary<string, TileComponentRules> TileComponentRules;
 		public static Dictionary<string, Environment> Environments;
@@ -214,6 +215,32 @@ namespace PanzerBlitz
 						Console.WriteLine("There was an error reading scenario {0}\n\n{1}", s.Name, e);
 						Console.WriteLine(new HexDumpWriter(16).Write(m.GetBuffer()));
 					}
+				}
+			}
+
+			// Dump all the things.  This will turn into module munging.
+			using (MemoryStream m = new MemoryStream())
+			{
+				try
+				{
+					SerializationOutputStream stream = new SerializationOutputStream(m);
+					stream.Write(UnitMovementRules, i => stream.Write(i.Value, false, true));
+					stream.Write(TileComponentRules, i => stream.Write(i.Value, false, true));
+					stream.Write(Environments, i => stream.Write(i.Value));
+					stream.Write(Factions, i => stream.Write(i.Value));
+					stream.Write(FactionRenderDetails, i =>
+					{
+						stream.Write(i.Key);
+						stream.Write(i.Value);
+					});
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message);
+				}
+				finally
+				{
+					Console.WriteLine(new HexDumpWriter(16).Write(m.GetBuffer()));
 				}
 			}
 		}

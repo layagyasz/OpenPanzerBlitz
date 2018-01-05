@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class Environment
+	public class Environment : Serializable
 	{
 		enum Attribute { TILE_RULE_SET, MOVEMENT_MULTIPLIER, RESTRICT_ROAD_MOVEMENT };
 
@@ -46,6 +46,14 @@ namespace PanzerBlitz
 		public bool IsRoadMovementRestricted(UnitClass UnitClass)
 		{
 			return _RestrictRoadMovement[(int)UnitClass];
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+			Stream.Write(TileRuleSet);
+			Stream.Write(MovementMultiplier);
+			Stream.Write(_RestrictRoadMovement, i => Stream.Write(i));
 		}
 	}
 }
