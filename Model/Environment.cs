@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -26,6 +27,14 @@ namespace PanzerBlitz
 			this.MovementMultiplier = MovementMultiplier;
 
 			foreach (UnitClass unitClass in RoadMovementRestricted) _RestrictRoadMovement[(int)unitClass] = true;
+		}
+
+		public Environment(SerializationInputStream Stream)
+		{
+			UniqueKey = Stream.ReadString();
+			TileRuleSet = new TileRuleSet(Stream);
+			MovementMultiplier = Stream.ReadFloat();
+			_RestrictRoadMovement = Stream.ReadEnumerable(i => i.ReadBoolean()).ToArray();
 		}
 
 		public Environment(ParseBlock Block)

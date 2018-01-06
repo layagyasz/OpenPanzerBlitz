@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
 using System.Text;
 using Cardamom.Interface;
 using Cardamom.Serialization;
 
-using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -17,10 +15,43 @@ namespace PanzerBlitz
 
 		public static void Main(string[] args)
 		{
+			string module = "Default";
+			string modulePath = "./Modules/" + module;
+			string moduleFile = modulePath + ".mod";
+
+			bool mungeModule = false;
+			bool tryLoadMungedModule = false;
+
 			ProgramFlowController flowController = null;
 			try
 			{
-				GameData.Load("Default");
+				if (File.Exists(moduleFile) && tryLoadMungedModule)
+				{
+					using (FileStream fileStream = new FileStream(moduleFile, FileMode.Open))
+					{
+						using (GZipStream compressionStream = new GZipStream(fileStream, CompressionMode.Decompress))
+						{
+							SerializationInputStream stream = new SerializationInputStream(compressionStream);
+							GameData.Load(module, stream);
+						}
+					}
+				}
+				else
+				{
+					GameData.Load(module);
+
+					if (mungeModule)
+					{
+						using (FileStream fileStream = new FileStream(moduleFile, FileMode.Create))
+						{
+							using (GZipStream compressionStream = new GZipStream(fileStream, CompressionLevel.Optimal))
+							{
+								SerializationOutputStream stream = new SerializationOutputStream(compressionStream);
+								GameData.Serialize(stream);
+							}
+						}
+					}
+				}
 
 				Interface.Screen = new Screen();
 

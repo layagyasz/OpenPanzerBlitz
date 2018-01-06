@@ -10,7 +10,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class TileRenderer
+	public class TileRenderer : Serializable
 	{
 		enum Attribute
 		{
@@ -27,6 +27,8 @@ namespace PanzerBlitz
 			PATH_BORDER_WIDTHS
 		};
 
+		public readonly string UniqueKey;
+		public readonly string FontPath;
 		public readonly Font FontFace;
 		public readonly Color FontColor;
 		public readonly Color BaseColor;
@@ -41,6 +43,9 @@ namespace PanzerBlitz
 		float[] _PathBorderWidths;
 
 		public TileRenderer(
+			string UniqueKey,
+			string FontPath,
+			Color FontColor,
 			Color BaseColor,
 			Color[] ElevationColors,
 			Color[] TopColors,
@@ -51,6 +56,10 @@ namespace PanzerBlitz
 			float[] PathWidths,
 			float[] PathBorderWidths)
 		{
+			this.UniqueKey = UniqueKey;
+			this.FontPath = FontPath;
+			FontFace = Cardamom.Interface.ClassLibrary.Instance.GetFont(FontPath);
+			this.FontColor = FontColor;
 			this.BaseColor = BaseColor;
 			_ElevationColors = ElevationColors;
 			_TopColors = TopColors;
@@ -62,11 +71,30 @@ namespace PanzerBlitz
 			_PathBorderWidths = PathBorderWidths;
 		}
 
+		public TileRenderer(SerializationInputStream Stream)
+		: this(
+			Stream.ReadString(),
+			Stream.ReadString(),
+			FileUtils.DeserializeColor(Stream),
+			FileUtils.DeserializeColor(Stream),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => FileUtils.DeserializeColor(i)).ToArray(),
+			Stream.ReadEnumerable(i => i.ReadFloat()).ToArray(),
+			Stream.ReadEnumerable(i => i.ReadFloat()).ToArray())
+		{ }
+
 		public TileRenderer(ParseBlock Block)
 		{
+			UniqueKey = Block.Name;
+
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			FontFace = Cardamom.Interface.ClassLibrary.Instance.GetFont((string)attributes[(int)Attribute.FONT_FACE]);
+			FontPath = (string)attributes[(int)Attribute.FONT_FACE];
+			FontFace = Cardamom.Interface.ClassLibrary.Instance.GetFont(FontPath);
 			FontColor = (Color)attributes[(int)Attribute.FONT_COLOR];
 			BaseColor = (Color)attributes[(int)Attribute.BASE_COLOR];
 			_ElevationColors = (Color[])attributes[(int)Attribute.ELEVATION_COLORS];
@@ -473,6 +501,23 @@ namespace PanzerBlitz
 		static Vector2f Normalize(Vector2f Vector)
 		{
 			return Vector / (float)Math.Sqrt(Vector.X * Vector.X + Vector.Y * Vector.Y);
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+			Stream.Write(FontPath);
+			FileUtils.SerializeColor(Stream, FontColor);
+			FileUtils.SerializeColor(Stream, BaseColor);
+
+			Stream.Write(_ElevationColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_TopColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_EdgeColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_OverlayColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_PathColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_PathBorderColors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(_PathWidths, Stream.Write);
+			Stream.Write(_PathBorderWidths, Stream.Write);
 		}
 	}
 }

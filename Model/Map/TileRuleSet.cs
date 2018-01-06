@@ -30,7 +30,7 @@ namespace PanzerBlitz
 		}
 
 		static Func<SerializationInputStream, TileComponentRules> PARSER =
-					i => i.ReadObject(j => new TileComponentRules(j), false, true);
+			i => i.ReadObject(j => new TileComponentRules(j), true, true);
 
 		public TileRuleSet(SerializationInputStream Stream)
 			: this(
@@ -72,9 +72,9 @@ namespace PanzerBlitz
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(UniqueKey);
-			Stream.Write(_BaseRules, i => Stream.Write(i, false, true));
-			Stream.Write(_EdgeRules, i => Stream.Write(i, false, true));
-			Stream.Write(_PathOverlayRules, i => Stream.Write(i, false, true));
+			Stream.Write(_BaseRules, i => Stream.Write(i, true, true));
+			Stream.Write(_EdgeRules, i => Stream.Write(i, true, true));
+			Stream.Write(_PathOverlayRules, i => Stream.Write(i, true, true));
 		}
 	}
 }

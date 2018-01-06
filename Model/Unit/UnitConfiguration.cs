@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
-using SFML.Graphics;
-
 namespace PanzerBlitz
 {
-	public class UnitConfiguration
+	public class UnitConfiguration : Serializable
 	{
 		enum Attribute
 		{
@@ -102,6 +100,52 @@ namespace PanzerBlitz
 				yield return this;
 				if (DismountAs != null) yield return DismountAs;
 			}
+		}
+
+		public UnitConfiguration(SerializationInputStream Stream)
+		{
+			UniqueKey = Stream.ReadString();
+			Name = Stream.ReadString();
+			UnitClass = (UnitClass)Stream.ReadByte();
+			WeaponClass = (WeaponClass)Stream.ReadByte();
+
+			Attack = Stream.ReadByte();
+			Range = Stream.ReadByte();
+			Defense = Stream.ReadByte();
+			Movement = Stream.ReadByte();
+
+			CanDirectFire = Stream.ReadBoolean();
+			CanIndirectFire = Stream.ReadBoolean();
+			CanOverrun = Stream.ReadBoolean();
+			CanCloseAssault = Stream.ReadBoolean();
+			CanAntiAircraft = Stream.ReadBoolean();
+			CanDoubleRange = Stream.ReadBoolean();
+
+			IsVehicle = Stream.ReadBoolean();
+			IsArmored = Stream.ReadBoolean();
+			LeavesWreckWhenDestroyed = Stream.ReadBoolean();
+			IsEngineer = Stream.ReadBoolean();
+			IsParatroop = Stream.ReadBoolean();
+			IsCommando = Stream.ReadBoolean();
+			HasLowProfile = Stream.ReadBoolean();
+
+			MovementRules = Stream.ReadObject(i => new UnitMovementRules(i), false, true);
+
+			IsCarrier = Stream.ReadBoolean();
+			CanOnlyCarryInfantry = Stream.ReadBoolean();
+			CanOnlyCarryLight = Stream.ReadBoolean();
+			CanOnlyOverrunUnarmored = Stream.ReadBoolean();
+			CanOnlySupportCloseAssault = Stream.ReadBoolean();
+			IsPassenger = Stream.ReadBoolean();
+			IsLightPassenger = Stream.ReadBoolean();
+			IsOversizedPassenger = Stream.ReadBoolean();
+			CannotUseRoadMovementWithOversizedPassenger = Stream.ReadBoolean();
+			OversizedPassengerMovementMultiplier = Stream.ReadFloat();
+
+			CanSpotIndirectFire = Stream.ReadBoolean();
+
+			DismountAs = Stream.ReadObject(i => new UnitConfiguration(i), true, true);
+			CanRemount = Stream.ReadBoolean();
 		}
 
 		public UnitConfiguration(ParseBlock Block)
@@ -314,58 +358,55 @@ namespace PanzerBlitz
 					if (CanAntiAircraft)
 					{
 						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f * Range + Defense + Movement;
-						else return 1.5f * Attack + .5f * Range + Defense + Movement;
+						return 1.5f * Attack + .5f * Range + Defense + Movement;
 					}
-					else return Attack + Math.Min((int)Defense, 6) + Defense + Movement;
+					return Attack + Math.Min((int)Defense, 6) + Defense + Movement;
 				case UnitClass.FLAME_TANK:
 					return .5f * Attack + Range + Defense + Movement;
 				case UnitClass.SELF_PROPELLED_ARTILLERY:
 					if (Range > 16) return Attack + .25f * Range + Defense + Movement;
-					else return Attack + 4 + Defense + Movement;
+					return Attack + 4 + Defense + Movement;
 				case UnitClass.RECONNAISSANCE_VEHICLE:
 					if (CanSpotIndirectFire) return 5 + Defense + Movement;
 					if (CanAntiAircraft)
 					{
 						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f * Range + Defense + Movement;
-						else return 1.5f * Attack + .5f * Range + Defense + Movement;
+						return 1.5f * Attack + .5f * Range + Defense + Movement;
 					}
-					else
-					{
-						if (WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
-						else if (WeaponClass == WeaponClass.ANTI_ARMOR) return Attack + Range + Defense + Movement;
-						else return Attack + Math.Min((int)Range, 6) + Defense + Movement;
-					}
+					if (WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
+					if (WeaponClass == WeaponClass.ANTI_ARMOR) return Attack + Range + Defense + Movement;
+					return Attack + Math.Min((int)Range, 6) + Defense + Movement;
 				case UnitClass.TRANSPORT:
 					if (IsVehicle)
 					{
 						if (IsArmored) return Attack + Range + Defense + Movement;
-						else return Attack + Range + Defense + .5f * Movement;
+						return Attack + Range + Defense + .5f * Movement;
 					}
-					else return Attack + Range + Defense + Movement;
+					return Attack + Range + Defense + Movement;
 				case UnitClass.TOWED_GUN:
 					if (CanIndirectFire && WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
 						return .5f * Attack + .25f * Range + Defense + Movement;
-					else if (CanAntiAircraft)
+					if (CanAntiAircraft)
 					{
 						if (WeaponClass == WeaponClass.INFANTRY) return .5f * Attack + .5f + Range + Defense + Movement;
-						else return Attack + .5f * Range + Defense + Movement;
+						return Attack + .5f * Range + Defense + Movement;
 					}
-					else if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+					if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
 						return .5f * Attack + Math.Min((int)Range, 6) + Defense + Movement;
-					else return .5f * Attack + .5f * Range + Defense + Movement;
+					return .5f * Attack + .5f * Range + Defense + Movement;
 				case UnitClass.INFANTRY:
 					if (IsEngineer) return 2 * Attack + 1 + Defense + Movement;
-					else if (IsCommando) return 2 * Attack + 1 + Defense + 2 * Movement;
-					else return Attack + 1 + Defense + Movement;
+					if (IsCommando) return 2 * Attack + 1 + Defense + 2 * Movement;
+					return Attack + 1 + Defense + Movement;
 				case UnitClass.CAVALRY:
 					return Attack + 1 + Defense + 1;
 				case UnitClass.COMMAND_POST:
 					return 5;
 				case UnitClass.AMPHIBIOUS_VEHICLE:
 					if (!CanOnlyCarryInfantry || WeaponClass == WeaponClass.INFANTRY) return Defense + 1.5f * Movement;
-					else if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+					if (WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
 						return Attack + Math.Min((int)Range, 6) + Defense + 1.5f * Movement;
-					else return Attack + Range + Defense + 1.5f * Movement;
+					return Attack + Range + Defense + 1.5f * Movement;
 				case UnitClass.ENGINEER_VEHICLE:
 					return Attack + Range + Defense + 1.5f * Movement;
 				case UnitClass.BRIDGE:
@@ -379,6 +420,52 @@ namespace PanzerBlitz
 				default:
 					return Attack + Range + Defense + Movement;
 			}
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UniqueKey);
+			Stream.Write(Name);
+			Stream.Write((byte)UnitClass);
+			Stream.Write((byte)WeaponClass);
+
+			Stream.Write(Attack);
+			Stream.Write(Range);
+			Stream.Write(Defense);
+			Stream.Write(Movement);
+
+			Stream.Write(CanDirectFire);
+			Stream.Write(CanIndirectFire);
+			Stream.Write(CanOverrun);
+			Stream.Write(CanCloseAssault);
+			Stream.Write(CanAntiAircraft);
+			Stream.Write(CanDoubleRange);
+
+			Stream.Write(IsVehicle);
+			Stream.Write(IsArmored);
+			Stream.Write(LeavesWreckWhenDestroyed);
+			Stream.Write(IsEngineer);
+			Stream.Write(IsParatroop);
+			Stream.Write(IsCommando);
+			Stream.Write(HasLowProfile);
+
+			Stream.Write(MovementRules, false, true);
+
+			Stream.Write(IsCarrier);
+			Stream.Write(CanOnlyCarryInfantry);
+			Stream.Write(CanOnlyCarryLight);
+			Stream.Write(CanOnlyOverrunUnarmored);
+			Stream.Write(CanOnlySupportCloseAssault);
+			Stream.Write(IsPassenger);
+			Stream.Write(IsLightPassenger);
+			Stream.Write(IsOversizedPassenger);
+			Stream.Write(CannotUseRoadMovementWithOversizedPassenger);
+			Stream.Write(OversizedPassengerMovementMultiplier);
+
+			Stream.Write(CanSpotIndirectFire);
+
+			Stream.Write(DismountAs, true, true);
+			Stream.Write(CanRemount);
 		}
 
 		public override string ToString()

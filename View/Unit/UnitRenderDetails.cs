@@ -6,13 +6,32 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class UnitRenderDetails
+	public class UnitRenderDetails : Serializable
 	{
 		enum Attribute { OVERRIDE_DISPLAY_NAME, OVERRIDE_COLOR, IMAGE_PATH }
 
 		public readonly string OverrideDisplayName;
 		public readonly Color OverrideColor;
-		public readonly string ImagePath;
+
+		string _RootPath;
+		string _ImagePath;
+
+		public string ImagePath
+		{
+			get
+			{
+				return _RootPath + _ImagePath;
+			}
+		}
+
+		public UnitRenderDetails(SerializationInputStream Stream, string Path)
+		{
+			_RootPath = Path;
+
+			if (Stream.ReadBoolean()) OverrideDisplayName = Stream.ReadString();
+			OverrideColor = FileUtils.DeserializeColor(Stream);
+			_ImagePath = Stream.ReadString();
+		}
 
 		public UnitRenderDetails(ParseBlock Block, string Path)
 		{
@@ -20,7 +39,16 @@ namespace PanzerBlitz
 
 			OverrideDisplayName = (string)attributes[(int)Attribute.OVERRIDE_DISPLAY_NAME];
 			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
-			ImagePath = Path + (string)attributes[(int)Attribute.IMAGE_PATH];
+			_RootPath = Path;
+			_ImagePath = (string)attributes[(int)Attribute.IMAGE_PATH];
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(OverrideDisplayName != null);
+			if (OverrideDisplayName != null) Stream.Write(OverrideDisplayName);
+			FileUtils.SerializeColor(Stream, OverrideColor);
+			Stream.Write(_ImagePath);
 		}
 	}
 }

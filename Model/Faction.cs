@@ -17,11 +17,12 @@ namespace PanzerBlitz
 		public readonly byte StackLimit;
 		public readonly bool HalfPriceTrucks;
 
-		public Faction(string UniqueKey, string Name, Color[] Colors, bool HalfPriceTrucks = false)
+		public Faction(string UniqueKey, string Name, Color[] Colors, byte StackLimit, bool HalfPriceTrucks = false)
 		{
 			this.UniqueKey = UniqueKey;
 			this.Name = Name;
 			this.Colors = Colors;
+			this.StackLimit = StackLimit;
 			this.HalfPriceTrucks = HalfPriceTrucks;
 		}
 
@@ -30,6 +31,7 @@ namespace PanzerBlitz
 				Stream.ReadString(),
 				Stream.ReadString(),
 				Stream.ReadEnumerable(FileUtils.DeserializeColor).ToArray(),
+				Stream.ReadByte(),
 				Stream.ReadBoolean())
 		{ }
 
@@ -48,6 +50,7 @@ namespace PanzerBlitz
 			Stream.Write(UniqueKey);
 			Stream.Write(Name);
 			Stream.Write(Colors, i => FileUtils.SerializeColor(Stream, i));
+			Stream.Write(StackLimit);
 			Stream.Write(HalfPriceTrucks);
 		}
 	}

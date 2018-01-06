@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitConfigurationLink
+	public class UnitConfigurationLink : Serializable
 	{
 		enum Attribute { FACTION, UNIT_CONFIGURATION, INTRODUCE_YEAR, OBSOLETE_YEAR, FRONT, ENVIRONMENTS };
 
@@ -15,6 +16,18 @@ namespace PanzerBlitz
 		public readonly int ObsoleteYear;
 		public readonly Front Front;
 		public readonly List<Environment> Environments;
+
+		public UnitConfigurationLink(SerializationInputStream Stream)
+		{
+			Faction = Stream.ReadObject(i => new Faction(i), false, true);
+			UnitConfiguration = Stream.ReadObject(i => new UnitConfiguration(i), false, true);
+			IntroduceYear = Stream.ReadInt32();
+			ObsoleteYear = Stream.ReadInt32();
+			Front = (Front)Stream.ReadByte();
+			if (Stream.ReadBoolean())
+				Environments = Stream.ReadEnumerable(
+					i => Stream.ReadObject(j => new Environment(j), false, true)).ToList();
+		}
 
 		public UnitConfigurationLink(ParseBlock Block)
 		{
@@ -26,6 +39,17 @@ namespace PanzerBlitz
 			ObsoleteYear = Parse.DefaultIfNull(attributes[(int)Attribute.OBSOLETE_YEAR], 0);
 			Front = Parse.DefaultIfNull(attributes[(int)Attribute.FRONT], Front.ALL);
 			Environments = Parse.DefaultIfNull<List<Environment>>(attributes[(int)Attribute.ENVIRONMENTS], null);
+		}
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Faction, false, true);
+			Stream.Write(UnitConfiguration, false, true);
+			Stream.Write(IntroduceYear);
+			Stream.Write(ObsoleteYear);
+			Stream.Write((byte)Front);
+			Stream.Write(Environments != null);
+			if (Environments != null) Stream.Write(Environments, i => Stream.Write(i, false, true));
 		}
 	}
 }

@@ -217,32 +217,69 @@ namespace PanzerBlitz
 					}
 				}
 			}
+		}
 
-			// Dump all the things.  This will turn into module munging.
-			using (MemoryStream m = new MemoryStream())
+		public static void Load(string Module, SerializationInputStream Stream)
+		{
+			LoadedModule = Module;
+			string Path = "./Modules/" + Module;
+
+			ClassLibrary.Instance.ReadBlock(new ParseBlock(new ParseBlock[]
+				{
+					ParseBlock.FromFile(Path + "/Theme/Fonts.blk"),
+						new ParseBlock(
+							"class<>",
+							"classes",
+							Enumerable.Repeat(Path + "/Theme/Base.blk", 1)
+								.Concat(Directory.EnumerateFiles(
+									Path + "/Theme/Components", "*", SearchOption.AllDirectories))
+								.SelectMany(i => ParseBlock.FromFile(i).Break()))
+				}));
+
+			UnitMovementRules = Stream.ReadEnumerable(
+				i => i.ReadObject(j => new UnitMovementRules(j), false, true)).ToDictionary(i => i.UniqueKey);
+			TileComponentRules = Stream.ReadEnumerable(
+				i => i.ReadObject(j => new TileComponentRules(j), false, true)).ToDictionary(i => i.UniqueKey);
+			Environments = Stream.ReadEnumerable(
+				i => i.ReadObject(j => new Environment(j), false, true)).ToDictionary(i => i.UniqueKey);
+			Factions = Stream.ReadEnumerable(
+				i => i.ReadObject(j => new Faction(j), false, true)).ToDictionary(i => i.UniqueKey);
+			FactionRenderDetails = Stream.ReadEnumerable(
+				i => new KeyValuePair<string, FactionRenderDetails>(
+					i.ReadString(),
+					new FactionRenderDetails(i, Path + "/FactionSymbols/"))).ToDictionary(i => i.Key, i => i.Value);
+			UnitConfigurations = Stream.ReadEnumerable(
+				i => i.ReadObject(j => new UnitConfiguration(j), false, true)).ToDictionary(i => i.UniqueKey);
+			UnitRenderDetails = Stream.ReadEnumerable(
+				i => new KeyValuePair<string, UnitRenderDetails>(
+					i.ReadString(),
+					new UnitRenderDetails(i, Path + "/UnitSprites/"))).ToDictionary(i => i.Key, i => i.Value);
+			UnitConfigurationLinks = Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToList();
+			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
+			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
+			Wreckage = UnitConfigurations["wreckage"];
+		}
+
+		public static void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(UnitMovementRules, i => Stream.Write(i.Value, false, true));
+			Stream.Write(TileComponentRules, i => Stream.Write(i.Value, false, true));
+			Stream.Write(Environments, i => Stream.Write(i.Value, false, true));
+			Stream.Write(Factions, i => Stream.Write(i.Value, false, true));
+			Stream.Write(FactionRenderDetails, i =>
 			{
-				try
-				{
-					SerializationOutputStream stream = new SerializationOutputStream(m);
-					stream.Write(UnitMovementRules, i => stream.Write(i.Value, false, true));
-					stream.Write(TileComponentRules, i => stream.Write(i.Value, false, true));
-					stream.Write(Environments, i => stream.Write(i.Value));
-					stream.Write(Factions, i => stream.Write(i.Value));
-					stream.Write(FactionRenderDetails, i =>
-					{
-						stream.Write(i.Key);
-						stream.Write(i.Value);
-					});
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine(e.Message);
-				}
-				finally
-				{
-					Console.WriteLine(new HexDumpWriter(16).Write(m.GetBuffer()));
-				}
-			}
+				Stream.Write(i.Key);
+				Stream.Write(i.Value);
+			});
+			Stream.Write(UnitConfigurations, i => Stream.Write(i.Value, false, true));
+			Stream.Write(UnitRenderDetails, i =>
+			{
+				Stream.Write(i.Key);
+				Stream.Write(i.Value);
+			});
+			Stream.Write(UnitConfigurationLinks);
+			Stream.Write(Scenarios);
+			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
 		}
 	}
 }
