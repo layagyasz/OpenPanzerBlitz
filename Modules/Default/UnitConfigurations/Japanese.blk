@@ -155,7 +155,7 @@ unit-configuration:ho-ni-2 {
 }
 unit-configuration:ho-ro {
 	string:name { Ho-Ro }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -264,7 +264,7 @@ unit-configuration:te-ke {
 	byte:movement { 9 }
 }
 unit-configuration:chi-he {
-	string:name { Ha-Go }
+	string:name { Chi-He }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

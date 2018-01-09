@@ -7,6 +7,7 @@
 	byte:range { 2 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:mg-platoon-slovak {
@@ -107,6 +108,7 @@ unit-configuration:motorcycle-slovak {
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 12 }
+
 	!unit-configuration:dismount-as { rifle-platoon-slovak-41 }
 }
 unit-configuration:oa-27{

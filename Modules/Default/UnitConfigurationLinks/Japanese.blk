@@ -1,0 +1,154 @@
+﻿unit-configuration-link:engineer-platoon-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-japanese }
+}
+unit-configuration-link:mg-platoon-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-japanese }
+}
+unit-configuration-link:rifle-platoon-japanese-39 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-japanese-41 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-41 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:assault-platoon-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.assault-platoon-japanese }
+}
+unit-configuration-link:cavalry-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-japanese }
+}
+unit-configuration-link:wagon-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.wagon-japanese }
+}
+unit-configuration-link:truck-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.truck-japanese }
+}
+unit-configuration-link:type-1-ho-ki {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.type-1-ho-ki }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:type-92 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.type-92 }
+}
+unit-configuration-link:type-93 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.type-93 }
+}
+unit-configuration-link:ho-ni-1-sph {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ni-1-sph }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:ho-ni-1 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ni-1 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:ho-ni-2 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ni-2 }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:ho-ro {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ro }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:ho-ni-3 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ni-3 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:ss-ki {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ss-ki }
+}
+unit-configuration-link:tk {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.tk }
+}
+unit-configuration-link:ke-ni {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ke-ni }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:ha-go-early {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ha-go-early }
+}
+unit-configuration-link:ha-go {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ha-go }
+}
+unit-configuration-link:otsu {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.otsu }
+
+	int:obsolete-year { 1942 }
+}
+unit-configuration-link:chi-ha-he {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.chi-ha-he }
+}
+unit-configuration-link:chi-ha-at {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.chi-ha-at }
+}
+unit-configuration-link:te-ke {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.te-ke }
+}
+unit-configuration-link:chi-he {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.chi-he }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:chi-nu {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.chi-nu }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:chi-to {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.chi-to }
+
+	int:introduce-year { 1945 }
+}
+unit-configuration-link:ss-ki-engineer {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ss-ki-engineer }
+}
+unit-configuration-link:ka-mi {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ka-mi }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:ka-chi {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ka-chi }
+
+	int:introduce-year { 1943 }
+}

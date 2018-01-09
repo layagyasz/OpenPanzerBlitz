@@ -1,0 +1,123 @@
+﻿unit-configuration-link:rifle-platoon-finnish-39 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:ski-platoon-39 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ski-platoon-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-finnish-41 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish-41 }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:ski-platoon-41 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ski-platoon-41 }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:rifle-platoon-finnish-44 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish-44 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:ski-platoon-44 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ski-platoon-44 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:sissi-platoon {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.sissi-platoon }
+}
+unit-configuration-link:sissi-ski-platoon {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.sissi-ski-platoon }
+}
+unit-configuration-link:mg-platoon-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-finnish }
+}
+unit-configuration-link:engineer-platoon-finnish-39 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-finnish-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:engineer-platoon-finnish-41 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-finnish-41 }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:engineer-platoon-finnish-44 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-finnish-44 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:cavalry-finnish-39 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-finnish-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:cavalry-finnish-41 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-finnish-41 }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:cavalry-finnish-44 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-finnish-44 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:truck-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.truck-finnish }
+}
+unit-configuration-link:bicycle-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-finnish }
+}
+unit-configuration-link:bt-42 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.bt-42 }
+
+	int:introduce-year { 1943 }
+	int:obsolete-year { 1944 }
+}
+unit-configuration-link:ft-17 {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ft-17 }
+}
+unit-configuration-link:ft-17-corrected {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
+}
+unit-configuration-link:vickers-6-ton {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.vickers-6-ton }
+}
+unit-configuration-link:landsverk {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.landsverk }
+}
+unit-configuration-link:aerosan {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.aerosan }
+}

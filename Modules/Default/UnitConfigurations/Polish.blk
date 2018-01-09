@@ -7,6 +7,7 @@
 	byte:range { 1 }
 	byte:defense { 5 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:rifle-platoon-polish-39 {
@@ -60,6 +61,7 @@ unit-configuration:c2p {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 8 }
+
 	bool:is-armored { true }
 }
 unit-configuration:c4p {
@@ -71,6 +73,7 @@ unit-configuration:c4p {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 8 }
+
 	bool:is-armored { true }
 }
 unit-configuration:c7p {
@@ -82,6 +85,7 @@ unit-configuration:c7p {
 	byte:range { 0 }
 	byte:defense { 1 }
 	byte:movement { 8 }
+
 	bool:is-armored { true }
 }
 unit-configuration:motorcycle-polish {

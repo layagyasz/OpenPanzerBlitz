@@ -1,0 +1,124 @@
+﻿unit-configuration-link:engineer-platoon-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-polish }
+}
+unit-configuration-link:rifle-platoon-polish-39 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-polish-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-polish-41 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-polish-41 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:cavalry-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-polish }
+}
+unit-configuration-link:truck-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.truck-polish }
+}
+unit-configuration-link:c2p {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.c2p }
+}
+unit-configuration-link:c4p {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.c4p }
+}
+unit-configuration-link:c7p {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.c7p }
+
+	int:obsolete-year { 1939 }
+}
+unit-configuration-link:motorcycle-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.motorcycle-polish }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:peugeot {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.peugeot }
+}
+unit-configuration-link:wz-28 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wz-28 }
+}
+unit-configuration-link:wz-29 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wz-29 }
+}
+unit-configuration-link:wz-34-infantry {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wz-34-infantry }
+}
+unit-configuration-link:wz-34-he {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wz-34-he }
+}
+unit-configuration-link:tk-3 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.tk-3 }
+}
+unit-configuration-link:tks {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.tks }
+}
+unit-configuration-link:7tp-infantry {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.7tp-infantry }
+}
+unit-configuration-link:7tp-at {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.7tp-at }
+}
+unit-configuration-link:7tp-infantry-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.7tp-infantry-corrected }
+}
+unit-configuration-link:7tp-at-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.7tp-at-corrected }
+}
+unit-configuration-link:4tp {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.4tp }
+}
+unit-configuration-link:4tp-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.4tp-corrected }
+}
+unit-configuration-link:10tp-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.10tp-corrected }
+}
+unit-configuration-link:14tp {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.14tp }
+}
+unit-configuration-link:14tp-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.14tp-corrected }
+}
+unit-configuration-link:vau-33-infantry {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.vau-33-infantry }
+}
+unit-configuration-link:vau-33-at {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.vau-33-at }
+}
+unit-configuration-link:vau-33-infantry-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.vau-33-infantry-corrected }
+}
+unit-configuration-link:vau-33-at-corrected {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.vau-33-at-corrected }
+}

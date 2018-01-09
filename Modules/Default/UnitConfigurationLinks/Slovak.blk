@@ -1,0 +1,73 @@
+﻿unit-configuration-link:engineer-platoon-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-slovak }
+}
+unit-configuration-link:mg-platoon-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-slovak }
+}
+unit-configuration-link:rifle-platoon-slovak-39 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-slovak-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-slovak-40 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-slovak-40 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-slovak-41 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-slovak-41 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:cavalry-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-slovak }
+}
+unit-configuration-link:truck-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.truck-slovak }
+}
+unit-configuration-link:praga-iv {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.praga-iv }
+}
+unit-configuration-link:bicycle-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-slovak }
+}
+unit-configuration-link:motorcycle-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.motorcycle-slovak }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:oa-27{
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.oa-27 }
+}
+unit-configuration-link:oa-30 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.oa-30 }
+}
+unit-configuration-link:tancik-33-corrected {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.tancik-33-corrected }
+}
+unit-configuration-link:lt-34-corrected {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.lt-34-corrected }
+}
+unit-configuration-link:lt-35-corrected {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.lt-35-corrected }
+}
+unit-configuration-link:lt-38-corrected {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.lt-38-corrected }
+}

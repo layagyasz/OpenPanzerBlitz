@@ -115,6 +115,7 @@ unit-configuration:engineer-platoon-finnish-39 {
 	byte:range { 1 }
 	byte:defense { 4 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:engineer-platoon-finnish-41 {
@@ -126,6 +127,7 @@ unit-configuration:engineer-platoon-finnish-41 {
 	byte:range { 1 }
 	byte:defense { 4 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:engineer-platoon-finnish-44 {
@@ -137,6 +139,7 @@ unit-configuration:engineer-platoon-finnish-44 {
 	byte:range { 3 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:cavalry-finnish-39 {
