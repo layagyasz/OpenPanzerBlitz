@@ -313,9 +313,10 @@
     <Compile Include="View\ArmyBuilder\UnitConfigurationStackView.cs" />
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
     <Compile Include="Model\Front.cs" />
-    <Compile Include="Model\ArmyParameters.cs" />
+    <Compile Include="Model\ScenarioParameters.cs" />
     <Compile Include="View\SquareSpriteSheetRenderer.cs" />
     <Compile Include="View\Faction\FactionRenderer.cs" />
+    <Compile Include="Model\ArmyParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -1967,6 +1968,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitConfigurationLinks\Slovak.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-i.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-k.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Maps\board-l.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

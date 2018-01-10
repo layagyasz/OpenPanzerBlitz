@@ -14,14 +14,14 @@ namespace PanzerBlitz
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
 			Faction faction = GameData.Factions["slovak"];
-			ArmyParameters parameters =
-				new ArmyParameters(1000, 1939, Front.EAST, GameData.Environments["summer-steppe"]);
+			ScenarioParameters scenarioParameters =
+				new ScenarioParameters(1939, Front.EAST, GameData.Environments["summer-steppe"]);
+			ArmyParameters parameters = new ArmyParameters(faction, 1000, scenarioParameters);
 			ArmyBuilderScreen screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,
 					GameData.UnitConfigurationLinks,
 					parameters,
-					faction,
 					new UnitConfigurationRenderer(
 						GameData.UnitConfigurationLinks.Where(
 							i => i.Faction == faction && parameters.Matches(i)).Select(i => i.UnitConfiguration),

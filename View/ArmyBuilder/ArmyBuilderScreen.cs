@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +15,6 @@ namespace PanzerBlitz
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("army-builder-pane");
 
 		ArmyParameters _Parameters;
-		Faction _Faction;
 		IEnumerable<UnitConfigurationLink> _Links;
 
 		Select<UnitClass> _UnitClassSelect = new Select<UnitClass>("army-builder-select");
@@ -29,22 +28,25 @@ namespace PanzerBlitz
 			Vector2f WindowSize,
 			IEnumerable<UnitConfigurationLink> UnitConfigurations,
 			ArmyParameters Parameters,
-			Faction Faction,
 			UnitConfigurationRenderer Renderer)
 			: base(WindowSize)
 		{
 			_Parameters = Parameters;
-			_Faction = Faction;
 			_Links = UnitConfigurations;
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
-			Button header = new Button("army-builder-header") { DisplayedString = Faction.Name };
+			Button header = new Button("army-builder-header") { DisplayedString = _Parameters.Faction.Name };
 
 			_UnitClassSelect.Position = new Vector2f(0, header.Size.Y);
 
 			_AvailableUnits = new UnitConfigurationTable(
-				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, false);
+				"army-builder-table",
+				"army-builder-table-row",
+				"army-builder-table-cell",
+				_Parameters.Faction,
+				Renderer,
+				false);
 			_AvailableUnits.Position = new Vector2f(0, _UnitClassSelect.Position.Y + _UnitClassSelect.Size.Y + 16);
 			_AvailableUnits.OnUnitClicked += HandleAddUnit;
 
@@ -53,7 +55,12 @@ namespace PanzerBlitz
 			SetPointTotal(0);
 
 			_SelectedUnits = new UnitConfigurationTable(
-				"army-builder-table", "army-builder-table-row", "army-builder-table-cell", Faction, Renderer, true);
+				"army-builder-table",
+				"army-builder-table-row",
+				"army-builder-table-cell",
+				_Parameters.Faction,
+				Renderer,
+				true);
 			_SelectedUnits.Position =
 				new Vector2f(_AvailableUnits.Size.X + 16, _PointTotalButton.Position.Y + _PointTotalButton.Size.Y + 16);
 			_SelectedUnits.OnUnitRightClicked += HandleRemoveUnit;
@@ -88,8 +95,7 @@ namespace PanzerBlitz
 			UnitClass filterClass = _UnitClassSelect.Value.Value;
 			foreach (UnitConfigurationLink link in _Links.OrderBy(i => i.UnitConfiguration.Name))
 			{
-				if (link.Faction == _Faction
-					&& (filterClass == UnitClass.NONE || link.UnitConfiguration.UnitClass == filterClass)
+				if ((filterClass == UnitClass.NONE || link.UnitConfiguration.UnitClass == filterClass)
 					&& _Parameters.Matches(link))
 					_AvailableUnits.Add(link.UnitConfiguration);
 			}

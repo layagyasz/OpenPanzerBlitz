@@ -47,15 +47,15 @@
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-13.map }
+				string:board-path { Maps/board-i.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-14.map }
+				string:board-path { Maps/board-k.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-15.map }
+				string:board-path { Maps/board-l.map }
 				bool:invert { false }
 			}
 		}
