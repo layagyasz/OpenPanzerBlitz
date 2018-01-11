@@ -1,0 +1,21 @@
+﻿unit-configuration-link:command-post {
+	!unit-configuration:unit-configuration { unit-configurations.command-post }
+}
+unit-configuration-link:block {
+	!unit-configuration:unit-configuration { unit-configurations.block }
+}
+unit-configuration-link:minefield {
+	!unit-configuration:unit-configuration { unit-configurations.minefield }
+}
+unit-configuration-link:fort-20 {
+	!unit-configuration:unit-configuration { unit-configurations.fort-20 }
+}
+unit-configuration-link:fort-30 {
+	!unit-configuration:unit-configuration { unit-configurations.fort-30 }
+}
+unit-configuration-link:fort-40 {
+	!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+}
+unit-configuration-link:fort-50 {
+	!unit-configuration:unit-configuration { unit-configurations.fort-50 }
+}

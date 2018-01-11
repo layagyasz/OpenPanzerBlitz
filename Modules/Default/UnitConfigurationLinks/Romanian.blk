@@ -1,4 +1,69 @@
-﻿unit-configuration-link:engineer-platoon-romanian {
+﻿unit-configuration-link:37mm-at-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:47mm-at-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+}
+unit-configuration-link:50mm-at-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:75mm-at-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:76_2mm-at-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:20mm-aa-early-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+}
+unit-configuration-link:20mm-aa-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:75mm-aa-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-aa }
+}
+unit-configuration-link:75mm-how-company-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:105mm-how-company-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:81mm-mortar-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:120mm-mortar-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+
+	int:introduce-year { 1942 }
+}
+
+unit-configuration-link:engineer-platoon-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-romanian }
 }

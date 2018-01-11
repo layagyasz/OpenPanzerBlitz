@@ -11,6 +11,19 @@
 	bool:can-anti-aircraft { true }
 	bool:is-light-passenger { true }
 }
+unit-configuration:20mm-mg {
+	string:name { 20mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 6 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+	bool:is-light-passenger { true }
+}
 unit-configuration:50cal-mg {
 	string:name { .50 cal }
 	unit-class:unit-class { towed-gun }
@@ -229,6 +242,16 @@ unit-configuration:17pdr-at {
 	byte:defense { 2 }
 	byte:movement { 0 }
 }
+unit-configuration:85mm-at {
+	string:name { 85mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 8 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+}
 unit-configuration:88mm-at-early {
 	string:name { 88mm }
 	unit-class:unit-class { towed-gun }
@@ -257,6 +280,16 @@ unit-configuration:90mm-at {
 	byte:attack { 15 }
 	byte:range { 20 }
 	byte:defense { 1 }
+	byte:movement { 0 }
+}
+unit-configuration:100mm-at {
+	string:name { 100mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 16 }
+	byte:range { 8 }
+	byte:defense { 2 }
 	byte:movement { 0 }
 }
 unit-configuration:20mm-aa-early {

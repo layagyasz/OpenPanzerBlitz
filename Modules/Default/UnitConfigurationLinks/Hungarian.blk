@@ -1,4 +1,80 @@
-﻿unit-configuration-link:engineer-platoon-hungarian {
+﻿unit-configuration-link:wagon-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+unit-configuration-link:limber-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.limber }
+}
+
+unit-configuration-link:37mm-at-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:47mm-at-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:50mm-at-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:75mm-at-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:20mm-aa-early-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+}
+unit-configuration-link:20mm-aa-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:40mm-aa-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+}
+unit-configuration-link:80mm-aa-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.80mm-aa }
+}
+unit-configuration-link:75mm-how-company-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:105mm-how-company-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:150mm-how-company-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
+}
+unit-configuration-link:150mm-how-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+}
+unit-configuration-link:81mm-mortar-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-hungarian }
 }
@@ -59,14 +135,20 @@ unit-configuration-link:zrinyi-ii {
 unit-configuration-link:toldi-i {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-i }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:toldi-i-corrected {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-i-corrected }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:toldi-ii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-ii }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:turan-i {
 	!faction:faction { factions.hungarian }
@@ -78,7 +160,7 @@ unit-configuration-link:turan-ii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.turan-ii }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:turan-iii {
 	!faction:faction { factions.hungarian }

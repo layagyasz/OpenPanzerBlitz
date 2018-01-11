@@ -1,4 +1,72 @@
-﻿unit-configuration-link:engineer-platoon-polish {
+﻿unit-configuration-link:wagon-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+
+unit-configuration-link:wz-30-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.wz-30 }
+}
+unit-configuration-link:37mm-at-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:47mm-at-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+}
+unit-configuration-link:40mm-aa-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+}
+unit-configuration-link:75mm-aa-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-aa }
+}
+unit-configuration-link:75mm-how-company-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-long-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+}
+unit-configuration-link:76_2mm-how-company-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
+}
+unit-configuration-link:76_2mm-how-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-polish }
+}
+unit-configuration-link:100mm-how-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.100mm-how }
+}
+unit-configuration-link:105mm-how-company-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:155mm-how-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.155mm-how }
+}
+unit-configuration-link:81mm-mortar-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:120mm-mortar-early-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-early }
+
+	int:introduce-year { 1940 }
+}
+
+unit-configuration-link:engineer-platoon-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-polish }
 }

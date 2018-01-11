@@ -1,4 +1,96 @@
-﻿unit-configuration-link:engineer-platoon-german {
+﻿unit-configuration-link:wagon-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+
+unit-configuration-link:37mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:50mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:75mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:88mm-at-early-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.88mm-at-early }
+}
+unit-configuration-link:88mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:20mm-aa-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:20mm_4-aa-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.20mm_4-aa }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:37mm-aa-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
+}
+unit-configuration-link:75mm-how-company-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:105mm-how-company-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:150mm-how-company-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
+}
+unit-configuration-link:150mm-how-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+}
+unit-configuration-link:170mm-how-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.170mm-how }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:81mm-mortar-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:120mm-mortar-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:nebelwerfer-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.nebelwerfer }
+}
+
+unit-configuration-link:engineer-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german }
 
@@ -161,6 +253,8 @@ unit-configuration-link:sdkfz-6_2 {
 unit-configuration-link:sdkfz-7_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-7_1 }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:sdkfz-10_4 {
 	!faction:faction { factions.german }

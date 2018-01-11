@@ -1,4 +1,92 @@
-﻿unit-configuration-link:engineer-company {
+﻿unit-configuration-link:wagon-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+unit-configuration-link:limber-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.limber }
+}
+
+unit-configuration-link:12_7mm-mg-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.12_7mm-mg }
+}
+unit-configuration-link:45mm-at-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.45mm-at }
+}
+unit-configuration-link:57mm-at-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:76_2mm-at-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:85mm-at-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.85mm-at }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:100mm-at-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.100mm-at }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:37mm-aa-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
+}
+unit-configuration-link:76_2mm-how-company-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
+}
+unit-configuration-link:76_2mm-how-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how }
+}
+unit-configuration-link:122mm-how-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.122mm-how }
+}
+unit-configuration-link:152mm-how-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.152mm-how }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:203mm-how-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.203mm-how }
+}
+unit-configuration-link:82mm-mortar-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.82mm-mortar }
+}
+unit-configuration-link:82mm-mortar-motorized-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.82mm-mortar-motorized }
+}
+unit-configuration-link:120mm-mortar-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:160mm-mortar-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.160mm-mortar }
+
+	int:introduce-year { 1944 }
+}
+
+unit-configuration-link:engineer-company {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-company }
 }

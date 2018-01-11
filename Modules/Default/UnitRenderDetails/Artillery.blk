@@ -1,6 +1,9 @@
 ﻿unit-render-details:12_7mm-mg {
 	string:image-path { anti-aircraft.png }
 }
+unit-render-details:20mm-mg {
+	string:image-path { anti-aircraft.png }
+}
 unit-render-details:50cal-mg {
 	string:image-path { anti-aircraft.png }
 }
@@ -58,6 +61,9 @@ unit-render-details:76_2mm-at {
 unit-render-details:17pdr-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:85mm-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:88mm-at-early {
 	string:image-path { anti-armor.png }
 }
@@ -65,6 +71,9 @@ unit-render-details:88mm-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:90mm-at {
+	string:image-path { anti-armor.png }
+}
+unit-render-details:100mm-at {
 	string:image-path { anti-armor.png }
 }
 unit-render-details:20mm-aa-early {
@@ -146,7 +155,7 @@ unit-render-details:149mm-how {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:150mm-how-company {
-	string:image-path { artillery-company.png }
+	string:image-path { artillery-heavy-company.png }
 }
 unit-render-details:150mm-how {
 	string:image-path { artillery-heavy.png }

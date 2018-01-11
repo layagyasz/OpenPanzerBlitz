@@ -1,4 +1,70 @@
-﻿unit-configuration-link:engineer-platoon-italian {
+﻿unit-configuration-link:limber-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.limber }
+}
+
+unit-configuration-link:37mm-at-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:47mm-at-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+}
+unit-configuration-link:75mm-at-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at-italian }
+}
+unit-configuration-link:90mm-at-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.90mm-at }
+}
+unit-configuration-link:20mm-aa-early-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+}
+unit-configuration-link:20mm-aa-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:75mm-aa-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-aa }
+}
+unit-configuration-link:65mm-how-company-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.65mm-how-company }
+}
+unit-configuration-link:75mm-how-company-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:100mm-how-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.100mm-how }
+}
+unit-configuration-link:105mm-how-company-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:149mm-how-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.149mm-how }
+}
+unit-configuration-link:81mm-mortar-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-italian }
 }

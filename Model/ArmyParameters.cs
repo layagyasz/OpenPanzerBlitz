@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		public bool Matches(UnitConfigurationLink Link)
 		{
-			return Faction == Link.Faction && Parameters.Matches(Link);
+			return (Link.Faction == null || Faction == Link.Faction) && Parameters.Matches(Link);
 		}
 	}
 }

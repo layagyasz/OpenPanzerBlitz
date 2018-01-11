@@ -1,4 +1,50 @@
-﻿unit-configuration-link:engineer-platoon-slovak {
+﻿unit-configuration-link:wagon-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+
+unit-configuration-link:37mm-at-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:20mm-aa-early-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+}
+unit-configuration-link:75mm-how-company-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:100mm-how-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.100mm-how }
+}
+unit-configuration-link:105mm-how-company-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:150mm-how-company-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
+}
+unit-configuration-link:150mm-how-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+}
+unit-configuration-link:81mm-mortar-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-slovak {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-slovak }
 }

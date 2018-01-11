@@ -1,4 +1,80 @@
-﻿unit-configuration-link:rifle-platoon-finnish-39 {
+﻿unit-configuration-link:wagon-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+unit-configuration-link:limber-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.limber }
+}
+unit-configuration-link:sled-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.sled }
+
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
+}
+
+unit-configuration-link:25mm-at-gun-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+
+	int:obsolete-year { 1942 }
+}
+unit-configuration-link:37mm-at-gun-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:45mm-at-gun-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.45mm-at }
+}
+unit-configuration-link:50mm-at-gun-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:75mm-at-gun-finnish { 
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:20mm-aa-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:40mm-aa-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+}
+unit-configuration-link:75mm-how-company-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:155mm-how-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.155mm-how }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:81mm-mortar-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:120mm-mortar-early-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-early }
+
+	int:introduce-year { 1941 }
+}
+
+unit-configuration-link:rifle-platoon-finnish-39 {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-finnish-39 }
 
@@ -120,4 +196,8 @@ unit-configuration-link:landsverk {
 unit-configuration-link:aerosan {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.aerosan }
+
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
