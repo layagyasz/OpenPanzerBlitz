@@ -1,4 +1,73 @@
-﻿unit-configuration-link:engineer-platoon-british {
+﻿unit-configuration-link:6pdr-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.6pdr-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:76mm-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.76mm-at }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:17pdr-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.17pdr-at }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:90mm-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.90mm-at }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:40mm-aa-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+}
+unit-configuration-link:75mm-how-company-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-allied-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-allied }
+}
+unit-configuration-link:25pdr-how-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.25pdr-how }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:5_5in-how-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.7_2in-how }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:7_2in-how-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.7_2in-how }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:8in-how-allied-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.8in-how-allied }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:81mm-mortar-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:107mm-mortar-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
 

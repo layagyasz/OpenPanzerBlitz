@@ -1,4 +1,73 @@
-﻿unit-configuration-link:engineer-platoon-american {
+﻿unit-configuration-link:50cal-mg-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.50cal-mg }
+}
+unit-configuration-link:37mm-at-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at-american }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:57mm-at-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:76mm-at-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.76mm-at }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:90mm-at-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.90mm-at }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:40mm-aa-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+}
+unit-configuration-link:75mm-how-company-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-allied-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-allied }
+}
+unit-configuration-link:105mm-how-company-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:155mm-how-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.155mm-how }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:8in-how-allied-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.8in-how-allied }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:81mm-mortar-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:107mm-mortar-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-american }
 }
@@ -32,6 +101,7 @@ unit-configuration-link:assault-platoon-american-41 {
 
 	int:introduce-year { 1941 }
 	int:obsolete-year { 1942 }
+	front:front { pacific }
 }
 unit-configuration-link:assault-platoon-american-43 {
 	!faction:faction { factions.american }
@@ -39,12 +109,14 @@ unit-configuration-link:assault-platoon-american-43 {
 
 	int:introduce-year { 1943 }
 	int:obsolete-year { 1943 }
+	front:front { pacific }
 }
 unit-configuration-link:assault-platoon-american-44 {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.assault-platoon-american-44 }
 
 	int:introduce-year { 1944 }
+	front:front { pacific }
 }
 unit-configuration-link:truck-american {
 	!faction:faction { factions.american }

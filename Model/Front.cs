@@ -5,6 +5,7 @@ namespace PanzerBlitz
 	{
 		ALL,
 		EAST,
-		WEST
+		WEST,
+		PACIFIC
 	}
 }

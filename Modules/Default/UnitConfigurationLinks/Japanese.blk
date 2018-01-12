@@ -1,4 +1,79 @@
-﻿unit-configuration-link:engineer-platoon-japanese {
+﻿unit-configuration-link:37mm-at-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
+}
+unit-configuration-link:47mm-at-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:20mm-aa-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
+unit-configuration-link:20mm_2-aa-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.20mm_2-aa }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:75mm-aa-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-aa }
+}
+unit-configuration-link:70mm-how-company-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.70mm-how-company }
+}
+unit-configuration-link:75mm-how-company-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-mountain-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-mountain }
+}
+unit-configuration-link:75mm-how-long-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+}
+unit-configuration-link:105mm-how-company-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:150mm-how-company-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
+}
+unit-configuration-link:150mm-how-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+}
+unit-configuration-link:81mm-mortar-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+unit-configuration-link:90mm-mortar-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.90mm-mortar }
+}
+unit-configuration-link:120mm-mortar-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:150mm-mortar-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-japanese }
 }
