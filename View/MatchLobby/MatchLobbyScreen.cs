@@ -30,7 +30,8 @@ namespace PanzerBlitz
 		Player _Player;
 		List<Scenario> _Scenarios;
 
-		public MatchLobbyScreen(Vector2f WindowSize, bool Host, MatchLobby Lobby, Chat Chat, Player Player, IEnumerable<Scenario> Scenarios)
+		public MatchLobbyScreen(
+			Vector2f WindowSize, bool Host, MatchLobby Lobby, Chat Chat, Player Player, IEnumerable<Scenario> Scenarios)
 			: base(WindowSize)
 		{
 			_Host = Host;

@@ -16,6 +16,7 @@ namespace PanzerBlitz
 			new Dictionary<ProgramState, ProgramStateController>
 		{
 			{ ProgramState.BUILD_ARMY, new ArmyBuilderStateController() },
+			{ ProgramState.BUILD_SCENARIO, new ScenarioBuilderStateController() },
 			{ ProgramState.EDIT, new EditStateController() },
 			{ ProgramState.LANDING, new LandingStateController() },
 			{ ProgramState.LOCAL_MATCH_RECORD_SELECT, new LocalMatchRecordSelectStateController() },

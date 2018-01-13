@@ -53,5 +53,10 @@ namespace PanzerBlitz
 		{
 			return Region.Name;
 		}
+
+		public static string Describe(Environment Environment)
+		{
+			return Environment.UniqueKey;
+		}
 	}
 }

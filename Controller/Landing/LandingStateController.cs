@@ -17,7 +17,7 @@ namespace PanzerBlitz
 			screen.HostMatchButton.OnClick += HandleHostMatch;
 			screen.LocalMatchRecordButton.OnClick += HandleLocalMatchRecord;
 			screen.EditButton.OnClick += HandleEdit;
-			screen.ArmyBuilderButton.OnClick += HandleBuildArmy;
+			screen.ScenarioBuilderButton.OnClick += HandleBuildScenario;
 			screen.JoinServerButton.OnClick += HandleJoinServer;
 			screen.StartServerButton.OnClick += HandleStartServer;
 
@@ -68,9 +68,9 @@ namespace PanzerBlitz
 			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.EDIT, null));
 		}
 
-		void HandleBuildArmy(object Sender, EventArgs E)
+		void HandleBuildScenario(object Sender, EventArgs E)
 		{
-			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.BUILD_ARMY, null));
+			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.BUILD_SCENARIO, null));
 		}
 
 		void HandleJoinServer(object Sender, EventArgs E)

@@ -313,10 +313,14 @@
     <Compile Include="View\ArmyBuilder\UnitConfigurationStackView.cs" />
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
     <Compile Include="Model\Front.cs" />
-    <Compile Include="Model\ScenarioParameters.cs" />
     <Compile Include="View\SquareSpriteSheetRenderer.cs" />
     <Compile Include="View\Faction\FactionRenderer.cs" />
-    <Compile Include="Model\ArmyParameters.cs" />
+    <Compile Include="Model\ScenarioBuilder\ArmyParameters.cs" />
+    <Compile Include="Model\ScenarioBuilder\ScenarioParameters.cs" />
+    <Compile Include="Model\ScenarioBuilder\ArmyBuilder.cs" />
+    <Compile Include="Model\ScenarioBuilder\ScenarioBuilder.cs" />
+    <Compile Include="View\ScenarioBuilder\ScenarioBuilderScreen.cs" />
+    <Compile Include="Controller\ScenarioBuilder\ScenarioBuilderStateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -377,6 +381,9 @@
     <Folder Include="View\MatchRecordSelect\" />
     <Folder Include="Controller\LocalMatchRecordSelect\" />
     <Folder Include="Controller\ArmyBuilder\" />
+    <Folder Include="Model\ScenarioBuilder\" />
+    <Folder Include="View\ScenarioBuilder\" />
+    <Folder Include="Controller\ScenarioBuilder\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -1980,6 +1987,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitConfigurationLinks\Common.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Theme\Components\ScenarioBuilder.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

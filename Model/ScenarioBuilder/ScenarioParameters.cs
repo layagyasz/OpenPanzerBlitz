@@ -3,11 +3,11 @@ namespace PanzerBlitz
 {
 	public class ScenarioParameters
 	{
-		public readonly int Year;
+		public readonly uint Year;
 		public readonly Front Front;
 		public readonly Environment Environment;
 
-		public ScenarioParameters(int Year, Front Front, Environment Environment)
+		public ScenarioParameters(uint Year, Front Front, Environment Environment)
 		{
 			this.Year = Year;
 			this.Front = Front;

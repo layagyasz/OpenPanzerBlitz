@@ -17,8 +17,8 @@ namespace PanzerBlitz
 			new Button("landing-button") { DisplayedString = "Join Remote Match" };
 		public readonly Button HostMatchButton = new Button("landing-button") { DisplayedString = "Host Match" };
 		public readonly Button EditButton = new Button("landing-button") { DisplayedString = "Edit" };
-		public readonly Button ArmyBuilderButton =
-			new Button("landing-button") { DisplayedString = "Army Builder (Alpha)" };
+		public readonly Button ScenarioBuilderButton =
+			new Button("landing-button") { DisplayedString = "Custom Scenario (Alpha)" };
 		public readonly Button JoinServerButton = new Button("landing-button") { DisplayedString = "Join Server" };
 		public readonly Button StartServerButton = new Button("landing-button") { DisplayedString = "Start Server" };
 
@@ -33,7 +33,7 @@ namespace PanzerBlitz
 			_LandingSelect.Add(HostMatchButton);
 			_LandingSelect.Add(LocalMatchRecordButton);
 			_LandingSelect.Add(EditButton);
-			_LandingSelect.Add(ArmyBuilderButton);
+			_LandingSelect.Add(ScenarioBuilderButton);
 			// Commenting these out for now.  Maybe one day in the future work on PanzerBlitz online will continue!
 			//_LandingSelect.Add(JoinServerButton);
 			//_LandingSelect.Add(StartServerButton);

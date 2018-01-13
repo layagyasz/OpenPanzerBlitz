@@ -1,0 +1,27 @@
+﻿class:scenario-builder-pane {
+	!class:parent { pane }
+}
+class:scenario-builder-display {
+	!class:parent { pane-display }
+}
+class:scenario-builder-parameters-section {
+	!class:parent { regular }
+}
+class:scenario-builder-parameters-section-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 272 }
+	}
+}
+class:scenario-builder-parameters-section-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 272 }
+	}
+}
+class:scenario-builder-parameters-section-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 272 }
+	}
+}

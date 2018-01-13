@@ -4,10 +4,10 @@ namespace PanzerBlitz
 	public class ArmyParameters
 	{
 		public readonly Faction Faction;
-		public readonly int Points;
+		public readonly uint Points;
 		public readonly ScenarioParameters Parameters;
 
-		public ArmyParameters(Faction Faction, int Points, ScenarioParameters Parameters)
+		public ArmyParameters(Faction Faction, uint Points, ScenarioParameters Parameters)
 		{
 			this.Faction = Faction;
 			this.Points = Points;
