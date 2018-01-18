@@ -15,6 +15,17 @@ namespace PanzerBlitz
 			this.Parameters = Parameters;
 		}
 
+		public bool Apply(ScenarioBuilderAction Action)
+		{
+			return Action.Apply(this);
+		}
+
+		public bool SetParameters(ScenarioParameters Parameters)
+		{
+			Parameters.Copy(Parameters);
+			return true;
+		}
+
 		public void AddArmy(Faction Faction, uint Points)
 		{
 			_Armies.Add(new ArmyBuilder(_IdGenerator, new ArmyParameters(Faction, Points, Parameters)));

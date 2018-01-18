@@ -321,6 +321,10 @@
     <Compile Include="Model\ScenarioBuilder\ScenarioBuilder.cs" />
     <Compile Include="View\ScenarioBuilder\ScenarioBuilderScreen.cs" />
     <Compile Include="Controller\ScenarioBuilder\ScenarioBuilderStateController.cs" />
+    <Compile Include="Model\ScenarioBuilder\SetScenarioParametersAction.cs" />
+    <Compile Include="Model\ScenarioBuilder\ScenarioBuilderAction.cs" />
+    <Compile Include="Model\ScenarioBuilder\ScenarioBuilderActionSerializer.cs" />
+    <Compile Include="Controller\ScenarioBuilder\ScenarioBuilderController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

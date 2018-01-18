@@ -3,9 +3,9 @@ namespace PanzerBlitz
 {
 	public class ArmyParameters
 	{
-		public readonly Faction Faction;
-		public readonly uint Points;
-		public readonly ScenarioParameters Parameters;
+		public Faction Faction { get; private set; }
+		public uint Points { get; private set; }
+		public ScenarioParameters Parameters { get; private set; }
 
 		public ArmyParameters(Faction Faction, uint Points, ScenarioParameters Parameters)
 		{

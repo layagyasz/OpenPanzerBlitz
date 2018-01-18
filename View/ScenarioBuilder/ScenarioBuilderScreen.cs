@@ -6,10 +6,14 @@ using Cardamom.Interface.Items;
 
 using SFML.Window;
 
+using Cardamom.Utilities;
+
 namespace PanzerBlitz
 {
 	public class ScenarioBuilderScreen : ScreenBase
 	{
+		public EventHandler<ValuedEventArgs<ScenarioParameters>> OnParametersChanged;
+
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("scenario-builder-pane");
 		SingleColumnTable _Display = new SingleColumnTable("scenario-builder-display");
 
@@ -23,6 +27,7 @@ namespace PanzerBlitz
 			_Display.Add(new Button("header-1") { DisplayedString = "Custom Scenario" });
 
 			MakeSection("Year", _YearSelect, _Display);
+			_YearSelect.OnChange += HandleParametersChanged;
 			for (uint i = 1939; i < 1946; ++i)
 				_YearSelect.Add(
 					new SelectionOption<uint>(
@@ -33,6 +38,7 @@ namespace PanzerBlitz
 					});
 
 			MakeSection("Environment", _EnvironmentSelect, _Display);
+			_EnvironmentSelect.OnChange += HandleParametersChanged;
 			foreach (Environment environment in GameData.Environments.Values)
 				_EnvironmentSelect.Add(
 					new SelectionOption<Environment>("scenario-builder-parameters-section-select-option")
@@ -42,6 +48,7 @@ namespace PanzerBlitz
 					});
 
 			MakeSection("Front", _FrontSelect, _Display);
+			_FrontSelect.OnChange += HandleParametersChanged;
 			foreach (Front front in Enum.GetValues(typeof(Front)).Cast<Front>().Skip(1))
 				_FrontSelect.Add(
 					new SelectionOption<Front>("scenario-builder-parameters-section-select-option")
@@ -65,6 +72,17 @@ namespace PanzerBlitz
 
 			Display.Add(header);
 			Display.Add(container);
+		}
+
+		void HandleParametersChanged(object Sender, EventArgs E)
+		{
+			if (_YearSelect.Value == null || _FrontSelect.Value == null || _EnvironmentSelect.Value == null) return;
+
+			ScenarioParameters parameters =
+				new ScenarioParameters(
+					_YearSelect.Value.Value, _FrontSelect.Value.Value, _EnvironmentSelect.Value.Value);
+			if (OnParametersChanged != null)
+				OnParametersChanged(this, new ValuedEventArgs<ScenarioParameters>(parameters));
 		}
 	}
 }
