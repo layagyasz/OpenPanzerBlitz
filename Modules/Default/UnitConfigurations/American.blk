@@ -451,6 +451,9 @@ unit-configuration:lvt-1 {
 
 	bool:can-only-carry-infantry { false }
 	bool:can-double-range { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:lvt_a-1 {
 	string:name { LVT(A)-1 }
@@ -463,6 +466,9 @@ unit-configuration:lvt_a-1 {
 	byte:movement { 8 }
 
 	bool:can-only-carry-infantry { false }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:lvt_a-2 {
 	string:name { LVT(A)-2 }
@@ -476,6 +482,9 @@ unit-configuration:lvt_a-2 {
 
 	bool:can-only-carry-infantry { false }
 	bool:can-double-range { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:lvt-4 {
 	string:name { LVT-4 }
@@ -489,6 +498,9 @@ unit-configuration:lvt-4 {
 
 	bool:can-only-carry-infantry { false }
 	bool:can-double-range { true }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:lvt_a-4 {
 	string:name { LVT(A)-4 }
@@ -501,6 +513,9 @@ unit-configuration:lvt_a-4 {
 	byte:movement { 8 }
 
 	bool:can-only-carry-infantry { false }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:dukw {
 	string:name { DUKW }
@@ -513,6 +528,9 @@ unit-configuration:dukw {
 	byte:movement { 14 }
 
 	bool:can-only-carry-infantry { false }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:d-8 {
 	string:name { D-8 }
@@ -600,7 +618,8 @@ unit-configuration:scorpion {
 	byte:defense { 1 }
 	byte:movement { 14 }
 
-	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:calliope {
 	string:name { Calliope }

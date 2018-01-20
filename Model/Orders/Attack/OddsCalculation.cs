@@ -104,9 +104,11 @@ namespace PanzerBlitz
 			}
 
 			// Terrain modifiers.
-			if (Defenders.First().Position.RulesCalculator.DieModifier != 0)
+			int totalDieModifier = Defenders.First().Position.RulesCalculator.DieModifier
+											+ Defenders.Min(i => i.Configuration.WaterDieModifier);
+			if (totalDieModifier != 0)
 			{
-				_DieModifier += Defenders.First().Position.RulesCalculator.DieModifier;
+				_DieModifier += totalDieModifier;
 				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
 			}
 			// Disrupted modifier.

@@ -7,79 +7,16 @@ namespace PanzerBlitz
 	{
 		public readonly Tile Tile;
 
-		bool _MustAttackAllUnits;
-		bool _TreatUnitsAsArmored;
-		bool _Depressed;
-		bool _DepressedTransition;
-		bool _Concealing;
-		bool _LowProfileConcealing;
-		int _DieModifier;
-		int _TieredElevation;
-		int _SubTieredElevation;
-
-		public bool MustAttackAllUnits
-		{
-			get
-			{
-				return _MustAttackAllUnits;
-			}
-		}
-		public bool TreatUnitsAsArmored
-		{
-			get
-			{
-				return _TreatUnitsAsArmored;
-			}
-		}
-		public bool Depressed
-		{
-			get
-			{
-				return _Depressed;
-			}
-		}
-		public bool DepressedTransition
-		{
-			get
-			{
-				return _DepressedTransition;
-			}
-		}
-		public bool Concealing
-		{
-			get
-			{
-				return _Concealing;
-			}
-		}
-		public bool LowProfileConcealing
-		{
-			get
-			{
-				return _LowProfileConcealing;
-			}
-		}
-		public int DieModifier
-		{
-			get
-			{
-				return _DieModifier;
-			}
-		}
-		public int TieredElevation
-		{
-			get
-			{
-				return _TieredElevation;
-			}
-		}
-		public int SubTieredElevation
-		{
-			get
-			{
-				return _SubTieredElevation;
-			}
-		}
+		public bool MustAttackAllUnits { get; private set; }
+		public bool TreatUnitsAsArmored { get; private set; }
+		public bool Depressed { get; private set; }
+		public bool DepressedTransition { get; private set; }
+		public bool Concealing { get; private set; }
+		public bool LowProfileConcealing { get; private set; }
+		public bool Water { get; private set; }
+		public int DieModifier { get; private set; }
+		public int TieredElevation { get; private set; }
+		public int SubTieredElevation { get; private set; }
 
 		public TileRulesCalculator(Tile Tile)
 		{
@@ -138,26 +75,27 @@ namespace PanzerBlitz
 		{
 			if (Tile.RuleSet == null) return;
 
-			_MustAttackAllUnits = Tile.GetBaseRules().MustAttackAllUnits
+			MustAttackAllUnits = Tile.GetBaseRules().MustAttackAllUnits
 									  || Tile.GetEdgeRules().Any(i => i != null && i.MustAttackAllUnits)
 									  || Tile.GetPathOverlayRules().Any(i => i != null && i.MustAttackAllUnits);
-			_TreatUnitsAsArmored = Tile.GetBaseRules().TreatUnitsAsArmored
+			TreatUnitsAsArmored = Tile.GetBaseRules().TreatUnitsAsArmored
 									   || Tile.GetEdgeRules().Any(i => i != null && i.TreatUnitsAsArmored)
 									   || Tile.GetPathOverlayRules().Any(i => i != null && i.TreatUnitsAsArmored);
-			_Depressed = Tile.GetBaseRules().Depressed
+			Depressed = Tile.GetBaseRules().Depressed
 							 || Tile.GetEdgeRules().Any(i => i != null && i.Depressed)
 							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Depressed);
-			_DepressedTransition = Tile.GetBaseRules().DepressedTransition
+			DepressedTransition = Tile.GetBaseRules().DepressedTransition
 									   || Tile.GetEdgeRules().Any(i => i != null && i.DepressedTransition)
 									   || Tile.GetPathOverlayRules().Any(i => i != null && i.DepressedTransition);
-			_Concealing = Tile.GetBaseRules().Concealing
+			Concealing = Tile.GetBaseRules().Concealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.Concealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.Concealing);
-			_LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
+			LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.LowProfileConcealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
+			Water = Tile.GetBaseRules().Water || Tile.GetEdgeRules().All(i => i != null && i.Water);
 
-			_DieModifier =
+			DieModifier =
 				Math.Max(
 					Tile.GetBaseRules().DieModifier,
 					Math.Max(
@@ -167,8 +105,8 @@ namespace PanzerBlitz
 			bool elevated = Tile.GetBaseRules().Elevated
 							 || Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
 							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated);
-			_TieredElevation = Tile.Configuration.Elevation + (elevated ? 1 : 0);
-			_SubTieredElevation = 2 * Tile.Configuration.Elevation + (elevated ? 1 : 0);
+			TieredElevation = Tile.Configuration.Elevation + (elevated ? 1 : 0);
+			SubTieredElevation = 2 * Tile.Configuration.Elevation + (elevated ? 1 : 0);
 		}
 
 		float CalculateMovement(

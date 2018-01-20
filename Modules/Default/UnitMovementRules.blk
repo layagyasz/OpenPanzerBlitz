@@ -1,6 +1,7 @@
 ﻿unit-movement-rules<>:unit-movement-rules {
 	unit-movement-rules:default-non-vehicle { 
 		movement-cost:roaded { -.5 }
+		movement-cost:water { impassable }
 	}
 	unit-movement-rules:default-vehicle {
 		movement-cost:dense-edge { impassable }
@@ -8,6 +9,21 @@
 		movement-cost:roaded { -.5 }
 		movement-cost:sloped { 2 }
 		movement-cost:swamp { impassable }
+		movement-cost:water { impassable }
+	}
+	unit-movement-rules:amphibious-transport {
+		movement-cost:dense-edge { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:roaded { -.5 }
+		movement-cost:sloped { 2 }
+	}
+	unit-movement-rules:amphibious-vehicle {
+		movement-cost:dense-edge { impassable }
+		movement-cost:frozen { impassable }
+		movement-cost:roaded { -.5 }
+		movement-cost:sloped { 2 }
+		movement-cost:swamp { hard-block }
+		movement-cost:water { hard-block }
 	}
 	unit-movement-rules:truck {
 		movement-cost:dense-edge { impassable }
@@ -17,6 +33,7 @@
 		movement-cost:rough { 1 }
 		movement-cost:sloped { 3 }
 		movement-cost:swamp { impassable }
+		movement-cost:water { impassable }
 	}
 	unit-movement-rules:wagon {
 		movement-cost:dense-edge { impassable }
@@ -25,6 +42,7 @@
 		movement-cost:roaded { -.5 }
 		movement-cost:sloped { 2 }
 		movement-cost:swamp { impassable }
+		movement-cost:water { impassable }
 	}
 	unit-movement-rules:bicycle {
 		movement-cost:dense-edge { impassable }
@@ -35,6 +53,7 @@
 		movement-cost:sloped { 1 }
 		movement-cost:swamp { impassable }
 		movement-cost:uphill { 2 }
+		movement-cost:water { impassable }
 	}
 	unit-movement-rules:aerosan {
 		movement-cost:dense-edge { impassable }
@@ -43,12 +62,16 @@
 		movement-cost:rough { 1 }
 		movement-cost:sloped { 4 }
 		movement-cost:swamp { impassable }
+		movement-cost:water { impassable }
+
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}
 	unit-movement-rules:ski {
 		movement-cost:downhill { -1 }
 		movement-cost:sloped { 1 }
+		movement-cost:water { impassable }
+
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}
@@ -58,6 +81,8 @@
 		movement-cost:frozen { impassable }
 		movement-cost:sloped { 2 }
 		movement-cost:swamp { impassable }
+		movement-cost:water { impassable }
+
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}

@@ -24,6 +24,8 @@ namespace PanzerBlitz
 			: base("attack-pane")
 		{
 			this.Attack = Attack;
+			Attack.OnChanged += UpdateDescription;
+
 			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
 			{
 				DisplayedString = AttackTarget.ALL.ToString(),
@@ -46,9 +48,11 @@ namespace PanzerBlitz
 			Add(_Description);
 			Add(_AttackTargetSelect);
 			Add(_OrderButton);
+
+			UpdateDescription(null, EventArgs.Empty);
 		}
 
-		public void UpdateDescription()
+		void UpdateDescription(object Sender, EventArgs E)
 		{
 			_Description.Clear();
 			foreach (OddsCalculation o in Attack.OddsCalculations) DescribeOddsCalculation(o);

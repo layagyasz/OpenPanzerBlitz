@@ -35,11 +35,7 @@ namespace PanzerBlitz
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
-			if (_AttackBuilder != null)
-			{
-				_AttackBuilder.RemoveAttacker(Unit);
-				_AttackPane.UpdateDescription();
-			}
+			if (_AttackBuilder != null) _AttackBuilder.RemoveAttacker(Unit);
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key)
@@ -65,7 +61,6 @@ namespace PanzerBlitz
 					_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
 					_AttackPane.OnExecute += ExecuteAttack;
 				}
-				_AttackPane.UpdateDescription();
 			}
 			else _Controller.Alert(r);
 		}
@@ -82,13 +77,11 @@ namespace PanzerBlitz
 				_Controller.RemovePane(_AttackPane);
 				_AttackBuilder = null;
 			}
-			else _AttackPane.UpdateDescription();
 		}
 
 		void ChangeAttackTarget(object Sender, ValuedEventArgs<AttackTarget> E)
 		{
 			_AttackBuilder.SetAttackTarget(E.Value);
-			_AttackPane.UpdateDescription();
 		}
 	}
 }

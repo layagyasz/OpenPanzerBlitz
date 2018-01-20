@@ -11,11 +11,11 @@
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-f.map }
+				string:board-path { Maps/board-07.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-g.map }
+				string:board-path { Maps/board-06.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {
@@ -153,7 +153,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.chi-nu }
+								!unit-configuration:unit-configuration { unit-configurations.ka-chi }
 								int:count { 1 }
 							}
 						}

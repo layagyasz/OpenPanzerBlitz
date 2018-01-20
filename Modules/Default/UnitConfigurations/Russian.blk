@@ -498,6 +498,9 @@ unit-configuration:t-38 {
 	byte:range { 3 }
 	byte:defense { 3 }
 	byte:movement { 8 }	
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
+	int:water-die-modifier { 2 }
 }
 unit-configuration:t-38-m2 {
 	string:name { T-38 M2 }
@@ -508,6 +511,9 @@ unit-configuration:t-38-m2 {
 	byte:range { 4 }
 	byte:defense { 3 }
 	byte:movement { 8 }	
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
+	int:water-die-modifier { 2 }
 }
 unit-configuration:t-40 {
 	string:name { T-40 }
@@ -517,7 +523,10 @@ unit-configuration:t-40 {
 	byte:attack { 2 }
 	byte:range { 2 }
 	byte:defense { 3 }
-	byte:movement { 9 }	
+	byte:movement { 9 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
+	int:water-die-modifier { 2 }
 }
 unit-configuration:t-28-e {
 	string:name { T-28 E }

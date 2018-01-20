@@ -86,7 +86,9 @@ namespace PanzerBlitz
 			defenseText.Color = Color.Black;
 			defenseText.Position = SpriteSize * new Vector2f(1f / 6, 3f / 4) - GetCenter(defenseText);
 
-			Text moveText = new Text(UnitConfiguration.Movement.ToString(), Font, 36);
+			Text moveText = new Text(
+				UnitConfiguration.Movement
+				+ (UnitConfiguration.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 

@@ -312,6 +312,9 @@ unit-configuration:ka-mi {
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 7 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }
 unit-configuration:ka-chi {
 	string:name { Ka-Chi }
@@ -322,4 +325,7 @@ unit-configuration:ka-chi {
 	byte:range { 3 }
 	byte:defense { 5 }
 	byte:movement { 6 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-transport }
+	bool:can-carry-in-water { true }
 }

@@ -37,6 +37,7 @@ namespace PanzerBlitz
 			IS_CARRIER,
 			CAN_ONLY_CARRY_INFANTRY,
 			CAN_ONLY_CARRY_LIGHT,
+			CAN_CARRY_IN_WATER,
 			CAN_ONLY_OVERRUN_UNARMORED,
 			CAN_ONLY_SUPPORT_CLOSE_ASSAULT,
 			IS_PASSENGER,
@@ -44,6 +45,7 @@ namespace PanzerBlitz
 			IS_OVERSIZED_PASSENGER,
 			CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER,
 			OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER,
+			WATER_DIE_MODIFIER,
 
 			CAN_SPOT_INDIRECT_FIRE,
 			DISMOUNT_AS,
@@ -80,6 +82,7 @@ namespace PanzerBlitz
 		public readonly bool IsCarrier;
 		public readonly bool CanOnlyCarryInfantry;
 		public readonly bool CanOnlyCarryLight;
+		public readonly bool CanCarryInWater;
 		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool CanOnlySupportCloseAssault;
 		public readonly bool IsPassenger;
@@ -87,6 +90,7 @@ namespace PanzerBlitz
 		public readonly bool IsOversizedPassenger;
 		public readonly bool CannotUseRoadMovementWithOversizedPassenger;
 		public readonly float OversizedPassengerMovementMultiplier;
+		public readonly int WaterDieModifier;
 
 		public readonly bool CanSpotIndirectFire;
 
@@ -134,6 +138,7 @@ namespace PanzerBlitz
 			IsCarrier = Stream.ReadBoolean();
 			CanOnlyCarryInfantry = Stream.ReadBoolean();
 			CanOnlyCarryLight = Stream.ReadBoolean();
+			CanCarryInWater = Stream.ReadBoolean();
 			CanOnlyOverrunUnarmored = Stream.ReadBoolean();
 			CanOnlySupportCloseAssault = Stream.ReadBoolean();
 			IsPassenger = Stream.ReadBoolean();
@@ -141,6 +146,7 @@ namespace PanzerBlitz
 			IsOversizedPassenger = Stream.ReadBoolean();
 			CannotUseRoadMovementWithOversizedPassenger = Stream.ReadBoolean();
 			OversizedPassengerMovementMultiplier = Stream.ReadFloat();
+			WaterDieModifier = Stream.ReadInt32();
 
 			CanSpotIndirectFire = Stream.ReadBoolean();
 
@@ -192,6 +198,7 @@ namespace PanzerBlitz
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsCarrier && UnitClass != UnitClass.TRANSPORT);
 			CanOnlyCarryLight = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT], false);
+			CanCarryInWater = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CARRY_IN_WATER], false);
 			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
 											  UnitClass == UnitClass.INFANTRY
 											  || UnitClass == UnitClass.COMMAND_POST
@@ -205,6 +212,7 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER], CanOnlyCarryInfantry);
 			OversizedPassengerMovementMultiplier = Parse.DefaultIfNull(
 				attributes[(int)Attribute.OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER], 1f);
+			WaterDieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.WATER_DIE_MODIFIER], 0);
 
 			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
 			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], Attack > 0);
@@ -454,6 +462,7 @@ namespace PanzerBlitz
 			Stream.Write(IsCarrier);
 			Stream.Write(CanOnlyCarryInfantry);
 			Stream.Write(CanOnlyCarryLight);
+			Stream.Write(CanCarryInWater);
 			Stream.Write(CanOnlyOverrunUnarmored);
 			Stream.Write(CanOnlySupportCloseAssault);
 			Stream.Write(IsPassenger);
@@ -461,6 +470,7 @@ namespace PanzerBlitz
 			Stream.Write(IsOversizedPassenger);
 			Stream.Write(CannotUseRoadMovementWithOversizedPassenger);
 			Stream.Write(OversizedPassengerMovementMultiplier);
+			Stream.Write(WaterDieModifier);
 
 			Stream.Write(CanSpotIndirectFire);
 

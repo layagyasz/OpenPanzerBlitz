@@ -9,6 +9,8 @@ namespace PanzerBlitz
 {
 	public class AttackOrder : Order
 	{
+		public EventHandler<EventArgs> OnChanged;
+
 		public readonly Army AttackingArmy;
 		public readonly Tile AttackAt;
 		public readonly AttackMethod AttackMethod;
@@ -141,6 +143,8 @@ namespace PanzerBlitz
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)
 				odds.AttackFactorCalculations.ForEach(i => i.Item1.SetTreatStackAsArmored(odds.StackArmored));
+
+			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 		}
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -157,8 +161,6 @@ namespace PanzerBlitz
 
 		public virtual OrderInvalidReason Validate()
 		{
-			Recalculate();
-
 			if (_OddsCalculations.Count == 0)
 			{
 				if (AttackAt.Units.Count() == 0) return OrderInvalidReason.TARGET_EMPTY;

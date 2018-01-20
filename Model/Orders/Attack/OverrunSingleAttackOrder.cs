@@ -76,6 +76,8 @@ namespace PanzerBlitz
 
 			r = _InitialMovement.Unit.CanEnter(ExitTile, true);
 			if (r != OrderInvalidReason.NONE) return r;
+			r = _InitialMovement.Unit.CanEnter(AttackTile, false, true);
+			if (r != OrderInvalidReason.NONE) return r;
 
 			float distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);

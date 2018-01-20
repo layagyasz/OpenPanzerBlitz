@@ -162,13 +162,15 @@ namespace PanzerBlitz
 					|| Direction == Direction.SOUTH) && Position.OnEdge(Direction);
 		}
 
-		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false)
+		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false, bool IgnoreEnemyUnits = false)
 		{
-			if (Tile.GetUnitBlockType() == BlockType.STANDARD
+			if (!IgnoreEnemyUnits && Tile.GetUnitBlockType() == BlockType.STANDARD
 				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && i.Army != Army))
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
+			if (Tile.RulesCalculator.Water && !Configuration.CanCarryInWater && Passenger != null)
+				return OrderInvalidReason.UNIT_NO_CARRY_IN_WATER;
 			if (Terminal
 				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
 				&& !Tile.Units.Contains(this))
@@ -318,6 +320,8 @@ namespace PanzerBlitz
 			if (_Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
 			if (Unit.Carrier != null) return OrderInvalidReason.TARGET_CARRIED;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			if (Position != null && Position.RulesCalculator.Water && !Configuration.CanCarryInWater)
+				return OrderInvalidReason.UNIT_NO_CARRY_IN_WATER;
 
 			return Configuration.CanLoad(Unit.Configuration);
 		}
