@@ -13,6 +13,9 @@ namespace PanzerBlitz
 	public class ScenarioBuilderScreen : ScreenBase
 	{
 		public EventHandler<ValuedEventArgs<ScenarioParameters>> OnParametersChanged;
+		public EventHandler<EventArgs> OnArmyAdded;
+
+		public readonly ScenarioParameters Parameters;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("scenario-builder-pane");
 		SingleColumnTable _Display = new SingleColumnTable("scenario-builder-display");
@@ -21,9 +24,13 @@ namespace PanzerBlitz
 		Select<Environment> _EnvironmentSelect = new Select<Environment>("scenario-builder-parameters-section-select");
 		Select<Front> _FrontSelect = new Select<Front>("scenario-builder-parameters-section-select");
 
-		public ScenarioBuilderScreen(Vector2f WindowSize)
+		Table _ArmiesTable = new Table("scenario-builder-army-section-table", true);
+
+		public ScenarioBuilderScreen(Vector2f WindowSize, ScenarioParameters Parameters)
 			: base(WindowSize, true)
 		{
+			this.Parameters = Parameters;
+
 			_Display.Add(new Button("header-1") { DisplayedString = "Custom Scenario" });
 
 			MakeSection("Year", _YearSelect, _Display);
@@ -36,6 +43,7 @@ namespace PanzerBlitz
 						DisplayedString = i.ToString(),
 						Value = i
 					});
+			_YearSelect.SetValue(i => i.Value == Parameters.Year);
 
 			MakeSection("Environment", _EnvironmentSelect, _Display);
 			_EnvironmentSelect.OnChange += HandleParametersChanged;
@@ -46,6 +54,7 @@ namespace PanzerBlitz
 						DisplayedString = ObjectDescriber.Describe(environment),
 						Value = environment
 					});
+			_EnvironmentSelect.SetValue(i => i.Value == Parameters.Environment);
 
 			MakeSection("Front", _FrontSelect, _Display);
 			_FrontSelect.OnChange += HandleParametersChanged;
@@ -56,11 +65,29 @@ namespace PanzerBlitz
 						DisplayedString = ObjectDescriber.Describe(front),
 						Value = front
 					});
+			_FrontSelect.SetValue(i => i.Value == Parameters.Front);
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
+			Button addArmyButton = new Button("scenario-builder-army-section-add-button") { DisplayedString = "+" };
+			addArmyButton.OnClick += HandleArmyAdded;
+			_ArmiesTable.Add(
+				new TableRow("scenario-builder-army-section-header")
+				{
+					new Button("scenario-builder-army-section-faction-header") { DisplayedString = "Faction"},
+					new Button("scenario-builder-army-section-points-header") { DisplayedString = "Points"},
+					new Button("scenario-builder-army-section-team-header") { DisplayedString = "Team"},
+					addArmyButton
+				});
+			_Display.Add(_ArmiesTable);
+
 			_Pane.Add(_Display);
 			_Items.Add(_Pane);
+		}
+
+		public void AddArmyBuilder(ArmyBuilder Builder)
+		{
+			_ArmiesTable.Add(new ScenarioBuilderArmySection(Builder, GameData.Factions.Values));
 		}
 
 		void MakeSection(string SectionName, GuiItem Input, SingleColumnTable Display)
@@ -83,6 +110,11 @@ namespace PanzerBlitz
 					_YearSelect.Value.Value, _FrontSelect.Value.Value, _EnvironmentSelect.Value.Value);
 			if (OnParametersChanged != null)
 				OnParametersChanged(this, new ValuedEventArgs<ScenarioParameters>(parameters));
+		}
+
+		void HandleArmyAdded(object Sender, EventArgs E)
+		{
+			if (OnArmyAdded != null) OnArmyAdded(this, EventArgs.Empty);
 		}
 	}
 }

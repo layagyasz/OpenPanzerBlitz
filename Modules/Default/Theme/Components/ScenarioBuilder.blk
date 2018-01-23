@@ -25,3 +25,105 @@ class:scenario-builder-parameters-section-select-option {
 		int:width { 272 }
 	}
 }
+class:scenario-builder-army-section-table {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 409 }
+		int[]:padding { 0 9 0 0 }
+	}
+}
+class:scenario-builder-army-section-header {
+	mode:default {
+		int:height { 24 }
+		int:width { 288 }
+		int[]:margin { 0 1 0 8 }
+	}
+}
+class:scenario-builder-army-section-faction-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 116 }
+		int[]:margin { 0 0 4 0 }
+	}
+}
+class:scenario-builder-army-section-points-header {
+	!class:parent { scenario-builder-army-section-faction-header }
+	mode:default {
+		int:width { 68 }
+	}
+}
+class:scenario-builder-army-section-team-header {
+	!class:parent { scenario-builder-army-section-faction-header }
+	mode:default {
+		int:width { 68 }
+	}
+}
+class:scenario-builder-army-section-add-button {
+	!class:parent { square-button }
+	mode:default {
+		int[]:margin { 0 0 0 0 }
+	}
+}
+class:scenario-builder-army-section {
+	mode:default {
+		int:height { 34 }
+		int:width { 228 }
+	}
+}
+class:scenario-builder-army-section-faction-cell {
+	!class:parent { regular }
+	mode:default {
+		int:width { 116 }
+		int[]:margin { 0 0 4 0 }
+	}
+}
+class:scenario-builder-army-section-points-cell {
+	!class:parent { scenario-builder-army-section-faction-cell }
+	mode:default {
+		int:width { 68 }
+	}
+}
+class:scenario-builder-army-section-team-cell {
+	!class:parent { scenario-builder-army-section-faction-cell }
+	mode:default {
+		int:width { 68 }
+	}
+}
+class:scenario-builder-army-section-faction-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 100 }
+	}
+}
+class:scenario-builder-army-section-faction-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 100 }
+	}
+}
+class:scenario-builder-army-section-points-input {
+	!class:parent { text-input }
+	mode:default {
+		int:width { 52 }
+	}
+}
+class:scenario-builder-army-section-team-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 52 }
+	}
+}
+class:scenario-builder-army-section-team-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 52 }
+	}
+}
+class:scenario-builder-army-section-remove-button {
+	!class:parent { square-button }
+	mode:default {
+		int:height { 32 }
+		int[]:margin { 0 0 0 0 }
+		int[]:padding { 8 7 8 7 }
+	}
+}

@@ -8,7 +8,6 @@ namespace PanzerBlitz
 		public readonly ScenarioParameters Parameters;
 
 		List<ArmyBuilder> _Armies = new List<ArmyBuilder>();
-		IdGenerator _IdGenerator = new IdGenerator();
 
 		public ScenarioBuilder(ScenarioParameters Parameters)
 		{
@@ -26,9 +25,9 @@ namespace PanzerBlitz
 			return true;
 		}
 
-		public void AddArmy(Faction Faction, uint Points)
+		public void AddArmy(ArmyBuilder Builder)
 		{
-			_Armies.Add(new ArmyBuilder(_IdGenerator, new ArmyParameters(Faction, Points, Parameters)));
+			_Armies.Add(Builder);
 		}
 	}
 }

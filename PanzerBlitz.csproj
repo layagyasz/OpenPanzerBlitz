@@ -325,6 +325,7 @@
     <Compile Include="Model\ScenarioBuilder\ScenarioBuilderAction.cs" />
     <Compile Include="Model\ScenarioBuilder\ScenarioBuilderActionSerializer.cs" />
     <Compile Include="Controller\ScenarioBuilder\ScenarioBuilderController.cs" />
+    <Compile Include="View\ScenarioBuilder\ScenarioBuilderArmySection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

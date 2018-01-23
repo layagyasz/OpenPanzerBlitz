@@ -5,12 +5,14 @@ namespace PanzerBlitz
 	{
 		public Faction Faction { get; private set; }
 		public uint Points { get; private set; }
+		public byte Team { get; private set; }
 		public ScenarioParameters Parameters { get; private set; }
 
-		public ArmyParameters(Faction Faction, uint Points, ScenarioParameters Parameters)
+		public ArmyParameters(Faction Faction, uint Points, byte Team, ScenarioParameters Parameters)
 		{
 			this.Faction = Faction;
 			this.Points = Points;
+			this.Team = Team;
 			this.Parameters = Parameters;
 		}
 
