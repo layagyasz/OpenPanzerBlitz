@@ -13,12 +13,16 @@ namespace PanzerBlitz
 	public class ScenarioBuilderScreen : ScreenBase
 	{
 		public EventHandler<ValuedEventArgs<ScenarioParameters>> OnParametersChanged;
-		public EventHandler<EventArgs> OnArmyAdded;
+		public EventHandler OnArmyAdded;
+		public EventHandler<ValuedEventArgs<Tuple<ArmyBuilder, ArmyParameters>>> OnArmyParametersChanged;
+		public EventHandler<ValuedEventArgs<ArmyBuilder>> OnArmyRemoved;
+		public EventHandler OnFinished;
 
-		public readonly ScenarioParameters Parameters;
+		public readonly ScenarioBuilder ScenarioBuilder;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("scenario-builder-pane");
 		SingleColumnTable _Display = new SingleColumnTable("scenario-builder-display");
+		Button _Error = new Button("footer-error");
 
 		Select<uint> _YearSelect = new Select<uint>("scenario-builder-parameters-section-select");
 		Select<Environment> _EnvironmentSelect = new Select<Environment>("scenario-builder-parameters-section-select");
@@ -26,10 +30,10 @@ namespace PanzerBlitz
 
 		Table _ArmiesTable = new Table("scenario-builder-army-section-table", true);
 
-		public ScenarioBuilderScreen(Vector2f WindowSize, ScenarioParameters Parameters)
+		public ScenarioBuilderScreen(Vector2f WindowSize, ScenarioBuilder ScenarioBuilder)
 			: base(WindowSize, true)
 		{
-			this.Parameters = Parameters;
+			this.ScenarioBuilder = ScenarioBuilder;
 
 			_Display.Add(new Button("header-1") { DisplayedString = "Custom Scenario" });
 
@@ -43,7 +47,7 @@ namespace PanzerBlitz
 						DisplayedString = i.ToString(),
 						Value = i
 					});
-			_YearSelect.SetValue(i => i.Value == Parameters.Year);
+			_YearSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Year);
 
 			MakeSection("Environment", _EnvironmentSelect, _Display);
 			_EnvironmentSelect.OnChange += HandleParametersChanged;
@@ -54,7 +58,7 @@ namespace PanzerBlitz
 						DisplayedString = ObjectDescriber.Describe(environment),
 						Value = environment
 					});
-			_EnvironmentSelect.SetValue(i => i.Value == Parameters.Environment);
+			_EnvironmentSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Environment);
 
 			MakeSection("Front", _FrontSelect, _Display);
 			_FrontSelect.OnChange += HandleParametersChanged;
@@ -65,7 +69,7 @@ namespace PanzerBlitz
 						DisplayedString = ObjectDescriber.Describe(front),
 						Value = front
 					});
-			_FrontSelect.SetValue(i => i.Value == Parameters.Front);
+			_FrontSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Front);
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
@@ -81,13 +85,40 @@ namespace PanzerBlitz
 				});
 			_Display.Add(_ArmiesTable);
 
+			Button finishedButton = new Button("large-button") { DisplayedString = "Finished" };
+			finishedButton.Position = new Vector2f(0, _Pane.Size.Y - finishedButton.Size.Y - 32);
+			finishedButton.OnClick += HandleFinished;
+
 			_Pane.Add(_Display);
+			_Pane.Add(finishedButton);
 			_Items.Add(_Pane);
 		}
 
 		public void AddArmyBuilder(ArmyBuilder Builder)
 		{
-			_ArmiesTable.Add(new ScenarioBuilderArmySection(Builder, GameData.Factions.Values));
+			ScenarioBuilderArmySection section = new ScenarioBuilderArmySection(Builder, GameData.Factions.Values);
+			section.OnParametersChanged += HandleArmyParametersChanged;
+			section.OnRemoved += HandleArmyRemoved;
+			_ArmiesTable.Add(section);
+		}
+
+		public void RemoveArmyBuilder(ArmyBuilder Builder)
+		{
+			_ArmiesTable.Remove(
+				i => i is ScenarioBuilderArmySection && ((ScenarioBuilderArmySection)i).ArmyBuilder == Builder);
+		}
+
+		public void Alert(string Alert)
+		{
+			_Error.DisplayedString = Alert;
+			_Display.Remove(_Error);
+			_Display.Add(_Error);
+		}
+
+		public bool Validate()
+		{
+			return _ArmiesTable.All(
+				i => !(i is ScenarioBuilderArmySection) || ((ScenarioBuilderArmySection)i).Validate());
 		}
 
 		void MakeSection(string SectionName, GuiItem Input, SingleColumnTable Display)
@@ -115,6 +146,27 @@ namespace PanzerBlitz
 		void HandleArmyAdded(object Sender, EventArgs E)
 		{
 			if (OnArmyAdded != null) OnArmyAdded(this, EventArgs.Empty);
+		}
+
+		void HandleArmyParametersChanged(object Sender, ValuedEventArgs<ArmyParameters> E)
+		{
+			if (OnArmyParametersChanged != null)
+				OnArmyParametersChanged(
+					this,
+					new ValuedEventArgs<Tuple<ArmyBuilder, ArmyParameters>>(
+						new Tuple<ArmyBuilder, ArmyParameters>(
+							((ScenarioBuilderArmySection)Sender).ArmyBuilder, E.Value)));
+		}
+
+		void HandleArmyRemoved(object Sender, EventArgs E)
+		{
+			if (OnArmyRemoved != null)
+				OnArmyRemoved(this, new ValuedEventArgs<ArmyBuilder>(((ScenarioBuilderArmySection)Sender).ArmyBuilder));
+		}
+
+		void HandleFinished(object Sender, EventArgs E)
+		{
+			if (OnFinished != null) OnFinished(this, EventArgs.Empty);
 		}
 	}
 }

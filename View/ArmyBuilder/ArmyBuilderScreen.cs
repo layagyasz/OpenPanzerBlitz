@@ -12,6 +12,8 @@ namespace PanzerBlitz
 {
 	public class ArmyBuilderScreen : ScreenBase
 	{
+		public EventHandler OnFinished;
+
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("army-builder-pane");
 
 		ArmyParameters _Parameters;
@@ -36,7 +38,15 @@ namespace PanzerBlitz
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
-			Button header = new Button("army-builder-header") { DisplayedString = _Parameters.Faction.Name };
+			Button header = new Button("army-builder-header")
+			{
+				DisplayedString =
+					string.Format(
+						"{0} - {1} - {2}",
+						ObjectDescriber.Describe(Parameters.Faction.Name),
+						ObjectDescriber.Describe(Parameters.Parameters.Front),
+						Parameters.Parameters.Year)
+			};
 
 			_UnitClassSelect.Position = new Vector2f(0, header.Size.Y);
 
@@ -76,11 +86,15 @@ namespace PanzerBlitz
 			_UnitClassSelect.OnChange += FilterUnits;
 			FilterUnits();
 
+			Button finishedButton = new Button("large-button") { DisplayedString = "Finished" };
+			finishedButton.Position = _Pane.Size - finishedButton.Size - new Vector2f(32, 32);
+
 			_Pane.Add(header);
 			_Pane.Add(_AvailableUnits);
 			_Pane.Add(_SelectedUnits);
 			_Pane.Add(_PointTotalButton);
 			_Pane.Add(_UnitClassSelect);
+			_Pane.Add(finishedButton);
 			_Items.Add(_Pane);
 		}
 
@@ -117,6 +131,11 @@ namespace PanzerBlitz
 		{
 			_SelectedUnits.Remove(E.Value);
 			SetPointTotal(_PointTotal - E.Value.GetPointValue());
+		}
+
+		void HandleFinished(object Sender, EventArgs E)
+		{
+			if (OnFinished != null) OnFinished(this, EventArgs.Empty);
 		}
 	}
 }

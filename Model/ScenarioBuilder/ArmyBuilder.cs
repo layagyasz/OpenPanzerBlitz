@@ -36,6 +36,12 @@ namespace PanzerBlitz
 			return Units.All(i => Parameters.Matches(i));
 		}
 
+		public bool SetParameters(ArmyParameters Parameters)
+		{
+			this.Parameters.Copy(Parameters);
+			return true;
+		}
+
 		public void SetUnits(IEnumerable<UnitConfigurationLink> Units)
 		{
 			_Units = Units.ToList();

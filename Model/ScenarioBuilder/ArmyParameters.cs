@@ -16,9 +16,27 @@ namespace PanzerBlitz
 			this.Parameters = Parameters;
 		}
 
+		public void Copy(ArmyParameters Copy)
+		{
+			Faction = Copy.Faction;
+			Points = Copy.Points;
+			Team = Copy.Team;
+			Parameters = Copy.Parameters;
+		}
+
 		public bool Matches(UnitConfigurationLink Link)
 		{
 			return (Link.Faction == null || Faction == Link.Faction) && Parameters.Matches(Link);
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[ArmyParameters: Faction={0}, Points={1}, Team={2}, Parameters={3}]",
+				Faction,
+				Points,
+				Team,
+				Parameters);
 		}
 	}
 }

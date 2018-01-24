@@ -9,6 +9,14 @@ namespace PanzerBlitz
 
 		List<ArmyBuilder> _Armies = new List<ArmyBuilder>();
 
+		public IEnumerable<ArmyBuilder> Armies
+		{
+			get
+			{
+				return _Armies;
+			}
+		}
+
 		public ScenarioBuilder(ScenarioParameters Parameters)
 		{
 			this.Parameters = Parameters;
@@ -21,13 +29,19 @@ namespace PanzerBlitz
 
 		public bool SetParameters(ScenarioParameters Parameters)
 		{
-			Parameters.Copy(Parameters);
+			this.Parameters.Copy(Parameters);
 			return true;
 		}
 
-		public void AddArmy(ArmyBuilder Builder)
+		public bool AddArmy(ArmyBuilder Builder)
 		{
 			_Armies.Add(Builder);
+			return true;
+		}
+
+		public bool RemoveArmy(ArmyBuilder Builder)
+		{
+			return _Armies.Remove(Builder);
 		}
 	}
 }

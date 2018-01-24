@@ -8,7 +8,7 @@
 class:army-builder-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 708 }
+		int:height { 756 }
 		int:width { 752 }
 	}
 }

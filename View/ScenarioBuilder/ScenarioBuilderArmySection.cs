@@ -9,19 +9,19 @@ namespace PanzerBlitz
 {
 	public class ScenarioBuilderArmySection : TableRow
 	{
-		public EventHandler<ValuedEventArgs<ArmyParameters>> OnChanged;
+		public EventHandler<ValuedEventArgs<ArmyParameters>> OnParametersChanged;
 		public EventHandler<EventArgs> OnRemoved;
 
-		public readonly ArmyParameters Parameters;
+		public readonly ArmyBuilder ArmyBuilder;
 
 		Select<Faction> _FactionSelect = new Select<Faction>("scenario-builder-army-section-faction-select");
 		TextInput _PointsInput = new TextInput("scenario-builder-army-section-points-input");
 		Select<byte> _TeamSelect = new Select<byte>("scenario-builder-army-section-team-select");
 
-		public ScenarioBuilderArmySection(ArmyBuilder Builder, IEnumerable<Faction> Factions)
+		public ScenarioBuilderArmySection(ArmyBuilder ArmyBuilder, IEnumerable<Faction> Factions)
 			: base("scenario-builder-army-section")
 		{
-			this.Parameters = Builder.Parameters;
+			this.ArmyBuilder = ArmyBuilder;
 
 			foreach (Faction faction in Factions)
 				_FactionSelect.Add(
@@ -30,9 +30,9 @@ namespace PanzerBlitz
 						DisplayedString = ObjectDescriber.Describe(faction),
 						Value = faction
 					});
-			_FactionSelect.SetValue(i => i.Value == Parameters.Faction);
+			_FactionSelect.SetValue(i => i.Value == ArmyBuilder.Parameters.Faction);
 
-			_PointsInput.Value = Parameters.Points.ToString();
+			_PointsInput.Value = ArmyBuilder.Parameters.Points.ToString();
 
 			for (byte i = 1; i <= 3; ++i)
 				_TeamSelect.Add(
@@ -41,12 +41,12 @@ namespace PanzerBlitz
 						DisplayedString = i.ToString(),
 						Value = i
 					});
-			_TeamSelect.SetValue(i => i.Value == Parameters.Team);
+			_TeamSelect.SetValue(i => i.Value == ArmyBuilder.Parameters.Team);
 
 			Button removeButton = new Button("scenario-builder-army-section-remove-button") { DisplayedString = "X" };
 
 			_FactionSelect.OnChange += HandleChange;
-			_PointsInput.OnChange += HandleChange;
+			_PointsInput.OnLeave += HandleChange;
 			_TeamSelect.OnChange += HandleChange;
 			removeButton.OnClick += HandleRemove;
 
@@ -54,6 +54,19 @@ namespace PanzerBlitz
 			Add(new GuiContainer<GuiItem>("scenario-builder-army-section-points-cell") { _PointsInput });
 			Add(new GuiContainer<GuiItem>("scenario-builder-army-section-team-cell") { _TeamSelect });
 			Add(removeButton);
+		}
+
+		public bool Validate()
+		{
+			try
+			{
+				uint points = Convert.ToUInt32(_PointsInput.Value);
+				return points > 0;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
 		}
 
 		void HandleChange(object Sender, EventArgs E)
@@ -64,11 +77,11 @@ namespace PanzerBlitz
 				uint points = Convert.ToUInt32(_PointsInput.Value);
 				parameters =
 					new ArmyParameters(
-						_FactionSelect.Value.Value, points, _TeamSelect.Value.Value, Parameters.Parameters);
+						_FactionSelect.Value.Value, points, _TeamSelect.Value.Value, ArmyBuilder.Parameters.Parameters);
 			}
 			catch (Exception e) { }
-			if (parameters != null && OnChanged != null)
-				OnChanged(this, new ValuedEventArgs<ArmyParameters>(parameters));
+			if (parameters != null && OnParametersChanged != null)
+				OnParametersChanged(this, new ValuedEventArgs<ArmyParameters>(parameters));
 		}
 
 		void HandleRemove(object Sender, EventArgs E)

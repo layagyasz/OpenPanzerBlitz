@@ -13,18 +13,18 @@ namespace PanzerBlitz
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			Faction faction = GameData.Factions["japanese"];
-			ScenarioParameters scenarioParameters =
-				new ScenarioParameters(1939, Front.EAST, GameData.Environments["summer-steppe"]);
-			ArmyParameters parameters = new ArmyParameters(faction, 1000, 1, scenarioParameters);
+			_Context = ProgramStateContext;
+			ScenarioBuilderContext context = (ScenarioBuilderContext)_Context;
+
+			ArmyBuilder builder = context.ScenarioBuilder.Armies.First(i => !i.Validate());
 			ArmyBuilderScreen screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,
 					GameData.UnitConfigurationLinks,
-					parameters,
+					builder.Parameters,
 					new UnitConfigurationRenderer(
 						GameData.UnitConfigurationLinks.Where(
-							i => parameters.Matches(i)).Select(i => i.UnitConfiguration),
+							i => builder.Parameters.Matches(i)).Select(i => i.UnitConfiguration),
 						GameData.UnitRenderDetails,
 						128,
 						1024,

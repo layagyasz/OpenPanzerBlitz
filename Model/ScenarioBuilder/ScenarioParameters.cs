@@ -42,5 +42,11 @@ namespace PanzerBlitz
 			Stream.Write((byte)Front);
 			Stream.Write(Environment.UniqueKey);
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[ScenarioParameters: Year={0}, Front={1}, Environment={2}]", Year, Front, Environment);
+		}
 	}
 }

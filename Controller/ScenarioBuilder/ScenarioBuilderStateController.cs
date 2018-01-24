@@ -7,24 +7,32 @@ namespace PanzerBlitz
 {
 	public class ScenarioBuilderStateController : PagedProgramStateController
 	{
-		ScenarioParameters _Parameters;
+		ScenarioBuilder _ScenarioBuilder;
 		ScenarioBuilderController _Controller;
 
 		public ScenarioBuilderStateController() : base(ProgramState.LANDING) { }
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			_Parameters = new ScenarioParameters(1939, Front.EAST, GameData.Environments.Values.First());
+			ScenarioParameters defaultParameters =
+				new ScenarioParameters(1939, Front.EAST, GameData.Environments.Values.First());
+			_ScenarioBuilder = new ScenarioBuilder(defaultParameters);
 
-			ScenarioBuilderScreen screen = new ScenarioBuilderScreen(ProgramContext.ScreenResolution, _Parameters);
+			ScenarioBuilderScreen screen = new ScenarioBuilderScreen(ProgramContext.ScreenResolution, _ScenarioBuilder);
 			screen.OnMainMenuButtonClicked += HandleBack;
 
-			_Controller =
-				new ScenarioBuilderController(
-					new ScenarioBuilder(new ScenarioParameters(0, Front.ALL, GameData.Environments.Values.First())),
-					screen);
+			_Controller = new ScenarioBuilderController(_ScenarioBuilder, screen);
+			_Controller.OnFinished += HandleFinished;
 
 			return screen;
+		}
+
+		void HandleFinished(object Sender, EventArgs E)
+		{
+			OnProgramStateTransition(
+				this,
+				new ProgramStateTransitionEventArgs(
+					ProgramState.BUILD_ARMY, new ScenarioBuilderContext(_ScenarioBuilder)));
 		}
 	}
 }

@@ -3,6 +3,9 @@
 }
 class:scenario-builder-display {
 	!class:parent { pane-display }
+	mode:default { 
+		int:height { 682 }
+	}
 }
 class:scenario-builder-parameters-section {
 	!class:parent { regular }
@@ -28,7 +31,7 @@ class:scenario-builder-parameters-section-select-option {
 class:scenario-builder-army-section-table {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 409 }
+		int:height { 415 }
 		int[]:padding { 0 9 0 0 }
 	}
 }
