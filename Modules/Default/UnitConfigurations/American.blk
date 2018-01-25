@@ -386,7 +386,7 @@ unit-configuration:m-4a3e2_76 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
 	byte:range { 10 }
-	byte:defense { 17 }
+	byte:defense { 15 }
 	byte:movement { 7 }
 }
 unit-configuration:m-26 {

@@ -9,6 +9,8 @@ namespace PanzerBlitz
 {
 	public class ArmyBuilderStateController : PagedProgramStateController
 	{
+		ArmyBuilderController _Controller;
+
 		public ArmyBuilderStateController() : base(ProgramState.LANDING) { }
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
@@ -30,7 +32,22 @@ namespace PanzerBlitz
 						1024,
 						new Font("Compacta Std Regular.otf")));
 			screen.OnMainMenuButtonClicked += HandleBack;
+
+			_Controller = new ArmyBuilderController(builder, screen);
+			_Controller.OnFinished += HandleFinished;
+
 			return screen;
+		}
+
+		void HandleFinished(object Sender, EventArgs E)
+		{
+			ScenarioBuilder builder = ((ScenarioBuilderContext)_Context).ScenarioBuilder;
+			ProgramStateTransitionEventArgs transition = null;
+			if (builder.Armies.All(i => i.Validate()))
+				transition = new ProgramStateTransitionEventArgs(
+					ProgramState.MATCH, new MatchContext(new Match(builder.BuildScenario())));
+			else transition = new ProgramStateTransitionEventArgs(ProgramState.BUILD_ARMY, _Context);
+			OnProgramStateTransition(this, transition);
 		}
 	}
 }

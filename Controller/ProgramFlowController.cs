@@ -11,39 +11,45 @@ namespace PanzerBlitz
 		public readonly ProgramContext ProgramContext;
 
 		ProgramState _ProgramState;
+		ProgramStateController _Controller;
 
-		Dictionary<ProgramState, ProgramStateController> _ProgramStateControllers =
-			new Dictionary<ProgramState, ProgramStateController>
+		Dictionary<ProgramState, Type> _ProgramStateControllers =
+			new Dictionary<ProgramState, Type>
 		{
-			{ ProgramState.BUILD_ARMY, new ArmyBuilderStateController() },
-			{ ProgramState.BUILD_SCENARIO, new ScenarioBuilderStateController() },
-			{ ProgramState.EDIT, new EditStateController() },
-			{ ProgramState.LANDING, new LandingStateController() },
-			{ ProgramState.LOCAL_MATCH_RECORD_SELECT, new LocalMatchRecordSelectStateController() },
-			{ ProgramState.LOCAL_SCENARIO_SELECT, new LocalScenarioSelectStateController() },
-			{ ProgramState.LOG_IN_PLAYER, new LogInPlayerStateController() },
-			{ ProgramState.MATCH, new MatchStateController() },
-			{ ProgramState.MATCH_END, new MatchEndStateController() },
-			{ ProgramState.MATCH_LOBBY, new MatchLobbyStateController() },
-			{ ProgramState.REGISTER_PLAYER, new RegisterPlayerStateController() },
-			{ ProgramState.SERVER, new ServerStateController() }
+			{ ProgramState.BUILD_ARMY, typeof(ArmyBuilderStateController) },
+			{ ProgramState.BUILD_SCENARIO, typeof(ScenarioBuilderStateController) },
+			{ ProgramState.EDIT, typeof(EditStateController) },
+			{ ProgramState.LANDING, typeof(LandingStateController) },
+			{ ProgramState.LOCAL_MATCH_RECORD_SELECT, typeof(LocalMatchRecordSelectStateController) },
+			{ ProgramState.LOCAL_SCENARIO_SELECT, typeof(LocalScenarioSelectStateController) },
+			{ ProgramState.LOG_IN_PLAYER, typeof(LogInPlayerStateController) },
+			{ ProgramState.MATCH, typeof(MatchStateController) },
+			{ ProgramState.MATCH_END, typeof(MatchEndStateController) },
+			{ ProgramState.MATCH_LOBBY, typeof(MatchLobbyStateController) },
+			{ ProgramState.REGISTER_PLAYER, typeof(RegisterPlayerStateController) },
+			{ ProgramState.SERVER, typeof(ServerStateController) }
 		};
 
 		public ProgramFlowController(Interface Interface)
 		{
 			this.Interface = Interface;
 			this.ProgramContext = new ProgramContext(Interface.WindowBounds[2], Interface.KeyController);
-
-			foreach (ProgramStateController controller in _ProgramStateControllers.Values)
-				controller.OnProgramStateTransition += HandleStateChange;
 		}
 
 		public void EnterState(ProgramState ProgramState, ProgramStateContext ProgramStateContext)
 		{
 			_ProgramState = ProgramState;
+
+			ProgramStateController newController =
+				(ProgramStateController)_ProgramStateControllers[ProgramState]
+					.GetConstructor(new Type[] { }).Invoke(new object[] { });
+			newController.OnProgramStateTransition += HandleStateChange;
+
+			if (_Controller != null) _Controller.OnProgramStateTransition -= HandleStateChange;
+			_Controller = newController;
+
 			Interface.Screen.Clear();
-			Interface.Screen.Add(
-				_ProgramStateControllers[ProgramState].SetupState(ProgramContext, ProgramStateContext));
+			Interface.Screen.Add(newController.SetupState(ProgramContext, ProgramStateContext));
 		}
 
 		void HandleStateChange(object Sender, ProgramStateTransitionEventArgs E)

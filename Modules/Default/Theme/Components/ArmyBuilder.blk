@@ -8,7 +8,7 @@
 class:army-builder-pane {
 	!class:parent { pane }
 	mode:default {
-		int:height { 756 }
+		int:height { 804 }
 		int:width { 752 }
 	}
 }
@@ -95,5 +95,17 @@ class:army-builder-table-cell-overlay {
 		int:height { 24 }
 		int:width { 64 }
 		int[]:padding { 24 3 0 0 }
+	}
+}
+class:army-builder-error {
+	!class:parent { footer-error }
+	mode:default {
+		int:width { 720 }
+	}
+}
+class:army-builder-large-button {
+	!class:parent { large-button }
+	mode:default {
+		int:width { 352 }
 	}
 }

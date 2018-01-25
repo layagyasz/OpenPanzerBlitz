@@ -16,6 +16,8 @@
 		movement-cost:frozen { impassable }
 		movement-cost:roaded { -.5 }
 		movement-cost:sloped { 2 }
+		movement-cost:swamp { 7 }
+		movement-cost:water { 7 }
 	}
 	unit-movement-rules:amphibious-vehicle {
 		movement-cost:dense-edge { impassable }

@@ -15,14 +15,16 @@ namespace PanzerBlitz
 		{
 			typeof(CompositeObjective),
 			typeof(FurthestAdvanceObjective),
+			typeof(HighestScoreObjective),
 			typeof(LineOfFireObjective),
-			typeof(UnitsDestroyedObjective),
-			typeof(UnitsMatchedObjective),
 			typeof(PreventEnemyObjective),
 			typeof(RatioObjective),
 			typeof(SumObjective),
 			typeof(TilesControlledObjective),
-			typeof(TriggerObjective)
+			typeof(TriggerObjective),
+			typeof(UnitsDestroyedObjective),
+			typeof(UnitsMatchedObjective),
+			typeof(UnitsMatchedPointsObjective)
 		})
 		{ }
 

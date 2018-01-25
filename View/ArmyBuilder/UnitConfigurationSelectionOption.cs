@@ -10,7 +10,7 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationSelectionOption : Button
 	{
-		public readonly UnitConfiguration UnitConfiguration;
+		public readonly UnitConfigurationLink UnitConfigurationLink;
 		public readonly UnitConfigurationStackView StackView;
 
 		Button _PointText;
@@ -19,16 +19,16 @@ namespace PanzerBlitz
 			string ClassName,
 			string DetailsClassName,
 			string OverlayClassName,
-			UnitConfiguration UnitConfiguration,
+			UnitConfigurationLink UnitConfigurationLink,
 			Faction Faction,
 			UnitConfigurationRenderer Renderer,
 			bool DisplayCount)
 			: base(ClassName)
 		{
-			this.UnitConfiguration = UnitConfiguration;
+			this.UnitConfigurationLink = UnitConfigurationLink;
 
 			StackView = new UnitConfigurationStackView(
-				UnitConfiguration,
+				UnitConfigurationLink.UnitConfiguration,
 				Faction,
 				Renderer,
 				Class.GetAttributeWithDefault("unit-scale", 0),
@@ -41,7 +41,7 @@ namespace PanzerBlitz
 			_PointText = new Button(DetailsClassName);
 			_PointText.Position = new Vector2f(12, StackView.Size.Y + 16);
 			_PointText.Parent = this;
-			_PointText.DisplayedString = UnitConfiguration.GetPointValue().ToString();
+			_PointText.DisplayedString = UnitConfigurationLink.UnitConfiguration.GetPointValue().ToString();
 		}
 
 		public override void Update(

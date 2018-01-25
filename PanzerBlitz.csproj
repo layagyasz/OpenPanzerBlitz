@@ -327,6 +327,9 @@
     <Compile Include="Controller\ScenarioBuilder\ScenarioBuilderController.cs" />
     <Compile Include="View\ScenarioBuilder\ScenarioBuilderArmySection.cs" />
     <Compile Include="Controller\ScenarioBuilderContext.cs" />
+    <Compile Include="Controller\ArmyBuilder\ArmyBuilderController.cs" />
+    <Compile Include="Model\VictoryConditions\HighestScoreObjective.cs" />
+    <Compile Include="Model\VictoryConditions\UnitsMatchedPointsObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

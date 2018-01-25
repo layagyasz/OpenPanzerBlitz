@@ -9,8 +9,8 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationTable : Table
 	{
-		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnUnitClicked;
-		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnUnitRightClicked;
+		public EventHandler<ValuedEventArgs<UnitConfigurationLink>> OnUnitClicked;
+		public EventHandler<ValuedEventArgs<UnitConfigurationLink>> OnUnitRightClicked;
 
 		UnitConfigurationRenderer _Renderer;
 		Faction _Faction;
@@ -37,7 +37,7 @@ namespace PanzerBlitz
 			_StackDuplicates = StackDuplicates;
 		}
 
-		public void Add(UnitConfiguration UnitConfiguration)
+		public void Add(UnitConfigurationLink UnitConfigurationLink)
 		{
 			if (_StackDuplicates)
 			{
@@ -45,7 +45,7 @@ namespace PanzerBlitz
 					_Items
 						.SelectMany(i => i)
 						.Cast<UnitConfigurationSelectionOption>()
-						.FirstOrDefault(i => i.UnitConfiguration == UnitConfiguration);
+						.FirstOrDefault(i => i.UnitConfigurationLink == UnitConfigurationLink);
 				if (o != null)
 				{
 					o.StackView.Count++;
@@ -66,7 +66,7 @@ namespace PanzerBlitz
 					_CellClassName,
 					_CellClassName + "-details",
 					_CellClassName + "-overlay",
-					UnitConfiguration,
+					UnitConfigurationLink,
 					_Faction,
 					_Renderer,
 					_StackDuplicates);
@@ -75,7 +75,15 @@ namespace PanzerBlitz
 			t.Add(option);
 		}
 
-		public void Remove(UnitConfiguration UnitConfiguration)
+		public IEnumerable<Tuple<UnitConfigurationLink, int>> GetUnitConfigurationLinks()
+		{
+			return _Items
+				.SelectMany(i => i)
+				.Cast<UnitConfigurationSelectionOption>()
+				.Select(i => new Tuple<UnitConfigurationLink, int>(i.UnitConfigurationLink, i.StackView.Count));
+		}
+
+		public void Remove(UnitConfigurationLink UnitConfigurationLink)
 		{
 			TableRow current = null;
 			List<TableRow> rows = _Items.ToList();
@@ -84,7 +92,7 @@ namespace PanzerBlitz
 			{
 				foreach (UnitConfigurationSelectionOption option in row)
 				{
-					if (option.UnitConfiguration != UnitConfiguration
+					if (option.UnitConfigurationLink != UnitConfigurationLink
 						|| (_StackDuplicates && --option.StackView.Count > 0))
 					{
 						if (current == null || current.Count() >= _ItemWidth)
@@ -103,8 +111,8 @@ namespace PanzerBlitz
 			if (OnUnitClicked != null)
 				OnUnitClicked(
 					this,
-					new ValuedEventArgs<UnitConfiguration>(
-						((UnitConfigurationSelectionOption)Sender).UnitConfiguration));
+					new ValuedEventArgs<UnitConfigurationLink>(
+						((UnitConfigurationSelectionOption)Sender).UnitConfigurationLink));
 		}
 
 		void HandleRightClick(object Sender, EventArgs E)
@@ -112,8 +120,8 @@ namespace PanzerBlitz
 			if (OnUnitRightClicked != null)
 				OnUnitRightClicked(
 					this,
-					new ValuedEventArgs<UnitConfiguration>(
-						((UnitConfigurationSelectionOption)Sender).UnitConfiguration));
+					new ValuedEventArgs<UnitConfigurationLink>(
+						((UnitConfigurationSelectionOption)Sender).UnitConfigurationLink));
 		}
 	}
 }

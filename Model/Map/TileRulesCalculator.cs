@@ -93,7 +93,9 @@ namespace PanzerBlitz
 			LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.LowProfileConcealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
-			Water = Tile.GetBaseRules().Water || Tile.GetEdgeRules().All(i => i != null && i.Water);
+			Water = Tile.GetBaseRules().Water
+						|| Tile.GetBaseRules().Swamp
+						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp));
 
 			DieModifier =
 				Math.Max(

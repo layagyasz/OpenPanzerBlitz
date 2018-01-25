@@ -25,11 +25,20 @@ namespace PanzerBlitz
 		public readonly List<ArmyConfiguration> TurnOrder;
 		public readonly byte Turns;
 		public readonly Environment Environment;
-		public readonly BoardCompositeMapConfiguration MapConfiguration;
+		public readonly MapConfiguration MapConfiguration;
 
-		public Scenario(IEnumerable<ArmyConfiguration> ArmyConfigurations)
+		public Scenario(
+			IEnumerable<ArmyConfiguration> ArmyConfigurations,
+			byte Turns,
+			Environment Environment,
+			MapConfiguration MapConfiguration)
 		{
 			this.ArmyConfigurations = ArmyConfigurations.ToList();
+			DeploymentOrder = this.ArmyConfigurations;
+			TurnOrder = this.ArmyConfigurations;
+			this.Turns = Turns;
+			this.Environment = Environment;
+			this.MapConfiguration = MapConfiguration;
 		}
 
 		public Scenario(ParseBlock Block)

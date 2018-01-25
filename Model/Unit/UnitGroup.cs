@@ -22,6 +22,12 @@ namespace PanzerBlitz
 			}
 		}
 
+		public UnitGroup(string Name, IEnumerable<UnitCount> UnitCounts)
+		{
+			this.Name = Name;
+			_UnitCounts = UnitCounts.ToList();
+		}
+
 		public UnitGroup(ParseBlock Block)
 		{
 			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));

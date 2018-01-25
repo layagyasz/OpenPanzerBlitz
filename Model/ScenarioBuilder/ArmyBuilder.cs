@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +10,9 @@ namespace PanzerBlitz
 		public int Id { get; }
 		public readonly ArmyParameters Parameters;
 
-		List<UnitConfigurationLink> _Units;
+		List<Tuple<UnitConfigurationLink, int>> _Units;
 
-		public IEnumerable<UnitConfigurationLink> Units
+		public IEnumerable<Tuple<UnitConfigurationLink, int>> Units
 		{
 			get
 			{
@@ -30,10 +31,10 @@ namespace PanzerBlitz
 			return Validate(_Units);
 		}
 
-		public bool Validate(IEnumerable<UnitConfigurationLink> Units)
+		public bool Validate(IEnumerable<Tuple<UnitConfigurationLink, int>> Units)
 		{
 			if (Units == null) return false;
-			return Units.All(i => Parameters.Matches(i));
+			return Parameters.Matches(Units);
 		}
 
 		public bool SetParameters(ArmyParameters Parameters)
@@ -42,9 +43,36 @@ namespace PanzerBlitz
 			return true;
 		}
 
-		public void SetUnits(IEnumerable<UnitConfigurationLink> Units)
+		public bool SetUnits(IEnumerable<Tuple<UnitConfigurationLink, int>> Units)
 		{
-			_Units = Units.ToList();
+			if (Validate(Units))
+			{
+				_Units = Units.ToList();
+				return true;
+			}
+			return false;
+		}
+
+		public ArmyConfiguration BuildArmyConfiguration()
+		{
+			Objective objective =
+				new HighestScoreObjective(
+					new UnitsMatchedPointsObjective(new UnitHasStatus(UnitStatus.DESTROYED), false));
+			return new ArmyConfiguration(
+				Id.ToString(),
+				Parameters.Faction,
+				Parameters.Team,
+				Enumerable.Repeat(
+					new PositionalDeploymentConfiguration(
+						new UnitGroup(
+							Parameters.Faction.Name + " Deployment",
+							_Units.Select(i => new UnitCount(i.Item1.UnitConfiguration, i.Item2))),
+						new EmptyMatcher<Tile>())
+					, 1),
+				new VictoryCondition(
+					Enumerable.Repeat(objective, 1),
+					Enumerable.Repeat(
+						new ObjectiveSuccessTrigger(ObjectiveSuccessLevel.VICTORY, 1, false, objective), 1)));
 		}
 	}
 }

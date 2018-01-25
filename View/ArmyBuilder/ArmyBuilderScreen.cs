@@ -26,6 +26,8 @@ namespace PanzerBlitz
 		float _PointTotal;
 		UnitConfigurationTable _SelectedUnits;
 
+		Button _Error = new Button("army-builder-error");
+
 		public ArmyBuilderScreen(
 			Vector2f WindowSize,
 			IEnumerable<UnitConfigurationLink> UnitConfigurations,
@@ -86,8 +88,9 @@ namespace PanzerBlitz
 			_UnitClassSelect.OnChange += FilterUnits;
 			FilterUnits();
 
-			Button finishedButton = new Button("large-button") { DisplayedString = "Finished" };
+			Button finishedButton = new Button("army-builder-large-button") { DisplayedString = "Finished" };
 			finishedButton.Position = _Pane.Size - finishedButton.Size - new Vector2f(32, 32);
+			finishedButton.OnClick += HandleFinished;
 
 			_Pane.Add(header);
 			_Pane.Add(_AvailableUnits);
@@ -96,6 +99,19 @@ namespace PanzerBlitz
 			_Pane.Add(_UnitClassSelect);
 			_Pane.Add(finishedButton);
 			_Items.Add(_Pane);
+		}
+
+		public void Alert(string Alert)
+		{
+			_Error.DisplayedString = Alert;
+			_Error.Position = new Vector2f(0, _AvailableUnits.Size.Y + _AvailableUnits.Position.Y + 16);
+			_Pane.Remove(_Error);
+			_Pane.Add(_Error);
+		}
+
+		public IEnumerable<Tuple<UnitConfigurationLink, int>> GetSelectedUnits()
+		{
+			return _SelectedUnits.GetUnitConfigurationLinks();
 		}
 
 		void FilterUnits(object Sender, EventArgs E)
@@ -111,7 +127,7 @@ namespace PanzerBlitz
 			{
 				if ((filterClass == UnitClass.NONE || link.UnitConfiguration.UnitClass == filterClass)
 					&& _Parameters.Matches(link))
-					_AvailableUnits.Add(link.UnitConfiguration);
+					_AvailableUnits.Add(link);
 			}
 		}
 
@@ -121,16 +137,16 @@ namespace PanzerBlitz
 			_PointTotalButton.DisplayedString = string.Format("Point Total: {0}/{1}", _PointTotal, _Parameters.Points);
 		}
 
-		void HandleAddUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
+		void HandleAddUnit(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
 		{
 			_SelectedUnits.Add(E.Value);
-			SetPointTotal(_PointTotal + E.Value.GetPointValue());
+			SetPointTotal(_PointTotal + E.Value.UnitConfiguration.GetPointValue());
 		}
 
-		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfiguration> E)
+		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
 		{
 			_SelectedUnits.Remove(E.Value);
-			SetPointTotal(_PointTotal - E.Value.GetPointValue());
+			SetPointTotal(_PointTotal - E.Value.UnitConfiguration.GetPointValue());
 		}
 
 		void HandleFinished(object Sender, EventArgs E)

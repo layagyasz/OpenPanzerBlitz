@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -42,6 +43,15 @@ namespace PanzerBlitz
 		public bool RemoveArmy(ArmyBuilder Builder)
 		{
 			return _Armies.Remove(Builder);
+		}
+
+		public Scenario BuildScenario()
+		{
+			return new Scenario(
+				_Armies.Select(i => i.BuildArmyConfiguration()),
+				10,
+				Parameters.Environment,
+				new RandomMapConfiguration(32, 32));
 		}
 	}
 }

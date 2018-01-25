@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace PanzerBlitz
 {
 	public class ArmyParameters
@@ -22,6 +25,12 @@ namespace PanzerBlitz
 			Points = Copy.Points;
 			Team = Copy.Team;
 			Parameters = Copy.Parameters;
+		}
+
+		public bool Matches(IEnumerable<Tuple<UnitConfigurationLink, int>> Units)
+		{
+			return Units.All(i => Matches(i.Item1))
+						&& Units.Sum(i => i.Item1.UnitConfiguration.GetPointValue() * i.Item2) <= Points;
 		}
 
 		public bool Matches(UnitConfigurationLink Link)
