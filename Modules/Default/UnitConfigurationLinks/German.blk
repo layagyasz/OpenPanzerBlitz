@@ -3,10 +3,23 @@
 	!unit-configuration:unit-configuration { unit-configurations.wagon }
 }
 
+unit-configuration-link:28mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.28mm-at }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:37mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
 
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:47mm-at-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+
+	int:introduce-year { 1941 }
 	int:obsolete-year { 1941 }
 }
 unit-configuration-link:50mm-at-german {
@@ -24,12 +37,15 @@ unit-configuration-link:75mm-at-german {
 unit-configuration-link:88mm-at-early-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.88mm-at-early }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:88mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.88mm-at }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:20mm-aa-german {
 	!faction:faction { factions.german }
@@ -52,6 +68,10 @@ unit-configuration-link:75mm-how-company-german {
 unit-configuration-link:75mm-how-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+}
+unit-configuration-link:100mm-how-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.100mm-how-german }
 }
 unit-configuration-link:105mm-how-company-german {
 	!faction:faction { factions.german }

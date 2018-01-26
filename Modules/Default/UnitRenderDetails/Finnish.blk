@@ -68,12 +68,6 @@ unit-render-details:bicycle-finnish {
 unit-render-details:bt-42 {
 	string:image-path { bt-42.png }
 }
-unit-render-details:ft-17 {
-	string:image-path { ft-17.png }
-}
-unit-render-details:ft-17-corrected {
-	string:image-path { ft-17.png }
-}
 unit-render-details:vickers-6-ton {
 	string:image-path { vickers-6-ton.png }
 }

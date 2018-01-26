@@ -1,0 +1,404 @@
+﻿unit-configuration:engineer-platoon-french {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 1 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:is-engineer { true }
+}
+unit-configuration:hmg-platoon-french {
+	string:name { HMG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 4 }
+	byte:movement { 1 }
+
+	bool:can-only-support-close-assault { true }
+}
+unit-configuration:rifle-platoon-french-39 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-french-40 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:foreign-legion-platoon {
+	string:name { Foreign Legion Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+}
+unit-configuration:cavalry-french {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:truck-french {
+	string:name { Truck }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 14 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:bicycle-french {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-french-40 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+}
+unit-configuration:motorcycle-french {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-french-40 }
+}
+unit-configuration:chenillette {
+	string:name { Chenillette }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+
+	bool:is-armored { true }
+}
+unit-configuration:somua-mcg {
+	string:name { Somua MCG }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 6 }
+}
+unit-configuration:unic-p107 {
+	string:name { Unic P107 }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 6 }
+}
+unit-configuration:vudb {
+	string:name { VUDB }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+}
+unit-configuration:75mm-spaa {
+	string:name { 75mm SPAA }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:amc-p16 {
+	string:name { AMC P16 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:amd-50 {
+	string:name { AMD 50 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 14 }
+}
+unit-configuration:panhard-165_175 {
+	string:name { Panhard 165/175 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:amd-80 {
+	string:name { AMD 80 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 17 }
+}
+unit-configuration:laffly-s15 {
+	string:name { Laffly S15 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+}
+unit-configuration:panhard-178-infantry {
+	string:name { Panhard 178 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:panhard-178-at {
+	string:name { Panhard 178 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 16 }
+}
+unit-configuration:laffly-tcc {
+	string:name { Laffly TCC }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 1 }
+	byte:movement { 10 }
+
+	bool:is-armored { true }
+}
+unit-configuration:37-r {
+	string:name { 37 R }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:ft-17 {
+	string:name { FT-17 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 3 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 2 }	
+}
+unit-configuration:ft-17-corrected {
+	string:name { FT-17 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }	
+}
+unit-configuration:char-d1b {
+	string:name { Char D1b }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 4 }	
+}
+unit-configuration:amr-33 {
+	string:name { AMR 33 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:char-d2 {
+	string:name { Char D2 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 7 }	
+}
+unit-configuration:char-b1-bis {
+	string:name { Char B1 bis }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 8 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 6 }	
+}
+unit-configuration:amr-35 {
+	string:name { AMR 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:amc-35 {
+	string:name { AMC 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 8 }	
+}
+unit-configuration:hotchkiss-35 {
+	string:name { Hotchkiss 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 6 }	
+}
+unit-configuration:hotchkiss-39 {
+	string:name { Hotchkiss 39 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 7 }	
+}
+unit-configuration:renault-35 {
+	string:name { Renault 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 7 }
+	byte:movement { 4 }
+}
+unit-configuration:renault-35-corrected {
+	string:name { Renault 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 4 }
+}
+unit-configuration:renault-40 {
+	string:name { Renault 40 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 4 }	
+}
+unit-configuration:somua-35 {
+	string:name { Somua 35 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+}
+unit-configuration:fcm-36 {
+	string:name { FCM 36 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 4 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 5 }
+}

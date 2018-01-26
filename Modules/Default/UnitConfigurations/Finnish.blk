@@ -209,26 +209,6 @@ unit-configuration:bt-42 {
 	byte:defense { 5 }
 	byte:movement { 13 }	
 }
-unit-configuration:ft-17 {
-	string:name { FT-17 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 3 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 2 }	
-}
-unit-configuration:ft-17-corrected {
-	string:name { FT-17 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 2 }
-	byte:range { 2 }
-	byte:defense { 2 }
-	byte:movement { 2 }	
-}
 unit-configuration:vickers-6-ton {
 	string:name { Vickers 6 Ton }
 	unit-class:unit-class { tank }
@@ -243,11 +223,13 @@ unit-configuration:landsverk {
 	string:name { Landsverk }
 	unit-class:unit-class { tank }
 
-	weapon-class:weapon-class { anti-armor }
+	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
 	byte:range { 10 }
 	byte:defense { 4 }
-	byte:movement { 8 }	
+	byte:movement { 8 }
+
+	bool:can-anti-aircraft { true }
 }
 unit-configuration:aerosan {
 	string:name { Aerosan }

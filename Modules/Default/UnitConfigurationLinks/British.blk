@@ -1,4 +1,10 @@
-﻿unit-configuration-link:6pdr-at-british {
+﻿unit-configuration-link:25mm-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:6pdr-at-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.6pdr-at }
 
@@ -40,9 +46,21 @@ unit-configuration-link:25pdr-how-british {
 
 	int:introduce-year { 1940 }
 }
+unit-configuration-link:25pdr-short-how-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.25pdr-short-how }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:4_5in-how-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.4_5in-how }
+
+	int:obsolete-year { 1944 }
+}
 unit-configuration-link:5_5in-how-british {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.7_2in-how }
+	!unit-configuration:unit-configuration { unit-configurations.5_5in-how }
 
 	int:introduce-year { 1941 }
 }
@@ -58,13 +76,19 @@ unit-configuration-link:8in-how-allied-british {
 
 	int:introduce-year { 1942 }
 }
-unit-configuration-link:81mm-mortar-british {
+unit-configuration-link:76mm-mortar-british {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+	!unit-configuration:unit-configuration { unit-configurations.76mm-mortar }
 }
 unit-configuration-link:107mm-mortar-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+}
+unit-configuration-link:land-mattress-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.land-mattress }
+
+	int:introduce-year { 1944 }
 }
 
 unit-configuration-link:engineer-platoon-british {
@@ -87,9 +111,18 @@ unit-configuration-link:mg-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-british }
 }
-unit-configuration-link:rifle-platoon-british {
+unit-configuration-link:rifle-platoon-british-40 {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-40 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:rifle-platoon-british-44 {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:parachute-platoon-british {
 	!faction:faction { factions.british }
@@ -219,6 +252,38 @@ unit-configuration-link:matilda-ii {
 	!unit-configuration:unit-configuration { unit-configurations.matilda-ii }
 
 	int:introduce-year { 1939 }
+}
+unit-configuration-link:a-9 {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.a-9 }
+
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:a-9-cs {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.a-9-cs }
+
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:a-10 {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.a-10 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:a-10-cs {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.a-10-cs }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:a-11 {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.a-11 }
+
+	int:obsolete-year { 1940 }
 }
 unit-configuration-link:a-13 {
 	!faction:faction { factions.british }

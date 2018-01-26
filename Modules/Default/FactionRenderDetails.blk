@@ -8,6 +8,9 @@
 	faction-render-details:finnish {
 		string:image-path { finnish-symbol.png }
 	}
+	faction-render-details:french {
+		string:image-path { french-symbol.png }
+	}
 	faction-render-details:german {
 		string:image-path { german-symbol.png }
 	}

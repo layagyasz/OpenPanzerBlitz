@@ -44,12 +44,6 @@ unit-render-details:r-2 {
 unit-render-details:r-2-corrected {
 	string:image-path { lt-35.png }
 }
-unit-render-details:renault-35 {
-	string:image-path { renault-35.png }
-}
-unit-render-details:renault-35-corrected {
-	string:image-path { renault-35.png }
-}
 unit-render-details:r-35_45 {
 	string:image-path { r-35_45.png }
 }

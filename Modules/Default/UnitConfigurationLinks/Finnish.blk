@@ -85,6 +85,9 @@ unit-configuration-link:ski-platoon-39 {
 	!unit-configuration:unit-configuration { unit-configurations.ski-platoon-39 }
 
 	int:obsolete-year { 1940 }
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:rifle-platoon-finnish-41 {
 	!faction:faction { factions.finnish }
@@ -99,6 +102,9 @@ unit-configuration-link:ski-platoon-41 {
 
 	int:introduce-year { 1941 }
 	int:obsolete-year { 1943 }
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:rifle-platoon-finnish-44 {
 	!faction:faction { factions.finnish }
@@ -111,6 +117,9 @@ unit-configuration-link:ski-platoon-44 {
 	!unit-configuration:unit-configuration { unit-configurations.ski-platoon-44 }
 
 	int:introduce-year { 1944 }
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:sissi-platoon {
 	!faction:faction { factions.finnish }
@@ -119,6 +128,10 @@ unit-configuration-link:sissi-platoon {
 unit-configuration-link:sissi-ski-platoon {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.sissi-ski-platoon }
+
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:mg-platoon-finnish {
 	!faction:faction { factions.finnish }
@@ -170,6 +183,20 @@ unit-configuration-link:bicycle-finnish {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.bicycle-finnish }
 }
+unit-configuration-link:t-20-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.t-20 }
+}
+unit-configuration-link:ba-10-infantry-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.ba-10-infantry }
+}
+unit-configuration-link:t-38-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.t-38 }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:bt-42 {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.bt-42 }
@@ -177,11 +204,11 @@ unit-configuration-link:bt-42 {
 	int:introduce-year { 1943 }
 	int:obsolete-year { 1944 }
 }
-unit-configuration-link:ft-17 {
+unit-configuration-link:ft-17-finnish {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.ft-17 }
 }
-unit-configuration-link:ft-17-corrected {
+unit-configuration-link:ft-17-corrected-finnish {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
 }
@@ -189,9 +216,33 @@ unit-configuration-link:vickers-6-ton {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.vickers-6-ton }
 }
+unit-configuration-link:t-26-c-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.t-26-c }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:t-26-e-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.t-26-e }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:landsverk {
 	!faction:faction { factions.finnish }
 	!unit-configuration:unit-configuration { unit-configurations.landsverk }
+}
+unit-configuration-link:stug-iii-g-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:pzkw-iv-h-finnish {
+	!faction:faction { factions.finnish }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:aerosan {
 	!faction:faction { factions.finnish }

@@ -45,7 +45,19 @@ unit-configuration:mg-platoon-british {
 	bool:can-only-support-close-assault { true }
 	bool:can-double-range { true }
 }
-unit-configuration:rifle-platoon-british {
+unit-configuration:rifle-platoon-british-40 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:rifle-platoon-british-44 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -92,6 +104,20 @@ unit-configuration:truck-british {
 	byte:movement { 14 }
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:motorcycle-british {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-british-40 }
 }
 unit-configuration:matador {
 	string:name { Matador }
@@ -315,6 +341,56 @@ unit-configuration:matilda-ii {
 	byte:range { 3 }
 	byte:defense { 10 }
 	byte:movement { 5 }
+}
+unit-configuration:a-9 {
+	string:name { A-9 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:a-9-cs {
+	string:name { A-9 CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:a-10 {
+	string:name { A-10 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 5 }
+}
+unit-configuration:a-10-cs {
+	string:name { A-10 CS }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 3 }
+	byte:movement { 5 }
+}
+unit-configuration:a-11 {
+	string:name { A-11 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 2 }
 }
 unit-configuration:a-13 {
 	string:name { A-13 }

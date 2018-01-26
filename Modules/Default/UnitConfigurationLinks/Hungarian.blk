@@ -114,6 +114,10 @@ unit-configuration-link:csaba {
 
 	int:introduce-year { 1939 }
 }
+unit-configuration-link:leggero-3-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.leggero-3 }
+}
 unit-configuration-link:nimrod {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.nimrod }

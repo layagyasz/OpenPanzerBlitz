@@ -1,0 +1,222 @@
+﻿unit-configuration-link:wagon-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+
+unit-configuration-link:25mm-at-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:47mm-at-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+}
+unit-configuration-link:75mm-at-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+}
+unit-configuration-link:20mm-aa-early-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+}
+unit-configuration-link:25mm-aa-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.25mm-aa }
+}
+unit-configuration-link:37mm-how-company-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-how-company }
+}
+unit-configuration-link:75mm-how-company-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+}
+unit-configuration-link:75mm-how-long-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+}
+unit-configuration-link:105mm-how-company-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
+}
+unit-configuration-link:105mm-how-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:155mm-how-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.155mm-how }
+}
+unit-configuration-link:81mm-mortar-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+}
+
+unit-configuration-link:engineer-platoon-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-french }
+}
+unit-configuration-link:hmg-platoon-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.hmg-platoon-french }
+}
+unit-configuration-link:rifle-platoon-french-39 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-39 }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:rifle-platoon-french-40 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-40 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:foreign-legion-platoon {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.foreign-legion-platoon }
+}
+unit-configuration-link:cavalry-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-french }
+}
+unit-configuration-link:truck-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.truck-french }
+}
+unit-configuration-link:bicycle-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-french }
+
+	int:obsolete-year { 1940 }
+}
+unit-configuration-link:motorcycle-french {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.motorcycle-french }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:chenillette {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.chenillette }
+}
+unit-configuration-link:somua-mcg {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.somua-mcg }
+}
+unit-configuration-link:unic-p107 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.unic-p107 }
+}
+unit-configuration-link:vudb {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.vudb }
+}
+unit-configuration-link:75mm-spaa {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-spaa }
+}
+unit-configuration-link:amc-p16 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amc-p16 }
+}
+unit-configuration-link:amd-50 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amd-50 }
+}
+unit-configuration-link:panhard-165_175 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.panhard-165_175 }
+}
+unit-configuration-link:amd-80 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amd-80 }
+}
+unit-configuration-link:laffly-s15 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.laffly-s15 }
+}
+unit-configuration-link:panhard-178-infantry {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.panhard-178-infantry }
+}
+unit-configuration-link:panhard-178-at {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.panhard-178-at }
+}
+unit-configuration-link:laffly-tcc {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.laffly-tcc }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:37-r {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.37-r }
+}
+unit-configuration-link:ft-17 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.ft-17 }
+}
+unit-configuration-link:ft-17-corrected {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
+}
+unit-configuration-link:char-d1b {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.char-d1b }
+}
+unit-configuration-link:amr-33 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amr-33 }
+}
+unit-configuration-link:char-d2 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.char-d2 }
+}
+unit-configuration-link:char-b1-bis {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.char-b1-bis }
+}
+unit-configuration-link:amr-35 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amr-35 }
+}
+unit-configuration-link:amc-35 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.amc-35 }
+}
+unit-configuration-link:hotchkiss-35 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.hotchkiss-35 }
+}
+unit-configuration-link:hotchkiss-39 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.hotchkiss-39 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:renault-35 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.renault-35 }
+}
+unit-configuration-link:renault-35-corrected {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.renault-35-corrected }
+}
+unit-configuration-link:renault-40 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.renault-40 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:somua-35 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.somua-35 }
+}
+unit-configuration-link:fcm-36 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.fcm-36 }
+}

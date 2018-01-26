@@ -95,7 +95,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
 								int:count { 2 }
 							}
 							unit-count:_ {

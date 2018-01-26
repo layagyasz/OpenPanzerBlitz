@@ -14,7 +14,11 @@ unit-render-details:mg-platoon-british {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
-unit-render-details:rifle-platoon-british {
+unit-render-details:rifle-platoon-british-40 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-british-44 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
@@ -28,6 +32,9 @@ unit-render-details:commando-platoon-british {
 }
 unit-render-details:truck-british {
 	string:image-path { truck-9.png }
+}
+unit-render-details:motorcycle-british {
+	string:image-path { motorcycle.png }
 }
 unit-render-details:matador {
 	string:image-path { matador.png }
@@ -92,6 +99,21 @@ unit-render-details:matilda {
 }
 unit-render-details:matilda-ii {
 	string:image-path { matilda.png }
+}
+unit-render-details:a-9 {
+	string:image-path { a-9.png }
+}
+unit-render-details:a-9-cs {
+	string:image-path { a-9-cs.png }
+}
+unit-render-details:a-10 {
+	string:image-path { a-10.png }
+}
+unit-render-details:a-10-cs {
+	string:image-path { a-10-cs.png }
+}
+unit-render-details:a-11 {
+	string:image-path { a-11.png }
 }
 unit-render-details:a-13 {
 	string:image-path { a-13.png }

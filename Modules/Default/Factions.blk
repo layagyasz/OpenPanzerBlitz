@@ -16,6 +16,11 @@
 		color[]:colors { 255,255,255 131,166,220 255,255,255 }
 		byte:stack-limit { 3 }
 	}
+	faction:french {
+		string:name { French }
+		color[]:colors { 142,176,221 }
+		byte:stack-limit { 3 }
+	}
 	faction:german {
 		string:name { German }
 		color[]:colors { 146,136,127 }

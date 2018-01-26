@@ -43,6 +43,10 @@ unit-configuration-link:37mm-aa-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
 }
+unit-configuration-link:76_2mm-aa-russian {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-aa }
+}
 unit-configuration-link:76_2mm-how-company-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
@@ -122,6 +126,9 @@ unit-configuration-link:ski-company-41 {
 
 	int:introduce-year { 1941 }
 	int:obsolete-year { 1941 }
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:rifle-company-42 {
 	!faction:faction { factions.russian }
@@ -136,6 +143,9 @@ unit-configuration-link:ski-company-42 {
 
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1942 }
+	environment[]:environments {
+		!environment:_ { environments.winter-steppe }
+	}
 }
 unit-configuration-link:rifle-company-43 {
 	!faction:faction { factions.russian }
@@ -242,6 +252,7 @@ unit-configuration-link:nkl-6 {
 unit-configuration-link:nkl-6-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.nkl-6-a }
+
 	environment[]:environments {
 		!environment:_ { environments.winter-steppe }
 	}

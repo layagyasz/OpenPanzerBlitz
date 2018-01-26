@@ -1,0 +1,121 @@
+﻿unit-render-details:engineer-platoon-french {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:hmg-platoon-french {
+	string:override-display-name { HMG }
+	string:image-path { hmg-platoon.png }
+}
+unit-render-details:rifle-platoon-french-39 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-french-40 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:foreign-legion-platoon {
+	string:override-display-name { Foreign Legion }
+	string:image-path { infantry-platoon.png }
+	color:override-color { #FFFFFF }
+}
+unit-render-details:cavalry-french {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-4.png }
+}
+unit-render-details:truck-french {
+	string:image-path { truck-11.png }
+}
+unit-render-details:bicycle-french {
+	string:image-path { bicycle.png }
+}
+unit-render-details:motorcycle-french {
+	string:image-path { motorcycle.png }
+}
+unit-render-details:chenillette {
+	string:image-path { chenillette.png }
+}
+unit-render-details:somua-mcg {
+	string:image-path { somua-mcg.png }
+}
+unit-render-details:unic-p107 {
+	string:image-path { unic-p107.png }
+}
+unit-render-details:vudb {
+	string:image-path { vudb.png }
+}
+unit-render-details:75mm-spaa {
+	string:image-path { 75mm-spaa.png }
+}
+unit-render-details:amc-p16 {
+	string:image-path { amc-p16.png }
+}
+unit-render-details:amd-50 {
+	string:image-path { amd-50.png }
+}
+unit-render-details:panhard-165_175 {
+	string:image-path { panhard-165_175.png }
+}
+unit-render-details:amd-80 {
+	string:image-path { amd-80.png }
+}
+unit-render-details:laffly-s15 {
+	string:image-path { laffly-s15.png }
+}
+unit-render-details:panhard-178-infantry {
+	string:image-path { panhard-178-infantry.png }
+}
+unit-render-details:panhard-178-at {
+	string:image-path { panhard-178-at.png }
+}
+unit-render-details:laffly-tcc {
+	string:image-path { laffly-tcc.png }
+}
+unit-render-details:37-r {
+	string:image-path { 37-r.png }
+}
+unit-render-details:ft-17 {
+	string:image-path { ft-17.png }
+}
+unit-render-details:ft-17-corrected {
+	string:image-path { ft-17.png }
+}
+unit-render-details:char-d1b {
+	string:image-path { char-d1b.png }
+}
+unit-render-details:amr-33 {
+	string:image-path { amr-33.png }
+}
+unit-render-details:char-d2 {
+	string:image-path { char-d2.png }
+}
+unit-render-details:char-b1-bis {
+	string:image-path { char-b1-bis.png }
+}
+unit-render-details:amr-35 {
+	string:image-path { amr-35.png }
+}
+unit-render-details:amc-35 {
+	string:image-path { amc-35.png }
+}
+unit-render-details:hotchkiss-35 {
+	string:image-path { hotchkiss-35.png }
+}
+unit-render-details:hotchkiss-39 {
+	string:image-path { hotchkiss-39.png }
+}
+unit-render-details:renault-35 {
+	string:image-path { renault-35.png }
+}
+unit-render-details:renault-35-corrected {
+	string:image-path { renault-35.png }
+}
+unit-render-details:renault-40 {
+	string:image-path { renault-40.png }
+}
+unit-render-details:somua-35 {
+	string:image-path { somua-35.png }
+}
+unit-render-details:fcm-36 {
+	string:image-path { fcm-36.png }
+}

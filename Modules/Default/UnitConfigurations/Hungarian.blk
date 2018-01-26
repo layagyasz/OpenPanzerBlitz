@@ -7,6 +7,7 @@
 	byte:range { 1 }
 	byte:defense { 5 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:hmg-platoon-hungarian {

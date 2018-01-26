@@ -1,4 +1,9 @@
-﻿unit-configuration-link:37mm-at-romanian {
+﻿unit-configuration-link:wagon-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.wagon }
+}
+
+unit-configuration-link:37mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
 }
@@ -125,13 +130,13 @@ unit-configuration-link:r-2-corrected {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.r-2-corrected }
 }
-unit-configuration-link:renault-35 {
+unit-configuration-link:renault-35-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.renault-35 }
 
 	int:introduce-year { 1939 }
 }
-unit-configuration-link:renault-35-corrected {
+unit-configuration-link:renault-35-corrected-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.renault-35-corrected }
 

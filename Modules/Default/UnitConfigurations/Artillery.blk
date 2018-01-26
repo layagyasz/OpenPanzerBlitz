@@ -344,6 +344,19 @@ unit-configuration:20mm_4-aa {
 	bool:can-anti-aircraft { true }
 	bool:is-light-passenger { true }
 }
+unit-configuration:25mm-aa {
+	string:name { 25mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 10 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+	bool:is-light-passenger { true }
+}
 unit-configuration:37mm-aa {
 	string:name { 37mm }
 	unit-class:unit-class { towed-gun }
@@ -405,6 +418,16 @@ unit-configuration:80mm-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
+}
+unit-configuration:37mm-how-company {
+	string:name { 37mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 4 }
+	byte:movement { 1 }
 }
 unit-configuration:65mm-how-company {
 	string:name { 65mm }
@@ -549,6 +572,18 @@ unit-configuration:100mm-how {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 40 }
 	byte:range { 32 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:100mm-how-german {
+	string:name { 100mm }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 36 }
+	byte:range { 50 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 

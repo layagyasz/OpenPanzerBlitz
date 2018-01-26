@@ -79,7 +79,7 @@
 						string:name { 2nd Canadian Infantry }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
 								int:count { 18 }
 							}
 							unit-count:_ {

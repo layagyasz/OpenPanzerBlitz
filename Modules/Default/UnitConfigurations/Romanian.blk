@@ -7,6 +7,7 @@
 	byte:range { 1 }
 	byte:defense { 5 }
 	byte:movement { 1 }
+
 	bool:is-engineer { true }
 }
 unit-configuration:hmg-platoon-romanian {
@@ -137,26 +138,6 @@ unit-configuration:r-2-corrected {
 	byte:range { 2 }
 	byte:defense { 3 }
 	byte:movement { 7 }
-}
-unit-configuration:renault-35 {
-	string:name { Renault 35 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 4 }
-	byte:range { 2 }
-	byte:defense { 7 }
-	byte:movement { 4 }
-}
-unit-configuration:renault-35-corrected {
-	string:name { Renault 35 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 4 }
-	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 4 }
 }
 unit-configuration:r-35_45 {
 	string:name { R-35/45 }
