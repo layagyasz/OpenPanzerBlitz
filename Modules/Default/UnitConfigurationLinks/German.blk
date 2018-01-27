@@ -368,13 +368,19 @@ unit-configuration-link:maultier {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.maultier }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:wespe {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.wespe }
 
 	int:introduce-year { 1943 }
+}
+unit-configuration-link:sdkfz-135_1-lrs {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.sdkfz-135_1-lrs }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:hummel {
 	!faction:faction { factions.german }
@@ -387,6 +393,13 @@ unit-configuration-link:gw-1 {
 	!unit-configuration:unit-configuration { unit-configurations.gw-1 }
 
 	int:introduce-year { 1940 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:sig33-pzkw-ii {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.sig33-pzkw-ii }
+
+	int:introduce-year { 1942 }
 	int:obsolete-year { 1943 }
 }
 unit-configuration-link:gw-38_m {
@@ -412,6 +425,13 @@ unit-configuration-link:stuh-42 {
 	!unit-configuration:unit-configuration { unit-configurations.stuh-42 }
 
 	int:introduce-year { 1943 }
+}
+unit-configuration-link:diana {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.diana }
+
+	int:introduce-year { 1942 }
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:marder-ii {
 	!faction:faction { factions.german }

@@ -175,6 +175,11 @@ namespace PanzerBlitz
 			return map;
 		}
 
+		public StaticMapConfiguration MakeStaticMap()
+		{
+			return new StaticMapConfiguration(GenerateMap(null, new IdGenerator()));
+		}
+
 		LatticeNoiseGenerator MakeNoiseGenerator(double MinFrequency, double MaxFrequency, double Persistence)
 		{
 			LatticeNoiseSettings frequencySettings = new LatticeNoiseSettings()

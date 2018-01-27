@@ -329,6 +329,13 @@ unit-configuration-link:bishop {
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1942 }
 }
+unit-configuration-link:m-7-priest-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+
+	int:introduce-year { 1942 }
+	int:obsolete-year { 1942 }
+}
 unit-configuration-link:m-3a3 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.m-3a3 }
@@ -419,6 +426,12 @@ unit-configuration-link:crusader-iii {
 
 	int:introduce-year { 1942 }
 }
+unit-configuration-link:valentine-ii {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.valentine-ii }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:valentine-iii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-iii }
@@ -495,6 +508,12 @@ unit-configuration-link:centaur-arv {
 unit-configuration-link:churchill-arv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-arv }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:scorpion-flail {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.scorpion-flail }
 
 	int:introduce-year { 1942 }
 }

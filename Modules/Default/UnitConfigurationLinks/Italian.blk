@@ -187,10 +187,20 @@ unit-configuration-link:65_17 {
 unit-configuration-link:76_30 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.76_30 }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:100_17 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.100_17 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:milmart {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.milmart }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:ab-40 {
 	!faction:faction { factions.italian }

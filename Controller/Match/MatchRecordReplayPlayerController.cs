@@ -46,7 +46,7 @@ namespace PanzerBlitz
 				case TurnComponent.RESET: return 0;
 				case TurnComponent.MINEFIELD_ATTACK: return 0;
 				case TurnComponent.DEPLOYMENT: return 0;
-				default: return 2000;
+				default: return 5000;
 			}
 		}
 

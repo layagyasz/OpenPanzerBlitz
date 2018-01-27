@@ -264,6 +264,18 @@ unit-configuration:100_17 {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
+unit-configuration:milmart {
+	string:name { Milmart }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
 unit-configuration:ab-40 {
 	string:name { AB-40 }
 	unit-class:unit-class { reconnaissance-vehicle }

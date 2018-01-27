@@ -175,6 +175,16 @@ unit-configuration:m-20 {
 	byte:defense { 3 }
 	byte:movement { 15 }
 }
+unit-configuration:m-6-gmc {
+	string:name { M-6 GMC }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 5 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+}
 unit-configuration:m-8 {
 	string:name { M-8 }
 	unit-class:unit-class { reconnaissance-vehicle }
@@ -184,6 +194,18 @@ unit-configuration:m-8 {
 	byte:range { 5 }
 	byte:defense { 3 }
 	byte:movement { 15 }
+}
+unit-configuration:m-13-aa {
+	string:name { M-13 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
 }
 unit-configuration:m-15 {
 	string:name { M-15 }

@@ -612,6 +612,16 @@ unit-configuration:crusader-iii {
 	byte:defense { 5 }
 	byte:movement { 9 }
 }
+unit-configuration:valentine-ii {
+	string:name { Valentine II }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor}
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 7 }
+	byte:movement { 6 }
+}
 unit-configuration:valentine-iii {
 	string:name { Valentine III }
 	unit-class:unit-class { tank }
@@ -620,7 +630,7 @@ unit-configuration:valentine-iii {
 	byte:attack { 6 }
 	byte:range { 3 }
 	byte:defense { 7 }
-	byte:movement { 6 }
+	byte:movement { 5 }
 }
 unit-configuration:valentine-viii {
 	string:name { Valentine VIII }
@@ -741,4 +751,14 @@ unit-configuration:churchill-arv {
 	byte:range { 2 }
 	byte:defense { 10 }
 	byte:movement { 4 }
+}
+unit-configuration:scorpion-flail {
+	string:name { Scorpion }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 8 }
+	byte:movement { 5 }
 }

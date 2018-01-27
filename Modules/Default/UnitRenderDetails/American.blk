@@ -53,8 +53,14 @@ unit-render-details:m-3 {
 unit-render-details:m-20 {
 	string:image-path { m-20.png }
 }
+unit-render-details:m-6-gmc {
+	string:image-path { m-6-gmc.png }
+}
 unit-render-details:m-8 {
 	string:image-path { m-8.png }
+}
+unit-render-details:m-13-aa {
+	string:image-path { m-15.png }
 }
 unit-render-details:m-15 {
 	string:image-path { m-15.png }

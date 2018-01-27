@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	{
 		public static readonly ObjectiveSerializer Instance = new ObjectiveSerializer();
 
-		public ObjectiveSerializer()
+		ObjectiveSerializer()
 			: base(new Type[]
 		{
 			typeof(CompositeObjective),

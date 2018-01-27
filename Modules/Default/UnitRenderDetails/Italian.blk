@@ -82,6 +82,9 @@ unit-render-details:76_30 {
 unit-render-details:100_17 {
 	string:image-path { 100_17.png }
 }
+unit-render-details:milmart {
+	string:image-path { milmart.png }
+}
 unit-render-details:ab-40 {
 	string:image-path { ab-40.png }
 }

@@ -54,7 +54,7 @@ namespace PanzerBlitz
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
 			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];
-			MapConfiguration = (BoardCompositeMapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
+			MapConfiguration = (MapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
 		}
 
 		public Scenario(SerializationInputStream Stream)
@@ -65,7 +65,7 @@ namespace PanzerBlitz
 			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			Turns = Stream.ReadByte();
 			Environment = GameData.Environments[Stream.ReadString()];
-			MapConfiguration = new BoardCompositeMapConfiguration(Stream);
+			MapConfiguration = (MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -76,7 +76,7 @@ namespace PanzerBlitz
 			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(Turns);
 			Stream.Write(Environment.UniqueKey);
-			Stream.Write(MapConfiguration);
+			MapConfigurationSerializer.Instance.Serialize(MapConfiguration, Stream);
 		}
 	}
 }

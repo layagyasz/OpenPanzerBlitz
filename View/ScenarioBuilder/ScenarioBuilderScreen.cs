@@ -89,8 +89,8 @@ namespace PanzerBlitz
 			finishedButton.Position = new Vector2f(0, _Pane.Size.Y - finishedButton.Size.Y - 32);
 			finishedButton.OnClick += HandleFinished;
 
-			_Pane.Add(_Display);
 			_Pane.Add(finishedButton);
+			_Pane.Add(_Display);
 			_Items.Add(_Pane);
 		}
 

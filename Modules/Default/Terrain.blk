@@ -12,6 +12,9 @@
 		int:die-modifier { -1 }
 		bool:frozen { true }
 	}
+	tile-component-rules:base-sand {
+		bool:loose { true }
+	}
 	tile-component-rules:base-slope {
 		bool:elevated { true }
 	}

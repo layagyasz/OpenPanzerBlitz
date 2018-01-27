@@ -157,12 +157,18 @@ unit-render-details:wespe {
 	string:override-display-name { WESPE }
 	string:image-path { wespe.png }
 }
+unit-render-details:sdkfz-135_1-lrs {
+	string:image-path { sdkfz-135_1-lrs.png }
+}
 unit-render-details:hummel {
 	string:override-display-name { HUMMEL }
 	string:image-path { hummel.png }
 }
 unit-render-details:gw-1 {
 	string:image-path { gw-1.png }
+}
+unit-render-details:sig33-pzkw-ii {
+	string:image-path { sig33-pzkw-ii.png }
 }
 unit-render-details:gw-38_m {
 	string:image-path { gw-38_m.png }
@@ -175,6 +181,9 @@ unit-render-details:wirbelwind {
 }
 unit-render-details:stuh-42 {
 	string:image-path { stuh-42.png }
+}
+unit-render-details:diana {
+	string:image-path { diana.png }
 }
 unit-render-details:marder-ii {
 	string:image-path { marder-ii.png }

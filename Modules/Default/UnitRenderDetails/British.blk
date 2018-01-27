@@ -181,6 +181,9 @@ unit-render-details:crusader-ii {
 unit-render-details:crusader-iii {
 	string:image-path { crusader.png }
 }
+unit-render-details:valentine-ii {
+	string:image-path { valentine-ii.png }
+}
 unit-render-details:valentine-iii {
 	string:image-path { valentine-iii.png }
 }
@@ -220,4 +223,7 @@ unit-render-details:centaur-arv {
 }
 unit-render-details:churchill-arv {
 	string:image-path { churchill-arv.png }
+}
+unit-render-details:scorpion-flail {
+	string:image-path { scorpion-flail.png }
 }

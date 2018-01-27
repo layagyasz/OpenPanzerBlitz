@@ -512,6 +512,16 @@ unit-configuration:wespe {
 	byte:defense { 5 }
 	byte:movement { 8 }
 }
+unit-configuration:sdkfz-135_1-lrs {
+	string:name { Sdkfz 135/1 LrS }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 60 }
+	byte:range { 24 }
+	byte:defense { 4 }
+	byte:movement { 7 }
+}
 unit-configuration:hummel {
 	string:name { Hummel }
 	unit-class:unit-class { self-propelled-artillery }
@@ -531,6 +541,16 @@ unit-configuration:gw-1 {
 	byte:range { 12 }
 	byte:defense { 2 }
 	byte:movement { 6 }
+}
+unit-configuration:sig33-pzkw-ii {
+	string:name { sIG33 Pzkw II }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 6 }
+	byte:movement { 8 }
 }
 unit-configuration:gw-38_m {
 	string:name { GW 38(M) }
@@ -575,6 +595,16 @@ unit-configuration:stuh-42 {
 	byte:range { 12 }
 	byte:defense { 12 }
 	byte:movement { 8 }
+}
+unit-configuration:diana {
+	string:name { Diana }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 12 }
+	byte:range { 8 }
+	byte:defense { 1 }
+	byte:movement { 10 }
 }
 unit-configuration:marder-ii {
 	string:name { Marder II }

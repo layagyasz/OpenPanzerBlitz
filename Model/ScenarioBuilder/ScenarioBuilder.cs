@@ -51,7 +51,7 @@ namespace PanzerBlitz
 				_Armies.Select(i => i.BuildArmyConfiguration()),
 				10,
 				Parameters.Environment,
-				new RandomMapConfiguration(32, 32));
+				new RandomMapConfiguration(32, 32).MakeStaticMap());
 		}
 	}
 }

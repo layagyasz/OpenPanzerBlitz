@@ -83,4 +83,31 @@
 			}
 		}
 	}
+
+	environment:desert {
+		tile-rule-set:tile-rule-set {
+			tile-component-rules<>:bases {
+				!tile-component-rules:clear { tile-component-rules.base-clear }
+				!tile-component-rules:swamp { tile-component-rules.base-sand }
+				!tile-component-rules:slope { tile-component-rules.base-slope }
+				!tile-component-rules:village { tile-component-rules.base-village }
+				!tile-component-rules:fort { tile-component-rules.base-fort }
+				!tile-component-rules:wheat-field { tile-component-rules.base-wheat-field }
+				!tile-component-rules:copse { tile-component-rules.base-copse }
+			}
+			tile-component-rules<>:edges {
+				!tile-component-rules:town { tile-component-rules.edge-town }
+				!tile-component-rules:forest { tile-component-rules.edge-forest }
+				!tile-component-rules:slope { tile-component-rules.edge-slope }
+				!tile-component-rules:water { tile-component-rules.edge-water }
+			}
+			tile-component-rules<>:paths {
+				!tile-component-rules:road { tile-component-rules.path-road }
+				!tile-component-rules:stream { tile-component-rules.path-stream }
+				!tile-component-rules:stream-ford { tile-component-rules.path-stream-ford }
+				!tile-component-rules:dirt-road { tile-component-rules.path-road }
+				!tile-component-rules:rail-road { tile-component-rules.path-rail-road }
+			}
+		}
+	}
 }

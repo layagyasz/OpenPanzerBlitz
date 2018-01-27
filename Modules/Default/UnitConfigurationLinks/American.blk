@@ -146,11 +146,24 @@ unit-configuration-link:m-20 {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:m-6-gmc {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-6-gmc }
+
+	int:introduce-year { 1942 }
+}
 unit-configuration-link:m-8 {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.m-8 }
 
 	int:introduce-year { 1943 }
+}
+unit-configuration-link:m-13-aa {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-15 }
+
+	int:introduce-year { 1943 }
+	int:obsolete-year { 1944 }
 }
 unit-configuration-link:m-15 {
 	!faction:faction { factions.american }

@@ -75,6 +75,7 @@ namespace PanzerBlitz
 		{
 			_AttackTarget = AttackTarget;
 			Recalculate();
+			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 		}
 
 		public OrderInvalidReason AddAttacker(SingleAttackOrder AttackOrder)
@@ -86,6 +87,7 @@ namespace PanzerBlitz
 
 				_Attackers.Add(AttackOrder);
 				Recalculate();
+				if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 				return OrderInvalidReason.NONE;
 			}
 			return OrderInvalidReason.UNIT_DUPLICATE;
@@ -95,6 +97,7 @@ namespace PanzerBlitz
 		{
 			_Attackers.RemoveAll(i => i.Attacker == Attacker);
 			Recalculate();
+			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 		}
 
 		void Recalculate()
@@ -143,8 +146,6 @@ namespace PanzerBlitz
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)
 				odds.AttackFactorCalculations.ForEach(i => i.Item1.SetTreatStackAsArmored(odds.StackArmored));
-
-			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 		}
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -234,6 +235,7 @@ namespace PanzerBlitz
 
 		public virtual OrderStatus Execute(Random Random)
 		{
+			Recalculate();
 			if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
 
 			if (_Results.Length == 0) _Results = new CombatResult[_OddsCalculations.Count];
@@ -253,11 +255,12 @@ namespace PanzerBlitz
 		public override string ToString()
 		{
 			return string.Format(
-				"[AttackOrder: Army={0}, AttackTarget={1}, AttackMethod={2}, Attackers={3}]",
+				"[AttackOrder: Army={0}, AttackTarget={1}, AttackMethod={2}, Attackers={3}, Results={4}]",
 				Army,
 				AttackTarget,
 				AttackMethod,
-				string.Join(",", _Attackers.Select(i => i.ToString())));
+				string.Join(",", _Attackers.Select(i => i.ToString())),
+				string.Join(",", _Results.Select(i => i.ToString())));
 		}
 	}
 }
