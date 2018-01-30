@@ -63,9 +63,7 @@ namespace PanzerBlitz
 
 		public Order Deserialize(SerializationInputStream Stream)
 		{
-			Order o = DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
-			Console.WriteLine("[DEBUG SERIALIZER] {0}", o);
-			return o;
+			return DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
 		}
 	}
 }

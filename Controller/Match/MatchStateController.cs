@@ -18,7 +18,7 @@ namespace PanzerBlitz
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
 			_Context = (MatchContext)ProgramStateContext;
-			_MatchEndBuffer = new EventBuffer<EventArgs>(HandleMatchEnd);
+			_MatchEndBuffer = new EventBuffer<EventArgs>();
 
 			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
 				_Context.Match.Scenario, GameData.UnitRenderDetails, 128, 1024, new Font("Compacta Std Regular.otf"));
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 			}
 			_MatchController = new MatchController(_Context.Match, playerControllers);
 			screen.OnPulse += HandlePulse;
-			_Context.Match.OnMatchEnded += _MatchEndBuffer.QueueEvent;
+			_Context.Match.OnMatchEnded += _MatchEndBuffer.Hook(HandleMatchEnd).Invoke;
 			_Context.Match.Start();
 
 			return screen;

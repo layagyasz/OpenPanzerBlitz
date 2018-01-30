@@ -19,8 +19,7 @@ namespace PanzerBlitz
 		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly FactionRenderer FactionRenderer;
 
-		EventBuffer<StartTurnComponentEventArgs> _NewTurnBuffer;
-		EventBuffer<NewUnitEventArgs> _NewUnitBuffer;
+		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
 		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
 		StackLayer _StackLayer = new StackLayer();
@@ -39,16 +38,16 @@ namespace PanzerBlitz
 			Vector2f WindowSize, Match Match, TileRenderer TileRenderer, UnitConfigurationRenderer UnitRenderer, FactionRenderer FactionRenderer)
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
-			_NewTurnBuffer = new EventBuffer<StartTurnComponentEventArgs>(HandleNewTurn);
-			_NewUnitBuffer = new EventBuffer<NewUnitEventArgs>(AddUnit);
-
-			Match.OnStartPhase += _NewTurnBuffer.QueueEvent;
+			Match.OnStartPhase += _EventBuffer.Hook((s, e) => HandleNewTurn(s, (StartTurnComponentEventArgs)e)).Invoke;
 
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
+
+			EventHandler<NewUnitEventArgs> addUnitHandler =
+				_EventBuffer.Hook((s, e) => AddUnit(s, (NewUnitEventArgs)e)).Invoke;
 			foreach (Army a in Match.Armies)
 			{
-				a.OnUnitAdded += _NewUnitBuffer.QueueEvent;
+				a.OnUnitAdded += addUnitHandler;
 				foreach (Unit u in a.Units) AddUnit(u);
 			}
 
@@ -120,8 +119,7 @@ namespace PanzerBlitz
 			int DeltaT,
 			Transform Transform)
 		{
-			_NewTurnBuffer.DispatchEvents();
-			_NewUnitBuffer.DispatchEvents();
+			_EventBuffer.DispatchEvents();
 
 			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
 

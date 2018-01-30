@@ -169,8 +169,6 @@ namespace PanzerBlitz
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
-			if (Tile.RulesCalculator.Water && !Configuration.CanCarryInWater && Passenger != null)
-				return OrderInvalidReason.UNIT_NO_CARRY_IN_WATER;
 			if (Terminal
 				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
 				&& !Tile.Units.Contains(this))
@@ -275,7 +273,7 @@ namespace PanzerBlitz
 			_Position = Tile;
 			_Position.Enter(this);
 
-			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path));
+			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path, Carrier));
 		}
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
@@ -428,7 +426,7 @@ namespace PanzerBlitz
 				From,
 				Tile,
 				i => true,
-				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat),
+				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat).Cost,
 				(i, j) => i.HeuristicDistanceTo(j),
 				i => i.Neighbors(),
 				(i, j) => i == j);
@@ -467,14 +465,14 @@ namespace PanzerBlitz
 				_Position.NeighborTiles
 		   			.Where(i => i != null && _Position.RulesCalculator.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, _Position, _Position.RulesCalculator.GetMoveCost(this, i, !Combat)));
+							 i, _Position, _Position.RulesCalculator.GetMoveCost(this, i, !Combat).Cost));
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				_Position,
 				RemainingMovement,
-				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat))
+				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat).Cost)
 					.GetReachableNodes();
 
 			if (!Moved)

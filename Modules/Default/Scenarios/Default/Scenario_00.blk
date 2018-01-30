@@ -3,7 +3,7 @@
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 2 }
-	!environment:environment { environments.desert }
+	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
@@ -15,8 +15,8 @@
 				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-06.map }
-				bool:invert { false }
+				string:board-path { Maps/board-01.map }
+				bool:invert { true }
 			}
 			board-configuration:_ {
 				string:board-path { Maps/board-h.map }
@@ -99,7 +99,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.badger }
+								!unit-configuration:unit-configuration { unit-configurations.truck-british }
 								int:count { 1 }
 							}
 						}

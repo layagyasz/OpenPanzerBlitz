@@ -58,5 +58,11 @@ namespace PanzerBlitz
 			}
 			return OrderStatus.ILLEGAL;
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[UnloadOrder: Carrier={0}, Passenger={1}, UseMovement={2}]", Carrier, Carrier.Passenger, UseMovement);
+		}
 	}
 }

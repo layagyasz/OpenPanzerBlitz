@@ -5,27 +5,29 @@ namespace PanzerBlitz
 {
 	public class EventBuffer<T> where T : EventArgs
 	{
-		Action<object, T> _Method;
-		Queue<Tuple<object, T>> _Invocations = new Queue<Tuple<object, T>>();
+		Queue<Tuple<Action<object, T>, Tuple<object, T>>> _Invocations =
+			new Queue<Tuple<Action<object, T>, Tuple<object, T>>>();
 
-		public EventBuffer(Action<object, T> Method)
-		{
-			_Method = Method;
-		}
-
-		public void QueueEvent(object Sender, T E)
+		public void QueueEvent(Action<object, T> Handler, object Sender, T E)
 		{
 			lock (_Invocations)
 			{
-				_Invocations.Enqueue(new Tuple<object, T>(Sender, E));
+				_Invocations.Enqueue(
+					new Tuple<Action<object, T>, Tuple<object, T>>(Handler, new Tuple<object, T>(Sender, E)));
 			}
+		}
+
+		public Action<object, T> Hook(Action<object, T> Handler)
+		{
+			return (Sender, E) => QueueEvent(Handler, Sender, E);
 		}
 
 		public void DispatchEvents()
 		{
 			lock (_Invocations)
 			{
-				foreach (Tuple<object, T> args in _Invocations) _Method(args.Item1, args.Item2);
+				foreach (var invocation in _Invocations)
+					invocation.Item1(invocation.Item2.Item1, invocation.Item2.Item2);
 				_Invocations.Clear();
 			}
 		}

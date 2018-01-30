@@ -23,7 +23,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MovementDolly(UnitView UnitView, Path<Tile> Path)
+		public MovementDolly(UnitView UnitView, Path<Tile> Path, Unit Carrier)
 		{
 			_End = Path.Destination.Center;
 			if (Path.Distance > 0)
@@ -32,9 +32,9 @@ namespace PanzerBlitz
 				foreach (Tile t in Path.Nodes.Where((x, i) => i % 2 == 0 || i == Path.Nodes.Count() - 1))
 					_Spline.Points.Add(t.Center);
 
-				float move = UnitView.Unit.Carrier == null
-									 ? UnitView.Unit.Configuration.Movement
-									 : UnitView.Unit.Carrier.Configuration.Movement;
+				float move = Carrier == null
+					? UnitView.Unit.Configuration.Movement
+					: Carrier.Configuration.Movement;
 				_SpeedRecipricol = .0002 * move / Path.Distance;
 			}
 			else _Traveled = 1;

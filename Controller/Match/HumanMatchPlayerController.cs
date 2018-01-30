@@ -47,7 +47,7 @@ namespace PanzerBlitz
 			MatchScreen MatchScreen,
 			KeyController KeyController)
 		{
-			_NewUnitBuffer = new EventBuffer<ValuedEventArgs<UnitView>>(AddUnit);
+			_NewUnitBuffer = new EventBuffer<ValuedEventArgs<UnitView>>();
 
 			this.Match = Match;
 			this.AllowedArmies = new HashSet<Army>(AllowedArmies);
@@ -55,7 +55,7 @@ namespace PanzerBlitz
 
 			_MatchScreen = MatchScreen;
 			_MatchScreen.OnFinishClicked += EndTurn;
-			_MatchScreen.OnUnitAdded += _NewUnitBuffer.QueueEvent;
+			_MatchScreen.OnUnitAdded += _NewUnitBuffer.Hook(AddUnit).Invoke;
 			_MatchScreen.OnPulse += (sender, e) => _NewUnitBuffer.DispatchEvents();
 
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>()

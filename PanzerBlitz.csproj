@@ -282,7 +282,6 @@
     <Compile Include="Controller\PagedProgramStateController.cs" />
     <Compile Include="View\Match\MatchInfoDisplay.cs" />
     <Compile Include="Model\Orders\OrderInvalidReason.cs" />
-    <Compile Include="Model\MovementCost.cs" />
     <Compile Include="View\Unit\UnitInfoPane.cs" />
     <Compile Include="Model\Map\BlankMapConfiguration.cs" />
     <Compile Include="Model\Unit\Unit.cs" />
@@ -332,6 +331,8 @@
     <Compile Include="Model\VictoryConditions\UnitsMatchedPointsObjective.cs" />
     <Compile Include="Model\Map\MapConfigurationSerializer.cs" />
     <Compile Include="Model\Map\StaticMapConfiguration.cs" />
+    <Compile Include="Model\Orders\Movement\MovementCost.cs" />
+    <Compile Include="Model\Unit\MovementRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

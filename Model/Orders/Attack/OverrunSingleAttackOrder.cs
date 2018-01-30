@@ -79,15 +79,16 @@ namespace PanzerBlitz
 			r = _InitialMovement.Unit.CanEnter(AttackTile, false, true);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			float distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
+			MovementCost distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);
-			float distance2 = AttackTile.RulesCalculator.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
-			if (Math.Abs(distance1 - float.MaxValue) < float.Epsilon
-				|| Math.Abs(distance2 - float.MaxValue) < float.Epsilon) return OrderInvalidReason.MOVEMENT_TERRAIN;
+			MovementCost distance2 =
+				AttackTile.RulesCalculator.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
+			if (distance1.UnableReason != OrderInvalidReason.NONE) return distance1.UnableReason;
+			if (distance2.UnableReason != OrderInvalidReason.NONE) return distance2.UnableReason;
 
 			_MovementPath = new Path<Tile>(_InitialMovement.Path);
-			_MovementPath.Add(AttackTile, distance1);
-			_MovementPath.Add(ExitTile, distance2);
+			_MovementPath.Add(AttackTile, distance1.Cost);
+			_MovementPath.Add(ExitTile, distance2.Cost);
 			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 

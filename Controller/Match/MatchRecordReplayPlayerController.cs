@@ -29,7 +29,6 @@ namespace PanzerBlitz
 				while (!(_Orders.Peek() is NextPhaseOrder))
 				{
 					Order o = _Orders.Dequeue();
-					Console.WriteLine("[DEBUG CONTROLLER] {0} {1}", o, o.Validate());
 					_Match.ExecuteOrder(o);
 					if (!(o is ResetOrder)) didAnything = true;
 				}
@@ -45,7 +44,8 @@ namespace PanzerBlitz
 			{
 				case TurnComponent.RESET: return 0;
 				case TurnComponent.MINEFIELD_ATTACK: return 0;
-				case TurnComponent.DEPLOYMENT: return 0;
+				case TurnComponent.ATTACK: return 1000;
+				case TurnComponent.DEPLOYMENT: return 2500;
 				default: return 5000;
 			}
 		}

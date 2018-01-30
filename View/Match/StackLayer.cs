@@ -14,9 +14,7 @@ namespace PanzerBlitz
 
 		List<KeyValuePair<Tile, StackView>> _Stacks = new List<KeyValuePair<Tile, StackView>>();
 
-		EventBuffer<EventArgs> _UpdateStackBuffer;
-		EventBuffer<MovementEventArgs> _MoveUnitBuffer;
-		EventBuffer<EventArgs> _RemoveUnitBuffer;
+		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
 		public IEnumerable<UnitView> UnitViews
 		{
@@ -26,22 +24,17 @@ namespace PanzerBlitz
 			}
 		}
 
-		public StackLayer()
-		{
-			_UpdateStackBuffer = new EventBuffer<EventArgs>(UpdateStack);
-			_MoveUnitBuffer = new EventBuffer<MovementEventArgs>(MoveUnit);
-			_RemoveUnitBuffer = new EventBuffer<EventArgs>(RemoveUnit);
-		}
-
 		public void AddUnitView(UnitView UnitView)
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
-			UnitView.Unit.OnLoad += _UpdateStackBuffer.QueueEvent;
-			UnitView.Unit.OnUnload += _UpdateStackBuffer.QueueEvent;
-			UnitView.Unit.OnMove += _MoveUnitBuffer.QueueEvent;
-			UnitView.Unit.OnRemove += _RemoveUnitBuffer.QueueEvent;
+
+			Action<object, EventArgs> updateHandler = _EventBuffer.Hook(UpdateStack);
+			UnitView.Unit.OnLoad += updateHandler.Invoke;
+			UnitView.Unit.OnUnload += updateHandler.Invoke;
+			UnitView.Unit.OnMove += _EventBuffer.Hook((s, e) => MoveUnit(s, (MovementEventArgs)e)).Invoke;
+			UnitView.Unit.OnRemove += _EventBuffer.Hook(RemoveUnit).Invoke;
 			if (UnitView.Unit.Position != null)
-				MoveUnit(UnitView.Unit, new MovementEventArgs(UnitView.Unit.Position, null));
+				MoveUnit(UnitView.Unit, new MovementEventArgs(UnitView.Unit.Position, null, null));
 		}
 
 		void MoveUnit(object Sender, MovementEventArgs E)
@@ -106,9 +99,7 @@ namespace PanzerBlitz
 		public void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			_MoveUnitBuffer.DispatchEvents();
-			_RemoveUnitBuffer.DispatchEvents();
-			_UpdateStackBuffer.DispatchEvents();
+			_EventBuffer.DispatchEvents();
 
 			foreach (var s in _Stacks) s.Value.Update(MouseController, KeyController, DeltaT, Transform);
 		}
