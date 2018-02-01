@@ -412,6 +412,16 @@ unit-configuration:archer {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
+unit-configuration:wolverine {
+	string:name { Wolverine }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 14 }
+	byte:range { 10 }
+	byte:defense { 6 }
+	byte:movement { 9 }
+}
 unit-configuration:achilles {
 	string:name { Achilles }
 	unit-class:unit-class { tank }

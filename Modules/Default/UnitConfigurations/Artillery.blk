@@ -755,6 +755,18 @@ unit-configuration:4_5in-how {
 
 	bool:can-indirect-fire { true }
 }
+unit-configuration:4_5in-how-american {
+	string:name { 4.5inch }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 36 }
+	byte:range { 56 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
 unit-configuration:5_5in-how {
 	string:name { 5.5inch }
 	unit-class:unit-class { towed-gun }
@@ -798,6 +810,18 @@ unit-configuration:8in-how-finnish {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 80 }
 	byte:range { 36 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:long-tom {
+	string:name { Long Tom }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 56 }
+	byte:range { 60 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 

@@ -21,12 +21,15 @@ namespace PanzerBlitz
 		public readonly ScenarioBuilder ScenarioBuilder;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("scenario-builder-pane");
-		SingleColumnTable _Display = new SingleColumnTable("scenario-builder-display");
+		SingleColumnTable _LeftDisplay = new SingleColumnTable("scenario-builder-display");
 		Button _Error = new Button("footer-error");
 
 		Select<uint> _YearSelect = new Select<uint>("scenario-builder-parameters-section-select");
 		Select<Environment> _EnvironmentSelect = new Select<Environment>("scenario-builder-parameters-section-select");
 		Select<Front> _FrontSelect = new Select<Front>("scenario-builder-parameters-section-select");
+		Select<byte> _TurnsSelect = new Select<byte>("scenario-builder-parameters-section-select");
+		TextInput _MapWidthInput = new TextInput("scenario-builder-parameters-section-text-input");
+		TextInput _MapHeightInput = new TextInput("scenario-builder-parameters-section-text-input");
 
 		Table _ArmiesTable = new Table("scenario-builder-army-section-table", true);
 
@@ -35,9 +38,12 @@ namespace PanzerBlitz
 		{
 			this.ScenarioBuilder = ScenarioBuilder;
 
-			_Display.Add(new Button("header-1") { DisplayedString = "Custom Scenario" });
+			Button header = new Button("scenario-builder-header") { DisplayedString = "Custom Scenario" };
+			_Pane.Add(header);
+			_LeftDisplay.Position = new Vector2f(0, header.Size.Y);
+			_ArmiesTable.Position = new Vector2f(_LeftDisplay.Size.X + 32, header.Size.Y);
 
-			MakeSection("Year", _YearSelect, _Display);
+			MakeSection("Year", _YearSelect, _LeftDisplay);
 			_YearSelect.OnChange += HandleParametersChanged;
 			for (uint i = 1939; i < 1946; ++i)
 				_YearSelect.Add(
@@ -49,7 +55,7 @@ namespace PanzerBlitz
 					});
 			_YearSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Year);
 
-			MakeSection("Environment", _EnvironmentSelect, _Display);
+			MakeSection("Environment", _EnvironmentSelect, _LeftDisplay);
 			_EnvironmentSelect.OnChange += HandleParametersChanged;
 			foreach (Environment environment in GameData.Environments.Values)
 				_EnvironmentSelect.Add(
@@ -60,7 +66,7 @@ namespace PanzerBlitz
 					});
 			_EnvironmentSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Environment);
 
-			MakeSection("Front", _FrontSelect, _Display);
+			MakeSection("Front", _FrontSelect, _LeftDisplay);
 			_FrontSelect.OnChange += HandleParametersChanged;
 			foreach (Front front in Enum.GetValues(typeof(Front)).Cast<Front>().Skip(1))
 				_FrontSelect.Add(
@@ -70,6 +76,25 @@ namespace PanzerBlitz
 						Value = front
 					});
 			_FrontSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Front);
+
+			MakeSection("Turns", _TurnsSelect, _LeftDisplay);
+			_TurnsSelect.OnChange += HandleParametersChanged;
+			for (byte i = 6; i <= 16; ++i)
+				_TurnsSelect.Add(
+					new SelectionOption<byte>("scenario-builder-parameters-section-select-option")
+					{
+						DisplayedString = i.ToString(),
+						Value = i
+					});
+			_TurnsSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Turns);
+
+			MakeSection("Map Width", _MapWidthInput, _LeftDisplay);
+			_MapWidthInput.OnChange += HandleParametersChanged;
+			_MapWidthInput.Value = ScenarioBuilder.Parameters.MapSize.X.ToString();
+
+			MakeSection("Map Height", _MapHeightInput, _LeftDisplay);
+			_MapHeightInput.OnChange += HandleParametersChanged;
+			_MapHeightInput.Value = ScenarioBuilder.Parameters.MapSize.Y.ToString();
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
@@ -83,14 +108,14 @@ namespace PanzerBlitz
 					new Button("scenario-builder-army-section-team-header") { DisplayedString = "Team"},
 					addArmyButton
 				});
-			_Display.Add(_ArmiesTable);
 
 			Button finishedButton = new Button("large-button") { DisplayedString = "Finished" };
 			finishedButton.Position = new Vector2f(0, _Pane.Size.Y - finishedButton.Size.Y - 32);
 			finishedButton.OnClick += HandleFinished;
 
 			_Pane.Add(finishedButton);
-			_Pane.Add(_Display);
+			_Pane.Add(_LeftDisplay);
+			_Pane.Add(_ArmiesTable);
 			_Items.Add(_Pane);
 		}
 
@@ -111,14 +136,16 @@ namespace PanzerBlitz
 		public void Alert(string Alert)
 		{
 			_Error.DisplayedString = Alert;
-			_Display.Remove(_Error);
-			_Display.Add(_Error);
+			_LeftDisplay.Remove(_Error);
+			_LeftDisplay.Add(_Error);
 		}
 
 		public bool Validate()
 		{
-			return _ArmiesTable.All(
-				i => !(i is ScenarioBuilderArmySection) || ((ScenarioBuilderArmySection)i).Validate());
+			return ValidateIntegerInput(_MapWidthInput.Value) > 0
+				&& ValidateIntegerInput(_MapHeightInput.Value) > 0
+				&& _ArmiesTable.All(
+					i => !(i is ScenarioBuilderArmySection) || ((ScenarioBuilderArmySection)i).Validate());
 		}
 
 		void MakeSection(string SectionName, GuiItem Input, SingleColumnTable Display)
@@ -132,13 +159,39 @@ namespace PanzerBlitz
 			Display.Add(container);
 		}
 
+		int ValidateIntegerInput(string Value)
+		{
+			try
+			{
+				return Convert.ToInt32(Value);
+			}
+			catch (Exception e)
+			{
+				return 0;
+			}
+		}
+
 		void HandleParametersChanged(object Sender, EventArgs E)
 		{
-			if (_YearSelect.Value == null || _FrontSelect.Value == null || _EnvironmentSelect.Value == null) return;
+			if (_YearSelect.Value == null
+				|| _FrontSelect.Value == null
+				|| _EnvironmentSelect.Value == null
+				|| _TurnsSelect.Value == null)
+				return;
+
+			int width = ValidateIntegerInput(_MapWidthInput.Value);
+			int height = ValidateIntegerInput(_MapHeightInput.Value);
+
+			if (width == 0 || height == 0)
+				return;
 
 			ScenarioParameters parameters =
 				new ScenarioParameters(
-					_YearSelect.Value.Value, _FrontSelect.Value.Value, _EnvironmentSelect.Value.Value);
+					_YearSelect.Value.Value,
+					_FrontSelect.Value.Value,
+					_EnvironmentSelect.Value.Value,
+					_TurnsSelect.Value.Value,
+					new Coordinate(width, height));
 			if (OnParametersChanged != null)
 				OnParametersChanged(this, new ValuedEventArgs<ScenarioParameters>(parameters));
 		}

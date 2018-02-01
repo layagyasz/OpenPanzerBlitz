@@ -28,6 +28,10 @@ unit-configuration-link:90mm-at-british {
 
 	int:introduce-year { 1941 }
 }
+unit-configuration-link:20mm-aa-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+}
 unit-configuration-link:40mm-aa-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
@@ -139,6 +143,12 @@ unit-configuration-link:truck-british {
 unit-configuration-link:matador {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matador }
+}
+unit-configuration-link:jeep-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.jeep }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:bren {
 	!faction:faction { factions.british }
@@ -297,6 +307,12 @@ unit-configuration-link:archer {
 	!unit-configuration:unit-configuration { unit-configurations.archer }
 
 	int:introduce-year { 1944 }
+}
+unit-configuration-link:wolverine {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.wolverine }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:achilles {
 	!faction:faction { factions.british }

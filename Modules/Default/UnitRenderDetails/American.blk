@@ -44,6 +44,12 @@ unit-render-details:truck-american {
 unit-render-details:m-3-scout {
 	string:image-path { m-3-scout.png }
 }
+unit-render-details:m-4-hst {
+	string:image-path { m-4-hst.png }
+}
+unit-render-details:jeep {
+	string:image-path { jeep.png }
+}
 unit-render-details:m-8-jeep {
 	string:image-path { m-8-jeep.png }
 }

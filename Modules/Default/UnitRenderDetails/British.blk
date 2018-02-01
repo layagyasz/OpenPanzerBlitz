@@ -121,6 +121,9 @@ unit-render-details:a-13 {
 unit-render-details:archer {
 	string:image-path { archer.png }
 }
+unit-render-details:wolverine {
+	string:image-path { m-10.png }
+}
 unit-render-details:achilles {
 	string:image-path { achilles.png }
 }

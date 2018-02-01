@@ -52,11 +52,23 @@ unit-configuration-link:155mm-how-american {
 
 	int:introduce-year { 1942 }
 }
+unit-configuration-link:4_5in-how-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.4_5in-how-american }
+
+	int:introduce-year { 1942 }
+}
 unit-configuration-link:8in-how-allied-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.8in-how-allied }
 
 	int:introduce-year { 1942 }
+}
+unit-configuration-link:long-tom-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.long-tom }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:81mm-mortar-american {
 	!faction:faction { factions.american }
@@ -128,6 +140,18 @@ unit-configuration-link:m-3-scout {
 
 	int:introduce-year { 1940 }
 }
+unit-configuration-link:m-4-hst {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.m-4-hst }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:jeep {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.jeep }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:m-8-jeep {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.m-8-jeep }
@@ -160,7 +184,7 @@ unit-configuration-link:m-8 {
 }
 unit-configuration-link:m-13-aa {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-15 }
+	!unit-configuration:unit-configuration { unit-configurations.m-13-aa }
 
 	int:introduce-year { 1943 }
 	int:obsolete-year { 1944 }

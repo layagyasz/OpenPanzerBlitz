@@ -1,10 +1,20 @@
 ﻿class:scenario-builder-pane {
 	!class:parent { pane }
+	mode:default {
+		int:width { 624 }
+	}
 }
 class:scenario-builder-display {
 	!class:parent { pane-display }
 	mode:default { 
-		int:height { 682 }
+		int:width { 272 }
+		int:height { 633 }
+	}
+}
+class:scenario-builder-header {
+	!class:parent { header-1 }
+	mode:default {
+		int:width { 592 }
 	}
 }
 class:scenario-builder-parameters-section {
@@ -28,11 +38,17 @@ class:scenario-builder-parameters-section-select-option {
 		int:width { 272 }
 	}
 }
+class:scenario-builder-parameters-section-text-input {
+	!class:parent { text-input }
+	mode:default {
+		int:width { 272 }
+	}
+}
 class:scenario-builder-army-section-table {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 415 }
-		int[]:padding { 0 9 0 0 }
+		int:height { 633 }
+		int[]:padding { 0 1 0 0 }
 	}
 }
 class:scenario-builder-army-section-header {

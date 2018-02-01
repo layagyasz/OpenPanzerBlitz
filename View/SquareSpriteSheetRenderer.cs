@@ -43,9 +43,7 @@ namespace PanzerBlitz
 				{
 					texture.Display();
 					renderedTexture = new Texture(texture.Texture);
-					foreach (KeyValuePair<T, Vector2f[]> k in renderInfoCache)
-						_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
-					renderInfoCache.Clear();
+					DumpCache(renderInfoCache, renderedTexture);
 					_Textures.Add(renderedTexture);
 					texture = new RenderTexture(TextureSize, TextureSize);
 					i = 0;
@@ -54,9 +52,24 @@ namespace PanzerBlitz
 			}
 			texture.Display();
 			renderedTexture = new Texture(texture.Texture);
-			foreach (KeyValuePair<T, Vector2f[]> k in renderInfoCache)
-				_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(renderedTexture, k.Value));
+			DumpCache(renderInfoCache, renderedTexture);
 			_Textures.Add(renderedTexture);
+		}
+
+		void DumpCache(List<KeyValuePair<T, Vector2f[]>> Cache, Texture Texture)
+		{
+			foreach (KeyValuePair<T, Vector2f[]> k in Cache)
+			{
+				try
+				{
+					_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(Texture, k.Value));
+				}
+				catch (Exception e)
+				{
+					throw new Exception(string.Format("Error Caching {0}: {1}", k.Key, e));
+				}
+			}
+			Cache.Clear();
 		}
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(T Object)

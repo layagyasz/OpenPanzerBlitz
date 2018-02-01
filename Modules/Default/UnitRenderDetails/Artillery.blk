@@ -193,6 +193,9 @@ unit-render-details:25pdr-short-how {
 unit-render-details:4_5in-how {
 	string:image-path { artillery-heavy.png }
 }
+unit-render-details:4_5in-how-american {
+	string:image-path { artillery-heavy.png }
+}
 unit-render-details:5_5in-how {
 	string:image-path { artillery-heavy.png }
 }
@@ -203,6 +206,10 @@ unit-render-details:8in-how-allied {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:8in-how-finnish {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:long-tom {
+	string:override-display-name { LONG TOM }
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:76mm-mortar {
