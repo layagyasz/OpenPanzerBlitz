@@ -8,15 +8,18 @@ namespace PanzerBlitz
 {
 	public class VictoryCondition : Serializable
 	{
-		enum Attribute { OBJECTIVES, TRIGGERS };
+		enum Attribute { OBJECTIVES, TRIGGERS, STOP_EARLY };
 
 		public readonly List<Objective> Scorers;
 		public readonly List<ObjectiveSuccessTrigger> Triggers;
+		public readonly bool StopEarly;
 
-		public VictoryCondition(IEnumerable<Objective> Scorers, IEnumerable<ObjectiveSuccessTrigger> Triggers)
+		public VictoryCondition(
+			IEnumerable<Objective> Scorers, IEnumerable<ObjectiveSuccessTrigger> Triggers, bool StopEarly = false)
 		{
 			this.Scorers = Scorers.ToList();
 			this.Triggers = Triggers.ToList();
+			this.StopEarly = StopEarly;
 		}
 
 		public VictoryCondition(ParseBlock Block)
@@ -25,6 +28,7 @@ namespace PanzerBlitz
 			Scorers = ((Dictionary<string, object>)attributes[(int)Attribute.OBJECTIVES])
 				.Values.Cast<Objective>().ToList();
 			Triggers = (List<ObjectiveSuccessTrigger>)attributes[(int)Attribute.TRIGGERS];
+			StopEarly = Parse.DefaultIfNull(attributes[(int)Attribute.STOP_EARLY], false);
 		}
 
 		public VictoryCondition(SerializationInputStream Stream)
@@ -32,12 +36,14 @@ namespace PanzerBlitz
 			Scorers = Stream.ReadEnumerable(
 				i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream, false, true)).ToList();
 			Triggers = Stream.ReadEnumerable(i => new ObjectiveSuccessTrigger(Stream)).ToList();
+			StopEarly = Stream.ReadBoolean();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Scorers, i => ObjectiveSerializer.Instance.Serialize(i, Stream, false, true));
 			Stream.Write(Triggers);
+			Stream.Write(StopEarly);
 		}
 
 		public ObjectiveSuccessLevel GetMatchResult(Army ForArmy, Match Match)

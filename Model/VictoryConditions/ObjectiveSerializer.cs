@@ -20,11 +20,11 @@ namespace PanzerBlitz
 			typeof(PreventEnemyObjective),
 			typeof(RatioObjective),
 			typeof(SumObjective),
+			typeof(TemporalObjective),
 			typeof(TilesControlledObjective),
 			typeof(TriggerObjective),
 			typeof(UnitsDestroyedObjective),
-			typeof(UnitsMatchedObjective),
-			typeof(UnitsMatchedPointsObjective)
+			typeof(UnitsMatchedObjective)
 		})
 		{ }
 

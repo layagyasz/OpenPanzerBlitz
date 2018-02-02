@@ -1,0 +1,194 @@
+scenario:_ {
+	string:name { Marieulles }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.american }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				bool:stop-early { true }
+				var<>:objectives {
+					sum-objective:grancelle-controlled-by {
+						temporal-objective:_ {
+							trigger-objective:objective {
+								int:threshold { 15 }
+								tiles-controlled-objective:objective {
+									bool:friendly { true }
+									tile-in-region:matcher {
+										string:region-name { grancelle }
+									}
+								}
+							}
+						}
+						trigger-objective:_ {
+							int:threshold { 15 }
+							units-matched-objective:objective {
+								bool:friendly { true }
+								unit-has-status:matcher {
+									unit-status:status { destroyed }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 6 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 7 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 8 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 11,0 11,33 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { 7th Armored Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_75 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 13 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+					trigger-objective:grancelle-controlled {
+						int:threshold { 14 }
+						bool:invert { true }
+						tiles-controlled-objective:objective {
+							bool:friendly { false }
+							tile-in-region:matcher {
+								string:region-name { grancelle }
+							}
+						}
+					}
+					trigger-objective:units-destroyed {
+						int:threshold { 7 }
+						units-matched-objective:objective {
+							bool:friendly { true }
+							unit-has-status:matcher {
+								unit-status:status { destroyed }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.prevent-enemy }
+							!var:_ { objectives.units-destroyed }
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						!var:objective { objectives.grancelle-controlled }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.grancelle-controlled }
+							!var:_ { objectives.units-destroyed }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-in-region:matcher {
+						string:region-name { grancelle }
+					}
+					unit-group:unit-group {
+						string:name { Officer Trainees }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

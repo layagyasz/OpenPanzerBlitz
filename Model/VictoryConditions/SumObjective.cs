@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	{
 		public readonly List<Objective> Objectives;
 
-		public SumObjective(string UniqueKey, IEnumerable<Objective> Objectives)
+		public SumObjective(IEnumerable<Objective> Objectives)
 		{
 			this.Objectives = Objectives.ToList();
 		}

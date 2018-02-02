@@ -54,7 +54,7 @@ namespace PanzerBlitz
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
 		{
 			Dictionary<Army, ObjectiveSuccessLevel> r = new Dictionary<Army, ObjectiveSuccessLevel>();
-			foreach (Army a in Armies) r.Add(a, a.GetObjectiveSuccessLevel(this));
+			foreach (Army a in Armies) r.Add(a, a.GetObjectiveSuccessLevel());
 			return r;
 		}
 
@@ -83,7 +83,14 @@ namespace PanzerBlitz
 
 		bool AdvancePhaseIterator()
 		{
-			if (_TurnOrder.MoveNext()) return true;
+			Turn lastTurn = _TurnOrder.Current;
+			if (_TurnOrder.MoveNext())
+			{
+				// Check to see if any stop early victory conditions are met.
+				if (_TurnOrder.Current.TurnNumber == lastTurn.TurnNumber
+					|| Armies.Max(i => i.CheckObjectiveSuccessLevel()) == ObjectiveSuccessLevel.NONE)
+					return true;
+			}
 
 			if (OnMatchEnded != null) OnMatchEnded(this, EventArgs.Empty);
 			return false;

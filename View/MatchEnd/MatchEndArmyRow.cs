@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			});
 			Add(new Button("match-end-army-success")
 			{
-				DisplayedString = ObjectDescriber.Describe(Army.GetObjectiveSuccessLevel(Match))
+				DisplayedString = ObjectDescriber.Describe(Army.GetObjectiveSuccessLevel())
 			});
 		}
 

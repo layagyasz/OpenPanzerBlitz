@@ -7,7 +7,7 @@
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
-				string:board-path { Maps/board-e.map }
+				string:board-path { Maps/board-a.map }
 				bool:invert { false }
 			}
 			board-configuration:_ {

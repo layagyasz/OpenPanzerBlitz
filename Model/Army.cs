@@ -46,7 +46,17 @@ namespace PanzerBlitz
 			_IdGenerator = IdGenerator;
 		}
 
-		public ObjectiveSuccessLevel GetObjectiveSuccessLevel(Match Match)
+		public ObjectiveSuccessLevel CheckObjectiveSuccessLevel()
+		{
+			if (Configuration.VictoryCondition.StopEarly)
+			{
+				ObjectiveSuccessLevel l = Configuration.VictoryCondition.GetMatchResult(this, Match);
+				return l == ObjectiveSuccessLevel.DEFEAT ? ObjectiveSuccessLevel.NONE : l;
+			}
+			return ObjectiveSuccessLevel.NONE;
+		}
+
+		public ObjectiveSuccessLevel GetObjectiveSuccessLevel()
 		{
 			return Configuration.VictoryCondition.GetMatchResult(this, Match);
 		}

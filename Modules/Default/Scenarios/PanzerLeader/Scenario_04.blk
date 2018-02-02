@@ -24,12 +24,12 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					trigger-objective:grancelles-controlled {
+					trigger-objective:grancelle-controlled {
 						int:threshold { 15 }
 						tiles-controlled-objective:objective {
 							bool:friendly { true }
 							tile-in-region:matcher {
-								string:region-name { grancelles }
+								string:region-name { grancelle }
 							}
 						}
 					}
@@ -60,7 +60,7 @@
 							}
 						}
 					}
-					trigger-objective:east-grancelles-controlled {
+					trigger-objective:east-grancelle-controlled {
 						int:threshold { 5 }
 						tiles-controlled-objective:objective {
 							bool:friendly { true }
@@ -69,7 +69,7 @@
 									zone:zone { 1,9 5,13 0,13 }
 								}
 								tile-in-region:_ {
-									string:region-name { grancelles }
+									string:region-name { grancelle }
 								}
 							}
 						}
@@ -80,7 +80,7 @@
 						objective-success-level:success-level { victory }
 						int:threshold { 1 }
 						achieve-any:objective {
-							!var:_ { objectives.grancelles-controlled }
+							!var:_ { objectives.grancelle-controlled }
 							achieve-all:_ {
 								!var:_ { objectives.sambleu-controlled }
 								!var:_ { objectives.caverge-controlled }

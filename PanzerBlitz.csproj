@@ -328,11 +328,11 @@
     <Compile Include="Controller\ScenarioBuilderContext.cs" />
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderController.cs" />
     <Compile Include="Model\VictoryConditions\HighestScoreObjective.cs" />
-    <Compile Include="Model\VictoryConditions\UnitsMatchedPointsObjective.cs" />
     <Compile Include="Model\Map\MapConfigurationSerializer.cs" />
     <Compile Include="Model\Map\StaticMapConfiguration.cs" />
     <Compile Include="Model\Orders\Movement\MovementCost.cs" />
     <Compile Include="Model\Unit\MovementRule.cs" />
+    <Compile Include="Model\VictoryConditions\TemporalObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2143,6 +2143,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitSprites\jeep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_08.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

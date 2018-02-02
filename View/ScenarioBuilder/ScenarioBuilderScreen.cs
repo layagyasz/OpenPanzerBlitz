@@ -79,7 +79,7 @@ namespace PanzerBlitz
 
 			MakeSection("Turns", _TurnsSelect, _LeftDisplay);
 			_TurnsSelect.OnChange += HandleParametersChanged;
-			for (byte i = 6; i <= 16; ++i)
+			for (byte i = 6; i <= 16; i += 2)
 				_TurnsSelect.Add(
 					new SelectionOption<byte>("scenario-builder-parameters-section-select-option")
 					{
