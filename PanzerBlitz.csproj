@@ -84,7 +84,6 @@
     <Compile Include="Model\Orders\Attack\MinefieldSingleAttackOrder.cs" />
     <Compile Include="Model\NewUnitEventArgs.cs" />
     <Compile Include="Model\VictoryConditions\Objective.cs" />
-    <Compile Include="Model\VictoryConditions\UnitsDestroyedObjective.cs" />
     <Compile Include="Model\VictoryConditions\VictoryCondition.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessLevel.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSuccessTrigger.cs" />
@@ -241,7 +240,6 @@
     <Compile Include="Model\Matchers\Matcher.cs" />
     <Compile Include="Model\Matchers\CompositeMatcher.cs" />
     <Compile Include="Model\Matchers\EmptyMatcher.cs" />
-    <Compile Include="View\ObjectDescriber.cs" />
     <Compile Include="Model\Matchers\MatcherSerializer.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasStatus.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasReconned.cs" />
@@ -333,6 +331,10 @@
     <Compile Include="Model\Orders\Movement\MovementCost.cs" />
     <Compile Include="Model\Unit\MovementRule.cs" />
     <Compile Include="Model\VictoryConditions\TemporalObjective.cs" />
+    <Compile Include="View\Describers\ObjectDescriber.cs" />
+    <Compile Include="View\Describers\ObjectiveDescriber.cs" />
+    <Compile Include="View\Describers\MatcherDescriber.cs" />
+    <Compile Include="View\Match\VictoryConditionDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -396,6 +398,7 @@
     <Folder Include="Model\ScenarioBuilder\" />
     <Folder Include="View\ScenarioBuilder\" />
     <Folder Include="Controller\ScenarioBuilder\" />
+    <Folder Include="View\Describers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

@@ -95,8 +95,11 @@ scenario:_ {
 							string:region-name { grancelle }
 						}
 					}
-					units-destroyed-objective:units-destroyed {
+					units-matched-objective:units-destroyed {
 						bool:friendly { true }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
 					}
 				}
 				objective-success-trigger[]:triggers {

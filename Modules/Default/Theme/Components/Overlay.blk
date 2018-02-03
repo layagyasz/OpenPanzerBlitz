@@ -65,3 +65,22 @@ class:overlay-fired-box {
 		int[]:padding { 10 3 0 0 }
 	}
 }
+class:victory-condition-display {
+	!class:parent { info-display }
+	mode:default {
+		int:height { 363 }
+	}
+}
+class:victory-condition-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 272 }
+	}
+}
+class:victory-condition-regular {
+	!class:parent { regular }
+	mode:default {
+		int:height { 88 }
+		int:width { 272 }
+	}
+}

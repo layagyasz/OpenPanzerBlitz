@@ -157,7 +157,7 @@
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { decisive-victory }
-						int:threshold { 44 }
+						int:threshold { 43 }
 						bool:invert { true }
 						!var:objective { objectives.region-controlled }
 					}

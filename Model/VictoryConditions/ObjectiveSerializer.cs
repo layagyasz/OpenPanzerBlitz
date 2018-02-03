@@ -23,7 +23,6 @@ namespace PanzerBlitz
 			typeof(TemporalObjective),
 			typeof(TilesControlledObjective),
 			typeof(TriggerObjective),
-			typeof(UnitsDestroyedObjective),
 			typeof(UnitsMatchedObjective)
 		})
 		{ }

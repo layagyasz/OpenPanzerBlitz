@@ -18,8 +18,11 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed {
+					units-matched-objective:units-destroyed {
 						bool:friendly { true }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
 					}
 					trigger-objective:nece-controlled {
 						int:threshold { 4 }
@@ -130,8 +133,11 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed {
+					units-matched-objective:units-destroyed {
 						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
 					}
 					tiles-controlled-objective:nece-controlled {
 						bool:friendly { true }

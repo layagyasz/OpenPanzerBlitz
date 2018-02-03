@@ -26,11 +26,23 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed {
-						2-tuple[]:override-scores {
-							2-tuple:_ {
-								!unit-configuration:_ { unit-configurations.command-post }
-								int:_ { 5 }
+					sum-objective:units-destroyed {
+						units-matched-objective:_ {
+							bool:friendly { false }
+							unit-has-status:matcher {
+								unit-status:status { destroyed }
+							}
+						}
+						units-matched-objective:_ {
+							bool:friendly { false }
+							int:point-value { 4 }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { destroyed }
+								}
+								unit-has-configuration:_ {
+									!unit-configuration:unit-configuration { unit-configurations.command-post }
+								}
 							}
 						}
 					}
@@ -100,8 +112,11 @@
 			byte:team { 2 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed {
+					units-matched-objective:units-destroyed {
 						bool:friendly { true }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
 					}
 				}
 				objective-success-trigger[]:triggers {

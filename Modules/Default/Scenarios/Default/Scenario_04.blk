@@ -30,7 +30,12 @@
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					units-destroyed-objective:units-destroyed { }
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {

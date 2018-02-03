@@ -122,6 +122,7 @@ scenario:_ {
 					}
 					trigger-objective:units-destroyed {
 						int:threshold { 7 }
+						bool:invert { true }
 						units-matched-objective:objective {
 							bool:friendly { true }
 							unit-has-status:matcher {
@@ -139,15 +140,13 @@ scenario:_ {
 					objective-success-trigger:_ {
 						objective-success-level:success-level { tactical-victory }
 						int:threshold { 1 }
-						achieve-all:objective {
-							!var:_ { objectives.prevent-enemy }
-							!var:_ { objectives.units-destroyed }
+						achieve-any:objective {
+							achieve-all:_ {
+								!var:_ { objectives.prevent-enemy }
+								!var:_ { objectives.units-destroyed }
+							}
+							!var:objective { objectives.grancelle-controlled }
 						}
-					}
-					objective-success-trigger:_ {
-						objective-success-level:success-level { tactical-victory }
-						int:threshold { 1 }
-						!var:objective { objectives.grancelle-controlled }
 					}
 					objective-success-trigger:_ {
 						objective-success-level:success-level { decisive-victory }

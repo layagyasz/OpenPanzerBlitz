@@ -21,6 +21,7 @@ namespace PanzerBlitz
 
 		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
+		VictoryConditionDisplay _VictoryConditionDisplay = new VictoryConditionDisplay();
 		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
 		StackLayer _StackLayer = new StackLayer();
 		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
@@ -57,9 +58,12 @@ namespace PanzerBlitz
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);
 			_FinishButton.OnClick += HandleFinishClicked;
 			_InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
+			_VictoryConditionDisplay.Position =
+				_InfoDisplay.Position - new Vector2f(0, _VictoryConditionDisplay.Size.Y + 16);
 
 			_Items.Add(_FinishButton);
 			_Items.Add(_InfoDisplay);
+			_Items.Add(_VictoryConditionDisplay);
 			_Items.Add(_TurnCounter);
 		}
 
@@ -111,6 +115,7 @@ namespace PanzerBlitz
 			}
 
 			_InfoDisplay.SetTurn(Turn);
+			_VictoryConditionDisplay.SetVictoryCondition(Turn.TurnInfo.Army.Configuration.VictoryCondition);
 		}
 
 		public override void Update(
