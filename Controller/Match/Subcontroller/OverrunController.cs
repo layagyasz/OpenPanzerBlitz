@@ -47,10 +47,10 @@ namespace PanzerBlitz
 					Unit.GetFieldOfMovement(true).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
-							HIGHLIGHT_COLORS[
+								HumanMatchPlayerController.HIGHLIGHT_COLORS[
 								Math.Max(0, Math.Min(
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
-									HIGHLIGHT_COLORS.Length - 1))])));
+									HumanMatchPlayerController.HIGHLIGHT_COLORS.Length - 1))])));
 			}
 		}
 
@@ -81,7 +81,8 @@ namespace PanzerBlitz
 			{
 				_InitialMovement = _Controller.SelectedUnit.GetPathTo(Tile, true);
 				_Controller.Highlight(
-					_InitialMovement.Nodes.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+					_InitialMovement.Nodes.Select(
+						i => new Tuple<Tile, Color>(i, HumanMatchPlayerController.HIGHLIGHT_COLORS.First())));
 			}
 		}
 	}

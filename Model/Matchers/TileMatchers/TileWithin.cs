@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Planar;
 using Cardamom.Serialization;
@@ -36,6 +37,11 @@ namespace PanzerBlitz
 		{
 			if (Tile == null) return false;
 			return Zone.ContainsPoint(new Vector2f(Tile.Coordinate.X, Tile.Coordinate.Y));
+		}
+
+		public IEnumerable<Matcher<Tile>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

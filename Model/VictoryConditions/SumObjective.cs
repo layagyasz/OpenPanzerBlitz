@@ -35,5 +35,10 @@ namespace PanzerBlitz
 		{
 			return Objectives.Sum(i => i.GetScore(ForArmy, Match, Cache));
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Objectives.SelectMany(i => i.GetTiles(Map));
+		}
 	}
 }

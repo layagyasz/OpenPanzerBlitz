@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -34,6 +35,11 @@ namespace PanzerBlitz
 		{
 			if (Tile == null) return false;
 			return Tile.OnEdge(Edge);
+		}
+
+		public IEnumerable<Matcher<Tile>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

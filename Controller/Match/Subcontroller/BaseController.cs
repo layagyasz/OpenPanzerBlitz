@@ -11,22 +11,6 @@ namespace PanzerBlitz
 {
 	public abstract class BaseController : Subcontroller
 	{
-		public static readonly Color[] HIGHLIGHT_COLORS =
-		{
-			new Color(0, 255, 0, 120),
-			new Color(255, 255, 0, 120),
-			new Color(255, 128, 0, 120),
-			new Color(255, 0, 0, 120)
-		};
-
-		public static readonly Color[] DIM_HIGHLIGHT_COLORS =
-		{
-			new Color(0, 255, 0, 120),
-			new Color(255, 255, 0, 120),
-			new Color(255, 128, 0, 120),
-			new Color(255, 0, 0, 120)
-		};
-
 		protected Pane _Pane;
 
 		protected HumanMatchPlayerController _Controller;

@@ -65,10 +65,10 @@ namespace PanzerBlitz
 					Unit.GetFieldOfMovement(false).Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
-							HIGHLIGHT_COLORS[
+							HumanMatchPlayerController.HIGHLIGHT_COLORS[
 								Math.Max(0, Math.Min(
 									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
-									HIGHLIGHT_COLORS.Length - 1))])));
+									HumanMatchPlayerController.HIGHLIGHT_COLORS.Length - 1))])));
 			}
 			else _Controller.UnHighlight();
 		}

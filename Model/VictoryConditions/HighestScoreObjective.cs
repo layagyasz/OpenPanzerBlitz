@@ -39,5 +39,10 @@ namespace PanzerBlitz
 									.Max(i => Metric.CalculateScore(i, Match, new Dictionary<Objective, int>()));
 			return score > compareScore ? 1 : 0;
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Metric.GetTiles(Map);
+		}
 	}
 }

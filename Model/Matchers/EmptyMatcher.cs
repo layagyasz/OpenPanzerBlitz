@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -15,6 +16,11 @@ namespace PanzerBlitz
 		public bool Matches(T Object)
 		{
 			return true;
+		}
+
+		public IEnumerable<Matcher<T>> Flatten()
+		{
+			yield return this;
 		}
 
 		public void Serialize(SerializationOutputStream Stream) { }

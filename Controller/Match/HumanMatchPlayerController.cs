@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
@@ -12,6 +13,24 @@ namespace PanzerBlitz
 {
 	public class HumanMatchPlayerController : MatchPlayerController
 	{
+		public static readonly Color[] HIGHLIGHT_COLORS =
+		{
+			new Color(0, 255, 0, 120),
+			new Color(255, 255, 0, 120),
+			new Color(255, 128, 0, 120),
+			new Color(255, 0, 0, 120)
+		};
+
+		public static readonly Color[] DIM_HIGHLIGHT_COLORS =
+		{
+			new Color(0, 255, 0, 60),
+			new Color(255, 255, 0, 60),
+			new Color(255, 128, 0, 60),
+			new Color(255, 0, 0, 60)
+		};
+
+		enum HighlightToggle { ENEMY_SIGHT_FIELD, VICTORY_CONDITION_FIELD };
+
 		public readonly MatchAdapter Match;
 		public readonly HashSet<Army> AllowedArmies;
 		public readonly UnitConfigurationRenderer UnitConfigurationRenderer;
@@ -20,7 +39,9 @@ namespace PanzerBlitz
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
 		TurnInfo _CurrentTurn;
 		Unit _SelectedUnit;
+
 		Highlight _Highlight;
+		bool[] _HighlightToggles = new bool[Enum.GetValues(typeof(HighlightToggle)).Length];
 
 		KeyController _KeyController;
 		EventBuffer<ValuedEventArgs<UnitView>> _NewUnitBuffer;
@@ -153,6 +174,8 @@ namespace PanzerBlitz
 			_MatchScreen.HighlightLayer.RemoveHighlight(_Highlight);
 			_Highlight = new Highlight();
 			_MatchScreen.HighlightLayer.AddHighlight(_Highlight);
+
+			for (int i = 0; i < _HighlightToggles.Length; ++i) _HighlightToggles[i] = false;
 		}
 
 		public void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
@@ -160,6 +183,59 @@ namespace PanzerBlitz
 			_MatchScreen.HighlightLayer.RemoveHighlight(_Highlight);
 			_Highlight = new Highlight(Highlight);
 			_MatchScreen.HighlightLayer.AddHighlight(_Highlight);
+
+			for (int i = 0; i < _HighlightToggles.Length; ++i) _HighlightToggles[i] = false;
+		}
+
+		public Color GetRangeColor(
+			LineOfSight LineOfSight, Unit Unit, bool DirectFire, AttackMethod AttackMethod = AttackMethod.NORMAL_FIRE)
+		{
+			return (DirectFire ? HIGHLIGHT_COLORS : DIM_HIGHLIGHT_COLORS)[
+				PosterizeLineOfSight(LineOfSight, Unit, AttackMethod)];
+		}
+
+		public int PosterizeLineOfSight(
+			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.NORMAL_FIRE)
+		{
+			return Math.Min(
+				LineOfSight.Range * HIGHLIGHT_COLORS.Length / (Unit.Configuration.GetRange(AttackMethod) + 1),
+				HIGHLIGHT_COLORS.Length - 1);
+		}
+
+		public Color GetTileColor(Tile Tile, byte ForTeam)
+		{
+			if (Tile.ControllingArmy == null) return HIGHLIGHT_COLORS[2];
+			if (Tile.ControllingArmy.Configuration.Team == ForTeam) return HIGHLIGHT_COLORS.First();
+			return HIGHLIGHT_COLORS.Last();
+		}
+
+		void HighlightEnemyFieldOfSight(byte Team)
+		{
+			if (_HighlightToggles[(int)HighlightToggle.ENEMY_SIGHT_FIELD]) UnHighlight();
+			else
+			{
+				Highlight(Match.GetArmies()
+					 .Where(i => i.Configuration.Team != Team)
+					 .SelectMany(i => i.Units)
+					 .SelectMany(i =>
+								 i.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
+									 j => new Tuple<Tile, int>(j.Item1.Final, PosterizeLineOfSight(j.Item1, i))))
+					 .GroupBy(i => i.Item1)
+						  .Select(i => new Tuple<Tile, Color>(i.Key, HIGHLIGHT_COLORS[i.Min(j => j.Item2)])));
+				_HighlightToggles[(int)HighlightToggle.ENEMY_SIGHT_FIELD] = true;
+			}
+		}
+
+		void HighlightVictoryConditionField(Army Army)
+		{
+			if (_HighlightToggles[(int)HighlightToggle.VICTORY_CONDITION_FIELD]) UnHighlight();
+			else
+			{
+				Highlight(
+					Army.Configuration.VictoryCondition.GetTiles(Match.GetMap())
+					.Select(i => new Tuple<Tile, Color>(i, GetTileColor(i, Army.Configuration.Team))));
+				_HighlightToggles[(int)HighlightToggle.VICTORY_CONDITION_FIELD] = true;
+			}
 		}
 
 		void OnTileClick(object sender, MouseEventArgs e)
@@ -198,7 +274,11 @@ namespace PanzerBlitz
 		{
 			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
-				_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+			{
+				if (E.Key == Keyboard.Key.S) HighlightEnemyFieldOfSight(phase.Army.Configuration.Team);
+				else if (E.Key == Keyboard.Key.V) HighlightVictoryConditionField(phase.Army);
+				else _Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+			}
 		}
 
 		public void Unhook()

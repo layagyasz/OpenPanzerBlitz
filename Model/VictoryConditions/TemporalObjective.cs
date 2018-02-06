@@ -35,5 +35,10 @@ namespace PanzerBlitz
 			int turn = Match.CurrentTurn.TurnNumber == 0 ? Match.Scenario.Turns + 1 : Match.CurrentTurn.TurnNumber;
 			return Objective.GetScore(ForArmy, Match, Cache) > 0 ? turn : int.MaxValue;
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Objective.GetTiles(Map);
+		}
 	}
 }

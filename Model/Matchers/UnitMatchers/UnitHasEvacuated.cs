@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -32,6 +33,11 @@ namespace PanzerBlitz
 		public bool Matches(Unit Unit)
 		{
 			return Unit.Evacuated == Direction;
+		}
+
+		public IEnumerable<Matcher<Unit>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

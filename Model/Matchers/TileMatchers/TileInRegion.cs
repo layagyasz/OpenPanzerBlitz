@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -34,6 +35,11 @@ namespace PanzerBlitz
 		{
 			return Tile.Map.Regions.First(
 				i => NormalizedRegionName == i.Name.Replace(' ', '-').ToLower()).Contains(Tile);
+		}
+
+		public IEnumerable<Matcher<Tile>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

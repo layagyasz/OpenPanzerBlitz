@@ -45,5 +45,10 @@ namespace PanzerBlitz
 			bool seed = Matchers.First().Matches(Object);
 			return Matchers.Skip(1).Select(i => i.Matches(Object)).Aggregate(seed, Aggregator);
 		}
+
+		public IEnumerable<Matcher<T>> Flatten()
+		{
+			return Matchers.SelectMany(i => i.Flatten());
+		}
 	}
 }

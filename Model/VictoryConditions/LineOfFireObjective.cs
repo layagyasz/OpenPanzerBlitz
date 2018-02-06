@@ -129,5 +129,10 @@ namespace PanzerBlitz
 			if (SinkEdge.Contains(Tile)) yield return Sink;
 			foreach (Tile t in Tile.Neighbors()) yield return t;
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Enumerable.Empty<Tile>();
+		}
 	}
 }

@@ -20,6 +20,11 @@ namespace PanzerBlitz
 						.All(i => i.GetObjectiveSuccessLevel() < ObjectiveSuccessLevel.VICTORY) ? 1 : 0;
 		}
 
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Enumerable.Empty<Tile>();
+		}
+
 		public override void Serialize(SerializationOutputStream Stream) { }
 	}
 }

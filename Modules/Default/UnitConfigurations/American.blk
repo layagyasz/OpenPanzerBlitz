@@ -157,7 +157,7 @@ unit-configuration:jeep {
 	string:name { Jeep }
 	unit-class:unit-class { transport }
 
-	weapon-class:weapon-class { infantry }
+	weapon-class:weapon-class { na }
 	byte:attack { 0 }
 	byte:range { 0 }
 	byte:defense { 1 }

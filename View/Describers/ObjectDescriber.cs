@@ -66,14 +66,14 @@ namespace PanzerBlitz
 
 		public static string Describe(Coordinate Coordinate)
 		{
-			return string.Format("({0},{1})", Coordinate.X, Coordinate.Y);
+			return string.Format("({0}, {1})", Coordinate.X, Coordinate.Y);
 		}
 
 		public static string Describe(Polygon Zone)
 		{
 			return string.Format(
 				"[{0}]",
-				string.Join(",", Zone.Segments.Select(i => Describe(new Coordinate((int)i.Point.X, (int)i.Point.Y)))));
+				string.Join(", ", Zone.Segments.Select(i => Describe(new Coordinate((int)i.Point.X, (int)i.Point.Y)))));
 		}
 
 		public static string Describe(ObjectiveSuccessTrigger Trigger)

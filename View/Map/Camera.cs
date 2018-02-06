@@ -10,14 +10,22 @@ namespace PanzerBlitz
 	public class Camera
 	{
 		Vector2f _Window;
+		Vector2f _TrueCenter;
 		Vector2f _Center;
 		float _Zoom;
 
 		public Camera(Vector2f Window, Vector2f Center, float Zoom)
 		{
 			_Window = Window;
+			_TrueCenter = Center;
 			_Center = Center;
 			_Zoom = Zoom;
+		}
+
+		public void Reset()
+		{
+			_Center = _TrueCenter;
+			_Zoom = 64;
 		}
 
 		public Transform GetTransform()
@@ -40,6 +48,8 @@ namespace PanzerBlitz
 
 			if (Keyboard.IsKeyPressed(Keyboard.Key.PageUp)) _Zoom += 5 * step;
 			if (Keyboard.IsKeyPressed(Keyboard.Key.PageDown)) _Zoom -= 5 * step;
+
+			if (Keyboard.IsKeyPressed(Keyboard.Key.C)) Reset();
 
 			if (!Blocked)
 			{

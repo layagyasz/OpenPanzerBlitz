@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -33,6 +34,11 @@ namespace PanzerBlitz
 		public bool Matches(Unit Unit)
 		{
 			return Unit.Army.Configuration.Team != Team;
+		}
+
+		public IEnumerable<Matcher<Unit>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

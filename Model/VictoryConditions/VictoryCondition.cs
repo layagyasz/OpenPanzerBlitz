@@ -57,5 +57,10 @@ namespace PanzerBlitz
 			}
 			return result;
 		}
+
+		public IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Scorers.SelectMany(i => i.GetTiles(Map)).Distinct();
+		}
 	}
 }

@@ -44,5 +44,10 @@ namespace PanzerBlitz
 			return Match.Map.TilesEnumerable.Count(
 				i => Friendly == (i.ControllingArmy == ForArmy) && Matcher.Matches(i));
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Map.TilesEnumerable.Where(i => Matcher.Matches(i));
+		}
 	}
 }

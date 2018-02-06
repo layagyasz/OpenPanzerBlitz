@@ -46,5 +46,10 @@ namespace PanzerBlitz
 			return Objectives.Skip(1).Select(i => i.GetScore(ForArmy, Match, Cache) != 0).Aggregate(seed, Aggregator)
 							 ? 1 : 0;
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Objectives.SelectMany(i => i.GetTiles(Map));
+		}
 	}
 }

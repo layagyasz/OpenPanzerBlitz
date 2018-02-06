@@ -87,7 +87,7 @@ namespace PanzerBlitz
 			{
 				_Controller.Highlight(_DeploymentPage.SelectedStack.Peek().GetFieldOfDeployment(
 					_Controller.Match.GetMap().TilesEnumerable).Select(
-						i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLORS[0])));
+						i => new Tuple<Tile, Color>(i, HumanMatchPlayerController.HIGHLIGHT_COLORS.First())));
 			}
 			else _Controller.UnHighlight();
 		}

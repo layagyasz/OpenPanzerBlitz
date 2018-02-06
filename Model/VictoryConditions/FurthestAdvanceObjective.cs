@@ -51,5 +51,10 @@ namespace PanzerBlitz
 					throw new ArgumentException(string.Format("Direction not supported: {0}", Direction));
 			}
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Enumerable.Empty<Tile>();
+		}
 	}
 }

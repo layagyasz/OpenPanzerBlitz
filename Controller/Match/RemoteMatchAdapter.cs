@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Network;
 using Cardamom.Network.Responses;
@@ -26,6 +27,11 @@ namespace PanzerBlitz
 		public Map GetMap()
 		{
 			return _LocalMatch.Map;
+		}
+
+		public IEnumerable<Army> GetArmies()
+		{
+			return _LocalMatch.Armies;
 		}
 
 		public Turn GetTurn()

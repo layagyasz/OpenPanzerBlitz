@@ -57,5 +57,13 @@ namespace PanzerBlitz
 							 .Where(Matcher.Matches)
 							 .Sum(i => CountPoints ? 1 : i.Configuration.GetPointValue() * 100);
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Matcher.Flatten()
+						  .Where(i => i is UnitHasPosition)
+						  .Cast<UnitHasPosition>()
+						  .SelectMany(i => Map.TilesEnumerable.Where(j => i.Matcher.Matches(j)));
+		}
 	}
 }

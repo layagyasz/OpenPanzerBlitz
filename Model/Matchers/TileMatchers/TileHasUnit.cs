@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -33,6 +34,11 @@ namespace PanzerBlitz
 		public bool Matches(Tile Tile)
 		{
 			return Tile.Units.Any(i => Matcher.Matches(i));
+		}
+
+		public IEnumerable<Matcher<Tile>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }

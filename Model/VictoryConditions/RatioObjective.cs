@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
@@ -40,6 +42,11 @@ namespace PanzerBlitz
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			return Numerator.GetScore(ForArmy, Match, Cache) / Denominator.GetScore(ForArmy, Match, Cache);
+		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Numerator.GetTiles(Map).Concat(Denominator.GetTiles(Map));
 		}
 	}
 }

@@ -125,8 +125,8 @@ namespace PanzerBlitz
 					i => _Deployment.Validate(i) == OrderInvalidReason.NONE)
 				.Select(i => new Tuple<Tile, Color>(
 					i, _Deployment.EntryTile == i
-					? HIGHLIGHT_COLORS[HIGHLIGHT_COLORS.Length - 1]
-					: HIGHLIGHT_COLORS[0])));
+					? HumanMatchPlayerController.HIGHLIGHT_COLORS.Last()
+					: HumanMatchPlayerController.HIGHLIGHT_COLORS.First())));
 		}
 
 		void LoadUnit(object Sender, ValuedEventArgs<Unit> E)

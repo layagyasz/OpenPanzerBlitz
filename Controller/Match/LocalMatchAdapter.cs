@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PanzerBlitz
 {
 	public class LocalMatchAdapter : MatchAdapter
@@ -18,6 +20,11 @@ namespace PanzerBlitz
 		public Map GetMap()
 		{
 			return Match.Map;
+		}
+
+		public IEnumerable<Army> GetArmies()
+		{
+			return Match.Armies;
 		}
 
 		public Turn GetTurn()

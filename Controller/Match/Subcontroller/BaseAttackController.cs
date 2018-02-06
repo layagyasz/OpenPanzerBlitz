@@ -65,11 +65,6 @@ namespace PanzerBlitz
 			else _Controller.Alert(r);
 		}
 
-		protected Color GetRangeColor(Color[] ColorSet, int Range, int MaxRange)
-		{
-			return ColorSet[Math.Min(Range * HIGHLIGHT_COLORS.Length / (MaxRange + 1), ColorSet.Length - 1)];
-		}
-
 		void ExecuteAttack(object sender, EventArgs e)
 		{
 			if (_Controller.ExecuteOrderAndAlert(_AttackBuilder))

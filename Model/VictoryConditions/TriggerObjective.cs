@@ -49,5 +49,10 @@ namespace PanzerBlitz
 									   : Objective.GetScore(ForArmy, Match, Cache) >= Threshold;
 			return t ? 1 : 0;
 		}
+
+		public override IEnumerable<Tile> GetTiles(Map Map)
+		{
+			return Objective.GetTiles(Map);
+		}
 	}
 }

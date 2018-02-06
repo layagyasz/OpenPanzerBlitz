@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Graphing;
@@ -51,6 +52,11 @@ namespace PanzerBlitz
 			return new Field<Tile>(Tile, Distance, (i, j) => 1)
 				.GetReachableNodes()
 				.Any(i => Matcher.Matches(i.Item1)) ^ Atleast;
+		}
+
+		public IEnumerable<Matcher<Tile>> Flatten()
+		{
+			yield return this;
 		}
 	}
 }
