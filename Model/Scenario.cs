@@ -27,6 +27,11 @@ namespace PanzerBlitz
 		public readonly Environment Environment;
 		public readonly MapConfiguration MapConfiguration;
 
+		public IEnumerable<UnitConfiguration> UnitConfigurations
+		{
+			get { return ArmyConfigurations.SelectMany(i => i.UnitConfigurations); }
+		}
+
 		public Scenario(
 			IEnumerable<ArmyConfiguration> ArmyConfigurations,
 			byte Turns,

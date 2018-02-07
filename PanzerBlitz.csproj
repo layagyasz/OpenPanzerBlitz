@@ -307,7 +307,6 @@
     <Compile Include="View\Match\StackViewUnitComparator.cs" />
     <Compile Include="View\ArmyBuilder\UnitConfigurationTable.cs" />
     <Compile Include="View\ArmyBuilder\UnitConfigurationSelectionOption.cs" />
-    <Compile Include="View\ArmyBuilder\UnitConfigurationStackView.cs" />
     <Compile Include="Controller\ArmyBuilder\ArmyBuilderStateController.cs" />
     <Compile Include="Model\Front.cs" />
     <Compile Include="View\SquareSpriteSheetRenderer.cs" />
@@ -335,6 +334,11 @@
     <Compile Include="View\Describers\ObjectiveDescriber.cs" />
     <Compile Include="View\Describers\MatcherDescriber.cs" />
     <Compile Include="View\Match\VictoryConditionDisplay.cs" />
+    <Compile Include="View\Unit\UnitConfigurationStackView.cs" />
+    <Compile Include="View\ScenarioSelect\VictoryConditionRow.cs" />
+    <Compile Include="View\Describers\DeploymentDescriber.cs" />
+    <Compile Include="View\ScenarioSelect\DeploymentRow.cs" />
+    <Compile Include="View\ScenarioSelect\UnitGroupView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

@@ -78,12 +78,9 @@ namespace PanzerBlitz
 
 		public static string Describe(ObjectiveSuccessTrigger Trigger)
 		{
-			return string.Format(
-				"{0} - {1}",
-				Describe(Trigger.SuccessLevel),
-				Sentencify(
-					ObjectiveDescriber.Describe(
-						new TriggerObjective(Trigger.Objective, Trigger.Threshold, Trigger.Invert))));
+			return Sentencify(
+				ObjectiveDescriber.Describe(
+				new TriggerObjective(Trigger.Objective, Trigger.Threshold, Trigger.Invert)));
 		}
 
 		public static string Sentencify(string Input)

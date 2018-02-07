@@ -1,11 +1,87 @@
-﻿class:scenario-select {
-	!class:parent { pane-display }
+﻿class:scenario-select-display {
+	!class:parent { pane }
 	mode:default {
 		int:height { 636 }
-		int:width { 636 }
+		int:width { 852 }
 		color[]:background-color { #000000 #000000 #000000 #000000 }
 	}
 }
+class:scenario-select-scenario-display {
+	!class:parent { pane }
+	mode:default {
+		int:height { 604 }
+		int:width { 516 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+		int[]:padding { 0 0 0 0 }
+	}
+}
+class:scenario-select {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 604 }
+		int:width { 288 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
+	}
+}
 class:scenario-selection-option {
-	!class:parent { large-selection-option }
+	!class:parent { normal-button }
+}
+class:scenario-select-army-header {
+	!class:parent { header-1 }
+	mode:default {
+		int:width { 516 }
+	}
+}
+class:scenario-select-victory-condition-row {
+	mode:default {
+		int:height { 106 }
+		int:width { 516 }
+		int[]:padding { 8 8 8 8 }
+		int[]:margin { 0 3 0 3 }
+		color[]:background-color { #626262 #626262 #626262 #626262 }
+	}
+}
+class:scenario-select-victory-condition-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 500 }
+	}
+}
+class:scenario-select-victory-condition {
+	!class:parent { regular }
+	mode:default {
+		int:height { 64 }
+		int:width { 500 }
+	}
+}
+class:scenario-select-deployment-row {
+	!class:parent { scenario-select-victory-condition-row }
+	mode:default {
+		int:height { 178 }
+	}
+}
+class:scenario-select-deployment-header {
+	!class:parent { scenario-select-victory-condition-header }
+}
+class:scenario-select-deployment {
+	!class:parent { scenario-select-victory-condition }
+}
+class:scenario-select-deployment-units {
+	!class:parent { detail }
+	mode:default {
+		int:height { 72 }
+		int:width { 500 }
+		int[]:padding { 4 4 4 4 }
+	}
+}
+class:scenario-select-deployment-units-overlay {
+	mode:default {
+		color[]:background-color { #000000AA #000000AA #000000AA #000000AA }
+		!font:font-face { fonts.univers }
+		color:font-color { #FF0000 }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 24 3 0 0 }
+	}
 }

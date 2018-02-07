@@ -14,6 +14,11 @@ namespace PanzerBlitz
 
 		List<UnitCount> _UnitCounts;
 
+		public IEnumerable<UnitCount> UnitCounts
+		{
+			get { return _UnitCounts; }
+		}
+
 		public IEnumerable<UnitConfiguration> UnitConfigurations
 		{
 			get

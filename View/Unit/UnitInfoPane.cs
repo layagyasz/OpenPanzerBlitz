@@ -121,7 +121,8 @@ namespace PanzerBlitz
 				|| Unit.Configuration.IsOversizedPassenger
 				|| Unit.Configuration.IsCarrier
 				|| Unit.Configuration.CanOnlyCarryLight
-				|| Unit.Configuration.CanOnlyCarryInfantry)
+				|| Unit.Configuration.CanOnlyCarryInfantry
+				|| Unit.Configuration.CanCarryInWater)
 				AddSection("Transport Capabilities");
 			if (Unit.Configuration.IsPassenger) AddAttribute("Passenger");
 			if (Unit.Configuration.IsLightPassenger) AddAttribute("Light Passenger");
@@ -129,6 +130,7 @@ namespace PanzerBlitz
 			if (Unit.Configuration.IsCarrier) AddAttribute("Carrier");
 			if (Unit.Configuration.CanOnlyCarryLight) AddAttribute("Carry Only Light Units");
 			if (Unit.Configuration.CanOnlyCarryInfantry) AddAttribute("Carry Only Infantry");
+			if (Unit.Configuration.CanCarryInWater) AddAttribute("Can Carry In Water");
 		}
 
 		void AddMovementAttributes(Unit Unit)

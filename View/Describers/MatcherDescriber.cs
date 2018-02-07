@@ -11,6 +11,7 @@ namespace PanzerBlitz
 			if (Matcher is TileElevation) return Describe((TileElevation)Matcher);
 			if (Matcher is TileHasCoordinate) return Describe((TileHasCoordinate)Matcher);
 			if (Matcher is TileHasEdge) return Describe((TileHasEdge)Matcher);
+			if (Matcher is TileHasUnit) return Describe((TileHasUnit)Matcher);
 			if (Matcher is TileInRegion) return Describe((TileInRegion)Matcher);
 			if (Matcher is TileOnEdge) return Describe((TileOnEdge)Matcher);
 			if (Matcher is TileWithin) return Describe((TileWithin)Matcher);
@@ -18,7 +19,7 @@ namespace PanzerBlitz
 			if (Matcher is InverseMatcher<Tile>) return Describe((InverseMatcher<Tile>)Matcher);
 			if (Matcher is EmptyMatcher<Tile>) return Describe((EmptyMatcher<Tile>)Matcher);
 
-			return Describe<Tile>(Matcher);
+			return Describe(Matcher);
 		}
 
 		public static string Describe(TileDistanceFrom Matcher)
@@ -26,18 +27,19 @@ namespace PanzerBlitz
 			return string.Format(
 				"{0} {1} hexes away from tiles that {2}",
 				Matcher.Atleast ? "at least" : "at most",
-				Matcher.Distance, Describe(Matcher.Matcher));
+				Matcher.Distance,
+				Describe(Matcher.Matcher));
 		}
 
 		public static string Describe(TileElevation Matcher)
 		{
 			return string.Format(
-				"have an elevation of {0} {1}", Matcher.Atleast ? "at least" : "at most", Matcher.Elevation);
+				"at elevation of {0} {1}", Matcher.Atleast ? "at least" : "at most", Matcher.Elevation);
 		}
 
 		public static string Describe(TileHasCoordinate Matcher)
 		{
-			return string.Format("located at {0}", ObjectDescriber.Describe(Matcher.Coordinate));
+			return string.Format("at {0}", ObjectDescriber.Describe(Matcher.Coordinate));
 		}
 
 		public static string Describe(TileHasEdge Matcher)
@@ -47,7 +49,7 @@ namespace PanzerBlitz
 
 		public static string Describe(TileHasUnit Matcher)
 		{
-			return string.Format("contain units that {0}", Describe(Matcher.Matcher));
+			return string.Format("contain units {0}", Describe(Matcher.Matcher));
 		}
 
 		public static string Describe(TileInRegion Matcher)

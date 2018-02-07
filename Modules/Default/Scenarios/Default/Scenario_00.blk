@@ -145,7 +145,7 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 15,2 }
+						coordinate:coordinate { 13,3 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
@@ -163,7 +163,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ka-chi }
+								!unit-configuration:unit-configuration { unit-configurations.150mm-mortar }
 								int:count { 1 }
 							}
 						}

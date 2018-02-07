@@ -16,6 +16,15 @@ namespace PanzerBlitz
 		public readonly List<DeploymentConfiguration> DeploymentConfigurations;
 		public readonly VictoryCondition VictoryCondition;
 
+		public IEnumerable<UnitConfiguration> UnitConfigurations
+		{
+			get
+			{
+				return DeploymentConfigurations.SelectMany(
+					i => i.UnitGroup.UnitCounts.SelectMany(j => j.UnitConfiguration.RepresentedConfigurations));
+			}
+		}
+
 		public ArmyConfiguration(
 			string UniqueKey,
 			Faction Faction,

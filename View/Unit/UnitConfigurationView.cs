@@ -13,7 +13,7 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class UnitConfigurationView : Pod
+	public class UnitConfigurationView : GuiItem
 	{
 		public readonly float Scale;
 
@@ -24,7 +24,7 @@ namespace PanzerBlitz
 
 		public bool Flipped;
 
-		public Vector2f Size
+		public override Vector2f Size
 		{
 			get
 			{
@@ -85,15 +85,16 @@ namespace PanzerBlitz
 			return _Bounds.ContainsPoint(Point);
 		}
 
-		public void Update(
+		public override void Update(
 			MouseController MouseController,
 			KeyController KeyController,
 			int DeltaT,
 			Transform Transform)
 		{ }
 
-		public void Draw(RenderTarget Target, Transform Transform)
+		public override void Draw(RenderTarget Target, Transform Transform)
 		{
+			Transform.Translate(Position);
 			Transform.Scale(Scale, Scale);
 			RenderStates r = new RenderStates();
 			r.Transform = Transform;

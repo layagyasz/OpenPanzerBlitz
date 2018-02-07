@@ -38,11 +38,7 @@ namespace PanzerBlitz
 			uint TextureSize,
 			Font Font)
 			: this(
-				new UnitConfiguration[] { GameData.Wreckage }
-					.Concat(Scenario.ArmyConfigurations
-						.SelectMany(i => i.DeploymentConfigurations)
-							.SelectMany(i => i.UnitGroup.UnitConfigurations
-										.SelectMany(j => j.RepresentedConfigurations)).Distinct()),
+				new UnitConfiguration[] { GameData.Wreckage }.Concat(Scenario.UnitConfigurations.Distinct()),
   	 			RenderDetails,
 				SpriteSize,
 				TextureSize,
