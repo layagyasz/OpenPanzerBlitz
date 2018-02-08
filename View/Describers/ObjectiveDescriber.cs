@@ -71,7 +71,7 @@ namespace PanzerBlitz
 			return string.Format(
 				"sum of {0} is %score%",
 				ObjectDescriber.Listify(
-					Objective.Objectives.Select(i => ReplaceScore(Describe(i), "number of")), ", ", ", and"));
+					Objective.Objectives.Select(i => ReplaceScore(Describe(i), "number of")), ", ", ", and "));
 		}
 
 		public static string Describe(TemporalObjective Objective)

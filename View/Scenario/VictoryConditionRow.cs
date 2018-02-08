@@ -7,13 +7,13 @@ namespace PanzerBlitz
 	public class VictoryConditionRow : SingleColumnTable
 	{
 		public VictoryConditionRow(ObjectiveSuccessTrigger Trigger)
-			: base("scenario-select-victory-condition-row")
+			: base("scenario-victory-condition-row")
 		{
-			Add(new Button("scenario-select-victory-condition-header")
+			Add(new Button("scenario-victory-condition-header")
 			{
 				DisplayedString = ObjectDescriber.Describe(Trigger.SuccessLevel)
 			});
-			Add(new Button("scenario-select-victory-condition")
+			Add(new Button("scenario-victory-condition")
 			{
 				DisplayedString = ObjectDescriber.Describe(Trigger)
 			});

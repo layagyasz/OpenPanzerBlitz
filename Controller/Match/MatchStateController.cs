@@ -21,7 +21,11 @@ namespace PanzerBlitz
 			_MatchEndBuffer = new EventBuffer<EventArgs>();
 
 			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
-				_Context.Match.Scenario, GameData.UnitRenderDetails, 128, 1024, new Font("Compacta Std Regular.otf"));
+				_Context.Match.Scenario,
+				GameData.UnitRenderDetails,
+				128,
+				1024,
+				ClassLibrary.Instance.GetFont("compacta"));
 			FactionRenderer factionRenderer =
 				new FactionRenderer(_Context.Match.Scenario, GameData.FactionRenderDetails, 512, 1024);
 			HashSet<Army> armies = new HashSet<Army>(_Context.GetPlayerControlledArmies());

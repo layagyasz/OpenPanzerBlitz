@@ -1,11 +1,19 @@
-﻿class:match-record-select {
-	!class:parent { pane-display }
+﻿class:match-record-select-display {
+	!class:parent { pane }
 	mode:default {
 		int:height { 636 }
-		int:width { 636 }
+		int:width { 1156 }
 		color[]:background-color { #000000 #000000 #000000 #000000 }
 	}
 }
+class:match-record-select {
+	!class:parent { pane-display }
+	mode:default {
+		int:height { 556 }
+		int:width { 288 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
+	}
+}
 class:match-record-selection-option {
-	!class:parent { large-selection-option }
+	!class:parent { normal-button }
 }

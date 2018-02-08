@@ -1,0 +1,83 @@
+﻿class:scenario-display {
+	!class:parent { pane }
+	mode:default {
+		int:height { 604 }
+		int:width { 820 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
+		int[]:padding { 0 0 0 0 }
+	}
+}
+class:scenario-main-display {
+	!class:parent { scenario-display }
+	mode:default {
+		int:width { 516 }
+	}
+}
+class:scenario-detail-display {
+	!class:parent { scenario-display }
+	mode:default {
+		int:width { 304 }
+	}
+}
+class:scenario-army-header {
+	!class:parent { header-1 }
+	mode:default {
+		int:width { 516 }
+	}
+}
+class:scenario-victory-condition-row {
+	mode:default {
+		int:height { 106 }
+		int:width { 516 }
+		int[]:padding { 8 8 8 8 }
+		int[]:margin { 0 3 0 3 }
+		color[]:background-color { #626262 #626262 #626262 #626262 }
+	}
+}
+class:scenario-victory-condition-header {
+	!class:parent { header-2 }
+	mode:default {
+		int:width { 500 }
+	}
+}
+class:scenario-victory-condition {
+	!class:parent { regular }
+	mode:default {
+		int:height { 64 }
+		int:width { 500 }
+	}
+}
+class:scenario-deployment-row {
+	!class:parent { scenario-victory-condition-row }
+	mode:default {
+		int:height { 178 }
+	}
+}
+class:scenario-deployment-header {
+	!class:parent { scenario-victory-condition-header }
+}
+class:scenario-deployment {
+	!class:parent { scenario-victory-condition }
+}
+class:scenario-deployment-units {
+	!class:parent { detail }
+	mode:default {
+		int:height { 72 }
+		int:width { 500 }
+		int[]:padding { 4 4 4 4 }
+	}
+}
+class:scenario-deployment-units-overlay {
+	mode:default {
+		color[]:background-color { #000000AA #000000AA #000000AA #000000AA }
+		!font:font-face { fonts.univers }
+		color:font-color { #FF0000 }
+		int:font-size { 16 }
+		int:height { 24 }
+		int:width { 64 }
+		int[]:padding { 24 3 0 0 }
+	}
+}
+class:scenario-faction-mount {
+	!class:parent { scenario-victory-condition-row }
+}

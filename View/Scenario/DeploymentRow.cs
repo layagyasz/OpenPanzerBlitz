@@ -7,13 +7,13 @@ namespace PanzerBlitz
 	public class DeploymentRow : SingleColumnTable
 	{
 		public DeploymentRow(DeploymentConfiguration Deployment, Faction Faction, UnitConfigurationRenderer Renderer)
-			: base("scenario-select-deployment-row")
+			: base("scenario-deployment-row")
 		{
-			Add(new Button("scenario-select-deployment-header")
+			Add(new Button("scenario-deployment-header")
 			{
 				DisplayedString = Deployment.UnitGroup.Name
 			});
-			Add(new Button("scenario-select-deployment")
+			Add(new Button("scenario-deployment")
 			{
 				DisplayedString = DeploymentDescriber.Describe(Deployment)
 			});

@@ -135,7 +135,7 @@ namespace PanzerBlitz
 
 		public static string Describe<T>(EmptyMatcher<T> Matcher)
 		{
-			return "present";
+			return "anywhere";
 		}
 	}
 }

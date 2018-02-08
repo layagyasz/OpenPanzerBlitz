@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	public class UnitGroupView : GuiContainer<GuiItem>
 	{
 		public UnitGroupView(UnitGroup UnitGroup, Faction Faction, UnitConfigurationRenderer Renderer)
-			: base("scenario-select-deployment-units")
+			: base("scenario-deployment-units")
 		{
 			float offset = Math.Min(68, (Size.X - LeftPadding.X * 2 - 68) / (UnitGroup.UnitCounts.Count() - 1));
 			int i = 0;
@@ -22,7 +22,7 @@ namespace PanzerBlitz
 						Faction,
 						Renderer,
 						64,
-						"scenario-select-deployment-units-overlay",
+						"scenario-deployment-units-overlay",
 						true)
 					{
 						Count = count.Count,

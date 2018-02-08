@@ -7,15 +7,21 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class FactionView : Pod
+	public class FactionView : GuiItem
 	{
-		public Vector2f Position;
-
 		public readonly Faction Faction;
 		public readonly float Scale;
 
 		Texture _Texture;
 		Vertex[] _Vertices;
+
+		public override Vector2f Size
+		{
+			get
+			{
+				return new Vector2f(Scale, Scale);
+			}
+		}
 
 		public FactionView(Faction Faction, FactionRenderer Renderer, float Scale)
 		{
@@ -33,12 +39,12 @@ namespace PanzerBlitz
 			};
 		}
 
-		public void Update(
+		public override void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
 		}
 
-		public void Draw(RenderTarget Target, Transform Transform)
+		public override void Draw(RenderTarget Target, Transform Transform)
 		{
 			Transform.Translate(Position);
 			Transform.Scale(Scale, Scale);

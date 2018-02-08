@@ -30,7 +30,7 @@ namespace PanzerBlitz
 						GameData.UnitRenderDetails,
 						128,
 						1024,
-						new Font("Compacta Std Regular.otf")));
+						ClassLibrary.Instance.GetFont("compacta")));
 			screen.OnMainMenuButtonClicked += HandleBack;
 
 			_Controller = new ArmyBuilderController(builder, screen);
