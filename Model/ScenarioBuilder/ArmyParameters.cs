@@ -30,7 +30,8 @@ namespace PanzerBlitz
 		public bool Matches(IEnumerable<Tuple<UnitConfigurationLink, int>> Units)
 		{
 			return Units.All(i => Matches(i.Item1))
-						&& Units.Sum(i => i.Item1.UnitConfiguration.GetPointValue() * i.Item2) <= Points;
+						&& Units.Sum(
+							i => i.Item1.UnitConfiguration.GetPointValue(Faction.HalfPriceTrucks) * i.Item2) <= Points;
 		}
 
 		public bool Matches(UnitConfigurationLink Link)

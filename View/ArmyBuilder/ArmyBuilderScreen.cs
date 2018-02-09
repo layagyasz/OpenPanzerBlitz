@@ -140,13 +140,13 @@ namespace PanzerBlitz
 		void HandleAddUnit(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
 		{
 			_SelectedUnits.Add(E.Value);
-			SetPointTotal(_PointTotal + E.Value.UnitConfiguration.GetPointValue());
+			SetPointTotal(_PointTotal + E.Value.UnitConfiguration.GetPointValue(_Parameters.Faction.HalfPriceTrucks));
 		}
 
 		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
 		{
 			_SelectedUnits.Remove(E.Value);
-			SetPointTotal(_PointTotal - E.Value.UnitConfiguration.GetPointValue());
+			SetPointTotal(_PointTotal - E.Value.UnitConfiguration.GetPointValue(_Parameters.Faction.HalfPriceTrucks));
 		}
 
 		void HandleFinished(object Sender, EventArgs E)

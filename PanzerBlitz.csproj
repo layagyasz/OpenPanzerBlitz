@@ -335,10 +335,14 @@
     <Compile Include="View\Describers\MatcherDescriber.cs" />
     <Compile Include="View\Match\VictoryConditionDisplay.cs" />
     <Compile Include="View\Unit\UnitConfigurationStackView.cs" />
-    <Compile Include="View\ScenarioSelect\VictoryConditionRow.cs" />
     <Compile Include="View\Describers\DeploymentDescriber.cs" />
-    <Compile Include="View\ScenarioSelect\DeploymentRow.cs" />
-    <Compile Include="View\ScenarioSelect\UnitGroupView.cs" />
+    <Compile Include="View\Scenario\ScenarioView.cs" />
+    <Compile Include="View\Scenario\DeploymentRow.cs" />
+    <Compile Include="View\Scenario\UnitGroupView.cs" />
+    <Compile Include="View\Scenario\VictoryConditionRow.cs" />
+    <Compile Include="Model\Interactions\Interaction.cs" />
+    <Compile Include="Model\Interactions\ClearMinefieldInteraction.cs" />
+    <Compile Include="Model\Orders\Movement\ClearMinefieldOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -403,6 +407,8 @@
     <Folder Include="View\ScenarioBuilder\" />
     <Folder Include="Controller\ScenarioBuilder\" />
     <Folder Include="View\Describers\" />
+    <Folder Include="View\Scenario\" />
+    <Folder Include="Model\Interactions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2153,6 +2159,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_08.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Theme\Components\Scenario.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

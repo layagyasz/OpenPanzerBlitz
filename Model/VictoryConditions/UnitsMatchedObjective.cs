@@ -55,7 +55,7 @@ namespace PanzerBlitz
 							 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 							 .SelectMany(i => i.Units)
 							 .Where(Matcher.Matches)
-							 .Sum(i => CountPoints ? 1 : i.Configuration.GetPointValue() * 100);
+							 .Sum(i => CountPoints ? 1 : i.GetPointValue() * 100);
 		}
 
 		public override IEnumerable<Tile> GetTiles(Map Map)

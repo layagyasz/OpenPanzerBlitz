@@ -69,7 +69,7 @@ namespace PanzerBlitz
 			AddAttribute(string.Format("Range - {0}", Unit.Configuration.Range));
 			AddAttribute(string.Format("Defense - {0}", Unit.Configuration.Defense));
 			AddAttribute(string.Format("Movement - {0}", Unit.Configuration.Movement));
-			AddAttribute(string.Format("Point Value - {0}", Unit.Configuration.GetPointValue()));
+			AddAttribute(string.Format("Point Value - {0}", Unit.GetPointValue()));
 		}
 
 		void AddComposition(Unit Unit)

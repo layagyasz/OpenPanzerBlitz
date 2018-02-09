@@ -35,7 +35,7 @@ namespace PanzerBlitz
 			TagMatcher m = (TagMatcher)attributes[(int)Attribute.TAG_MATCHER];
 			foreach (UnitConfigurationLock c in locks.Values)
 			{
-				float lockCost = c.UnitConfiguration.GetPointValue() / c.Rarity;
+				float lockCost = c.UnitConfiguration.GetPointValue(c.Faction.HalfPriceTrucks) / c.Rarity;
 				if (m.Matches(c.Tags))
 				{
 					UnitConfigurationLocks.Add(c.Rarity, c);
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 				}
 				totalCost += lockCost;
 			}
-			Cost = RoundCost(cost / this.UnitConfigurationLocks.Length, COST_SCALE, COST_STEP);
+			Cost = RoundCost(cost / UnitConfigurationLocks.Length, COST_SCALE, COST_STEP);
 		}
 
 		public IEnumerable<UnitConfigurationLock> Open(Random Random)

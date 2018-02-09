@@ -11,37 +11,39 @@ namespace PanzerBlitz
 		static readonly Type[] ORDER_TYPES =
 		{
 			typeof(AttackOrder),
+			typeof(ClearMinefieldOrder),
 			typeof(ConvoyOrderDeployOrder),
-			typeof(EntryTileDeployOrder),
-			typeof(MovementDeployOrder),
-			typeof(PositionalDeployOrder),
-			typeof(LoadOrder),
-			typeof(MovementOrder),
-			typeof(UnloadOrder),
-			typeof(ReconOrder),
-			typeof(EvacuateOrder),
-			typeof(MountOrder),
 			typeof(DismountOrder),
+			typeof(EntryTileDeployOrder),
+			typeof(EvacuateOrder),
+			typeof(LoadOrder),
+			typeof(MountOrder),
+			typeof(MovementDeployOrder),
+			typeof(MovementOrder),
+			typeof(NextPhaseOrder),
+			typeof(PositionalDeployOrder),
+			typeof(ReconOrder),
 			typeof(ResetOrder),
-			typeof(NextPhaseOrder)
+			typeof(UnloadOrder)
 		};
 
 		static readonly Func<SerializationInputStream, List<GameObject>, Order>[] DESERIALIZERS =
 		{
 			(i, j) => new AttackOrder(i, j),
+			(i, j) => new ClearMinefieldOrder(i, j),
 			(i, j) => new ConvoyOrderDeployOrder(i, j),
-			(i, j) => new EntryTileDeployOrder(i, j),
-			(i, j) => new MovementDeployOrder(i, j),
-			(i, j) => new PositionalDeployOrder(i, j),
-			(i, j) => new LoadOrder(i, j),
-			(i, j) => new MovementOrder(i, j),
-			(i, j) => new UnloadOrder(i, j),
-			(i, j) => new ReconOrder(i, j),
-			(i, j) => new EvacuateOrder(i, j),
-			(i, j) => new MountOrder(i, j),
 			(i, j) => new DismountOrder(i, j),
-			(i, j) => new ResetOrder(i, j),
+			(i, j) => new EntryTileDeployOrder(i, j),
+			(i, j) => new EvacuateOrder(i, j),
+			(i, j) => new LoadOrder(i, j),
+			(i, j) => new MountOrder(i, j),
+			(i, j) => new MovementDeployOrder(i, j),
+			(i, j) => new MovementOrder(i, j),
 			(i, j) => new NextPhaseOrder(i, j),
+			(i, j) => new PositionalDeployOrder(i, j),
+			(i, j) => new ReconOrder(i, j),
+			(i, j) => new ResetOrder(i, j),
+			(i, j) => new UnloadOrder(i, j)
 		};
 
 		List<GameObject> _GameObjects = new List<GameObject>();

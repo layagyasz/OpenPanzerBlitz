@@ -349,13 +349,13 @@ namespace PanzerBlitz
 			return Math.Max(1, Environment.MovementMultiplier * Movement);
 		}
 
-		public float GetPointValue()
+		public float GetPointValue(bool HalfPriceTrucks)
 		{
-			if (DismountAs == null) return GetPointValueInternal();
-			return Math.Max(GetPointValueInternal(), DismountAs.GetPointValue());
+			if (DismountAs == null) return GetPointValueInternal(HalfPriceTrucks);
+			return Math.Max(GetPointValueInternal(HalfPriceTrucks), DismountAs.GetPointValue(HalfPriceTrucks));
 		}
 
-		float GetPointValueInternal()
+		float GetPointValueInternal(bool HalfPriceTrucks)
 		{
 			switch (UnitClass)
 			{
@@ -388,7 +388,7 @@ namespace PanzerBlitz
 					if (IsVehicle)
 					{
 						if (IsArmored) return Attack + Range + Defense + Movement;
-						return Attack + Range + Defense + .5f * Movement;
+						return (HalfPriceTrucks ? .5f : 1) * (Attack + Range + Defense + .5f * Movement);
 					}
 					return Attack + Range + Defense + Movement;
 				case UnitClass.TOWED_GUN:

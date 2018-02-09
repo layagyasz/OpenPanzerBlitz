@@ -17,49 +17,32 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 
+		public bool Deployed { get; set; }
+
 		public readonly Army Army;
 
-		int _Id;
-		bool _Deployed;
+		public int Id { get; private set; }
+		public bool Fired { get; private set; }
+		public bool Moved { get; private set; }
+		public bool MovedMoreThanOneTile { get; private set; }
+		public float RemainingMovement { get; private set; }
+		public UnitStatus Status { get; private set; }
+		public Tile Position { get; private set; }
+		public Unit Passenger { get; private set; }
+		public Unit Carrier { get; private set; }
+		public Direction Evacuated { get; set; } = Direction.NONE;
+		public Interaction Interaction { get; private set; }
+
 		UnitConfiguration _BaseConfiguration;
 		bool _Dismounted;
-		float _RemainingMovement;
-		bool _Fired;
-		bool _Moved;
-		bool _MovedMoreThanOneTile;
-		UnitStatus _Status;
-
-		Tile _Position;
-
-		Unit _Passenger;
-		Unit _Carrier;
 
 		bool[] _ReconDirections = new bool[Enum.GetValues(typeof(Direction)).Length];
-		public Direction Evacuated { get; set; } = Direction.NONE;
 
-		public int Id
-		{
-			get
-			{
-				return _Id;
-			}
-		}
 		public Deployment Deployment
 		{
 			get
 			{
 				return Army.Deployments.Find(i => i.Units.Contains(this));
-			}
-		}
-		public bool Deployed
-		{
-			get
-			{
-				return _Deployed;
-			}
-			set
-			{
-				_Deployed = value;
 			}
 		}
 		public UnitConfiguration Configuration
@@ -69,81 +52,19 @@ namespace PanzerBlitz
 				return _Dismounted ? _BaseConfiguration.DismountAs : _BaseConfiguration;
 			}
 		}
-		public float RemainingMovement
-		{
-			get
-			{
-				return _RemainingMovement;
-			}
-		}
-		public bool Fired
-		{
-			get
-			{
-				return _Fired;
-			}
-		}
-
-		public bool Moved
-		{
-			get
-			{
-				return _Moved;
-			}
-		}
-
-		public bool MovedMoreThanOneTile
-		{
-			get
-			{
-				return _MovedMoreThanOneTile;
-			}
-		}
-
-		public UnitStatus Status
-		{
-			get
-			{
-				return _Status;
-			}
-		}
-
-		public Tile Position
-		{
-			get
-			{
-				return _Position;
-			}
-		}
-
-		public Unit Passenger
-		{
-			get
-			{
-				return _Passenger;
-			}
-		}
-
-		public Unit Carrier
-		{
-			get
-			{
-				return _Carrier;
-			}
-		}
 
 		public Unit(Army Army, UnitConfiguration UnitConfiguration, IdGenerator IdGenerator)
 		{
 			this.Army = Army;
 			_BaseConfiguration = UnitConfiguration;
-			_Id = IdGenerator.GenerateId();
+			Id = IdGenerator.GenerateId();
 		}
 
 		public OrderInvalidReason CanBeAttackedBy(Army Army)
 		{
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
 				return OrderInvalidReason.TARGET_TEAM;
-			if (_Position == null) return OrderInvalidReason.ILLEGAL;
+			if (Position == null) return OrderInvalidReason.ILLEGAL;
 			if (Configuration.UnitClass == UnitClass.FORT)
 			{
 				if (Position.Units.Any(
@@ -151,7 +72,7 @@ namespace PanzerBlitz
 					return OrderInvalidReason.NONE;
 			}
 			if (!Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
-			if (_Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
+			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
 		}
 
@@ -178,7 +99,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanMove(bool Combat)
 		{
-			if (_Position == null || Fired || _Status != UnitStatus.ACTIVE || _Carrier != null)
+			if (Position == null || Fired || Status != UnitStatus.ACTIVE || Carrier != null)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 			if (RemainingMovement > 0)
 			{
@@ -186,7 +107,7 @@ namespace PanzerBlitz
 				{
 					if (Configuration.CanOverrun) return OrderInvalidReason.NONE;
 					if (Configuration.CanCloseAssault)
-						return _MovedMoreThanOneTile ? OrderInvalidReason.UNIT_NO_MOVE : OrderInvalidReason.NONE;
+						return MovedMoreThanOneTile ? OrderInvalidReason.UNIT_NO_MOVE : OrderInvalidReason.NONE;
 					return OrderInvalidReason.UNIT_NO_MOVE;
 				}
 				return OrderInvalidReason.NONE;
@@ -202,7 +123,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (_Position == null || Fired || _MovedMoreThanOneTile || _Status != UnitStatus.ACTIVE || _Carrier != null)
+			if (Position == null || Fired || MovedMoreThanOneTile || Status != UnitStatus.ACTIVE || Carrier != null)
 				return OrderInvalidReason.UNIT_NO_ACTION;
 			if (AttackMethod != AttackMethod.CLOSE_ASSAULT && Moved) return OrderInvalidReason.UNIT_NO_ACTION;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
@@ -234,57 +155,57 @@ namespace PanzerBlitz
 
 		public void HandleCombatResult(CombatResult CombatResult)
 		{
-			if (_Passenger != null) _Passenger.HandleCombatResult(CombatResult);
+			if (Passenger != null) Passenger.HandleCombatResult(CombatResult);
 			switch (CombatResult)
 			{
 				case CombatResult.MISS:
 					return;
 				case CombatResult.DESTROY:
-					_Status = UnitStatus.DESTROYED;
+					Status = UnitStatus.DESTROYED;
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
 				case CombatResult.DISRUPT:
-					_Status = UnitStatus.DISRUPTED;
+					Status = UnitStatus.DISRUPTED;
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
-					if (_Status == UnitStatus.DISRUPTED)
+					if (Status == UnitStatus.DISRUPTED)
 					{
-						_Status = UnitStatus.DESTROYED;
+						Status = UnitStatus.DESTROYED;
 						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 						Remove();
 					}
-					else _Status = UnitStatus.DISRUPTED;
+					else Status = UnitStatus.DISRUPTED;
 					return;
 			}
 		}
 
 		public void Remove()
 		{
-			_Position.Exit(this);
-			_Position = null;
+			Position.Exit(this);
+			Position = null;
 			if (OnRemove != null) OnRemove(this, EventArgs.Empty);
 		}
 
 		public void Place(Tile Tile, Path<Tile> Path = null)
 		{
-			if (_Passenger != null) _Passenger.Place(Tile, Path);
-			if (_Position != null) _Position.Exit(this);
-			_Position = Tile;
-			_Position.Enter(this);
+			if (Passenger != null) Passenger.Place(Tile, Path);
+			if (Position != null) Position.Exit(this);
+			Position = Tile;
+			Position.Enter(this);
 
 			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path, Carrier));
 		}
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
-			if (Tile == _Position) return;
+			if (Tile == Position) return;
 			foreach (Tile t in Path.Nodes) t.Control(this);
 
 			float movement = (float)Path.Distance;
-			_RemainingMovement -= movement;
-			_MovedMoreThanOneTile = Path.Count > 2 || _Moved;
-			_Moved = true;
+			RemainingMovement -= movement;
+			MovedMoreThanOneTile = Path.Count > 2 || Moved;
+			Moved = true;
 			Place(Tile, Path);
 
 		}
@@ -296,7 +217,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanDismount()
 		{
-			if (_Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
 				return OrderInvalidReason.UNIT_NO_ACTION;
 			if (_BaseConfiguration.DismountAs == null) return OrderInvalidReason.UNIT_NO_DISMOUNT;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
@@ -315,7 +236,7 @@ namespace PanzerBlitz
 				return OrderInvalidReason.UNIT_NO_MOVE;
 			if (Unit.Army != Army) return OrderInvalidReason.TARGET_TEAM;
 			if (Unit.Position != Position) return OrderInvalidReason.ILLEGAL;
-			if (_Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
+			if (Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
 			if (Unit.Carrier != null) return OrderInvalidReason.TARGET_CARRIED;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			if (Position != null && Position.RulesCalculator.Water && !Configuration.CanCarryInWater)
@@ -327,13 +248,13 @@ namespace PanzerBlitz
 		public OrderInvalidReason CanUnload()
 		{
 			if (Status != UnitStatus.ACTIVE) return OrderInvalidReason.UNIT_NO_MOVE;
-			if (_Passenger == null) return OrderInvalidReason.UNIT_NO_PASSENGER;
-			if (_Position != null)
+			if (Passenger == null) return OrderInvalidReason.UNIT_NO_PASSENGER;
+			if (Position != null)
 			{
-				OrderInvalidReason r = _Passenger.CanEnter(_Position);
+				OrderInvalidReason r = Passenger.CanEnter(Position);
 				if (r != OrderInvalidReason.NONE) return r;
 
-				if (_Position.GetStackSize() + _Passenger.Configuration.GetStackSize()
+				if (Position.GetStackSize() + Passenger.Configuration.GetStackSize()
 					> Army.Configuration.Faction.StackLimit)
 					return OrderInvalidReason.UNIT_STACK_LIMIT;
 			}
@@ -341,45 +262,43 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
+		public OrderInvalidReason CanClearMinefield()
+		{
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			if (!Configuration.IsEngineer) return OrderInvalidReason.UNIT_NO_ENGINEER;
+			return OrderInvalidReason.NONE;
+		}
+
 		public bool IsSolitary()
 		{
-			return _Position.Units.Count() == 1 || _Position.Units.All(i => i == this || i == _Passenger);
+			return Position.Units.Count() == 1 || Position.Units.All(i => i == this || i == Passenger);
 		}
 
 		public void Dismount(bool UseMovement)
 		{
 			_Dismounted = true;
 			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
-			if (UseMovement)
-			{
-				_Moved = true;
-				_RemainingMovement = 0;
-			}
+			if (UseMovement) Halt();
 		}
 
 		public void Mount(bool UseMovement)
 		{
 			_Dismounted = false;
 			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
-			if (UseMovement)
-			{
-				_Moved = true;
-				_RemainingMovement = 0;
-			}
+			if (UseMovement) Halt();
 		}
 
 		public void Load(Unit Unit, bool UseMovement)
 		{
-			_Passenger = Unit;
-			Unit._Carrier = this;
+			Passenger = Unit;
+			Unit.Carrier = this;
 
 			if (UseMovement)
 			{
-				_Moved = true;
-				Unit._Moved = true;
-				Unit._MovedMoreThanOneTile = true;
-				_RemainingMovement = 0;
-				Unit._RemainingMovement = 0;
+				Halt();
+				Passenger.Halt();
 			}
 
 			if (OnLoad != null) OnLoad(this, EventArgs.Empty);
@@ -389,35 +308,32 @@ namespace PanzerBlitz
 		{
 			if (UseMovement)
 			{
-				_Moved = true;
-				_Passenger._Moved = true;
-				_Passenger._MovedMoreThanOneTile = true;
-				_RemainingMovement = 0;
-				_Passenger._RemainingMovement = 0;
+				Halt();
+				Passenger.Halt();
 			}
 
-			Unit passenger = _Passenger;
-			_Passenger._Carrier = null;
-			_Passenger = null;
+			Unit passenger = Passenger;
+			Passenger.Carrier = null;
+			Passenger = null;
 
 			if (OnUnload != null) OnUnload(this, new ValuedEventArgs<Unit>(passenger));
 		}
 
 		public int GetStackSize()
 		{
-			return _Carrier == null ? Configuration.GetStackSize() : 0;
+			return Carrier == null ? Configuration.GetStackSize() : 0;
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)
 		{
-			if (_Position == null) return null;
-			return new LineOfSight(_Position, Tile);
+			if (Position == null) return null;
+			return new LineOfSight(Position, Tile);
 		}
 
 		public Path<Tile> GetPathTo(Tile Tile, bool Combat)
 		{
-			if (_Position == null) return null;
-			return GetPathTo(_Position, Tile, Combat);
+			if (Position == null) return null;
+			return GetPathTo(Position, Tile, Combat);
 		}
 
 		public Path<Tile> GetPathTo(Tile From, Tile Tile, bool Combat)
@@ -442,12 +358,12 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			if (_Position != null && CanAttack(AttackMethod) == OrderInvalidReason.NONE)
+			if (Position != null && CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
-				foreach (LineOfSight l in new Field<Tile>(_Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
+				foreach (LineOfSight l in new Field<Tile>(Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
 						 .GetReachableNodes()
 						 .Select(i => GetLineOfSight(i.Item1))
-						 .Where(i => i.Final != _Position))
+						 .Where(i => i.Final != Position))
 				{
 					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
 					else if (CanAttack(AttackMethod, false, l) == OrderInvalidReason.NONE)
@@ -458,19 +374,19 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tuple<Tile, Tile, double>> GetFieldOfMovement(bool Combat)
 		{
-			if (_Position == null) return null;
+			if (Position == null) return null;
 			if (CanMove(Combat) != OrderInvalidReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
-				_Position.NeighborTiles
-		   			.Where(i => i != null && _Position.RulesCalculator.CanMove(this, i, !Combat, false))
+				Position.NeighborTiles
+		   			.Where(i => i != null && Position.RulesCalculator.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, _Position, _Position.RulesCalculator.GetMoveCost(this, i, !Combat).Cost));
+							 i, Position, Position.RulesCalculator.GetMoveCost(this, i, !Combat).Cost));
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
-				_Position,
+				Position,
 				RemainingMovement,
 				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat).Cost)
 					.GetReachableNodes();
@@ -490,25 +406,58 @@ namespace PanzerBlitz
 			return _ReconDirections[(int)Direction];
 		}
 
+		public void SetInteraction(Interaction Interaction)
+		{
+			if (Interaction != null) CancelInteraction();
+			this.Interaction = Interaction;
+		}
+
+		public void CancelInteraction()
+		{
+			if (Interaction != null)
+			{
+				Interaction i = Interaction;
+				Interaction = null;
+				i.Cancel();
+			}
+		}
+
+		public T HasInteraction<T>(Func<T, bool> Predicate)
+		{
+			if (Interaction is T) return Predicate((T)Interaction) ? (T)Interaction : default(T);
+			return default(T);
+		}
+
+		public void DoInteraction()
+		{
+			if (Interaction.Master == this && !Interaction.Apply()) Interaction.Cancel();
+		}
+
 		public void Fire()
 		{
-			_Fired = true;
+			Fired = true;
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
 		public void Halt()
 		{
-			_Moved = true;
-			_RemainingMovement = 0;
+			Moved = true;
+			MovedMoreThanOneTile = true;
+			RemainingMovement = 0;
 		}
 
 		public void Reset()
 		{
-			_Fired = false;
-			_Moved = false;
-			_MovedMoreThanOneTile = false;
-			_RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
-			if (_Status == UnitStatus.DISRUPTED) _Status = UnitStatus.ACTIVE;
+			Fired = false;
+			Moved = false;
+			MovedMoreThanOneTile = false;
+			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
+			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
+		}
+
+		public float GetPointValue()
+		{
+			return Configuration.GetPointValue(Army.Configuration.Faction.HalfPriceTrucks);
 		}
 
 		public override string ToString()

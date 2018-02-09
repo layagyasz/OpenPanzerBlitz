@@ -41,7 +41,8 @@ namespace PanzerBlitz
 			_PointText = new Button(DetailsClassName);
 			_PointText.Position = new Vector2f(12, StackView.Size.Y + 16);
 			_PointText.Parent = this;
-			_PointText.DisplayedString = UnitConfigurationLink.UnitConfiguration.GetPointValue().ToString();
+			_PointText.DisplayedString =
+				UnitConfigurationLink.UnitConfiguration.GetPointValue(Faction.HalfPriceTrucks).ToString();
 		}
 
 		public override void Update(
