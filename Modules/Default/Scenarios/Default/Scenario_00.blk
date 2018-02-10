@@ -2,60 +2,12 @@
 	string:name { Test Scenario }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
-	byte:turns { 2 }
+	byte:turns { 8 }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-a.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-07.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-01.map }
-				bool:invert { true }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-h.map }
-				bool:invert { false }
-			}
-		}
-		board-configuration[]:_ {
-			board-configuration:_ {
-				string:board-path { Maps/board-04.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-10.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-12.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-11.map }
-				bool:invert { false }
-			}
-		}
-		board-configuration[]:_ {
-			board-configuration:_ {
-				string:board-path { Maps/board-08.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-i.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-k.map }
-				bool:invert { false }
-			}
-			board-configuration:_ {
-				string:board-path { Maps/board-l.map }
 				bool:invert { false }
 			}
 		}
@@ -94,17 +46,17 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 18,1 }
+						coordinate:coordinate { 5,4 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
-								int:count { 2 }
+								!unit-configuration:unit-configuration { unit-configurations.scorpion-flail }
+								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-british }
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
 								int:count { 1 }
 							}
 						}
@@ -145,25 +97,13 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 13,3 }
+						coordinate:coordinate { 5,3 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-japanese }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.assault-platoon-japanese }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.150mm-mortar }
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
 								int:count { 1 }
 							}
 						}

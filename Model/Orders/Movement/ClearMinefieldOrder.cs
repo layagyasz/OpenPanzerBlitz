@@ -57,6 +57,7 @@ namespace PanzerBlitz
 					return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 				return _Interaction.Validate();
 			}
+
 			if (Minefield.Interaction != null)
 				return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
 			_Interaction = new ClearMinefieldInteraction(Engineer, Minefield);
@@ -74,7 +75,7 @@ namespace PanzerBlitz
 				}
 				else
 				{
-					_Interaction.Apply();
+					_Interaction.Apply(Minefield);
 					Engineer.SetInteraction(_Interaction);
 					Minefield.SetInteraction(_Interaction);
 				}

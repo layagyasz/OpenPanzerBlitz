@@ -75,84 +75,13 @@ namespace PanzerBlitz
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
-			// Load/Unload
-			if (Key == Keyboard.Key.L) LoadUnit();
-			else if (Key == Keyboard.Key.U) UnloadUnit();
-			// Recon
-			else if (Key == Keyboard.Key.R)
-			{
-				if (_Controller.SelectedUnit != null)
-				{
-					List<Direction> directions =
-						Enum.GetValues(typeof(Direction))
-							.Cast<Direction>()
-							.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
-							.ToList();
-					if (directions.Count == 1) ReconDirection(directions.First());
-					else if (directions.Count > 1)
-					{
-						Clear();
-						SelectPane<Direction> pane = new SelectPane<Direction>("Recon", directions);
-						pane.OnItemSelected += ReconDirection;
-						_Pane = pane;
-						_Controller.AddPane(_Pane);
-					}
-				}
-			}
-			// Evacuate
-			else if (Key == Keyboard.Key.E)
-			{
-				if (_Controller.SelectedUnit != null)
-				{
-					List<Direction> directions =
-						Enum.GetValues(typeof(Direction))
-							.Cast<Direction>()
-							.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
-							.ToList();
-					if (directions.Count == 1) EvacuateDirection(directions.First());
-					else if (directions.Count > 1)
-					{
-						Clear();
-						SelectPane<Direction> pane = new SelectPane<Direction>("Evacuate", directions);
-						pane.OnItemSelected += EvacuateDirection;
-						_Pane = pane;
-						_Controller.AddPane(_Pane);
-					}
-				}
-			}
-			// Mount/Dismount
+			if (Key == Keyboard.Key.D) Dismount();
+			else if (Key == Keyboard.Key.E) Evacuate();
+			else if (Key == Keyboard.Key.I) ClearMinefield();
+			else if (Key == Keyboard.Key.L) LoadUnit();
 			else if (Key == Keyboard.Key.M) Mount();
-			else if (Key == Keyboard.Key.D) Dismount();
-		}
-
-		void ReconDirection(object Sender, ValuedEventArgs<Direction> E)
-		{
-			ReconDirection(E.Value);
-		}
-
-		void ReconDirection(Direction Direction)
-		{
-			if (_Controller.SelectedUnit != null)
-			{
-				ReconOrder order = new ReconOrder(_Controller.SelectedUnit, Direction);
-				if (_Controller.ExecuteOrderAndAlert(order)) _Controller.UnHighlight();
-			}
-			Clear();
-		}
-
-		void EvacuateDirection(object Sender, ValuedEventArgs<Direction> E)
-		{
-			EvacuateDirection(E.Value);
-		}
-
-		void EvacuateDirection(Direction Direction)
-		{
-			if (_Controller.SelectedUnit != null)
-			{
-				EvacuateOrder order = new EvacuateOrder(_Controller.SelectedUnit, Direction);
-				if (_Controller.ExecuteOrderAndAlert(order)) _Controller.UnHighlight();
-			}
-			Clear();
+			else if (Key == Keyboard.Key.R) Recon();
+			else if (Key == Keyboard.Key.U) UnloadUnit();
 		}
 	}
 }

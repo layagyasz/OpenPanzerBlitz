@@ -5,9 +5,9 @@ namespace PanzerBlitz
 {
 	public interface Interaction
 	{
-		object Master { get; }
+		Unit Master { get; }
 		OrderInvalidReason Validate();
-		bool Apply();
+		bool Apply(Unit Unit);
 		bool Cancel();
 	}
 }

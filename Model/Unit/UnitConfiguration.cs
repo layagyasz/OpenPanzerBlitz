@@ -23,6 +23,9 @@ namespace PanzerBlitz
 			CAN_CLOSE_ASSAULT,
 			CAN_ANTI_AIRCRAFT,
 			CAN_DOUBLE_RANGE,
+			CAN_CLEAR_MINES,
+			INNATELY_CLEARS_MINES,
+			IMMUNE_TO_MINES,
 
 			IS_VEHICLE,
 			IS_ARMORED,
@@ -68,6 +71,9 @@ namespace PanzerBlitz
 		public readonly bool CanCloseAssault;
 		public readonly bool CanAntiAircraft;
 		public readonly bool CanDoubleRange;
+		public readonly bool CanClearMines;
+		public readonly bool InnatelyClearsMines;
+		public readonly bool ImmuneToMines;
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
@@ -80,6 +86,7 @@ namespace PanzerBlitz
 		public readonly UnitMovementRules MovementRules;
 
 		public readonly bool IsCarrier;
+
 		public readonly bool CanOnlyCarryInfantry;
 		public readonly bool CanOnlyCarryLight;
 		public readonly bool CanCarryInWater;
@@ -124,6 +131,9 @@ namespace PanzerBlitz
 			CanCloseAssault = Stream.ReadBoolean();
 			CanAntiAircraft = Stream.ReadBoolean();
 			CanDoubleRange = Stream.ReadBoolean();
+			CanClearMines = Stream.ReadBoolean();
+			InnatelyClearsMines = Stream.ReadBoolean();
+			ImmuneToMines = Stream.ReadBoolean();
 
 			IsVehicle = Stream.ReadBoolean();
 			IsArmored = Stream.ReadBoolean();
@@ -215,11 +225,14 @@ namespace PanzerBlitz
 			WaterDieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.WATER_DIE_MODIFIER], 0);
 
 			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
-			CanDirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DIRECT_FIRE], Attack > 0);
-			CanIndirectFire = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_INDIRECT_FIRE],
-												  UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY);
-			CanOverrun = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_OVERRUN],
-											 IsVehicle && IsArmored && UnitClass != UnitClass.SELF_PROPELLED_ARTILLERY);
+			CanDirectFire = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_DIRECT_FIRE], Attack > 0 && UnitClass != UnitClass.MINEFIELD);
+			CanIndirectFire = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_INDIRECT_FIRE], UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY);
+			CanOverrun =
+				Parse.DefaultIfNull(
+					attributes[(int)Attribute.CAN_OVERRUN],
+					IsVehicle && IsArmored && UnitClass != UnitClass.SELF_PROPELLED_ARTILLERY && CanDirectFire);
 			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED],
 				CanOverrun && WeaponClass == WeaponClass.INFANTRY);
@@ -230,6 +243,9 @@ namespace PanzerBlitz
 				attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT], false);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 			CanDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
+			CanClearMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CLEAR_MINES], IsEngineer);
+			InnatelyClearsMines = Parse.DefaultIfNull(attributes[(int)Attribute.INNATELY_CLEARS_MINES], false);
+			ImmuneToMines = Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines);
 
 			CanSpotIndirectFire = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
@@ -278,7 +294,13 @@ namespace PanzerBlitz
 		{
 			return UnitClass == UnitClass.MINEFIELD
 										 || UnitClass == UnitClass.BLOCK
-										 || UnitClass == UnitClass.WRECKAGE;
+										 || UnitClass == UnitClass.WRECKAGE
+										 || UnitClass == UnitClass.BRIDGE;
+		}
+
+		public bool CanSpot()
+		{
+			return !IsNeutral() && UnitClass != UnitClass.FORT;
 		}
 
 		public byte GetAdjustedRange()
@@ -448,6 +470,9 @@ namespace PanzerBlitz
 			Stream.Write(CanCloseAssault);
 			Stream.Write(CanAntiAircraft);
 			Stream.Write(CanDoubleRange);
+			Stream.Write(CanClearMines);
+			Stream.Write(InnatelyClearsMines);
+			Stream.Write(ImmuneToMines);
 
 			Stream.Write(IsVehicle);
 			Stream.Write(IsArmored);

@@ -65,6 +65,21 @@ class:overlay-fired-box {
 		int[]:padding { 10 3 0 0 }
 	}
 }
+class:overlay-moving-box {
+	!cass:parent { overlay-moved-box }
+	mode:default {
+		color[]:background-color { #008CFFAA #008CFFAA #008CFFAA #008CFFAA }
+		int[]:padding { 1 3 0 0 }
+	}
+}
+class:overlay-working-box {
+	!cass:parent { overlay-moved-box }
+	mode:default {
+		color[]:background-color { #A000FFAA #A000FFAA #A000FFAA #A000FFAA }
+		int:font-size { 12 }
+		int[]:padding { 4 4 0 0 }
+	}
+}
 class:victory-condition-display {
 	!class:parent { info-display }
 	mode:default {

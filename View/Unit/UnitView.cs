@@ -10,24 +10,11 @@ namespace PanzerBlitz
 {
 	public class UnitView : Interactive
 	{
-		static readonly Vertex[] FiredRect =
-		{
-			new Vertex(new Vector2f(-.5f, -.15f), Color.Red),
-			new Vertex(new Vector2f(.5f, -.15f), Color.Red),
-			new Vertex(new Vector2f(.5f, .15f) , Color.Red),
-			new Vertex( new Vector2f(-.5f, .15f), Color.Red)
-		};
-		static readonly Vertex[] MovedRect =
-		{
-			new Vertex(new Vector2f(-.5f, -.15f), Color.Blue),
-			new Vertex(new Vector2f(.5f, -.15f), Color.Blue),
-			new Vertex(new Vector2f(.5f, .15f) , Color.Blue),
-			new Vertex( new Vector2f(-.5f, .15f), Color.Blue)
-		};
-
-		Button MOVED_DISPLAY;
-		Button FIRED_DISPLAY;
-		bool DISPLAYED = false;
+		static Button MOVED_DISPLAY;
+		static Button FIRED_DISPLAY;
+		static Button MOVING_DISPLAY;
+		static Button WORKING_DISPLAY;
+		static bool DISPLAYED;
 
 		UnitConfigurationRenderer _Renderer;
 		UnitConfigurationView _UnitConfigurationView;
@@ -71,6 +58,16 @@ namespace PanzerBlitz
 				FIRED_DISPLAY = new Button("overlay-fired-box") { DisplayedString = "FIRED" };
 				FIRED_DISPLAY.Position = -.5f * new Vector2f(64, FIRED_DISPLAY.Size.Y);
 			}
+			if (MOVING_DISPLAY == null)
+			{
+				MOVING_DISPLAY = new Button("overlay-moving-box") { DisplayedString = "MOVING" };
+				MOVING_DISPLAY.Position = -.5f * new Vector2f(64, MOVING_DISPLAY.Size.Y);
+			}
+			if (WORKING_DISPLAY == null)
+			{
+				WORKING_DISPLAY = new Button("overlay-working-box") { DisplayedString = "WORKING" };
+				WORKING_DISPLAY.Position = -.5f * new Vector2f(64, WORKING_DISPLAY.Size.Y);
+			}
 		}
 
 		void UpdateConfigurationView(object Sender, EventArgs E)
@@ -110,6 +107,8 @@ namespace PanzerBlitz
 				Transform.Scale(1 / 64f, 1 / 64f);
 				MOVED_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
 				FIRED_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
+				MOVING_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
+				WORKING_DISPLAY.Update(MouseController, KeyController, DeltaT, Transform);
 				DISPLAYED = true;
 			}
 
@@ -128,9 +127,15 @@ namespace PanzerBlitz
 				Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
 				RenderStates r = new RenderStates(Transform);
 
-				if (Unit.Moved || Unit.Fired) Transform.Scale(1 / 64f, 1 / 64f);
-				if (Unit.Moved && !Unit.Fired) MOVED_DISPLAY.Draw(Target, Transform);
-				if (Unit.Fired) FIRED_DISPLAY.Draw(Target, Transform);
+				if (Unit.Moved || Unit.Fired || (Unit.Interaction != null && Unit.Interaction.Master == Unit))
+					Transform.Scale(1 / 64f, 1 / 64f);
+
+				if (Unit.Interaction != null && Unit.Interaction.Master == Unit)
+					WORKING_DISPLAY.Draw(Target, Transform);
+				else if (Unit.Moved && !Unit.Fired && Unit.RemainingMovement > 0)
+					MOVING_DISPLAY.Draw(Target, Transform);
+				else if (Unit.Moved && !Unit.Fired) MOVED_DISPLAY.Draw(Target, Transform);
+				else if (Unit.Fired) FIRED_DISPLAY.Draw(Target, Transform);
 			}
 		}
 	}

@@ -60,15 +60,21 @@ namespace PanzerBlitz
 			Id = IdGenerator.GenerateId();
 		}
 
-		public OrderInvalidReason CanBeAttackedBy(Army Army)
+		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod)
 		{
+			if (AttackMethod == AttackMethod.MINEFIELD && Configuration.ImmuneToMines)
+				return OrderInvalidReason.TARGET_IMMUNE;
+			if (AttackMethod == AttackMethod.MINEFIELD && !Configuration.IsNeutral()) return OrderInvalidReason.NONE;
+
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
 				return OrderInvalidReason.TARGET_TEAM;
 			if (Position == null) return OrderInvalidReason.ILLEGAL;
 			if (Configuration.UnitClass == UnitClass.FORT)
 			{
 				if (Position.Units.Any(
-					i => i != this && i.Army == this.Army && i.CanBeAttackedBy(Army) == OrderInvalidReason.NONE))
+					i => i != this
+						&& i.Army == this.Army
+						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.NONE;
 			}
 			if (!Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
@@ -123,8 +129,14 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
-			if (Position == null || Fired || MovedMoreThanOneTile || Status != UnitStatus.ACTIVE || Carrier != null)
+			if (Position == null || Fired || MovedMoreThanOneTile || Carrier != null)
 				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (Status != UnitStatus.ACTIVE)
+			{
+				if (Configuration.UnitClass == UnitClass.MINEFIELD && AttackMethod == AttackMethod.MINEFIELD)
+					return OrderInvalidReason.NONE;
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			}
 			if (AttackMethod != AttackMethod.CLOSE_ASSAULT && Moved) return OrderInvalidReason.UNIT_NO_ACTION;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			return Configuration.CanAttack(AttackMethod);
@@ -162,6 +174,7 @@ namespace PanzerBlitz
 					return;
 				case CombatResult.DESTROY:
 					Status = UnitStatus.DESTROYED;
+					if (Interaction != null) Interaction.Cancel();
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
@@ -169,12 +182,7 @@ namespace PanzerBlitz
 					Status = UnitStatus.DISRUPTED;
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
-					if (Status == UnitStatus.DISRUPTED)
-					{
-						Status = UnitStatus.DESTROYED;
-						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
-						Remove();
-					}
+					if (Status == UnitStatus.DISRUPTED) HandleCombatResult(CombatResult.DESTROY);
 					else Status = UnitStatus.DISRUPTED;
 					return;
 			}
@@ -267,7 +275,7 @@ namespace PanzerBlitz
 			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
 				return OrderInvalidReason.UNIT_NO_ACTION;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
-			if (!Configuration.IsEngineer) return OrderInvalidReason.UNIT_NO_ENGINEER;
+			if (!Configuration.CanClearMines) return OrderInvalidReason.UNIT_NO_ENGINEER;
 			return OrderInvalidReason.NONE;
 		}
 
@@ -408,18 +416,13 @@ namespace PanzerBlitz
 
 		public void SetInteraction(Interaction Interaction)
 		{
-			if (Interaction != null) CancelInteraction();
+			if (this.Interaction != null) this.Interaction.Cancel();
 			this.Interaction = Interaction;
 		}
 
 		public void CancelInteraction()
 		{
-			if (Interaction != null)
-			{
-				Interaction i = Interaction;
-				Interaction = null;
-				i.Cancel();
-			}
+			Interaction = null;
 		}
 
 		public T HasInteraction<T>(Func<T, bool> Predicate)
@@ -430,12 +433,13 @@ namespace PanzerBlitz
 
 		public void DoInteraction()
 		{
-			if (Interaction.Master == this && !Interaction.Apply()) Interaction.Cancel();
+			if (Interaction != null && !Interaction.Apply(this)) Interaction.Cancel();
 		}
 
 		public void Fire()
 		{
 			Fired = true;
+			Interaction.Cancel();
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
@@ -453,6 +457,8 @@ namespace PanzerBlitz
 			MovedMoreThanOneTile = false;
 			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
 			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
+
+			DoInteraction();
 		}
 
 		public float GetPointValue()

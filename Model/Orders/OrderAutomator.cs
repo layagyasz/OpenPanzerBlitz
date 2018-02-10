@@ -83,14 +83,15 @@ namespace PanzerBlitz
 				Unit mine = u.Position.Units.FirstOrDefault(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
 				if (mine != null && mine.Position != null)
 				{
+					AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
+					order.SetAttackTarget(AttackTarget.EACH);
 					foreach (Unit d in mine.Position.Units.Where(i => i != mine))
 					{
-						AttackOrder order = new AttackOrder(mine.Army, u.Position, AttackMethod.MINEFIELD);
-						order.AddAttacker(new MinefieldSingleAttackOrder(mine, d));
-						Match.ExecuteOrder(order);
+						MinefieldSingleAttackOrder attack = new MinefieldSingleAttackOrder(mine, d);
+						if (attack.Validate() == OrderInvalidReason.NONE) order.AddAttacker(attack);
 					}
+					Match.ExecuteOrder(order);
 				}
-
 			}
 		}
 	}

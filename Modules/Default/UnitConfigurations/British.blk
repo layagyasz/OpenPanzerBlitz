@@ -771,4 +771,6 @@ unit-configuration:scorpion-flail {
 	byte:range { 0 }
 	byte:defense { 8 }
 	byte:movement { 5 }
+
+	bool:innately-clears-mines { true }
 }

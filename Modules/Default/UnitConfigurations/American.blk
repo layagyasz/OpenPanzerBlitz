@@ -485,6 +485,8 @@ unit-configuration:sherman-flail {
 	byte:range { 8 }
 	byte:defense { 8 }
 	byte:movement { 8 }
+
+	bool:innately-clears-mines { true }
 }
 unit-configuration:lvt-1 {
 	string:name { LVT-1 }

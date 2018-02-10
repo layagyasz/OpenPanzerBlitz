@@ -12,7 +12,7 @@ namespace PanzerBlitz
 		public UnitGroupView(UnitGroup UnitGroup, Faction Faction, UnitConfigurationRenderer Renderer)
 			: base("scenario-deployment-units")
 		{
-			float offset = Math.Min(68, (Size.X - LeftPadding.X * 2 - 68) / (UnitGroup.UnitCounts.Count() - 1));
+			float offset = Math.Min(68, (Size.X - LeftPadding.X * 2 - 64) / (UnitGroup.UnitCounts.Count() - 1));
 			int i = 0;
 			foreach (UnitCount count in UnitGroup.UnitCounts)
 			{

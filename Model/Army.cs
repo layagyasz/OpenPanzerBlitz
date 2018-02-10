@@ -115,7 +115,7 @@ namespace PanzerBlitz
 			if (Tile == null) return false;
 			if (Tile.RulesCalculator.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
 			foreach (Unit u in Units.Where(
-				i => i.Status == UnitStatus.ACTIVE && i.Configuration.UnitClass != UnitClass.WRECKAGE))
+				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot()))
 			{
 				LineOfSight s = u.GetLineOfSight(Tile);
 				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
@@ -140,7 +140,7 @@ namespace PanzerBlitz
 			return Units.Any(
 				i => i.Position != null
 				&& i.Status == UnitStatus.ACTIVE
-				&& i.Configuration.UnitClass != UnitClass.WRECKAGE
+				&& i.Configuration.CanSpot()
 				&& (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
 		}
 

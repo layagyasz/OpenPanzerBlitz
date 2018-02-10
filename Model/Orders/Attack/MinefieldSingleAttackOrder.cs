@@ -63,12 +63,19 @@ namespace PanzerBlitz
 			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)
 				return OrderInvalidReason.UNIT_NO_ATTACK;
 			if (_Attacker.Position != _Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (_Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == _Defender) != null)
+				return OrderInvalidReason.TARGET_IMMUNE;
 			return OrderInvalidReason.NONE;
 		}
 
 		public override OrderStatus Execute(Random Random)
 		{
 			return Validate() == OrderInvalidReason.NONE ? OrderStatus.FINISHED : OrderStatus.ILLEGAL;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[MinefieldSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);
 		}
 	}
 }

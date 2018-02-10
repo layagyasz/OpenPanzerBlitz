@@ -94,7 +94,15 @@ namespace PanzerBlitz
 			{
 				Unit.MoveTo(Path.Destination, Path);
 				if (Halt) Unit.Halt();
+				if (Unit.Configuration.InnatelyClearsMines)
+				{
+					foreach (Unit minefield in Path.Nodes
+							 .Take(Path.Count - 1)
+							 .SelectMany(i => i.Units).Where(j => j.Configuration.UnitClass == UnitClass.MINEFIELD)
+							 .ToList())
+						minefield.HandleCombatResult(CombatResult.DESTROY);
 
+				}
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

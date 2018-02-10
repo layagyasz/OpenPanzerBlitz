@@ -97,6 +97,9 @@ namespace PanzerBlitz
 				|| Unit.Configuration.CanOnlySupportCloseAssault
 				|| Unit.Configuration.CanAntiAircraft
 				|| Unit.Configuration.CanDoubleRange
+				|| Unit.Configuration.CanClearMines
+				|| Unit.Configuration.InnatelyClearsMines
+				|| Unit.Configuration.ImmuneToMines
 				|| Unit.Configuration.HasLowProfile)
 				AddSection("Combat Capabilities");
 			if (Unit.Configuration.IsEngineer) AddAttribute("Engineers");
@@ -111,6 +114,9 @@ namespace PanzerBlitz
 			if (Unit.Configuration.CanOnlySupportCloseAssault) AddAttribute("Close Assault Support");
 			if (Unit.Configuration.CanAntiAircraft) AddAttribute("Anti-Aircraft");
 			if (Unit.Configuration.CanDoubleRange) AddAttribute("Can Double Range");
+			if (Unit.Configuration.CanClearMines) AddAttribute("Can Clear Mines");
+			if (Unit.Configuration.InnatelyClearsMines) AddAttribute("Innately Clears Mines");
+			if (Unit.Configuration.ImmuneToMines) AddAttribute("Immune To Mines");
 			if (Unit.Configuration.HasLowProfile) AddAttribute("Low Profile");
 		}
 
