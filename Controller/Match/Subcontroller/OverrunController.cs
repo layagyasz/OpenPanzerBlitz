@@ -66,9 +66,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null && _InitialMovement != null)
 			{
 				AddAttack(
-					_Controller.CurrentTurn.Army,
 					Tile,
-					AttackMethod.OVERRUN,
 					new OverrunSingleAttackOrder(
 						new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
 			}

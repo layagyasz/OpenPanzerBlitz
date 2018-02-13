@@ -91,7 +91,6 @@
     <Compile Include="Model\VictoryConditions\LineOfFireObjective.cs" />
     <Compile Include="Model\ArmyConfiguration.cs" />
     <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\Orders\Attack\SingleAttackOrderSerializer.cs" />
     <Compile Include="Model\Orders\OrderSerializer.cs" />
     <Compile Include="Model\VictoryConditions\ObjectiveSerializer.cs" />
     <Compile Include="Model\Deployment\DeploymentConfigurationSerializer.cs" />
@@ -343,6 +342,12 @@
     <Compile Include="Model\Interactions\Interaction.cs" />
     <Compile Include="Model\Interactions\ClearMinefieldInteraction.cs" />
     <Compile Include="Model\Orders\Movement\ClearMinefieldOrder.cs" />
+    <Compile Include="Model\Orders\Attack\AttackOrderBase.cs" />
+    <Compile Include="Model\Orders\Attack\NormalAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\OverrunAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\CloseAssaultSingleAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\CloseAssaultAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\MinefieldAttackOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

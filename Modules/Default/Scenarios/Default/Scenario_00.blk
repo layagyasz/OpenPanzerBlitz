@@ -109,6 +109,20 @@
 						}
 					}
 				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 4,3 }
+					}
+					unit-group:unit-group {
+						string:name { Test B }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chi-he }
+								int:count { 1 }
+							}
+						}
+					}
+				}
 			}
 		}
 	}

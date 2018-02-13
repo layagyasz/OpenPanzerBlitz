@@ -60,7 +60,7 @@ namespace PanzerBlitz
 				OddsCalculationFactors.Add(OddsCalculationFactor.FORT);
 			}
 			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
-			foreach (SingleAttackOrder a in AttackOrders) a.SetTreatStackAsArmored(StackArmored);
+			foreach (SingleAttackOrder a in AttackOrders) a.TreatStackAsArmored = StackArmored;
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(
 					i, i.GetAttack())).ToList();
@@ -147,11 +147,11 @@ namespace PanzerBlitz
 			if (armoredCount > unArmoredCount) return true;
 			if (armoredCount < unArmoredCount) return false;
 
-			foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(true);
+			foreach (SingleAttackOrder a in Attackers) a.TreatStackAsArmored = true;
 			int armoredAttack = Attackers.Sum(
 				i => i.GetAttack().Attack);
 
-			foreach (SingleAttackOrder a in Attackers) a.SetTreatStackAsArmored(false);
+			foreach (SingleAttackOrder a in Attackers) a.TreatStackAsArmored = false;
 			int unArmoredAttack = Attackers.Sum(
 				i => i.GetAttack().Attack);
 

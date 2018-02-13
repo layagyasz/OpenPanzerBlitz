@@ -162,7 +162,10 @@ namespace PanzerBlitz
 				return OrderInvalidReason.NONE;
 			}
 			if (AttackMethod == AttackMethod.OVERRUN) return Configuration.CanOverrunAt(EnemyArmored);
-			return Configuration.CanCloseAssaultAt(LineOfSight);
+
+			if (!Configuration.CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
+
+			return OrderInvalidReason.NONE;
 		}
 
 		public void HandleCombatResult(CombatResult CombatResult)
@@ -439,7 +442,7 @@ namespace PanzerBlitz
 		public void Fire()
 		{
 			Fired = true;
-			Interaction.Cancel();
+			if (Interaction != null) Interaction.Cancel();
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 

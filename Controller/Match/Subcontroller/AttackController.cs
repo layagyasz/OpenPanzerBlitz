@@ -37,10 +37,8 @@ namespace PanzerBlitz
 				if (_Controller.SelectedUnit != null)
 				{
 					AddAttack(
-						_Controller.CurrentTurn.Army,
 						Unit.Position,
-						AttackMethod.NORMAL_FIRE,
-						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, AttackMethod.NORMAL_FIRE));
+						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit));
 				}
 			}
 		}

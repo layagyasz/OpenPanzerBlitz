@@ -42,11 +42,12 @@ namespace PanzerBlitz
 		{
 		}
 
-		protected void AddAttack(Army Army, Tile Tile, AttackMethod AttackMethod, SingleAttackOrder NewAttack)
+		protected void AddAttack(Tile Tile, SingleAttackOrder NewAttack)
 		{
-			AttackOrder attack = _AttackBuilder == null || _AttackBuilder.AttackAt != Tile
-																		 ? new AttackOrder(Army, Tile, AttackMethod)
-																		 : _AttackBuilder;
+			AttackOrder attack = null;
+			if (_AttackBuilder == null || _AttackBuilder.TargetTile != Tile)
+				attack = NewAttack.GenerateNewAttackOrder();
+			else attack = _AttackBuilder;
 			OrderInvalidReason r = attack.AddAttacker(NewAttack);
 			if (r == OrderInvalidReason.NONE)
 			{

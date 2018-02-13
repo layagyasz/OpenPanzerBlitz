@@ -15,25 +15,8 @@ namespace PanzerBlitz
 		public readonly Tile AttackTile;
 		public readonly Tile ExitTile;
 
-		bool _TreatStackAsArmored;
-
-		public override Unit Attacker
-		{
-			get
-			{
-				return _InitialMovement.Unit;
-			}
-		}
-
-		public override Unit Defender
-		{
-			get
-			{
-				return null;
-			}
-		}
-
 		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile)
+			: base(InitialMovement.Unit, null)
 		{
 			_InitialMovement = InitialMovement;
 			this.AttackTile = AttackTile;
@@ -49,18 +32,17 @@ namespace PanzerBlitz
 			Stream.Write(AttackTile.Id);
 		}
 
-		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)
-		{
-			_TreatStackAsArmored = TreatStackAsArmored;
-		}
-
 		public override AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == OrderInvalidReason.NONE)
-				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, TreatStackAsArmored, null);
 			return new AttackFactorCalculation(
 				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
+
+		public override AttackOrder GenerateNewAttackOrder()
+		{
+			return new OverrunAttackOrder(Army, AttackTile);		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
@@ -74,9 +56,9 @@ namespace PanzerBlitz
 			if (r != OrderInvalidReason.NONE && r != OrderInvalidReason.UNIT_STACK_LIMIT)
 				return r;
 
-			r = _InitialMovement.Unit.CanEnter(ExitTile, true);
+			r = Attacker.CanEnter(ExitTile, true);
 			if (r != OrderInvalidReason.NONE) return r;
-			r = _InitialMovement.Unit.CanEnter(AttackTile, false, true);
+			r = Attacker.CanEnter(AttackTile, false, true);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			MovementCost distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
@@ -89,10 +71,10 @@ namespace PanzerBlitz
 			_MovementPath = new Path<Tile>(_InitialMovement.Path);
 			_MovementPath.Add(AttackTile, distance1.Cost);
 			_MovementPath.Add(ExitTile, distance2.Cost);
-			if (_MovementPath.Distance > _InitialMovement.Unit.RemainingMovement)
+			if (_MovementPath.Distance > Attacker.RemainingMovement)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 
-			r = _InitialMovement.Unit.CanAttack(AttackMethod.OVERRUN, _TreatStackAsArmored, null);
+			r = Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			return base.Validate();
@@ -104,7 +86,7 @@ namespace PanzerBlitz
 			{
 				Attacker.Fire();
 				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
-				if (_InitialMovement.Unit.Configuration.InnatelyClearsMines)
+				if (Attacker.Configuration.InnatelyClearsMines)
 				{
 					foreach (Unit minefield in ExitTile.Units
 							 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())

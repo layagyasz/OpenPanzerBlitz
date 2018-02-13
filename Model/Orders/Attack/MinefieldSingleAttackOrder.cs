@@ -7,50 +7,28 @@ namespace PanzerBlitz
 {
 	public class MinefieldSingleAttackOrder : SingleAttackOrder
 	{
-		Unit _Attacker;
-		Unit _Defender;
-
-		public override Unit Attacker
-		{
-			get
-			{
-				return _Attacker;
-			}
-		}
-
-		public override Unit Defender
-		{
-			get
-			{
-				return _Defender;
-			}
-		}
-
 		public MinefieldSingleAttackOrder(Unit Attacker, Unit Defender)
-		{
-			_Attacker = Attacker;
-			_Defender = Defender;
-		}
+			: base(Attacker, Defender) { }
 
 		public MinefieldSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()]) { }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_Attacker.Id);
-			Stream.Write(_Defender.Id);
-		}
-
-		public override void SetTreatStackAsArmored(bool TreatStackAsArmored)
-		{
-			// Armored doesn't matter.
+			Stream.Write(Attacker.Id);
+			Stream.Write(Defender.Id);
 		}
 
 		public override AttackFactorCalculation GetAttack()
 		{
 			return new AttackFactorCalculation(
-				_Defender.Configuration.Defense * _Attacker.Configuration.Attack,
+				Defender.Configuration.Defense * Attacker.Configuration.Attack,
 				new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.MINEFIELD });
+		}
+
+		public override AttackOrder GenerateNewAttackOrder()
+		{
+			return new MinefieldAttackOrder(Army, Attacker.Position);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -60,11 +38,13 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (_Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)
+			if (Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)
 				return OrderInvalidReason.UNIT_NO_ATTACK;
-			if (_Attacker.Position != _Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
-			if (_Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == _Defender) != null)
+			if (Attacker.Position != Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == Defender) != null)
 				return OrderInvalidReason.TARGET_IMMUNE;
+			OrderInvalidReason r = Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
+			if (r != OrderInvalidReason.NONE) return r;
 			return OrderInvalidReason.NONE;
 		}
 

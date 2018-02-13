@@ -330,13 +330,6 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
-		public OrderInvalidReason CanCloseAssaultAt(LineOfSight LineOfSight)
-		{
-			if (!CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
-			if (LineOfSight.Range > 1) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
-			return OrderInvalidReason.NONE;
-		}
-
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
 			switch (AttackMethod)

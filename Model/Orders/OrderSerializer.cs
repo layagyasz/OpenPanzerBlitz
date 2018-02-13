@@ -10,17 +10,20 @@ namespace PanzerBlitz
 	{
 		static readonly Type[] ORDER_TYPES =
 		{
-			typeof(AttackOrder),
 			typeof(ClearMinefieldOrder),
+			typeof(CloseAssaultAttackOrder),
 			typeof(ConvoyOrderDeployOrder),
 			typeof(DismountOrder),
 			typeof(EntryTileDeployOrder),
 			typeof(EvacuateOrder),
 			typeof(LoadOrder),
+			typeof(MinefieldAttackOrder),
 			typeof(MountOrder),
 			typeof(MovementDeployOrder),
 			typeof(MovementOrder),
 			typeof(NextPhaseOrder),
+			typeof(NormalAttackOrder),
+			typeof(OverrunAttackOrder),
 			typeof(PositionalDeployOrder),
 			typeof(ReconOrder),
 			typeof(ResetOrder),
@@ -29,17 +32,20 @@ namespace PanzerBlitz
 
 		static readonly Func<SerializationInputStream, List<GameObject>, Order>[] DESERIALIZERS =
 		{
-			(i, j) => new AttackOrder(i, j),
 			(i, j) => new ClearMinefieldOrder(i, j),
+			(i, j) => new CloseAssaultAttackOrder(i, j),
 			(i, j) => new ConvoyOrderDeployOrder(i, j),
 			(i, j) => new DismountOrder(i, j),
 			(i, j) => new EntryTileDeployOrder(i, j),
 			(i, j) => new EvacuateOrder(i, j),
 			(i, j) => new LoadOrder(i, j),
+			(i, j) => new MinefieldAttackOrder(i, j),
 			(i, j) => new MountOrder(i, j),
 			(i, j) => new MovementDeployOrder(i, j),
 			(i, j) => new MovementOrder(i, j),
 			(i, j) => new NextPhaseOrder(i, j),
+			(i, j) => new NormalAttackOrder(i, j),
+			(i, j) => new OverrunAttackOrder(i, j),
 			(i, j) => new PositionalDeployOrder(i, j),
 			(i, j) => new ReconOrder(i, j),
 			(i, j) => new ResetOrder(i, j),
