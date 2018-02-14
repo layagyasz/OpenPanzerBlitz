@@ -115,8 +115,8 @@ namespace PanzerBlitz
 			// Sort LOS so lower tile is first.
 			Tile[] los = null;
 			TileComponentRules[] edges = null;
-			if (LineOfSight[0].RulesCalculator.SubTieredElevation
-				> LineOfSight[LineOfSight.Length - 1].RulesCalculator.SubTieredElevation)
+			if (LineOfSight[0].Rules.SubTieredElevation
+				> LineOfSight[LineOfSight.Length - 1].Rules.SubTieredElevation)
 			{
 				los = LineOfSight.Reverse().ToArray();
 				edges = CrossedEdges.Reverse().ToArray();
@@ -168,20 +168,20 @@ namespace PanzerBlitz
 
 		static bool DepressionBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].RulesCalculator.Depressed)
+			if (LineOfSight[0].Rules.Depressed)
 				return LineOfSight[LineOfSight.Length - 1]
-					.RulesCalculator.SubTieredElevation <= LineOfSight[0].RulesCalculator.SubTieredElevation
-					|| LineOfSight[LineOfSight.Length - 1].RulesCalculator.Depressed;
-			return LineOfSight[LineOfSight.Length - 1].RulesCalculator.Depressed;
+					.Rules.SubTieredElevation <= LineOfSight[0].Rules.SubTieredElevation
+					|| LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
+			return LineOfSight[LineOfSight.Length - 1].Rules.Depressed;
 		}
 
 		static bool ElevationBlocks(Tile[] LineOfSight)
 		{
-			if (LineOfSight[0].RulesCalculator.SubTieredElevation
-				== LineOfSight[LineOfSight.Length - 1].RulesCalculator.SubTieredElevation)
+			if (LineOfSight[0].Rules.SubTieredElevation
+				== LineOfSight[LineOfSight.Length - 1].Rules.SubTieredElevation)
 			{
 				return LineOfSight.Any(
-					i => i.RulesCalculator.SubTieredElevation > LineOfSight[0].RulesCalculator.SubTieredElevation);
+					i => i.Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation);
 			}
 			else
 			{
@@ -189,12 +189,12 @@ namespace PanzerBlitz
 					&& LineOfSight[0].Configuration.Elevation == LineOfSight[1].Configuration.Elevation) return false;
 				for (int i = 0; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1); ++i)
 				{
-					if (LineOfSight[i].RulesCalculator.SubTieredElevation > LineOfSight[0].RulesCalculator.SubTieredElevation)
+					if (LineOfSight[i].Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation)
 						return true;
 				}
 				return LineOfSight.Any(
-					i => i.RulesCalculator.SubTieredElevation > LineOfSight[0].RulesCalculator.SubTieredElevation
-					&& i.RulesCalculator.SubTieredElevation > LineOfSight[LineOfSight.Length - 1].RulesCalculator.SubTieredElevation);
+					i => i.Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation
+					&& i.Rules.SubTieredElevation > LineOfSight[LineOfSight.Length - 1].Rules.SubTieredElevation);
 			}
 		}
 	}

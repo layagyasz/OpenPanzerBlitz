@@ -240,6 +240,7 @@ namespace PanzerBlitz
 
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
+			Console.WriteLine(((TileView)sender).Tile.Coordinate);
 			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 				_Controllers[phase.TurnComponent].HandleTileLeftClick(((TileView)sender).Tile);

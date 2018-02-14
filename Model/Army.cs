@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -105,15 +105,15 @@ namespace PanzerBlitz
 									  i => i.Configuration.UnitClass == UnitClass.FORT
 									  && i.Army == Unit.Army
 									  && i.Configuration.HasLowProfile);
-			bool concealed = Unit.Position.RulesCalculator.Concealing
-								 || (Unit.Position.RulesCalculator.LowProfileConcealing && lowProfile);
+			bool concealed = Unit.Position.Rules.Concealing
+								 || (Unit.Position.Rules.LowProfileConcealing && lowProfile);
 			return !concealed || CanSpotTile(Unit.Position) || _OverrideVisibleUnits.Contains(Unit);
 		}
 
 		public bool CanSeeTile(Tile Tile, bool OverrideConcealment = false)
 		{
 			if (Tile == null) return false;
-			if (Tile.RulesCalculator.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
+			if (Tile.Rules.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
 			foreach (Unit u in Units.Where(
 				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot()))
 			{
@@ -158,7 +158,7 @@ namespace PanzerBlitz
 
 		public void UpdateUnitVisibility(Unit Unit, Tile MovedFrom, Tile MovedTo)
 		{
-			if (Unit.Army == this || !MovedTo.RulesCalculator.Concealing) return;
+			if (Unit.Army == this || !MovedTo.Rules.Concealing) return;
 			if (CanSeeTile(MovedFrom)) _OverrideVisibleUnits.Add(Unit);
 			else _OverrideVisibleUnits.Remove(Unit);
 		}

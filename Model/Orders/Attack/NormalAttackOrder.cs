@@ -16,8 +16,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public NormalAttackOrder(Army AttackingArmy, Tile TargetTile)
-			: base(AttackingArmy, TargetTile) { }
+		public NormalAttackOrder(Army Army, Tile TargetTile)
+			: base(Army, TargetTile) { }
 
 		public NormalAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
@@ -47,7 +47,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Target != AttackTarget.ALL && (TargetTile.RulesCalculator.MustAttackAllUnits
+			if (Target != AttackTarget.ALL && (TargetTile.Rules.MustAttackAllUnits
 				 || TargetTile.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)))
 				return OrderInvalidReason.MUST_ATTACK_ALL;
 

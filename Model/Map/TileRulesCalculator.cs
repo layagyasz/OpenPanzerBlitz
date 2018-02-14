@@ -13,7 +13,8 @@ namespace PanzerBlitz
 		public bool DepressedTransition { get; private set; }
 		public bool Concealing { get; private set; }
 		public bool LowProfileConcealing { get; private set; }
-		public bool Water { get; private set; }
+		public bool Watery { get; private set; }
+		public bool Bridged { get; private set; }
 		public int DieModifier { get; private set; }
 		public int TieredElevation { get; private set; }
 		public int SubTieredElevation { get; private set; }
@@ -51,9 +52,20 @@ namespace PanzerBlitz
 			LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.LowProfileConcealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
-			Water = Tile.GetBaseRules().Water
+			Watery = Tile.GetBaseRules().Water
 						|| Tile.GetBaseRules().Swamp
 						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp));
+
+			bool[] lowerPaths = Tile.GetPathOverlayRules()
+									 .Where(i => i != null)
+									 .Select(i => i.Water || i.Depressed || i.DepressedTransition)
+									 .ToArray();
+			int diffCount = 0;
+			for (int i = 0; i < lowerPaths.Length; ++i)
+			{
+				if (lowerPaths[i] != lowerPaths[(i + 1) % lowerPaths.Length]) diffCount++;
+			}
+			Bridged = diffCount > 3;
 
 			DieModifier =
 				Math.Max(
@@ -102,7 +114,7 @@ namespace PanzerBlitz
 
 			bool roaded = path != null && path.RoadMove;
 
-			bool leavingDepressed = Tile.RulesCalculator.Depressed
+			bool leavingDepressed = Tile.Rules.Depressed
 										&& (path == null || !path.Depressed)
 										&& (path == null || !path.DepressedTransition)
 										&& !roaded;
@@ -150,7 +162,7 @@ namespace PanzerBlitz
 					path, movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
 				crossCost = new MovementCost(0f);
 			}
-			if (Tile.RulesCalculator.TieredElevation < To.RulesCalculator.TieredElevation)
+			if (Tile.Rules.TieredElevation < To.Rules.TieredElevation)
 				enterCost += movementRules.Uphill.GetMoveCost(adjacent, unitMoved);
 			if (Tile.Configuration.Elevation > To.Configuration.Elevation)
 				enterCost += movementRules.Downhill.GetMoveCost(adjacent, unitMoved);

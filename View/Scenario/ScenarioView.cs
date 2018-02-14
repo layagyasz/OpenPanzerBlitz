@@ -12,8 +12,7 @@ namespace PanzerBlitz
 	{
 		ScrollCollection<ClassedGuiItem> _ScenarioDisplay =
 			new ScrollCollection<ClassedGuiItem>("scenario-main-display");
-		ScrollCollection<ClassedGuiItem> _DetailDisplay =
-			new ScrollCollection<ClassedGuiItem>("scenario-detail-display");
+		SingleColumnTable _DetailDisplay = new SingleColumnTable("scenario-detail-display");
 
 		public ScenarioView()
 			: base("scenario-display")

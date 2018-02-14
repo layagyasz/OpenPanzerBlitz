@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -69,8 +69,8 @@ namespace PanzerBlitz
 				Factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
 			}
 
-			if (LineOfSight.Initial.RulesCalculator.SubTieredElevation
-				< LineOfSight.Final.RulesCalculator.SubTieredElevation)
+			if (LineOfSight.Initial.Rules.SubTieredElevation
+				< LineOfSight.Final.Rules.SubTieredElevation)
 			{
 				Attack /= 2;
 				Factors.Add(AttackFactorCalculationFactor.ELEVATION);

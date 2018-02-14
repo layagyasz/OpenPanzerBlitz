@@ -23,7 +23,7 @@ namespace PanzerBlitz
 		public readonly Tile[] NeighborTiles = new Tile[6];
 
 		public readonly TileConfiguration Configuration;
-		public readonly TileRulesCalculator RulesCalculator;
+		public readonly TileRulesCalculator Rules;
 		public readonly TileRuleSet RuleSet;
 
 		Army _ControllingArmy;
@@ -60,8 +60,8 @@ namespace PanzerBlitz
 			Bounds = CalculateBounds();
 
 			Configuration = new TileConfiguration();
-			RulesCalculator = new TileRulesCalculator(this);
-			Configuration.OnReconfigure += (sender, e) => RulesCalculator.Recalculate();
+			Rules = new TileRulesCalculator(this);
+			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
 		}
 
 		public Tile(SerializationInputStream Stream, Map Map, TileRuleSet RuleSet, IdGenerator IdGenerator)
@@ -74,8 +74,8 @@ namespace PanzerBlitz
 			Bounds = CalculateBounds();
 
 			this.RuleSet = RuleSet;
-			RulesCalculator = new TileRulesCalculator(this);
-			Configuration.OnReconfigure += (sender, e) => RulesCalculator.Recalculate();
+			Rules = new TileRulesCalculator(this);
+			Configuration.OnReconfigure += (sender, e) => Rules.Recalculate();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

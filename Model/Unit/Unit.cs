@@ -250,7 +250,7 @@ namespace PanzerBlitz
 			if (Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
 			if (Unit.Carrier != null) return OrderInvalidReason.TARGET_CARRIED;
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
-			if (Position != null && Position.RulesCalculator.Water && !Configuration.CanCarryInWater)
+			if (Position != null && Position.Rules.Watery && !Configuration.CanCarryInWater)
 				return OrderInvalidReason.UNIT_NO_CARRY_IN_WATER;
 
 			return Configuration.CanLoad(Unit.Configuration);
@@ -353,7 +353,7 @@ namespace PanzerBlitz
 				From,
 				Tile,
 				i => true,
-				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat).Cost,
+				(i, j) => i.Rules.GetMoveCost(this, j, !Combat).Cost,
 				(i, j) => i.HeuristicDistanceTo(j),
 				i => i.Neighbors(),
 				(i, j) => i == j);
@@ -390,16 +390,16 @@ namespace PanzerBlitz
 
 			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
 				Position.NeighborTiles
-		   			.Where(i => i != null && Position.RulesCalculator.CanMove(this, i, !Combat, false))
+		   			.Where(i => i != null && Position.Rules.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
-							 i, Position, Position.RulesCalculator.GetMoveCost(this, i, !Combat).Cost));
+							 i, Position, Position.Rules.GetMoveCost(this, i, !Combat).Cost));
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
 			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
 				Position,
 				RemainingMovement,
-				(i, j) => i.RulesCalculator.GetMoveCost(this, j, !Combat).Cost)
+				(i, j) => i.Rules.GetMoveCost(this, j, !Combat).Cost)
 					.GetReachableNodes();
 
 			if (!Moved)

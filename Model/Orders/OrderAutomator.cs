@@ -84,7 +84,6 @@ namespace PanzerBlitz
 				if (mine != null && mine.Position != null)
 				{
 					AttackOrder order = new MinefieldAttackOrder(mine.Army, u.Position);
-					order.SetAttackTarget(AttackTarget.EACH);
 					foreach (Unit d in mine.Position.Units.Where(i => i != mine))
 					{
 						MinefieldSingleAttackOrder attack = new MinefieldSingleAttackOrder(mine, d);

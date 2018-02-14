@@ -48,7 +48,7 @@ namespace PanzerBlitz
 			OddsCalculationFactors = new List<OddsCalculationFactor>();
 
 			StackArmored = Defenders.Any(i => i.Configuration.UnitClass == UnitClass.FORT)
-					 			|| Tile.RulesCalculator.TreatUnitsAsArmored
+					 			|| Tile.Rules.TreatUnitsAsArmored
 								|| TreatStackAsArmored(AttackOrders, Defenders);
 			// If there is a fort, only use its defense.
 			Unit fort = Defenders.First().Position.Units.FirstOrDefault(
@@ -104,7 +104,7 @@ namespace PanzerBlitz
 			}
 
 			// Terrain modifiers.
-			int totalDieModifier = Defenders.First().Position.RulesCalculator.DieModifier
+			int totalDieModifier = Defenders.First().Position.Rules.DieModifier
 											+ Defenders.Min(i => i.Configuration.WaterDieModifier);
 			if (totalDieModifier != 0)
 			{

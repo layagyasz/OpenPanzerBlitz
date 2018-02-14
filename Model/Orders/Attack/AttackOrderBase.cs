@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		public Army Army { get; }
 		public Tile TargetTile { get; }
 		public abstract AttackMethod AttackMethod { get; }
-		public AttackTarget Target { get; private set; }
+		public AttackTarget Target { get; protected set; }
 
 		protected List<T> _Attackers = new List<T>();
 		protected List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();

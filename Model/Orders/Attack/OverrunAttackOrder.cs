@@ -16,8 +16,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		public OverrunAttackOrder(Army AttackingArmy, Tile TargetTile)
-			: base(AttackingArmy, TargetTile) { }
+		public OverrunAttackOrder(Army Army, Tile TargetTile)
+			: base(Army, TargetTile) { }
 
 		public OverrunAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)

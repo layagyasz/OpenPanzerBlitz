@@ -76,7 +76,7 @@ namespace PanzerBlitz
 				noEnter = Unit.CanEnter(Path[i + 1]);
 				if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
-				MovementCost d = Path[i].RulesCalculator.GetMoveCost(Unit, Path[i + 1], !Combat);
+				MovementCost d = Path[i].Rules.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (d.UnableReason != OrderInvalidReason.NONE) return d.UnableReason;
 			}
 			if (Path.Distance > Unit.RemainingMovement)

@@ -9,6 +9,7 @@ namespace PanzerBlitz
 		{
 			if (Matcher is TileDistanceFrom) return Describe((TileDistanceFrom)Matcher);
 			if (Matcher is TileElevation) return Describe((TileElevation)Matcher);
+			if (Matcher is TileHasBridge) return Describe((TileHasBridge)Matcher);
 			if (Matcher is TileHasCoordinate) return Describe((TileHasCoordinate)Matcher);
 			if (Matcher is TileHasEdge) return Describe((TileHasEdge)Matcher);
 			if (Matcher is TileHasUnit) return Describe((TileHasUnit)Matcher);
@@ -35,6 +36,11 @@ namespace PanzerBlitz
 		{
 			return string.Format(
 				"at elevation of {0} {1}", Matcher.Atleast ? "at least" : "at most", Matcher.Elevation);
+		}
+
+		public static string Describe(TileHasBridge Matcher)
+		{
+			return "by bridge";
 		}
 
 		public static string Describe(TileHasCoordinate Matcher)

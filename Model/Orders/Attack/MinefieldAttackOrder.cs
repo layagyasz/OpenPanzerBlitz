@@ -16,8 +16,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MinefieldAttackOrder(Army AttackingArmy, Tile TargetTile)
-			: base(AttackingArmy, TargetTile) { }
+		public MinefieldAttackOrder(Army Army, Tile TargetTile)
+			: base(Army, TargetTile)
+		{
+			Target = AttackTarget.EACH;
+		}
 
 		public MinefieldAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)

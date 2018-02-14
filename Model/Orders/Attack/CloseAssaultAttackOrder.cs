@@ -15,11 +15,11 @@ namespace PanzerBlitz
 			}
 		}
 
-		public CloseAssaultAttackOrder(Army AttackingArmy, Tile TargetTile)
-					: base(AttackingArmy, TargetTile) { }
+		public CloseAssaultAttackOrder(Army Army, Tile TargetTile)
+			: base(Army, TargetTile) { }
 
 		public CloseAssaultAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-					: base(Stream, Objects)
+			: base(Stream, Objects)
 		{
 			_Attackers = Stream.ReadEnumerable(i => new CloseAssaultSingleAttackOrder(Stream, Objects)).ToList();
 		}

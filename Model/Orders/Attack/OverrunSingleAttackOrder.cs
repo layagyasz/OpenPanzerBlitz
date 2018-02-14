@@ -61,10 +61,10 @@ namespace PanzerBlitz
 			r = Attacker.CanEnter(AttackTile, false, true);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			MovementCost distance1 = _InitialMovement.Path.Destination.RulesCalculator.GetMoveCost(
+			MovementCost distance1 = _InitialMovement.Path.Destination.Rules.GetMoveCost(
 				_InitialMovement.Unit, AttackTile, false, true);
 			MovementCost distance2 =
-				AttackTile.RulesCalculator.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
+				AttackTile.Rules.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
 			if (distance1.UnableReason != OrderInvalidReason.NONE) return distance1.UnableReason;
 			if (distance2.UnableReason != OrderInvalidReason.NONE) return distance2.UnableReason;
 

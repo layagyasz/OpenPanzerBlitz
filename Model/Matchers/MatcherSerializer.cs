@@ -13,26 +13,29 @@ namespace PanzerBlitz
 		MatcherSerializer()
 			: base(new Type[]
 		{
+			typeof(CompositeMatcher<Tile>),
 			typeof(EmptyMatcher<Tile>),
 			typeof(InverseMatcher<Tile>),
-			typeof(CompositeMatcher<Tile>),
+
 			typeof(TileDistanceFrom),
 			typeof(TileElevation),
-			typeof(TileOnEdge),
-			typeof(TileWithin),
+			typeof(TileHasBridge),
 			typeof(TileHasCoordinate),
+			typeof(TileHasEdge),
 			typeof(TileHasUnit),
 			typeof(TileInRegion),
-			typeof(TileHasEdge),
+			typeof(TileOnEdge),
+			typeof(TileWithin),
 
+			typeof(CompositeMatcher<Unit>),
 			typeof(EmptyMatcher<Unit>),
 			typeof(InverseMatcher<Unit>),
-			typeof(CompositeMatcher<Unit>),
-			typeof(UnitHasStatus),
-			typeof(UnitHasReconned),
+
+			typeof(UnitHasConfiguration),
 			typeof(UnitHasEvacuated),
 			typeof(UnitHasPosition),
-			typeof(UnitHasConfiguration),
+			typeof(UnitHasReconned),
+			typeof(UnitHasStatus),
 			typeof(UnitIsHostile)
 		})
 		{ }
