@@ -39,6 +39,11 @@ namespace PanzerBlitz
 			ObjectiveSerializer.Instance.Serialize(Denominator, Stream);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return Numerator.CanStopEarly() || Denominator.CanStopEarly();
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			return Numerator.GetScore(ForArmy, Match, Cache) / Denominator.GetScore(ForArmy, Match, Cache);

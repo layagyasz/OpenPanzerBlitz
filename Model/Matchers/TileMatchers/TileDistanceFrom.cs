@@ -49,7 +49,7 @@ namespace PanzerBlitz
 		{
 			if (Tile == null) return false;
 
-			return new Field<Tile>(Tile, Distance, (i, j) => 1)
+			return new Field<Tile>(Tile, Distance - (Atleast ? 1 : 0), (i, j) => 1)
 				.GetReachableNodes()
 				.Any(i => Matcher.Matches(i.Item1)) ^ Atleast;
 		}

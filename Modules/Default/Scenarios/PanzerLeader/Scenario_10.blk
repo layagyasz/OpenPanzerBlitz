@@ -1,0 +1,198 @@
+﻿scenario:_ {
+	string:name { Operation Market: Arnhem }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.british }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:grancelle-not-controlled {
+						int:threshold { 14 }
+						bool:invert { true }
+						tiles-controlled-objective:objective {
+							bool:friendly { false }
+							tile-in-region:matcher {
+								string:region-name { grancelle }
+							}
+						}
+					}
+					temporal-objective:grancelle-controlled-by {
+						trigger-objective:objective {
+							int:threshold { 15 }
+							tiles-controlled-objective:objective {
+								bool:friendly { false }
+								tile-in-region:matcher {
+									string:region-name { grancelle }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 11 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						!var:objective { objectives.grancelle-not-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-in-region:matcher {
+						string:region-name { grancelle }
+					}
+					unit-group:unit-group {
+						string:name { 1st Parachute Bgde. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-british-44 
+								}
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at-american }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					temporal-objective:grancelle-controlled-by {
+						trigger-objective:objective {
+							int:threshold { 15 }
+							tiles-controlled-objective:objective {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { grancelle }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 6 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 8 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 9 }
+						bool:invert { true }
+						!var:objective { objectives.grancelle-controlled-by }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-distance-from:matcher {
+						byte:distance { 3 }
+						bool:atleast { true }
+						tile-has-unit:matcher {
+							unit-is-hostile:matcher {
+								byte:team { 2 }
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { Kampfgruppe Harzer }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.gw-38_m }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-j }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.tiger-i }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

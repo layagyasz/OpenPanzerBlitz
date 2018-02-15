@@ -54,7 +54,8 @@ namespace PanzerBlitz
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
 			Watery = Tile.GetBaseRules().Water
 						|| Tile.GetBaseRules().Swamp
-						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp));
+						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp))
+					 	|| Tile.GetPathOverlayRules().Any(i => i != null && (i.Water || i.Swamp));
 
 			bool[] lowerPaths = Tile.GetPathOverlayRules()
 									 .Where(i => i != null)
@@ -66,6 +67,16 @@ namespace PanzerBlitz
 				if (lowerPaths[i] != lowerPaths[(i + 1) % lowerPaths.Length]) diffCount++;
 			}
 			Bridged = diffCount > 3;
+			if (!Bridged)
+			{
+				for (int i = 0; i < 6; ++i)
+				{
+					TileComponentRules edge = Tile.GetEdgeRules(i);
+					TileComponentRules path = Tile.GetPathOverlayRules(i);
+					if (edge == null || path == null) continue;
+					Bridged |= !path.Depressed && !path.Water && (edge.Depressed || edge.Water);
+				}
+			}
 
 			DieModifier =
 				Math.Max(

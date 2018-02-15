@@ -50,7 +50,7 @@ unit-configuration:security-platoon-german-west {
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
-	byte:range { 4 }
+	byte:range { 2 }
 	byte:defense { 5 }
 	byte:movement { 1 }
 }
@@ -941,7 +941,7 @@ unit-configuration:pzkw-iii-j {
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
-	byte:attack { 10 }
+	byte:attack { 8 }
 	byte:range { 6 }
 	byte:defense { 7 }
 	byte:movement { 9 }

@@ -115,7 +115,7 @@ namespace PanzerBlitz
 
 		public static string Describe(UnitIsHostile Matcher)
 		{
-			return "are hostile";
+			return "that are hostile";
 		}
 
 		public static string Describe<T>(Matcher<T> Matcher)

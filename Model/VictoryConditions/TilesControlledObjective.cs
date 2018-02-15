@@ -39,6 +39,11 @@ namespace PanzerBlitz
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return false;
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			return Match.Map.TilesEnumerable.Count(

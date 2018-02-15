@@ -43,6 +43,11 @@ namespace PanzerBlitz
 			Stream.Write(Invert);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return Objective.CanStopEarly();
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			bool t = Invert ? Objective.GetScore(ForArmy, Match, Cache) <= Threshold

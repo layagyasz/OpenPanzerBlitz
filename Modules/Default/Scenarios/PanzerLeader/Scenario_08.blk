@@ -21,7 +21,6 @@ scenario:_ {
 			!faction:faction { factions.american }
 			byte:team { 1 }
 			victory-condition:victory-condition {
-				bool:stop-early { true }
 				var<>:objectives {
 					sum-objective:grancelle-controlled-by {
 						temporal-objective:_ {

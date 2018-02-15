@@ -40,6 +40,11 @@ namespace PanzerBlitz
 			Stream.Write((byte)Array.IndexOf(AGGREGATORS, Aggregator));
 		}
 
+		public override bool CanStopEarly()
+		{
+			return Objectives.Any(i => i.CanStopEarly());
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			bool seed = Objectives.First().GetScore(ForArmy, Match, Cache) != 0;

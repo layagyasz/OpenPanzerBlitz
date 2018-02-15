@@ -188,7 +188,7 @@
 									!unit-configuration:unit-configuration { unit-configurations.command-post }
 								}
 							}
-							byte:distance { 2 }
+							byte:distance { 3 }
 							bool:atleast { true }
 						}
 						tile-elevation:_ {

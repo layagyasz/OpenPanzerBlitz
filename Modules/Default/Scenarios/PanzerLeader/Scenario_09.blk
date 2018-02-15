@@ -1,5 +1,5 @@
 ﻿scenario:_ {
-	string:name { Nijmegen }
+	string:name { Operation Market: Nijmegen }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 10 }
@@ -21,14 +21,13 @@
 			!faction:faction { factions.american }
 			byte:team { 1 }
 			victory-condition:victory-condition {
-				bool:stop-early { true }
 				var<>:objectives {
 					tiles-controlled-objective:bridges-controlled {
 						bool:friendly { true }
 						tile-matches-all:matcher {
 							tile-has-bridge:_ { }
 							tile-within:_ {
-								zone:zone { 0,0 23,0 23,17 0,17 }
+								zone:zone { 0,0 21,0 21,17 0,17 }
 							}
 						}
 					}

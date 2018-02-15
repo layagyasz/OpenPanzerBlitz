@@ -49,6 +49,11 @@ namespace PanzerBlitz
 			Stream.Write(PointValue);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return false;
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			return PointValue * (int)Match.Armies

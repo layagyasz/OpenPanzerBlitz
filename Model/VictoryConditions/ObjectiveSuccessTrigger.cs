@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -15,6 +14,8 @@ namespace PanzerBlitz
 		public readonly bool Invert;
 		public readonly Objective Objective;
 
+		public readonly bool CanStopEarly;
+
 		public ObjectiveSuccessTrigger(
 			ObjectiveSuccessLevel SuccessLevel, int Threshold, bool Invert, Objective Objective)
 		{
@@ -22,6 +23,8 @@ namespace PanzerBlitz
 			this.Threshold = Threshold;
 			this.Invert = Invert;
 			this.Objective = Objective;
+
+			CanStopEarly = Objective.CanStopEarly();
 		}
 
 		public ObjectiveSuccessTrigger(ParseBlock Block)
@@ -31,16 +34,17 @@ namespace PanzerBlitz
 			Threshold = Parse.DefaultIfNull(attributes[(int)Attribute.THRESHOLD], 1);
 			Invert = Parse.DefaultIfNull(attributes[(int)Attribute.INVERT], false);
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
+
+			CanStopEarly = Objective.CanStopEarly();
 		}
 
 		public ObjectiveSuccessTrigger(SerializationInputStream Stream)
-		{
-			SuccessLevel = (ObjectiveSuccessLevel)Stream.ReadByte();
-			Threshold = Stream.ReadInt32();
-			Invert = Stream.ReadBoolean();
-			Objective = (Objective)Stream.ReadObject(
-				i => ObjectiveSerializer.Instance.Deserialize(Stream), false, true);
-		}
+			: this(
+				(ObjectiveSuccessLevel)Stream.ReadByte(),
+				Stream.ReadInt32(),
+				Stream.ReadBoolean(),
+				(Objective)Stream.ReadObject(i => ObjectiveSerializer.Instance.Deserialize(Stream), false, true))
+		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{

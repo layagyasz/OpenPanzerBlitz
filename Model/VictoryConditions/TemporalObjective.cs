@@ -30,6 +30,11 @@ namespace PanzerBlitz
 			ObjectiveSerializer.Instance.Serialize(Objective, Stream);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return true;
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			int turn = Match.CurrentTurn.TurnNumber == 0 ? Match.Scenario.Turns + 1 : Match.CurrentTurn.TurnNumber;

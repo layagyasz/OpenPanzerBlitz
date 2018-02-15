@@ -7,6 +7,7 @@ namespace PanzerBlitz
 {
 	public abstract class Objective : Serializable
 	{
+		public abstract bool CanStopEarly();
 		public abstract int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache);
 		public abstract IEnumerable<Tile> GetTiles(Map Map);
 

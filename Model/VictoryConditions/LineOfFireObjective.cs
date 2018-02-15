@@ -17,10 +17,10 @@ namespace PanzerBlitz
 		public readonly byte Width;
 		public readonly bool Vertical;
 
-		public LineOfFireObjective(bool Friendly, bool IncludeLineOfSight, bool BreakThrough, byte Width, bool Vertical)
+		public LineOfFireObjective(bool Friendly, bool IncludeFieldOfSight, bool BreakThrough, byte Width, bool Vertical)
 		{
 			this.Friendly = Friendly;
-			this.IncludeFieldOfSight = IncludeLineOfSight;
+			this.IncludeFieldOfSight = IncludeFieldOfSight;
 			this.BreakThrough = BreakThrough;
 			this.Width = Width;
 			this.Vertical = Vertical;
@@ -53,6 +53,11 @@ namespace PanzerBlitz
 			Stream.Write(BreakThrough);
 			Stream.Write(Width);
 			Stream.Write(Vertical);
+		}
+
+		public override bool CanStopEarly()
+		{
+			return false;
 		}
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)

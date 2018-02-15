@@ -48,17 +48,13 @@ namespace PanzerBlitz
 
 		public ObjectiveSuccessLevel CheckObjectiveSuccessLevel()
 		{
-			if (Configuration.VictoryCondition.StopEarly)
-			{
-				ObjectiveSuccessLevel l = Configuration.VictoryCondition.GetMatchResult(this, Match);
-				return l == ObjectiveSuccessLevel.DEFEAT ? ObjectiveSuccessLevel.NONE : l;
-			}
-			return ObjectiveSuccessLevel.NONE;
+			ObjectiveSuccessLevel l = Configuration.VictoryCondition.GetMatchResult(this, Match, false);
+			return l == ObjectiveSuccessLevel.DEFEAT ? ObjectiveSuccessLevel.NONE : l;
 		}
 
 		public ObjectiveSuccessLevel GetObjectiveSuccessLevel()
 		{
-			return Configuration.VictoryCondition.GetMatchResult(this, Match);
+			return Configuration.VictoryCondition.GetMatchResult(this, Match, true);
 		}
 
 		public IEnumerable<GameObject> GetGameObjects()

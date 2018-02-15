@@ -31,6 +31,11 @@ namespace PanzerBlitz
 			Stream.Write((byte)Direction);
 		}
 
+		public override bool CanStopEarly()
+		{
+			return false;
+		}
+
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
 			switch (Direction)
