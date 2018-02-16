@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -18,7 +17,7 @@ namespace PanzerBlitz
 
 		public InverseMatcher(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Matcher = (Matcher<T>)attributes[(int)Attribute.MATCHER];
 		}

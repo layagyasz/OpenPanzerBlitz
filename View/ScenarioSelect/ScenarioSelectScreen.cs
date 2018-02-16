@@ -6,7 +6,6 @@ using Cardamom.Interface;
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
-using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -20,10 +19,10 @@ namespace PanzerBlitz
 
 		GuiContainer<GuiItem> _Display = new GuiContainer<GuiItem>("scenario-select-display");
 
-		ValuedScrollCollection<SelectionOption<Scenario>, Scenario> _ScenarioSelect =
+		readonly ValuedScrollCollection<SelectionOption<Scenario>, Scenario> _ScenarioSelect =
 			new ValuedScrollCollection<SelectionOption<Scenario>, Scenario>("scenario-select");
-		ScenarioView _ScenarioView = new ScenarioView();
-		Button _StartButton = new Button("large-button") { DisplayedString = "Play" };
+		readonly ScenarioView _ScenarioView = new ScenarioView();
+		readonly Button _StartButton = new Button("large-button") { DisplayedString = "Play" };
 
 		public ScenarioSelectScreen(Vector2f WindowSize, IEnumerable<Scenario> Scenarios)
 			: base(WindowSize)
@@ -43,7 +42,7 @@ namespace PanzerBlitz
 					1024);
 			foreach (Scenario s in Scenarios)
 			{
-				SelectionOption<Scenario> option = new SelectionOption<Scenario>("scenario-selection-option")
+				var option = new SelectionOption<Scenario>("scenario-selection-option")
 				{
 					DisplayedString = s.Name,
 					Value = s

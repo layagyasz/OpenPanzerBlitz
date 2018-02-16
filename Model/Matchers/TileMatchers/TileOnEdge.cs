@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -19,7 +17,8 @@ namespace PanzerBlitz
 
 		public TileOnEdge(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Edge = (Direction)attributes[(int)Attribute.EDGE];
 		}
 

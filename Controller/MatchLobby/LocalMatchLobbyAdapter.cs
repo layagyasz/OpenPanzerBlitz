@@ -1,9 +1,8 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public class LocalMatchLobbyAdapter : MatchLobbyAdapter
 	{
-		MatchLobby _Lobby;
+		readonly MatchLobby _Lobby;
 
 		public LocalMatchLobbyAdapter(MatchLobby Lobby)
 		{

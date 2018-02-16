@@ -24,7 +24,7 @@ namespace PanzerBlitz
 			Clear();
 			if (_Controller.SelectedUnit != null)
 			{
-				MovementOrder order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
+				var order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
 				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
 			}
 		}
@@ -75,13 +75,16 @@ namespace PanzerBlitz
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
-			if (Key == Keyboard.Key.D) Dismount();
-			else if (Key == Keyboard.Key.E) Evacuate();
-			else if (Key == Keyboard.Key.I) ClearMinefield();
-			else if (Key == Keyboard.Key.L) LoadUnit();
-			else if (Key == Keyboard.Key.M) Mount();
-			else if (Key == Keyboard.Key.R) Recon();
-			else if (Key == Keyboard.Key.U) UnloadUnit();
+			switch (Key)
+			{
+				case Keyboard.Key.D: Dismount(); break;
+				case Keyboard.Key.E: Evacuate(); break;
+				case Keyboard.Key.I: ClearMinefield(); break;
+				case Keyboard.Key.L: LoadUnit(); break;
+				case Keyboard.Key.M: Mount(); break;
+				case Keyboard.Key.R: Recon(); break;
+				case Keyboard.Key.U: UnloadUnit(); break;
+			}
 		}
 	}
 }

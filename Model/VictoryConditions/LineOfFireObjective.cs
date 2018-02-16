@@ -28,7 +28,7 @@ namespace PanzerBlitz
 
 		public LineOfFireObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], true);
 			IncludeFieldOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.INCLUDE_FIELD_OF_SIGHT], true);
@@ -62,10 +62,10 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			IEnumerable<Unit> units = Match.Armies
+			var units = Match.Armies
 								 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
 										   .SelectMany(i => i.Units).Where(i => i.Position != null);
-			IEnumerable<Tile> losTiles = IncludeFieldOfSight
+			var losTiles = IncludeFieldOfSight
 				? units.SelectMany(i => i.GetFieldOfSight(AttackMethod.NORMAL_FIRE)).Select(i => i.Item1.Final)
 					   : units.Select(i => i.Position);
 
@@ -77,7 +77,7 @@ namespace PanzerBlitz
 
 			for (int i = 0; i < Width - 1; ++i)
 			{
-				List<Tile> tiles = new List<Tile>();
+				var tiles = new List<Tile>();
 				foreach (Tile t in negative)
 				{
 					for (int j = 1; j < 4; ++j)
@@ -113,7 +113,7 @@ namespace PanzerBlitz
 			}
 
 			image.Add(sink);
-			Path<Tile> p = new Path<Tile>(
+			var p = new Path<Tile>(
 				source,
 				sink,
 				i => true,

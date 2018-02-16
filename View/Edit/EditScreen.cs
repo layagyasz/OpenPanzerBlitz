@@ -19,18 +19,15 @@ namespace PanzerBlitz
 		{
 			_FileDropDown.Add(new SelectionOption<object>("select-option") { DisplayedString = "File" });
 
-			SelectionOption<object> newOption =
-				new SelectionOption<object>("select-option") { DisplayedString = "New " };
+			var newOption = new SelectionOption<object>("select-option") { DisplayedString = "New " };
 			newOption.OnClick += HandleNewClicked;
 			_FileDropDown.Add(newOption);
 
-			SelectionOption<object> openOption =
-				new SelectionOption<object>("select-option") { DisplayedString = "Open" };
+			var openOption = new SelectionOption<object>("select-option") { DisplayedString = "Open" };
 			openOption.OnClick += HandleOpenClicked;
 			_FileDropDown.Add(openOption);
 
-			SelectionOption<object> saveOption =
-				new SelectionOption<object>("select-option") { DisplayedString = "Save" };
+			var saveOption = new SelectionOption<object>("select-option") { DisplayedString = "Save" };
 			saveOption.OnClick += HandleSaveClicked;
 			_FileDropDown.Add(saveOption);
 

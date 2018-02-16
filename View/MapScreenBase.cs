@@ -41,10 +41,9 @@ namespace PanzerBlitz
 			_TileRenderer = TileRenderer;
 
 			Size = WindowSize;
-			Camera = new Camera(
-				WindowSize, new Vector2f((float)MapView.Map.Width, (float)MapView.Map.Height) * .5f, 64);
+			Camera = new Camera(WindowSize, new Vector2f(MapView.Map.Width, MapView.Map.Height) * .5f, 64);
 
-			Color backdropColor = MakeBackdropColor(MapView.TileRenderer.BaseColor);
+			var backdropColor = MakeBackdropColor(MapView.TileRenderer.BaseColor);
 			_Backdrop = new Vertex[]
 			{
 				new Vertex(new Vector2f(0, 0), backdropColor),
@@ -59,7 +58,7 @@ namespace PanzerBlitz
 
 		Color MakeBackdropColor(Color BaseColor)
 		{
-			FloatingColor f = new FloatingColor(BaseColor).MakeHSL();
+			var f = new FloatingColor(BaseColor).MakeHSL();
 			f.B = Math.Min(.2f, Math.Max(0, f.B - .2f));
 			f.G = Math.Min(.2f, Math.Max(0, f.G - .2f));
 			return f.MakeRGB().ConvertToColor();

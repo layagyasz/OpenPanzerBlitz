@@ -22,7 +22,7 @@ namespace PanzerBlitz
 		TextPane _NewRegionPane;
 		Highlight _Highlight;
 
-		NewMapPane _NewPane = new NewMapPane() { Visible = false };
+		NewMapPane _NewPane = new NewMapPane { Visible = false };
 		IOPane _OpenPane = new IOPane("Open") { Visible = false };
 		IOPane _SavePane = new IOPane("Save") { Visible = false };
 
@@ -37,11 +37,11 @@ namespace PanzerBlitz
 
 			_OpenPane.SetDirectory("./Maps");
 			_OpenPane.OnCancel += (sender, e) => _OpenPane.Visible = false;
-			_OpenPane.OnAction += (sender, e) => OpenMap(sender, e);
+			_OpenPane.OnAction += OpenMap;
 
 			_SavePane.SetDirectory("./Maps");
 			_SavePane.OnCancel += (sender, e) => _SavePane.Visible = false;
-			_SavePane.OnAction += (sender, e) => SaveMap(sender, e);
+			_SavePane.OnAction += SaveMap;
 
 			_EditScreen.OnNewClicked += (sender, e) => _NewPane.Visible = true;
 			_EditScreen.OnOpenClicked += (sender, e) => _OpenPane.Visible = true;
@@ -80,7 +80,7 @@ namespace PanzerBlitz
 
 		void HandleAddMapRegion(object Sender, ValuedEventArgs<string> E)
 		{
-			MapRegion m = new MapRegion() { Name = E.Value };
+			var m = new MapRegion { Name = E.Value };
 			m.OnChange += HandleRegionChanged;
 			_EditScreen.MapView.Map.Regions.Add(m);
 			_EditScreen.MapView.MapRegions.Add(new MapRegionView(m, _EditScreen.MapView.TileRenderer));
@@ -102,7 +102,7 @@ namespace PanzerBlitz
 		{
 			if (Sender == null) return;
 
-			MapRegion region = (MapRegion)Sender;
+			var region = (MapRegion)Sender;
 			Highlight(region.Tiles.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLOR)));
 		}
 
@@ -135,14 +135,14 @@ namespace PanzerBlitz
 
 		void NewMap(object Sender, ValuedEventArgs<MapConfiguration> E)
 		{
-			NewMapPane pane = (NewMapPane)Sender;
+			var pane = (NewMapPane)Sender;
 			SetMap(E.Value.GenerateMap(null, new IdGenerator()));
 			pane.Visible = false;
 		}
 
 		void SaveMap(object Sender, EventArgs E)
 		{
-			IOPane pane = (IOPane)Sender;
+			var pane = (IOPane)Sender;
 			using (FileStream stream = new FileStream(pane.InputPath, FileMode.Create))
 			{
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionLevel.Optimal))
@@ -157,7 +157,7 @@ namespace PanzerBlitz
 
 		void OpenMap(object Sender, EventArgs E)
 		{
-			IOPane pane = (IOPane)Sender;
+			var pane = (IOPane)Sender;
 			using (FileStream stream = new FileStream(pane.InputPath, FileMode.Open))
 			{
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))

@@ -35,7 +35,7 @@ namespace PanzerBlitz
 
 		public override void Render(RenderTarget Target, Transform Transform, Faction Faction)
 		{
-			Sprite image = new Sprite(new Texture(RenderDetails[Faction.UniqueKey].ImagePath));
+			var image = new Sprite(new Texture(RenderDetails[Faction.UniqueKey].ImagePath));
 			image.Draw(Target, new RenderStates(Transform));
 		}
 	}

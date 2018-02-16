@@ -18,7 +18,7 @@ namespace PanzerBlitz
 		TextInput _TextInput;
 		string _MessageClassName;
 
-		List<ChatMessage> _IncomingMessages = new List<ChatMessage>();
+		readonly List<ChatMessage> _IncomingMessages = new List<ChatMessage>();
 
 		public ChatView(
 			Chat Chat,

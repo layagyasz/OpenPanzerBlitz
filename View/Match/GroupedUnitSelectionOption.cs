@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -13,7 +12,7 @@ namespace PanzerBlitz
 	{
 		public readonly UnitConfiguration UnitConfiguration;
 
-		HomogenousStackView _StackView;
+		readonly HomogenousStackView _StackView;
 
 		public int Count
 		{
@@ -30,7 +29,7 @@ namespace PanzerBlitz
 			UnitConfiguration = Units.First().Configuration;
 
 			_StackView = new HomogenousStackView(
-				Units, Renderer, Class.GetAttributeWithDefault<int>("unit-scale", 0), OverlayClassName);
+				Units, Renderer, Class.GetAttributeWithDefault("unit-scale", 0), OverlayClassName);
 			_StackView.Position = Size / 2;
 			_StackView.Parent = this;
 			Value = _StackView;

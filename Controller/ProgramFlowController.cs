@@ -13,7 +13,7 @@ namespace PanzerBlitz
 		ProgramState _ProgramState;
 		ProgramStateController _Controller;
 
-		Dictionary<ProgramState, Type> _ProgramStateControllers =
+		readonly Dictionary<ProgramState, Type> _ProgramStateControllers =
 			new Dictionary<ProgramState, Type>
 		{
 			{ ProgramState.BUILD_ARMY, typeof(ArmyBuilderStateController) },
@@ -33,14 +33,14 @@ namespace PanzerBlitz
 		public ProgramFlowController(Interface Interface)
 		{
 			this.Interface = Interface;
-			this.ProgramContext = new ProgramContext(Interface.WindowBounds[2], Interface.KeyController);
+			ProgramContext = new ProgramContext(Interface.WindowBounds[2], Interface.KeyController);
 		}
 
 		public void EnterState(ProgramState ProgramState, ProgramStateContext ProgramStateContext)
 		{
 			_ProgramState = ProgramState;
 
-			ProgramStateController newController =
+			var newController =
 				(ProgramStateController)_ProgramStateControllers[ProgramState]
 					.GetConstructor(new Type[] { }).Invoke(new object[] { });
 			newController.OnProgramStateTransition += HandleStateChange;

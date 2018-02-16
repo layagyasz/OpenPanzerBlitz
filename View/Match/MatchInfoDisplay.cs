@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
@@ -10,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class MatchInfoDisplay : GuiItem
 	{
-		SingleColumnTable _InfoDisplay = new SingleColumnTable("info-display");
+		readonly SingleColumnTable _InfoDisplay = new SingleColumnTable("info-display");
 		Pod _ViewItem;
 
 		public override Vector2f Size

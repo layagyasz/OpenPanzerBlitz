@@ -19,3 +19,9 @@ unit-configuration-link:fort-40 {
 unit-configuration-link:fort-50 {
 	!unit-configuration:unit-configuration { unit-configurations.fort-50 }
 }
+unit-configuration-link:truck-bridge {
+	!unit-configuration:unit-configuration { unit-configurations.truck-bridge }
+}
+unit-configuration-link:tank-bridge {
+	!unit-configuration:unit-configuration { unit-configurations.tank-bridge }
+}

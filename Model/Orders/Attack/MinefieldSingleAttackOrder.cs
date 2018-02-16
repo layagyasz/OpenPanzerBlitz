@@ -23,7 +23,7 @@ namespace PanzerBlitz
 		{
 			return new AttackFactorCalculation(
 				Defender.Configuration.Defense * Attacker.Configuration.Attack,
-				new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.MINEFIELD });
+				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.MINEFIELD });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 			if (Attacker.Position != Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == Defender) != null)
 				return OrderInvalidReason.TARGET_IMMUNE;
-			OrderInvalidReason r = Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
+			var r = Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
 			if (r != OrderInvalidReason.NONE) return r;
 			return OrderInvalidReason.NONE;
 		}

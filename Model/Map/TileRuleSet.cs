@@ -12,9 +12,9 @@ namespace PanzerBlitz
 
 		public readonly string UniqueKey;
 
-		TileComponentRules[] _BaseRules;
-		TileComponentRules[] _EdgeRules;
-		TileComponentRules[] _PathOverlayRules;
+		readonly TileComponentRules[] _BaseRules;
+		readonly TileComponentRules[] _EdgeRules;
+		readonly TileComponentRules[] _PathOverlayRules;
 
 		public TileRuleSet(
 			string UniqueKey,
@@ -42,7 +42,7 @@ namespace PanzerBlitz
 
 		public TileRuleSet(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UniqueKey = Block.Name;
 

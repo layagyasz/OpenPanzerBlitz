@@ -67,7 +67,7 @@ namespace PanzerBlitz
 		{
 			_Description.Add(new Button("attack-odds-box") { DisplayedString = OddsString(OddsCalculation) });
 
-			double[] p = CombatResultsTable.STANDARD_CRT.GetCombatResultProbabilities(OddsCalculation);
+			var p = CombatResultsTable.STANDARD_CRT.GetCombatResultProbabilities(OddsCalculation);
 			for (int i = 0; i < p.Length; ++i)
 			{
 				if (p[i] > 0)
@@ -119,12 +119,12 @@ namespace PanzerBlitz
 
 		string OddsString(OddsCalculation OddsCalculation)
 		{
-			string dieModifier =
+			var dieModifier =
 				string.Format(
 					"{0} {1}", OddsCalculation.DieModifier < 0 ? "-" : "+", Math.Abs(OddsCalculation.DieModifier));
 			if (OddsCalculation.OddsAgainst)
 				return string.Format("Attack at 1-{0} {1} against", OddsCalculation.Odds, dieModifier);
-			else return string.Format("Attack at {0}-1 {1} for", OddsCalculation.Odds, dieModifier);
+			return string.Format("Attack at {0}-1 {1} for", OddsCalculation.Odds, dieModifier);
 		}
 
 		void HandleAttackTargetChanged(object Sender, ValuedEventArgs<StandardItem<AttackTarget>> E)

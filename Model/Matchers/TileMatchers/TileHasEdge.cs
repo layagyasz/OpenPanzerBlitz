@@ -19,7 +19,8 @@ namespace PanzerBlitz
 
 		public TileHasEdge(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Edge = (TileEdge)attributes[(int)Attribute.EDGE];
 		}
 

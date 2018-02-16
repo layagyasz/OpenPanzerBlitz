@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -22,7 +21,7 @@ namespace PanzerBlitz
 
 		public TriggerObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
 			Threshold = (int)attributes[(int)Attribute.THRESHOLD];

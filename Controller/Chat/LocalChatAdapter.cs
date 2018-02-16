@@ -1,9 +1,8 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public class LocalChatAdapter : ChatAdapter
 	{
-		Chat _Chat;
+		readonly Chat _Chat;
 
 		public LocalChatAdapter(Chat Chat)
 		{

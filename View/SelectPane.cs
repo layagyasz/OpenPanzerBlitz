@@ -17,13 +17,13 @@ namespace PanzerBlitz
 		public SelectPane(string Title, IEnumerable<T> Items)
 			: base("select-pane")
 		{
-			Button header = new Button("select-pane-header") { DisplayedString = Title };
+			var header = new Button("select-pane-header") { DisplayedString = Title };
 			Add(header);
 
 			_UnitSelect.Position = new Vector2f(0, header.Size.Y + 6);
 			foreach (T item in Items)
 			{
-				SelectionOption<T> option = new SelectionOption<T>("select-option")
+				var option = new SelectionOption<T>("select-option")
 				{
 					Value = item,
 					DisplayedString = ObjectDescriber.Describe(item)

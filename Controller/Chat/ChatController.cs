@@ -1,14 +1,12 @@
-﻿using System;
-
-using Cardamom.Utilities;
+﻿using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
 	public class ChatController
 	{
-		ChatAdapter _Adapter;
-		ChatView _ChatView;
-		Player _Player;
+		readonly ChatAdapter _Adapter;
+		readonly ChatView _ChatView;
+		readonly Player _Player;
 
 		public ChatController(ChatAdapter Adapter, ChatView ChatView, Player Player)
 		{

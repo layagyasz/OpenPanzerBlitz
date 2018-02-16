@@ -8,7 +8,8 @@ namespace PanzerBlitz
 {
 	public class DeploymentController : BaseController
 	{
-		Dictionary<Deployment, Subcontroller> _DeploymentMicrocontrollers = new Dictionary<Deployment, Subcontroller>();
+		readonly Dictionary<Deployment, Subcontroller> _DeploymentMicrocontrollers =
+			new Dictionary<Deployment, Subcontroller>();
 
 		DeploymentPane _DeploymentPane;
 		Deployment _WorkingDeployment;

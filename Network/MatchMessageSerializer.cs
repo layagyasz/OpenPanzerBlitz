@@ -7,7 +7,7 @@ namespace PanzerBlitz
 {
 	public class MatchMessageSerializer : SerializableAdapter
 	{
-		OrderSerializer _OrderSerializer;
+		readonly OrderSerializer _OrderSerializer;
 
 		public MatchMessageSerializer(OrderSerializer OrderSerializer)
 			: base(new Tuple<Type, Func<SerializationInputStream, Serializable>>[]

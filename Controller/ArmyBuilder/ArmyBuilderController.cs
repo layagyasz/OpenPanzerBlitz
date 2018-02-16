@@ -5,8 +5,8 @@ namespace PanzerBlitz
 	{
 		public EventHandler OnFinished;
 
-		ArmyBuilder _ArmyBuilder;
-		ArmyBuilderScreen _Screen;
+		readonly ArmyBuilder _ArmyBuilder;
+		readonly ArmyBuilderScreen _Screen;
 
 		public ArmyBuilderController(ArmyBuilder ArmyBuilder, ArmyBuilderScreen Screen)
 		{

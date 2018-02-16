@@ -22,7 +22,7 @@ namespace PanzerBlitz
 		public UnitConfigurationPack(
 			ParseBlock Block, IdGenerator IdGenerator)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Id = IdGenerator.GenerateId();
 			Number = (int)attributes[(int)Attribute.NUMBER];
@@ -30,9 +30,8 @@ namespace PanzerBlitz
 
 			float cost = 0;
 			float totalCost = 0;
-			Dictionary<string, UnitConfigurationLock> locks =
-				Block.Get<Dictionary<string, UnitConfigurationLock>>("unit-configuration-locks");
-			TagMatcher m = (TagMatcher)attributes[(int)Attribute.TAG_MATCHER];
+			var locks = Block.Get<Dictionary<string, UnitConfigurationLock>>("unit-configuration-locks");
+			var m = (TagMatcher)attributes[(int)Attribute.TAG_MATCHER];
 			foreach (UnitConfigurationLock c in locks.Values)
 			{
 				float lockCost = c.UnitConfiguration.GetPointValue(c.Faction.HalfPriceTrucks) / c.Rarity;

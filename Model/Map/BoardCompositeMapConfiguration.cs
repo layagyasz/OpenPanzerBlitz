@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
 using System.Linq;
 
@@ -30,12 +29,12 @@ namespace PanzerBlitz
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
-			List<List<Tuple<Map, bool>>> boards = Boards.Select(i => i.Select(j => j.LoadMap()).ToList()).ToList();
+			var boards = Boards.Select(i => i.Select(j => j.LoadMap()).ToList()).ToList();
 
-			int width = boards.Max(i => i.Sum(j => j.Item1.Width) - i.Count + 1);
-			int height = boards.Sum(i => i.Max(j => j.Item1.Height)) - Boards.Count + 1;
+			var width = boards.Max(i => i.Sum(j => j.Item1.Width) - i.Count + 1);
+			var height = boards.Sum(i => i.Max(j => j.Item1.Height)) - Boards.Count + 1;
 
-			Map map = new Map(width, height, Environment, IdGenerator);
+			var map = new Map(width, height, Environment, IdGenerator);
 
 			int rowY = 0;
 			foreach (List<Tuple<Map, bool>> mapRow in boards)

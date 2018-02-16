@@ -20,7 +20,7 @@ namespace PanzerBlitz
 
 		public BoardConfiguration(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			BoardPath = (string)attributes[(int)Attribute.BOARD_PATH];
 			Invert = (bool)attributes[(int)Attribute.INVERT];
@@ -37,8 +37,8 @@ namespace PanzerBlitz
 
 		public Tuple<Map, bool> LoadMap()
 		{
-			FileStream f = FileUtils.GetStream(BoardPath, FileMode.Open, 1000);
-			Map m = new Map(
+			var f = FileUtils.GetStream(BoardPath, FileMode.Open, 1000);
+			var m = new Map(
 				new SerializationInputStream(
 					new GZipStream(f, CompressionMode.Decompress)), null, new IdGenerator());
 			f.Close();

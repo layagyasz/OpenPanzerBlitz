@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface.Items;
+﻿using Cardamom.Interface.Items;
 
 using SFML.Graphics;
 
@@ -8,9 +6,9 @@ namespace PanzerBlitz
 {
 	public class MatchEndArmyRow : SingleColumnTable
 	{
-		FactionView _FactionView;
+		readonly FactionView _FactionView;
 
-		public MatchEndArmyRow(Match Match, Army Army, FactionRenderer FactionRenderer)
+		public MatchEndArmyRow(Army Army, FactionRenderer FactionRenderer)
 			: base("match-end-army-row")
 		{
 			_FactionView = new FactionView(Army.Configuration.Faction, FactionRenderer, 128) { Position = LeftPadding };

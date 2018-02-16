@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 using SFML.Graphics;
 
@@ -13,8 +11,8 @@ namespace PanzerBlitz
 		public readonly string OverrideDisplayName;
 		public readonly Color OverrideColor;
 
-		string _RootPath;
-		string _ImagePath;
+		readonly string _RootPath;
+		readonly string _ImagePath;
 
 		public string ImagePath
 		{
@@ -35,7 +33,7 @@ namespace PanzerBlitz
 
 		public UnitRenderDetails(ParseBlock Block, string Path)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			OverrideDisplayName = (string)attributes[(int)Attribute.OVERRIDE_DISPLAY_NAME];
 			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);

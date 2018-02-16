@@ -28,9 +28,9 @@ namespace PanzerBlitz
 				bool didAnything = false;
 				while (!(_Orders.Peek() is NextPhaseOrder))
 				{
-					Order o = _Orders.Dequeue();
+					var o = _Orders.Dequeue();
 					_Match.ExecuteOrder(o);
-					if (!(o is ResetOrder)) didAnything = true;
+					didAnything |= !(o is ResetOrder);
 				}
 				if (didAnything) Thread.Sleep(WaitMillis(Turn.TurnInfo.TurnComponent));
 				_Match.ExecuteOrder(_Orders.Dequeue());
@@ -50,8 +50,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void Unhook()
-		{
-		}
+		public void Unhook() { }
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -19,7 +18,8 @@ namespace PanzerBlitz
 
 		public TileHasUnit(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
 		}
 

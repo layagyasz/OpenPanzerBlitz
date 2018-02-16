@@ -12,7 +12,7 @@ namespace PanzerBlitz
 	{
 		Dictionary<Unit, UnitView> _UnitViews = new Dictionary<Unit, UnitView>();
 
-		List<KeyValuePair<Tile, StackView>> _Stacks = new List<KeyValuePair<Tile, StackView>>();
+		readonly List<KeyValuePair<Tile, StackView>> _Stacks = new List<KeyValuePair<Tile, StackView>>();
 
 		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
@@ -28,7 +28,7 @@ namespace PanzerBlitz
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
 
-			Action<object, EventArgs> updateHandler = _EventBuffer.Hook(UpdateStack);
+			var updateHandler = _EventBuffer.Hook(UpdateStack);
 			UnitView.Unit.OnLoad += updateHandler.Invoke;
 			UnitView.Unit.OnUnload += updateHandler.Invoke;
 			UnitView.Unit.OnMove += _EventBuffer.Hook((s, e) => MoveUnit(s, (MovementEventArgs)e)).Invoke;
@@ -50,7 +50,7 @@ namespace PanzerBlitz
 			UnitView view = _UnitViews[Unit];
 			view.Move(E);
 
-			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
+			var from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
 			StackView toStack = _Stacks.FirstOrDefault(i => i.Key == tile).Value;
 
@@ -75,7 +75,7 @@ namespace PanzerBlitz
 
 		void RemoveUnit(Unit Unit)
 		{
-			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
+			var from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
 			if (fromStack != null)
 			{
@@ -91,7 +91,7 @@ namespace PanzerBlitz
 
 		void UpdateStack(Unit Unit)
 		{
-			KeyValuePair<Tile, StackView> from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
+			var from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
 			if (fromStack != null) fromStack.Sort();
 		}

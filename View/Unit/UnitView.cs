@@ -125,7 +125,7 @@ namespace PanzerBlitz
 			if (Reactive)
 			{
 				Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
-				RenderStates r = new RenderStates(Transform);
+				var r = new RenderStates(Transform);
 
 				if (Unit.Moved || Unit.Fired || (Unit.Interaction != null && Unit.Interaction.Master == Unit))
 					Transform.Scale(1 / 64f, 1 / 64f);

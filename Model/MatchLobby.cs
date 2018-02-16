@@ -55,7 +55,7 @@ namespace PanzerBlitz
 
 		public bool ApplyAction(LobbyAction Action)
 		{
-			bool r = Action.Apply(this);
+			var r = Action.Apply(this);
 			if (r && OnActionApplied != null) OnActionApplied(this, new ValuedEventArgs<LobbyAction>(Action));
 			return r;
 		}
@@ -118,7 +118,7 @@ namespace PanzerBlitz
 			// All players are in the ready state.
 			if (!_PlayerReady.Values.All(i => i)) return false;
 
-			List<ArmyConfiguration> pickedArmies = _PlayerArmies.Values.Where(i => i != null).ToList();
+			var pickedArmies = _PlayerArmies.Values.Where(i => i != null).ToList();
 			// All players have picked a unique army.
 			if (pickedArmies.Count != pickedArmies.Distinct().Count()) return false;
 			// All armies are picked.

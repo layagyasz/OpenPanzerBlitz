@@ -69,6 +69,12 @@ namespace PanzerBlitz
 			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
 				return OrderInvalidReason.TARGET_TEAM;
 			if (Position == null) return OrderInvalidReason.ILLEGAL;
+			if (Configuration.MustBeAttackedAlone())
+			{
+				if (Position.Units.Any(
+					i => i != this && i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
+					return OrderInvalidReason.TARGET_COVERED;
+			}
 			if (Configuration.UnitClass == UnitClass.FORT)
 			{
 				if (Position.Units.Any(
@@ -144,7 +150,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
 		{
-			OrderInvalidReason r = CanAttack(AttackMethod);
+			var r = CanAttack(AttackMethod);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
@@ -210,10 +216,10 @@ namespace PanzerBlitz
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
-			if (Tile == Position) return;
+			if (Tile == Position && (Path == null || Path.Count < 2)) return;
 			foreach (Tile t in Path.Nodes) t.Control(this);
 
-			float movement = (float)Path.Distance;
+			var movement = (float)Path.Distance;
 			RemainingMovement -= movement;
 			MovedMoreThanOneTile = Path.Count > 2 || Moved;
 			Moved = true;
@@ -262,7 +268,7 @@ namespace PanzerBlitz
 			if (Passenger == null) return OrderInvalidReason.UNIT_NO_PASSENGER;
 			if (Position != null)
 			{
-				OrderInvalidReason r = Passenger.CanEnter(Position);
+				var r = Passenger.CanEnter(Position);
 				if (r != OrderInvalidReason.NONE) return r;
 
 				if (Position.GetStackSize() + Passenger.Configuration.GetStackSize()
@@ -280,11 +286,6 @@ namespace PanzerBlitz
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			if (!Configuration.CanClearMines) return OrderInvalidReason.UNIT_NO_ENGINEER;
 			return OrderInvalidReason.NONE;
-		}
-
-		public bool IsSolitary()
-		{
-			return Position.Units.Count() == 1 || Position.Units.All(i => i == this || i == Passenger);
 		}
 
 		public void Dismount(bool UseMovement)
@@ -388,7 +389,7 @@ namespace PanzerBlitz
 			if (Position == null) return null;
 			if (CanMove(Combat) != OrderInvalidReason.NONE) return Enumerable.Empty<Tuple<Tile, Tile, double>>();
 
-			IEnumerable<Tuple<Tile, Tile, double>> adjacent =
+			var adjacent =
 				Position.NeighborTiles
 		   			.Where(i => i != null && Position.Rules.CanMove(this, i, !Combat, false))
 					.Select(i => new Tuple<Tile, Tile, double>(
@@ -396,7 +397,7 @@ namespace PanzerBlitz
 			if (Combat && Configuration.CanCloseAssault)
 				return adjacent;
 
-			IEnumerable<Tuple<Tile, Tile, double>> fullMovement = new Field<Tile>(
+			var fullMovement = new Field<Tile>(
 				Position,
 				RemainingMovement,
 				(i, j) => i.Rules.GetMoveCost(this, j, !Combat).Cost)

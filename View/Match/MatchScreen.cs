@@ -23,9 +23,9 @@ namespace PanzerBlitz
 
 		VictoryConditionDisplay _VictoryConditionDisplay = new VictoryConditionDisplay();
 		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
-		StackLayer _StackLayer = new StackLayer();
-		Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
-		TableRow _TurnCounter = new TableRow("overlay-turn-counter");
+		readonly StackLayer _StackLayer = new StackLayer();
+		readonly Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
+		readonly TableRow _TurnCounter = new TableRow("overlay-turn-counter");
 
 		public IEnumerable<UnitView> UnitViews
 		{
@@ -80,7 +80,7 @@ namespace PanzerBlitz
 
 		public void AddUnit(Unit Unit)
 		{
-			UnitView unitView = new UnitView(Unit, UnitRenderer, .625f, true);
+			var unitView = new UnitView(Unit, UnitRenderer, .625f, true);
 			_StackLayer.AddUnitView(unitView);
 			if (OnUnitAdded != null) OnUnitAdded(this, new ValuedEventArgs<UnitView>(unitView));
 		}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -13,7 +12,7 @@ namespace PanzerBlitz
 	{
 		static readonly float STEP = .25f;
 
-		List<UnitView> _UnitViews;
+		readonly List<UnitView> _UnitViews;
 
 		public IEnumerable<Unit> Units
 		{
@@ -59,7 +58,7 @@ namespace PanzerBlitz
 
 		public IEnumerable<StackView> Split()
 		{
-			IEnumerable<StackView> r = _UnitViews.Skip(1).Select(i => new StackView(Enumerable.Repeat(i, 1)));
+			var r = _UnitViews.Skip(1).Select(i => new StackView(Enumerable.Repeat(i, 1)));
 			_UnitViews.RemoveRange(1, _UnitViews.Count - 1);
 			return r;
 		}

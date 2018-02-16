@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -12,8 +10,8 @@ namespace PanzerBlitz
 		public readonly Faction Faction;
 		public readonly float Scale;
 
-		Texture _Texture;
-		Vertex[] _Vertices;
+		readonly Texture _Texture;
+		readonly Vertex[] _Vertices;
 
 		public override Vector2f Size
 		{
@@ -48,7 +46,7 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 			Transform.Scale(Scale, Scale);
-			RenderStates r = new RenderStates(_Texture);
+			var r = new RenderStates(_Texture);
 			r.Transform = Transform;
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);
 		}

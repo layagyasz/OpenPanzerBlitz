@@ -43,7 +43,7 @@ namespace PanzerBlitz
 		Highlight _Highlight;
 		bool[] _HighlightToggles = new bool[Enum.GetValues(typeof(HighlightToggle)).Length];
 
-		KeyController _KeyController;
+		readonly KeyController _KeyController;
 		EventBuffer<ValuedEventArgs<UnitView>> _NewUnitBuffer;
 
 		public TurnInfo CurrentTurn
@@ -79,7 +79,7 @@ namespace PanzerBlitz
 			_MatchScreen.OnUnitAdded += _NewUnitBuffer.Hook(AddUnit).Invoke;
 			_MatchScreen.OnPulse += (sender, e) => _NewUnitBuffer.DispatchEvents();
 
-			_Controllers = new Dictionary<TurnComponent, Subcontroller>()
+			_Controllers = new Dictionary<TurnComponent, Subcontroller>
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(this) },
 				{ TurnComponent.ATTACK, new AttackController(this) },
@@ -159,7 +159,7 @@ namespace PanzerBlitz
 
 		public bool ExecuteOrderAndAlert(Order Order)
 		{
-			OrderInvalidReason r = Match.ExecuteOrder(Order);
+			var r = Match.ExecuteOrder(Order);
 			if (r != OrderInvalidReason.NONE) Alert(r);
 			return r == OrderInvalidReason.NONE;
 		}

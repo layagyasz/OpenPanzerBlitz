@@ -15,13 +15,13 @@ namespace PanzerBlitz
 		public EventHandler<ValuedEventArgs<MapRegion>> OnDeleteMapRegion;
 		public EventHandler<ValuedEventArgs<MapRegion>> OnMapRegionSelected;
 
-		Select<Pod> _ModeSelect = new Select<Pod>("select");
+		readonly Select<Pod> _ModeSelect = new Select<Pod>("select");
 
-		Container<Pod> _TileBasePage = new Container<Pod>();
-		Container<Pod> _EdgePage = new Container<Pod>();
-		Container<Pod> _PathOverlayPage = new Container<Pod>();
-		Container<Pod> _ElevationPage = new Container<Pod>();
-		Container<Pod> _MapRegionPage = new Container<Pod>();
+		readonly Container<Pod> _TileBasePage = new Container<Pod>();
+		readonly Container<Pod> _EdgePage = new Container<Pod>();
+		readonly Container<Pod> _PathOverlayPage = new Container<Pod>();
+		readonly Container<Pod> _ElevationPage = new Container<Pod>();
+		readonly Container<Pod> _MapRegionPage = new Container<Pod>();
 
 		Select<TileBase> _TileBaseSelect = new Select<TileBase>("select");
 		Select<TileEdge> _EdgeSelect = new Select<TileEdge>("select");
@@ -62,7 +62,7 @@ namespace PanzerBlitz
 					Value = _MapRegionPage
 				});
 
-			Button header = new Button("edit-header-1") { DisplayedString = "Edit" };
+			var header = new Button("edit-header-1") { DisplayedString = "Edit" };
 			_ModeSelect.Position = new Vector2f(0, header.Size.Y);
 			_TileBaseSelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
 			_PathOverlaySelect.Position = new Vector2f(0, _ModeSelect.Position.Y + _ModeSelect.Size.Y + 2);
@@ -135,7 +135,7 @@ namespace PanzerBlitz
 
 		void PaneChange(object Sender, EventArgs E)
 		{
-			Container<Pod> select = (Container<Pod>)_ModeSelect.Value.Value;
+			var select = (Container<Pod>)_ModeSelect.Value.Value;
 
 			_TileBasePage.Visible = false;
 			_EdgePage.Visible = false;
@@ -165,7 +165,7 @@ namespace PanzerBlitz
 		{
 			if (_ModeSelect.Value.Value == _EdgePage)
 			{
-				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
+				var index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
 				Tile.SetEdge(index, _EdgeSelect.Value.Value);
 			}
 			else if (_ModeSelect.Value.Value == _TileBasePage)
@@ -174,7 +174,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _PathOverlayPage)
 			{
-				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
+				var index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
 				Tile.SetPathOverlay(index, _PathOverlaySelect.Value.Value);
 			}
 			else if (_ModeSelect.Value.Value == _ElevationPage)
@@ -199,7 +199,7 @@ namespace PanzerBlitz
 		{
 			if (_ModeSelect.Value.Value == _EdgePage)
 			{
-				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
+				var index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
 				Tile.SetEdge(index, TileEdge.NONE);
 			}
 			else if (_ModeSelect.Value.Value == _TileBasePage)
@@ -208,7 +208,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _PathOverlayPage)
 			{
-				int index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
+				var index = Enumerable.Range(0, 6).ArgMax(i => -Tile.Bounds[i].DistanceSquared(Point));
 				Tile.SetPathOverlay(index, TilePathOverlay.NONE);
 			}
 			else if (_ModeSelect.Value.Value == _ElevationPage)

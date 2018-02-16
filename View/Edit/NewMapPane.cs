@@ -12,13 +12,13 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnCancel;
 		public EventHandler<ValuedEventArgs<MapConfiguration>> OnCreate;
 
-		SingleColumnTable _Display = new SingleColumnTable("new-map-display");
-		TextInput _HeightInput = new TextInput("new-map-text-input");
-		TextInput _WidthInput = new TextInput("new-map-text-input");
-		Checkbox _GenerateRandomCheckbox = new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
-		Button _Error = new Button("new-map-error");
-		Button _CancelButton = new Button("small-button") { DisplayedString = "Cancel" };
-		Button _CreateButton = new Button("small-button") { DisplayedString = "Create" };
+		readonly SingleColumnTable _Display = new SingleColumnTable("new-map-display");
+		readonly TextInput _HeightInput = new TextInput("new-map-text-input");
+		readonly TextInput _WidthInput = new TextInput("new-map-text-input");
+		readonly Checkbox _GenerateRandomCheckbox = new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
+		readonly Button _Error = new Button("new-map-error");
+		readonly Button _CancelButton = new Button("small-button") { DisplayedString = "Cancel" };
+		readonly Button _CreateButton = new Button("small-button") { DisplayedString = "Create" };
 
 		public NewMapPane()
 			: base("new-map-pane")
@@ -62,8 +62,8 @@ namespace PanzerBlitz
 		{
 			try
 			{
-				int height = Convert.ToInt32(_HeightInput.Value);
-				int width = Convert.ToInt32(_WidthInput.Value);
+				var height = Convert.ToInt32(_HeightInput.Value);
+				var width = Convert.ToInt32(_WidthInput.Value);
 				if (height < 1 || width < 1) throw new FormatException();
 
 				MapConfiguration configuration = null;

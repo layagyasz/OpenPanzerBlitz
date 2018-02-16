@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Network;
 using Cardamom.Network.Responses;
@@ -23,7 +22,7 @@ namespace PanzerBlitz
 			if (Request.Action is AddPlayerAction)
 			{
 				if (PlayerConnections.ContainsValue(Connection)) return new BooleanResponse(false);
-				BooleanResponse r = (BooleanResponse)base.ApplyLobbyAction(Request, Connection);
+				var r = (BooleanResponse)base.ApplyLobbyAction(Request, Connection);
 				if (r.Value) PlayerConnections.Add(Request.Action.Player, Connection);
 				return r;
 			}

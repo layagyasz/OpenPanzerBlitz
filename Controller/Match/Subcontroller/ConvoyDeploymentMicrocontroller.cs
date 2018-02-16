@@ -55,7 +55,7 @@ namespace PanzerBlitz
 
 		public override bool Finish()
 		{
-			ConvoyOrderDeployOrder order = new ConvoyOrderDeployOrder(_Deployment, _DeploymentPage.GetConvoyOrder());
+			var order = new ConvoyOrderDeployOrder(_Deployment, _DeploymentPage.GetConvoyOrder());
 			if (!_Controller.ExecuteOrderAndAlert(order))
 			{
 				_Controller.Alert(order.Validate());
@@ -73,7 +73,7 @@ namespace PanzerBlitz
 		public override void HandleTileLeftClick(Tile Tile)
 		{
 			Clear();
-			EntryTileDeployOrder o = new EntryTileDeployOrder(_Deployment, Tile);
+			var o = new EntryTileDeployOrder(_Deployment, Tile);
 			if (_Controller.ExecuteOrderAndAlert(o)) HighlightDeploymentArea(null, EventArgs.Empty);
 		}
 
@@ -100,12 +100,12 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedUnit != null)
 			{
-				IEnumerable<Unit> units =
+				var units =
 					Deployment.Units.Where(i => _DeploymentPage.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
 				if (units.Count() > 0)
 				{
 					Clear();
-					SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", units); ;
+					var pane = new SelectPane<Unit>("Load Unit", units);
 					pane.OnItemSelected += LoadUnit;
 					_LoadUnitPane = pane;
 					_Controller.AddPane(_LoadUnitPane);
@@ -138,7 +138,7 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedUnit != null)
 			{
-				LoadOrder order = new LoadOrder(_DeploymentPage.SelectedUnit, Unit, false);
+				var order = new LoadOrder(_DeploymentPage.SelectedUnit, Unit, false);
 				if (!_Controller.ExecuteOrderAndAlert(order))
 					_Controller.Alert(order.Validate());
 			}
@@ -149,7 +149,7 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedUnit != null)
 			{
-				UnloadOrder order = new UnloadOrder(_DeploymentPage.SelectedUnit, false);
+				var order = new UnloadOrder(_DeploymentPage.SelectedUnit, false);
 				if (!_Controller.ExecuteOrderAndAlert(order)) _Controller.Alert(order.Validate().ToString());
 			}
 		}

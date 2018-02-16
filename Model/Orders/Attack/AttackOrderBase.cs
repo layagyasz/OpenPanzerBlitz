@@ -37,7 +37,7 @@ namespace PanzerBlitz
 			Target = AttackTarget.ALL;
 		}
 
-		public AttackOrderBase(SerializationInputStream Stream, List<GameObject> Objects)
+		protected AttackOrderBase(SerializationInputStream Stream, List<GameObject> Objects)
 			: this(
 				(Army)Objects[Stream.ReadInt32()],
 				(Tile)Objects[Stream.ReadInt32()])
@@ -89,7 +89,7 @@ namespace PanzerBlitz
 
 			if (Target == AttackTarget.ALL)
 			{
-				List<Unit> defenders =
+				var defenders =
 					TargetTile.Units.Where(
 						i => i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE).ToList();
 				if (defenders.Count == 0) return;
@@ -103,7 +103,7 @@ namespace PanzerBlitz
 			}
 			else if (Target == AttackTarget.WEAKEST)
 			{
-				List<Unit> defenders =
+				var defenders =
 					TargetTile.Units.Where(
 						i => i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE).ToList();
 				if (defenders.Count == 0) return;
@@ -143,7 +143,7 @@ namespace PanzerBlitz
 			if (Army.HasAttackedTile(TargetTile)) return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
 			foreach (SingleAttackOrder order in _Attackers)
 			{
-				OrderInvalidReason r = order.Validate();
+				var r = order.Validate();
 				if (r != OrderInvalidReason.NONE) return r;
 			}
 			if (TargetTile.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE)

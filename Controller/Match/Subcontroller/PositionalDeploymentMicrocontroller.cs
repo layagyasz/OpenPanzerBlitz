@@ -28,7 +28,7 @@ namespace PanzerBlitz
 
 		public override DeploymentPage MakePage(DeploymentPane Pane, UnitConfigurationRenderer Renderer)
 		{
-			_DeploymentPage = new PositionalDeploymentPage(_Deployment, Renderer, Pane);
+			_DeploymentPage = new PositionalDeploymentPage(_Deployment, Renderer);
 			_DeploymentPage.OnSelectedStack += HighlightDeploymentArea;
 			return _DeploymentPage;
 		}
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedStack != null)
 			{
-				Unit unit = _DeploymentPage.Peek();
+				var unit = _DeploymentPage.Peek();
 				if (_Controller.ExecuteOrderAndAlert(new PositionalDeployOrder(unit, Tile)))
 				{
 					_Controller.SelectUnit(unit);
@@ -73,12 +73,13 @@ namespace PanzerBlitz
 
 		public override void HandleKeyPress(Keyboard.Key Key)
 		{
-			// Load/Unload
-			if (Key == Keyboard.Key.L) LoadUnit();
-			else if (Key == Keyboard.Key.U) UnloadUnit();
-			// Mount/Dismount
-			else if (Key == Keyboard.Key.M) Mount();
-			else if (Key == Keyboard.Key.D) Dismount();
+			switch (Key)
+			{
+				case Keyboard.Key.L: LoadUnit(); break;
+				case Keyboard.Key.U: UnloadUnit(); break;
+				case Keyboard.Key.M: Mount(); break;
+				case Keyboard.Key.D: Dismount(); break;
+			}
 		}
 
 		void HighlightDeploymentArea(object Sender, EventArgs E)

@@ -30,7 +30,7 @@ namespace PanzerBlitz
 		{
 			foreach (Unit u in Units)
 			{
-				List<Tile> validTiles = Army.Match.Map.TilesEnumerable.Where(
+				var validTiles = Army.Match.Map.TilesEnumerable.Where(
 					i => Validate(u, i) == OrderInvalidReason.NONE).ToList();
 				if (validTiles.Count == 1) Army.Match.ExecuteOrder(new PositionalDeployOrder(u, validTiles.First()));
 				if (validTiles.Count == 0) throw new Exception("No valid entry tiles for PositionalDeployment.");
@@ -45,7 +45,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)
 		{
-			OrderInvalidReason v = base.Validate(Unit, Tile);
+			var v = base.Validate(Unit, Tile);
 			if (v != OrderInvalidReason.NONE) return v;
 
 			if (Tile != null)

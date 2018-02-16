@@ -84,7 +84,7 @@ namespace PanzerBlitz
 			Stream.Write(Configuration);
 		}
 
-		private CollisionPolygon CalculateBounds()
+		CollisionPolygon CalculateBounds()
 		{
 			Vector2f c = Center;
 			return new CollisionPolygon(
@@ -128,8 +128,8 @@ namespace PanzerBlitz
 					&& NeighborTiles[i].Configuration.GetPathOverlay((i + 3) % 6) == TilePathOverlay.NONE)
 				{
 					// Find other tiles disconnected path.
-					TilePathOverlay p = Configuration.GetPathOverlay(i);
-					Tuple<int, int> otherPath = GetDisconntedNeighbor(p);
+					var p = Configuration.GetPathOverlay(i);
+					var otherPath = GetDisconntedNeighbor(p);
 					// Connect them.
 					if (otherPath != null)
 					{
@@ -219,13 +219,17 @@ namespace PanzerBlitz
 
 		public BlockType GetUnitBlockType()
 		{
+			var blockType = BlockType.NONE;
+			var found = false;
 			foreach (Unit u in _Units)
 			{
-				BlockType t = u.Configuration.GetBlockType();
-				if (t == BlockType.NONE || t == BlockType.HARD_BLOCK || t == BlockType.SOFT_BLOCK) return t;
+				if (!found || u.Configuration.OverridesBlockType())
+				{
+					found = true;
+					blockType = u.Configuration.GetBlockType();
+				}
 			}
-			if (_Units.Count > 0) return BlockType.STANDARD;
-			return BlockType.NONE;
+			return blockType;
 		}
 
 		public Tile GetOppositeNeighbor(Tile Neighbor)

@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		public readonly TileRuleSet TileRuleSet;
 		public readonly float MovementMultiplier;
 
-		bool[] _RestrictRoadMovement = new bool[Enum.GetValues(typeof(UnitClass)).Length];
+		readonly bool[] _RestrictRoadMovement = new bool[Enum.GetValues(typeof(UnitClass)).Length];
 
 		public Environment(
 			string UniqueKey,
@@ -39,7 +39,7 @@ namespace PanzerBlitz
 
 		public Environment(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UniqueKey = Block.Name;
 			TileRuleSet = (TileRuleSet)attributes[(int)Attribute.TILE_RULE_SET];

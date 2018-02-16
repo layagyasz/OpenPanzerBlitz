@@ -11,10 +11,10 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<string>> OnValueEntered;
 
-		SingleColumnTable _Display = new SingleColumnTable("text-pane-display");
-		TextInput _IPInput = new TextInput("text-pane-input");
-		Button _Error = new Button("text-pane-error");
-		Button _Button = new Button("small-button");
+		readonly SingleColumnTable _Display = new SingleColumnTable("text-pane-display");
+		readonly TextInput _IPInput = new TextInput("text-pane-input");
+		readonly Button _Error = new Button("text-pane-error");
+		readonly Button _Button = new Button("small-button");
 
 		public TextPane(string Title, string Subtitle, string ButtonString)
 			: base("text-pane")

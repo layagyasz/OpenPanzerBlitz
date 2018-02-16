@@ -8,9 +8,9 @@ namespace PanzerBlitz
 {
 	public class RemoteMatchAdapter : MatchAdapter
 	{
-		Match _LocalMatch;
-		TCPClient _Client;
-		OrderSerializer _Serializer;
+		readonly Match _LocalMatch;
+		readonly TCPClient _Client;
+		readonly OrderSerializer _Serializer;
 
 		public RemoteMatchAdapter(Match LocalMatch, TCPClient Client, OrderSerializer Serializer)
 		{

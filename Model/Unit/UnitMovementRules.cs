@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -45,7 +43,7 @@ namespace PanzerBlitz
 		{
 			UniqueKey = Block.Name;
 
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], default(MovementRule));
 			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], default(MovementRule));

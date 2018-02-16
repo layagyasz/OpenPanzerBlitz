@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -18,7 +17,8 @@ namespace PanzerBlitz
 
 		public UnitHasEvacuated(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Direction = (Direction)attributes[(int)Attribute.DIRECTION];
 		}
 

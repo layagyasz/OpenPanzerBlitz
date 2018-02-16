@@ -23,7 +23,7 @@ namespace PanzerBlitz
 
 		public Coordinate(ParseBlock Block)
 		{
-			string[] attributes = Block.String.Split(',');
+			var attributes = Block.String.Split(',');
 			X = Convert.ToInt32(attributes[0]);
 			Y = Convert.ToInt32(attributes[1]);
 		}
@@ -39,7 +39,7 @@ namespace PanzerBlitz
 			if (obj == null) return false;
 			if (obj is Coordinate)
 			{
-				Coordinate o = (Coordinate)obj;
+				var o = (Coordinate)obj;
 				return X == o.X && Y == o.Y;
 			}
 			return false;

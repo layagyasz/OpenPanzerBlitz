@@ -11,9 +11,11 @@ namespace PanzerBlitz
 	public class MovementOrder : Order
 	{
 		public readonly Unit Unit;
+		public readonly Tile To;
 		public readonly bool Combat;
 		public readonly bool Halt;
-		public readonly Path<Tile> Path;
+
+		public Path<Tile> Path;
 
 		public Army Army
 		{
@@ -28,24 +30,21 @@ namespace PanzerBlitz
 			this.Unit = Unit;
 			this.Combat = Combat;
 			this.Halt = Halt;
-			this.Path = Unit.GetPathTo(To, Combat);
+
 		}
 
 		public MovementOrder(SerializationInputStream Stream, List<GameObject> Objects)
 		{
 			Unit = (Unit)Objects[Stream.ReadInt32()];
-			Tile from = (Tile)Objects[Stream.ReadInt32()];
-			Tile to = (Tile)Objects[Stream.ReadInt32()];
+			To = (Tile)Objects[Stream.ReadInt32()];
 			Combat = Stream.ReadBoolean();
 			Halt = Stream.ReadBoolean();
-			Path = Unit.GetPathTo(from, to, Combat);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Unit.Id);
-			Stream.Write(Path.Nodes.First().Id);
-			Stream.Write(Path.Destination.Id);
+			Stream.Write(To.Id);
 			Stream.Write(Combat);
 			Stream.Write(Halt);
 		}
@@ -65,10 +64,12 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason Validate()
 		{
+			Path = Unit.GetPathTo(To, Combat);
+
 			if (Unit.CanMove(Combat) != OrderInvalidReason.NONE) return OrderInvalidReason.UNIT_NO_MOVE;
 			if (Unit.Position != Path.Nodes.First()) return OrderInvalidReason.ILLEGAL;
 
-			OrderInvalidReason noEnter = Unit.CanEnter(Path.Destination, true);
+			var noEnter = Unit.CanEnter(Path.Destination, true);
 			if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
 			for (int i = 0; i < Path.Count - 1; ++i)
@@ -76,7 +77,7 @@ namespace PanzerBlitz
 				noEnter = Unit.CanEnter(Path[i + 1]);
 				if (noEnter != OrderInvalidReason.NONE) return noEnter;
 
-				MovementCost d = Path[i].Rules.GetMoveCost(Unit, Path[i + 1], !Combat);
+				var d = Path[i].Rules.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (d.UnableReason != OrderInvalidReason.NONE) return d.UnableReason;
 			}
 			if (Path.Distance > Unit.RemainingMovement)
@@ -111,11 +112,12 @@ namespace PanzerBlitz
 		public override string ToString()
 		{
 			return string.Format(
-				"[MovementOrder: Unit={0}, From={1}, To={2}, Distance={3}]",
+				"[MovementOrder: Unit={0}, From={1}, To={2}, Distance={3}, Path={4}]",
 				Unit,
 				Path.Nodes.First(),
 				Path.Destination,
-				Path.Distance);
+				Path.Distance,
+				string.Join(", ", Path.Nodes.Select(i => i.Coordinate.ToString())));
 		}
 	}
 }

@@ -10,10 +10,11 @@ namespace PanzerBlitz
 {
 	public class MovementDolly
 	{
-		CardinalSpline _Spline;
+		readonly CardinalSpline _Spline;
+		readonly double _SpeedRecipricol;
+		readonly Vector2f _End;
+
 		double _Traveled;
-		double _SpeedRecipricol;
-		Vector2f _End;
 
 		public bool Done
 		{

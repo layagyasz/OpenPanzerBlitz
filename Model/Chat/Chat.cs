@@ -9,7 +9,7 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<ChatAction>> OnActionApplied;
 
-		List<ChatMessage> _Messages = new List<ChatMessage>();
+		readonly List<ChatMessage> _Messages = new List<ChatMessage>();
 
 		public IEnumerable<ChatMessage> Messages
 		{
@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		public bool ApplyAction(ChatAction Action)
 		{
-			bool r = Action.Apply(this);
+			var r = Action.Apply(this);
 			if (r && OnActionApplied != null) OnActionApplied(this, new ValuedEventArgs<ChatAction>(Action));
 			return r;
 		}

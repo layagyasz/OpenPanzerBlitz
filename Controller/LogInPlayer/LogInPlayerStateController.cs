@@ -16,7 +16,7 @@ namespace PanzerBlitz
 		{
 			_Context = ProgramStateContext;
 
-			LogInPlayerScreen screen = new LogInPlayerScreen(ProgramContext.ScreenResolution);
+			var screen = new LogInPlayerScreen(ProgramContext.ScreenResolution);
 			_Controller = new LogInPlayerController(screen);
 			_Controller.OnLogIn += HandleLogIn;
 			screen.OnRegister += HandleRegister;

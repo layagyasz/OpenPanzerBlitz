@@ -17,10 +17,10 @@ namespace PanzerBlitz
 	{
 		public readonly float Scale;
 
-		Texture _Texture;
-		Rectangle _Bounds;
-		Vertex[] _ImageVertices;
-		Vertex[] _Vertices;
+		readonly Texture _Texture;
+		readonly Rectangle _Bounds;
+		readonly Vertex[] _ImageVertices;
+		readonly Vertex[] _Vertices;
 
 		public bool Flipped;
 
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 				colors = colors.ToArray();
 				for (int i = 0; i < colors.Length; ++i)
 				{
-					FloatingColor f = new FloatingColor(colors[i]);
+					var f = new FloatingColor(colors[i]);
 					f = f.MakeHSL();
 					f.B = (float)Math.Min(1, f.B + .1);
 					colors[i] = f.MakeRGB().ConvertToColor();
@@ -68,10 +68,10 @@ namespace PanzerBlitz
 			if (c.R == 0 && c.G == 0 && c.B == 0)
 				c = colors.ArgMax(i => new FloatingColor(i).Luminosity());
 
-			Vector2f tl = new Vector2f(-.5f, -.5f);
-			Vector2f tr = new Vector2f(.5f, -.5f);
-			Vector2f br = new Vector2f(.5f, .5f);
-			Vector2f bl = new Vector2f(-.5f, .5f);
+			var tl = new Vector2f(-.5f, -.5f);
+			var tr = new Vector2f(.5f, -.5f);
+			var br = new Vector2f(.5f, .5f);
+			var bl = new Vector2f(-.5f, .5f);
 			_ImageVertices[0] = new Vertex(tl, c, renderInfo.Item2[0]);
 			_ImageVertices[1] = new Vertex(tr, c, renderInfo.Item2[1]);
 			_ImageVertices[2] = new Vertex(br, c, renderInfo.Item2[2]);
@@ -96,7 +96,7 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 			Transform.Scale(Scale, Scale);
-			RenderStates r = new RenderStates();
+			var r = new RenderStates();
 			r.Transform = Transform;
 
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);

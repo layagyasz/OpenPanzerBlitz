@@ -34,7 +34,7 @@ namespace PanzerBlitz
 			if (_Time <= Duration)
 			{
 				_Time += DeltaT;
-				if (_Time > Duration) Visible = false;
+				Visible &= _Time <= Duration;
 			}
 		}
 	}

@@ -20,9 +20,9 @@ namespace PanzerBlitz
 		{
 			this.Player = Player;
 
-			Button header = new Button("match-lobby-player-section-header") { DisplayedString = Player.Name };
-			Select<ArmyConfiguration> select = new Select<ArmyConfiguration>("match-lobby-player-section-select");
-			Checkbox ready = new Checkbox("match-lobby-player-section-checkbox");
+			var header = new Button("match-lobby-player-section-header") { DisplayedString = Player.Name };
+			var select = new Select<ArmyConfiguration>("match-lobby-player-section-select");
+			var ready = new Checkbox("match-lobby-player-section-checkbox");
 
 			select.Add(new SelectionOption<ArmyConfiguration>("match-lobby-player-section-select-option")
 			{

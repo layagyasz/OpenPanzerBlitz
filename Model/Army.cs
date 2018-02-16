@@ -48,7 +48,7 @@ namespace PanzerBlitz
 
 		public ObjectiveSuccessLevel CheckObjectiveSuccessLevel()
 		{
-			ObjectiveSuccessLevel l = Configuration.VictoryCondition.GetMatchResult(this, Match, false);
+			var l = Configuration.VictoryCondition.GetMatchResult(this, Match, false);
 			return l == ObjectiveSuccessLevel.DEFEAT ? ObjectiveSuccessLevel.NONE : l;
 		}
 
@@ -113,7 +113,7 @@ namespace PanzerBlitz
 			foreach (Unit u in Units.Where(
 				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot()))
 			{
-				LineOfSight s = u.GetLineOfSight(Tile);
+				var s = u.GetLineOfSight(Tile);
 				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
 			}
 			return false;
@@ -124,7 +124,7 @@ namespace PanzerBlitz
 			if (!CanSpotTile(Tile)) return false;
 			foreach (Unit u in Units.Where(i => i.Configuration.CanSpotIndirectFire))
 			{
-				LineOfSight s = u.GetLineOfSight(Tile);
+				var s = u.GetLineOfSight(Tile);
 				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
 			}
 			return false;
@@ -166,10 +166,10 @@ namespace PanzerBlitz
 
 		void UnitDestroyed(object Sender, EventArgs E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			if (unit.Configuration.LeavesWreckWhenDestroyed)
 			{
-				Unit wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
+				var wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
 				wreckage.Place(unit.Position);
 			}

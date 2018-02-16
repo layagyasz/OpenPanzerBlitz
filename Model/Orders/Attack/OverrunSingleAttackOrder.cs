@@ -9,7 +9,7 @@ namespace PanzerBlitz
 {
 	public class OverrunSingleAttackOrder : SingleAttackOrder
 	{
-		MovementOrder _InitialMovement;
+		readonly MovementOrder _InitialMovement;
 		Path<Tile> _MovementPath;
 
 		public readonly Tile AttackTile;
@@ -20,7 +20,7 @@ namespace PanzerBlitz
 		{
 			_InitialMovement = InitialMovement;
 			this.AttackTile = AttackTile;
-			ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.Path.Destination);
+			ExitTile = AttackTile.GetOppositeNeighbor(InitialMovement.To);
 		}
 
 		public OverrunSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
@@ -37,7 +37,7 @@ namespace PanzerBlitz
 			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, TreatStackAsArmored, null);
 			return new AttackFactorCalculation(
-				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
+				0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			OrderInvalidReason r = _InitialMovement.Validate();
+			var r = _InitialMovement.Validate();
 			// Unit is not stopping in this tile.  Ignore stack limit.
 			if (r != OrderInvalidReason.NONE && r != OrderInvalidReason.UNIT_STACK_LIMIT)
 				return r;
@@ -61,10 +61,9 @@ namespace PanzerBlitz
 			r = Attacker.CanEnter(AttackTile, false, true);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			MovementCost distance1 = _InitialMovement.Path.Destination.Rules.GetMoveCost(
-				_InitialMovement.Unit, AttackTile, false, true);
-			MovementCost distance2 =
-				AttackTile.Rules.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
+			var distance1 =
+				_InitialMovement.Path.Destination.Rules.GetMoveCost(_InitialMovement.Unit, AttackTile, false, true);
+			var distance2 = AttackTile.Rules.GetMoveCost(_InitialMovement.Unit, ExitTile, false, false);
 			if (distance1.UnableReason != OrderInvalidReason.NONE) return distance1.UnableReason;
 			if (distance2.UnableReason != OrderInvalidReason.NONE) return distance2.UnableReason;
 

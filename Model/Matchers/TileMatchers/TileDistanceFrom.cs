@@ -24,7 +24,7 @@ namespace PanzerBlitz
 
 		public TileDistanceFrom(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Matcher = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
 			Distance = (byte)attributes[(int)Attribute.DISTANCE];

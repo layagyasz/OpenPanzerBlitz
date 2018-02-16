@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -15,7 +14,7 @@ namespace PanzerBlitz
 		public MatchRecord(Match Match, OrderSerializer OrderSerializer)
 		{
 			this.Match = Match;
-			this.OrderSerializer = OrderSerializer == null ? new OrderSerializer(Match) : OrderSerializer;
+			this.OrderSerializer = OrderSerializer ?? new OrderSerializer(Match);
 			Orders = Match.ExecutedOrders.ToList();
 		}
 

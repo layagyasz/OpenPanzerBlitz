@@ -13,14 +13,14 @@ namespace PanzerBlitz
 
 		public TagMatcher(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Tags = (string[])attributes[(int)Attribute.TAGS];
 		}
 
 		public bool Matches(string[] Tags)
 		{
-			return this.Tags.All(i => Tags.Contains(i));
+			return this.Tags.All(Tags.Contains);
 		}
 	}
 }

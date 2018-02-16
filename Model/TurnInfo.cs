@@ -30,7 +30,7 @@ namespace PanzerBlitz
 			if (obj == null) return false;
 			if (obj is TurnInfo)
 			{
-				TurnInfo i = (TurnInfo)obj;
+				var i = (TurnInfo)obj;
 				return Army == i.Army && TurnComponent == i.TurnComponent;
 			}
 			return false;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -19,7 +17,7 @@ namespace PanzerBlitz
 
 		public UnitCount(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
 			Count = (int)attributes[(int)Attribute.COUNT];

@@ -39,18 +39,18 @@ namespace PanzerBlitz
 
 		public MatchContext MakeMatchContext()
 		{
-			Match match = new Match(Lobby.Scenario, IsHost);
-			OrderSerializer serializer = new OrderSerializer(match);
+			var match = new Match(Lobby.Scenario, IsHost);
+			var serializer = new OrderSerializer(match);
 
 			if (IsHost)
 			{
-				LobbyServerRPCHandler currentHandler = (LobbyServerRPCHandler)Server.RPCHandler;
-				Dictionary<Army, TCPConnection> armyConnections = new Dictionary<Army, TCPConnection>();
+				var currentHandler = (LobbyServerRPCHandler)Server.RPCHandler;
+				var armyConnections = new Dictionary<Army, TCPConnection>();
 				foreach (Player p in Lobby.Players)
 				{
 					if (currentHandler.PlayerConnections.ContainsKey(p))
 					{
-						Army a = match.Armies.FirstOrDefault(i => i.Configuration == Lobby.GetPlayerArmy(p));
+						var a = match.Armies.FirstOrDefault(i => i.Configuration == Lobby.GetPlayerArmy(p));
 						armyConnections.Add(a, currentHandler.PlayerConnections[p]);
 					}
 				}
@@ -64,16 +64,13 @@ namespace PanzerBlitz
 					serializer,
 					match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
 			}
-			else
-			{
-				Client.MessageAdapter = new MatchMessageSerializer(serializer);
-				Client.RPCHandler = new MatchRPCHandler(match);
-				return new MatchContext(
-					Client,
-					match,
-					serializer,
-					match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
-			}
+			Client.MessageAdapter = new MatchMessageSerializer(serializer);
+			Client.RPCHandler = new MatchRPCHandler(match);
+			return new MatchContext(
+				Client,
+				match,
+				serializer,
+				match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
 		}
 	}
 }

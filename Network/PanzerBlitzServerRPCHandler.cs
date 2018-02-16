@@ -1,12 +1,10 @@
-﻿using System;
-
-using Cardamom.Network;
+﻿using Cardamom.Network;
 
 namespace PanzerBlitz
 {
 	public class PanzerBlitzServerRPCHandler : RPCHandler
 	{
-		PanzerBlitzServer _Server;
+		readonly PanzerBlitzServer _Server;
 
 		public PanzerBlitzServerRPCHandler(PanzerBlitzServer Server)
 		{

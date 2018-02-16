@@ -9,7 +9,7 @@ namespace PanzerBlitz
 {
 	public class Faction : Serializable
 	{
-		private enum Attribute { NAME, COLORS, STACK_LIMIT, HALF_PRICE_TRUCKS };
+		enum Attribute { NAME, COLORS, STACK_LIMIT, HALF_PRICE_TRUCKS };
 
 		public readonly string UniqueKey;
 		public readonly string Name;
@@ -37,7 +37,8 @@ namespace PanzerBlitz
 
 		public Faction(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			UniqueKey = Block.Name;
 			Name = (string)attributes[(int)Attribute.NAME];
 			Colors = (Color[])attributes[(int)Attribute.COLORS];

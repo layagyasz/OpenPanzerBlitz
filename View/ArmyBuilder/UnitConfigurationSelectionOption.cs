@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
@@ -13,7 +11,7 @@ namespace PanzerBlitz
 		public readonly UnitConfigurationLink UnitConfigurationLink;
 		public readonly UnitConfigurationStackView StackView;
 
-		Button _PointText;
+		readonly Button _PointText;
 
 		public UnitConfigurationSelectionOption(
 			string ClassName,

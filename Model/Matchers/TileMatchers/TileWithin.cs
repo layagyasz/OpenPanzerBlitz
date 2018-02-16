@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Planar;
 using Cardamom.Serialization;
@@ -21,7 +20,8 @@ namespace PanzerBlitz
 
 		public TileWithin(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Zone = (Polygon)attributes[(int)Attribute.ZONE];
 		}
 

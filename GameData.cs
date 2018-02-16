@@ -61,7 +61,7 @@ namespace PanzerBlitz
 								.SelectMany(i => ParseBlock.FromFile(i).Break()))
 				}));
 
-			ParseBlock block = new ParseBlock(new ParseBlock[] {
+			var block = new ParseBlock(new ParseBlock[] {
 				ParseBlock.FromFile(path + "/UnitMovementRules.blk"),
 				ParseBlock.FromFile(path + "/Factions.blk"),
 				ParseBlock.FromFile(path + "/FactionRenderDetails.blk"),
@@ -149,7 +149,7 @@ namespace PanzerBlitz
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<TileRenderer>("tile-renderer", i => new TileRenderer(i));
 
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];
 			TileComponentRules =
 				(Dictionary<string, TileComponentRules>)attributes[(int)Attribute.TILE_COMPONENT_RULES];
@@ -197,7 +197,7 @@ namespace PanzerBlitz
 				{
 					try
 					{
-						SerializationOutputStream stream = new SerializationOutputStream(m);
+						var stream = new SerializationOutputStream(m);
 						stream.Write(s);
 					}
 					catch (Exception e)
@@ -207,8 +207,8 @@ namespace PanzerBlitz
 					m.Seek(0, SeekOrigin.Begin);
 					try
 					{
-						SerializationInputStream stream = new SerializationInputStream(m);
-						Scenario copy = new Scenario(stream);
+						var stream = new SerializationInputStream(m);
+						var copy = new Scenario(stream);
 					}
 					catch (Exception e)
 					{

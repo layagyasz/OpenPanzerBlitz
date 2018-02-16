@@ -1,10 +1,7 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
-using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -14,7 +11,7 @@ namespace PanzerBlitz
 
 		public readonly Unit Unit;
 
-		StackView _StackView = new StackView();
+		readonly StackView _StackView = new StackView();
 
 		public SingularUnitSelectionOption(string ClassName, Unit Unit, UnitConfigurationRenderer Renderer)
 					: base(ClassName)

@@ -82,7 +82,7 @@ namespace PanzerBlitz
 				CombatResult.DESTROY,
 				CombatResult.DESTROY,
 				CombatResult.MISS
-			},
+			}
 		});
 
 		CombatResult[,] _CombatResults;
@@ -100,7 +100,7 @@ namespace PanzerBlitz
 		public double[] GetCombatResultProbabilities(OddsCalculation Odds)
 		{
 			double[] p = new double[Enum.GetValues(typeof(CombatResult)).Length];
-			int oddsIndex = Odds.GetOddsIndex();
+			var oddsIndex = Odds.GetOddsIndex();
 			for (int i = 0; i < 6; ++i)
 			{
 				p[(int)GetCombatResult(Odds, i)] += 1f / 6;

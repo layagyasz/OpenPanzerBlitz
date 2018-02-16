@@ -22,7 +22,8 @@ namespace PanzerBlitz
 
 		public VictoryCondition(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
+
 			Scorers = ((Dictionary<string, object>)attributes[(int)Attribute.OBJECTIVES])
 				.Values.Cast<Objective>().ToList();
 			Triggers = (List<ObjectiveSuccessTrigger>)attributes[(int)Attribute.TRIGGERS];
@@ -43,7 +44,7 @@ namespace PanzerBlitz
 
 		public ObjectiveSuccessLevel GetMatchResult(Army ForArmy, Match Match, bool MatchOver)
 		{
-			Dictionary<Objective, int> cache = new Dictionary<Objective, int>();
+			var cache = new Dictionary<Objective, int>();
 
 			ObjectiveSuccessLevel result = ObjectiveSuccessLevel.DEFEAT;
 			foreach (ObjectiveSuccessTrigger t in Triggers)

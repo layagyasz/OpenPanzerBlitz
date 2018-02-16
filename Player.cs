@@ -1,13 +1,11 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
 	public class Player : Serializable
 	{
-		public readonly int TemporaryId = 0;
-		public readonly int PermanentId = 0;
+		public readonly int TemporaryId;
+		public readonly int PermanentId;
 		public readonly string Name;
 
 		public Player(int Id, string Name, bool IsTemporaryId)
@@ -32,7 +30,7 @@ namespace PanzerBlitz
 			if (obj == null) return false;
 			if (obj is Player)
 			{
-				Player o = (Player)obj;
+				var o = (Player)obj;
 				return TemporaryId == o.TemporaryId && PermanentId == o.PermanentId && Name == o.Name;
 			}
 			return false;

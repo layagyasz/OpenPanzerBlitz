@@ -55,7 +55,7 @@ namespace PanzerBlitz
 
 		public override bool AutomateDeployment()
 		{
-			List<Tile> validTiles = Army.Match.Map.TilesEnumerable.Where(
+			var validTiles = Army.Match.Map.TilesEnumerable.Where(
 				i => Validate(i) == OrderInvalidReason.NONE).ToList();
 			if (validTiles.Count == 1) Army.Match.ExecuteOrder(new EntryTileDeployOrder(this, validTiles.First()));
 			if (validTiles.Count == 0) throw new Exception("No valid entry tiles for ConvoyDeployment.");
@@ -81,7 +81,7 @@ namespace PanzerBlitz
 
 		public override void EnterUnits(bool Vehicle)
 		{
-			Unit unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
+			var unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
 			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
 			{
 				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));
@@ -112,7 +112,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)
 		{
-			OrderInvalidReason r = base.Validate(Unit, Tile);
+			var r = base.Validate(Unit, Tile);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			if (_EntryTile.Units.Count() > 0) return OrderInvalidReason.DEPLOYMENT_RULE;

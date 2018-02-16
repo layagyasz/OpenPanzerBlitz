@@ -29,7 +29,8 @@ namespace PanzerBlitz
 
 		public ObjectiveSuccessTrigger(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			SuccessLevel = (ObjectiveSuccessLevel)attributes[(int)Attribute.SUCCESS_LEVEL];
 			Threshold = Parse.DefaultIfNull(attributes[(int)Attribute.THRESHOLD], 1);
 			Invert = Parse.DefaultIfNull(attributes[(int)Attribute.INVERT], false);

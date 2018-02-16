@@ -43,7 +43,7 @@ namespace PanzerBlitz
 					});
 			_TeamSelect.SetValue(i => i.Value == ArmyBuilder.Parameters.Team);
 
-			Button removeButton = new Button("scenario-builder-army-section-remove-button") { DisplayedString = "X" };
+			var removeButton = new Button("scenario-builder-army-section-remove-button") { DisplayedString = "X" };
 
 			_FactionSelect.OnChange += HandleChange;
 			_PointsInput.OnLeave += HandleChange;
@@ -60,7 +60,7 @@ namespace PanzerBlitz
 		{
 			try
 			{
-				uint points = Convert.ToUInt32(_PointsInput.Value);
+				var points = Convert.ToUInt32(_PointsInput.Value);
 				return points > 0;
 			}
 			catch (Exception e)
@@ -74,7 +74,7 @@ namespace PanzerBlitz
 			ArmyParameters parameters = null;
 			try
 			{
-				uint points = Convert.ToUInt32(_PointsInput.Value);
+				var points = Convert.ToUInt32(_PointsInput.Value);
 				parameters =
 					new ArmyParameters(
 						_FactionSelect.Value.Value, points, _TeamSelect.Value.Value, ArmyBuilder.Parameters.Parameters);

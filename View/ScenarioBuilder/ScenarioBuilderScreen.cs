@@ -38,7 +38,7 @@ namespace PanzerBlitz
 		{
 			this.ScenarioBuilder = ScenarioBuilder;
 
-			Button header = new Button("scenario-builder-header") { DisplayedString = "Custom Scenario" };
+			var header = new Button("scenario-builder-header") { DisplayedString = "Custom Scenario" };
 			_Pane.Add(header);
 			_LeftDisplay.Position = new Vector2f(0, header.Size.Y);
 			_ArmiesTable.Position = new Vector2f(_LeftDisplay.Size.X + 32, header.Size.Y);
@@ -98,7 +98,7 @@ namespace PanzerBlitz
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
-			Button addArmyButton = new Button("scenario-builder-army-section-add-button") { DisplayedString = "+" };
+			var addArmyButton = new Button("scenario-builder-army-section-add-button") { DisplayedString = "+" };
 			addArmyButton.OnClick += HandleArmyAdded;
 			_ArmiesTable.Add(
 				new TableRow("scenario-builder-army-section-header")
@@ -109,7 +109,7 @@ namespace PanzerBlitz
 					addArmyButton
 				});
 
-			Button finishedButton = new Button("large-button") { DisplayedString = "Finished" };
+			var finishedButton = new Button("large-button") { DisplayedString = "Finished" };
 			finishedButton.Position = new Vector2f(0, _Pane.Size.Y - finishedButton.Size.Y - 32);
 			finishedButton.OnClick += HandleFinished;
 
@@ -121,7 +121,7 @@ namespace PanzerBlitz
 
 		public void AddArmyBuilder(ArmyBuilder Builder)
 		{
-			ScenarioBuilderArmySection section = new ScenarioBuilderArmySection(Builder, GameData.Factions.Values);
+			var section = new ScenarioBuilderArmySection(Builder, GameData.Factions.Values);
 			section.OnParametersChanged += HandleArmyParametersChanged;
 			section.OnRemoved += HandleArmyRemoved;
 			_ArmiesTable.Add(section);
@@ -150,8 +150,8 @@ namespace PanzerBlitz
 
 		void MakeSection(string SectionName, GuiItem Input, SingleColumnTable Display)
 		{
-			Button header = new Button("header-2") { DisplayedString = SectionName };
-			GuiContainer<Pod> container = new GuiContainer<Pod>("scenario-builder-parameters-section");
+			var header = new Button("header-2") { DisplayedString = SectionName };
+			var container = new GuiContainer<Pod>("scenario-builder-parameters-section");
 
 			container.Add(Input);
 
@@ -179,13 +179,13 @@ namespace PanzerBlitz
 				|| _TurnsSelect.Value == null)
 				return;
 
-			int width = ValidateIntegerInput(_MapWidthInput.Value);
-			int height = ValidateIntegerInput(_MapHeightInput.Value);
+			var width = ValidateIntegerInput(_MapWidthInput.Value);
+			var height = ValidateIntegerInput(_MapHeightInput.Value);
 
 			if (width == 0 || height == 0)
 				return;
 
-			ScenarioParameters parameters =
+			var parameters =
 				new ScenarioParameters(
 					_YearSelect.Value.Value,
 					_FrontSelect.Value.Value,

@@ -1,7 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
-using Cardamom.Planar;
+﻿using Cardamom.Interface;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -12,7 +9,8 @@ namespace PanzerBlitz
 	{
 		public readonly Tile Tile;
 
-		Vertex[] _BorderVertices;
+		readonly Vertex[] _BorderVertices;
+
 		Vertex[] _Vertices;
 
 		public override Vector2f Size
@@ -59,7 +57,7 @@ namespace PanzerBlitz
 
 		public override void Draw(RenderTarget Target, Transform Transform)
 		{
-			RenderStates r = new RenderStates(Transform);
+			var r = new RenderStates(Transform);
 			Target.Draw(_Vertices, PrimitiveType.Triangles, r);
 			Target.Draw(_BorderVertices, PrimitiveType.LinesStrip, r);
 		}

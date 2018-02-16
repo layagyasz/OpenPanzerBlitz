@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PanzerBlitz
@@ -8,7 +7,7 @@ namespace PanzerBlitz
 	{
 		public readonly ScenarioParameters Parameters;
 
-		List<ArmyBuilder> _Armies = new List<ArmyBuilder>();
+		readonly List<ArmyBuilder> _Armies = new List<ArmyBuilder>();
 
 		public IEnumerable<ArmyBuilder> Armies
 		{

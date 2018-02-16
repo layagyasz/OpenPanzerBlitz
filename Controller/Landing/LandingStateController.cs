@@ -1,7 +1,6 @@
 using System;
 
 using Cardamom.Interface;
-using Cardamom.Network;
 using Cardamom.Utilities;
 
 namespace PanzerBlitz
@@ -12,7 +11,7 @@ namespace PanzerBlitz
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			LandingScreen screen = new LandingScreen(ProgramContext.ScreenResolution);
+			var screen = new LandingScreen(ProgramContext.ScreenResolution);
 			screen.LocalMatchButton.OnClick += HandleLocalMatch;
 			screen.HostMatchButton.OnClick += HandleHostMatch;
 			screen.LocalMatchRecordButton.OnClick += HandleLocalMatchRecord;
@@ -80,7 +79,7 @@ namespace PanzerBlitz
 
 		void HandleStartServer(object Sender, EventArgs E)
 		{
-			ServerContext server = ServerContext.CreateServer(GameData.OnlinePort);
+			var server = ServerContext.CreateServer(GameData.OnlinePort);
 			if (server != null)
 				OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.SERVER, server));
 		}

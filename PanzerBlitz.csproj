@@ -349,6 +349,7 @@
     <Compile Include="Model\Orders\Attack\CloseAssaultAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\MinefieldAttackOrder.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasBridge.cs" />
+    <Compile Include="Aggregators.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

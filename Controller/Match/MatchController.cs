@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace PanzerBlitz
 {
 	public class MatchController
 	{
-		Match _Match;
-		Dictionary<Army, MatchPlayerController> _PlayerControllers;
+		readonly Match _Match;
+		readonly Dictionary<Army, MatchPlayerController> _PlayerControllers;
 
 		public MatchController(
 			Match Match, Dictionary<Army, MatchPlayerController> PlayerControllers)

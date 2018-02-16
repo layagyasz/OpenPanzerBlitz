@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -8,8 +6,8 @@ namespace PanzerBlitz
 	{
 		enum Attribute { IMAGE_PATH }
 
-		string _RootPath;
-		string _ImagePath;
+		readonly string _RootPath;
+		readonly string _ImagePath;
 
 		public string ImagePath
 		{
@@ -21,7 +19,8 @@ namespace PanzerBlitz
 
 		public FactionRenderDetails(ParseBlock Block, string Path)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			_RootPath = Path;
 			_ImagePath = (string)attributes[(int)Attribute.IMAGE_PATH];
 		}

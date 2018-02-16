@@ -27,7 +27,7 @@ namespace PanzerBlitz
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
-			return CompleteReset ? TurnComponent == TurnComponent.RESET : true;
+			return CompleteReset || TurnComponent == TurnComponent.RESET;
 		}
 
 		public OrderInvalidReason Validate()

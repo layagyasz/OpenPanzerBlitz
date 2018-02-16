@@ -48,12 +48,13 @@ namespace PanzerBlitz
 
 		public Scenario(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			Name = (string)attributes[(int)Attribute.NAME];
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
-			byte[] deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
-			byte[] turnOrderIndices = (byte[])attributes[(int)Attribute.TURN_ORDER];
+			var deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
+			var turnOrderIndices = (byte[])attributes[(int)Attribute.TURN_ORDER];
 			Turns = (byte)attributes[(int)Attribute.TURNS];
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();

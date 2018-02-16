@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		{
 			_Context = ProgramStateContext;
 
-			MatchRecordSelectScreen scenarioSelect =
+			var scenarioSelect =
 				new MatchRecordSelectScreen(
 					ProgramContext.ScreenResolution, string.Format("./MatchRecords/{0}", GameData.LoadedModule));
 			scenarioSelect.OnMatchRecordSelected += HandleStartScenario;
@@ -25,9 +25,9 @@ namespace PanzerBlitz
 
 		void HandleStartScenario(object Sender, ValuedEventArgs<MatchRecord> E)
 		{
-			MatchContext m = new MatchContext(E.Value.Match);
-			MatchAdapter a = m.MakeMatchAdapter();
-			MatchRecordReplayPlayerController controller = new MatchRecordReplayPlayerController(a, E.Value);
+			var m = new MatchContext(E.Value.Match);
+			var a = m.MakeMatchAdapter();
+			var controller = new MatchRecordReplayPlayerController(a, E.Value);
 			foreach (Army army in E.Value.Match.Armies) m.OverridePlayerController(army, controller);
 
 			OnProgramStateTransition(this, new ProgramStateTransitionEventArgs(ProgramState.MATCH, m));

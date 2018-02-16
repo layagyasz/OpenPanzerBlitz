@@ -8,11 +8,6 @@ namespace PanzerBlitz
 {
 	public class CompositeObjective : Objective
 	{
-		public static readonly Func<bool, bool, bool> AND = (i, j) => i && j;
-		public static readonly Func<bool, bool, bool> OR = (i, j) => i || j;
-
-		protected static readonly Func<bool, bool, bool>[] AGGREGATORS = { AND, OR };
-
 		public readonly List<Objective> Objectives;
 		public readonly Func<bool, bool, bool> Aggregator;
 
@@ -31,13 +26,13 @@ namespace PanzerBlitz
 		public CompositeObjective(SerializationInputStream Stream)
 			: this(
 				Stream.ReadEnumerable(i => (Objective)ObjectiveSerializer.Instance.Deserialize(Stream)).ToList(),
-				AGGREGATORS[Stream.ReadByte()])
+				Aggregators.AGGREGATORS[Stream.ReadByte()])
 		{ }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Objectives, i => ObjectiveSerializer.Instance.Serialize(i, Stream));
-			Stream.Write((byte)Array.IndexOf(AGGREGATORS, Aggregator));
+			Stream.Write((byte)Array.IndexOf(Aggregators.AGGREGATORS, Aggregator));
 		}
 
 		public override bool CanStopEarly()

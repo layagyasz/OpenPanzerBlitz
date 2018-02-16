@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		public RatioObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Numerator = (Objective)attributes[(int)Attribute.NUMERATOR];
 			Denominator = (Objective)attributes[(int)Attribute.DENOMINATOR];

@@ -55,7 +55,7 @@ namespace PanzerBlitz
 			{
 				foreach (NormalSingleAttackOrder attacker in _Attackers)
 				{
-					OrderInvalidReason r = attacker.Defender.CanBeAttackedBy(Army, AttackMethod);
+					var r = attacker.Defender.CanBeAttackedBy(Army, AttackMethod);
 					if (r != OrderInvalidReason.NONE) return r;
 				}
 				if (_OddsCalculations.Count != TargetTile.Units.Count(

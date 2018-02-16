@@ -35,7 +35,7 @@ namespace PanzerBlitz
 				return new AttackFactorCalculation(
 					Attacker, AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight);
 			return new AttackFactorCalculation(
-				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
+				0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 		public override OrderInvalidReason Validate()
 		{
 			if (Defender == null) return OrderInvalidReason.ILLEGAL;
-			OrderInvalidReason r = Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight);
+			var r = Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight);
 			if (r != OrderInvalidReason.NONE) return r;
 			return base.Validate();
 		}

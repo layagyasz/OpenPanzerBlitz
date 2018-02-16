@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 
-using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Window;
@@ -33,8 +32,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public PositionalDeploymentPage(
-			PositionalDeployment Deployment, UnitConfigurationRenderer Renderer, DeploymentPane Pane)
+		public PositionalDeploymentPage(PositionalDeployment Deployment, UnitConfigurationRenderer Renderer)
 		{
 			_Deployment = Deployment;
 			_Renderer = Renderer;
@@ -55,8 +53,7 @@ namespace PanzerBlitz
 
 		public void Add(Unit Unit)
 		{
-			GroupedUnitSelectionOption option =
-				_Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
+			var option = _Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
 			if (option == null) _Selection.Add(
 				new GroupedUnitSelectionOption(
 					"deployment-selection-option",
@@ -68,8 +65,7 @@ namespace PanzerBlitz
 
 		public void Remove(Unit Unit)
 		{
-			GroupedUnitSelectionOption option =
-				_Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
+			var option = _Selection.FirstOrDefault(i => i.UnitConfiguration == Unit.Configuration);
 			if (option != null) option.Pop();
 			if (option.Count == 0) _Selection.Remove(option);
 		}

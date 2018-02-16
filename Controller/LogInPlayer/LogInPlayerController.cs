@@ -8,7 +8,7 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<PlayerContext>> OnLogIn;
 
-		LogInPlayerScreen _Screen;
+		readonly LogInPlayerScreen _Screen;
 
 		public LogInPlayerController(LogInPlayerScreen Screen)
 		{
@@ -20,8 +20,8 @@ namespace PanzerBlitz
 		{
 			try
 			{
-				NetworkContext client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
-				PlayerContext context = client.MakeLoggedInPlayerContext(_Screen.Username, _Screen.Password);
+				var client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
+				var context = client.MakeLoggedInPlayerContext(_Screen.Username, _Screen.Password);
 				if (context == null)
 				{
 					_Screen.SetError("Invalid Log In information.");

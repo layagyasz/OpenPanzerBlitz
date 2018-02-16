@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				MovementOrder order = new MovementOrder(_Controller.SelectedUnit, Tile, true);
+				var order = new MovementOrder(_Controller.SelectedUnit, Tile, true);
 				if (_Controller.ExecuteOrderAndAlert(order)) SetCloseAssaultHighlight(_Controller.SelectedUnit);
 			}
 		}
@@ -47,12 +47,12 @@ namespace PanzerBlitz
 
 		void SetCloseAssaultHighlight(Unit Unit)
 		{
-			IEnumerable<Tuple<Tile, Color>> attackRange = Unit.GetFieldOfSight(AttackMethod.CLOSE_ASSAULT).Select(
+			var attackRange = Unit.GetFieldOfSight(AttackMethod.CLOSE_ASSAULT).Select(
 				i => new Tuple<Tile, Color>(
 					i.Item1.Final,
 					_Controller.GetRangeColor(i.Item1, Unit, i.Item2, AttackMethod.CLOSE_ASSAULT)));
 
-			IEnumerable<Tuple<Tile, Color>> moveRange = Unit.GetFieldOfMovement(true).Select(
+			var moveRange = Unit.GetFieldOfMovement(true).Select(
 				i => new Tuple<Tile, Color>(
 					i.Item1,
 						HumanMatchPlayerController.HIGHLIGHT_COLORS[

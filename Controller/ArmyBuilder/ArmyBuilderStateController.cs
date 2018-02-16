@@ -3,8 +3,6 @@ using System.Linq;
 
 using Cardamom.Interface;
 
-using SFML.Graphics;
-
 namespace PanzerBlitz
 {
 	public class ArmyBuilderStateController : PagedProgramStateController
@@ -16,10 +14,10 @@ namespace PanzerBlitz
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
 			_Context = ProgramStateContext;
-			ScenarioBuilderContext context = (ScenarioBuilderContext)_Context;
+			var context = (ScenarioBuilderContext)_Context;
 
-			ArmyBuilder builder = context.ScenarioBuilder.Armies.First(i => !i.Validate());
-			ArmyBuilderScreen screen =
+			var builder = context.ScenarioBuilder.Armies.First(i => !i.Validate());
+			var screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,
 					GameData.UnitConfigurationLinks,

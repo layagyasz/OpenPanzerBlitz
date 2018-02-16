@@ -37,9 +37,9 @@ namespace PanzerBlitz
 
 			Armies = Scenario.TurnOrder.Select(i => new Army(this, i, IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
-				i => new Turn((byte)0, new TurnInfo(
+				i => new Turn(0, new TurnInfo(
 					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT)))
-								 .Concat(Armies.Select(i => new Turn((byte)0, new TurnInfo(i, TurnComponent.RESET))))
+								 .Concat(Armies.Select(i => new Turn(0, new TurnInfo(i, TurnComponent.RESET))))
 								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
 										 .SelectMany((i, j) => i.Select(k => new Turn((byte)(j + 1), k))))
 								 .GetEnumerator();
@@ -53,7 +53,7 @@ namespace PanzerBlitz
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
 		{
-			Dictionary<Army, ObjectiveSuccessLevel> r = new Dictionary<Army, ObjectiveSuccessLevel>();
+			var r = new Dictionary<Army, ObjectiveSuccessLevel>();
 			foreach (Army a in Armies) r.Add(a, a.GetObjectiveSuccessLevel());
 			return r;
 		}
@@ -124,7 +124,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason ExecuteOrder(Order Order)
 		{
-			OrderInvalidReason r = ValidateOrder(Order);
+			var r = ValidateOrder(Order);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			ExecutedOrders.Add(Order);
@@ -135,11 +135,11 @@ namespace PanzerBlitz
 				return OrderInvalidReason.NONE;
 			}
 
-			OrderStatus executed = Order.Execute(_Random);
+			var executed = Order.Execute(_Random);
 			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
 				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current.TurnInfo);
 			if (executed == OrderStatus.ILLEGAL)
-				throw new Exception("Tried to execute illegal order.");
+				throw new Exception(string.Format("Tried to execute illegal order. {0} {1}", Order, Order.Validate()));
 
 			if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 			return OrderInvalidReason.NONE;
@@ -147,7 +147,7 @@ namespace PanzerBlitz
 
 		void UpdateUnitVisibilityFromMove(object Sender, MovementEventArgs E)
 		{
-			Unit u = (Unit)Sender;
+			var u = (Unit)Sender;
 			foreach (Army a in Armies)
 			{
 				if (E.Path == null || E.Path.Count < 2) a.UpdateUnitVisibility(u, E.Tile);
@@ -157,7 +157,7 @@ namespace PanzerBlitz
 
 		void UpdateUnitVisibilityFromFire(object Sender, EventArgs E)
 		{
-			Unit u = (Unit)Sender;
+			var u = (Unit)Sender;
 			foreach (Army a in Armies)
 			{
 				a.SetUnitVisibility(u, true);

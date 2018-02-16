@@ -33,7 +33,7 @@ namespace PanzerBlitz
 
 		public ConvoyMovementAutomator(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Origin = (Coordinate)attributes[(int)Attribute.ORIGIN];
 			Destination = (Coordinate)attributes[(int)Attribute.DESTINATION];
@@ -76,13 +76,13 @@ namespace PanzerBlitz
 		{
 			if (StopEarly(Unit.Army)) return true;
 
-			Path<Tile> path = new Path<Tile>(
+			var path = new Path<Tile>(
 				Unit.Army.Match.Map.Tiles[Origin.X, Origin.Y],
 				Unit.Army.Match.Map.Tiles[Destination.X, Destination.Y],
 				t => true,
 				(t, j) =>
 				{
-					TileComponentRules rules = t.GetPathOverlayRules(j);
+					var rules = t.GetPathOverlayRules(j);
 					if (rules == null || !rules.RoadMove) return float.MaxValue;
 					return 1;
 				},
@@ -106,7 +106,7 @@ namespace PanzerBlitz
 				if (i < path.Count - 1 && path[i + 1].Units.Count() > 0) break;
 			}
 
-			MovementOrder o = new MovementOrder(Unit, path[i], false, !Halted);
+			var o = new MovementOrder(Unit, path[i], false, !Halted);
 			if (Unit.Army.Match.ExecuteOrder(o) != OrderInvalidReason.NONE)
 				throw new Exception(string.Format("Could not move unit {0} to {1}: {2}", Unit, path[i], o.Validate()));
 			return Halted;

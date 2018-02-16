@@ -20,7 +20,7 @@ namespace PanzerBlitz
 
 		public TileElevation(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Elevation = (int)attributes[(int)Attribute.ELEVATION];
 			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);

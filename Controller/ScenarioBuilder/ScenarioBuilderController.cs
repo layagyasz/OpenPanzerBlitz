@@ -9,9 +9,9 @@ namespace PanzerBlitz
 	{
 		public EventHandler OnFinished;
 
-		IdGenerator _IdGenerator = new IdGenerator();
-		ScenarioBuilder _ScenarioBuilder;
-		ScenarioBuilderScreen _Screen;
+		readonly IdGenerator _IdGenerator = new IdGenerator();
+		readonly ScenarioBuilder _ScenarioBuilder;
+		readonly ScenarioBuilderScreen _Screen;
 
 		public ScenarioBuilderController(ScenarioBuilder ScenarioBuilder, ScenarioBuilderScreen Screen)
 		{
@@ -32,7 +32,7 @@ namespace PanzerBlitz
 
 		void HandleArmyAdded(object Sender, EventArgs E)
 		{
-			ArmyBuilder builder =
+			var builder =
 				new ArmyBuilder(
 					_IdGenerator,
 					new ArmyParameters(GameData.Factions.Values.First(), 0, 1, _ScenarioBuilder.Parameters));

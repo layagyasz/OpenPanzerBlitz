@@ -1,13 +1,11 @@
-﻿using System;
-
-using Cardamom.Network;
+﻿using Cardamom.Network;
 using Cardamom.Network.Responses;
 
 namespace PanzerBlitz
 {
 	public class MatchRPCHandler : RPCHandler
 	{
-		Match _Match;
+		readonly Match _Match;
 
 		public MatchRPCHandler(Match Match)
 		{

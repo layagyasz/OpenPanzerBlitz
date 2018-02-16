@@ -21,7 +21,7 @@ namespace PanzerBlitz
 			_Table.Position = .5f * (WindowSize - _Table.Size);
 			foreach (Army a in Match.Armies)
 			{
-				_Table.Add(new MatchEndArmyRow(Match, a, FactionRenderer));
+				_Table.Add(new MatchEndArmyRow(a, FactionRenderer));
 			}
 
 			_SaveButton.Position = new Vector2f(_Table.Size.X - _SaveButton.Size.X, 0);

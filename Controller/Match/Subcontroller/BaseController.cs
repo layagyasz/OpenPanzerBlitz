@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
@@ -14,7 +15,7 @@ namespace PanzerBlitz
 
 		protected HumanMatchPlayerController _Controller;
 
-		public BaseController(HumanMatchPlayerController Controller)
+		protected BaseController(HumanMatchPlayerController Controller)
 		{
 			_Controller = Controller;
 		}
@@ -50,7 +51,7 @@ namespace PanzerBlitz
 		public void HandleUnitShiftLeftClick(Unit Unit)
 		{
 			Clear();
-			UnitInfoPane pane = new UnitInfoPane(Unit, _Controller.UnitConfigurationRenderer);
+			var pane = new UnitInfoPane(Unit, _Controller.UnitConfigurationRenderer);
 			pane.OnClose += (sender, e) => Clear();
 			_Pane = pane;
 			_Controller.AddPane(_Pane);
@@ -60,7 +61,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			List<Direction> directions =
+			var directions =
 				Enum.GetValues(typeof(Direction))
 					.Cast<Direction>()
 					.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
@@ -69,7 +70,7 @@ namespace PanzerBlitz
 			else if (directions.Count > 1)
 			{
 				Clear();
-				SelectPane<Direction> pane = new SelectPane<Direction>("Recon", directions);
+				var pane = new SelectPane<Direction>("Recon", directions);
 				pane.OnItemSelected += ReconDirection;
 				_Pane = pane;
 				_Controller.AddPane(_Pane);
@@ -85,7 +86,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				ReconOrder order = new ReconOrder(_Controller.SelectedUnit, Direction);
+				var order = new ReconOrder(_Controller.SelectedUnit, Direction);
 				if (_Controller.ExecuteOrderAndAlert(order))
 				{
 					_Controller.SelectUnit(null);
@@ -99,7 +100,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			List<Direction> directions =
+			var directions =
 				Enum.GetValues(typeof(Direction))
 					.Cast<Direction>()
 					.Where(i => _Controller.SelectedUnit.CanExitDirection(i))
@@ -108,7 +109,7 @@ namespace PanzerBlitz
 			else if (directions.Count > 1)
 			{
 				Clear();
-				SelectPane<Direction> pane = new SelectPane<Direction>("Evacuate", directions);
+				var pane = new SelectPane<Direction>("Evacuate", directions);
 				pane.OnItemSelected += EvacuateDirection;
 				_Pane = pane;
 				_Controller.AddPane(_Pane);
@@ -124,7 +125,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				EvacuateOrder order = new EvacuateOrder(_Controller.SelectedUnit, Direction);
+				var order = new EvacuateOrder(_Controller.SelectedUnit, Direction);
 				if (_Controller.ExecuteOrderAndAlert(order))
 				{
 					_Controller.SelectUnit(null);
@@ -138,13 +139,13 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			Unit onMine =
+			var onMine =
 				_Controller.SelectedUnit.Position.Units.FirstOrDefault(
 					i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
 			if (onMine != null) ClearMinefield(onMine);
 			else
 			{
-				IEnumerable<Unit> mines =
+				var mines =
 					_Controller.SelectedUnit.Position.Neighbors()
 							   .SelectMany(i => i.Units)
 							   .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
@@ -152,7 +153,7 @@ namespace PanzerBlitz
 				else if (mines.Count() > 1)
 				{
 					Clear();
-					SelectPane<Unit> pane = new SelectPane<Unit>("Clear Minefield", mines);
+					var pane = new SelectPane<Unit>("Clear Minefield", mines);
 					pane.OnItemSelected += ClearMinefield;
 					_Pane = pane;
 					_Controller.AddPane(_Pane);
@@ -169,7 +170,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				ClearMinefieldOrder order = new ClearMinefieldOrder(_Controller.SelectedUnit, Minefield);
+				var order = new ClearMinefieldOrder(_Controller.SelectedUnit, Minefield);
 				if (_Controller.ExecuteOrderAndAlert(order))
 				{
 					_Controller.SelectUnit(null);
@@ -183,7 +184,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			List<Unit> canLoad =
+			var canLoad =
 				_Controller.SelectedUnit.Position.Units.Where(
 					i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE).ToList();
 			if (canLoad.Count == 1)
@@ -193,7 +194,7 @@ namespace PanzerBlitz
 			else if (canLoad.Count > 1)
 			{
 				Clear();
-				SelectPane<Unit> pane = new SelectPane<Unit>("Load Unit", canLoad);
+				var pane = new SelectPane<Unit>("Load Unit", canLoad);
 				pane.OnItemSelected += LoadUnit;
 				_Pane = pane;
 				_Controller.AddPane(_Pane);
@@ -209,7 +210,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				LoadOrder order = new LoadOrder(
+				var order = new LoadOrder(
 					_Controller.SelectedUnit, Unit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 				if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
 				{
@@ -224,7 +225,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			UnloadOrder order = new UnloadOrder(
+			var order = new UnloadOrder(
 				_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 			if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
 			{
@@ -237,7 +238,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit == null) return;
 
-			MountOrder order = new MountOrder(
+			var order = new MountOrder(
 				_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 			if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
 			{
@@ -249,7 +250,7 @@ namespace PanzerBlitz
 		protected void Dismount()
 		{
 			if (_Controller.SelectedUnit == null) return;
-			DismountOrder order = new DismountOrder(
+			var order = new DismountOrder(
 				_Controller.SelectedUnit, _Controller.CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 			if (_Controller.ExecuteOrderAndAlert(order) && order.UseMovement)
 			{

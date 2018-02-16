@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 using Cardamom.Interface;
 
@@ -12,7 +11,7 @@ namespace PanzerBlitz
 	{
 		public readonly MapRegion MapRegion;
 
-		Text _Text;
+		readonly Text _Text;
 
 		public MapRegionView(MapRegion MapRegion, TileRenderer Renderer)
 		{
@@ -29,11 +28,11 @@ namespace PanzerBlitz
 		{
 			_Text.DisplayedString = MapRegion.Name;
 
-			Vector2f center = GetCenter(_Text);
+			var center = GetCenter(_Text);
 			if (MapRegion.Tiles.Count() > 0)
 			{
-				Vector2f tl = new Vector2f(MapRegion.Tiles.Min(i => i.Center.X), MapRegion.Tiles.Min(i => i.Center.Y));
-				Vector2f br = new Vector2f(MapRegion.Tiles.Max(i => i.Center.X), MapRegion.Tiles.Max(i => i.Center.Y));
+				var tl = new Vector2f(MapRegion.Tiles.Min(i => i.Center.X), MapRegion.Tiles.Min(i => i.Center.Y));
+				var br = new Vector2f(MapRegion.Tiles.Max(i => i.Center.X), MapRegion.Tiles.Max(i => i.Center.Y));
 				_Text.Position = .5f * (tl + br) - center;
 			}
 			else _Text.Position = -center;

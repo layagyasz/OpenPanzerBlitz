@@ -18,9 +18,9 @@ namespace PanzerBlitz
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
 			_Context = ProgramStateContext;
-			MatchLobbyContext context = (MatchLobbyContext)_Context;
+			var context = (MatchLobbyContext)_Context;
 
-			MatchLobbyScreen screen = new MatchLobbyScreen(
+			var screen = new MatchLobbyScreen(
 				ProgramContext.ScreenResolution,
 				context.IsHost,
 				context.Lobby,

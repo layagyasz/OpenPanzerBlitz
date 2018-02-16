@@ -8,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class ArmyConfiguration : Serializable
 	{
-		private enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS, VICTORY_CONDITION }
+		enum Attribute { FACTION, TEAM, DEPLOYMENT_CONFIGURATIONS, VICTORY_CONDITION }
 
 		public readonly string UniqueKey;
 		public readonly Faction Faction;
@@ -41,7 +41,8 @@ namespace PanzerBlitz
 
 		public ArmyConfiguration(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+
 			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			Team = (byte)attributes[(int)Attribute.TEAM];

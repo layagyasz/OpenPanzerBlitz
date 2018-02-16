@@ -19,7 +19,7 @@ namespace PanzerBlitz
 
 		public FurthestAdvanceObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Direction = (Direction)attributes[(int)Attribute.DIRECTION];
 		}
 

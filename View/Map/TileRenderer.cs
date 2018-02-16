@@ -33,14 +33,14 @@ namespace PanzerBlitz
 		public readonly Color FontColor;
 		public readonly Color BaseColor;
 
-		Color[] _ElevationColors;
-		Color[] _TopColors;
-		Color[] _EdgeColors;
-		Color[] _OverlayColors;
-		Color[] _PathColors;
-		Color[] _PathBorderColors;
-		float[] _PathWidths;
-		float[] _PathBorderWidths;
+		readonly Color[] _ElevationColors;
+		readonly Color[] _TopColors;
+		readonly Color[] _EdgeColors;
+		readonly Color[] _OverlayColors;
+		readonly Color[] _PathColors;
+		readonly Color[] _PathBorderColors;
+		readonly float[] _PathWidths;
+		readonly float[] _PathBorderWidths;
 
 		public TileRenderer(
 			string UniqueKey,
@@ -91,7 +91,7 @@ namespace PanzerBlitz
 		{
 			UniqueKey = Block.Name;
 
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			FontPath = (string)attributes[(int)Attribute.FONT_FACE];
 			FontFace = Cardamom.Interface.ClassLibrary.Instance.GetFont(FontPath);
@@ -116,7 +116,7 @@ namespace PanzerBlitz
 
 		public Vertex[] Render(Tile Tile)
 		{
-			List<Vertex> vertices = new List<Vertex>();
+			var vertices = new List<Vertex>();
 
 			Color baseColor = BaseColor;
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
@@ -279,13 +279,13 @@ namespace PanzerBlitz
 			}
 
 			// IsHilltop.
-			bool isHilltop = Tile.NeighborTiles.Any(i => i != null
+			var isHilltop = Tile.NeighborTiles.Any(i => i != null
 													&& i.Configuration.Elevation < Tile.Configuration.Elevation);
 
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{
 				// Border.
-				Color edgeColor = EdgeColor(Tile.Configuration.GetEdge(i), isHilltop, Tile.Configuration.Elevation);
+				var edgeColor = EdgeColor(Tile.Configuration.GetEdge(i), isHilltop, Tile.Configuration.Elevation);
 				Segment left = Tile.Bounds[Mod(i - 1, Tile.Bounds.Length)];
 				Segment right = Tile.Bounds[Mod(i + 1, Tile.Bounds.Length)];
 				Vector2f internalLeft =
@@ -308,7 +308,7 @@ namespace PanzerBlitz
 
 		static void RenderTile(Tile Tile, Func<Tile, Tile, bool> Matched, List<Vertex> Vertices, Color Color)
 		{
-			List<Vector2f> points = new List<Vector2f>();
+			var points = new List<Vector2f>();
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{
 				if (Matched(Tile, Tile.NeighborTiles[i]))
@@ -323,13 +323,13 @@ namespace PanzerBlitz
 		static void RenderEdges(
 			Tile Tile, Func<Tile, Tile, bool> Matched, List<Vertex> Vertices, Color Color, bool Segmented)
 		{
-			List<List<int>> indices = new List<List<int>>();
+			var indices = new List<List<int>>();
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
 				if (Matched(Tile, Tile.NeighborTiles[i]))
 				{
 					if (indices.Count > 0 && (indices.Last().Last() == i - 1 || !Segmented)) indices.Last().Add(i);
-					else indices.Add(new List<int>() { i });
+					else indices.Add(new List<int> { i });
 				}
 			}
 			if (indices.Count > 1 && indices.First().First() == (indices.Last().Last() + 1) % Tile.NeighborTiles.Length)
@@ -339,7 +339,7 @@ namespace PanzerBlitz
 			}
 			foreach (List<int> p in indices)
 			{
-				List<Vector2f> points = new List<Vector2f>();
+				var points = new List<Vector2f>();
 				foreach (int i in p)
 				{
 					points.Add(Tile.Bounds[i].Point);
@@ -367,7 +367,7 @@ namespace PanzerBlitz
 			}
 			else if (Points.Count == 2)
 			{
-				Vector2f point3 = Inlay(Points[0], Points[1], Tile.Center, .25f);
+				var point3 = Inlay(Points[0], Points[1], Tile.Center, .25f);
 				Vertices.Add(new Vertex(Points[0], Color));
 				Vertices.Add(new Vertex(Points[1], Color));
 				Vertices.Add(new Vertex(point3, Color));
@@ -393,7 +393,7 @@ namespace PanzerBlitz
 		{
 			float width = .5f * (1 - Width);
 
-			List<Segment> segments = new List<Segment>();
+			var segments = new List<Segment>();
 			for (int i = 0; i < Tile.NeighborTiles.Length; ++i)
 			{
 				if (Matched(Tile, i)) segments.Add(Tile.Bounds[i]);
@@ -412,18 +412,18 @@ namespace PanzerBlitz
 			}
 			else if (segments.Count == 1)
 			{
-				Vector2f p1 = OnSegment(segments[0], width);
-				Vector2f p2 = OnSegment(segments[0], 1 - width);
+				var p1 = OnSegment(segments[0], width);
+				var p2 = OnSegment(segments[0], 1 - width);
 				Vertices.Add(new Vertex(p1, Color));
 				Vertices.Add(new Vertex(p2, Color));
 				Vertices.Add(new Vertex(Tile.Center, Color));
 			}
 			else if (segments.Count == 2)
 			{
-				Vector2f p1 = OnSegment(segments[1], width);
-				Vector2f p2 = OnSegment(segments[1], 1 - width);
-				Vector2f p3 = OnSegment(segments[0], width);
-				Vector2f p4 = OnSegment(segments[0], 1 - width);
+				var p1 = OnSegment(segments[1], width);
+				var p2 = OnSegment(segments[1], 1 - width);
+				var p3 = OnSegment(segments[0], width);
+				var p4 = OnSegment(segments[0], 1 - width);
 				Vertices.Add(new Vertex(p1, Color));
 				Vertices.Add(new Vertex(p2, Color));
 				Vertices.Add(new Vertex(p3, Color));
@@ -435,8 +435,8 @@ namespace PanzerBlitz
 			{
 				foreach (Segment s in segments)
 				{
-					Vector2f p1 = OnSegment(s, width);
-					Vector2f p2 = OnSegment(s, 1 - width);
+					var p1 = OnSegment(s, width);
+					var p2 = OnSegment(s, 1 - width);
 					Vector2f p3 = s.Point * Width + Tile.Center * (1 - Width);
 					Vector2f p4 = s.End * Width + Tile.Center * (1 - Width);
 					Vertices.Add(new Vertex(p1, Color));
@@ -463,7 +463,7 @@ namespace PanzerBlitz
 		{
 			Color c = _EdgeColors[(int)Edge];
 			if (c.A > 0) return c;
-			else return Higher ? _ElevationColors[Math.Min(_ElevationColors.Length - 1, Math.Max(0, Elevation))] : c;
+			return Higher ? _ElevationColors[Math.Min(_ElevationColors.Length - 1, Math.Max(0, Elevation))] : c;
 		}
 
 		Color OverlayColor(TileEdge Edge)

@@ -1,5 +1,3 @@
-using System;
-
 using Cardamom.Network;
 using Cardamom.Network.Responses;
 
@@ -7,7 +5,7 @@ namespace PanzerBlitz
 {
 	public class RemoteChatAdapter : ChatAdapter
 	{
-		TCPClient _Client;
+		readonly TCPClient _Client;
 
 		public RemoteChatAdapter(TCPClient Client)
 		{

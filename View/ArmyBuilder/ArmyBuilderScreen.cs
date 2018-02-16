@@ -40,7 +40,7 @@ namespace PanzerBlitz
 
 			_Pane.Position = .5f * (WindowSize - _Pane.Size);
 
-			Button header = new Button("army-builder-header")
+			var header = new Button("army-builder-header")
 			{
 				DisplayedString =
 					string.Format(
@@ -88,7 +88,7 @@ namespace PanzerBlitz
 			_UnitClassSelect.OnChange += FilterUnits;
 			FilterUnits();
 
-			Button finishedButton = new Button("army-builder-large-button") { DisplayedString = "Finished" };
+			var finishedButton = new Button("army-builder-large-button") { DisplayedString = "Finished" };
 			finishedButton.Position = _Pane.Size - finishedButton.Size - new Vector2f(32, 32);
 			finishedButton.OnClick += HandleFinished;
 

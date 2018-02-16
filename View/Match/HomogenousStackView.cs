@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -12,10 +11,10 @@ namespace PanzerBlitz
 {
 	public class HomogenousStackView : Interactive
 	{
-		Button _Text;
-		UnitConfigurationRenderer _Renderer;
-		Stack<UnitView> _UnitViews;
-		int _UnitScale;
+		readonly Button _Text;
+		readonly UnitConfigurationRenderer _Renderer;
+		readonly Stack<UnitView> _UnitViews;
+		readonly int _UnitScale;
 
 		public override Vector2f Size
 		{

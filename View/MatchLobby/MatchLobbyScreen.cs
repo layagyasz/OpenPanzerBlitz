@@ -86,14 +86,14 @@ namespace PanzerBlitz
 				_ScenarioSelect.Add(new SelectionOption<Scenario>("match-lobby-player-section-select-option")
 				{
 					DisplayedString = _Lobby.Scenario.Name,
-					Value = _Lobby.Scenario,
+					Value = _Lobby.Scenario
 				});
 			}
 			_ScenarioSelect.Enabled = _Host;
 
 			foreach (Player p in _Lobby.Players)
 			{
-				MatchLobbyPlayerSection section = new MatchLobbyPlayerSection(p, _Lobby, p == _Player);
+				var section = new MatchLobbyPlayerSection(p, _Lobby, p == _Player);
 				section.OnArmyConfigurationSelected += HandleArmyConfigurationSelected;
 				section.OnPlayerReadyStateChanged += HandlePlayerReadyStateChanged;
 				_Display.Add(section);

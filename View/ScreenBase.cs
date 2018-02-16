@@ -19,10 +19,10 @@ namespace PanzerBlitz
 
 		public readonly PaneLayer PaneLayer = new PaneLayer();
 
-		Vertex[] _Backdrop;
+		readonly Vertex[] _Backdrop;
 		protected List<Pod> _Items = new List<Pod>();
 
-		public ScreenBase(Vector2f WindowSize, bool HasMainMenuButton = true)
+		protected ScreenBase(Vector2f WindowSize, bool HasMainMenuButton = true)
 		{
 			_Backdrop = new Vertex[]
 			{
@@ -38,7 +38,7 @@ namespace PanzerBlitz
 			};
 			if (HasMainMenuButton)
 			{
-				Button mainMenuButton = new Button("normal-button") { DisplayedString = "Main Menu" };
+				var mainMenuButton = new Button("normal-button") { DisplayedString = "Main Menu" };
 				mainMenuButton.Position = WindowSize - mainMenuButton.Size - new Vector2f(32, 32);
 				mainMenuButton.OnClick += HandleMainMenuButtonClicked;
 				_Items.Add(mainMenuButton);

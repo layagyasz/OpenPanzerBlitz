@@ -57,7 +57,7 @@ namespace PanzerBlitz
 						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp))
 					 	|| Tile.GetPathOverlayRules().Any(i => i != null && (i.Water || i.Swamp));
 
-			bool[] lowerPaths = Tile.GetPathOverlayRules()
+			var lowerPaths = Tile.GetPathOverlayRules()
 									 .Where(i => i != null)
 									 .Select(i => i.Water || i.Depressed || i.DepressedTransition)
 									 .ToArray();
@@ -71,8 +71,8 @@ namespace PanzerBlitz
 			{
 				for (int i = 0; i < 6; ++i)
 				{
-					TileComponentRules edge = Tile.GetEdgeRules(i);
-					TileComponentRules path = Tile.GetPathOverlayRules(i);
+					var edge = Tile.GetEdgeRules(i);
+					var path = Tile.GetPathOverlayRules(i);
 					if (edge == null || path == null) continue;
 					Bridged |= !path.Depressed && !path.Water && (edge.Depressed || edge.Water);
 				}
@@ -97,8 +97,8 @@ namespace PanzerBlitz
 			if (!IgnoreOccupyingUnits && Unit.CanEnter(To) == OrderInvalidReason.TILE_ENEMY_OCCUPIED)
 				return new MovementCost(OrderInvalidReason.TILE_ENEMY_OCCUPIED);
 
-			BlockType toBlock = To.GetUnitBlockType();
-			BlockType fromBlock = Tile.GetUnitBlockType();
+			var toBlock = To.GetUnitBlockType();
+			var fromBlock = Tile.GetUnitBlockType();
 
 			bool unitMoved = Unit.Moved || !Tile.Units.Contains(Unit);
 			bool adjacent = !unitMoved && !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
@@ -110,18 +110,16 @@ namespace PanzerBlitz
 
 			bool useRoadMovement = RoadMovement
 							&& !Tile.Map.Environment.IsRoadMovementRestricted(Unit.Configuration.UnitClass)
-							&& !Unit.Configuration.MovementRules.CannotUseRoadMovement;
-			if (toBlock == BlockType.STANDARD && (!To.Units.Contains(Unit) || To.Units.Count() > 1))
-				useRoadMovement = false;
-			if (fromBlock == BlockType.STANDARD && (!Tile.Units.Contains(Unit) || Tile.Units.Count() > 1))
-				useRoadMovement = false;
-			if (Unit.Configuration.CannotUseRoadMovementWithOversizedPassenger
-				&& Unit.Passenger != null
-				&& Unit.Passenger.Configuration.IsOversizedPassenger)
-				useRoadMovement = false;
+							&& !Unit.Configuration.MovementRules.CannotUseRoadMovement
+							&& !(toBlock == BlockType.STANDARD && (!To.Units.Contains(Unit) || To.Units.Count() > 1))
+							&& !(fromBlock == BlockType.STANDARD
+								 && (!Tile.Units.Contains(Unit) || Tile.Units.Count() > 1))
+							&& !(Unit.Configuration.CannotUseRoadMovementWithOversizedPassenger
+								 && Unit.Passenger != null
+								 && Unit.Passenger.Configuration.IsOversizedPassenger);
 
-			TileComponentRules edge = Tile.GetEdgeRules(To);
-			TileComponentRules path = Tile.GetPathOverlayRules(To);
+			var edge = Tile.GetEdgeRules(To);
+			var path = Tile.GetPathOverlayRules(To);
 
 			bool roaded = path != null && path.RoadMove;
 
@@ -131,7 +129,7 @@ namespace PanzerBlitz
 										&& !roaded;
 
 			UnitMovementRules movementRules = Unit.Configuration.MovementRules;
-			MovementCost leaveCost = new MovementCost(0f);
+			var leaveCost = new MovementCost(0f);
 			if (leavingDepressed)
 			{
 				leaveCost = 1 + movementRules.Sloped.GetMoveCost(adjacent, unitMoved)
@@ -139,17 +137,17 @@ namespace PanzerBlitz
 					+ movementRules.Uphill.GetMoveCost(adjacent, unitMoved);
 			}
 
-			MovementCost crossCost = GetRulesMoveCost(
+			var crossCost = GetRulesMoveCost(
 				edge, movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit, true);
 
-			MovementCost enterCost = GetRulesMoveCost(
+			var enterCost = GetRulesMoveCost(
 				To.GetBaseRules(), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
 
-			MovementCost edgeCost = new MovementCost(0f);
-			MovementCost intersectCost = new MovementCost(0f);
+			var edgeCost = new MovementCost(0f);
+			var intersectCost = new MovementCost(0f);
 			for (int i = 0; i < 6; ++i)
 			{
-				MovementCost eMove = GetRulesMoveCost(
+				var eMove = GetRulesMoveCost(
 					To.GetEdgeRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
 				if (eMove.IsSet())
 				{
@@ -157,7 +155,7 @@ namespace PanzerBlitz
 					else edgeCost = eMove;
 				}
 
-				MovementCost pMove = GetRulesMoveCost(
+				var pMove = GetRulesMoveCost(
 					To.GetPathOverlayRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
 				if (pMove.IsSet())
 				{
@@ -196,7 +194,7 @@ namespace PanzerBlitz
 		{
 			if (TileRules == null) return new MovementCost(0f);
 
-			MovementCost cost = new MovementCost(0f);
+			var cost = new MovementCost(0f);
 
 			if (TileRules.DenseEdge && !Road && CrossesEdge)
 				cost += MovementRules.DenseEdge.GetMoveCost(Adjacent, UnitMoved);

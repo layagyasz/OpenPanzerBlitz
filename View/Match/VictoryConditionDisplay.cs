@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
@@ -10,7 +8,7 @@ namespace PanzerBlitz
 {
 	public class VictoryConditionDisplay : GuiItem
 	{
-		SingleColumnTable _Display = new SingleColumnTable("victory-condition-display");
+		readonly SingleColumnTable _Display = new SingleColumnTable("victory-condition-display");
 
 		public override Vector2f Size
 		{

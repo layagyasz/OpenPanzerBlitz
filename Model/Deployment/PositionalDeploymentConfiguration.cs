@@ -21,7 +21,7 @@ namespace PanzerBlitz
 
 		public PositionalDeploymentConfiguration(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			Matcher = Parse.DefaultIfNull<Matcher<Tile>>(attributes[(int)Attribute.MATCHER], new EmptyMatcher<Tile>());

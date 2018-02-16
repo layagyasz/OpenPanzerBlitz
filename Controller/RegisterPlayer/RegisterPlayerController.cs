@@ -9,7 +9,7 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<PlayerContext>> OnRegister;
 
-		RegisterPlayerScreen _Screen;
+		readonly RegisterPlayerScreen _Screen;
 
 		public RegisterPlayerController(RegisterPlayerScreen Screen)
 		{
@@ -21,7 +21,7 @@ namespace PanzerBlitz
 		{
 			try
 			{
-				NetworkContext client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
+				var client = NetworkContext.CreateClient(_Screen.IpAddress, GameData.OnlinePort);
 				client.Client.MessageAdapter = new NonMatchMessageSerializer();
 				client.Client.RPCHandler = new RPCHandler();
 				Player p = ((LogInPlayerResponse)client.Client.Call(

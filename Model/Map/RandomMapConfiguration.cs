@@ -13,9 +13,9 @@ namespace PanzerBlitz
 {
 	public class RandomMapConfiguration : MapConfiguration
 	{
-		int _Width;
-		int _Height;
-		Random _Random;
+		readonly int _Width;
+		readonly int _Height;
+		readonly Random _Random;
 
 		public RandomMapConfiguration(int Width, int Height)
 		{
@@ -29,49 +29,49 @@ namespace PanzerBlitz
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
-			Map map = new Map(_Width, _Height, Environment, IdGenerator);
+			var map = new Map(_Width, _Height, Environment, IdGenerator);
 
-			LatticeNoiseGenerator thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
+			var thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.1),
 				Factor = .1,
 				Bias = .63
 			});
-			LatticeNoiseGenerator waterThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
+			var waterThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.1),
 				Factor = .1,
 				Bias = .3
 			});
-			LatticeNoiseGenerator noise = MakeNoiseGenerator(.1, .2, .5);
+			var noise = MakeNoiseGenerator(.1, .2, .5);
 
-			LatticeNoiseGenerator swampThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
+			var swampThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.1),
 				Factor = .3,
 				Bias = .35
 			});
-			LatticeNoiseGenerator swampNoise = MakeNoiseGenerator(.075, .175, .5);
+			var swampNoise = MakeNoiseGenerator(.075, .175, .5);
 
-			LatticeNoiseGenerator forestThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
+			var forestThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.15),
 				Factor = .1,
 				Bias = .6
 			});
-			LatticeNoiseGenerator forestNoise = MakeNoiseGenerator(.25, .5, .5);
+			var forestNoise = MakeNoiseGenerator(.25, .5, .5);
 
-			LatticeNoiseGenerator townThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings()
+			var townThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.1),
 				Factor = .2,
 				Bias = .72
 			});
-			LatticeNoiseGenerator townNoise = MakeNoiseGenerator(.25, .5, .5);
+			var townNoise = MakeNoiseGenerator(.25, .5, .5);
 
 			foreach (Tile t in map.TilesEnumerable)
 			{
-				double elevation = noise.Generate(t.Center.X, t.Center.Y);
+				var elevation = noise.Generate(t.Center.X, t.Center.Y);
 				if (elevation > thresholdNoise.Generate(t.Center.X, t.Center.Y) && t.OnEdge(Direction.NONE))
 					t.Configuration.SetElevation(1);
 				else if (elevation < waterThresholdNoise.Generate(t.Center.X, t.Center.Y))
@@ -116,37 +116,35 @@ namespace PanzerBlitz
 			}
 
 			// Rivers
-			HashSet<Tile> riverNodes = new HashSet<Tile>();
+			var riverNodes = new HashSet<Tile>();
 			for (int i = 0; i < Math.Max(1, _Width * _Height / 160); ++i)
 			{
-				Tile t = GetRandomTile(map);
+				var t = GetRandomTile(map);
 				if (!IsElevated(t)) riverNodes.Add(t);
 			}
 			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
 			{
-				Tile t = GetRandomEdgeTile(map);
+				var t = GetRandomEdgeTile(map);
 				if (!IsElevated(t))
 				{
 					EdgePathOverlay(t, TilePathOverlay.STREAM);
 					riverNodes.Add(t);
 				}
 			}
-			MinimalSpanning<Tile> mst =
-				new MinimalSpanning<Tile>(riverNodes, i => riverNodes, (i, j) => i.HeuristicDistanceTo(j));
-			List<Tuple<Tile, Tile>> edges = mst.GetEdges().ToList();
+			var mst = new MinimalSpanning<Tile>(riverNodes, i => riverNodes, (i, j) => i.HeuristicDistanceTo(j));
+			var edges = mst.GetEdges().ToList();
 			for (int i = 0; i < edges.Count / 4; ++i)
 				edges.RemoveAt(_Random.Next(0, edges.Count));
 			foreach (Tuple<Tile, Tile> edge in edges)
 				MakePath(edge.Item1, edge.Item2, TilePathOverlay.STREAM, RiverDistanceFunction);
 
 			// Roads and Towns
-			Partitioning<Tile> towns = new Partitioning<Tile>(
-				map.TilesEnumerable, (i, j) => i.GetEdge(j) == TileEdge.TOWN);
-			HashSet<Tile> roadNodes = new HashSet<Tile>();
+			var towns = new Partitioning<Tile>(map.TilesEnumerable, (i, j) => i.GetEdge(j) == TileEdge.TOWN);
+			var roadNodes = new HashSet<Tile>();
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
 				map.Regions.Add(new MapRegion("Town " + IdGenerator.GenerateId().ToString(), town));
-				List<Tile> tiles = town.ToList();
+				var tiles = town.ToList();
 				for (int i = 0; i < Math.Max(1, tiles.Count / 4); ++i)
 					roadNodes.Add(tiles[_Random.Next(0, tiles.Count)]);
 			}
@@ -154,14 +152,14 @@ namespace PanzerBlitz
 				roadNodes.Add(GetRandomTile(map));
 			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
 			{
-				Tile t = GetRandomEdgeTile(map);
+				var t = GetRandomEdgeTile(map);
 				EdgePathOverlay(t, TilePathOverlay.ROAD);
 				roadNodes.Add(t);
 			}
 
 			mst = new MinimalSpanning<Tile>(roadNodes, i => roadNodes, (i, j) => i.HeuristicDistanceTo(j));
 			edges = mst.GetEdges().ToList();
-			List<Tile> nodes = roadNodes.ToList();
+			var nodes = roadNodes.ToList();
 			for (int i = 0; i < edges.Count / 4; ++i)
 			{
 				edges.Add(
@@ -182,12 +180,12 @@ namespace PanzerBlitz
 
 		LatticeNoiseGenerator MakeNoiseGenerator(double MinFrequency, double MaxFrequency, double Persistence)
 		{
-			LatticeNoiseSettings frequencySettings = new LatticeNoiseSettings()
+			var frequencySettings = new LatticeNoiseSettings
 			{
 				Frequency = Constant.Create(.1)
 			};
-			LatticeNoiseGenerator frequencyGenerator = new LatticeNoiseGenerator(_Random, frequencySettings);
-			LatticeNoiseSettings settings = new LatticeNoiseSettings()
+			var frequencyGenerator = new LatticeNoiseGenerator(_Random, frequencySettings);
+			var settings = new LatticeNoiseSettings
 			{
 				Frequency = (i, j) => MinFrequency + (MaxFrequency - MinFrequency) * frequencyGenerator.Generate(i, j),
 				Persistence = Constant.Create(Persistence)
@@ -197,7 +195,7 @@ namespace PanzerBlitz
 
 		void MakePath(Tile Start, Tile End, TilePathOverlay Path, Func<Tile, Tile, double> DistanceFunction)
 		{
-			Path<Tile> path = new Path<Tile>(
+			var path = new Path<Tile>(
 				Start,
 				End,
 				i => true,

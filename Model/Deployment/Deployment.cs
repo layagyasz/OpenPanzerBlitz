@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Deployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
+		protected Deployment(Army Army, IEnumerable<Unit> Units, IdGenerator IdGenerator)
 		{
 			this.Army = Army;
 			this.Units = Units.ToList();

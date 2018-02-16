@@ -5,7 +5,7 @@ namespace PanzerBlitz
 {
 	public class EventBuffer<T> where T : EventArgs
 	{
-		Queue<Tuple<Action<object, T>, Tuple<object, T>>> _Invocations =
+		readonly Queue<Tuple<Action<object, T>, Tuple<object, T>>> _Invocations =
 			new Queue<Tuple<Action<object, T>, Tuple<object, T>>>();
 
 		public void QueueEvent(Action<object, T> Handler, object Sender, T E)

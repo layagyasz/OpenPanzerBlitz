@@ -45,7 +45,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason Validate()
 		{
-			OrderInvalidReason r = Engineer.CanClearMinefield();
+			var r = Engineer.CanClearMinefield();
 			if (r != OrderInvalidReason.NONE) return r;
 
 			_Interaction =

@@ -17,12 +17,12 @@ namespace PanzerBlitz
 	{
 		public EventHandler<ValuedEventArgs<MatchRecord>> OnMatchRecordSelected;
 
-		GuiContainer<GuiItem> _Display = new GuiContainer<GuiItem>("match-record-select-display");
+		readonly GuiContainer<GuiItem> _Display = new GuiContainer<GuiItem>("match-record-select-display");
 
-		ValuedScrollCollection<SelectionOption<FileInfo>, FileInfo> _MatchRecordSelect =
+		readonly ValuedScrollCollection<SelectionOption<FileInfo>, FileInfo> _MatchRecordSelect =
 			new ValuedScrollCollection<SelectionOption<FileInfo>, FileInfo>("match-record-select");
-		ScenarioView _ScenarioView = new ScenarioView();
-		Button _StartButton = new Button("large-button") { DisplayedString = "Play" };
+		readonly ScenarioView _ScenarioView = new ScenarioView();
+		readonly Button _StartButton = new Button("large-button") { DisplayedString = "Play" };
 
 		MatchRecord _SelectedRecord;
 
@@ -33,7 +33,7 @@ namespace PanzerBlitz
 			{
 				foreach (FileInfo file in Directory.EnumerateFiles(Path).Select(i => new FileInfo(i)))
 				{
-					SelectionOption<FileInfo> option = new SelectionOption<FileInfo>("match-record-selection-option")
+					var option = new SelectionOption<FileInfo>("match-record-selection-option")
 					{
 						DisplayedString = file.Name,
 						Value = file

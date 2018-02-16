@@ -8,8 +8,8 @@ namespace PanzerBlitz
 {
 	public class MatchEndController
 	{
-		MatchContext _Context;
-		IOPane _SavePane = new IOPane("Save") { Visible = false };
+		readonly MatchContext _Context;
+		readonly IOPane _SavePane = new IOPane("Save") { Visible = false };
 
 		public MatchEndController(MatchEndScreen MatchEndScreen, MatchContext Context)
 		{
@@ -25,7 +25,7 @@ namespace PanzerBlitz
 
 		void SaveMatchRecord(object Sender, EventArgs E)
 		{
-			IOPane pane = (IOPane)Sender;
+			var pane = (IOPane)Sender;
 			using (FileStream stream = new FileStream(pane.InputPath, FileMode.Create))
 			{
 				using (GZipStream compressionStream = new GZipStream(stream, CompressionLevel.Optimal))

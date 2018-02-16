@@ -52,7 +52,7 @@ namespace PanzerBlitz
 			(i, j) => new UnloadOrder(i, j)
 		};
 
-		List<GameObject> _GameObjects = new List<GameObject>();
+		readonly List<GameObject> _GameObjects = new List<GameObject>();
 
 		public OrderSerializer(Match Match)
 		{

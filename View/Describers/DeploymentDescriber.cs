@@ -1,7 +1,6 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
-	public class DeploymentDescriber
+	public static class DeploymentDescriber
 	{
 		public static string Describe(DeploymentConfiguration Deployment)
 		{

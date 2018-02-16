@@ -13,10 +13,10 @@ namespace PanzerBlitz
 
 		protected void RenderAll(IEnumerable<T> Objects, uint SpriteSize, uint TextureSize)
 		{
-			RenderTexture texture = new RenderTexture(TextureSize, TextureSize);
+			var texture = new RenderTexture(TextureSize, TextureSize);
 			Texture renderedTexture;
 
-			List<KeyValuePair<T, Vector2f[]>> renderInfoCache = new List<KeyValuePair<T, Vector2f[]>>();
+			var renderInfoCache = new List<KeyValuePair<T, Vector2f[]>>();
 			int i = 0;
 			int j = 0;
 			uint rowSprites = TextureSize / SpriteSize;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -16,7 +15,7 @@ namespace PanzerBlitz
 
 		public ServerData(string Path)
 		{
-			ParseBlock block = new ParseBlock(new ParseBlock[]
+			var block = new ParseBlock(new ParseBlock[]
 			{
 				new ParseBlock(
 					"unit-configuration-lock<>",
@@ -26,7 +25,7 @@ namespace PanzerBlitz
 				ParseBlock.FromFile(Path + "/UnitConfigurationPacks.blk")
 			});
 
-			IdGenerator idGenerator = new IdGenerator();
+			var idGenerator = new IdGenerator();
 			block.AddParser<TagMatcher>("tag-matcher", i => new TagMatcher(i));
 			block.AddParser<UnitConfigurationLock>(
 				"unit-configuration-lock",
@@ -34,7 +33,7 @@ namespace PanzerBlitz
 			block.AddParser<UnitConfigurationPack>(
 				"unit-configuration-pack", i => new UnitConfigurationPack(i, idGenerator));
 
-			object[] attributes = block.BreakToAttributes<object>(typeof(Attribute), true);
+			var attributes = block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitConfigurationLocks =
 				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
 			UnitConfigurationPacks =

@@ -17,7 +17,7 @@ namespace PanzerBlitz
 
 		public UnitConfigurationLock(ParseBlock Block, IdGenerator IdGenerator)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Id = IdGenerator.GenerateId();
 			UnitConfiguration = GameData.UnitConfigurations[(string)attributes[(int)Attribute.UNIT_CONFIGURATION]];

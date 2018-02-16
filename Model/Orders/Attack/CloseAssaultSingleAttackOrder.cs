@@ -24,7 +24,7 @@ namespace PanzerBlitz
 			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(Attacker, AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null);
 			return new AttackFactorCalculation(
-				0, new List<AttackFactorCalculationFactor>() { AttackFactorCalculationFactor.CANNOT_ATTACK });
+				0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -43,7 +43,7 @@ namespace PanzerBlitz
 			if (Attacker.Position.HexCoordinate.Distance(Defender.Position.HexCoordinate) > 1)
 				return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 
-			OrderInvalidReason r = Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null);
+			var r = Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null);
 			if (r != OrderInvalidReason.NONE) return r;
 			return base.Validate();
 		}

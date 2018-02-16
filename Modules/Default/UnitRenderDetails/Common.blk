@@ -36,6 +36,12 @@ unit-render-details:fort-50 {
 	string:image-path { fort.png }
 	color:override-color { #FFFFFF }
 }
+unit-render-details:truck-bridge {
+	string:image-path { bridge.png }
+}
+unit-render-details:tank-bridge {
+	string:image-path { bridge.png }
+}
 unit-render-details:wagon {
 	string:image-path { wagon.png }
 }

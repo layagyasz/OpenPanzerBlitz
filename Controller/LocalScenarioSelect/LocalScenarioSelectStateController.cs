@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		{
 			_Context = ProgramStateContext;
 
-			ScenarioSelectScreen scenarioSelect =
+			var scenarioSelect =
 				new ScenarioSelectScreen(ProgramContext.ScreenResolution, GameData.Scenarios);
 			scenarioSelect.OnScenarioSelected += HandleStartScenario;
 			scenarioSelect.OnMainMenuButtonClicked += HandleBack;

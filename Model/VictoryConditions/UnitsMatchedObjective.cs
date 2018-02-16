@@ -25,7 +25,7 @@ namespace PanzerBlitz
 
 		public UnitsMatchedObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
 			Friendly = (bool)attributes[(int)Attribute.FRIENDLY];

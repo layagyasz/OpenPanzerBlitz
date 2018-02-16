@@ -15,10 +15,9 @@ namespace PanzerBlitz
 		{
 			_Context = ProgramStateContext;
 
-			MatchContext context = (MatchContext)ProgramStateContext;
-			FactionRenderer factionRenderer =
-				new FactionRenderer(context.Match.Scenario, GameData.FactionRenderDetails, 512, 1024);
-			MatchEndScreen screen = new MatchEndScreen(context.Match, ProgramContext.ScreenResolution, factionRenderer);
+			var context = (MatchContext)ProgramStateContext;
+			var factionRenderer = new FactionRenderer(context.Match.Scenario, GameData.FactionRenderDetails, 512, 1024);
+			var screen = new MatchEndScreen(context.Match, ProgramContext.ScreenResolution, factionRenderer);
 			screen.OnMainMenuButtonClicked += HandleBack;
 			_Controller = new MatchEndController(screen, context);
 			return screen;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
+﻿using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
@@ -10,9 +8,9 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationStackView : Interactive
 	{
-		bool _DisplayCount;
-		UnitConfigurationView _UnitConfigurationView;
-		Button _Text;
+		readonly bool _DisplayCount;
+		readonly UnitConfigurationView _UnitConfigurationView;
+		readonly Button _Text;
 
 		public int Count { get; set; } = 1;
 

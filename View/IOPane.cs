@@ -13,10 +13,10 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnAction;
 		public EventHandler<EventArgs> OnCancel;
 
-		Select<FileInfo> _FileSelect = new Select<FileInfo>("io-select", false);
-		Button _ActionButton = new Button("small-button");
-		Button _CancelButton = new Button("small-button");
-		TextInput _FileNameInput = new TextInput("io-text-input");
+		readonly Select<FileInfo> _FileSelect = new Select<FileInfo>("io-select", false);
+		readonly Button _ActionButton = new Button("small-button");
+		readonly Button _CancelButton = new Button("small-button");
+		readonly TextInput _FileNameInput = new TextInput("io-text-input");
 
 		string _Directory;
 
@@ -58,7 +58,7 @@ namespace PanzerBlitz
 
 			foreach (FileInfo f in Directory.EnumerateFiles(Path).Select(i => new FileInfo(i)))
 			{
-				SelectionOption<FileInfo> option =
+				var option =
 					new SelectionOption<FileInfo>("io-select-option") { DisplayedString = f.Name, Value = f };
 				option.OnClick += (sender, e) => _FileNameInput.Value = ((SelectionOption<FileInfo>)sender).Value.Name;
 				_FileSelect.Add(option);

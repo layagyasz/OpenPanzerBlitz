@@ -11,7 +11,7 @@ namespace PanzerBlitz
 {
 	class MainClass
 	{
-		static Interface Interface = new Interface(VideoMode.DesktopMode, "PanzerBlitz", Styles.Default);
+		static readonly Interface Interface = new Interface(VideoMode.DesktopMode, "PanzerBlitz", Styles.Default);
 
 		public static void Main(string[] args)
 		{
@@ -31,7 +31,7 @@ namespace PanzerBlitz
 					{
 						using (GZipStream compressionStream = new GZipStream(fileStream, CompressionMode.Decompress))
 						{
-							SerializationInputStream stream = new SerializationInputStream(compressionStream);
+							var stream = new SerializationInputStream(compressionStream);
 							GameData.Load(module, stream);
 						}
 					}
@@ -46,7 +46,7 @@ namespace PanzerBlitz
 						{
 							using (GZipStream compressionStream = new GZipStream(fileStream, CompressionLevel.Optimal))
 							{
-								SerializationOutputStream stream = new SerializationOutputStream(compressionStream);
+								var stream = new SerializationOutputStream(compressionStream);
 								GameData.Serialize(stream);
 							}
 						}
@@ -62,8 +62,8 @@ namespace PanzerBlitz
 			}
 			catch (Exception e)
 			{
-				string fileName = string.Format("Logs/CrashDump-{0}.txt", DateTime.Now.ToString("yyyyMMddHHmmss"));
-				StringBuilder log = new StringBuilder();
+				var fileName = string.Format("Logs/CrashDump-{0}.txt", DateTime.Now.ToString("yyyyMMddHHmmss"));
+				var log = new StringBuilder();
 				log.AppendFormat("[ProgramState]\n{0}\n\n", flowController);
 				log.AppendFormat("[StackTrace]\n{0}", e);
 				File.WriteAllText(fileName, log.ToString());

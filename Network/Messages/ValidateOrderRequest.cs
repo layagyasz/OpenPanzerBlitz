@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Network;
+﻿using Cardamom.Network;
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
@@ -9,7 +7,7 @@ namespace PanzerBlitz
 	{
 		public readonly Order Order;
 
-		OrderSerializer _Serializer;
+		readonly OrderSerializer _Serializer;
 
 		public ValidateOrderRequest(Order Order, OrderSerializer Serializer)
 		{

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
@@ -13,7 +12,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnDeploymentSelected;
 
 		Select<DeploymentPage> _DeploymentPageSelect = new Select<DeploymentPage>("select");
-		List<DeploymentPage> _Pages = new List<DeploymentPage>();
+		readonly List<DeploymentPage> _Pages = new List<DeploymentPage>();
 
 		public Deployment SelectedDeployment
 		{
@@ -36,7 +35,7 @@ namespace PanzerBlitz
 			_Pages.Add(Page);
 			Insert(0, Page);
 
-			SelectionOption<DeploymentPage> option = new SelectionOption<DeploymentPage>("select-option")
+			var option = new SelectionOption<DeploymentPage>("select-option")
 			{
 				Value = Page,
 				DisplayedString = Page.Deployment.Configuration.UnitGroup.Name

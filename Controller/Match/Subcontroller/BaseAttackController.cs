@@ -2,7 +2,6 @@ using System;
 
 using Cardamom.Utilities;
 
-using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -12,7 +11,7 @@ namespace PanzerBlitz
 		AttackOrder _AttackBuilder;
 		AttackPane _AttackPane;
 
-		public BaseAttackController(HumanMatchPlayerController Controller)
+		protected BaseAttackController(HumanMatchPlayerController Controller)
 			: base(Controller)
 		{
 		}
@@ -48,7 +47,7 @@ namespace PanzerBlitz
 			if (_AttackBuilder == null || _AttackBuilder.TargetTile != Tile)
 				attack = NewAttack.GenerateNewAttackOrder();
 			else attack = _AttackBuilder;
-			OrderInvalidReason r = attack.AddAttacker(NewAttack);
+			var r = attack.AddAttacker(NewAttack);
 			if (r == OrderInvalidReason.NONE)
 			{
 				if (attack != _AttackBuilder)

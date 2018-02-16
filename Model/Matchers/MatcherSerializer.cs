@@ -56,16 +56,16 @@ namespace PanzerBlitz
 
 			yield return new Tuple<string, Func<ParseBlock, object>>("any-tile", i => new EmptyMatcher<Tile>());
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"tile-matches-all", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.AND));
+				"tile-matches-all", i => new CompositeMatcher<Tile>(i, Aggregators.AND));
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"tile-matches-any", i => new CompositeMatcher<Tile>(i, CompositeMatcher<Tile>.OR));
+				"tile-matches-any", i => new CompositeMatcher<Tile>(i, Aggregators.OR));
 			yield return new Tuple<string, Func<ParseBlock, object>>("tile-not", i => new InverseMatcher<Tile>(i));
 
 			yield return new Tuple<string, Func<ParseBlock, object>>("any-unit", i => new EmptyMatcher<Unit>());
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"unit-matches-all", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.AND));
+				"unit-matches-all", i => new CompositeMatcher<Unit>(i, Aggregators.AND));
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"unit-matches-any", i => new CompositeMatcher<Unit>(i, CompositeMatcher<Unit>.OR));
+				"unit-matches-any", i => new CompositeMatcher<Unit>(i, Aggregators.OR));
 			yield return new Tuple<string, Func<ParseBlock, object>>("unit-not", i => new InverseMatcher<Unit>(i));
 		}
 	}

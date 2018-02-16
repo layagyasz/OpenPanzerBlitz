@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		{
 			if (Cache.ContainsKey(this)) return Cache[this];
 
-			int score = CalculateScore(ForArmy, Match, Cache);
+			var score = CalculateScore(ForArmy, Match, Cache);
 			Cache.Add(this, score);
 			return score;
 		}

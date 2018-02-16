@@ -56,14 +56,14 @@ namespace PanzerBlitz
 
 		public static NetworkContext CreateClient(string IpAddress, ushort Port)
 		{
-			TCPClient client = new TCPClient(IpAddress, Port);
+			var client = new TCPClient(IpAddress, Port);
 			client.Start();
 			return new NetworkContext(client);
 		}
 
 		public static NetworkContext CreateServer(ushort Port)
 		{
-			TCPServer server = new TCPServer(Port);
+			var server = new TCPServer(Port);
 			server.Start();
 			return new NetworkContext(server);
 		}

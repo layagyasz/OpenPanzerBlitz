@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class ObjectiveDescriber
+	public static class ObjectiveDescriber
 	{
 		public static string Describe(Objective Objective)
 		{
@@ -28,7 +26,7 @@ namespace PanzerBlitz
 			return ObjectDescriber.Listify(
 				Objective.Objectives.Select(i => ReplaceScore(Describe(i), "number of")),
 				", ",
-				Objective.Aggregator == CompositeObjective.AND ? ", and " : ", or ");
+				Objective.Aggregator == Aggregators.AND ? ", and " : ", or ");
 		}
 
 		public static string Describe(FurthestAdvanceObjective Objective)

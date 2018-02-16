@@ -51,7 +51,7 @@ namespace PanzerBlitz
 					 			|| Tile.Rules.TreatUnitsAsArmored
 								|| TreatStackAsArmored(AttackOrders, Defenders);
 			// If there is a fort, only use its defense.
-			Unit fort = Defenders.First().Position.Units.FirstOrDefault(
+			var fort = Defenders.First().Position.Units.FirstOrDefault(
 							i => i.Configuration.UnitClass == UnitClass.FORT && i.Army == Defenders.First().Army);
 			if (fort != null)
 			{
@@ -126,7 +126,7 @@ namespace PanzerBlitz
 			if (_Odds > 4) _Odds = 4;
 		}
 
-		private void IncreaseOdds()
+		void IncreaseOdds()
 		{
 			if (OddsAgainst) --_Odds;
 			else ++_Odds;
@@ -142,17 +142,17 @@ namespace PanzerBlitz
 			IEnumerable<SingleAttackOrder> Attackers,
 			IEnumerable<Unit> Defenders)
 		{
-			int armoredCount = Defenders.Count(i => i.Configuration.IsArmored);
-			int unArmoredCount = Defenders.Count(i => !i.Configuration.IsArmored);
+			var armoredCount = Defenders.Count(i => i.Configuration.IsArmored);
+			var unArmoredCount = Defenders.Count(i => !i.Configuration.IsArmored);
 			if (armoredCount > unArmoredCount) return true;
 			if (armoredCount < unArmoredCount) return false;
 
 			foreach (SingleAttackOrder a in Attackers) a.TreatStackAsArmored = true;
-			int armoredAttack = Attackers.Sum(
+			var armoredAttack = Attackers.Sum(
 				i => i.GetAttack().Attack);
 
 			foreach (SingleAttackOrder a in Attackers) a.TreatStackAsArmored = false;
-			int unArmoredAttack = Attackers.Sum(
+			var unArmoredAttack = Attackers.Sum(
 				i => i.GetAttack().Attack);
 
 			return armoredAttack < unArmoredAttack;

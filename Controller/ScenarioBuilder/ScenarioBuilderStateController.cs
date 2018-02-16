@@ -14,12 +14,12 @@ namespace PanzerBlitz
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			ScenarioParameters defaultParameters =
+			var defaultParameters =
 				new ScenarioParameters(
 					1939, Front.EAST, GameData.Environments.Values.First(), 8, new Coordinate(33, 33));
 			_ScenarioBuilder = new ScenarioBuilder(defaultParameters);
 
-			ScenarioBuilderScreen screen = new ScenarioBuilderScreen(ProgramContext.ScreenResolution, _ScenarioBuilder);
+			var screen = new ScenarioBuilderScreen(ProgramContext.ScreenResolution, _ScenarioBuilder);
 			screen.OnMainMenuButtonClicked += HandleBack;
 
 			_Controller = new ScenarioBuilderController(_ScenarioBuilder, screen);

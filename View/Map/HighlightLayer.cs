@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Utilities;
@@ -11,10 +10,10 @@ namespace PanzerBlitz
 {
 	public class HighlightLayer : Pod
 	{
-		List<Highlight> _Highlights = new List<Highlight>();
+		readonly List<Highlight> _Highlights = new List<Highlight>();
 		bool _DirtyBuffer;
 
-		TransparentArrayList<Vertex> _VertexBuffer = new TransparentArrayList<Vertex>();
+		readonly TransparentArrayList<Vertex> _VertexBuffer = new TransparentArrayList<Vertex>();
 
 		public void AddHighlight(Highlight Highlight)
 		{
@@ -28,10 +27,10 @@ namespace PanzerBlitz
 			_DirtyBuffer = true;
 		}
 
-		private void UpdateVertexBuffer()
+		void UpdateVertexBuffer()
 		{
 			_VertexBuffer.Clear();
-			HashSet<Tile> highlighted = new HashSet<Tile>();
+			var highlighted = new HashSet<Tile>();
 			foreach (Highlight h in _Highlights)
 			{
 				foreach (Tuple<Tile, Color> t in h.Highlights)
@@ -45,7 +44,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		private void HighlightTile(Tile Tile, Color Color)
+		void HighlightTile(Tile Tile, Color Color)
 		{
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{

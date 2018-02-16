@@ -49,8 +49,8 @@ namespace PanzerBlitz
 		{
 			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration.UniqueKey];
 
-			Sprite image = new Sprite(new Texture(renderDetails.ImagePath));
-			RenderStates r = new RenderStates(Transform);
+			var image = new Sprite(new Texture(renderDetails.ImagePath));
+			var r = new RenderStates(Transform);
 			Target.Draw(image, r);
 
 			// Do not render stats for blocks and mines.
@@ -62,40 +62,37 @@ namespace PanzerBlitz
 			// Only render defense for forts.
 			if (UnitConfiguration.UnitClass == UnitClass.FORT)
 			{
-				Text fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 56);
+				var fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 56);
 				fortText.Color = Color.Black;
 				fortText.Position = SpriteSize * new Vector2f(1f / 2, 1f / 3) - GetCenter(fortText);
 				Target.Draw(fortText, r);
 				return;
 			}
 
-			Text attackText = new Text(UnitConfiguration.Attack.ToString(), Font, 36);
+			var attackText = new Text(UnitConfiguration.Attack.ToString(), Font, 36);
 			attackText.Color = Color.Black;
 			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
 
-			Text rangeText = new Text(
+			var rangeText = new Text(
 				UnitConfiguration.Range.ToString() + (UnitConfiguration.CanDoubleRange ? "*" : ""), Font, 36);
 			rangeText.Color = Color.Black;
 			rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
 
-			Text defenseText = new Text(UnitConfiguration.Defense.ToString(), Font, 36);
+			var defenseText = new Text(UnitConfiguration.Defense.ToString(), Font, 36);
 			defenseText.Color = Color.Black;
 			defenseText.Position = SpriteSize * new Vector2f(1f / 6, 3f / 4) - GetCenter(defenseText);
 
-			Text moveText = new Text(
+			var moveText = new Text(
 				UnitConfiguration.Movement
 				+ (UnitConfiguration.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 
-			Text weaponClassText = new Text(WeaponClassString(UnitConfiguration), Font, 28);
+			var weaponClassText = new Text(WeaponClassString(UnitConfiguration), Font, 28);
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
-			Text nameText = new Text(
-				renderDetails.OverrideDisplayName == null ? UnitConfiguration.Name : renderDetails.OverrideDisplayName,
-				Font,
-				24);
+			var nameText = new Text(renderDetails.OverrideDisplayName ?? UnitConfiguration.Name, Font, 24);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 
@@ -117,7 +114,7 @@ namespace PanzerBlitz
 			if (UnitConfiguration.IsCarrier && !UnitConfiguration.CanOnlyCarryInfantry)
 			{
 				if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "C";
-				else return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);
+				return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);
 			}
 			if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "-";
 			if (UnitConfiguration.CanIndirectFire && UnitConfiguration.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)

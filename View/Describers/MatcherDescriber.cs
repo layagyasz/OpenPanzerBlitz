@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class MatcherDescriber
+	public static class MatcherDescriber
 	{
 		public static string Describe(Matcher<Tile> Matcher)
 		{
@@ -131,7 +130,7 @@ namespace PanzerBlitz
 			return ObjectDescriber.Listify(
 				Matcher.Matchers.Select(Describe),
 				", ",
-				Matcher.Aggregator == CompositeMatcher<T>.AND ? ", and " : ", or ");
+				Matcher.Aggregator == Aggregators.AND ? ", and " : ", or ");
 		}
 
 		public static string Describe<T>(InverseMatcher<T> Matcher)

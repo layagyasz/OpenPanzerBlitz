@@ -10,7 +10,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnChange;
 
 		string _Name;
-		HashSet<Tile> _Tiles;
+		readonly HashSet<Tile> _Tiles;
 
 		public string Name
 		{

@@ -25,17 +25,17 @@ namespace PanzerBlitz
 
 		public ConvoyDeploymentConfiguration(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
 			IsStrictConvoy = Parse.DefaultIfNull(attributes[(int)Attribute.IS_STRICT_CONVOY], false);
 			MovementAutomator = (ConvoyMovementAutomator)attributes[(int)Attribute.MOVEMENT_AUTOMATOR];
 
-			Matcher<Tile> m = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
-			Matcher<Tile> edge = new TileOnEdge(Direction.ANY);
+			var m = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
+			var edge = new TileOnEdge(Direction.ANY);
 
 			if (m == null) Matcher = edge;
-			else Matcher = new CompositeMatcher<Tile>(new Matcher<Tile>[] { edge, m }, CompositeMatcher<Tile>.AND);
+			else Matcher = new CompositeMatcher<Tile>(new Matcher<Tile>[] { edge, m }, Aggregators.AND);
 		}
 
 		public ConvoyDeploymentConfiguration(SerializationInputStream Stream)

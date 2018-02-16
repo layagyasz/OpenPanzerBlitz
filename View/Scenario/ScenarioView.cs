@@ -10,9 +10,9 @@ namespace PanzerBlitz
 {
 	public class ScenarioView : GuiContainer<GuiItem>
 	{
-		ScrollCollection<ClassedGuiItem> _ScenarioDisplay =
+		readonly ScrollCollection<ClassedGuiItem> _ScenarioDisplay =
 			new ScrollCollection<ClassedGuiItem>("scenario-main-display");
-		SingleColumnTable _DetailDisplay = new SingleColumnTable("scenario-detail-display");
+		readonly SingleColumnTable _DetailDisplay = new SingleColumnTable("scenario-detail-display");
 
 		public ScenarioView()
 			: base("scenario-display")
@@ -40,10 +40,9 @@ namespace PanzerBlitz
 					{
 						DisplayedString = ObjectDescriber.Describe(army.Faction)
 					});
-				GuiContainer<GuiItem> factionMount = new GuiContainer<GuiItem>("scenario-faction-mount");
+				var factionMount = new GuiContainer<GuiItem>("scenario-faction-mount");
 				Vector2f size = factionMount.Size - factionMount.LeftPadding * 2;
-				FactionView faction =
-					new FactionView(army.Faction, FactionRenderer, Math.Min(size.X, size.Y));
+				var faction = new FactionView(army.Faction, FactionRenderer, Math.Min(size.X, size.Y));
 				faction.Position = .5f * (factionMount.Size - faction.Size) - factionMount.LeftPadding;
 				factionMount.Add(faction);
 				_ScenarioDisplay.Add(factionMount);

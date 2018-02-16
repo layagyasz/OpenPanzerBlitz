@@ -36,9 +36,9 @@ namespace PanzerBlitz
 				yield return p;
 
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"achieve-all", i => new CompositeObjective(i, CompositeObjective.AND));
+				"achieve-all", i => new CompositeObjective(i, Aggregators.AND));
 			yield return new Tuple<string, Func<ParseBlock, object>>(
-				"achieve-any", i => new CompositeObjective(i, CompositeObjective.OR));
+				"achieve-any", i => new CompositeObjective(i, Aggregators.OR));
 		}
 	}
 }

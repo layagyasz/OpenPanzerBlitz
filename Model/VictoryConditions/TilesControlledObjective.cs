@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -21,7 +20,7 @@ namespace PanzerBlitz
 
 		public TilesControlledObjective(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Friendly = (bool)attributes[(int)Attribute.FRIENDLY];
 			Matcher = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];

@@ -41,7 +41,7 @@ namespace PanzerBlitz
 		{
 			if (_StackDuplicates)
 			{
-				UnitConfigurationSelectionOption o =
+				var o =
 					_Items
 						.SelectMany(i => i)
 						.Cast<UnitConfigurationSelectionOption>()
@@ -61,7 +61,7 @@ namespace PanzerBlitz
 			}
 			else t = _Items.Last();
 
-			UnitConfigurationSelectionOption option =
+			var option =
 				new UnitConfigurationSelectionOption(
 					_CellClassName,
 					_CellClassName + "-details",
@@ -86,7 +86,7 @@ namespace PanzerBlitz
 		public void Remove(UnitConfigurationLink UnitConfigurationLink)
 		{
 			TableRow current = null;
-			List<TableRow> rows = _Items.ToList();
+			var rows = _Items.ToList();
 			_Items.Clear();
 			foreach (TableRow row in rows)
 			{

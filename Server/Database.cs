@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PanzerBlitz
@@ -8,11 +7,11 @@ namespace PanzerBlitz
 	{
 		IdGenerator _IdGenerator = new IdGenerator();
 
-		Dictionary<int, PlayerOrm> _Players = new Dictionary<int, PlayerOrm>();
+		readonly Dictionary<int, PlayerOrm> _Players = new Dictionary<int, PlayerOrm>();
 
 		public PlayerOrm AddPlayer(string Username, string Password)
 		{
-			PlayerOrm p = GetPlayer(Username);
+			var p = GetPlayer(Username);
 			if (p == null) return null;
 			p = new PlayerOrm(_IdGenerator, Username, Password);
 			_Players.Add(p.Id, p);

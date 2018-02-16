@@ -62,11 +62,10 @@ namespace PanzerBlitz
 
 		public Map(SerializationInputStream Stream, TileRuleSet RuleSet, IdGenerator IdGenerator)
 		{
-			int width = Stream.ReadInt32();
-			int height = Stream.ReadInt32();
+			var width = Stream.ReadInt32();
+			var height = Stream.ReadInt32();
 			Tiles = new Tile[width, height];
-			IEnumerator<Tile> tiles = Stream.ReadEnumerable(
-				i => new Tile(i, this, RuleSet, IdGenerator)).GetEnumerator();
+			var tiles = Stream.ReadEnumerable(i => new Tile(i, this, RuleSet, IdGenerator)).GetEnumerator();
 
 			for (int i = 0; i < width; ++i)
 			{
@@ -90,15 +89,15 @@ namespace PanzerBlitz
 
 		internal void CopyTo(Map From, int X, int Y, bool Invert)
 		{
-			Coordinate max = new Coordinate(From.Tiles.GetLength(0), From.Tiles.GetLength(1));
+			var max = new Coordinate(From.Tiles.GetLength(0), From.Tiles.GetLength(1));
 
 			foreach (MapRegion m in From.Regions)
 			{
-				MapRegion copy = Regions.FirstOrDefault(i => i.Name == m.Name);
-				if (copy == null) copy = new MapRegion() { Name = m.Name };
+				var copy = Regions.FirstOrDefault(i => i.Name == m.Name);
+				if (copy == null) copy = new MapRegion { Name = m.Name };
 				foreach (Tile t in m.Tiles)
 				{
-					Coordinate c = TransformCoordinate(t.Coordinate, new Coordinate(X, Y), max, Invert);
+					var c = TransformCoordinate(t.Coordinate, new Coordinate(X, Y), max, Invert);
 					copy.Add(Tiles[c.X + X, c.Y + Y]);
 				}
 				Regions.Add(copy);
@@ -108,7 +107,7 @@ namespace PanzerBlitz
 			{
 				for (int j = 0; j < From.Tiles.GetLength(1); ++j)
 				{
-					Coordinate c = TransformCoordinate(new Coordinate(i, j), new Coordinate(X, Y), max, Invert);
+					var c = TransformCoordinate(new Coordinate(i, j), new Coordinate(X, Y), max, Invert);
 					if (c.X < From.Tiles.GetLength(0) && c.X >= 0)
 					{
 						Tile t = From.Tiles[c.X, c.Y];

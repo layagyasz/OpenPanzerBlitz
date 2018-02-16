@@ -166,7 +166,7 @@ namespace PanzerBlitz
 
 		public UnitConfiguration(ParseBlock Block)
 		{
-			object[] attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UniqueKey = Block.Name;
 			Name = (string)attributes[(int)Attribute.NAME];
@@ -282,12 +282,24 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.BRIDGE;
 		}
 
+		public bool MustBeAttackedAlone()
+		{
+			return UnitClass == UnitClass.BRIDGE;
+		}
+
 		public BlockType GetBlockType()
 		{
 			if (UnitClass == UnitClass.FORT) return BlockType.NONE;
 			if (UnitClass == UnitClass.MINEFIELD) return BlockType.SOFT_BLOCK;
 			if (UnitClass == UnitClass.BLOCK) return BlockType.HARD_BLOCK;
 			return BlockType.STANDARD;
+		}
+
+		public bool OverridesBlockType()
+		{
+			return UnitClass == UnitClass.FORT
+										 || UnitClass == UnitClass.BLOCK
+										 || UnitClass == UnitClass.MINEFIELD;
 		}
 
 		public bool IsNeutral()
@@ -376,7 +388,7 @@ namespace PanzerBlitz
 			{
 				case UnitClass.TANK:
 					if (WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
-					else return Attack + Range + Defense + Movement;
+					return Attack + Range + Defense + Movement;
 				case UnitClass.ASSAULT_GUN:
 					if (CanAntiAircraft)
 					{

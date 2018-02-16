@@ -6,8 +6,8 @@ namespace PanzerBlitz
 {
 	public class MatchLobbyController
 	{
-		MatchLobbyAdapter _LobbyAdapter;
-		MatchLobbyScreen _LobbyScreen;
+		readonly MatchLobbyAdapter _LobbyAdapter;
+		readonly MatchLobbyScreen _LobbyScreen;
 
 		public MatchLobbyController(MatchLobbyAdapter LobbyAdapter, MatchLobbyScreen LobbyScreen)
 		{

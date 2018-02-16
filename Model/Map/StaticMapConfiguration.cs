@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
-			Map map = new Map(Map.Width, Map.Height, Environment, IdGenerator);
+			var map = new Map(Map.Width, Map.Height, Environment, IdGenerator);
 			map.CopyTo(Map, 0, 0, false);
 			return map;
 		}

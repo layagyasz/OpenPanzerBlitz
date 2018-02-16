@@ -78,6 +78,26 @@ unit-configuration:fort-50 {
 	byte:defense { 50 }
 	byte:movement { 0 }
 }
+unit-configuration:truck-bridge {
+	string:name { Truck Bridge }
+	unit-class:unit-class { bridge }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 23 }
+	byte:movement { 0 }
+}
+unit-configuration:tank-bridge {
+	string:name { Tank Bridge }
+	unit-class:unit-class { bridge }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 32 }
+	byte:movement { 0 }
+}
 unit-configuration:wagon {
 	string:name { Wagon }
 	unit-class:unit-class { transport }

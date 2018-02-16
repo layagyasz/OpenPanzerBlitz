@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 
 using Cardamom.Interface;
@@ -11,7 +10,7 @@ namespace PanzerBlitz
 
 		public override Pod SetupState(ProgramContext ProgramContext, ProgramStateContext ProgramStateContext)
 		{
-			EditScreen screen = new EditScreen(
+			var screen = new EditScreen(
 				ProgramContext.ScreenResolution,
 				new Map(11, 33, null, new IdGenerator()),
 				GameData.TileRenderers.Values.First());

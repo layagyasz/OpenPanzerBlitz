@@ -20,31 +20,31 @@ namespace PanzerBlitz
 			_Context = (MatchContext)ProgramStateContext;
 			_MatchEndBuffer = new EventBuffer<EventArgs>();
 
-			UnitConfigurationRenderer renderer = new UnitConfigurationRenderer(
+			var renderer = new UnitConfigurationRenderer(
 				_Context.Match.Scenario,
 				GameData.UnitRenderDetails,
 				128,
 				1024,
 				ClassLibrary.Instance.GetFont("compacta"));
-			FactionRenderer factionRenderer =
+			var factionRenderer =
 				new FactionRenderer(_Context.Match.Scenario, GameData.FactionRenderDetails, 512, 1024);
-			HashSet<Army> armies = new HashSet<Army>(_Context.GetPlayerControlledArmies());
+			var armies = new HashSet<Army>(_Context.GetPlayerControlledArmies());
 
-			MatchScreen screen = new MatchScreen(
+			var screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
 				_Context.Match,
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
 				renderer,
 				factionRenderer);
-			HumanMatchPlayerController controller =
+			var controller =
 				new HumanMatchPlayerController(
 					_Context.MakeMatchAdapter(), armies, renderer, screen, ProgramContext.KeyController);
 
-			Dictionary<Army, MatchPlayerController> playerControllers = new Dictionary<Army, MatchPlayerController>();
+			var playerControllers = new Dictionary<Army, MatchPlayerController>();
 			foreach (Army a in _Context.Match.Armies)
 			{
-				MatchPlayerController overrideController = _Context.GetOverridePlayerController(a);
-				playerControllers.Add(a, overrideController == null ? controller : overrideController);
+				var overrideController = _Context.GetOverridePlayerController(a);
+				playerControllers.Add(a, overrideController ?? controller);
 			}
 			_MatchController = new MatchController(_Context.Match, playerControllers);
 			screen.OnPulse += HandlePulse;

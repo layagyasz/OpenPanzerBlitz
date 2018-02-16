@@ -1,13 +1,11 @@
-﻿using System;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
 	public class BlankMapConfiguration : MapConfiguration
 	{
-		int _Width;
-		int _Height;
+		readonly int _Width;
+		readonly int _Height;
 
 		public BlankMapConfiguration(int Width, int Height)
 		{
@@ -20,7 +18,7 @@ namespace PanzerBlitz
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
-			Map map = new Map(_Width, _Height, Environment, IdGenerator);
+			var map = new Map(_Width, _Height, Environment, IdGenerator);
 			map.Ready();
 			return map;
 		}

@@ -1,6 +1,5 @@
 using System;
 
-using Cardamom.Network;
 using Cardamom.Utilities;
 
 namespace PanzerBlitz
@@ -34,8 +33,8 @@ namespace PanzerBlitz
 		{
 			try
 			{
-				NetworkContext client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
-				MatchLobbyContext lobby = client.MakePlayerContext(GameData.Player).MakeLobbyContext();
+				var client = NetworkContext.CreateClient(E.Value, GameData.OnlinePort);
+				var lobby = client.MakePlayerContext(GameData.Player).MakeLobbyContext();
 				if (lobby != null) OnConnectionSetup(this, new ValuedEventArgs<MatchLobbyContext>(lobby));
 				else
 				{
