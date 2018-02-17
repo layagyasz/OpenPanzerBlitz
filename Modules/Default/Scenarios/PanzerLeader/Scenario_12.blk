@@ -99,7 +99,7 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.57mm-at }
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at-american }
 								int:count { 3 }
 							}
 							unit-count:_ {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,13 +60,13 @@ namespace PanzerBlitz
 				if (Unit.Carrier != null) Unit.Carrier.Unload(false);
 				if (Unit.Passenger != null) Unit.Unload(false);
 				Unit.Remove();
-				Unit.Deployed = false;
+				Unit.Emplace(false);
 			}
 			else
 			{
 				Tile.Control(Unit);
 				Unit.Place(Tile);
-				Unit.Deployed = true;
+				Unit.Emplace(true);
 			}
 
 			return OrderStatus.FINISHED;

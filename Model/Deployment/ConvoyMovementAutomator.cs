@@ -66,7 +66,7 @@ namespace PanzerBlitz
 			{
 				if (Army.Match.Armies.Any(
 					a => a.Configuration.Team != Army.Configuration.Team
-						&& a.Units.Any(u => u.Deployed && !u.MustMove())))
+						&& a.Units.Any(u => u.Position != null && !u.MustMove())))
 					return true;
 			}
 			return false;

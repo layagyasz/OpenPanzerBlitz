@@ -123,6 +123,9 @@ namespace PanzerBlitz
 
 			bool roaded = path != null && path.RoadMove;
 
+			var fromBridged = Tile.Units.Any(i => i.Configuration.UnitClass == UnitClass.BRIDGE && i.Emplaced);
+			var toBridged = Tile.Units.Any(i => i.Configuration.UnitClass == UnitClass.BRIDGE && i.Emplaced);
+
 			bool leavingDepressed = Tile.Rules.Depressed
 										&& (path == null || !path.Depressed)
 										&& (path == null || !path.DepressedTransition)
@@ -130,7 +133,7 @@ namespace PanzerBlitz
 
 			UnitMovementRules movementRules = Unit.Configuration.MovementRules;
 			var leaveCost = new MovementCost(0f);
-			if (leavingDepressed)
+			if (leavingDepressed && !fromBridged)
 			{
 				leaveCost = 1 + movementRules.Sloped.GetMoveCost(adjacent, unitMoved)
 					+ movementRules.Rough.GetMoveCost(adjacent, unitMoved)
@@ -140,31 +143,36 @@ namespace PanzerBlitz
 			var crossCost = GetRulesMoveCost(
 				edge, movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit, true);
 
-			var enterCost = GetRulesMoveCost(
-				To.GetBaseRules(), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
-
-			var edgeCost = new MovementCost(0f);
-			var intersectCost = new MovementCost(0f);
-			for (int i = 0; i < 6; ++i)
+			var enterCost = new MovementCost(0f);
+			if (!toBridged)
 			{
-				var eMove = GetRulesMoveCost(
-					To.GetEdgeRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
-				if (eMove.IsSet())
+				enterCost = GetRulesMoveCost(
+					To.GetBaseRules(), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
+
+				var edgeCost = new MovementCost(0f);
+				var intersectCost = new MovementCost(0f);
+				for (int i = 0; i < 6; ++i)
 				{
-					if (edgeCost.IsSet()) edgeCost = MovementCost.Min(edgeCost, eMove);
-					else edgeCost = eMove;
+					var eMove = GetRulesMoveCost(
+						To.GetEdgeRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
+					if (eMove.IsSet())
+					{
+						if (edgeCost.IsSet()) edgeCost = MovementCost.Min(edgeCost, eMove);
+						else edgeCost = eMove;
+					}
+
+					var pMove = GetRulesMoveCost(
+						To.GetPathOverlayRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
+					if (pMove.IsSet())
+					{
+						if (intersectCost.IsSet()) intersectCost = MovementCost.Min(intersectCost, pMove);
+						else intersectCost = pMove;
+					}
 				}
 
-				var pMove = GetRulesMoveCost(
-					To.GetPathOverlayRules(i), movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
-				if (pMove.IsSet())
-				{
-					if (intersectCost.IsSet()) intersectCost = MovementCost.Min(intersectCost, pMove);
-					else intersectCost = pMove;
-				}
+				enterCost = (edgeCost.IsSet() ? MovementCost.Min(edgeCost, enterCost) : enterCost) + intersectCost;
 			}
 
-			enterCost = (edgeCost.IsSet() ? MovementCost.Min(edgeCost, enterCost) : enterCost) + intersectCost;
 			if (path != null && path.OverrideBaseMovement && (!path.RoadMove || useRoadMovement))
 			{
 				enterCost = GetRulesMoveCost(

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +40,7 @@ namespace PanzerBlitz
 
 		public override bool IsConfigured()
 		{
-			return Units.All(i => i.Deployed);
+			return Units.All(i => i.Position != null);
 		}
 
 		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)

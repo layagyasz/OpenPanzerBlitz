@@ -17,7 +17,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 
-		public bool Deployed { get; set; }
+		public bool Emplaced { get; private set; }
 
 		public readonly Army Army;
 
@@ -66,7 +66,8 @@ namespace PanzerBlitz
 				return OrderInvalidReason.TARGET_IMMUNE;
 			if (AttackMethod == AttackMethod.MINEFIELD && !Configuration.IsNeutral()) return OrderInvalidReason.NONE;
 
-			if (Army.Configuration.Team == this.Army.Configuration.Team || Configuration.IsNeutral())
+			if (Army.Configuration.Team == this.Army.Configuration.Team
+				|| (Configuration.IsNeutral() && !Configuration.MustBeAttackedAlone()))
 				return OrderInvalidReason.TARGET_TEAM;
 			if (Position == null) return OrderInvalidReason.ILLEGAL;
 			if (Configuration.MustBeAttackedAlone())
@@ -438,6 +439,11 @@ namespace PanzerBlitz
 		public void DoInteraction()
 		{
 			if (Interaction != null && !Interaction.Apply(this)) Interaction.Cancel();
+		}
+
+		public void Emplace(bool Emplaced)
+		{
+			this.Emplaced = Emplaced && Configuration.Emplaceable();
 		}
 
 		public void Fire()

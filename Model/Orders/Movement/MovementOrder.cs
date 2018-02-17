@@ -28,9 +28,9 @@ namespace PanzerBlitz
 		public MovementOrder(Unit Unit, Tile To, bool Combat, bool Halt = false)
 		{
 			this.Unit = Unit;
+			this.To = To;
 			this.Combat = Combat;
 			this.Halt = Halt;
-
 		}
 
 		public MovementOrder(SerializationInputStream Stream, List<GameObject> Objects)

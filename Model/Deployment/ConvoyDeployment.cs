@@ -66,7 +66,7 @@ namespace PanzerBlitz
 		{
 			if (Unit.Position == null) return false;
 			if (!_StopAutomatedMovement) return true;
-			return Unit.Position == _EntryTile && _ConvoyOrder.Any(i => !i.Deployed);
+			return Unit.Position == _EntryTile && _ConvoyOrder.Any(i => i.Position == null);
 		}
 
 		public override void ReassessMatch()

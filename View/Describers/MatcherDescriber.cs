@@ -8,6 +8,7 @@ namespace PanzerBlitz
 		{
 			if (Matcher is TileDistanceFrom) return Describe((TileDistanceFrom)Matcher);
 			if (Matcher is TileElevation) return Describe((TileElevation)Matcher);
+			if (Matcher is TileHasBase) return Describe((TileHasBase)Matcher);
 			if (Matcher is TileHasBridge) return Describe((TileHasBridge)Matcher);
 			if (Matcher is TileHasCoordinate) return Describe((TileHasCoordinate)Matcher);
 			if (Matcher is TileHasEdge) return Describe((TileHasEdge)Matcher);
@@ -25,7 +26,7 @@ namespace PanzerBlitz
 		public static string Describe(TileDistanceFrom Matcher)
 		{
 			return string.Format(
-				"{0} {1} hexes away from tiles that {2}",
+				"{0} {1} hexes away from tiles {2}",
 				Matcher.Atleast ? "at least" : "at most",
 				Matcher.Distance,
 				Describe(Matcher.Matcher));
@@ -45,6 +46,11 @@ namespace PanzerBlitz
 		public static string Describe(TileHasCoordinate Matcher)
 		{
 			return string.Format("at {0}", ObjectDescriber.Describe(Matcher.Coordinate));
+		}
+
+		public static string Describe(TileHasBase Matcher)
+		{
+			return string.Format("in {0}", ObjectDescriber.Describe(Matcher.TileBase));
 		}
 
 		public static string Describe(TileHasEdge Matcher)

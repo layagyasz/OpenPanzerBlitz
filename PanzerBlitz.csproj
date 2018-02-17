@@ -350,6 +350,7 @@
     <Compile Include="Model\Orders\Attack\MinefieldAttackOrder.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasBridge.cs" />
     <Compile Include="Aggregators.cs" />
+    <Compile Include="Model\Matchers\TileMatchers\TileHasBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2181,6 +2182,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_12.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_13.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_14.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

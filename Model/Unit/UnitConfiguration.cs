@@ -310,6 +310,11 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.BRIDGE;
 		}
 
+		public bool Emplaceable()
+		{
+			return IsNeutral() || UnitClass == UnitClass.FORT;
+		}
+
 		public bool CanSpot()
 		{
 			return !IsNeutral() && UnitClass != UnitClass.FORT;

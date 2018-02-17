@@ -54,7 +54,6 @@ namespace PanzerBlitz
 			{
 				Tile.Control(Unit);
 				Unit.Place(Tile);
-				Unit.Deployed = true;
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

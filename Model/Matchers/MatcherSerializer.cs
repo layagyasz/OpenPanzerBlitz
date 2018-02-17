@@ -19,6 +19,7 @@ namespace PanzerBlitz
 
 			typeof(TileDistanceFrom),
 			typeof(TileElevation),
+			typeof(TileHasBase),
 			typeof(TileHasBridge),
 			typeof(TileHasCoordinate),
 			typeof(TileHasEdge),

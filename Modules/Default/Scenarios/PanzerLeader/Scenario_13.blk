@@ -1,0 +1,336 @@
+﻿scenario:_ {
+	string:name { The Fortified Goose Egg }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 12 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-c.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.american }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+					tiles-controlled-objective:towns-controlled {
+						bool:friendly { false }
+						tile-matches-any:matcher {
+							tile-has-base:_ {
+								tile-base:base { village }
+							}
+							tile-has-edge:_ {
+								tile-edge:edge { town }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 7 }
+						bool:invert { true }
+						!var:objective { objectives.towns-controlled }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 5 }
+						bool:invert { true }
+						!var:objective { objectives.towns-controlled }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-any:objective {
+							trigger-objective:_ {
+								int:threshold { 3 }
+								bool:invert { true }
+								!var:objective { objectives.towns-controlled }
+							}
+							trigger-objective:_ {
+								int:threshold { 25 }
+								!var:objective { objectives.units-destroyed }
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,5 21,5 21,33 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { 106th Infantry Rgt. & 7th Armored Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-american }
+								int:count { 18 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.scout-platoon-american }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at-american }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.155mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.8in-how-allied }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-20 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-8 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-16 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_105 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-5 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_75 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 17 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-american }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+					tiles-controlled-objective:towns-controlled {
+						bool:friendly { true }
+						tile-matches-any:matcher {
+							tile-has-base:_ {
+								tile-base:base { village }
+							}
+							tile-has-edge:_ {
+								tile-edge:edge { town }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 8 }
+						!var:objective { objectives.towns-controlled }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 11 }
+						!var:objective { objectives.towns-controlled }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-any:objective {
+							trigger-objective:_ {
+								int:threshold { 13 }
+								!var:objective { objectives.towns-controlled }
+							}
+							trigger-objective:_ {
+								int:threshold { 33 }
+								!var:objective { objectives.units-destroyed }
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 10,0 10,3 0,3 }
+					}
+					unit-group:unit-group {
+						string:name { Fuhrer Begleit Bgde. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west 
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wespe }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hummel }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wirbelwind }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_ss }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 10 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 10,0 21,0 21,3 10,3 }
+					}
+					unit-group:unit-group {
+						string:name { 18th Volksgrenadier Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west 
+								}
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hetzer }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
