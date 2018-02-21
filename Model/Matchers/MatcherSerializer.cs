@@ -23,6 +23,7 @@ namespace PanzerBlitz
 			typeof(TileHasBridge),
 			typeof(TileHasCoordinate),
 			typeof(TileHasEdge),
+			typeof(TileHasPath),
 			typeof(TileHasUnit),
 			typeof(TileInRegion),
 			typeof(TileOnEdge),
@@ -37,7 +38,7 @@ namespace PanzerBlitz
 			typeof(UnitHasPosition),
 			typeof(UnitHasReconned),
 			typeof(UnitHasStatus),
-			typeof(UnitIsHostile)
+			typeof(UnitIsHostile),
 		})
 		{ }
 

@@ -12,6 +12,7 @@ namespace PanzerBlitz
 			if (Matcher is TileHasBridge) return Describe((TileHasBridge)Matcher);
 			if (Matcher is TileHasCoordinate) return Describe((TileHasCoordinate)Matcher);
 			if (Matcher is TileHasEdge) return Describe((TileHasEdge)Matcher);
+			if (Matcher is TileHasPath) return Describe((TileHasPath)Matcher);
 			if (Matcher is TileHasUnit) return Describe((TileHasUnit)Matcher);
 			if (Matcher is TileInRegion) return Describe((TileInRegion)Matcher);
 			if (Matcher is TileOnEdge) return Describe((TileOnEdge)Matcher);
@@ -58,6 +59,11 @@ namespace PanzerBlitz
 			return string.Format("next to {0}", ObjectDescriber.Describe(Matcher.Edge));
 		}
 
+		public static string Describe(TileHasPath Matcher)
+		{
+			return string.Format("next to {0}", ObjectDescriber.Describe(Matcher.Path));
+		}
+
 		public static string Describe(TileHasUnit Matcher)
 		{
 			return string.Format("contain units {0}", Describe(Matcher.Matcher));
@@ -100,7 +106,10 @@ namespace PanzerBlitz
 
 		public static string Describe(UnitHasEvacuated Matcher)
 		{
-			return string.Format("evacuated {0}", ObjectDescriber.Describe(Matcher.Direction));
+			return string.Format(
+				"evacuated {0} through tiles {1}",
+				ObjectDescriber.Describe(Matcher.Direction),
+				Describe(Matcher.Matcher));
 		}
 
 		public static string Describe(UnitHasPosition Matcher)

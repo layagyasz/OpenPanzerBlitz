@@ -50,8 +50,8 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 			{
+				Unit.Evacuated = Unit.Position;
 				Unit.Remove();
-				Unit.Evacuated = Direction;
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

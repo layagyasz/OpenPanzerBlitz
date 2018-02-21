@@ -30,7 +30,7 @@ namespace PanzerBlitz
 		public Tile Position { get; private set; }
 		public Unit Passenger { get; private set; }
 		public Unit Carrier { get; private set; }
-		public Direction Evacuated { get; set; } = Direction.NONE;
+		public Tile Evacuated { get; set; }
 		public Interaction Interaction { get; private set; }
 
 		UnitConfiguration _BaseConfiguration;
