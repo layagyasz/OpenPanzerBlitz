@@ -1,7 +1,6 @@
 using System;
 
 using Cardamom.Interface;
-using Cardamom.Network;
 
 namespace PanzerBlitz
 {

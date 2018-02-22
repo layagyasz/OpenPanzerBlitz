@@ -1,7 +1,4 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
-	public interface ProgramStateContext
-	{
-	}
+	public interface ProgramStateContext { }
 }

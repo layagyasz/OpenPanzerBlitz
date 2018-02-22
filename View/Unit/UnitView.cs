@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
@@ -127,10 +128,10 @@ namespace PanzerBlitz
 				Transform.Scale(_UnitConfigurationView.Scale, _UnitConfigurationView.Scale);
 				var r = new RenderStates(Transform);
 
-				if (Unit.Moved || Unit.Fired || (Unit.Interaction != null && Unit.Interaction.Master == Unit))
+				if (Unit.Moved || Unit.Fired || Unit.Interactions.Any(i => i.Master == Unit))
 					Transform.Scale(1 / 64f, 1 / 64f);
 
-				if (Unit.Interaction != null && Unit.Interaction.Master == Unit)
+				if (Unit.Interactions.Any(i => i.Master == Unit))
 					WORKING_DISPLAY.Draw(Target, Transform);
 				else if (Unit.Moved && !Unit.Fired && Unit.RemainingMovement > 0)
 					MOVING_DISPLAY.Draw(Target, Transform);

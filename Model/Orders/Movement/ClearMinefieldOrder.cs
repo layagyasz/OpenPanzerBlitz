@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -58,7 +59,7 @@ namespace PanzerBlitz
 				return _Interaction.Validate();
 			}
 
-			if (Minefield.Interaction != null)
+			if (Minefield.Interactions.Count() > 0)
 				return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
 			_Interaction = new ClearMinefieldInteraction(Engineer, Minefield);
 			return _Interaction.Validate();
@@ -76,8 +77,8 @@ namespace PanzerBlitz
 				else
 				{
 					_Interaction.Apply(Minefield);
-					Engineer.SetInteraction(_Interaction);
-					Minefield.SetInteraction(_Interaction);
+					Engineer.AddInteraction(_Interaction);
+					Minefield.AddInteraction(_Interaction);
 				}
 				Engineer.Halt();
 				return OrderStatus.FINISHED;

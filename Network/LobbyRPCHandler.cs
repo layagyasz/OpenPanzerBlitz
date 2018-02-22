@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Cardamom.Network;
+﻿using Cardamom.Network;
 using Cardamom.Network.Responses;
 
 namespace PanzerBlitz

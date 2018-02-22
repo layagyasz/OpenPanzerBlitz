@@ -12,12 +12,12 @@ namespace PanzerBlitz
 		public MovementRule(BlockType BlockType)
 		{
 			this.BlockType = BlockType;
-			this.Cost = 0;
+			Cost = 0;
 		}
 
 		public MovementRule(float Cost)
 		{
-			this.BlockType = BlockType.NONE;
+			BlockType = BlockType.NONE;
 			this.Cost = Cost;
 		}
 

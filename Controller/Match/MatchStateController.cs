@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Cardamom.Interface;
-
-using SFML.Graphics;
 
 namespace PanzerBlitz
 {

@@ -6,7 +6,6 @@ using Cardamom.Interface;
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
-using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz

@@ -31,8 +31,8 @@ namespace PanzerBlitz
 		public Unit Passenger { get; private set; }
 		public Unit Carrier { get; private set; }
 		public Tile Evacuated { get; set; }
-		public Interaction Interaction { get; private set; }
 
+		List<Interaction> _Interactions = new List<Interaction>();
 		UnitConfiguration _BaseConfiguration;
 		bool _Dismounted;
 
@@ -50,6 +50,13 @@ namespace PanzerBlitz
 			get
 			{
 				return _Dismounted ? _BaseConfiguration.DismountAs : _BaseConfiguration;
+			}
+		}
+		public IEnumerable<Interaction> Interactions
+		{
+			get
+			{
+				return _Interactions;
 			}
 		}
 
@@ -184,7 +191,7 @@ namespace PanzerBlitz
 					return;
 				case CombatResult.DESTROY:
 					Status = UnitStatus.DESTROYED;
-					if (Interaction != null) Interaction.Cancel();
+					CancelInteractions();
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
@@ -419,24 +426,32 @@ namespace PanzerBlitz
 			return _ReconDirections[(int)Direction];
 		}
 
-		public void SetInteraction(Interaction Interaction)
+		public void AddInteraction(Interaction Interaction)
 		{
-			if (this.Interaction != null) this.Interaction.Cancel();
-			this.Interaction = Interaction;
+			_Interactions.Add(Interaction);
 		}
 
-		public void CancelInteraction()
+		public void CancelInteractions()
 		{
-			Interaction = null;
+			_Interactions.ToList().ForEach(CancelInteraction);
+		}
+
+		public void CancelInteraction(Interaction Interaction)
+		{
+			_Interactions.Remove(Interaction);
 		}
 
 		public T HasInteraction<T>(Func<T, bool> Predicate)
 		{
-			if (Interaction is T) return Predicate((T)Interaction) ? (T)Interaction : default(T);
-			return default(T);
+			return (T)_Interactions.FirstOrDefault(i => i is T && Predicate((T)i));
 		}
 
-		public void DoInteraction()
+		public void DoInteractions()
+		{
+			_Interactions.ForEach(DoInteraction);
+		}
+
+		public void DoInteraction(Interaction Interaction)
 		{
 			if (Interaction != null && !Interaction.Apply(this)) Interaction.Cancel();
 		}
@@ -449,7 +464,7 @@ namespace PanzerBlitz
 		public void Fire()
 		{
 			Fired = true;
-			if (Interaction != null) Interaction.Cancel();
+			CancelInteractions();
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
@@ -468,7 +483,7 @@ namespace PanzerBlitz
 			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
 			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
 
-			DoInteraction();
+			DoInteractions();
 		}
 
 		public float GetPointValue()

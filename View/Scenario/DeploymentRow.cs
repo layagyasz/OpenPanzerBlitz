@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface.Items;
+﻿using Cardamom.Interface.Items;
 
 namespace PanzerBlitz
 {

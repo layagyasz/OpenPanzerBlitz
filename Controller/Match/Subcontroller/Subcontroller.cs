@@ -1,6 +1,4 @@
-﻿using System;
-
-using SFML.Window;
+﻿using SFML.Window;
 
 namespace PanzerBlitz
 {

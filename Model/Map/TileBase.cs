@@ -1,4 +1,3 @@
-using System;
 namespace PanzerBlitz
 {
 	public enum TileBase

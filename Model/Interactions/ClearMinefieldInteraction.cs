@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -42,8 +41,8 @@ namespace PanzerBlitz
 
 		public bool Cancel()
 		{
-			Agent.CancelInteraction();
-			Object.CancelInteraction();
+			Agent.CancelInteraction(this);
+			Object.CancelInteraction(this);
 			return true;
 		}
 

@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 
 using SFML.Graphics;
-using SFML.Window;
 
 namespace PanzerBlitz
 {

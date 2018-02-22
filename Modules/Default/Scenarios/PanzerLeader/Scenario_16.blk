@@ -27,7 +27,7 @@
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
-						objective-success-level:success-level { marginal-victory }
+						objective-success-level:success-level { victory }
 						int:threshold { 2 }
 						!var:objective { objectives.artain-controlled }
 					}
@@ -141,76 +141,6 @@
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 								int:count { 1 }
-							}
-						}
-					}
-				}
-				positional-deployment-configuration:_ {
-					tile-within:matcher {
-						zone:zone { 10,0 21,0 21,3 10,3 }
-					}
-					unit-group:unit-group {
-						string:name { 18th Volksgrenadier Div. }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
-								int:count { 9 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { 
-									unit-configurations.rifle-platoon-german-42-west 
-								}
-								int:count { 9 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-german-west 
-								}
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
-								int:count { 4 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.150mm-how }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.hetzer }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-german }
-								int:count { 4 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.wagon }
-								int:count { 6 }
 							}
 						}
 					}

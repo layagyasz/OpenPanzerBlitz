@@ -1,9 +1,4 @@
-﻿using System;
-
-using Cardamom.Interface;
-
-using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Window;
 
 namespace PanzerBlitz
 {

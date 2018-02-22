@@ -103,18 +103,23 @@
 						unit-has-evacuated:matcher {
 							direction:direction { west }
 							tile-within:matcher {
-								zone:zone { 0,10  1,10 1,24 0,24 }
+								zone:zone { 0,9  1,9 1,23 0,23 }
 							}
 						}
 					}
 					tiles-controlled-objective:towns-controlled {
 						bool:friendly { true }
-						tile-matches-any:matcher {
-							tile-has-base:_ {
-								tile-base:base { village }
+						tile-matches-all:matcher {
+							tile-within:_ {
+								zone:zone { 0,0 10,0 10,33 0,33 }
 							}
-							tile-has-edge:_ {
-								tile-edge:edge { town }
+							tile-matches-any:_ {
+								tile-has-base:_ {
+									tile-base:base { village }
+								}
+								tile-has-edge:_ {
+									tile-edge:edge { town }
+								}
 							}
 						}
 					}

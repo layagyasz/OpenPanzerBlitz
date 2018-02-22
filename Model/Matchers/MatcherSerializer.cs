@@ -38,7 +38,7 @@ namespace PanzerBlitz
 			typeof(UnitHasPosition),
 			typeof(UnitHasReconned),
 			typeof(UnitHasStatus),
-			typeof(UnitIsHostile),
+			typeof(UnitIsHostile)
 		})
 		{ }
 

@@ -36,7 +36,7 @@ namespace PanzerBlitz
 		{
 			Turns = Stream.ReadInt32();
 			ExitTile = (Tile)Objects[Stream.ReadInt32()];
-			_RemainingTurns = (int)Stream.ReadInt32();
+			_RemainingTurns = Stream.ReadInt32();
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

@@ -1,5 +1,4 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public enum OrderStatus
 	{

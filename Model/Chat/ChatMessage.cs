@@ -13,7 +13,7 @@ namespace PanzerBlitz
 		public ChatMessage(Player Player, string Message)
 		{
 			this.Player = Player;
-			this.Time = DateTime.Now;
+			Time = DateTime.Now;
 			this.Message = Message;
 		}
 

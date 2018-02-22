@@ -1,6 +1,4 @@
-﻿using System;
-
-using Cardamom.Network;
+﻿using Cardamom.Network;
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
