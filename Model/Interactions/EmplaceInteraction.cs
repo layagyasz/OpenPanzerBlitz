@@ -1,15 +1,16 @@
 ﻿namespace PanzerBlitz
 {
-	public class ClearMinefieldInteraction : InteractionBase
+	public class EmplaceInteraction : InteractionBase
 	{
-		public ClearMinefieldInteraction(Unit Agent, Unit Object)
+		public int Turns { get; private set; }
+
+		public EmplaceInteraction(Unit Agent, Unit Object)
 			: base(Agent, Object) { }
 
 		public override OrderInvalidReason Validate()
 		{
 			if (!Agent.Configuration.CanClearMines) return OrderInvalidReason.UNIT_NO_ENGINEER;
-			if (Object.Configuration.UnitClass != UnitClass.MINEFIELD) return OrderInvalidReason.TARGET_IMMUNE;
-			if (!Object.Emplaced) return OrderInvalidReason.TARGET_IMMUNE;
+			if (!Object.Configuration.Emplaceable()) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
 			if (Agent.Position == null
 				|| Object.Position == null
 				|| Agent.Position.HexCoordinate.Distance(Object.Position.HexCoordinate) > 1)
@@ -20,8 +21,12 @@
 		public override bool Apply(Unit Unit)
 		{
 			if (Validate() != OrderInvalidReason.NONE) return false;
-			if (Unit == Object) Unit.HandleCombatResult(CombatResult.DISRUPT);
 			return true;
+		}
+
+		public void Tick()
+		{
+			Turns++;
 		}
 	}
 }

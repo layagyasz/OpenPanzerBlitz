@@ -296,6 +296,37 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
+		public OrderInvalidReason CanPlaceMinefield()
+		{
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			if (!Configuration.CanPlaceMines) return OrderInvalidReason.UNIT_NO_ENGINEER;
+			return OrderInvalidReason.NONE;
+		}
+
+		public OrderInvalidReason CanPlaceBridge()
+		{
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+			if (!Configuration.CanPlaceBridges) return OrderInvalidReason.UNIT_NO_ENGINEER;
+			return OrderInvalidReason.NONE;
+		}
+
+		public OrderInvalidReason CanBeEmplaced()
+		{
+			if (Position == null) return OrderInvalidReason.ILLEGAL;
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Moved || Fired)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
+
+			if (Configuration.UnitClass == UnitClass.BRIDGE && !Position.Rules.Bridgeable)
+				return OrderInvalidReason.UNIT_EMPLACE_TERRAIN;
+			if (!Configuration.Emplaceable() || Emplaced) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
+			return OrderInvalidReason.NONE;
+		}
+
 		public void Dismount(bool UseMovement)
 		{
 			_Dismounted = true;

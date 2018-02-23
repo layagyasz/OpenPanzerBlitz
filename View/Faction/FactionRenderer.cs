@@ -32,9 +32,9 @@ namespace PanzerBlitz
 				TextureSize)
 		{ }
 
-		public override void Render(RenderTarget Target, Transform Transform, Faction Faction)
+		public override void Render(RenderTarget Target, Transform Transform, Faction Object)
 		{
-			var image = new Sprite(new Texture(RenderDetails[Faction.UniqueKey].ImagePath));
+			var image = new Sprite(new Texture(RenderDetails[Object.UniqueKey].ImagePath));
 			image.Draw(Target, new RenderStates(Transform));
 		}
 	}

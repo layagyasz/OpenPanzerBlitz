@@ -45,54 +45,54 @@ namespace PanzerBlitz
 				Font)
 		{ }
 
-		public override void Render(RenderTarget Target, Transform Transform, UnitConfiguration UnitConfiguration)
+		public override void Render(RenderTarget Target, Transform Transform, UnitConfiguration Object)
 		{
-			UnitRenderDetails renderDetails = RenderDetails[UnitConfiguration.UniqueKey];
+			UnitRenderDetails renderDetails = RenderDetails[Object.UniqueKey];
 
 			var image = new Sprite(new Texture(renderDetails.ImagePath));
 			var r = new RenderStates(Transform);
 			Target.Draw(image, r);
 
 			// Do not render stats for blocks and mines.
-			if (UnitConfiguration.UnitClass == UnitClass.BLOCK
-				|| UnitConfiguration.UnitClass == UnitClass.MINEFIELD
-				|| UnitConfiguration.UnitClass == UnitClass.WRECKAGE)
+			if (Object.UnitClass == UnitClass.BLOCK
+				|| Object.UnitClass == UnitClass.MINEFIELD
+				|| Object.UnitClass == UnitClass.WRECKAGE)
 				return;
 
 			// Only render defense for forts.
-			if (UnitConfiguration.UnitClass == UnitClass.FORT)
+			if (Object.UnitClass == UnitClass.FORT)
 			{
-				var fortText = new Text(UnitConfiguration.Defense.ToString(), Font, 56);
+				var fortText = new Text(Object.Defense.ToString(), Font, 56);
 				fortText.Color = Color.Black;
 				fortText.Position = SpriteSize * new Vector2f(1f / 2, 1f / 3) - GetCenter(fortText);
 				Target.Draw(fortText, r);
 				return;
 			}
 
-			var attackText = new Text(UnitConfiguration.Attack.ToString(), Font, 36);
+			var attackText = new Text(Object.Attack.ToString(), Font, 36);
 			attackText.Color = Color.Black;
 			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
 
 			var rangeText = new Text(
-				UnitConfiguration.Range.ToString() + (UnitConfiguration.CanDoubleRange ? "*" : ""), Font, 36);
+				Object.Range.ToString() + (Object.CanDoubleRange ? "*" : ""), Font, 36);
 			rangeText.Color = Color.Black;
 			rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
 
-			var defenseText = new Text(UnitConfiguration.Defense.ToString(), Font, 36);
+			var defenseText = new Text(Object.Defense.ToString(), Font, 36);
 			defenseText.Color = Color.Black;
 			defenseText.Position = SpriteSize * new Vector2f(1f / 6, 3f / 4) - GetCenter(defenseText);
 
 			var moveText = new Text(
-				UnitConfiguration.Movement
-				+ (UnitConfiguration.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
+				Object.Movement
+				+ (Object.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 
-			var weaponClassText = new Text(WeaponClassString(UnitConfiguration), Font, 28);
+			var weaponClassText = new Text(WeaponClassString(Object), Font, 28);
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
-			var nameText = new Text(renderDetails.OverrideDisplayName ?? UnitConfiguration.Name, Font, 24);
+			var nameText = new Text(renderDetails.OverrideDisplayName ?? Object.Name, Font, 24);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 

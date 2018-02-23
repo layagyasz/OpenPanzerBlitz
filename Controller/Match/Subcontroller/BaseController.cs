@@ -179,6 +179,44 @@ namespace PanzerBlitz
 			Clear();
 		}
 
+		protected void Emplace()
+		{
+			if (_Controller.SelectedUnit == null) return;
+
+			var emplaceables =
+				_Controller.SelectedUnit.Position.Neighbors()
+						   .SelectMany(i => i.Units)
+						   .Where(i => i.Configuration.Emplaceable());
+			if (emplaceables.Count() == 1) Emplace(emplaceables.First());
+			else if (emplaceables.Count() > 1)
+			{
+				Clear();
+				var pane = new SelectPane<Unit>("Emplace Unit", emplaceables);
+				pane.OnItemSelected += Emplace;
+				_Pane = pane;
+				_Controller.AddPane(_Pane);
+			}
+		}
+
+		void Emplace(object Sender, ValuedEventArgs<Unit> E)
+		{
+			Emplace(E.Value);
+		}
+
+		void Emplace(Unit Target)
+		{
+			if (_Controller.SelectedUnit != null)
+			{
+				var order = new EmplaceOrder(_Controller.SelectedUnit, Target);
+				if (_Controller.ExecuteOrderAndAlert(order))
+				{
+					_Controller.SelectUnit(null);
+					_Controller.UnHighlight();
+				}
+			}
+			Clear();
+		}
+
 		protected void LoadUnit()
 		{
 			if (_Controller.SelectedUnit == null) return;

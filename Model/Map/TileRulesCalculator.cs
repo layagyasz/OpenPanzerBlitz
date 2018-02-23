@@ -15,6 +15,7 @@ namespace PanzerBlitz
 		public bool LowProfileConcealing { get; private set; }
 		public bool Watery { get; private set; }
 		public bool Bridged { get; private set; }
+		public bool Bridgeable { get; private set; }
 		public int DieModifier { get; private set; }
 		public int TieredElevation { get; private set; }
 		public int SubTieredElevation { get; private set; }
@@ -77,6 +78,7 @@ namespace PanzerBlitz
 					Bridged |= !path.Depressed && !path.Water && (edge.Depressed || edge.Water);
 				}
 			}
+			Bridgeable = !Bridged && Tile.GetPathOverlayRules().Any(i => i != null && i.Depressed);
 
 			DieModifier =
 				Math.Max(
@@ -123,8 +125,14 @@ namespace PanzerBlitz
 
 			bool roaded = path != null && path.RoadMove;
 
-			var fromBridged = Tile.Units.Any(i => i.Configuration.UnitClass == UnitClass.BRIDGE && i.Emplaced);
-			var toBridged = Tile.Units.Any(i => i.Configuration.UnitClass == UnitClass.BRIDGE && i.Emplaced);
+			var fromBridged = Tile.Units.Any(
+				i => i.Configuration.UnitClass == UnitClass.BRIDGE
+				&& i.Emplaced
+				&& (!Unit.Configuration.IsArmored || i.Configuration.CanSupportArmored));
+			var toBridged = Tile.Units.Any(
+				i => i.Configuration.UnitClass == UnitClass.BRIDGE
+				&& i.Emplaced
+				&& (!Unit.Configuration.IsArmored || i.Configuration.CanSupportArmored));
 
 			bool leavingDepressed = Tile.Rules.Depressed
 										&& (path == null || !path.Depressed)

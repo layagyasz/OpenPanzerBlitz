@@ -97,6 +97,8 @@ unit-configuration:tank-bridge {
 	byte:range { 0 }
 	byte:defense { 32 }
 	byte:movement { 0 }
+
+	bool:can-support-armored { true }
 }
 unit-configuration:wagon {
 	string:name { Wagon }

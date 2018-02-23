@@ -24,6 +24,8 @@ namespace PanzerBlitz
 			CAN_ANTI_AIRCRAFT,
 			CAN_DOUBLE_RANGE,
 			CAN_CLEAR_MINES,
+			CAN_PLACE_MINES,
+			CAN_PLACE_BRIDGES,
 			INNATELY_CLEARS_MINES,
 			IMMUNE_TO_MINES,
 
@@ -52,7 +54,9 @@ namespace PanzerBlitz
 
 			CAN_SPOT_INDIRECT_FIRE,
 			DISMOUNT_AS,
-			CAN_REMOUNT
+			CAN_REMOUNT,
+
+			CAN_SUPPORT_ARMORED
 		};
 
 		public readonly string UniqueKey;
@@ -72,6 +76,8 @@ namespace PanzerBlitz
 		public readonly bool CanAntiAircraft;
 		public readonly bool CanDoubleRange;
 		public readonly bool CanClearMines;
+		public readonly bool CanPlaceMines;
+		public readonly bool CanPlaceBridges;
 		public readonly bool InnatelyClearsMines;
 		public readonly bool ImmuneToMines;
 
@@ -104,6 +110,8 @@ namespace PanzerBlitz
 		public readonly UnitConfiguration DismountAs;
 		public readonly bool CanRemount;
 
+		public readonly bool CanSupportArmored;
+
 		public IEnumerable<UnitConfiguration> RepresentedConfigurations
 		{
 			get
@@ -132,6 +140,8 @@ namespace PanzerBlitz
 			CanAntiAircraft = Stream.ReadBoolean();
 			CanDoubleRange = Stream.ReadBoolean();
 			CanClearMines = Stream.ReadBoolean();
+			CanPlaceMines = Stream.ReadBoolean();
+			CanPlaceBridges = Stream.ReadBoolean();
 			InnatelyClearsMines = Stream.ReadBoolean();
 			ImmuneToMines = Stream.ReadBoolean();
 
@@ -162,6 +172,8 @@ namespace PanzerBlitz
 
 			DismountAs = Stream.ReadObject(i => new UnitConfiguration(i), true, true);
 			CanRemount = Stream.ReadBoolean();
+
+			CanSupportArmored = Stream.ReadBoolean();
 		}
 
 		public UnitConfiguration(ParseBlock Block)
@@ -244,6 +256,8 @@ namespace PanzerBlitz
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 			CanDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
 			CanClearMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CLEAR_MINES], IsEngineer);
+			CanPlaceMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_MINES], IsEngineer);
+			CanPlaceBridges = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_BRIDGES], IsEngineer);
 			InnatelyClearsMines = Parse.DefaultIfNull(attributes[(int)Attribute.INNATELY_CLEARS_MINES], false);
 			ImmuneToMines = Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines);
 
@@ -252,6 +266,8 @@ namespace PanzerBlitz
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
+
+			CanSupportArmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_SUPPORT_ARMORED], false);
 		}
 
 		public OrderInvalidReason CanLoad(UnitConfiguration UnitConfiguration)
@@ -481,6 +497,8 @@ namespace PanzerBlitz
 			Stream.Write(CanAntiAircraft);
 			Stream.Write(CanDoubleRange);
 			Stream.Write(CanClearMines);
+			Stream.Write(CanPlaceMines);
+			Stream.Write(CanPlaceBridges);
 			Stream.Write(InnatelyClearsMines);
 			Stream.Write(ImmuneToMines);
 
@@ -511,6 +529,8 @@ namespace PanzerBlitz
 
 			Stream.Write(DismountAs, true, true);
 			Stream.Write(CanRemount);
+
+			Stream.Write(CanSupportArmored);
 		}
 
 		public override string ToString()

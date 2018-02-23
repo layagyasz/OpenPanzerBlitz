@@ -79,6 +79,7 @@ namespace PanzerBlitz
 				case Keyboard.Key.I: ClearMinefield(); break;
 				case Keyboard.Key.L: LoadUnit(); break;
 				case Keyboard.Key.M: Mount(); break;
+				case Keyboard.Key.P: Emplace(); break;
 				case Keyboard.Key.R: Recon(); break;
 				case Keyboard.Key.U: UnloadUnit(); break;
 			}

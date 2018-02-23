@@ -116,6 +116,12 @@ namespace PanzerBlitz
 		{
 			foreach (Tile T in NeighborTiles) yield return T;
 		}
+
+		public IEnumerable<Tile> NeighborsAndSelf()
+		{
+			foreach (Tile T in NeighborTiles) yield return T;
+			yield return this;
+		}
 		// Pathable
 
 		public void FixPaths()

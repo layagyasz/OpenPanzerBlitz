@@ -352,6 +352,10 @@
     <Compile Include="Aggregators.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasBase.cs" />
     <Compile Include="Model\Matchers\TileMatchers\TileHasPath.cs" />
+    <Compile Include="Model\Interactions\InteractionBase.cs" />
+    <Compile Include="Model\Interactions\EmplaceInteraction.cs" />
+    <Compile Include="Model\Orders\Movement\EmplaceOrder.cs" />
+    <Compile Include="Model\Orders\Movement\EmplacementRequirements.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

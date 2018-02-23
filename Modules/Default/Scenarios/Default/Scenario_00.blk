@@ -46,17 +46,69 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 5,4 }
+						coordinate:coordinate { 4,10 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.scorpion-flail }
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
 								int:count { 1 }
 							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 5,10 }
+					}
+					unit-group:unit-group {
+						string:name { Test B }
+						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 4,12 }
+					}
+					unit-group:unit-group {
+						string:name { Test C }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 5,12 }
+					}
+					unit-group:unit-group {
+						string:name { Test D }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 5,11 }
+					}
+					unit-group:unit-group {
+						string:name { Test E }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
 								int:count { 1 }
 							}
 						}

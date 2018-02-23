@@ -77,6 +77,7 @@ namespace PanzerBlitz
 				else
 				{
 					_Interaction.Apply(Minefield);
+					Engineer.CancelInteractions();
 					Engineer.AddInteraction(_Interaction);
 					Minefield.AddInteraction(_Interaction);
 				}
