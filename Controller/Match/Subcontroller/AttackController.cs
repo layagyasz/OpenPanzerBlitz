@@ -8,17 +8,11 @@ namespace PanzerBlitz
 	public class AttackController : BaseAttackController
 	{
 		public AttackController(HumanMatchPlayerController Controller)
-			: base(Controller)
-		{
-		}
+			: base(Controller) { }
 
-		public override void HandleTileLeftClick(Tile Tile)
-		{
-		}
+		public override void HandleTileLeftClick(Tile Tile) { }
 
-		public override void HandleTileRightClick(Tile Tile)
-		{
-		}
+		public override void HandleTileRightClick(Tile Tile) { }
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{

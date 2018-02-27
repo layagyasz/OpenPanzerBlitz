@@ -7,6 +7,16 @@ namespace PanzerBlitz
 		void Begin();
 		bool Finish();
 		void End();
+
+		bool CanLoad();
+		bool CanUnload();
+		bool CanDismount();
+		bool CanMount();
+		bool CanEvacuate();
+		bool CanRecon();
+		bool CanClearMinefield();
+		bool CanEmplace();
+
 		void HandleTileLeftClick(Tile Tile);
 		void HandleTileRightClick(Tile Tile);
 		void HandleUnitLeftClick(Unit Unit);

@@ -21,9 +21,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void HandleTileRightClick(Tile Tile)
-		{
-		}
+		public override void HandleTileRightClick(Tile Tile) { }
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{

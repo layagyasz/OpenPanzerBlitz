@@ -9,37 +9,16 @@ namespace PanzerBlitz
 	public abstract class BaseAttackController : BaseController
 	{
 		AttackOrder _AttackBuilder;
-		AttackPane _AttackPane;
 
 		protected BaseAttackController(HumanMatchPlayerController Controller)
-			: base(Controller)
-		{
-		}
-
-		public override void Clear()
-		{
-			base.Clear();
-			if (_AttackBuilder != null)
-			{
-				_Controller.RemovePane(_AttackPane);
-				_AttackBuilder = null;
-			}
-		}
-
-		public override void End()
-		{
-			base.End();
-			Clear();
-		}
+			: base(Controller) { }
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
 			if (_AttackBuilder != null) _AttackBuilder.RemoveAttacker(Unit);
 		}
 
-		public override void HandleKeyPress(Keyboard.Key Key)
-		{
-		}
+		public override void HandleKeyPress(Keyboard.Key Key) { }
 
 		protected void AddAttack(Tile Tile, SingleAttackOrder NewAttack)
 		{
@@ -52,14 +31,16 @@ namespace PanzerBlitz
 			{
 				if (attack != _AttackBuilder)
 				{
-					Clear();
+					_Controller.Clear();
 
 					_AttackBuilder = attack;
-					_AttackPane = new AttackPane(_AttackBuilder);
-					_Controller.AddPane(_AttackPane);
+					AttackPane attackPane = new AttackPane(_AttackBuilder);
+					_Controller.AddPane(attackPane);
 
-					_AttackPane.OnAttackTargetChanged += ChangeAttackTarget;
-					_AttackPane.OnExecute += ExecuteAttack;
+					attackPane.OnAttackTargetChanged += ChangeAttackTarget;
+					attackPane.OnExecute += ExecuteAttack;
+
+					_Controller.AddPane(attackPane);
 				}
 			}
 			else _Controller.Alert(r);
@@ -69,7 +50,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.ExecuteOrderAndAlert(_AttackBuilder))
 			{
-				_Controller.RemovePane(_AttackPane);
+				_Controller.Clear();
 				_AttackBuilder = null;
 			}
 		}

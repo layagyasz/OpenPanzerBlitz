@@ -37,7 +37,7 @@ namespace PanzerBlitz
 			return _DeploymentPage;
 		}
 
-		public override void Clear()
+		public void Clear()
 		{
 			if (_LoadUnitPane != null)
 			{
@@ -144,7 +144,7 @@ namespace PanzerBlitz
 			Clear();
 		}
 
-		new void UnloadUnit()
+		void UnloadUnit()
 		{
 			if (_DeploymentPage.SelectedUnit != null)
 			{

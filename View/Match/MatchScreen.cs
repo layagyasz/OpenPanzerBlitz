@@ -16,6 +16,19 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnFinishClicked;
 		public EventHandler<ValuedEventArgs<UnitView>> OnUnitAdded;
 
+		public readonly Button LoadButton = new Button("action-button") { DisplayedString = "Load" };
+		public readonly Button UnloadButton = new Button("action-button") { DisplayedString = "Unload" };
+
+		public readonly Button DismountButton = new Button("action-button") { DisplayedString = "Dismount" };
+		public readonly Button MountButton = new Button("action-button") { DisplayedString = "Mount" };
+
+		public readonly Button EvacuateButton = new Button("action-button") { DisplayedString = "Evacuate" };
+		public readonly Button ReconButton = new Button("action-button") { DisplayedString = "Recon" };
+
+		public readonly Button ClearMinefieldButton =
+			new Button("action-button") { DisplayedString = "Clear Minefield" };
+		public readonly Button EmplaceButton = new Button("action-button") { DisplayedString = "Emplace" };
+
 		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly FactionRenderer FactionRenderer;
 
@@ -26,6 +39,7 @@ namespace PanzerBlitz
 		readonly StackLayer _StackLayer = new StackLayer();
 		readonly Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
 		readonly TableRow _TurnCounter = new TableRow("overlay-turn-counter");
+		readonly SingleColumnTable _ActionDisplay = new SingleColumnTable("actions-display");
 
 		public IEnumerable<UnitView> UnitViews
 		{
@@ -34,9 +48,26 @@ namespace PanzerBlitz
 				return _StackLayer.UnitViews;
 			}
 		}
+		public IEnumerable<Button> ActionButtons
+		{
+			get
+			{
+				yield return LoadButton;
+				yield return UnloadButton;
+				yield return DismountButton;
+				yield return MountButton;
+				yield return EvacuateButton;
+				yield return ReconButton;
+				yield return ClearMinefieldButton;
+			}
+		}
 
 		public MatchScreen(
-			Vector2f WindowSize, Match Match, TileRenderer TileRenderer, UnitConfigurationRenderer UnitRenderer, FactionRenderer FactionRenderer)
+			Vector2f WindowSize,
+			Match Match,
+			TileRenderer TileRenderer,
+			UnitConfigurationRenderer UnitRenderer,
+			FactionRenderer FactionRenderer)
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
 			Match.OnStartPhase += _EventBuffer.Hook((s, e) => HandleNewTurn(s, (StartTurnComponentEventArgs)e)).Invoke;
@@ -60,11 +91,13 @@ namespace PanzerBlitz
 			_InfoDisplay.Position = _FinishButton.Position - new Vector2f(0, _InfoDisplay.Size.Y + 16);
 			_VictoryConditionDisplay.Position =
 				_InfoDisplay.Position - new Vector2f(0, _VictoryConditionDisplay.Size.Y + 16);
+			_ActionDisplay.Position = new Vector2f(WindowSize.X - _ActionDisplay.Size.X - 16, 16);
 
 			_Items.Add(_FinishButton);
 			_Items.Add(_InfoDisplay);
 			_Items.Add(_VictoryConditionDisplay);
 			_Items.Add(_TurnCounter);
+			_Items.Add(_ActionDisplay);
 		}
 
 		void HandleNewTurn(object Sender, StartTurnComponentEventArgs E)
@@ -116,6 +149,12 @@ namespace PanzerBlitz
 
 			_InfoDisplay.SetTurn(Turn);
 			_VictoryConditionDisplay.SetVictoryCondition(Turn.TurnInfo.Army.Configuration.VictoryCondition);
+		}
+
+		public void SetActions(Func<Button, bool> Selector)
+		{
+			_ActionDisplay.Clear();
+			foreach (Button button in ActionButtons.Where(Selector)) _ActionDisplay.Add(button);
 		}
 
 		public override void Update(

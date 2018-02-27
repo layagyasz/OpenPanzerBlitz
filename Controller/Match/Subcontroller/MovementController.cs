@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		public override void HandleTileLeftClick(Tile Tile)
 		{
-			Clear();
+			_Controller.Clear();
 			if (_Controller.SelectedUnit != null)
 			{
 				var order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
@@ -26,20 +26,14 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void End()
-		{
-			base.End();
-			Clear();
-		}
-
 		public override void HandleTileRightClick(Tile Tile)
 		{
-			Clear();
+			_Controller.Clear();
 		}
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
-			Clear();
+			_Controller.Clear();
 			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& (Unit.CanMove(VehicleMovement, false) == OrderInvalidReason.NONE
 					|| Unit.CanUnload() == OrderInvalidReason.NONE))
@@ -51,7 +45,7 @@ namespace PanzerBlitz
 
 		public override void HandleUnitRightClick(Unit Unit)
 		{
-			Clear();
+			_Controller.Clear();
 		}
 
 		void SetMovementHighlight(Unit Unit)
@@ -74,14 +68,14 @@ namespace PanzerBlitz
 		{
 			switch (Key)
 			{
-				case Keyboard.Key.D: Dismount(); break;
-				case Keyboard.Key.E: Evacuate(); break;
-				case Keyboard.Key.I: ClearMinefield(); break;
-				case Keyboard.Key.L: LoadUnit(); break;
-				case Keyboard.Key.M: Mount(); break;
-				case Keyboard.Key.P: Emplace(); break;
-				case Keyboard.Key.R: Recon(); break;
-				case Keyboard.Key.U: UnloadUnit(); break;
+				case Keyboard.Key.D: _Controller.Dismount(); break;
+				case Keyboard.Key.E: _Controller.Evacuate(); break;
+				case Keyboard.Key.I: _Controller.ClearMinefield(); break;
+				case Keyboard.Key.L: _Controller.LoadUnit(); break;
+				case Keyboard.Key.M: _Controller.Mount(); break;
+				case Keyboard.Key.P: _Controller.Emplace(); break;
+				case Keyboard.Key.R: _Controller.Recon(); break;
+				case Keyboard.Key.U: _Controller.UnloadUnit(); break;
 			}
 		}
 	}

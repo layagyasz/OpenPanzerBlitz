@@ -36,7 +36,9 @@ namespace PanzerBlitz
 		public readonly UnitConfigurationRenderer UnitConfigurationRenderer;
 
 		MatchScreen _MatchScreen;
+		Pane _Pane;
 		Dictionary<TurnComponent, Subcontroller> _Controllers;
+		Dictionary<Button, Func<bool>> _AllowedActions;
 		TurnInfo _CurrentTurn;
 		Unit _SelectedUnit;
 
@@ -100,6 +102,30 @@ namespace PanzerBlitz
 			}
 			_KeyController = KeyController;
 			KeyController.OnKeyPressed += OnKeyPressed;
+
+			MatchScreen.LoadButton.OnClick += (sender, e) => LoadUnit();
+			MatchScreen.UnloadButton.OnClick += (sender, e) => UnloadUnit();
+			MatchScreen.DismountButton.OnClick += (sender, e) => Dismount();
+			MatchScreen.MountButton.OnClick += (sender, e) => Mount();
+			MatchScreen.EvacuateButton.OnClick += (sender, e) => Evacuate();
+			MatchScreen.ReconButton.OnClick += (sender, e) => Recon();
+			MatchScreen.ClearMinefieldButton.OnClick += (sender, e) => ClearMinefield();
+			MatchScreen.EmplaceButton.OnClick += (sender, e) => Emplace();
+
+			_AllowedActions = new Dictionary<Button, Func<bool>>()
+			{
+				{ MatchScreen.LoadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanLoad() },
+				{ MatchScreen.UnloadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanUnload() },
+				{ MatchScreen.DismountButton, () => _Controllers[_CurrentTurn.TurnComponent].CanDismount() },
+				{ MatchScreen.MountButton, () => _Controllers[_CurrentTurn.TurnComponent].CanMount() },
+				{ MatchScreen.EvacuateButton, () => _Controllers[_CurrentTurn.TurnComponent].CanEvacuate() },
+				{ MatchScreen.ReconButton, () => _Controllers[_CurrentTurn.TurnComponent].CanRecon() },
+				{
+					MatchScreen.ClearMinefieldButton,
+					() => _Controllers[_CurrentTurn.TurnComponent].CanClearMinefield()
+				},
+				{ MatchScreen.EmplaceButton, () => _Controllers[_CurrentTurn.TurnComponent].CanEmplace() },
+			};
 		}
 
 		void AddUnit(object Sender, ValuedEventArgs<UnitView> E)
@@ -121,6 +147,7 @@ namespace PanzerBlitz
 			if (_CurrentTurn.Army != null && _Controllers.ContainsKey(_CurrentTurn.TurnComponent))
 			{
 				_Controllers[_CurrentTurn.TurnComponent].End();
+				Clear();
 				UnHighlight();
 				SelectUnit(null);
 				_MatchScreen.PaneLayer.Clear();
@@ -138,6 +165,12 @@ namespace PanzerBlitz
 				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurn().TurnInfo.Army));
 		}
 
+		public void SetPane(Pane Pane)
+		{
+			_Pane = Pane;
+			AddPane(Pane);
+		}
+
 		public void AddPane(Pane Pane)
 		{
 			_MatchScreen.PaneLayer.Add(Pane);
@@ -152,9 +185,15 @@ namespace PanzerBlitz
 		{
 			_SelectedUnit = Unit;
 			if (Unit != null)
+			{
 				_MatchScreen.SetViewUnit(Unit);
+				_MatchScreen.SetActions(i => _AllowedActions[i]());
+			}
 			else if (Match.GetTurn().TurnInfo.Army != null)
+			{
 				_MatchScreen.SetViewFaction(Match.GetTurn().TurnInfo.Army.Configuration.Faction);
+				_MatchScreen.SetActions(i => false);
+			}
 		}
 
 		public bool ExecuteOrderAndAlert(Order Order)
@@ -235,6 +274,250 @@ namespace PanzerBlitz
 					Army.Configuration.VictoryCondition.GetTiles(Match.GetMap())
 					.Select(i => new Tuple<Tile, Color>(i, GetTileColor(i, Army.Configuration.Team))));
 				_HighlightToggles[(int)HighlightToggle.VICTORY_CONDITION_FIELD] = true;
+			}
+		}
+
+		public virtual void Clear()
+		{
+			if (_Pane != null)
+			{
+				RemovePane(_Pane);
+				_Pane = null;
+			}
+		}
+
+		public IEnumerable<Direction> GetReconDirections()
+		{
+			return Enum.GetValues(typeof(Direction)).Cast<Direction>().Where(i => SelectedUnit.CanExitDirection(i));
+		}
+
+		public void Recon()
+		{
+			if (SelectedUnit == null) return;
+
+			var directions = GetReconDirections().ToList();
+			if (directions.Count == 1) ReconDirection(directions.First());
+			else if (directions.Count > 1)
+			{
+				Clear();
+				var pane = new SelectPane<Direction>("Recon", directions);
+				pane.OnItemSelected += ReconDirection;
+				SetPane(pane);
+			}
+		}
+
+		void ReconDirection(object Sender, ValuedEventArgs<Direction> E)
+		{
+			ReconDirection(E.Value);
+		}
+
+		void ReconDirection(Direction Direction)
+		{
+			if (SelectedUnit != null)
+			{
+				var order = new ReconOrder(SelectedUnit, Direction);
+				if (ExecuteOrderAndAlert(order))
+				{
+					SelectUnit(null);
+					UnHighlight();
+				}
+			}
+			Clear();
+		}
+
+		public IEnumerable<Direction> GetEvacuateDirections()
+		{
+			return Enum.GetValues(typeof(Direction)).Cast<Direction>().Where(i => SelectedUnit.CanExitDirection(i));
+		}
+
+		public void Evacuate()
+		{
+			if (SelectedUnit == null) return;
+
+			var directions = GetEvacuateDirections().ToList();
+			if (directions.Count == 1) EvacuateDirection(directions.First());
+			else if (directions.Count > 1)
+			{
+				Clear();
+				var pane = new SelectPane<Direction>("Evacuate", directions);
+				pane.OnItemSelected += EvacuateDirection;
+				SetPane(pane);
+			}
+		}
+
+		void EvacuateDirection(object Sender, ValuedEventArgs<Direction> E)
+		{
+			EvacuateDirection(E.Value);
+		}
+
+		void EvacuateDirection(Direction Direction)
+		{
+			if (SelectedUnit != null)
+			{
+				var order = new EvacuateOrder(SelectedUnit, Direction);
+				if (ExecuteOrderAndAlert(order))
+				{
+					SelectUnit(null);
+					UnHighlight();
+				}
+			}
+			Clear();
+		}
+
+		public void ClearMinefield()
+		{
+			if (SelectedUnit == null) return;
+
+			var onMine =
+				SelectedUnit.Position.Units.FirstOrDefault(
+					i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
+			if (onMine != null) ClearMinefield(onMine);
+			else
+			{
+				var mines =
+					SelectedUnit.Position.Neighbors()
+							   .SelectMany(i => i.Units)
+							   .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD);
+				if (mines.Count() == 1) ClearMinefield(mines.First());
+				else if (mines.Count() > 1)
+				{
+					Clear();
+					var pane = new SelectPane<Unit>("Clear Minefield", mines);
+					pane.OnItemSelected += ClearMinefield;
+					SetPane(pane);
+				}
+			}
+		}
+
+		void ClearMinefield(object Sender, ValuedEventArgs<Unit> E)
+		{
+			ClearMinefield(E.Value);
+		}
+
+		void ClearMinefield(Unit Minefield)
+		{
+			if (SelectedUnit != null)
+			{
+				var order = new ClearMinefieldOrder(SelectedUnit, Minefield);
+				if (ExecuteOrderAndAlert(order))
+				{
+					SelectUnit(null);
+					UnHighlight();
+				}
+			}
+			Clear();
+		}
+
+		public void Emplace()
+		{
+			if (SelectedUnit == null) return;
+
+			var emplaceables =
+				SelectedUnit.Position.Neighbors()
+						   .SelectMany(i => i.Units)
+						   .Where(i => i.Configuration.Emplaceable());
+			if (emplaceables.Count() == 1) Emplace(emplaceables.First());
+			else if (emplaceables.Count() > 1)
+			{
+				Clear();
+				var pane = new SelectPane<Unit>("Emplace Unit", emplaceables);
+				pane.OnItemSelected += Emplace;
+				SetPane(pane);
+			}
+		}
+
+		void Emplace(object Sender, ValuedEventArgs<Unit> E)
+		{
+			Emplace(E.Value);
+		}
+
+		void Emplace(Unit Target)
+		{
+			if (SelectedUnit != null)
+			{
+				var order = new EmplaceOrder(SelectedUnit, Target);
+				if (ExecuteOrderAndAlert(order))
+				{
+					SelectUnit(null);
+					UnHighlight();
+				}
+			}
+			Clear();
+		}
+
+		public void LoadUnit()
+		{
+			if (SelectedUnit == null) return;
+
+			var canLoad =
+				SelectedUnit.Position.Units.Where(i => SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE).ToList();
+			if (canLoad.Count == 1)
+			{
+				LoadUnit(canLoad.First());
+			}
+			else if (canLoad.Count > 1)
+			{
+				Clear();
+				var pane = new SelectPane<Unit>("Load Unit", canLoad);
+				pane.OnItemSelected += LoadUnit;
+				SetPane(pane);
+			}
+		}
+
+		void LoadUnit(object Sender, ValuedEventArgs<Unit> E)
+		{
+			LoadUnit(E.Value);
+		}
+
+		void LoadUnit(Unit Unit)
+		{
+			if (SelectedUnit != null)
+			{
+				var order = new LoadOrder(
+					SelectedUnit, Unit, CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
+				if (ExecuteOrderAndAlert(order) && order.UseMovement)
+				{
+					SelectUnit(null);
+					UnHighlight();
+				}
+			}
+			Clear();
+		}
+
+		public void UnloadUnit()
+		{
+			if (SelectedUnit == null) return;
+
+			var order = new UnloadOrder(
+				SelectedUnit, CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
+			if (ExecuteOrderAndAlert(order) && order.UseMovement)
+			{
+				SelectUnit(null);
+				UnHighlight();
+			}
+		}
+
+		public void Mount()
+		{
+			if (SelectedUnit == null) return;
+
+			var order = new MountOrder(SelectedUnit, CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
+			if (ExecuteOrderAndAlert(order) && order.UseMovement)
+			{
+				SelectUnit(null);
+				UnHighlight();
+			}
+		}
+
+		public void Dismount()
+		{
+			if (SelectedUnit == null) return;
+			var order = new DismountOrder(SelectedUnit, CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
+			if (ExecuteOrderAndAlert(order) && order.UseMovement)
+			{
+				SelectUnit(null);
+				UnHighlight();
+
 			}
 		}
 

@@ -75,10 +75,10 @@ namespace PanzerBlitz
 		{
 			switch (Key)
 			{
-				case Keyboard.Key.L: LoadUnit(); break;
-				case Keyboard.Key.U: UnloadUnit(); break;
-				case Keyboard.Key.M: Mount(); break;
-				case Keyboard.Key.D: Dismount(); break;
+				case Keyboard.Key.L: _Controller.LoadUnit(); break;
+				case Keyboard.Key.U: _Controller.UnloadUnit(); break;
+				case Keyboard.Key.M: _Controller.Mount(); break;
+				case Keyboard.Key.D: _Controller.Dismount(); break;
 			}
 		}
 
