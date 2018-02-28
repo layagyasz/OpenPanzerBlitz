@@ -49,6 +49,26 @@ namespace PanzerBlitz
 			_WorkingDeployment = null;
 		}
 
+		public override bool CanLoad()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanLoad();
+		}
+
+		public override bool CanUnload()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanUnload();
+		}
+
+		public override bool CanDismount()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanDismount();
+		}
+
+		public override bool CanMount()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanMount();
+		}
+
 		public override void HandleTileLeftClick(Tile Tile)
 		{
 			_DeploymentMicrocontrollers[_DeploymentPane.SelectedDeployment].HandleTileLeftClick(Tile);

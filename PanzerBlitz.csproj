@@ -356,6 +356,8 @@
     <Compile Include="Model\Interactions\EmplaceInteraction.cs" />
     <Compile Include="Model\Orders\Movement\EmplaceOrder.cs" />
     <Compile Include="Model\Orders\Movement\EmplacementRequirements.cs" />
+    <Compile Include="Model\VictoryConditions\PointsObjective.cs" />
+    <Compile Include="Model\Matchers\UnitMatchers\UnitHasClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

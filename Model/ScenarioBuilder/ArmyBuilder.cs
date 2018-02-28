@@ -56,7 +56,7 @@ namespace PanzerBlitz
 		{
 			Objective objective =
 				new HighestScoreObjective(
-					new UnitsMatchedObjective(new UnitHasStatus(UnitStatus.DESTROYED), false, true, 1));
+					new UnitsMatchedObjective(new UnitHasStatus(UnitStatus.DESTROYED), false, true));
 			return new ArmyConfiguration(
 				Id.ToString(),
 				Parameters.Faction,

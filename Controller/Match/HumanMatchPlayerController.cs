@@ -480,6 +480,7 @@ namespace PanzerBlitz
 					SelectUnit(null);
 					UnHighlight();
 				}
+				else SelectUnit(SelectedUnit);
 			}
 			Clear();
 		}
@@ -495,6 +496,7 @@ namespace PanzerBlitz
 				SelectUnit(null);
 				UnHighlight();
 			}
+			else SelectUnit(SelectedUnit);
 		}
 
 		public void Mount()
@@ -507,6 +509,7 @@ namespace PanzerBlitz
 				SelectUnit(null);
 				UnHighlight();
 			}
+			else SelectUnit(SelectedUnit);
 		}
 
 		public void Dismount()
@@ -517,8 +520,8 @@ namespace PanzerBlitz
 			{
 				SelectUnit(null);
 				UnHighlight();
-
 			}
+			else SelectUnit(SelectedUnit);
 		}
 
 		void OnTileClick(object sender, MouseEventArgs e)

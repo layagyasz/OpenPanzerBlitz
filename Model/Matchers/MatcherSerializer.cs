@@ -33,6 +33,7 @@ namespace PanzerBlitz
 			typeof(EmptyMatcher<Unit>),
 			typeof(InverseMatcher<Unit>),
 
+			typeof(UnitHasClass),
 			typeof(UnitHasConfiguration),
 			typeof(UnitHasEvacuated),
 			typeof(UnitHasPosition),

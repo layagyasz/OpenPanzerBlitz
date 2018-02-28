@@ -10,6 +10,7 @@ namespace PanzerBlitz
 			if (Objective is FurthestAdvanceObjective) return Describe((FurthestAdvanceObjective)Objective);
 			if (Objective is HighestScoreObjective) return Describe((HighestScoreObjective)Objective);
 			if (Objective is LineOfFireObjective) return Describe((LineOfFireObjective)Objective);
+			if (Objective is PointsObjective) return Describe((PointsObjective)Objective);
 			if (Objective is PreventEnemyObjective) return Describe((PreventEnemyObjective)Objective);
 			if (Objective is RatioObjective) return Describe((RatioObjective)Objective);
 			if (Objective is SumObjective) return Describe((SumObjective)Objective);
@@ -36,6 +37,7 @@ namespace PanzerBlitz
 
 		public static string Describe(HighestScoreObjective Objective)
 		{
+			if (Objective.Metric == null) return "the highest total score";
 			return string.Format("the highest {0}", ReplaceScore(Describe(Objective.Metric), "number of"));
 		}
 
@@ -49,6 +51,12 @@ namespace PanzerBlitz
 				Objective.Width,
 				ObjectDescriber.Describe(Objective.Vertical ? Direction.NORTH : Direction.EAST),
 				ObjectDescriber.Describe(Objective.Vertical ? Direction.SOUTH : Direction.WEST));
+		}
+
+		public static string Describe(PointsObjective Objective)
+		{
+			return Describe(Objective.Objective)
+				+ (Objective.Points > 1 ? " times " + Objective.Points.ToString() : "");
 		}
 
 		public static string Describe(PreventEnemyObjective Objective)
@@ -95,11 +103,10 @@ namespace PanzerBlitz
 		public static string Describe(UnitsMatchedObjective Objective)
 		{
 			return string.Format(
-				"%score% {0}{1} units {2}{3}",
+				"%score% {0}{1} units {2}",
 				Objective.CountPoints ? "points of " : "",
 				Objective.Friendly ? "friendly" : "enemy",
-				MatcherDescriber.Describe(Objective.Matcher),
-				Objective.PointValue > 1 ? " times " + Objective.PointValue.ToString() : "");
+				MatcherDescriber.Describe(Objective.Matcher));
 		}
 
 		public static string ReplaceScore(string Input, string Value)

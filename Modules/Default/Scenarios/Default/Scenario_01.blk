@@ -33,15 +33,17 @@
 								unit-status:status { destroyed }
 							}
 						}
-						units-matched-objective:_ {
-							bool:friendly { false }
-							int:point-value { 4 }
-							unit-matches-all:matcher {
-								unit-has-status:_ {
-									unit-status:status { destroyed }
-								}
-								unit-has-configuration:_ {
-									!unit-configuration:unit-configuration { unit-configurations.command-post }
+						points-objective:_ {
+							int:points { 4 }
+							units-matched-objective:objective {
+								bool:friendly { false }
+								unit-matches-all:matcher {
+									unit-has-status:_ {
+										unit-status:status { destroyed }
+									}
+									unit-has-configuration:_ {
+										!unit-configuration:unit-configuration { unit-configurations.command-post }
+									}
 								}
 							}
 						}

@@ -17,6 +17,7 @@ namespace PanzerBlitz
 			typeof(FurthestAdvanceObjective),
 			typeof(HighestScoreObjective),
 			typeof(LineOfFireObjective),
+			typeof(PointsObjective),
 			typeof(PreventEnemyObjective),
 			typeof(RatioObjective),
 			typeof(SumObjective),

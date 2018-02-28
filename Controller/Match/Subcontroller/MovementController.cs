@@ -16,6 +16,53 @@ namespace PanzerBlitz
 			this.VehicleMovement = VehicleMovement;
 		}
 
+		public override bool CanLoad()
+		{
+			return _Controller.SelectedUnit.Position.Units.Any(
+				i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
+		}
+
+		public override bool CanUnload()
+		{
+			return _Controller.SelectedUnit.CanUnload() == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanDismount()
+		{
+			return _Controller.SelectedUnit.CanDismount() == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanMount()
+		{
+			return _Controller.SelectedUnit.CanMount(false) == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanEvacuate()
+		{
+			return _Controller.GetEvacuateDirections().Count() > 0;
+		}
+
+		public override bool CanRecon()
+		{
+			return _Controller.GetReconDirections().Count() > 0;
+		}
+
+		public override bool CanClearMinefield()
+		{
+			return _Controller.SelectedUnit.Position
+				.NeighborsAndSelf()
+				.SelectMany(i => i.Units)
+				.Any(i => new ClearMinefieldOrder(_Controller.SelectedUnit, i).Validate() == OrderInvalidReason.NONE);
+		}
+
+		public override bool CanEmplace()
+		{
+			return _Controller.SelectedUnit.Position
+				.NeighborsAndSelf()
+				.SelectMany(i => i.Units)
+				.Any(i => new EmplaceOrder(_Controller.SelectedUnit, i).Validate() == OrderInvalidReason.NONE);
+		}
+
 		public override void HandleTileLeftClick(Tile Tile)
 		{
 			_Controller.Clear();

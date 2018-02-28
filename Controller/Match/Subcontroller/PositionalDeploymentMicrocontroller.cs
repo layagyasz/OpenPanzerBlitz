@@ -39,6 +39,27 @@ namespace PanzerBlitz
 			HighlightDeploymentArea(null, EventArgs.Empty);
 		}
 
+		public override bool CanLoad()
+		{
+			return _Controller.SelectedUnit.Position.Units.Any(
+				i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
+		}
+
+		public override bool CanUnload()
+		{
+			return _Controller.SelectedUnit.CanUnload() == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanDismount()
+		{
+			return _Controller.SelectedUnit.CanDismount() == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanMount()
+		{
+			return _Controller.SelectedUnit.CanMount(true) == OrderInvalidReason.NONE;
+		}
+
 		public override void HandleTileLeftClick(Tile Tile)
 		{
 			if (_DeploymentPage.SelectedStack != null)

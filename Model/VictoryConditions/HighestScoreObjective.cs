@@ -38,16 +38,34 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			var score = Metric.GetScore(ForArmy, Match, Cache);
-			var compareScore = Match.Armies
-									.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
-									.Max(i => Metric.CalculateScore(i, Match, new Dictionary<Objective, int>()));
-			return score > compareScore ? 1 : 0;
+			if (Metric == null)
+			{
+				var score = GenericScoreArmy(ForArmy, Match, Cache);
+				var compareScore = Match.Armies
+										.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
+										.Max(i => GenericScoreArmy(ForArmy, Match, Cache));
+				return score > compareScore ? 1 : 0;
+			}
+			else
+			{
+				var score = Metric.GetScore(ForArmy, Match, Cache);
+				var compareScore = Match.Armies
+										.Where(i => i.Configuration.Team != ForArmy.Configuration.Team)
+										.Max(i => Metric.CalculateScore(i, Match, new Dictionary<Objective, int>()));
+				return score > compareScore ? 1 : 0;
+			}
 		}
 
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Metric.GetTiles(Map);
+		}
+
+		int GenericScoreArmy(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
+		{
+			return ForArmy.Configuration.VictoryCondition.Scorers
+						   .Where(i => i is PointsObjective)
+						  .Sum(i => i.GetScore(ForArmy, Match, Cache)); ;
 		}
 	}
 }
