@@ -34,7 +34,7 @@ namespace PanzerBlitz
 					_Controller.Clear();
 
 					_AttackBuilder = attack;
-					AttackPane attackPane = new AttackPane(_AttackBuilder);
+					var attackPane = new AttackPane(_AttackBuilder);
 					_Controller.AddPane(attackPane);
 
 					attackPane.OnAttackTargetChanged += ChangeAttackTarget;

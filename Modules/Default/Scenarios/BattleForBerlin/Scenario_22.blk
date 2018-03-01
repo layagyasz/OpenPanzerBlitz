@@ -1,0 +1,355 @@
+﻿scenario:_ {
+	string:name { Germany }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:british {
+			!faction:faction { factions.british }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:caverge-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { caverge }
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:grancelle-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { grancelle }
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:kuhn-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { kuhn }
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:bednost-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { bednost }
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:nece-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { nece }
+									}
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 4 }
+						sum-objective:objective {
+							!var:_ { objectives.caverge-controlled }
+							!var:_ { objectives.grancelle-controlled }
+							!var:_ { objectives.kuhn-controlled }
+							!var:_ { objectives.bednost-controlled }
+							!var:_ { objectives.nece-controlled }
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.caverge-controlled }
+							!var:_ { objectives.grancelle-controlled }
+							!var:_ { objectives.kuhn-controlled }
+							!var:_ { objectives.bednost-controlled }
+							!var:_ { objectives.nece-controlled }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 0,16 }
+					}
+					unit-group:unit-group {
+						string:name { Armored Guards Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sherman-uk }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.cromwell }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.daimler }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sexton }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.57mm-at-american }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bren }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.achilles }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-british }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-british-44 
+								}
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:grancelle-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-matches-all:matcher {
+										tile-in-region:_ {
+											string:region-name { grancelle }
+										}
+										tile-within:_ {
+											zone:zone { 1,9 5,13 0,13 }
+										}
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:kuhn-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { kuhn }
+									}
+								}
+							}
+						}
+					}
+					trigger-objective:bednost-controlled {
+						int:threshold { 0 }
+						bool:invert { true }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { active }
+								}
+								unit-has-position:_ {
+									tile-in-region:matcher {
+										string:region-name { bednost }
+									}
+								}
+							}
+						}
+					}
+
+					units-matched-objective:road-controlled {
+						bool:friendly { false }
+						unit-matches-all:matcher {
+							unit-has-status:_ {
+								unit-status:status { active }
+							}
+							unit-has-position:_ {
+								tile-matches-all:matcher {
+									tile-within:_ {
+										zone:zone { 10,0 20,0 20,33 10,33 }
+									}
+									tile-distance-from:_ {
+										byte:distance { 1 }
+										tile-has-path:matcher {
+											tile-path-overlay:path { road }
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.grancelle-controlled }
+							!var:_ { objectives.kuhn-controlled }
+							!var:_ { objectives.bednost-controlled }
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 0 }
+						bool:invert { true }
+						!var:objective { objectives.road-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 7,32 }
+					}
+					unit-group:unit-group {
+						string:name { 17th Tk. Corps }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-152 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar-motorized }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

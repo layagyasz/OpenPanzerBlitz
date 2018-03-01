@@ -112,7 +112,7 @@ namespace PanzerBlitz
 			MatchScreen.ClearMinefieldButton.OnClick += (sender, e) => ClearMinefield();
 			MatchScreen.EmplaceButton.OnClick += (sender, e) => Emplace();
 
-			_AllowedActions = new Dictionary<Button, Func<bool>>()
+			_AllowedActions = new Dictionary<Button, Func<bool>>
 			{
 				{ MatchScreen.LoadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanLoad() },
 				{ MatchScreen.UnloadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanUnload() },
@@ -124,7 +124,7 @@ namespace PanzerBlitz
 					MatchScreen.ClearMinefieldButton,
 					() => _Controllers[_CurrentTurn.TurnComponent].CanClearMinefield()
 				},
-				{ MatchScreen.EmplaceButton, () => _Controllers[_CurrentTurn.TurnComponent].CanEmplace() },
+				{ MatchScreen.EmplaceButton, () => _Controllers[_CurrentTurn.TurnComponent].CanEmplace() }
 			};
 		}
 

@@ -1,9 +1,3 @@
-using System;
-using System.Linq;
-
-using Cardamom.Interface.Items;
-using Cardamom.Utilities;
-
 using SFML.Window;
 
 namespace PanzerBlitz

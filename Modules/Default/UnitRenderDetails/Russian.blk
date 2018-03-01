@@ -37,12 +37,21 @@ unit-render-details:rifle-company-43 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-company.png }
 }
+unit-render-details:rifle-company-43-west {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-company.png }
+}
 unit-render-details:guards-company-41 {
 	string:override-display-name { GUARDS }
 	string:image-path { infantry-company.png }
 	color:override-color { #E24B20 }
 }
 unit-render-details:guards-company-43 {
+	string:override-display-name { GUARDS }
+	string:image-path { infantry-company.png }
+	color:override-color { #E24B20 }
+}
+unit-render-details:guards-company-43-west {
 	string:override-display-name { GUARDS }
 	string:image-path { infantry-company.png }
 	color:override-color { #E24B20 }

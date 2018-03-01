@@ -9,6 +9,7 @@ namespace PanzerBlitz
 			if (Objective is CompositeObjective) return Describe((CompositeObjective)Objective);
 			if (Objective is FurthestAdvanceObjective) return Describe((FurthestAdvanceObjective)Objective);
 			if (Objective is HighestScoreObjective) return Describe((HighestScoreObjective)Objective);
+			if (Objective is HighestUniqueScoreObjective) return Describe((HighestUniqueScoreObjective)Objective);
 			if (Objective is LineOfFireObjective) return Describe((LineOfFireObjective)Objective);
 			if (Objective is PointsObjective) return Describe((PointsObjective)Objective);
 			if (Objective is PreventEnemyObjective) return Describe((PreventEnemyObjective)Objective);
@@ -37,8 +38,12 @@ namespace PanzerBlitz
 
 		public static string Describe(HighestScoreObjective Objective)
 		{
-			if (Objective.Metric == null) return "the highest total score";
 			return string.Format("the highest {0}", ReplaceScore(Describe(Objective.Metric), "number of"));
+		}
+
+		public static string Describe(HighestUniqueScoreObjective Objective)
+		{
+			return "highest total score";
 		}
 
 		public static string Describe(LineOfFireObjective Objective)

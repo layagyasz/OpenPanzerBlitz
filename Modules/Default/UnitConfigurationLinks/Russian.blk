@@ -152,6 +152,14 @@ unit-configuration-link:rifle-company-43 {
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 
 	int:introduce-year { 1943 }
+	front:front { east }
+}
+unit-configuration-link:rifle-company-43-west {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-company-43-west }
+
+	int:introduce-year { 1943 }
+	front:front { west }
 }
 unit-configuration-link:guards-company-41 {
 	!faction:faction { factions.russian }
@@ -165,6 +173,14 @@ unit-configuration-link:guards-company-43 {
 	!unit-configuration:unit-configuration { unit-configurations.guards-company-43 }
 
 	int:introduce-year { 1943 }
+	front:front { east }
+}
+unit-configuration-link:guards-company-43-west {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.guards-company-43-west }
+
+	int:introduce-year { 1943 }
+	front:front { west }
 }
 unit-configuration-link:smg-company-40 {
 	!faction:faction { factions.russian }

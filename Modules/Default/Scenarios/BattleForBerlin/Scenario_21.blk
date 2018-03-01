@@ -1,0 +1,375 @@
+﻿scenario:_ {
+	string:name { Austria }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.american }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:merden-controlled {
+						int:threshold { 2 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { merden }
+							}
+						}
+					}
+					trigger-objective:nece-controlled {
+						int:threshold { 4 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { nece }
+							}
+						}
+					}
+					trigger-objective:artain-controlled {
+						int:threshold { 3 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { artain }
+							}
+						}
+					}
+
+					points-objective:town-points {
+						int:points { 10 }
+						sum-objective:objective {
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { merden }
+								}
+							}
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { nece }
+								}
+							}
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { artain }
+								}
+							}
+						}
+					}
+					points-objective:tanks-destroyed {
+						int:points { 7 }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { destroyed }
+								}
+								unit-matches-any:_ {
+									unit-has-class:_ {
+										unit-class:unit-class { tank }
+									}
+									unit-has-class:_ {
+										unit-class:unit-class { assault-gun }
+									}
+								}
+							}
+						}
+					}
+					points-objective:infantry-destroyed {
+						int:points { 15 }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { destroyed }
+								}
+								unit-has-class:_ {
+									unit-class:unit-class { infantry }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 1 }
+						highest-unique-score-objective:objective { }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							highest-unique-score-objective:_ { }
+							trigger-objective:_ {
+								int:threshold { 2 }
+								sum-objective:objective {
+									!var:_ { objectives.merden-controlled }
+									!var:_ { objectives.nece-controlled }
+									!var:_ { objectives.artain-controlled }
+								}
+							}
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.merden-controlled }
+							!var:_ { objectives.nece-controlled }
+							!var:_ { objectives.artain-controlled }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 0,16 }
+					}
+					unit-group:unit-group {
+						string:name { 11th Armored Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.achilles }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.90mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-american }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-american }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 7 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					trigger-objective:merden-controlled {
+						int:threshold { 2 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { merden }
+							}
+						}
+					}
+					trigger-objective:nece-controlled {
+						int:threshold { 4 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { nece }
+							}
+						}
+					}
+					trigger-objective:artain-controlled {
+						int:threshold { 3 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { artain }
+							}
+						}
+					}
+
+					points-objective:town-points {
+						int:points { 10 }
+						sum-objective:objective {
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { merden }
+								}
+							}
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { nece }
+								}
+							}
+							tiles-controlled-objective:_ {
+								bool:friendly { true }
+								tile-in-region:matcher {
+									string:region-name { artain }
+								}
+							}
+						}
+					}
+					points-objective:tanks-destroyed {
+						int:points { 5 }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { destroyed }
+								}
+								unit-matches-any:_ {
+									unit-has-class:_ {
+										unit-class:unit-class { tank }
+									}
+									unit-has-class:_ {
+										unit-class:unit-class { self-propelled-artillery }
+									}
+								}
+							}
+						}
+					}
+					points-objective:infantry-destroyed {
+						int:points { 10 }
+						units-matched-objective:objective {
+							bool:friendly { false }
+							unit-matches-all:matcher {
+								unit-has-status:_ {
+									unit-status:status { destroyed }
+								}
+								unit-has-class:_ {
+									unit-class:unit-class { infantry }
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 1 }
+						highest-unique-score-objective:objective { }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { tactical-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							highest-unique-score-objective:_ { }
+							trigger-objective:_ {
+								int:threshold { 2 }
+								sum-objective:objective {
+									!var:_ { objectives.merden-controlled }
+									!var:_ { objectives.nece-controlled }
+									!var:_ { objectives.artain-controlled }
+								}
+							}
+						}
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.merden-controlled }
+							!var:_ { objectives.nece-controlled }
+							!var:_ { objectives.artain-controlled }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 30,16 }
+					}
+					unit-group:unit-group {
+						string:name { 213th Guards Tk. Bgde. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-100 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.js-ii }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.su-152 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar-motorized }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.guards-company-43-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-russian }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

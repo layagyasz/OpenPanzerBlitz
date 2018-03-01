@@ -105,6 +105,18 @@ unit-configuration:rifle-company-43 {
 	byte:defense { 16 }
 	byte:movement { 1 }
 }
+unit-configuration:rifle-company-43-west {
+	string:name { Rifle Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 16 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
 unit-configuration:guards-company-41 {
 	string:name { Guards Company }
 	unit-class:unit-class { infantry }
@@ -124,6 +136,18 @@ unit-configuration:guards-company-43 {
 	byte:range { 5 }
 	byte:defense { 18 }
 	byte:movement { 1 }
+}
+unit-configuration:guards-company-43-west {
+	string:name { Guards Company }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 2 }
+	byte:defense { 18 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
 }
 unit-configuration:smg-company-40 {
 	string:name { SMG Company }

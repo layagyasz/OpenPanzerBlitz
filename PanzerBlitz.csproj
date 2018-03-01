@@ -358,6 +358,7 @@
     <Compile Include="Model\Orders\Movement\EmplacementRequirements.cs" />
     <Compile Include="Model\VictoryConditions\PointsObjective.cs" />
     <Compile Include="Model\Matchers\UnitMatchers\UnitHasClass.cs" />
+    <Compile Include="Model\VictoryConditions\HighestUniqueScoreObjective.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -424,6 +425,7 @@
     <Folder Include="View\Describers\" />
     <Folder Include="View\Scenario\" />
     <Folder Include="Model\Interactions\" />
+    <Folder Include="Modules\Default\Scenarios\BattleForBerlin\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2204,6 +2206,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\PanzerLeader\Scenario_17.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\BattleForBerlin\Scenario_21.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\BattleForBerlin\Scenario_22.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
