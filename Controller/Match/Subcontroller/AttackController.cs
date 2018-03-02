@@ -31,7 +31,7 @@ namespace PanzerBlitz
 				{
 					AddAttack(
 						Unit.Position,
-						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit));
+						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, false));
 				}
 			}
 		}

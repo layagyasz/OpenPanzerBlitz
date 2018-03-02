@@ -64,9 +64,11 @@ namespace PanzerBlitz
 			AddSection("Basic Attributes");
 			AddAttribute(string.Format(
 				"Unit Class - {0}", ObjectDescriber.Describe(Unit.Configuration.UnitClass)));
-			AddAttribute(string.Format("Weapon Class - {0}", ObjectDescriber.Describe(Unit.Configuration.WeaponClass)));
-			AddAttribute(string.Format("Attack - {0}", Unit.Configuration.Attack));
-			AddAttribute(string.Format("Range - {0}", Unit.Configuration.Range));
+			AddAttribute(
+				string.Format(
+					"Weapon Class - {0}", ObjectDescriber.Describe(Unit.Configuration.PrimaryWeapon.WeaponClass)));
+			AddAttribute(string.Format("Attack - {0}", Unit.Configuration.PrimaryWeapon.Attack));
+			AddAttribute(string.Format("Range - {0}", Unit.Configuration.PrimaryWeapon.Range));
 			AddAttribute(string.Format("Defense - {0}", Unit.Configuration.Defense));
 			AddAttribute(string.Format("Movement - {0}", Unit.Configuration.Movement));
 			AddAttribute(string.Format("Point Value - {0}", Unit.GetPointValue()));
@@ -96,7 +98,7 @@ namespace PanzerBlitz
 				|| Unit.Configuration.CanCloseAssault
 				|| Unit.Configuration.CanOnlySupportCloseAssault
 				|| Unit.Configuration.CanAntiAircraft
-				|| Unit.Configuration.CanDoubleRange
+				|| Unit.Configuration.PrimaryWeapon.CanDoubleRange
 				|| Unit.Configuration.CanClearMines
 				|| Unit.Configuration.CanPlaceMines
 				|| Unit.Configuration.CanPlaceBridges
@@ -115,7 +117,7 @@ namespace PanzerBlitz
 			if (Unit.Configuration.CanCloseAssault) AddAttribute("Close Assault");
 			if (Unit.Configuration.CanOnlySupportCloseAssault) AddAttribute("Close Assault Support");
 			if (Unit.Configuration.CanAntiAircraft) AddAttribute("Anti-Aircraft");
-			if (Unit.Configuration.CanDoubleRange) AddAttribute("Can Double Range");
+			if (Unit.Configuration.PrimaryWeapon.CanDoubleRange) AddAttribute("Can Double Range");
 			if (Unit.Configuration.CanClearMines) AddAttribute("Can Clear Mines");
 			if (Unit.Configuration.CanPlaceMines) AddAttribute("Can Place Mines");
 			if (Unit.Configuration.CanPlaceBridges) AddAttribute("Can Place Bridges");

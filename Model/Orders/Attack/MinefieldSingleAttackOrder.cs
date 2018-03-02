@@ -8,7 +8,7 @@ namespace PanzerBlitz
 	public class MinefieldSingleAttackOrder : SingleAttackOrder
 	{
 		public MinefieldSingleAttackOrder(Unit Attacker, Unit Defender)
-			: base(Attacker, Defender) { }
+			: base(Attacker, Defender, false) { }
 
 		public MinefieldSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()]) { }
@@ -22,7 +22,7 @@ namespace PanzerBlitz
 		public override AttackFactorCalculation GetAttack()
 		{
 			return new AttackFactorCalculation(
-				Defender.Configuration.Defense * Attacker.Configuration.Attack,
+				Defender.Configuration.Defense * Attacker.Configuration.PrimaryWeapon.Attack,
 				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.MINEFIELD });
 		}
 

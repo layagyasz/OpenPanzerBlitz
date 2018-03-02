@@ -1,0 +1,187 @@
+﻿scenario:_ {
+	string:name { Battle of the Frontiers }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 8 }
+	!environment:environment { environments.summer-steppe }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-02.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-01.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 10,0 10,20 0,20 }
+					}
+					unit-group:unit-group {
+						string:name { Russian Front-Line }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.12_7mm-mg }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.45mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.82mm-mortar-motorized }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.recon-company }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-60-a }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-evacuated {
+						bool:friendly { true }
+						unit-matches-all:matcher {
+							unit-has-evacuated:_ {
+								direction:direction { north }
+							}
+							unit-not:_ {
+								unit-has-class:matcher {
+									unit-class:unit-class { transport }
+								}
+							}
+						}
+					}
+					path-objective:road-cleared {
+						tile-on-edge:source {
+							direction:edge { south }
+						}
+						tile-on-edge:sink {
+							direction:edge { north }
+						}
+						tile-matches-all:path {
+							tile-not:_ {
+								tile-has-unit:matcher {
+									unit-is-hostile:matcher {
+										byte:team { 2 }
+									}
+								}
+							}
+							tile-has-path:matcher {
+								tile-path-overlay:path { road }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							!var:_ { objectives.road-cleared }
+							trigger-objective:_ {
+								int:threshold { 9 }
+								!var:objective { objectives.units-evacuated }
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,22 10,22 10,33 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { Panzer Spearhead }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wespe }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
+								int:count { 15 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzjg-47 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-g }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-e }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 8 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

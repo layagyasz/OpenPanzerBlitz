@@ -69,12 +69,13 @@ namespace PanzerBlitz
 				return;
 			}
 
-			var attackText = new Text(Object.Attack.ToString(), Font, 36);
+			Weapon weapon = Object.GetWeapon(false);
+			var attackText = new Text(weapon.Attack.ToString(), Font, 36);
 			attackText.Color = Color.Black;
 			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
 
 			var rangeText = new Text(
-				Object.Range.ToString() + (Object.CanDoubleRange ? "*" : ""), Font, 36);
+				weapon.Range.ToString() + (weapon.CanDoubleRange ? "*" : ""), Font, 36);
 			rangeText.Color = Color.Black;
 			rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
 
@@ -88,7 +89,7 @@ namespace PanzerBlitz
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 
-			var weaponClassText = new Text(WeaponClassString(Object), Font, 28);
+			var weaponClassText = new Text(WeaponClassString(Object, false), Font, 28);
 			weaponClassText.Color = Color.Black;
 			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
 
@@ -109,19 +110,20 @@ namespace PanzerBlitz
 			return new Vector2f(Text.GetLocalBounds().Width, Text.GetLocalBounds().Height) * .5f;
 		}
 
-		static string WeaponClassString(UnitConfiguration UnitConfiguration)
+		static string WeaponClassString(UnitConfiguration UnitConfiguration, bool Secondary)
 		{
+			Weapon weapon = UnitConfiguration.GetWeapon(Secondary);
 			if (UnitConfiguration.IsCarrier && !UnitConfiguration.CanOnlyCarryInfantry)
 			{
-				if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "C";
-				return string.Format("C({0})", UnitConfiguration.WeaponClass.ToString()[0]);
+				if (weapon.WeaponClass == WeaponClass.NA) return "C";
+				return string.Format("C({0})", weapon.WeaponClass.ToString()[0]);
 			}
-			if (UnitConfiguration.WeaponClass == WeaponClass.NA) return "-";
-			if (UnitConfiguration.CanIndirectFire && UnitConfiguration.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
-				return string.Format("({0})", UnitConfiguration.WeaponClass.ToString().Substring(0, 1));
+			if (weapon.WeaponClass == WeaponClass.NA) return "-";
+			if (UnitConfiguration.CanIndirectFire && weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+				return string.Format("({0})", weapon.WeaponClass.ToString().Substring(0, 1));
 			if (UnitConfiguration.CanAntiAircraft)
-				return string.Format("<{0}>", UnitConfiguration.WeaponClass.ToString().Substring(0, 1));
-			return UnitConfiguration.WeaponClass.ToString().Substring(0, 1);
+				return string.Format("<{0}>", weapon.WeaponClass.ToString().Substring(0, 1));
+			return weapon.WeaponClass.ToString().Substring(0, 1);
 		}
 	}
 }

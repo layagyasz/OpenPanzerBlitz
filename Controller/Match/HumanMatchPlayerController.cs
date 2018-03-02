@@ -237,7 +237,7 @@ namespace PanzerBlitz
 			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.NORMAL_FIRE)
 		{
 			return Math.Min(
-				LineOfSight.Range * HIGHLIGHT_COLORS.Length / (Unit.Configuration.GetRange(AttackMethod) + 1),
+				LineOfSight.Range * HIGHLIGHT_COLORS.Length / (Unit.Configuration.GetRange(AttackMethod, false) + 1),
 				HIGHLIGHT_COLORS.Length - 1);
 		}
 

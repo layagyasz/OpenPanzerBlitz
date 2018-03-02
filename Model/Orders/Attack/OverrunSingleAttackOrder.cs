@@ -15,8 +15,8 @@ namespace PanzerBlitz
 		public readonly Tile AttackTile;
 		public readonly Tile ExitTile;
 
-		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile)
-			: base(InitialMovement.Unit, null)
+		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile, bool UseSecondaryWeapon = false)
+			: base(InitialMovement.Unit, null, UseSecondaryWeapon)
 		{
 			_InitialMovement = InitialMovement;
 			this.AttackTile = AttackTile;
@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		}
 
 		public OverrunSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this(new MovementOrder(Stream, Objects), (Tile)Objects[Stream.ReadInt32()]) { }
+			: this(new MovementOrder(Stream, Objects), (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
@@ -35,9 +35,11 @@ namespace PanzerBlitz
 		public override AttackFactorCalculation GetAttack()
 		{
 			if (Validate() == OrderInvalidReason.NONE)
-				return new AttackFactorCalculation(Attacker, AttackMethod.OVERRUN, TreatStackAsArmored, null);
+				return new AttackFactorCalculation(
+					Attacker, AttackMethod.OVERRUN, TreatStackAsArmored, null, UseSecondaryWeapon);
 			return new AttackFactorCalculation(
-				0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
+				0,
+				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -73,7 +75,7 @@ namespace PanzerBlitz
 			if (_MovementPath.Distance > Attacker.RemainingMovement)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 
-			r = Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null);
+			r = Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null, UseSecondaryWeapon);
 			if (r != OrderInvalidReason.NONE) return r;
 
 			return base.Validate();

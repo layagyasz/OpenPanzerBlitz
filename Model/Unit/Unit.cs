@@ -156,7 +156,8 @@ namespace PanzerBlitz
 			return Configuration.CanAttack(AttackMethod);
 		}
 
-		public OrderInvalidReason CanAttack(AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
+		public OrderInvalidReason CanAttack(
+			AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
 			var r = CanAttack(AttackMethod);
 			if (r != OrderInvalidReason.NONE) return r;
@@ -166,10 +167,10 @@ namespace PanzerBlitz
 
 			if (AttackMethod == AttackMethod.NORMAL_FIRE)
 			{
-				r = Configuration.CanDirectFireAt(EnemyArmored, LineOfSight);
+				r = Configuration.CanDirectFireAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
 				if (r != OrderInvalidReason.UNIT_NO_ATTACK)
 					return r;
-				r = Configuration.CanIndirectFireAt(LineOfSight);
+				r = Configuration.CanIndirectFireAt(LineOfSight, UseSecondaryWeapon);
 				if (r != OrderInvalidReason.NONE) return r;
 				if (!Army.CanIndirectFireAtTile(LineOfSight.Final))
 					return OrderInvalidReason.ATTACK_NO_SPOTTER;
@@ -411,13 +412,14 @@ namespace PanzerBlitz
 		{
 			if (Position != null && CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
-				foreach (LineOfSight l in new Field<Tile>(Position, Configuration.GetRange(AttackMethod), (i, j) => 1)
+				foreach (LineOfSight l in new Field<Tile>(
+					Position, Configuration.GetRange(AttackMethod, false), (i, j) => 1)
 						 .GetReachableNodes()
 						 .Select(i => GetLineOfSight(i.Item1))
 						 .Where(i => i.Final != Position))
 				{
 					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
-					else if (CanAttack(AttackMethod, false, l) == OrderInvalidReason.NONE)
+					else if (CanAttack(AttackMethod, false, l, false) == OrderInvalidReason.NONE)
 						yield return new Tuple<LineOfSight, bool>(l, false);
 				}
 			}

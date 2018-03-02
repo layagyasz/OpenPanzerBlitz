@@ -11,6 +11,7 @@ namespace PanzerBlitz
 			if (Objective is HighestScoreObjective) return Describe((HighestScoreObjective)Objective);
 			if (Objective is HighestUniqueScoreObjective) return Describe((HighestUniqueScoreObjective)Objective);
 			if (Objective is LineOfFireObjective) return Describe((LineOfFireObjective)Objective);
+			if (Objective is PathObjective) return Describe((PathObjective)Objective);
 			if (Objective is PointsObjective) return Describe((PointsObjective)Objective);
 			if (Objective is PreventEnemyObjective) return Describe((PreventEnemyObjective)Objective);
 			if (Objective is RatioObjective) return Describe((RatioObjective)Objective);
@@ -56,6 +57,15 @@ namespace PanzerBlitz
 				Objective.Width,
 				ObjectDescriber.Describe(Objective.Vertical ? Direction.NORTH : Direction.EAST),
 				ObjectDescriber.Describe(Objective.Vertical ? Direction.SOUTH : Direction.WEST));
+		}
+
+		public static string Describe(PathObjective Objective)
+		{
+			return string.Format(
+				"establish a path from tiles {0} to tiles {1} through tiles {2}",
+				MatcherDescriber.Describe(Objective.Source),
+				MatcherDescriber.Describe(Objective.Sink),
+				MatcherDescriber.Describe(Objective.Path));
 		}
 
 		public static string Describe(PointsObjective Objective)

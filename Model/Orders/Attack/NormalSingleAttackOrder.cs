@@ -9,14 +9,14 @@ namespace PanzerBlitz
 	{
 		public readonly LineOfSight LineOfSight;
 
-		public NormalSingleAttackOrder(Unit Attacker, Unit Defender)
-			: base(Attacker, Defender)
+		public NormalSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
+			: base(Attacker, Defender, UseSecondaryWeapon)
 		{
 			LineOfSight = Attacker.GetLineOfSight(Defender.Position);
 		}
 
 		public NormalSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: base((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()])
+			: base((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
 		{
 			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
 		}
@@ -33,9 +33,10 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(
-					Attacker, AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight);
+					Attacker, AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 			return new AttackFactorCalculation(
-				0, new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
+				0,
+				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
 		}
 
 		public override AttackOrder GenerateNewAttackOrder()
@@ -51,7 +52,7 @@ namespace PanzerBlitz
 		public override OrderInvalidReason Validate()
 		{
 			if (Defender == null) return OrderInvalidReason.ILLEGAL;
-			var r = Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight);
+			var r = Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 			if (r != OrderInvalidReason.NONE) return r;
 			return base.Validate();
 		}

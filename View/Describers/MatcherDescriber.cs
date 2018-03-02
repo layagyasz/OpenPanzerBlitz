@@ -66,7 +66,7 @@ namespace PanzerBlitz
 
 		public static string Describe(TileHasUnit Matcher)
 		{
-			return string.Format("contain units {0}", Describe(Matcher.Matcher));
+			return string.Format("with units {0}", Describe(Matcher.Matcher));
 		}
 
 		public static string Describe(TileInRegion Matcher)
@@ -86,6 +86,7 @@ namespace PanzerBlitz
 
 		public static string Describe(Matcher<Unit> Matcher)
 		{
+			if (Matcher is UnitHasClass) return Describe((UnitHasClass)Matcher);
 			if (Matcher is UnitHasConfiguration) return Describe((UnitHasConfiguration)Matcher);
 			if (Matcher is UnitHasEvacuated) return Describe((UnitHasEvacuated)Matcher);
 			if (Matcher is UnitHasPosition) return Describe((UnitHasPosition)Matcher);
@@ -97,6 +98,11 @@ namespace PanzerBlitz
 			if (Matcher is EmptyMatcher<Unit>) return Describe((EmptyMatcher<Unit>)Matcher);
 
 			return Describe<Unit>(Matcher);
+		}
+
+		public static string Describe(UnitHasClass Matcher)
+		{
+			return string.Format("of class {0}", ObjectDescriber.Describe(Matcher.UnitClass));
 		}
 
 		public static string Describe(UnitHasConfiguration Matcher)

@@ -14,38 +14,47 @@ namespace PanzerBlitz
 			this.Factors = Factors.ToList();
 		}
 
-		public AttackFactorCalculation(Unit Unit, AttackMethod AttackMethod, bool EnemyArmored, LineOfSight LineOfSight)
+		public AttackFactorCalculation(
+			Unit Unit,
+			AttackMethod AttackMethod,
+			bool EnemyArmored,
+			LineOfSight LineOfSight,
+			bool UseSecondaryWeapon)
 		{
-			if (AttackMethod == AttackMethod.NORMAL_FIRE) GetNormalAttack(Unit, EnemyArmored, LineOfSight);
+			if (AttackMethod == AttackMethod.NORMAL_FIRE)
+				GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
 			else
 			{
-				if (Unit.CanAttack(AttackMethod, EnemyArmored, LineOfSight) != OrderInvalidReason.NONE)
+				if (Unit.CanAttack(
+					AttackMethod, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
 				{
 					Attack = 0;
 					Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
 				}
-				Attack = Unit.Configuration.Attack;
+				Attack = Unit.Configuration.GetWeapon(UseSecondaryWeapon).Attack;
 				Factors = new List<AttackFactorCalculationFactor>();
 			}
 		}
 
-		void GetNormalAttack(Unit Unit, bool EnemyArmored, LineOfSight LineOfSight)
+		void GetNormalAttack(Unit Unit, bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
-			if (Unit.CanAttack(AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight) != OrderInvalidReason.NONE)
+			if (Unit.CanAttack(
+				AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
 			{
 				Attack = 0;
 				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
 				return;
 			}
 
+			Weapon weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
 			Factors = new List<AttackFactorCalculationFactor>();
-			Attack = Unit.Configuration.Attack;
+			Attack = weapon.Attack;
 
 			if (EnemyArmored)
 			{
-				int HalfRange = Unit.Configuration.Range / 2;
-				if (Unit.Configuration.WeaponClass == WeaponClass.HIGH_EXPLOSIVE
-					|| Unit.Configuration.WeaponClass == WeaponClass.MORTAR)
+				int HalfRange = weapon.Range / 2;
+				if (weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE
+					|| weapon.WeaponClass == WeaponClass.MORTAR)
 				{
 					if (LineOfSight.Range > HalfRange)
 					{
@@ -53,7 +62,7 @@ namespace PanzerBlitz
 						Factors.Add(AttackFactorCalculationFactor.ARMOR_RANGE);
 					}
 				}
-				else if (Unit.Configuration.WeaponClass == WeaponClass.ANTI_ARMOR)
+				else if (weapon.WeaponClass == WeaponClass.ANTI_ARMOR)
 				{
 					if (LineOfSight.Range <= HalfRange)
 					{
@@ -62,7 +71,7 @@ namespace PanzerBlitz
 					}
 				}
 			}
-			else if (Unit.Configuration.WeaponClass == WeaponClass.ANTI_ARMOR && !EnemyArmored)
+			else if (weapon.WeaponClass == WeaponClass.ANTI_ARMOR && !EnemyArmored)
 			{
 				Attack /= 2;
 				Factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
@@ -75,7 +84,7 @@ namespace PanzerBlitz
 				Factors.Add(AttackFactorCalculationFactor.ELEVATION);
 			}
 
-			if (Unit.Configuration.Range < LineOfSight.Range && Unit.Configuration.CanDoubleRange)
+			if (weapon.Range < LineOfSight.Range && weapon.CanDoubleRange)
 			{
 				Attack /= 2;
 				Factors.Add(AttackFactorCalculationFactor.DOUBLE_RANGE);

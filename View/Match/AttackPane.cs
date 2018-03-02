@@ -83,7 +83,7 @@ namespace PanzerBlitz
 				DisplayedString = string.Format("{0} Total Attack Factor", OddsCalculation.TotalAttack)
 			});
 			foreach (var a in OddsCalculation.AttackFactorCalculations)
-				DescribeAttackFactorCalculation(a.Item1.Attacker, a.Item2);
+				DescribeAttackFactorCalculation(a.Item1, a.Item2);
 			_Description.Add(new Button("attack-odds-section")
 			{
 				DisplayedString = string.Format("{0} Total Defense Factor", OddsCalculation.TotalDefense)
@@ -101,16 +101,19 @@ namespace PanzerBlitz
 				_Description.Add(new Button("odds-factor-box") { DisplayedString = o.ToString() });
 		}
 
-		void DescribeAttackFactorCalculation(Unit Unit, AttackFactorCalculation AttackFactorCalculation)
+		void DescribeAttackFactorCalculation(
+			SingleAttackOrder Attacker, AttackFactorCalculation AttackFactorCalculation)
 		{
 			_Description.Add(new Button("attack-part-box")
 			{
 				DisplayedString = string.Format(
-					"+{0} {1}", AttackFactorCalculation.Attack, Unit.Configuration.Name)
+					"+{0} {1}", AttackFactorCalculation.Attack, ObjectDescriber.Describe(Attacker.Attacker))
 			});
 			_Description.Add(new Button("attack-factor-box")
 			{
-				DisplayedString = string.Format("{0} Base Attack Factor", Unit.Configuration.Attack)
+				DisplayedString = string.Format(
+					"{0} Base Attack Factor",
+					Attacker.Attacker.Configuration.GetWeapon(Attacker.UseSecondaryWeapon).Attack)
 			});
 			foreach (AttackFactorCalculationFactor a in AttackFactorCalculation.Factors)
 				_Description.Add(new Button("attack-factor-box") { DisplayedString = a.ToString() });
