@@ -80,7 +80,7 @@ namespace PanzerBlitz
 				var d = Path[i].Rules.GetMoveCost(Unit, Path[i + 1], !Combat);
 				if (d.UnableReason != OrderInvalidReason.NONE) return d.UnableReason;
 			}
-			if (Path.Distance > Unit.RemainingMovement)
+			if (!Unit.Configuration.HasUnlimitedMovement() && Path.Distance > Unit.RemainingMovement)
 			{
 				if (!Unit.Moved && Path.Count <= 2) return OrderInvalidReason.NONE;
 				return OrderInvalidReason.UNIT_NO_MOVE;

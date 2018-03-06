@@ -56,7 +56,8 @@ namespace PanzerBlitz
 			DISMOUNT_AS,
 			CAN_REMOUNT,
 
-			CAN_SUPPORT_ARMORED
+			CAN_SUPPORT_ARMORED,
+			UNLIMITED_MOVEMENT
 		};
 
 		public readonly string UniqueKey;
@@ -187,7 +188,7 @@ namespace PanzerBlitz
 
 			PrimaryWeapon = new Weapon(weaponClass, attack, range, canDoubleRange);
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
-			Movement = (byte)attributes[(int)Attribute.MOVEMENT];
+			Movement = Parse.DefaultIfNull(attributes[(int)Attribute.MOVEMENT], IsAircraft() ? byte.MaxValue : (byte)0);
 			IsVehicle = Parse.DefaultIfNull(attributes[(int)Attribute.IS_VEHICLE],
 											UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
 											|| UnitClass == UnitClass.ASSAULT_GUN
@@ -287,11 +288,7 @@ namespace PanzerBlitz
 
 		public int GetStackSize()
 		{
-			if (UnitClass == UnitClass.BLOCK
-				|| UnitClass == UnitClass.MINEFIELD
-				|| UnitClass == UnitClass.FORT
-				|| UnitClass == UnitClass.BRIDGE)
-				return 0;
+			if (IsNeutral() || IsAircraft()) return 0;
 			return 1;
 		}
 
@@ -329,6 +326,16 @@ namespace PanzerBlitz
 										 || UnitClass == UnitClass.BLOCK
 										 || UnitClass == UnitClass.WRECKAGE
 										 || UnitClass == UnitClass.BRIDGE;
+		}
+
+		public bool IsAircraft()
+		{
+			return UnitClass == UnitClass.OBSERVATION_AIRCRAFT || UnitClass == UnitClass.FIGHTER_BOMBER;
+		}
+
+		public bool HasUnlimitedMovement()
+		{
+			return Movement == byte.MaxValue;
 		}
 
 		public bool Emplaceable()
@@ -398,6 +405,7 @@ namespace PanzerBlitz
 
 		public float GetMaxMovement(Environment Environment)
 		{
+			if (HasUnlimitedMovement()) return float.MaxValue;
 			if (MovementRules.IgnoresEnvironmentMovement) return Movement;
 			if (Movement == 0) return 0;
 			return Math.Max(1, Environment.MovementMultiplier * Movement);
@@ -412,9 +420,8 @@ namespace PanzerBlitz
 		float GetPointValueInternal(bool HalfPriceTrucks)
 		{
 			if (SecondaryWeapon == default(Weapon)) return GetPointValueInternal(HalfPriceTrucks, PrimaryWeapon);
-			return Math.Max(
-				GetPointValueInternal(HalfPriceTrucks, PrimaryWeapon),
-				GetPointValueInternal(HalfPriceTrucks, SecondaryWeapon));
+			return GetPointValueInternal(HalfPriceTrucks, PrimaryWeapon)
+				+ GetPointValueInternal(HalfPriceTrucks, SecondaryWeapon);
 		}
 
 		float GetPointValueInternal(bool HalfPriceTrucks, Weapon Weapon)
@@ -494,6 +501,12 @@ namespace PanzerBlitz
 					return 12;
 				case UnitClass.MINEFIELD:
 					return 10 * Weapon.Attack + 15;
+				case UnitClass.OBSERVATION_AIRCRAFT:
+					return 50;
+				case UnitClass.FIGHTER_BOMBER:
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
+					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 3 * Weapon.Attack;
+					else return Weapon.Attack;
 				default:
 					return Weapon.Attack + Weapon.Range + Defense + Movement;
 			}

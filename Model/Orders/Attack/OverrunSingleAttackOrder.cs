@@ -72,7 +72,7 @@ namespace PanzerBlitz
 			_MovementPath = new Path<Tile>(_InitialMovement.Path);
 			_MovementPath.Add(AttackTile, distance1.Cost);
 			_MovementPath.Add(ExitTile, distance2.Cost);
-			if (_MovementPath.Distance > Attacker.RemainingMovement)
+			if (!Attacker.Configuration.HasUnlimitedMovement() && _MovementPath.Distance > Attacker.RemainingMovement)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 
 			r = Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null, UseSecondaryWeapon);

@@ -70,7 +70,10 @@ namespace PanzerBlitz
 			AddAttribute(string.Format("Attack - {0}", Unit.Configuration.PrimaryWeapon.Attack));
 			AddAttribute(string.Format("Range - {0}", Unit.Configuration.PrimaryWeapon.Range));
 			AddAttribute(string.Format("Defense - {0}", Unit.Configuration.Defense));
-			AddAttribute(string.Format("Movement - {0}", Unit.Configuration.Movement));
+			AddAttribute(
+				string.Format(
+					"Movement - {0}",
+					Unit.Configuration.HasUnlimitedMovement() ? "Unlimited" : Unit.Configuration.Movement.ToString()));
 			AddAttribute(string.Format("Point Value - {0}", Unit.GetPointValue()));
 		}
 

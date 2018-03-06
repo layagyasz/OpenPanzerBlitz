@@ -40,6 +40,7 @@ namespace PanzerBlitz
 
 		public OrderStatus Execute(Random Random)
 		{
+			Army.Reset(false);
 			return OrderStatus.FINISHED;
 		}
 	}

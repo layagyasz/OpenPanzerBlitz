@@ -132,6 +132,7 @@ namespace PanzerBlitz
 			if (Order is NextPhaseOrder)
 			{
 				NextPhase();
+				Order.Execute(_Random);
 				return OrderInvalidReason.NONE;
 			}
 

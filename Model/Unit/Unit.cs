@@ -105,8 +105,8 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false, bool IgnoreEnemyUnits = false)
 		{
-			if (!IgnoreEnemyUnits && Tile.GetUnitBlockType() == BlockType.STANDARD
-				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && i.Army != Army))
+			if (!IgnoreEnemyUnits && !Configuration.IsAircraft() && Tile.GetUnitBlockType() == BlockType.STANDARD
+				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && !i.Configuration.IsAircraft() && i.Army != Army))
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
@@ -228,12 +228,14 @@ namespace PanzerBlitz
 			if (Tile == Position && (Path == null || Path.Count < 2)) return;
 			foreach (Tile t in Path.Nodes) t.Control(this);
 
-			var movement = (float)Path.Distance;
-			RemainingMovement -= movement;
-			MovedMoreThanOneTile = Path.Count > 2 || Moved;
-			Moved = true;
+			if (!Configuration.HasUnlimitedMovement())
+			{
+				var movement = (float)Path.Distance;
+				RemainingMovement -= movement;
+				MovedMoreThanOneTile = Path.Count > 2 || Moved;
+				Moved = true;
+			}
 			Place(Tile, Path);
-
 		}
 
 		public bool MustMove()

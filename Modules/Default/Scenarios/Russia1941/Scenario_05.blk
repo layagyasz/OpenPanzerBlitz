@@ -1,0 +1,100 @@
+﻿scenario:_ {
+	string:name { First Encounter: T-34 }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 5 }
+	!environment:environment { environments.summer-steppe }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-03.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:russian {
+			!faction:faction { factions.russian }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						highest-score-objective:objective {
+							!var:metric { objectives.units-destroyed }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					unit-group:unit-group {
+						string:name { T-34 Tank Brigade }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.t-34-c }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						highest-score-objective:objective {
+							!var:metric { objectives.units-destroyed }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-in-region:matcher {
+						string:region-name { opustoschenia }
+					}
+					unit-group:unit-group {
+						string:name { 258th Infantry Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzjg-47 }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

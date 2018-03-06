@@ -119,7 +119,7 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tile> NeighborsAndSelf()
 		{
-			foreach (Tile T in NeighborTiles) yield return T;
+			foreach (Tile T in NeighborTiles.Where(i => i != null)) yield return T;
 			yield return this;
 		}
 		// Pathable
