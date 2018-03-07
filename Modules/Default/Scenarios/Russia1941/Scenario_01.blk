@@ -39,7 +39,7 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-within:matcher {
-						zone:zone { 0,0 10,0 10,20 0,20 }
+						zone:zone { 0,0 31,0 31,20 0,20 }
 					}
 					unit-group:unit-group {
 						string:name { Russian Front-Line }
@@ -137,7 +137,7 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-within:matcher {
-						zone:zone { 0,22 10,22 10,33 0,33 }
+						zone:zone { 0,22 31,22 31,33 0,33 }
 					}
 					unit-group:unit-group {
 						string:name { Panzer Spearhead }

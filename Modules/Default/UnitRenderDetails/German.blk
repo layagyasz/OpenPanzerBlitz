@@ -336,3 +336,45 @@ unit-render-details:tiger-i {
 unit-render-details:tiger-ii {
 	string:image-path { tiger-ii.png }
 }
+unit-render-details:fw-190 {
+	string:image-path { fw-190.png }
+}
+unit-render-details:ju-87-b-early {
+	string:image-path { fw-190.png }
+}
+unit-render-details:ju-87-b {
+	string:image-path { ju-87.png }
+}
+unit-render-details:ju-87-g {
+	string:image-path { ju-87.png }
+}
+unit-render-details:hs-123 {
+	string:image-path { hs-123.png }
+}
+unit-render-details:do-17-z {
+	string:image-path { fw-190.png }
+}
+unit-render-details:hs-129_r1 {
+	string:image-path { do-17-z.png }
+}
+unit-render-details:hs-129_r2-early {
+	string:image-path { hs-129.png }
+}
+unit-render-details:hs-129_r2 {
+	string:image-path { hs-129.png }
+}
+unit-render-details:hs-129_r2-late {
+	string:image-path { hs-129.png }
+}
+unit-render-details:ju-88 {
+	string:image-path { ju-88.png }
+}
+unit-render-details:ju-52 {
+	string:image-path { ju-52.png }
+}
+unit-render-details:glider-german {
+	string:image-path { glider-2.png }
+}
+unit-render-details:spotter-german {
+	string:image-path { spotter.png }
+}

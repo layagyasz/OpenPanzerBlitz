@@ -109,6 +109,7 @@ namespace PanzerBlitz
 			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));
 			Block.AddParser<BlockType>("block-type", Parse.EnumBlockParser<BlockType>(typeof(BlockType)));
 			Block.AddParser<Front>("front", Parse.EnumBlockParser<Front>(typeof(Front)));
+			Block.AddParser<Weapon>("weapon", i => new Weapon(i));
 
 			Block.AddParser<MovementRule>("movement-rule", i => new MovementRule(i));
 			Block.AddParser<UnitMovementRules>("unit-movement-rules", i => new UnitMovementRules(i));

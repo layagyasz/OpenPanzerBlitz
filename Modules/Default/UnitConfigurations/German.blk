@@ -1096,3 +1096,182 @@ unit-configuration:tiger-ii {
 	byte:defense { 16 }
 	byte:movement { 6 }
 }
+unit-configuration:fw-190 {
+	string:name { FW-190 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 4 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:ju-87-b-early {
+	string:name { JU-87 B }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:ju-87-b {
+	string:name { JU-87 B }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:ju-87-g {
+	string:name { JU-87 G }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 6 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hs-123 {
+	string:name { Hs-123 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 8 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:do-17-z {
+	string:name { Do-17 Z }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hs-129_r1 {
+	string:name { Hs-129 (R1) }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hs-129_r2-early {
+	string:name { Hs-129 (R2) }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hs-129_r2 {
+	string:name { Hs-129 (R2) }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 6 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hs-129_r2-late {
+	string:name { Hs-129 (R2) }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 8 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:ju-88 {
+	string:name { JU-88 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:ju-52 {
+	string:name { JU-52 }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:glider-german {
+	string:name { Glider }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:spotter-german {
+	string:name { Spotter }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}

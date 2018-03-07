@@ -69,15 +69,12 @@ namespace PanzerBlitz
 				return;
 			}
 
-			Weapon weapon = Object.GetWeapon(false);
-			var attackText = new Text(weapon.Attack.ToString(), Font, 36);
-			attackText.Color = Color.Black;
-			attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
-
-			var rangeText = new Text(
-				weapon.Range.ToString() + (weapon.CanDoubleRange ? "*" : ""), Font, 36);
-			rangeText.Color = Color.Black;
-			rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
+			if (Object.SecondaryWeapon == default(Weapon)) RenderWeapon(Target, r, Object, Object.GetWeapon(false));
+			else
+			{
+				RenderWeapon(Target, r, Object, Object.GetWeapon(false), new Vector2f(1f / 6, 1f / 12), true);
+				RenderWeapon(Target, r, Object, Object.GetWeapon(true), new Vector2f(5f / 6, 1f / 12), true);
+			}
 
 			var defenseText = new Text(Object.Defense.ToString(), Font, 36);
 			defenseText.Color = Color.Black;
@@ -89,20 +86,44 @@ namespace PanzerBlitz
 			moveText.Color = Color.Black;
 			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 
-			var weaponClassText = new Text(WeaponClassString(Object, false), Font, 28);
-			weaponClassText.Color = Color.Black;
-			weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
-
 			var nameText = new Text(renderDetails.OverrideDisplayName ?? Object.Name, Font, 24);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 
-			Target.Draw(attackText, r);
-			Target.Draw(rangeText, r);
+			if (!Object.HasUnlimitedMovement()) Target.Draw(moveText, r);
 			Target.Draw(defenseText, r);
-			Target.Draw(moveText, r);
-			Target.Draw(weaponClassText, r);
 			Target.Draw(nameText, r);
+		}
+
+		void RenderWeapon(
+			RenderTarget Target,
+			RenderStates RenderStates,
+			UnitConfiguration Object,
+			Weapon Weapon,
+			Vector2f Origin = default(Vector2f),
+			bool Vertical = false)
+		{
+			var attackText = new Text(Weapon.Attack.ToString(), Font, 36) { Color = Color.Black };
+			var weaponClassText = new Text(WeaponClassString(Object, false), Font, 28) { Color = Color.Black };
+			var rangeText = new Text(
+				Weapon.Range.ToString() + (Weapon.CanDoubleRange ? "*" : ""), Font, 36)
+			{ Color = Color.Black };
+			if (Vertical)
+			{
+				Vector2f padding = new Vector2f(0, 1f / 4);
+				attackText.Position = SpriteSize * Origin - GetCenter(attackText);
+				weaponClassText.Position = SpriteSize * (Origin + padding * 2) - GetCenter(weaponClassText);
+				rangeText.Position = SpriteSize * (Origin + padding * 1) - GetCenter(rangeText);
+			}
+			else
+			{
+				attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
+				weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
+				rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
+			}
+			Target.Draw(attackText, RenderStates);
+			Target.Draw(weaponClassText, RenderStates);
+			Target.Draw(rangeText, RenderStates);
 		}
 
 		Vector2f GetCenter(Text Text)

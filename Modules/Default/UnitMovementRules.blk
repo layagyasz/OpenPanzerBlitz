@@ -11,6 +11,7 @@
 		movement-rule:swamp { impassable }
 		movement-rule:water { impassable }
 	}
+	unit-movement-rules:default-aircraft { }
 	unit-movement-rules:amphibious-transport {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }

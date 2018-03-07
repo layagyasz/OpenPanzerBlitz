@@ -707,3 +707,73 @@ unit-configuration-link:tiger-ii {
 
 	int:introduce-year { 1944 }
 }
+unit-configuration-link:fw-190 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.fw-190 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:ju-87-b-early {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.ju-87-b-early }
+}
+unit-configuration-link:ju-87-b {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.ju-87-b }
+}
+unit-configuration-link:ju-87-g {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.ju-87-g }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:hs-123 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.hs-123 }
+}
+unit-configuration-link:do-17-z {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.do-17-z }
+}
+unit-configuration-link:hs-129_r1 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.hs-129_r1 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:hs-129_r2-early {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2-early }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:hs-129_r2 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2 }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:hs-129_r2-late {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2-late }
+
+	int:introduce-year { 1945 }
+}
+unit-configuration-link:ju-88 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.ju-88 }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:ju-52 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.ju-52 }
+}
+unit-configuration-link:glider-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.glider-german }
+}
+unit-configuration-link:spotter-german {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.spotter-german }
+}

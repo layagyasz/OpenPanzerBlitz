@@ -11,9 +11,13 @@ namespace PanzerBlitz
 		{
 			NAME,
 			UNIT_CLASS,
+
+			PRIMARY_WEAPON,
+			SECONDARY_WEAPON,
 			WEAPON_CLASS,
 			ATTACK,
 			RANGE,
+
 			DEFENSE,
 			MOVEMENT,
 
@@ -56,8 +60,7 @@ namespace PanzerBlitz
 			DISMOUNT_AS,
 			CAN_REMOUNT,
 
-			CAN_SUPPORT_ARMORED,
-			UNLIMITED_MOVEMENT
+			CAN_SUPPORT_ARMORED
 		};
 
 		public readonly string UniqueKey;
@@ -181,24 +184,28 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			UnitClass = (UnitClass)attributes[(int)Attribute.UNIT_CLASS];
 
-			WeaponClass weaponClass = (WeaponClass)attributes[(int)Attribute.WEAPON_CLASS];
-			byte attack = (byte)attributes[(int)Attribute.ATTACK];
-			byte range = (byte)attributes[(int)Attribute.RANGE];
+			WeaponClass weaponClass = Parse.DefaultIfNull(attributes[(int)Attribute.WEAPON_CLASS], WeaponClass.NA);
+			byte attack = Parse.DefaultIfNull(attributes[(int)Attribute.ATTACK], (byte)0);
+			byte range = Parse.DefaultIfNull(attributes[(int)Attribute.RANGE], (byte)0);
 			bool canDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
 
-			PrimaryWeapon = new Weapon(weaponClass, attack, range, canDoubleRange);
+			PrimaryWeapon = Parse.DefaultIfNull(
+				attributes[(int)Attribute.PRIMARY_WEAPON], new Weapon(weaponClass, attack, range, canDoubleRange));
+			SecondaryWeapon = Parse.DefaultIfNull(attributes[(int)Attribute.SECONDARY_WEAPON], default(Weapon));
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
 			Movement = Parse.DefaultIfNull(attributes[(int)Attribute.MOVEMENT], IsAircraft() ? byte.MaxValue : (byte)0);
-			IsVehicle = Parse.DefaultIfNull(attributes[(int)Attribute.IS_VEHICLE],
-											UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
-											|| UnitClass == UnitClass.ASSAULT_GUN
-											|| UnitClass == UnitClass.ENGINEER_VEHICLE
-											|| UnitClass == UnitClass.FLAME_TANK
-											|| UnitClass == UnitClass.RECONNAISSANCE_VEHICLE
-											|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
-											|| UnitClass == UnitClass.TANK
-											|| UnitClass == UnitClass.TRANSPORT
-											|| UnitClass == UnitClass.WRECKAGE);
+			IsVehicle = Parse.DefaultIfNull(
+				attributes[(int)Attribute.IS_VEHICLE],
+				IsAircraft()
+				|| UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
+				|| UnitClass == UnitClass.ASSAULT_GUN
+				|| UnitClass == UnitClass.ENGINEER_VEHICLE
+				|| UnitClass == UnitClass.FLAME_TANK
+				|| UnitClass == UnitClass.RECONNAISSANCE_VEHICLE
+				|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
+				|| UnitClass == UnitClass.TANK
+				|| UnitClass == UnitClass.TRANSPORT
+				|| UnitClass == UnitClass.WRECKAGE);
 			IsArmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_ARMORED],
 				(IsVehicle && UnitClass != UnitClass.TRANSPORT) || UnitClass == UnitClass.FORT);
@@ -212,9 +219,7 @@ namespace PanzerBlitz
 
 			MovementRules = Parse.DefaultIfNull(
 				attributes[(int)Attribute.MOVEMENT_RULES],
-				IsVehicle
-					? Block.Get<UnitMovementRules>("unit-movement-rules.default-vehicle")
-					: Block.Get<UnitMovementRules>("unit-movement-rules.default-non-vehicle"));
+				Block.Get<UnitMovementRules>(GetDefaultMovementRules()));
 
 			IsCarrier = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
@@ -269,6 +274,13 @@ namespace PanzerBlitz
 			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
 
 			CanSupportArmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_SUPPORT_ARMORED], false);
+		}
+
+		string GetDefaultMovementRules()
+		{
+			if (IsAircraft()) return "unit-movement-rules.default-aircraft";
+			if (IsVehicle) return "unit-movement-rules.default-vehicle";
+			return "unit-movement-rules.default-non-vehicle";
 		}
 
 		public Weapon GetWeapon(bool Secondary)
