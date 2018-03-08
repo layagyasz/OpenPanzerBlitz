@@ -913,3 +913,131 @@ unit-configuration:js-iii {
 	byte:defense { 14 }
 	byte:movement { 8 }	
 }
+unit-configuration:il-2-bombs {
+	string:name { Il-2 Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 8 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:il-2-rockets {
+	string:name { Il-2 Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:su-2-bombs {
+	string:name { Su-2 Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 8 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:su-2-rockets {
+	string:name { Su-2 Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:yak-1-bombs {
+	string:name { Yak-1 Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 5 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:yak-1-rockets {
+	string:name { Yak-1 Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:il-10 {
+	string:name { Il-10 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:pe-2 {
+	string:name { Pe-2 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

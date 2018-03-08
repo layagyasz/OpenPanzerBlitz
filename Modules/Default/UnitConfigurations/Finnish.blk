@@ -245,3 +245,19 @@ unit-configuration:aerosan {
 	float:oversized-passenger-movement-multiplier { 2 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
+unit-configuration:blenheim {
+	string:name { Blenheim }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

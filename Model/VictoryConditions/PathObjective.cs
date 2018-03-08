@@ -51,12 +51,12 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			Tile source = new Tile(Match.Map, new Coordinate(-1, -1), null, new IdGenerator());
-			Tile sink = new Tile(Match.Map, new Coordinate(-1, -1), null, new IdGenerator());
-			HashSet<Tile> sources = new HashSet<Tile>(Match.Map.TilesEnumerable.Where(i => Source.Matches(i)));
-			HashSet<Tile> sinks = new HashSet<Tile>(Match.Map.TilesEnumerable.Where(i => Sink.Matches(i)));
+			var source = new Tile(Match.Map, new Coordinate(-1, -1), null, new IdGenerator());
+			var sink = new Tile(Match.Map, new Coordinate(-1, -1), null, new IdGenerator());
+			var sources = new HashSet<Tile>(Match.Map.TilesEnumerable.Where(i => Source.Matches(i)));
+			var sinks = new HashSet<Tile>(Match.Map.TilesEnumerable.Where(i => Sink.Matches(i)));
 
-			Path<Tile> path = new Path<Tile>(
+			var path = new Path<Tile>(
 				source,
 				sink,
 				i => true,

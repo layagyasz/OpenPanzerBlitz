@@ -29,11 +29,7 @@ namespace PanzerBlitz
 
 		public abstract void Serialize(SerializationOutputStream Stream);
 
-		public virtual OrderInvalidReason Validate()
-		{
-			return OrderInvalidReason.NONE;
-		}
-
+		public abstract OrderInvalidReason Validate();
 		public abstract AttackOrder GenerateNewAttackOrder();
 		public abstract bool MatchesTurnComponent(TurnComponent TurnComponent);
 		public abstract OrderStatus Execute(Random Random);

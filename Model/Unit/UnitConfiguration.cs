@@ -25,6 +25,7 @@ namespace PanzerBlitz
 			CAN_INDIRECT_FIRE,
 			CAN_OVERRUN,
 			CAN_CLOSE_ASSAULT,
+			CAN_AIR_ATTACK,
 			CAN_ANTI_AIRCRAFT,
 			CAN_DOUBLE_RANGE,
 			CAN_CLEAR_MINES,
@@ -76,6 +77,7 @@ namespace PanzerBlitz
 		public readonly bool CanIndirectFire;
 		public readonly bool CanOverrun;
 		public readonly bool CanCloseAssault;
+		public readonly bool CanAirAttack;
 		public readonly bool CanAntiAircraft;
 		public readonly bool CanClearMines;
 		public readonly bool CanPlaceMines;
@@ -138,7 +140,8 @@ namespace PanzerBlitz
 			CanIndirectFire = Stream.ReadBoolean();
 			CanOverrun = Stream.ReadBoolean();
 			CanCloseAssault = Stream.ReadBoolean();
-			CanAntiAircraft = Stream.ReadBoolean(); ;
+			CanAirAttack = Stream.ReadBoolean();
+			CanAntiAircraft = Stream.ReadBoolean();
 			CanClearMines = Stream.ReadBoolean();
 			CanPlaceMines = Stream.ReadBoolean();
 			CanPlaceBridges = Stream.ReadBoolean();
@@ -184,10 +187,10 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			UnitClass = (UnitClass)attributes[(int)Attribute.UNIT_CLASS];
 
-			WeaponClass weaponClass = Parse.DefaultIfNull(attributes[(int)Attribute.WEAPON_CLASS], WeaponClass.NA);
-			byte attack = Parse.DefaultIfNull(attributes[(int)Attribute.ATTACK], (byte)0);
-			byte range = Parse.DefaultIfNull(attributes[(int)Attribute.RANGE], (byte)0);
-			bool canDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
+			var weaponClass = Parse.DefaultIfNull(attributes[(int)Attribute.WEAPON_CLASS], WeaponClass.NA);
+			var attack = Parse.DefaultIfNull(attributes[(int)Attribute.ATTACK], (byte)0);
+			var range = Parse.DefaultIfNull(attributes[(int)Attribute.RANGE], (byte)0);
+			var canDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
 
 			PrimaryWeapon = Parse.DefaultIfNull(
 				attributes[(int)Attribute.PRIMARY_WEAPON], new Weapon(weaponClass, attack, range, canDoubleRange));
@@ -260,6 +263,8 @@ namespace PanzerBlitz
 				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
 			CanOnlySupportCloseAssault = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT], false);
+			CanAirAttack =
+				Parse.DefaultIfNull(attributes[(int)Attribute.CAN_AIR_ATTACK], UnitClass == UnitClass.FIGHTER_BOMBER);
 			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
 			CanClearMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CLEAR_MINES], IsEngineer);
 			CanPlaceMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_MINES], IsEngineer);
@@ -362,7 +367,7 @@ namespace PanzerBlitz
 
 		public byte GetAdjustedRange(bool UseSecondaryWeapon)
 		{
-			Weapon weapon = GetWeapon(UseSecondaryWeapon);
+			var weapon = GetWeapon(UseSecondaryWeapon);
 			return (byte)(weapon.CanDoubleRange ? 2 * weapon.Range : weapon.Range);
 		}
 
@@ -388,6 +393,24 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
+		public OrderInvalidReason CanAirAttackAt(bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
+		{
+			if (!CanAirAttack) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Range > GetAdjustedRange(UseSecondaryWeapon)) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (GetWeapon(UseSecondaryWeapon).WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
+				return OrderInvalidReason.TARGET_ARMORED;
+			return OrderInvalidReason.NONE;
+		}
+
+		public OrderInvalidReason CanAntiAircraftAt(bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
+		{
+			if (!CanAntiAircraft) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Range > GetAdjustedRange(UseSecondaryWeapon)) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (GetWeapon(UseSecondaryWeapon).WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
+				return OrderInvalidReason.TARGET_ARMORED;
+			return OrderInvalidReason.NONE;
+		}
+
 		public OrderInvalidReason CanAttack(AttackMethod AttackMethod)
 		{
 			switch (AttackMethod)
@@ -399,6 +422,15 @@ namespace PanzerBlitz
 						? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
 				case AttackMethod.CLOSE_ASSAULT:
 					return CanCloseAssault ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+				case AttackMethod.MINEFIELD:
+					return UnitClass == UnitClass.MINEFIELD
+						? OrderInvalidReason.NONE
+							: OrderInvalidReason.UNIT_NO_ATTACK;
+				case AttackMethod.AIR:
+					return CanAirAttack ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+				case AttackMethod.ANTI_AIRCRAFT:
+					return CanAntiAircraft ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+
 				default: return OrderInvalidReason.NONE;
 			}
 		}
@@ -410,6 +442,9 @@ namespace PanzerBlitz
 				case AttackMethod.OVERRUN: return 0;
 				case AttackMethod.NORMAL_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
 				case AttackMethod.CLOSE_ASSAULT: return CanCloseAssault ? 1 : 0;
+				case AttackMethod.MINEFIELD: return 0;
+				case AttackMethod.AIR: return CanAirAttack ? 1 : 0;
+				case AttackMethod.ANTI_AIRCRAFT: return CanAntiAircraft ? GetAdjustedRange(UseSecondaryWeapon) : 0;
 			}
 			// Should not end up here.
 			return 0;
@@ -518,7 +553,7 @@ namespace PanzerBlitz
 				case UnitClass.FIGHTER_BOMBER:
 					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
 					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 3 * Weapon.Attack;
-					else return Weapon.Attack;
+					return Weapon.Attack;
 				default:
 					return Weapon.Attack + Weapon.Range + Defense + Movement;
 			}
@@ -539,6 +574,7 @@ namespace PanzerBlitz
 			Stream.Write(CanIndirectFire);
 			Stream.Write(CanOverrun);
 			Stream.Write(CanCloseAssault);
+			Stream.Write(CanAirAttack);
 			Stream.Write(CanAntiAircraft);
 			Stream.Write(CanClearMines);
 			Stream.Write(CanPlaceMines);

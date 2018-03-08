@@ -66,7 +66,7 @@ namespace PanzerBlitz
 		{
 			_Description.Add(new Button("attack-odds-box") { DisplayedString = OddsString(OddsCalculation) });
 
-			var p = CombatResultsTable.STANDARD_CRT.GetCombatResultProbabilities(OddsCalculation);
+			var p = Attack.CombatResultsTable.GetCombatResultProbabilities(OddsCalculation);
 			for (int i = 0; i < p.Length; ++i)
 			{
 				if (p[i] > 0)

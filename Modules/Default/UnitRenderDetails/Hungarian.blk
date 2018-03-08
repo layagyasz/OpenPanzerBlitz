@@ -55,3 +55,6 @@ unit-render-details:turan-ii {
 unit-render-details:turan-iii {
 	string:image-path { turan-iii.png }
 }
+unit-render-details:ca-135 {
+	string:image-path { ca-135.png }
+}

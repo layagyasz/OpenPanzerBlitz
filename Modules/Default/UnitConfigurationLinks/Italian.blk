@@ -333,3 +333,25 @@ unit-configuration-link:pesante-40 {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:br-20 {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.br-20 }
+}
+unit-configuration-link:cr-42-italian {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.cr-42 }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:mc-202-a {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.mc-202-a }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:mc-202-i {
+	!faction:faction { factions.italian }
+	!unit-configuration:unit-configuration { unit-configurations.mc-202-i }
+
+	int:introduce-year { 1941 }
+}

@@ -90,3 +90,15 @@ unit-render-details:vau-33-infantry-corrected {
 unit-render-details:vau-33-at-corrected {
 	string:image-path { vau-33-a.png }
 }
+unit-render-details:p-7 {
+	string:image-path { p-7.png }
+}
+unit-render-details:p-11 {
+	string:image-path { p-11.png }
+}
+unit-render-details:karas {
+	string:image-path { karas.png }
+}
+unit-render-details:p-37-b {
+	string:image-path { p-37b.png }
+}

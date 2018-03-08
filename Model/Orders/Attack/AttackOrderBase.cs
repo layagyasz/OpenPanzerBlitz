@@ -15,6 +15,13 @@ namespace PanzerBlitz
 		public Tile TargetTile { get; }
 		public abstract AttackMethod AttackMethod { get; }
 		public AttackTarget Target { get; protected set; }
+		public virtual CombatResultsTable CombatResultsTable
+		{
+			get
+			{
+				return CombatResultsTable.STANDARD_CRT;
+			}
+		}
 
 		protected List<T> _Attackers = new List<T>();
 		protected List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
@@ -162,7 +169,7 @@ namespace PanzerBlitz
 			{
 				OddsCalculation c = _OddsCalculations[i];
 				if (_Results[i] == CombatResult.NONE)
-					_Results[i] = CombatResultsTable.STANDARD_CRT.GetCombatResult(c, Random.Next(0, 5));
+					_Results[i] = CombatResultsTable.GetCombatResult(c, Random.Next(0, 5));
 				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
 			}
 			Army.AttackTile(TargetTile);

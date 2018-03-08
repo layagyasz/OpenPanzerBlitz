@@ -167,3 +167,15 @@ unit-configuration-link:maresal {
 	int:introduce-year { 1943 }
 	int:obsolete-year { 1944 }
 }
+unit-configuration-link:iar-81-a {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.iar-81-a }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:iar-81-c {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.iar-81-c }
+
+	int:introduce-year { 1942 }
+}

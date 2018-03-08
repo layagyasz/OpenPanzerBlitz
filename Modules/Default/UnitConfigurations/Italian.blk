@@ -506,3 +506,62 @@ unit-configuration:pesante-40 {
 	byte:defense { 8 }
 	byte:movement { 8 }
 }
+unit-configuration:br-20 {
+	string:name { BR-20 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 35 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:cr-42 {
+	string:name { CR-42 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:mc-202-a {
+	string:name { MC-202 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 5 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:mc-202-i {
+	string:name { MC-202 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 5 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

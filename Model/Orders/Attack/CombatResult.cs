@@ -6,6 +6,7 @@
 		MISS,
 		DISRUPT,
 		DOUBLE_DISRUPT,
+		DAMAGED,
 		DESTROY
 	}
 }

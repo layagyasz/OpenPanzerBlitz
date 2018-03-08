@@ -154,3 +154,15 @@ unit-render-details:medio-15_42 {
 unit-render-details:pesante-40 {
 	string:image-path { pesante-40.png }
 }
+unit-render-details:br-20 {
+	string:image-path { br-20.png }
+}
+unit-render-details:cr-42 {
+	string:image-path { cr-42.png }
+}
+unit-render-details:mc-202-a {
+	string:image-path { mc-202.png }
+}
+unit-render-details:mc-202-i {
+	string:image-path { mc-202.png }
+}

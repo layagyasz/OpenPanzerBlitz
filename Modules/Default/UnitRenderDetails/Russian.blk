@@ -275,3 +275,27 @@ unit-render-details:js-ii {
 unit-render-details:js-iii {
 	string:image-path { js-iii.png }
 }
+unit-render-details:il-2-bombs {
+	string:image-path { il-2.png }
+}
+unit-render-details:il-2-rockets {
+	string:image-path { il-2.png }
+}
+unit-render-details:su-2-bombs {
+	string:image-path { su-2.png }
+}
+unit-render-details:su-2-rockets {
+	string:image-path { su-2.png }
+}
+unit-render-details:yak-1-bombs {
+	string:image-path { yak-1.png }
+}
+unit-render-details:yak-1-rockets {
+	string:image-path { yak-1.png }
+}
+unit-render-details:il-10 {
+	string:image-path { il-10.png }
+}
+unit-render-details:pe-2 {
+	string:image-path { pe-2.png }
+}

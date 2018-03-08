@@ -46,7 +46,7 @@ namespace PanzerBlitz
 				return;
 			}
 
-			Weapon weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
+			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
 			Factors = new List<AttackFactorCalculationFactor>();
 			Attack = weapon.Attack;
 

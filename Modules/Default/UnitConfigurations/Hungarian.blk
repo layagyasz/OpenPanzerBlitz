@@ -179,3 +179,14 @@ unit-configuration:turan-iii {
 	byte:defense { 8 }
 	byte:movement { 8 }
 }
+unit-configuration:ca-135 {
+	string:name { CA-135 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

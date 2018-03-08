@@ -46,9 +46,7 @@ namespace PanzerBlitz
 			if (Attacker.Position.HexCoordinate.Distance(Defender.Position.HexCoordinate) > 1)
 				return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 
-			var r = Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null, UseSecondaryWeapon);
-			if (r != OrderInvalidReason.NONE) return r;
-			return base.Validate();
+			return Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null, UseSecondaryWeapon);
 		}
 
 		public override OrderStatus Execute(Random Random)

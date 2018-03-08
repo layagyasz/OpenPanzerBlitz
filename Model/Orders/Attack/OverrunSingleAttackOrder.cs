@@ -75,10 +75,7 @@ namespace PanzerBlitz
 			if (!Attacker.Configuration.HasUnlimitedMovement() && _MovementPath.Distance > Attacker.RemainingMovement)
 				return OrderInvalidReason.UNIT_NO_MOVE;
 
-			r = Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null, UseSecondaryWeapon);
-			if (r != OrderInvalidReason.NONE) return r;
-
-			return base.Validate();
+			return Attacker.CanAttack(AttackMethod.OVERRUN, TreatStackAsArmored, null, UseSecondaryWeapon);
 		}
 
 		public override OrderStatus Execute(Random Random)

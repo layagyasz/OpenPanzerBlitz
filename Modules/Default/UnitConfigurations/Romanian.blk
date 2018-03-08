@@ -179,3 +179,30 @@ unit-configuration:maresal {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
+unit-configuration:iar-81-a {
+	string:name { IAR 81A }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 7 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:iar-81-c {
+	string:name { IAR 81C }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

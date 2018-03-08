@@ -77,3 +77,6 @@ unit-render-details:landsverk {
 unit-render-details:aerosan {
 	string:image-path { nkl-26.png }
 }
+unit-render-details:blenheim {
+	string:image-path { blenheim.png }
+}

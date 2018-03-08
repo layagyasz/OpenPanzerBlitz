@@ -43,7 +43,7 @@ namespace PanzerBlitz
 		public override bool Equals(object obj)
 		{
 			if (!(obj is Weapon)) return false;
-			Weapon w = (Weapon)obj;
+			var w = (Weapon)obj;
 			return WeaponClass == w.WeaponClass
 								   && Attack == w.Attack
 								   && Range == w.Range

@@ -302,3 +302,47 @@ unit-configuration:vau-33-at-corrected {
 	byte:defense { 2 }
 	byte:movement { 6 }
 }
+unit-configuration:p-7 {
+	string:name { P-7 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:p-11 {
+	string:name { P-11 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:karas {
+	string:name { Karas }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 8 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:p-37-b {
+	string:name { P-37b }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}

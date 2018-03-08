@@ -93,6 +93,7 @@ namespace PanzerBlitz
 		public bool CanSeeUnit(Unit Unit)
 		{
 			if (Unit.Position == null) return false;
+			if (Unit.Configuration.IsAircraft()) return true;
 
 			bool lowProfile = Unit.Configuration.HasLowProfile
 								  || Unit.Position.Units.Any(

@@ -190,3 +190,25 @@ unit-configuration-link:vau-33-at-corrected {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.vau-33-at-corrected }
 }
+unit-configuration-link:p-7 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.p-7 }
+
+	int:obsolete-year { 1939 }
+}
+unit-configuration-link:p-11 {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.p-11 }
+
+	int:obsolete-year { 1944 }
+}
+unit-configuration-link:karas {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.karas }
+}
+unit-configuration-link:p-37-b {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.p-37-b }
+
+	int:obsolete-year { 1944 }
+}

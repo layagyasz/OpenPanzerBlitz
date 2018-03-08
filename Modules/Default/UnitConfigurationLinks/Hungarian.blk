@@ -172,3 +172,15 @@ unit-configuration-link:turan-iii {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:cr-42-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.cr-42 }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:ca-135 {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.ca-135 }
+
+	int:introduce-year { 1940 }
+}

@@ -56,3 +56,9 @@ unit-render-details:tacam-r-2 {
 unit-render-details:maresal {
 	string:image-path { maresal.png }
 }
+unit-render-details:iar-81-a {
+	string:image-path { iar-81a.png }
+}
+unit-render-details:iar-81-c {
+	string:image-path { iar-81c.png }
+}

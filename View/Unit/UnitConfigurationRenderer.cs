@@ -110,7 +110,7 @@ namespace PanzerBlitz
 			{ Color = Color.Black };
 			if (Vertical)
 			{
-				Vector2f padding = new Vector2f(0, 1f / 4);
+				var padding = new Vector2f(0, 1f / 4);
 				attackText.Position = SpriteSize * Origin - GetCenter(attackText);
 				weaponClassText.Position = SpriteSize * (Origin + padding * 2) - GetCenter(weaponClassText);
 				rangeText.Position = SpriteSize * (Origin + padding * 1) - GetCenter(rangeText);
@@ -133,7 +133,7 @@ namespace PanzerBlitz
 
 		static string WeaponClassString(UnitConfiguration UnitConfiguration, bool Secondary)
 		{
-			Weapon weapon = UnitConfiguration.GetWeapon(Secondary);
+			var weapon = UnitConfiguration.GetWeapon(Secondary);
 			if (UnitConfiguration.IsCarrier && !UnitConfiguration.CanOnlyCarryInfantry)
 			{
 				if (weapon.WeaponClass == WeaponClass.NA) return "C";

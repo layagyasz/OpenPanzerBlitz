@@ -43,9 +43,7 @@ namespace PanzerBlitz
 			if (Attacker.Position != Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == Defender) != null)
 				return OrderInvalidReason.TARGET_IMMUNE;
-			var r = Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
-			if (r != OrderInvalidReason.NONE) return r;
-			return OrderInvalidReason.NONE;
+			return Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
 		}
 
 		public override OrderStatus Execute(Random Random)

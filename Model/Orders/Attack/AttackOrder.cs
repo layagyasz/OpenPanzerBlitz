@@ -11,6 +11,7 @@ namespace PanzerBlitz
 		AttackMethod AttackMethod { get; }
 		AttackTarget Target { get; }
 		IEnumerable<OddsCalculation> OddsCalculations { get; }
+		CombatResultsTable CombatResultsTable { get; }
 
 		OrderInvalidReason AddAttacker(SingleAttackOrder AttackOrder);
 		void RemoveAttacker(Unit Attacker);

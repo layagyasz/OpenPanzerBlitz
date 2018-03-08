@@ -73,6 +73,9 @@ namespace PanzerBlitz
 				return OrderInvalidReason.TARGET_IMMUNE;
 			if (AttackMethod == AttackMethod.MINEFIELD && !Configuration.IsNeutral()) return OrderInvalidReason.NONE;
 
+			if (Configuration.IsAircraft() && AttackMethod != AttackMethod.ANTI_AIRCRAFT)
+				return OrderInvalidReason.TARGET_IMMUNE;
+
 			if (Army.Configuration.Team == this.Army.Configuration.Team
 				|| (Configuration.IsNeutral() && !Configuration.MustBeAttackedAlone()))
 				return OrderInvalidReason.TARGET_TEAM;
@@ -162,11 +165,9 @@ namespace PanzerBlitz
 			var r = CanAttack(AttackMethod);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			if (AttackMethod == AttackMethod.NORMAL_FIRE && LineOfSight.Validate() != NoLineOfSightReason.NONE)
-				return OrderInvalidReason.ATTACK_NO_LOS;
-
 			if (AttackMethod == AttackMethod.NORMAL_FIRE)
 			{
+				if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return OrderInvalidReason.ATTACK_NO_LOS;
 				r = Configuration.CanDirectFireAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
 				if (r != OrderInvalidReason.UNIT_NO_ATTACK)
 					return r;
@@ -177,8 +178,14 @@ namespace PanzerBlitz
 				return OrderInvalidReason.NONE;
 			}
 			if (AttackMethod == AttackMethod.OVERRUN) return Configuration.CanOverrunAt(EnemyArmored);
-
-			if (!Configuration.CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (AttackMethod == AttackMethod.CLOSE_ASSAULT)
+			{
+				if (!Configuration.CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
+			}
+			if (AttackMethod == AttackMethod.AIR)
+				return Configuration.CanAirAttackAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
+			if (AttackMethod == AttackMethod.ANTI_AIRCRAFT)
+				return Configuration.CanAntiAircraftAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
 
 			return OrderInvalidReason.NONE;
 		}

@@ -52,9 +52,7 @@ namespace PanzerBlitz
 		public override OrderInvalidReason Validate()
 		{
 			if (Defender == null) return OrderInvalidReason.ILLEGAL;
-			var r = Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
-			if (r != OrderInvalidReason.NONE) return r;
-			return base.Validate();
+			return Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 
 		public override OrderStatus Execute(Random Random)
