@@ -203,6 +203,9 @@ namespace PanzerBlitz
 					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
+				case CombatResult.DAMAGE:
+					Status = UnitStatus.DAMAGED;
+					return;
 				case CombatResult.DISRUPT:
 					Status = UnitStatus.DISRUPTED;
 					return;

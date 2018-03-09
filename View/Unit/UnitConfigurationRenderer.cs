@@ -76,22 +76,27 @@ namespace PanzerBlitz
 				RenderWeapon(Target, r, Object, Object.GetWeapon(true), new Vector2f(5f / 6, 1f / 12), true);
 			}
 
-			var defenseText = new Text(Object.Defense.ToString(), Font, 36);
-			defenseText.Color = Color.Black;
-			defenseText.Position = SpriteSize * new Vector2f(1f / 6, 3f / 4) - GetCenter(defenseText);
-
-			var moveText = new Text(
-				Object.Movement
-				+ (Object.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
-			moveText.Color = Color.Black;
-			moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
+			if (!Object.IsAircraft())
+			{
+				var defenseText = new Text(Object.Defense.ToString(), Font, 36);
+				defenseText.Color = Color.Black;
+				defenseText.Position = SpriteSize * new Vector2f(1f / 6, 3f / 4) - GetCenter(defenseText);
+				Target.Draw(defenseText, r);
+			}
+			if (!Object.HasUnlimitedMovement())
+			{
+				var moveText = new Text(
+					Object.Movement
+					+ (Object.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
+				moveText.Color = Color.Black;
+				moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
+				Target.Draw(moveText, r);
+			}
 
 			var nameText = new Text(renderDetails.OverrideDisplayName ?? Object.Name, Font, 24);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 
-			if (!Object.HasUnlimitedMovement()) Target.Draw(moveText, r);
-			Target.Draw(defenseText, r);
 			Target.Draw(nameText, r);
 		}
 
@@ -104,26 +109,30 @@ namespace PanzerBlitz
 			bool Vertical = false)
 		{
 			var attackText = new Text(Weapon.Attack.ToString(), Font, 36) { Color = Color.Black };
-			var weaponClassText = new Text(WeaponClassString(Object, false), Font, 28) { Color = Color.Black };
-			var rangeText = new Text(
-				Weapon.Range.ToString() + (Weapon.CanDoubleRange ? "*" : ""), Font, 36)
-			{ Color = Color.Black };
+			var weaponClassText = new Text(WeaponClassString(Object, Weapon), Font, 28) { Color = Color.Black };
+			Text rangeText = null;
+			if (!Object.IsAircraft())
+				rangeText = new Text(Weapon.Range.ToString() + (Weapon.CanDoubleRange ? "*" : ""), Font, 36)
+				{
+					Color = Color.Black
+				};
 			if (Vertical)
 			{
 				var padding = new Vector2f(0, 1f / 4);
 				attackText.Position = SpriteSize * Origin - GetCenter(attackText);
 				weaponClassText.Position = SpriteSize * (Origin + padding * 2) - GetCenter(weaponClassText);
-				rangeText.Position = SpriteSize * (Origin + padding * 1) - GetCenter(rangeText);
+				if (rangeText != null) rangeText.Position = SpriteSize * (Origin + padding * 1) - GetCenter(rangeText);
 			}
 			else
 			{
 				attackText.Position = SpriteSize * new Vector2f(1f / 6, 1f / 12) - GetCenter(attackText);
 				weaponClassText.Position = SpriteSize * new Vector2f(.5f, 1f / 12) - GetCenter(weaponClassText);
-				rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
+				if (rangeText != null)
+					rangeText.Position = SpriteSize * new Vector2f(5f / 6, 1f / 12) - GetCenter(rangeText);
 			}
 			Target.Draw(attackText, RenderStates);
 			Target.Draw(weaponClassText, RenderStates);
-			Target.Draw(rangeText, RenderStates);
+			if (rangeText != null) Target.Draw(rangeText, RenderStates);
 		}
 
 		Vector2f GetCenter(Text Text)
@@ -131,20 +140,19 @@ namespace PanzerBlitz
 			return new Vector2f(Text.GetLocalBounds().Width, Text.GetLocalBounds().Height) * .5f;
 		}
 
-		static string WeaponClassString(UnitConfiguration UnitConfiguration, bool Secondary)
+		static string WeaponClassString(UnitConfiguration UnitConfiguration, Weapon Weapon)
 		{
-			var weapon = UnitConfiguration.GetWeapon(Secondary);
 			if (UnitConfiguration.IsCarrier && !UnitConfiguration.CanOnlyCarryInfantry)
 			{
-				if (weapon.WeaponClass == WeaponClass.NA) return "C";
-				return string.Format("C({0})", weapon.WeaponClass.ToString()[0]);
+				if (Weapon.WeaponClass == WeaponClass.NA) return "C";
+				return string.Format("C({0})", Weapon.WeaponClass.ToString()[0]);
 			}
-			if (weapon.WeaponClass == WeaponClass.NA) return "-";
-			if (UnitConfiguration.CanIndirectFire && weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
-				return string.Format("({0})", weapon.WeaponClass.ToString().Substring(0, 1));
+			if (Weapon.WeaponClass == WeaponClass.NA) return "-";
+			if (UnitConfiguration.CanIndirectFire && Weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
+				return string.Format("({0})", Weapon.WeaponClass.ToString().Substring(0, 1));
 			if (UnitConfiguration.CanAntiAircraft)
-				return string.Format("<{0}>", weapon.WeaponClass.ToString().Substring(0, 1));
-			return weapon.WeaponClass.ToString().Substring(0, 1);
+				return string.Format("<{0}>", Weapon.WeaponClass.ToString().Substring(0, 1));
+			return Weapon.WeaponClass.ToString().Substring(0, 1);
 		}
 	}
 }

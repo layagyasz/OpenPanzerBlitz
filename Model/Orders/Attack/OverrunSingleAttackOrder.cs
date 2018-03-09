@@ -30,6 +30,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(_InitialMovement);
 			Stream.Write(AttackTile.Id);
+			Stream.Write(UseSecondaryWeapon);
 		}
 
 		public override AttackFactorCalculation GetAttack()

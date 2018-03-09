@@ -60,7 +60,7 @@ namespace PanzerBlitz
 				if (_OddsCalculations.Count != TargetTile.Units.Count(
 					i => i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
-				if (_OddsCalculations.Any(i => i.GetOddsIndex() < 3))
+				if (_OddsCalculations.Any(i => i.Odds > 1 && i.OddsAgainst))
 					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
 			}
 

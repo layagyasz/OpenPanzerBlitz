@@ -270,7 +270,8 @@ namespace PanzerBlitz
 			CanPlaceMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_MINES], IsEngineer);
 			CanPlaceBridges = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_BRIDGES], IsEngineer);
 			InnatelyClearsMines = Parse.DefaultIfNull(attributes[(int)Attribute.INNATELY_CLEARS_MINES], false);
-			ImmuneToMines = Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines);
+			ImmuneToMines =
+				Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines || IsAircraft());
 
 			CanSpotIndirectFire = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);

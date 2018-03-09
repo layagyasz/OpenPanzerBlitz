@@ -131,8 +131,7 @@ namespace PanzerBlitz
 					_Attackers
 						.GroupBy(i => i.Defender)
 						.Select(i => new OddsCalculation(i, new Unit[] { i.Key }, AttackMethod, TargetTile)));
-				_OddsCalculations.Sort(
-					(x, y) => x.GetOddsIndex().CompareTo(y.GetOddsIndex()));
+				_OddsCalculations.Sort((x, y) => x.CompareTo(y));
 			}
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)

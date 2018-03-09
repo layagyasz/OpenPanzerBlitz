@@ -21,18 +21,71 @@ namespace PanzerBlitz
 			LineOfSight LineOfSight,
 			bool UseSecondaryWeapon)
 		{
-			if (AttackMethod == AttackMethod.NORMAL_FIRE)
-				GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+			switch (AttackMethod)
+			{
+				case AttackMethod.NORMAL_FIRE:
+					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+					break;
+				case AttackMethod.AIR:
+					GetAirAttack(Unit, EnemyArmored, UseSecondaryWeapon);
+					break;
+				case AttackMethod.ANTI_AIRCRAFT:
+					GetAntiAirAttack(Unit, LineOfSight, UseSecondaryWeapon);
+					break;
+				default:
+					if (Unit.CanAttack(
+						AttackMethod, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
+					{
+						Attack = 0;
+						Factors = new List<AttackFactorCalculationFactor>
+						{
+							AttackFactorCalculationFactor.CANNOT_ATTACK
+						};
+					}
+					Attack = Unit.Configuration.GetWeapon(UseSecondaryWeapon).Attack;
+					Factors = new List<AttackFactorCalculationFactor>();
+					break;
+			}
+		}
+
+		void GetAntiAirAttack(Unit Unit, LineOfSight LineOfSight, bool UseSecondaryWeapon)
+		{
+			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
+			Factors = new List<AttackFactorCalculationFactor>();
+			Attack = weapon.Attack;
+			if (LineOfSight.Range < weapon.Range / 2)
+			{
+				Attack *= 2;
+				Factors.Add(AttackFactorCalculationFactor.ANTI_AIR_RANGE);
+			}
+		}
+
+		void GetAirAttack(Unit Unit, bool EnemyArmored, bool UseSecondaryWeapon)
+		{
+			if (Unit.CanAttack(AttackMethod.AIR, EnemyArmored, null, UseSecondaryWeapon) != OrderInvalidReason.NONE)
+			{
+				Attack = 0;
+				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
+				return;
+			}
+			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
+			Factors = new List<AttackFactorCalculationFactor>();
+			Attack = weapon.Attack;
+			if (EnemyArmored)
+			{
+				if (weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE || weapon.WeaponClass == WeaponClass.MORTAR)
+				{
+					Attack /= 2;
+					Factors.Add(AttackFactorCalculationFactor.ARMOR_RANGE);
+				}
+			}
 			else
 			{
-				if (Unit.CanAttack(
-					AttackMethod, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
+				if (weapon.WeaponClass == WeaponClass.ANTI_ARMOR)
 				{
-					Attack = 0;
-					Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
+					Attack /= 2;
+					Factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
 				}
-				Attack = Unit.Configuration.GetWeapon(UseSecondaryWeapon).Attack;
-				Factors = new List<AttackFactorCalculationFactor>();
 			}
 		}
 

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class OddsCalculation
+	public class OddsCalculation : IComparable
 	{
 		public readonly List<Tuple<SingleAttackOrder, AttackFactorCalculation>> AttackFactorCalculations;
 		public readonly List<Unit> Defenders;
@@ -51,8 +51,10 @@ namespace PanzerBlitz
 					 			|| Tile.Rules.TreatUnitsAsArmored
 								|| TreatStackAsArmored(AttackOrders, Defenders);
 			// If there is a fort, only use its defense.
-			var fort = Defenders.First().Position.Units.FirstOrDefault(
-							i => i.Configuration.UnitClass == UnitClass.FORT && i.Army == Defenders.First().Army);
+			Unit fort = null;
+			if (AttackMethod != AttackMethod.ANTI_AIRCRAFT)
+				fort = Defenders.First().Position.Units.FirstOrDefault(
+					i => i.Configuration.UnitClass == UnitClass.FORT && i.Army == Defenders.First().Army);
 			if (fort != null)
 			{
 				TotalDefense = fort.Configuration.Defense;
@@ -103,19 +105,22 @@ namespace PanzerBlitz
 				IncreaseOdds();
 			}
 
-			// Terrain modifiers.
-			int totalDieModifier = Defenders.First().Position.Rules.DieModifier
-											+ Defenders.Min(i => i.Configuration.WaterDieModifier);
-			if (totalDieModifier != 0)
+			if (AttackMethod != AttackMethod.ANTI_AIRCRAFT)
 			{
-				_DieModifier += totalDieModifier;
-				OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
-			}
-			// Disrupted modifier.
-			if (Defenders.Any(i => i.Status == UnitStatus.DISRUPTED))
-			{
-				_DieModifier -= 1;
-				OddsCalculationFactors.Add(OddsCalculationFactor.DISRUPTED);
+				// Terrain modifiers.
+				int totalDieModifier = Defenders.First().Position.Rules.DieModifier
+												+ Defenders.Min(i => i.Configuration.WaterDieModifier);
+				if (totalDieModifier != 0)
+				{
+					_DieModifier += totalDieModifier;
+					OddsCalculationFactors.Add(OddsCalculationFactor.TERRAIN);
+				}
+				// Disrupted modifier.
+				if (Defenders.Any(i => i.Status == UnitStatus.DISRUPTED))
+				{
+					_DieModifier -= 1;
+					OddsCalculationFactors.Add(OddsCalculationFactor.DISRUPTED);
+				}
 			}
 
 			// Clamp the die modifier.
@@ -158,11 +163,12 @@ namespace PanzerBlitz
 			return armoredAttack < unArmoredAttack;
 		}
 
-		// Map 4, 3, 2, 1, 2, 3, 4 => 0 -> 6
-		public int GetOddsIndex()
+		public int CompareTo(object Object)
 		{
-			if (OddsAgainst) return 4 - Odds;
-			return 2 + Odds;
+			if (!(Object is OddsCalculation)) return 1;
+
+			var o = (OddsCalculation)Object;
+			return (int)Math.Ceiling((1f * TotalAttack / TotalDefense) - (1f * o.TotalAttack / o.TotalDefense));
 		}
 	}
 }

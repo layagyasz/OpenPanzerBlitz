@@ -4,6 +4,7 @@
 	{
 		ACTIVE,
 		DISRUPTED,
+		DAMAGED,
 		DESTROYED
 	}
 }

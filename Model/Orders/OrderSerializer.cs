@@ -10,6 +10,8 @@ namespace PanzerBlitz
 	{
 		static readonly Type[] ORDER_TYPES =
 		{
+			typeof(AirAttackOrder),
+			typeof(AntiAirSingleAttackOrder),
 			typeof(ClearMinefieldOrder),
 			typeof(CloseAssaultAttackOrder),
 			typeof(ConvoyOrderDeployOrder),
@@ -32,6 +34,8 @@ namespace PanzerBlitz
 
 		static readonly Func<SerializationInputStream, List<GameObject>, Order>[] DESERIALIZERS =
 		{
+			(i, j) => new AirAttackOrder(i, j),
+			(i, j) => new AntiAirSingleAttackOrder(i, j),
 			(i, j) => new ClearMinefieldOrder(i, j),
 			(i, j) => new CloseAssaultAttackOrder(i, j),
 			(i, j) => new ConvoyOrderDeployOrder(i, j),

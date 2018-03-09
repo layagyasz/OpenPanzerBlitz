@@ -361,6 +361,10 @@
     <Compile Include="Model\VictoryConditions\HighestUniqueScoreObjective.cs" />
     <Compile Include="Model\Unit\Weapon.cs" />
     <Compile Include="Model\VictoryConditions\PathObjective.cs" />
+    <Compile Include="Model\Orders\Attack\AirAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\AirSingleAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\AntiAirAttackOrder.cs" />
+    <Compile Include="Model\Orders\Attack\AntiAirSingleAttackOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

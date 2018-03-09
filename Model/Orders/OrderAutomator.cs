@@ -27,23 +27,18 @@ namespace PanzerBlitz
 
 			switch (TurnInfo.TurnComponent)
 			{
-				case TurnComponent.ATTACK:
-					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE);
-				case TurnComponent.CLOSE_ASSAULT:
-					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE);
 				case TurnComponent.DEPLOYMENT:
 					return TurnInfo.Army.Deployments.All(i => i.AutomateDeployment());
+
 				case TurnComponent.MINEFIELD_ATTACK:
 					DoMinefieldAttacks(TurnInfo.Army);
 					return true;
-				case TurnComponent.NON_VEHICLE_MOVEMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(false));
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
-				case TurnComponent.RESET:
+
+				case TurnComponent.AIRCRAFT:
 					return true;
+				case TurnComponent.ATTACK:
+					return !TurnInfo.Army.Units.Any(
+						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE);
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
 													&& i.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE);
@@ -51,6 +46,16 @@ namespace PanzerBlitz
 					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(true));
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(true));
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == OrderInvalidReason.NONE);
+				case TurnComponent.CLOSE_ASSAULT:
+					return !TurnInfo.Army.Units.Any(
+						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE);
+				case TurnComponent.NON_VEHICLE_MOVEMENT:
+					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(false));
+					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
+					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
+
+				case TurnComponent.RESET:
+					return true;
 			}
 			return false;
 		}
