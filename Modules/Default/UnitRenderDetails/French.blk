@@ -119,3 +119,12 @@ unit-render-details:somua-35 {
 unit-render-details:fcm-36 {
 	string:image-path { fcm-36.png }
 }
+unit-render-details:leo-451 {
+	string:image-path { leo-451.png }
+}
+unit-render-details:mm-167 {
+	string:image-path { mm-167.png }
+}
+unit-render-details:po-633 {
+	string:image-path { po-633.png }
+}

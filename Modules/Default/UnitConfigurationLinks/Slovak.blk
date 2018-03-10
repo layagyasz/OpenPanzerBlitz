@@ -7,6 +7,28 @@ unit-configuration-link:37mm-at-slovak {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
 }
+unit-configuration-link:45mm-at-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.45mm-at }
+}
+unit-configuration-link:50mm-at-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:75mm-at-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:88mm-at-early-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.88mm-at-early }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:20mm-aa-early-slovak {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
@@ -105,6 +127,14 @@ unit-configuration-link:tancik-33-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.tancik-33-corrected }
 }
+unit-configuration-link:pzkw-ii-d-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d }
+}
+unit-configuration-link:pzkw-ii-d-corrected-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d-corrected }
+}
 unit-configuration-link:lt-34-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.lt-34-corrected }
@@ -116,4 +146,22 @@ unit-configuration-link:lt-35-corrected {
 unit-configuration-link:lt-38-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.lt-38-corrected }
+}
+unit-configuration-link:marder-iii-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.marder-iii }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:avia-b-71 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.avia-b-71 }
+}
+unit-configuration-link:mb-200 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.mb-200 }
+}
+unit-configuration-link:spotter-slovak {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.spotter-slovak }
 }

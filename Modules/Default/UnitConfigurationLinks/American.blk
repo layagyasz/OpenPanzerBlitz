@@ -448,3 +448,91 @@ unit-configuration-link:m-3-gmc {
 	int:introduce-year { 1941 }
 	int:obsolete-year { 1942 }
 }
+unit-configuration-link:p-47-bombs {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.p-47-bombs }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:p-47-rockets {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.p-47-rockets }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:hellcat-bombs {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.hellcat-bombs }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:hellcat-rockets {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.hellcat-rockets }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:corsair-bombs {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.corsair-bombs }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:corsair-rockets {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.corsair-rockets }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:f4f-wildcat {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.f4f-wildcat }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:sbd-dauntless {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.sbd-dauntless }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:tbf-avenger {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.tbf-avenger }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:b-25-mitchell {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.b-25-mitchell }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:b-25-strafer {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.b-25-strafer }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:p-38-lightning {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.p-38-lightning }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:c-47 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.c-47 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:glider-allied-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.glider-allied }
+}
+unit-configuration-link:l-5 {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.l-5 }
+
+	int:introduce-year { 1942 }
+}

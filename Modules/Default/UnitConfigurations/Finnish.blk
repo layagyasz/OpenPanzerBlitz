@@ -245,7 +245,7 @@ unit-configuration:aerosan {
 	float:oversized-passenger-movement-multiplier { 2 }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
-unit-configuration:blenheim {
+unit-configuration:blenheim-finnish {
 	string:name { Blenheim }
 	unit-class:unit-class { fighter-bomber }
 

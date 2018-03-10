@@ -227,3 +227,43 @@ unit-configuration-link:ka-chi {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:a6-m2 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.a6-m2 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:d3a {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.d3a }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:ki-30 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ki-30 }
+}
+unit-configuration-link:ki-43 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ki-43 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:ki-51 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ki-51 }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:g4-m1 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.g4-m1 }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:g4-m2 {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.g4-m2 }
+
+	int:introduce-year { 1943 }
+}

@@ -97,3 +97,24 @@ unit-render-details:ka-mi {
 unit-render-details:ka-chi {
 	string:image-path { ka-chi.png }
 }
+unit-render-details:a6-m2 {
+	string:image-path { a6-m2.png }
+}
+unit-render-details:d3a {
+	string:image-path { d3a.png }
+}
+unit-render-details:ki-30 {
+	string:image-path { ki-30.png }
+}
+unit-render-details:ki-43 {
+	string:image-path { ki-43.png }
+}
+unit-render-details:ki-51 {
+	string:image-path { ki-51.png }
+}
+unit-render-details:g4-m1 {
+	string:image-path { g4.png }
+}
+unit-render-details:g4-m2 {
+	string:image-path { g4.png }
+}

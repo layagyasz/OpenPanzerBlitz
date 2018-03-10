@@ -220,3 +220,15 @@ unit-configuration-link:fcm-36 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.fcm-36 }
 }
+unit-configuration-link:leo-451 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.leo-451 }
+}
+unit-configuration-link:mm-167 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.mm-167 }
+}
+unit-configuration-link:po-633 {
+	!faction:faction { factions.french }
+	!unit-configuration:unit-configuration { unit-configurations.po-633 }
+}

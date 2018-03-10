@@ -774,3 +774,100 @@ unit-configuration:scorpion-flail {
 
 	bool:innately-clears-mines { true }
 }
+unit-configuration:typhoon-bombs {
+	string:name { Typhoon Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:typhoon-rockets {
+	string:name { Typhoon Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:kittyhawk {
+	string:name { Kittyhawk }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:blenheim {
+	string:name { Blenheim }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hurricane {
+	string:name { Hurricane }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:gladiator {
+	string:name { Gladiator }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:halifax {
+	string:name { Halifax }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}

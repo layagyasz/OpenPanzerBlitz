@@ -230,3 +230,24 @@ unit-render-details:churchill-arv {
 unit-render-details:scorpion-flail {
 	string:image-path { scorpion-flail.png }
 }
+unit-render-details:typhoon-bombs {
+	string:image-path { typhoon.png }
+}
+unit-render-details:typhoon-rockets {
+	string:image-path { typhoon.png }
+}
+unit-render-details:kittyhawk {
+	string:image-path { typhoon.png }
+}
+unit-render-details:blenheim {
+	string:image-path { blenheim.png }
+}
+unit-render-details:hurricane {
+	string:image-path { hurricane.png }
+}
+unit-render-details:gladiator {
+	string:image-path { gladiator.png }
+}
+unit-render-details:halifax {
+	string:image-path { halifax.png }
+}

@@ -533,3 +533,43 @@ unit-configuration-link:scorpion-flail {
 
 	int:introduce-year { 1942 }
 }
+unit-configuration-link:typhoon-bombs {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.typhoon-bombs }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:typhoon-rockets {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.typhoon-rockets }
+
+	int:introduce-year { 1941 }
+}
+unit-configuration-link:kittyhawk {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.kittyhawk }
+
+	int:introduce-year { 1939 }
+}
+unit-configuration-link:blenheim {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.blenheim }
+}
+unit-configuration-link:hurricane {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.hurricane }
+}
+unit-configuration-link:gladiator {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.gladiator }
+}
+unit-configuration-link:glider-allied-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.glider-allied }
+}
+unit-configuration-link:halifax {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.halifax }
+
+	int:introduce-year { 1940 }
+}

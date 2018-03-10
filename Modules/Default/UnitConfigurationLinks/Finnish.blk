@@ -254,5 +254,5 @@ unit-configuration-link:aerosan {
 }
 unit-configuration-link:blenheim-finnish {
 	!faction:faction { factions.finnish }
-	!unit-configuration:unit-configuration { unit-configurations.blenheim }
+	!unit-configuration:unit-configuration { unit-configurations.blenheim-finnish }
 }

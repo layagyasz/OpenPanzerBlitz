@@ -197,3 +197,48 @@ unit-render-details:t-30 {
 unit-render-details:m-3-gmc {
 	string:image-path { m-3-gmc.png }
 }
+unit-render-details:p-47-bombs {
+	string:image-path { p-47.png }
+}
+unit-render-details:p-47-rockets {
+	string:image-path { p-47.png }
+}
+unit-render-details:hellcat-bombs {
+	string:image-path { hellcat.png }
+}
+unit-render-details:hellcat-rockets {
+	string:image-path { hellcat.png }
+}
+unit-render-details:corsair-bombs {
+	string:image-path { corsair.png }
+}
+unit-render-details:corsair-rockets {
+	string:image-path { corsair.png }
+}
+unit-render-details:f4f-wildcat {
+	string:image-path { hellcat.png }
+}
+unit-render-details:sbd-dauntless {
+	string:image-path { dauntless.png }
+}
+unit-render-details:tbf-avenger {
+	string:image-path { avenger.png }
+}
+unit-render-details:b-25-mitchell {
+	string:image-path { b-25.png }
+}
+unit-render-details:b-25-strafer {
+	string:image-path { b-25.png }
+}
+unit-render-details:p-38-lightning {
+	string:image-path { p-38-lightning.png }
+}
+unit-render-details:c-47 {
+	string:image-path { c-47.png }
+}
+unit-render-details:glider-allied {
+	string:image-path { glider.png }
+}
+unit-render-details:l-5 {
+	string:image-path { l-5.png }
+}

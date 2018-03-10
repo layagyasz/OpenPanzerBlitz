@@ -171,3 +171,41 @@ unit-configuration:lt-38-corrected {
 	byte:defense { 5 }
 	byte:movement { 9 }
 }
+unit-configuration:avia-b-71 {
+	string:name { Avia B-71 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 1 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:mb-200 {
+	string:name { MB 200 }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 25 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:spotter-slovak {
+	string:name { Spotter }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}

@@ -53,3 +53,12 @@ unit-render-details:lt-35-corrected {
 unit-render-details:lt-38-corrected {
 	string:image-path { lt-38.png }
 }
+unit-render-details:avia-b-71 {
+	string:image-path { avia-b-71.png }
+}
+unit-render-details:mb-200 {
+	string:image-path { mb-200.png }
+}
+unit-render-details:spotter-slovak {
+	string:image-path { l-5.png }
+}

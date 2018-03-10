@@ -710,3 +710,228 @@ unit-configuration:m-3-gmc {
 	byte:defense { 3 }
 	byte:movement { 10 }
 }
+unit-configuration:p-47-bombs {
+	string:name { P-47 Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:p-47-rockets {
+	string:name { P-47 Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hellcat-bombs {
+	string:name { Hellcat Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:hellcat-rockets {
+	string:name { Hellcat Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 15 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:corsair-bombs {
+	string:name { Corsair Bombs }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 20 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:corsair-rockets {
+	string:name { Corsair Rockets }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 15 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { anti-armor }
+		byte:attack { 4 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:f4f-wildcat {
+	string:name { F4F Wildcat }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 3 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:sbd-dauntless {
+	string:name { SBD Dauntless }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 24 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:tbf-avenger {
+	string:name { TBF Avenger }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 10 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 4 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:b-25-mitchell {
+	string:name { B-25 Mitchell }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 2 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:b-25-strafer {
+	string:name { B-25 Strafer }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 30 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 4 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:p-38-lightning {
+	string:name { P-38 Lightning }
+	unit-class:unit-class { fighter-bomber }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { high-explosive }
+		byte:attack { 40 }
+		byte:range { 1 }
+	}
+	weapon:secondary-weapon {
+		weapon-class:weapon-class { infantry }
+		byte:attack { 4 }
+		byte:range { 1 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:c-47 {
+	string:name { C-47 }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:glider-allied {
+	string:name { Glider }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}
+unit-configuration:l-5 {
+	string:name { L-5 }
+	unit-class:unit-class { observation-aircraft }
+
+	weapon:primary-weapon {
+		weapon-class:weapon-class { na }
+		byte:attack { 0 }
+		byte:range { 0 }
+	}
+	byte:defense { 1 }
+}
