@@ -1,0 +1,51 @@
+﻿using System;
+using System.Linq;
+
+using SFML.Graphics;
+
+namespace PanzerBlitz
+{
+	public class AircraftController : BaseAttackController
+	{
+		public AircraftController(HumanMatchPlayerController Controller)
+			: base(Controller) { }
+
+		public override void HandleTileLeftClick(Tile Tile)
+		{
+			if (_Controller.SelectedUnit != null)
+			{
+				var order = new MovementOrder(_Controller.SelectedUnit, Tile, true);
+				if (_Controller.ExecuteOrderAndAlert(order)) SetAircraftHighlight(_Controller.SelectedUnit);
+			}
+		}
+
+		public override void HandleTileRightClick(Tile Tile) { }
+
+		public override void HandleUnitLeftClick(Unit Unit)
+		{
+			if (Unit.Army == _Controller.CurrentTurn.Army
+				&& Unit.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE)
+			{
+				_Controller.SelectUnit(Unit);
+				SetAircraftHighlight(Unit);
+			}
+			else if (Unit.Army != _Controller.CurrentTurn.Army)
+			{
+				if (_Controller.SelectedUnit != null)
+				{
+					AddAttack(
+						Unit.Position,
+						new AirSingleAttackOrder(_Controller.SelectedUnit, Unit.Position));
+				}
+			}
+		}
+
+		void SetAircraftHighlight(Unit Unit)
+		{
+			_Controller.Highlight(Unit.GetFieldOfSight(AttackMethod.AIR).Select(
+				i => new Tuple<Tile, Color>(
+					i.Item1.Final,
+					_Controller.GetRangeColor(i.Item1, Unit, i.Item2, AttackMethod.AIR))));
+		}
+	}
+}

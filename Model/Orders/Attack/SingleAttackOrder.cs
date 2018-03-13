@@ -8,6 +8,7 @@ namespace PanzerBlitz
 	{
 		public Unit Attacker { get; protected set; }
 		public Unit Defender { get; protected set; }
+		public abstract Tile AttackTile { get; protected set; }
 		public bool TreatStackAsArmored { get; set; }
 		public bool UseSecondaryWeapon { get; private set; }
 

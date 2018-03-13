@@ -9,6 +9,18 @@ namespace PanzerBlitz
 	{
 		public readonly LineOfSight LineOfSight;
 
+		public override Tile AttackTile
+		{
+			get
+			{
+				return Defender.Position;
+			}
+			protected set
+			{
+				throw new NotSupportedException();
+			}
+		}
+
 		public NormalSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
 			: base(Attacker, Defender, UseSecondaryWeapon)
 		{

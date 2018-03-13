@@ -9,14 +9,17 @@ namespace PanzerBlitz
 	{
 		public readonly LineOfSight LineOfSight;
 
-		public AntiAirSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
-			: base(Attacker, Defender, UseSecondaryWeapon)
+		public override Tile AttackTile { get; protected set; }
+
+		public AntiAirSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
+			: base(Attacker, null, UseSecondaryWeapon)
 		{
-			LineOfSight = Attacker.GetLineOfSight(Defender.Position);
+			this.AttackTile = AttackTile;
+			LineOfSight = Attacker.GetLineOfSight(AttackTile);
 		}
 
 		public AntiAirSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: base((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
+			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
 		{
 			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
 		}
@@ -24,10 +27,9 @@ namespace PanzerBlitz
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
-			Stream.Write(Defender.Id);
+			Stream.Write(AttackTile.Id);
 			Stream.Write(UseSecondaryWeapon);
 			Stream.Write(LineOfSight.Initial.Id);
-			Stream.Write(LineOfSight.Final.Id);
 		}
 
 		public override AttackFactorCalculation GetAttack()
@@ -42,7 +44,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new NormalAttackOrder(Army, LineOfSight.Final);
+			return new AntiAirAttackOrder(Army, LineOfSight.Final);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -52,7 +54,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Defender == null) return OrderInvalidReason.ILLEGAL;
+			if (AttackTile == null) return OrderInvalidReason.ILLEGAL;
 			return Attacker.CanAttack(AttackMethod.ANTI_AIRCRAFT, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 

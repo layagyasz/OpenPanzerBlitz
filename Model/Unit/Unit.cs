@@ -173,7 +173,7 @@ namespace PanzerBlitz
 					return r;
 				r = Configuration.CanIndirectFireAt(LineOfSight, UseSecondaryWeapon);
 				if (r != OrderInvalidReason.NONE) return r;
-				if (!Army.CanIndirectFireAtTile(LineOfSight.Final))
+				if (!Army.CanSpotTile(LineOfSight.Final))
 					return OrderInvalidReason.ATTACK_NO_SPOTTER;
 				return OrderInvalidReason.NONE;
 			}

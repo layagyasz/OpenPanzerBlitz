@@ -365,6 +365,7 @@
     <Compile Include="Model\Orders\Attack\AirSingleAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AntiAirAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AntiAirSingleAttackOrder.cs" />
+    <Compile Include="Controller\Match\Subcontroller\AircraftController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

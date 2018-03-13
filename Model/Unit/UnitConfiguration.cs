@@ -57,7 +57,8 @@ namespace PanzerBlitz
 			OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER,
 			WATER_DIE_MODIFIER,
 
-			CAN_SPOT_INDIRECT_FIRE,
+			CAN_SPOT,
+			SPOT_RANGE,
 			DISMOUNT_AS,
 			CAN_REMOUNT,
 
@@ -109,7 +110,8 @@ namespace PanzerBlitz
 		public readonly float OversizedPassengerMovementMultiplier;
 		public readonly int WaterDieModifier;
 
-		public readonly bool CanSpotIndirectFire;
+		public readonly bool CanSpot;
+		public readonly byte SpotRange;
 
 		public readonly UnitConfiguration DismountAs;
 		public readonly bool CanRemount;
@@ -171,7 +173,8 @@ namespace PanzerBlitz
 			OversizedPassengerMovementMultiplier = Stream.ReadFloat();
 			WaterDieModifier = Stream.ReadInt32();
 
-			CanSpotIndirectFire = Stream.ReadBoolean();
+			CanSpot = Stream.ReadBoolean();
+			SpotRange = Stream.ReadByte();
 
 			DismountAs = Stream.ReadObject(i => new UnitConfiguration(i), true, true);
 			CanRemount = Stream.ReadBoolean();
@@ -273,8 +276,16 @@ namespace PanzerBlitz
 			ImmuneToMines =
 				Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines || IsAircraft());
 
-			CanSpotIndirectFire = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_SPOT_INDIRECT_FIRE], UnitClass == UnitClass.COMMAND_POST);
+			CanSpot = Parse.DefaultIfNull(
+				attributes[(int)Attribute.CAN_SPOT],
+				!IsStackUnique() && UnitClass != UnitClass.FIGHTER_BOMBER && PrimaryWeapon != default(Weapon));
+			SpotRange = (byte)Parse.DefaultIfNull(
+				attributes[(int)Attribute.SPOT_RANGE],
+				CanSpot
+					? (UnitClass == UnitClass.OBSERVATION_AIRCRAFT
+					   ? 30
+					   : Math.Max(GetAdjustedRange(true), GetAdjustedRange(false)))
+					: 0);
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
@@ -359,11 +370,6 @@ namespace PanzerBlitz
 		public bool Emplaceable()
 		{
 			return IsNeutral() || UnitClass == UnitClass.FORT;
-		}
-
-		public bool CanSpot()
-		{
-			return !IsNeutral() && UnitClass != UnitClass.FORT;
 		}
 
 		public byte GetAdjustedRange(bool UseSecondaryWeapon)
@@ -494,7 +500,7 @@ namespace PanzerBlitz
 						return Weapon.Attack + .25f * Weapon.Range + Defense + Movement;
 					return Weapon.Attack + 4 + Defense + Movement;
 				case UnitClass.RECONNAISSANCE_VEHICLE:
-					if (CanSpotIndirectFire) return 5 + Defense + Movement;
+					if (CanSpot) return 5 + Defense + Movement;
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
@@ -532,7 +538,7 @@ namespace PanzerBlitz
 				case UnitClass.CAVALRY:
 					return Weapon.Attack + 1 + Defense + 1;
 				case UnitClass.COMMAND_POST:
-					return 5;
+					return 1;
 				case UnitClass.AMPHIBIOUS_VEHICLE:
 					if (!CanOnlyCarryInfantry || Weapon.WeaponClass == WeaponClass.INFANTRY)
 						return Defense + 1.5f * Movement;
@@ -606,7 +612,8 @@ namespace PanzerBlitz
 			Stream.Write(OversizedPassengerMovementMultiplier);
 			Stream.Write(WaterDieModifier);
 
-			Stream.Write(CanSpotIndirectFire);
+			Stream.Write(CanSpot);
+			Stream.Write(SpotRange);
 
 			Stream.Write(DismountAs, true, true);
 			Stream.Write(CanRemount);

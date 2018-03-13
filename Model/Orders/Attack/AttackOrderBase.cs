@@ -154,6 +154,8 @@ namespace PanzerBlitz
 			}
 			if (TargetTile.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE)
 				return TargetTile.CanBeAttacked(AttackMethod);
+			if (_Attackers.Select(i => i.AttackTile).Distinct().Count() > 1)
+				return OrderInvalidReason.ILLEGAL;
 
 			return OrderInvalidReason.NONE;
 		}

@@ -29,9 +29,18 @@ namespace PanzerBlitz
 			{
 				if (_Controller.SelectedUnit != null)
 				{
-					AddAttack(
-						Unit.Position,
-						new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, false));
+					if (Unit.Configuration.IsAircraft())
+					{
+						AddAttack(
+							Unit.Position,
+							new AntiAirSingleAttackOrder(_Controller.SelectedUnit, Unit.Position, false));
+					}
+					else
+					{
+						AddAttack(
+							Unit.Position,
+							new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, false));
+					}
 				}
 			}
 		}

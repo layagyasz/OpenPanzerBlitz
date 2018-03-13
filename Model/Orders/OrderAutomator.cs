@@ -35,7 +35,7 @@ namespace PanzerBlitz
 					return true;
 
 				case TurnComponent.AIRCRAFT:
-					return true;
+					return TurnInfo.Army.Units.All(i => !i.Configuration.IsAircraft());
 				case TurnComponent.ATTACK:
 					return !TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE);

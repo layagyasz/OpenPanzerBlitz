@@ -8,9 +8,7 @@ namespace PanzerBlitz
 	public class CloseAssaultController : BaseAttackController
 	{
 		public CloseAssaultController(HumanMatchPlayerController Controller)
-			: base(Controller)
-		{
-		}
+			: base(Controller) { }
 
 		public override void HandleTileLeftClick(Tile Tile)
 		{
@@ -37,7 +35,7 @@ namespace PanzerBlitz
 				{
 					AddAttack(
 						Unit.Position,
-						new CloseAssaultSingleAttackOrder(_Controller.SelectedUnit, Unit));
+						new CloseAssaultSingleAttackOrder(_Controller.SelectedUnit, Unit.Position));
 				}
 			}
 		}

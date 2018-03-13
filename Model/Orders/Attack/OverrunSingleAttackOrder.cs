@@ -12,8 +12,9 @@ namespace PanzerBlitz
 		readonly MovementOrder _InitialMovement;
 		Path<Tile> _MovementPath;
 
-		public readonly Tile AttackTile;
 		public readonly Tile ExitTile;
+
+		public override Tile AttackTile { get; protected set; }
 
 		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile, bool UseSecondaryWeapon = false)
 			: base(InitialMovement.Unit, null, UseSecondaryWeapon)

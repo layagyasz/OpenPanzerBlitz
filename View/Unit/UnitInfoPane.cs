@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
@@ -95,13 +95,14 @@ namespace PanzerBlitz
 				|| Unit.Configuration.IsCommando
 				|| Unit.Configuration.CanDirectFire
 				|| Unit.Configuration.CanIndirectFire
-				|| Unit.Configuration.CanSpotIndirectFire
 				|| Unit.Configuration.CanOverrun
 				|| Unit.Configuration.CanOnlyOverrunUnarmored
 				|| Unit.Configuration.CanCloseAssault
 				|| Unit.Configuration.CanOnlySupportCloseAssault
 				|| Unit.Configuration.CanAntiAircraft
 				|| Unit.Configuration.PrimaryWeapon.CanDoubleRange
+				|| Unit.Configuration.CanSpot
+				|| Unit.Configuration.SpotRange > 0
 				|| Unit.Configuration.CanClearMines
 				|| Unit.Configuration.CanPlaceMines
 				|| Unit.Configuration.CanPlaceBridges
@@ -114,13 +115,14 @@ namespace PanzerBlitz
 			if (Unit.Configuration.IsCommando) AddAttribute("Commandos");
 			if (Unit.Configuration.CanDirectFire) AddAttribute("Direct Fire");
 			if (Unit.Configuration.CanIndirectFire) AddAttribute("Indirect Fire");
-			if (Unit.Configuration.CanSpotIndirectFire) AddAttribute("Can Spot");
 			if (Unit.Configuration.CanOverrun) AddAttribute("Overrun");
 			if (Unit.Configuration.CanOnlyOverrunUnarmored) AddAttribute("Overrun Un-armored");
 			if (Unit.Configuration.CanCloseAssault) AddAttribute("Close Assault");
 			if (Unit.Configuration.CanOnlySupportCloseAssault) AddAttribute("Close Assault Support");
 			if (Unit.Configuration.CanAntiAircraft) AddAttribute("Anti-Aircraft");
 			if (Unit.Configuration.PrimaryWeapon.CanDoubleRange) AddAttribute("Can Double Range");
+			if (Unit.Configuration.CanSpot) AddAttribute("Can Spot");
+			if (Unit.Configuration.SpotRange > 0) AddAttribute("Spot Range " + Unit.Configuration.SpotRange);
 			if (Unit.Configuration.CanClearMines) AddAttribute("Can Clear Mines");
 			if (Unit.Configuration.CanPlaceMines) AddAttribute("Can Place Mines");
 			if (Unit.Configuration.CanPlaceBridges) AddAttribute("Can Place Bridges");

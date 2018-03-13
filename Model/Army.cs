@@ -110,21 +110,11 @@ namespace PanzerBlitz
 			if (Tile == null) return false;
 			if (Tile.Rules.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
 			foreach (Unit u in Units.Where(
-				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot()))
+				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot))
 			{
 				var s = u.GetLineOfSight(Tile);
-				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
-			}
-			return false;
-		}
-
-		public bool CanIndirectFireAtTile(Tile Tile)
-		{
-			if (!CanSpotTile(Tile)) return false;
-			foreach (Unit u in Units.Where(i => i.Configuration.CanSpotIndirectFire))
-			{
-				var s = u.GetLineOfSight(Tile);
-				if (s != null && s.Validate() == NoLineOfSightReason.NONE) return true;
+				if (s != null && s.Validate() == NoLineOfSightReason.NONE && u.Configuration.SpotRange >= s.Range)
+					return true;
 			}
 			return false;
 		}
@@ -135,7 +125,7 @@ namespace PanzerBlitz
 			return Units.Any(
 				i => i.Position != null
 				&& i.Status == UnitStatus.ACTIVE
-				&& i.Configuration.CanSpot()
+				&& i.Configuration.CanSpot
 				&& (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
 		}
 

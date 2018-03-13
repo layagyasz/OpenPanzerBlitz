@@ -51,6 +51,7 @@ namespace PanzerBlitz
 
 		public bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
+			if (Unit.Configuration.IsAircraft()) return TurnComponent == TurnComponent.AIRCRAFT;
 			if (Combat)
 			{
 				return Unit.Configuration.IsVehicle

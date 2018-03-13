@@ -7,6 +7,18 @@ namespace PanzerBlitz
 {
 	public class MinefieldSingleAttackOrder : SingleAttackOrder
 	{
+		public override Tile AttackTile
+		{
+			get
+			{
+				return Defender.Position;
+			}
+			protected set
+			{
+				throw new NotSupportedException();
+			}
+		}
+
 		public MinefieldSingleAttackOrder(Unit Attacker, Unit Defender)
 			: base(Attacker, Defender, false) { }
 

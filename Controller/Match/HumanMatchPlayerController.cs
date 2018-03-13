@@ -84,6 +84,7 @@ namespace PanzerBlitz
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(this) },
+				{ TurnComponent.AIRCRAFT, new AircraftController(this) },
 				{ TurnComponent.ATTACK, new AttackController(this) },
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },
