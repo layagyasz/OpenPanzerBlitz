@@ -921,11 +921,13 @@ unit-configuration:il-2-bombs {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -937,11 +939,13 @@ unit-configuration:il-2-rockets {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 20 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -953,11 +957,13 @@ unit-configuration:su-2-bombs {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -969,11 +975,13 @@ unit-configuration:su-2-rockets {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 20 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -985,11 +993,13 @@ unit-configuration:yak-1-bombs {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 5 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1001,11 +1011,13 @@ unit-configuration:yak-1-rockets {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1017,11 +1029,13 @@ unit-configuration:il-10 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 30 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1033,11 +1047,13 @@ unit-configuration:pe-2 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 30 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }

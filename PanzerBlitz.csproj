@@ -366,6 +366,7 @@
     <Compile Include="Model\Orders\Attack\AntiAirAttackOrder.cs" />
     <Compile Include="Model\Orders\Attack\AntiAirSingleAttackOrder.cs" />
     <Compile Include="Controller\Match\Subcontroller\AircraftController.cs" />
+    <Compile Include="Model\Map\MapGeneratorConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -434,6 +435,7 @@
     <Folder Include="Model\Interactions\" />
     <Folder Include="Modules\Default\Scenarios\BattleForBerlin\" />
     <Folder Include="Modules\Default\Scenarios\Russia1941\" />
+    <Folder Include="Modules\Default\LanguageGenerators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2243,6 +2245,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitSprites\l-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\LanguageGenerators\Russian.mkvc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\LanguageGenerators\French.mkvc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\LanguageGenerators\German.mkvc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\MapGeneratorConfigurations.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

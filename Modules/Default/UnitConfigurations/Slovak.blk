@@ -179,11 +179,13 @@ unit-configuration:avia-b-71 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -195,6 +197,7 @@ unit-configuration:mb-200 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 25 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }

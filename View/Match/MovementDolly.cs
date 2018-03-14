@@ -33,10 +33,17 @@ namespace PanzerBlitz
 				foreach (Tile t in Path.Nodes.Where((x, i) => i % 2 == 0 || i == Path.Nodes.Count() - 1))
 					_Spline.Points.Add(t.Center);
 
-				float move = Carrier == null
-					? UnitView.Unit.Configuration.Movement
-					: Carrier.Configuration.Movement;
-				_SpeedRecipricol = .0002 * move / Path.Distance;
+				bool unlimitedMove = Carrier == null
+					? UnitView.Unit.Configuration.HasUnlimitedMovement()
+				  	: Carrier.Configuration.HasUnlimitedMovement();
+				if (unlimitedMove) _SpeedRecipricol = .0002;
+				else
+				{
+					float move = Carrier == null
+						? UnitView.Unit.Configuration.Movement
+						: Carrier.Configuration.Movement;
+					_SpeedRecipricol = .0002 * move / Path.Distance;
+				}
 			}
 			else _Traveled = 1;
 		}

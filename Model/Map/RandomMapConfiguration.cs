@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using Cardamom.Graphing;
 using Cardamom.Serialization;
@@ -15,17 +16,19 @@ namespace PanzerBlitz
 	{
 		readonly int _Width;
 		readonly int _Height;
+		readonly MapGeneratorConfiguration _Configuration;
 		readonly Random _Random;
 
-		public RandomMapConfiguration(int Width, int Height)
+		public RandomMapConfiguration(int Width, int Height, MapGeneratorConfiguration Configuration)
 		{
 			_Width = Width;
 			_Height = Height;
+			_Configuration = Configuration;
 			_Random = new Random();
 		}
 
 		public RandomMapConfiguration(SerializationInputStream Stream)
-			: this(Stream.ReadInt32(), Stream.ReadInt32()) { }
+			: this(Stream.ReadInt32(), Stream.ReadInt32(), GameData.MapGenerators[Stream.ReadString()]) { }
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
@@ -85,7 +88,10 @@ namespace PanzerBlitz
 			foreach (Tile t in map.TilesEnumerable)
 			{
 				if (t.NeighborTiles.Any(i => i != null && i.Configuration.Elevation > t.Configuration.Elevation))
+				{
 					t.Configuration.SetTileBase(TileBase.SLOPE);
+					for (int i = 0; i < 6; ++i) t.SetEdge(i, TileEdge.NONE);
+				}
 			}
 			foreach (Tile t in map.TilesEnumerable)
 			{
@@ -143,7 +149,10 @@ namespace PanzerBlitz
 			var roadNodes = new HashSet<Tile>();
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
-				map.Regions.Add(new MapRegion("Town " + IdGenerator.GenerateId().ToString(), town));
+				var name =
+					new string(_Configuration.Language.Generate(_Random).ToArray()).RemoveDiacritics();
+				name = char.ToUpper(name[0]) + name.Substring(1);
+				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
 				for (int i = 0; i < Math.Max(1, tiles.Count / 4); ++i)
 					roadNodes.Add(tiles[_Random.Next(0, tiles.Count)]);
@@ -274,6 +283,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(_Width);
 			Stream.Write(_Height);
+			Stream.Write(_Configuration.UniqueKey);
 		}
 	}
 }

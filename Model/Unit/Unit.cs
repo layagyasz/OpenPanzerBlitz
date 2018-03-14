@@ -36,6 +36,8 @@ namespace PanzerBlitz
 		List<Interaction> _Interactions = new List<Interaction>();
 		UnitConfiguration _BaseConfiguration;
 		bool _Dismounted;
+		byte _PrimaryAmmunition;
+		byte _SecondaryAmmunition;
 
 		bool[] _ReconDirections = new bool[Enum.GetValues(typeof(Direction)).Length];
 
@@ -65,7 +67,22 @@ namespace PanzerBlitz
 		{
 			this.Army = Army;
 			_BaseConfiguration = UnitConfiguration;
+			if (UnitConfiguration.PrimaryWeapon.Ammunition > 0)
+				_PrimaryAmmunition = UnitConfiguration.PrimaryWeapon.Ammunition;
+			if (UnitConfiguration.SecondaryWeapon.Ammunition > 0)
+				_SecondaryAmmunition = UnitConfiguration.SecondaryWeapon.Ammunition;
 			Id = IdGenerator.GenerateId();
+		}
+
+		public byte GetAmmunition(bool Secondary)
+		{
+			return Secondary ? _SecondaryAmmunition : _PrimaryAmmunition;
+		}
+
+		public void UseAmmunition(bool Secondary)
+		{
+			if (Secondary) _SecondaryAmmunition--;
+			else _PrimaryAmmunition--;
 		}
 
 		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod)
@@ -173,6 +190,9 @@ namespace PanzerBlitz
 			var r = CanAttack(AttackMethod);
 			if (r != OrderInvalidReason.NONE) return r;
 
+			if (Configuration.GetWeapon(UseSecondaryWeapon).Ammunition > 0 && GetAmmunition(UseSecondaryWeapon) == 0)
+				return OrderInvalidReason.UNIT_NO_AMMUNITION;
+
 			if (AttackMethod == AttackMethod.NORMAL_FIRE)
 			{
 				if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return OrderInvalidReason.ATTACK_NO_LOS;
@@ -191,7 +211,7 @@ namespace PanzerBlitz
 				if (!Configuration.CanCloseAssault) return OrderInvalidReason.UNIT_NO_ATTACK;
 			}
 			if (AttackMethod == AttackMethod.AIR)
-				return Configuration.CanAirAttackAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
+				return Configuration.CanAirAttackAt(EnemyArmored, UseSecondaryWeapon);
 			if (AttackMethod == AttackMethod.ANTI_AIRCRAFT)
 				return Configuration.CanAntiAircraftAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
 
@@ -524,9 +544,10 @@ namespace PanzerBlitz
 			this.Emplaced = Emplaced && Configuration.Emplaceable();
 		}
 
-		public void Fire()
+		public void Fire(bool UseSecondary)
 		{
 			Fired = true;
+			if (Configuration.GetWeapon(UseSecondary).Ammunition > 0) UseAmmunition(UseSecondary);
 			CancelInteractions();
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}

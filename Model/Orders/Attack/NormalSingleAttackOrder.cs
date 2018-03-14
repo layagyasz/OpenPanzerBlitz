@@ -72,7 +72,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 			{
-				Attacker.Fire();
+				Attacker.Fire(UseSecondaryWeapon);
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		{
 			if (_Controller.SelectedUnit != null)
 			{
-				var order = new MovementOrder(_Controller.SelectedUnit, Tile, true);
+				var order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
 				if (_Controller.ExecuteOrderAndAlert(order)) SetAircraftHighlight(_Controller.SelectedUnit);
 			}
 		}
@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Controller.CurrentTurn.Army
-				&& Unit.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE)
+				&& Unit.Configuration.IsAircraft())
 			{
 				_Controller.SelectUnit(Unit);
 				SetAircraftHighlight(Unit);
@@ -35,7 +35,8 @@ namespace PanzerBlitz
 				{
 					AddAttack(
 						Unit.Position,
-						new AirSingleAttackOrder(_Controller.SelectedUnit, Unit.Position));
+						new AirSingleAttackOrder(
+							_Controller.SelectedUnit, Unit.Position, _Controller.UseSecondaryWeapon()));
 				}
 			}
 		}

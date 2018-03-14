@@ -187,6 +187,7 @@ unit-configuration:ca-135 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 30 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }

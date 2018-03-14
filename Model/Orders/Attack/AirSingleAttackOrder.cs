@@ -8,7 +8,7 @@ namespace PanzerBlitz
 	{
 		public override Tile AttackTile { get; protected set; }
 
-		public AirSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon = false)
+		public AirSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
 			: base(Attacker, null, UseSecondaryWeapon)
 		{
 			this.AttackTile = AttackTile;
@@ -36,7 +36,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new AirAttackOrder(Army, Defender.Position);
+			return new AirAttackOrder(Army, AttackTile);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -57,7 +57,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 			{
-				Attacker.Fire();
+				Attacker.Fire(UseSecondaryWeapon);
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

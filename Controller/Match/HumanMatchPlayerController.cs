@@ -525,6 +525,11 @@ namespace PanzerBlitz
 			else SelectUnit(SelectedUnit);
 		}
 
+		public bool UseSecondaryWeapon()
+		{
+			return Keyboard.IsKeyPressed(Keyboard.Key.LControl);
+		}
+
 		void OnTileClick(object sender, MouseEventArgs e)
 		{
 			Console.WriteLine(((TileView)sender).Tile.Coordinate);

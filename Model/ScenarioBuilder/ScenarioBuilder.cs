@@ -50,7 +50,9 @@ namespace PanzerBlitz
 				_Armies.Select(i => i.BuildArmyConfiguration()),
 				Parameters.Turns,
 				Parameters.Environment,
-				new RandomMapConfiguration(Parameters.MapSize.X, Parameters.MapSize.Y).MakeStaticMap());
+				new RandomMapConfiguration(
+					Parameters.MapSize.X, Parameters.MapSize.Y, GameData.MapGenerators["russian"])
+				.MakeStaticMap());
 		}
 	}
 }

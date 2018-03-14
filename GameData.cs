@@ -24,7 +24,8 @@ namespace PanzerBlitz
 			SCENARIOS,
 			TILE_COMPONENT_RULES,
 			ENVIRONMENTS,
-			TILE_RENDERERS
+			TILE_RENDERERS,
+			MAP_GENERATORS
 		};
 
 		public static ushort OnlinePort = 1000;
@@ -43,6 +44,7 @@ namespace PanzerBlitz
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
+		public static Dictionary<string, MapGeneratorConfiguration> MapGenerators;
 
 		public static void Load(string Module)
 		{
@@ -68,6 +70,7 @@ namespace PanzerBlitz
 				ParseBlock.FromFile(path + "/Terrain.blk"),
 				ParseBlock.FromFile(path + "/Environments.blk"),
 				ParseBlock.FromFile(path + "/TerrainRenderers.blk"),
+				ParseBlock.FromFile(path + "/MapGeneratorConfigurations.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
@@ -145,6 +148,8 @@ namespace PanzerBlitz
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<TileRenderer>(typeof(TileRenderer));
+			Block.AddParser<MapGeneratorConfiguration>(
+				"map-generator-configuration", i => new MapGeneratorConfiguration(i, Path));
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];
@@ -160,6 +165,7 @@ namespace PanzerBlitz
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
+			MapGenerators = (Dictionary<string, MapGeneratorConfiguration>)attributes[(int)Attribute.MAP_GENERATORS];
 
 			// Emit warnings for units without configured render details.
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)
@@ -254,6 +260,7 @@ namespace PanzerBlitz
 			UnitConfigurationLinks = Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToList();
 			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
 			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
+			MapGenerators = Stream.ReadEnumerable(i => new MapGeneratorConfiguration(i)).ToDictionary(i => i.UniqueKey);
 			Wreckage = UnitConfigurations["wreckage"];
 		}
 
@@ -277,6 +284,7 @@ namespace PanzerBlitz
 			Stream.Write(UnitConfigurationLinks);
 			Stream.Write(Scenarios);
 			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
+			Stream.Write(MapGenerators, i => Stream.Write(i.Value));
 		}
 	}
 }

@@ -82,6 +82,7 @@ namespace PanzerBlitz
 		{
 			_Controller.Clear();
 			if (Unit.Army == _Controller.CurrentTurn.Army
+				&& !Unit.Configuration.IsAircraft()
 				&& (Unit.CanMove(VehicleMovement, false) == OrderInvalidReason.NONE
 					|| Unit.CanUnload() == OrderInvalidReason.NONE))
 			{

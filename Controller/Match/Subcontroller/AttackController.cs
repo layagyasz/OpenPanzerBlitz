@@ -33,13 +33,15 @@ namespace PanzerBlitz
 					{
 						AddAttack(
 							Unit.Position,
-							new AntiAirSingleAttackOrder(_Controller.SelectedUnit, Unit.Position, false));
+							new AntiAirSingleAttackOrder(
+								_Controller.SelectedUnit, Unit.Position, _Controller.UseSecondaryWeapon()));
 					}
 					else
 					{
 						AddAttack(
 							Unit.Position,
-							new NormalSingleAttackOrder(_Controller.SelectedUnit, Unit, false));
+							new NormalSingleAttackOrder(
+								_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
 					}
 				}
 			}

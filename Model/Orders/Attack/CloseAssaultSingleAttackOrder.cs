@@ -9,7 +9,7 @@ namespace PanzerBlitz
 	{
 		public override Tile AttackTile { get; protected set; }
 
-		public CloseAssaultSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon = false)
+		public CloseAssaultSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
 			: base(Attacker, null, UseSecondaryWeapon)
 		{
 			this.AttackTile = AttackTile;
@@ -58,7 +58,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 			{
-				Attacker.Fire();
+				Attacker.Fire(UseSecondaryWeapon);
 				return OrderStatus.FINISHED;
 			}
 			return OrderStatus.ILLEGAL;

@@ -310,6 +310,7 @@ unit-configuration:p-7 {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -321,6 +322,7 @@ unit-configuration:p-11 {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -332,6 +334,7 @@ unit-configuration:karas {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -343,6 +346,7 @@ unit-configuration:p-37-b {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 20 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }

@@ -338,11 +338,13 @@ unit-configuration:a6-m2 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 5 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -354,11 +356,13 @@ unit-configuration:d3a {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -370,11 +374,13 @@ unit-configuration:ki-30 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -386,11 +392,13 @@ unit-configuration:ki-43 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 15 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -402,11 +410,13 @@ unit-configuration:ki-51 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 5 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -418,11 +428,13 @@ unit-configuration:g4-m1 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -434,11 +446,13 @@ unit-configuration:g4-m2 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 15 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }

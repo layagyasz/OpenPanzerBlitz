@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+
 using Cardamom.Interface;
 using Cardamom.Serialization;
 
@@ -15,6 +16,11 @@ namespace PanzerBlitz
 
 		public static void Main(string[] args)
 		{
+			if (args.Length == 3 && args[0] == "lang")
+			{
+				FileUtils.MungeLanguage(args[1], args[2]);
+			}
+
 			string module = "Default";
 			string modulePath = "./Modules/" + module;
 			string moduleFile = modulePath + ".mod";

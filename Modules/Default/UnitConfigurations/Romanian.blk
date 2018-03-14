@@ -187,11 +187,13 @@ unit-configuration:iar-81-a {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 7 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 3 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -203,6 +205,7 @@ unit-configuration:iar-81-c {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }

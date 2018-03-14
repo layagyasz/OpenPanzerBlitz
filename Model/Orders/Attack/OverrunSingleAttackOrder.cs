@@ -16,7 +16,7 @@ namespace PanzerBlitz
 
 		public override Tile AttackTile { get; protected set; }
 
-		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile, bool UseSecondaryWeapon = false)
+		public OverrunSingleAttackOrder(MovementOrder InitialMovement, Tile AttackTile, bool UseSecondaryWeapon)
 			: base(InitialMovement.Unit, null, UseSecondaryWeapon)
 		{
 			_InitialMovement = InitialMovement;
@@ -84,7 +84,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 			{
-				Attacker.Fire();
+				Attacker.Fire(UseSecondaryWeapon);
 				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
 				if (Attacker.Configuration.InnatelyClearsMines)
 				{

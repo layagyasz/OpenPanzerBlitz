@@ -141,7 +141,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.command-post }
+								!unit-configuration:unit-configuration { unit-configurations.g4-m2 }
 								int:count { 1 }
 							}
 						}

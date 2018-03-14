@@ -202,7 +202,7 @@ namespace PanzerBlitz
 			var canDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
 
 			PrimaryWeapon = Parse.DefaultIfNull(
-				attributes[(int)Attribute.PRIMARY_WEAPON], new Weapon(weaponClass, attack, range, canDoubleRange));
+				attributes[(int)Attribute.PRIMARY_WEAPON], new Weapon(weaponClass, attack, range, canDoubleRange, 0));
 			SecondaryWeapon = Parse.DefaultIfNull(attributes[(int)Attribute.SECONDARY_WEAPON], default(Weapon));
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
 			Movement = Parse.DefaultIfNull(attributes[(int)Attribute.MOVEMENT], IsAircraft() ? byte.MaxValue : (byte)0);
@@ -220,7 +220,7 @@ namespace PanzerBlitz
 				|| UnitClass == UnitClass.WRECKAGE);
 			IsArmored = Parse.DefaultIfNull(
 				attributes[(int)Attribute.IS_ARMORED],
-				(IsVehicle && UnitClass != UnitClass.TRANSPORT) || UnitClass == UnitClass.FORT);
+				(IsVehicle && UnitClass != UnitClass.TRANSPORT && !IsAircraft()) || UnitClass == UnitClass.FORT);
 			LeavesWreckWhenDestroyed = Parse.DefaultIfNull(
 				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED], IsArmored && IsVehicle);
 			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
@@ -234,7 +234,8 @@ namespace PanzerBlitz
 				Block.Get<UnitMovementRules>(GetDefaultMovementRules()));
 
 			IsCarrier = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_CARRIER], IsVehicle || UnitClass == UnitClass.TRANSPORT);
+				attributes[(int)Attribute.IS_CARRIER],
+				(IsVehicle && !IsAircraft()) || UnitClass == UnitClass.TRANSPORT);
 			CanOnlyCarryInfantry = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsCarrier && UnitClass != UnitClass.TRANSPORT);
 			CanOnlyCarryLight = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT], false);
@@ -414,10 +415,9 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
-		public OrderInvalidReason CanAirAttackAt(bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
+		public OrderInvalidReason CanAirAttackAt(bool EnemyArmored, bool UseSecondaryWeapon)
 		{
 			if (!CanAirAttack) return OrderInvalidReason.UNIT_NO_ATTACK;
-			if (LineOfSight.Range > GetAdjustedRange(UseSecondaryWeapon)) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (GetWeapon(UseSecondaryWeapon).WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
 				return OrderInvalidReason.TARGET_ARMORED;
 			return OrderInvalidReason.NONE;

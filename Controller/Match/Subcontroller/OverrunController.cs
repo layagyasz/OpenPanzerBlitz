@@ -68,7 +68,9 @@ namespace PanzerBlitz
 				AddAttack(
 					Tile,
 					new OverrunSingleAttackOrder(
-						new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true), Tile));
+						new MovementOrder(_Controller.SelectedUnit, _InitialMovement.Destination, true),
+						Tile,
+						_Controller.UseSecondaryWeapon()));
 			}
 			DeselectUnit();
 		}

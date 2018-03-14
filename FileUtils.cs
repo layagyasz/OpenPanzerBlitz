@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.IO.Compression;
+using System.Text;
+using System.Text.RegularExpressions;
 
 using Cardamom.Serialization;
+using Cardamom.Utilities.Markov;
 
 using SFML.Graphics;
 
@@ -40,6 +45,61 @@ namespace PanzerBlitz
 		public static Color DeserializeColor(SerializationInputStream Stream)
 		{
 			return new Color(Stream.ReadByte(), Stream.ReadByte(), Stream.ReadByte(), Stream.ReadByte());
+		}
+
+		public static MarkovGenerator<char> LoadLanguage(string Path)
+		{
+			using (FileStream fileStream = new FileStream(Path, FileMode.Open))
+			{
+				using (GZipStream compressionStream = new GZipStream(fileStream, CompressionMode.Decompress))
+				{
+					var stream = new SerializationInputStream(compressionStream);
+					return new MarkovGenerator<char>(stream);
+				}
+			}
+		}
+
+		public static MarkovGenerator<char> GenerateLanguage(string ExamplePath)
+		{
+			var g = new MarkovGenerator<char>(3);
+			var regex = new Regex("\\(.*\\)");
+			foreach (var line in File.ReadAllLines(ExamplePath))
+			{
+				var name = line.ToLower();
+				if (name.Length == 0) continue;
+				name = regex.Replace(name, "").Trim();
+				g.AddSequence(name);
+			}
+			return g;
+		}
+
+		public static void MungeLanguage(string ExamplePath, string OutputPath)
+		{
+			var g = GenerateLanguage(ExamplePath);
+			using (FileStream fileStream = new FileStream(OutputPath, FileMode.Create))
+			{
+				using (GZipStream compressionStream = new GZipStream(fileStream, CompressionLevel.Optimal))
+				{
+					var stream = new SerializationOutputStream(compressionStream);
+					stream.Write(g);
+				}
+			}
+		}
+
+		public static string RemoveDiacritics(this string value)
+		{
+			var valueFormD = value.Normalize(NormalizationForm.FormD);
+			var stringBuilder = new StringBuilder();
+
+			foreach (var item in valueFormD)
+			{
+				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(item);
+				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+				{
+					stringBuilder.Append(item);
+				}
+			}
+			return (stringBuilder.ToString().Normalize(NormalizationForm.FormC));
 		}
 	}
 }

@@ -18,6 +18,8 @@ namespace PanzerBlitz
 			if (x.Unit.Configuration.UnitClass == UnitClass.BLOCK
 				|| x.Unit.Configuration.UnitClass == UnitClass.MINEFIELD
 				|| x.Unit.Configuration.UnitClass == UnitClass.BRIDGE) return -1;
+			if (x.Unit.Configuration.IsAircraft()) return 1;
+			if (y.Unit.Configuration.IsAircraft()) return -1;
 			return 0;
 		}
 	}

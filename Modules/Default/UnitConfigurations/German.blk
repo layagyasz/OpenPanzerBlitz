@@ -1104,11 +1104,13 @@ unit-configuration:fw-190 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 4 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1120,11 +1122,13 @@ unit-configuration:ju-87-b-early {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -1136,11 +1140,13 @@ unit-configuration:ju-87-b {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 20 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 1 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -1152,6 +1158,7 @@ unit-configuration:ju-87-g {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 6 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1163,11 +1170,13 @@ unit-configuration:hs-123 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -1179,6 +1188,7 @@ unit-configuration:do-17-z {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1190,11 +1200,13 @@ unit-configuration:hs-129_r1 {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 2 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	weapon:secondary-weapon {
 		weapon-class:weapon-class { infantry }
 		byte:attack { 30 }
 		byte:range { 1 }
+		byte:ammunition { 4 }
 	}
 	byte:defense { 1 }
 }
@@ -1206,6 +1218,7 @@ unit-configuration:hs-129_r2-early {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 3 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1217,6 +1230,7 @@ unit-configuration:hs-129_r2 {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 6 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1228,6 +1242,7 @@ unit-configuration:hs-129_r2-late {
 		weapon-class:weapon-class { anti-armor }
 		byte:attack { 8 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
@@ -1239,6 +1254,7 @@ unit-configuration:ju-88 {
 		weapon-class:weapon-class { high-explosive }
 		byte:attack { 10 }
 		byte:range { 1 }
+		byte:ammunition { 1 }
 	}
 	byte:defense { 1 }
 }
