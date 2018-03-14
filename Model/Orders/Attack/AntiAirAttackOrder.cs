@@ -15,6 +15,14 @@ namespace PanzerBlitz
 			}
 		}
 
+		public override bool ResultPerDefender
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public override CombatResultsTable CombatResultsTable
 		{
 			get
@@ -41,15 +49,6 @@ namespace PanzerBlitz
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
 			return TurnComponent == TurnComponent.ATTACK;
-		}
-
-		public override OrderInvalidReason AddAttacker(AntiAirSingleAttackOrder AttackOrder)
-		{
-			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
-			{
-				return base.AddAttacker(AttackOrder);
-			}
-			return OrderInvalidReason.UNIT_DUPLICATE;
 		}
 
 		public override OrderInvalidReason Validate()

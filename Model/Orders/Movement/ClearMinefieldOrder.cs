@@ -71,7 +71,7 @@ namespace PanzerBlitz
 			{
 				if (_PreExisting)
 				{
-					Minefield.HandleCombatResult(CombatResult.DESTROY);
+					Minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
 					_Interaction.Cancel();
 				}
 				else

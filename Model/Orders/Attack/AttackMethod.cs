@@ -2,6 +2,7 @@
 {
 	public enum AttackMethod
 	{
+		NONE,
 		NORMAL_FIRE,
 		CLOSE_ASSAULT,
 		OVERRUN,

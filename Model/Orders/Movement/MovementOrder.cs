@@ -102,7 +102,7 @@ namespace PanzerBlitz
 							 .Take(Path.Count - 1)
 							 .SelectMany(i => i.Units).Where(j => j.Configuration.UnitClass == UnitClass.MINEFIELD)
 							 .ToList())
-						minefield.HandleCombatResult(CombatResult.DESTROY);
+						minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
 
 				}
 				return OrderStatus.FINISHED;

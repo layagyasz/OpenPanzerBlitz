@@ -54,7 +54,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new NormalAttackOrder(Army, LineOfSight.Final);
+			return new NormalAttackOrder(Army, AttackTile);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)

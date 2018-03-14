@@ -16,6 +16,7 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnFire;
 		public EventHandler<EventArgs> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
+		public EventHandler<ValuedEventArgs<Army>> OnCapture;
 
 		public bool Emplaced { get; private set; }
 
@@ -69,9 +70,16 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod)
 		{
-			if (AttackMethod == AttackMethod.MINEFIELD && Configuration.ImmuneToMines)
-				return OrderInvalidReason.TARGET_IMMUNE;
-			if (AttackMethod == AttackMethod.MINEFIELD && !Configuration.IsNeutral()) return OrderInvalidReason.NONE;
+			if (Position == null) return OrderInvalidReason.ILLEGAL;
+
+			if (AttackMethod == AttackMethod.MINEFIELD)
+			{
+				if (Configuration.ImmuneToMines) return OrderInvalidReason.TARGET_IMMUNE;
+				if (!Configuration.IsNeutral()) return OrderInvalidReason.NONE;
+				if (Position.Units.Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD)
+					== HasInteraction<ClearMinefieldInteraction>(i => true)?.Object)
+					return OrderInvalidReason.TARGET_IMMUNE;
+			}
 
 			if (Configuration.IsAircraft() && AttackMethod != AttackMethod.ANTI_AIRCRAFT)
 				return OrderInvalidReason.TARGET_IMMUNE;
@@ -190,17 +198,25 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
-		public void HandleCombatResult(CombatResult CombatResult)
+		public void HandleCombatResult(CombatResult CombatResult, AttackMethod AttackMethod, Army AttackingArmy)
 		{
-			if (Passenger != null) Passenger.HandleCombatResult(CombatResult);
+			if (Passenger != null) Passenger.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
 			switch (CombatResult)
 			{
 				case CombatResult.MISS:
 					return;
 				case CombatResult.DESTROY:
-					Status = UnitStatus.DESTROYED;
+					if (AttackMethod == AttackMethod.CLOSE_ASSAULT && Configuration.CloseAssaultCapture)
+					{
+						Status = UnitStatus.CAPTURED;
+						if (OnCapture != null) OnCapture(this, new ValuedEventArgs<Army>(AttackingArmy));
+					}
+					else
+					{
+						Status = UnitStatus.DESTROYED;
+						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+					}
 					CancelInteractions();
-					if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
 					Remove();
 					return;
 				case CombatResult.DAMAGE:
@@ -210,7 +226,8 @@ namespace PanzerBlitz
 					Status = UnitStatus.DISRUPTED;
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
-					if (Status == UnitStatus.DISRUPTED) HandleCombatResult(CombatResult.DESTROY);
+					if (Status == UnitStatus.DISRUPTED)
+						HandleCombatResult(CombatResult.DESTROY, AttackMethod, AttackingArmy);
 					else Status = UnitStatus.DISRUPTED;
 					return;
 			}
@@ -250,7 +267,7 @@ namespace PanzerBlitz
 
 		public bool MustMove()
 		{
-			return Deployment.UnitMustMove(this);
+			return Deployment?.UnitMustMove(this) ?? false;
 		}
 
 		public OrderInvalidReason CanDismount()
@@ -414,9 +431,10 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tile> GetFieldOfDeployment(IEnumerable<Tile> Tiles)
 		{
-			if (Deployment is PositionalDeployment)
+			var deployment = Deployment;
+			if (deployment != null && deployment is PositionalDeployment)
 				return Tiles.Where(
-					i => ((PositionalDeployment)Deployment).Validate(this, i) == OrderInvalidReason.NONE);
+					i => ((PositionalDeployment)deployment).Validate(this, i) == OrderInvalidReason.NONE);
 			return Enumerable.Empty<Tile>();
 		}
 

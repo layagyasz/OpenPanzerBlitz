@@ -62,7 +62,9 @@ namespace PanzerBlitz
 			DISMOUNT_AS,
 			CAN_REMOUNT,
 
-			CAN_SUPPORT_ARMORED
+			CAN_SUPPORT_ARMORED,
+			CLOSE_ASSAULT_CAPTURE,
+			AREA_CONTROL_CAPTURE
 		};
 
 		public readonly string UniqueKey;
@@ -117,6 +119,8 @@ namespace PanzerBlitz
 		public readonly bool CanRemount;
 
 		public readonly bool CanSupportArmored;
+		public readonly bool CloseAssaultCapture;
+		public readonly bool AreaControlCapture;
 
 		public IEnumerable<UnitConfiguration> RepresentedConfigurations
 		{
@@ -180,6 +184,8 @@ namespace PanzerBlitz
 			CanRemount = Stream.ReadBoolean();
 
 			CanSupportArmored = Stream.ReadBoolean();
+			CloseAssaultCapture = Stream.ReadBoolean();
+			AreaControlCapture = Stream.ReadBoolean();
 		}
 
 		public UnitConfiguration(ParseBlock Block)
@@ -278,7 +284,10 @@ namespace PanzerBlitz
 
 			CanSpot = Parse.DefaultIfNull(
 				attributes[(int)Attribute.CAN_SPOT],
-				!IsStackUnique() && UnitClass != UnitClass.FIGHTER_BOMBER && PrimaryWeapon != default(Weapon));
+				!IsStackUnique()
+				&& !IsNeutral()
+				&& UnitClass != UnitClass.FIGHTER_BOMBER
+				&& PrimaryWeapon != default(Weapon));
 			SpotRange = (byte)Parse.DefaultIfNull(
 				attributes[(int)Attribute.SPOT_RANGE],
 				CanSpot
@@ -291,6 +300,11 @@ namespace PanzerBlitz
 			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
 
 			CanSupportArmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_SUPPORT_ARMORED], false);
+			CloseAssaultCapture =
+				Parse.DefaultIfNull(
+					attributes[(int)Attribute.CLOSE_ASSAULT_CAPTURE], UnitClass == UnitClass.COMMAND_POST);
+			AreaControlCapture =
+				Parse.DefaultIfNull(attributes[(int)Attribute.AREA_CONTROL_CAPTURE], UnitClass == UnitClass.FORT);
 		}
 
 		string GetDefaultMovementRules()
@@ -619,6 +633,8 @@ namespace PanzerBlitz
 			Stream.Write(CanRemount);
 
 			Stream.Write(CanSupportArmored);
+			Stream.Write(CloseAssaultCapture);
+			Stream.Write(AreaControlCapture);
 		}
 
 		public override string ToString()

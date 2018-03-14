@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -11,7 +12,7 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return Defender.Position;
+				return Attacker.Position;
 			}
 			protected set
 			{
@@ -19,22 +20,24 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MinefieldSingleAttackOrder(Unit Attacker, Unit Defender)
-			: base(Attacker, Defender, false) { }
+		public MinefieldSingleAttackOrder(Unit Attacker)
+			: base(Attacker, null, false) { }
 
 		public MinefieldSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()]) { }
+			: this((Unit)Objects[Stream.ReadInt32()]) { }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
-			Stream.Write(Defender.Id);
 		}
 
 		public override AttackFactorCalculation GetAttack()
 		{
 			return new AttackFactorCalculation(
-				Defender.Configuration.Defense * Attacker.Configuration.PrimaryWeapon.Attack,
+				AttackTile.Units.Where(
+					i => i.CanBeAttackedBy(Army, AttackMethod.MINEFIELD) == OrderInvalidReason.NONE
+						&& Attacker.HasInteraction<ClearMinefieldInteraction>(j => j.Agent == i) == null)
+				.Sum(i => i.Configuration.Defense) * Attacker.Configuration.PrimaryWeapon.Attack,
 				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.MINEFIELD });
 		}
 
@@ -52,10 +55,7 @@ namespace PanzerBlitz
 		{
 			if (Attacker.CanAttack(AttackMethod.MINEFIELD) != OrderInvalidReason.NONE)
 				return OrderInvalidReason.UNIT_NO_ATTACK;
-			if (Attacker.Position != Defender.Position) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
-			if (Attacker.HasInteraction<ClearMinefieldInteraction>(i => i.Agent == Defender) != null)
-				return OrderInvalidReason.TARGET_IMMUNE;
-			return Defender.CanBeAttackedBy(Army, AttackMethod.MINEFIELD);
+			return OrderInvalidReason.NONE;
 		}
 
 		public override OrderStatus Execute(Random Random)

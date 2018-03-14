@@ -15,6 +15,14 @@ namespace PanzerBlitz
 			}
 		}
 
+		public override bool ResultPerDefender
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		public NormalAttackOrder(Army Army, Tile TargetTile)
 			: base(Army, TargetTile) { }
 
@@ -33,15 +41,6 @@ namespace PanzerBlitz
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
 			return TurnComponent == TurnComponent.ATTACK;
-		}
-
-		public override OrderInvalidReason AddAttacker(NormalSingleAttackOrder AttackOrder)
-		{
-			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
-			{
-				return base.AddAttacker(AttackOrder);
-			}
-			return OrderInvalidReason.UNIT_DUPLICATE;
 		}
 
 		public override OrderInvalidReason Validate()

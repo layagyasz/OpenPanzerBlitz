@@ -14,6 +14,7 @@ namespace PanzerBlitz
 		public Army Army { get; }
 		public Tile TargetTile { get; }
 		public abstract AttackMethod AttackMethod { get; }
+		public abstract bool ResultPerDefender { get; }
 		public AttackTarget Target { get; protected set; }
 		public virtual CombatResultsTable CombatResultsTable
 		{
@@ -26,7 +27,7 @@ namespace PanzerBlitz
 		protected List<T> _Attackers = new List<T>();
 		protected List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
 
-		CombatResult[] _Results = new CombatResult[0];
+		readonly List<Tuple<Unit, CombatResult>> _Results = new List<Tuple<Unit, CombatResult>>();
 
 		public IEnumerable<OddsCalculation> OddsCalculations
 		{
@@ -50,7 +51,11 @@ namespace PanzerBlitz
 				(Tile)Objects[Stream.ReadInt32()])
 		{
 			Target = (AttackTarget)Stream.ReadByte();
-			_Results = Stream.ReadEnumerable(i => (CombatResult)Stream.ReadByte()).ToArray();
+			_Results =
+				Stream.ReadEnumerable(
+					i => new Tuple<Unit, CombatResult>(
+						(Unit)Objects[Stream.ReadInt32()], (CombatResult)Stream.ReadByte()))
+				 .ToList();
 		}
 
 		public virtual void Serialize(SerializationOutputStream Stream)
@@ -58,7 +63,11 @@ namespace PanzerBlitz
 			Stream.Write(Army.Id);
 			Stream.Write(TargetTile.Id);
 			Stream.Write((byte)Target);
-			Stream.Write(_Results, i => Stream.Write((byte)i));		}
+			Stream.Write(_Results, i =>
+			{
+				Stream.Write(i.Item1.Id);
+				Stream.Write((byte)i.Item2);
+			});		}
 
 		public abstract bool MatchesTurnComponent(TurnComponent TurnComponent);
 
@@ -74,12 +83,16 @@ namespace PanzerBlitz
 			return AddAttacker((T)AttackOrder);
 		}
 
-		public virtual OrderInvalidReason AddAttacker(T AttackOrder)
+		public OrderInvalidReason AddAttacker(T AttackOrder)
 		{
-			_Attackers.Add(AttackOrder);
-			Recalculate();
-			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
-			return OrderInvalidReason.NONE;
+			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
+			{
+				_Attackers.Add(AttackOrder);
+				Recalculate();
+				if (OnChanged != null) OnChanged(this, EventArgs.Empty);
+				return OrderInvalidReason.NONE;
+			}
+			return OrderInvalidReason.UNIT_DUPLICATE;
 		}
 
 		public void RemoveAttacker(Unit Attacker)
@@ -165,13 +178,21 @@ namespace PanzerBlitz
 			Recalculate();
 			if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
 
-			if (_Results.Length == 0) _Results = new CombatResult[_OddsCalculations.Count];
-			for (int i = 0; i < _OddsCalculations.Count; ++i)
+			if (_Results.Count == 0)
 			{
-				OddsCalculation c = _OddsCalculations[i];
-				if (_Results[i] == CombatResult.NONE)
-					_Results[i] = CombatResultsTable.GetCombatResult(c, Random.Next(0, 5));
-				foreach (Unit u in c.Defenders) u.HandleCombatResult(_Results[i]);
+				foreach (OddsCalculation odds in _OddsCalculations)
+				{
+					var c = CombatResultsTable.GetCombatResult(odds, Random.Next(0, 5));
+					foreach (Unit unit in odds.Defenders)
+					{
+						_Results.Add(new Tuple<Unit, CombatResult>(unit, c));
+						if (ResultPerDefender) c = CombatResultsTable.GetCombatResult(odds, Random.Next(0, 5));
+					}
+				}
+			}
+			foreach (var result in _Results)
+			{
+				result.Item1.HandleCombatResult(result.Item2, AttackMethod, Army);
 			}
 			Army.AttackTile(TargetTile);
 			_Attackers.ForEach(i => i.Execute(Random));

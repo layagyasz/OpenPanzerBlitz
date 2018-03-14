@@ -21,7 +21,7 @@ namespace PanzerBlitz
 		public AntiAirSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
 		{
-			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
+			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], AttackTile);
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
@@ -44,7 +44,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new AntiAirAttackOrder(Army, LineOfSight.Final);
+			return new AntiAirAttackOrder(Army, AttackTile);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)

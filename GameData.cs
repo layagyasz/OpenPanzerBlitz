@@ -99,56 +99,52 @@ namespace PanzerBlitz
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
 
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
-			Block.AddParser<Coordinate>("coordinate", i => new Coordinate(i));
-			Block.AddParser<WeaponClass>("tile-edge", Parse.EnumBlockParser<WeaponClass>(typeof(TileEdge)));
-			Block.AddParser<WeaponClass>(
-				"tile-path-overlay", Parse.EnumBlockParser<WeaponClass>(typeof(TilePathOverlay)));
-			Block.AddParser<WeaponClass>("tile-base", Parse.EnumBlockParser<WeaponClass>(typeof(TileBase)));
-			Block.AddParser<WeaponClass>("weapon-class", Parse.EnumBlockParser<WeaponClass>(typeof(WeaponClass)));
-			Block.AddParser<UnitClass>("unit-class", Parse.EnumBlockParser<UnitClass>(typeof(UnitClass)));
-			Block.AddParser<UnitStatus>("unit-status", Parse.EnumBlockParser<UnitStatus>(typeof(UnitStatus)));
-			Block.AddParser<BlockType>("block-type", Parse.EnumBlockParser<BlockType>(typeof(BlockType)));
-			Block.AddParser<Front>("front", Parse.EnumBlockParser<Front>(typeof(Front)));
-			Block.AddParser<Weapon>("weapon", i => new Weapon(i));
+			Block.AddParser<Coordinate>(typeof(Coordinate));
+			Block.AddParser<WeaponClass>(typeof(TileEdge));
+			Block.AddParser<WeaponClass>(typeof(TilePathOverlay));
+			Block.AddParser<WeaponClass>(typeof(TileBase));
+			Block.AddParser<WeaponClass>(typeof(WeaponClass));
+			Block.AddParser<UnitClass>(typeof(UnitClass));
+			Block.AddParser<UnitStatus>(typeof(UnitStatus));
+			Block.AddParser<BlockType>(typeof(BlockType));
+			Block.AddParser<Front>(typeof(Front));
+			Block.AddParser<Weapon>(typeof(Weapon));
 
-			Block.AddParser<MovementRule>("movement-rule", i => new MovementRule(i));
-			Block.AddParser<UnitMovementRules>("unit-movement-rules", i => new UnitMovementRules(i));
-			Block.AddParser<Faction>("faction", i => new Faction(i));
-			Block.AddParser<UnitConfiguration>("unit-configuration", i => new UnitConfiguration(i));
-			Block.AddParser<UnitConfigurationLink>("unit-configuration-link", i => new UnitConfigurationLink(i));
-			Block.AddParser<Direction>("direction", Parse.EnumBlockParser<Direction>(typeof(Direction)));
-			Block.AddParser<TileComponentRules>("tile-component-rules", i => new TileComponentRules(i));
-			Block.AddParser<TileRuleSet>("tile-rule-set", i => new TileRuleSet(i));
-			Block.AddParser<Environment>("environment", i => new Environment(i));
+			Block.AddParser<MovementRule>(typeof(MovementRule));
+			Block.AddParser<UnitMovementRules>(typeof(UnitMovementRules));
+			Block.AddParser<Faction>(typeof(Faction));
+			Block.AddParser<UnitConfiguration>(typeof(UnitConfiguration));
+			Block.AddParser<UnitConfigurationLink>(typeof(UnitConfigurationLink));
+			Block.AddParser<Direction>(typeof(Direction));
+			Block.AddParser<TileComponentRules>(typeof(TileComponentRules));
+			Block.AddParser<TileRuleSet>(typeof(TileRuleSet));
+			Block.AddParser<Environment>(typeof(Environment));
 
 			Block.AddParsers<object>(MatcherSerializer.Instance.GetParsers());
 
-			Block.AddParser<UnitGroup>("unit-group", i => new UnitGroup(i));
-			Block.AddParser<UnitCount>("unit-count", i => new UnitCount(i));
-			Block.AddParser<ConvoyMovementAutomator>("convoy-movement-automator", i => new ConvoyMovementAutomator(i));
-			Block.AddParser<DeploymentConfiguration>(
-				"positional-deployment-configuration", i => new PositionalDeploymentConfiguration(i));
-			Block.AddParser<DeploymentConfiguration>(
-				"convoy-deployment-configuration", i => new ConvoyDeploymentConfiguration(i));
+			Block.AddParser<UnitGroup>(typeof(UnitGroup));
+			Block.AddParser<UnitCount>(typeof(UnitCount));
+			Block.AddParser<ConvoyMovementAutomator>(typeof(ConvoyMovementAutomator));
+			Block.AddParser<DeploymentConfiguration>(typeof(PositionalDeploymentConfiguration));
+			Block.AddParser<DeploymentConfiguration>(typeof(ConvoyDeploymentConfiguration));
 
-			Block.AddParser<ObjectiveSuccessLevel>(
-				"objective-success-level", Parse.EnumBlockParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel)));
-			Block.AddParser<VictoryCondition>("victory-condition", i => new VictoryCondition(i));
-			Block.AddParser<ObjectiveSuccessTrigger>("objective-success-trigger", i => new ObjectiveSuccessTrigger(i));
+			Block.AddParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel));
+			Block.AddParser<VictoryCondition>(typeof(VictoryCondition));
+			Block.AddParser<ObjectiveSuccessTrigger>(typeof(ObjectiveSuccessTrigger));
 
 			Block.AddParsers<Objective>(ObjectiveSerializer.Instance.GetParsers());
 
-			Block.AddParser<ArmyConfiguration>("army-configuration", i => new ArmyConfiguration(i));
-			Block.AddParser<BoardConfiguration>("board-configuration", i => new BoardConfiguration(i));
+			Block.AddParser<ArmyConfiguration>(typeof(ArmyConfiguration));
+			Block.AddParser<BoardConfiguration>(typeof(BoardConfiguration));
 			Block.AddParser<BoardCompositeMapConfiguration>(
 				"map-configuration", i => new BoardCompositeMapConfiguration(i));
-			Block.AddParser<Scenario>("scenario", i => new Scenario(i));
+			Block.AddParser<Scenario>(typeof(Scenario));
 
 			Block.AddParser<FactionRenderDetails>(
 				"faction-render-details", i => new FactionRenderDetails(i, Path + "/FactionSymbols/"));
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
-			Block.AddParser<TileRenderer>("tile-renderer", i => new TileRenderer(i));
+			Block.AddParser<TileRenderer>(typeof(TileRenderer));
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];

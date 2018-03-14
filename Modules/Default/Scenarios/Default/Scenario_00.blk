@@ -100,20 +100,6 @@
 						}
 					}
 				}
-				positional-deployment-configuration:_ {
-					tile-has-coordinate:matcher {
-						coordinate:coordinate { 5,11 }
-					}
-					unit-group:unit-group {
-						string:name { Test E }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.minefield }
-								int:count { 1 }
-							}
-						}
-					}
-				}
 			}
 		}
 		army-configuration:army-b {
@@ -149,13 +135,13 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 5,3 }
+						coordinate:coordinate { 5,11 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								!unit-configuration:unit-configuration { unit-configurations.command-post }
 								int:count { 1 }
 							}
 						}

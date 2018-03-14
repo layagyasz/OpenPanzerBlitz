@@ -90,10 +90,10 @@ namespace PanzerBlitz
 				{
 					foreach (Unit minefield in ExitTile.Units
 							 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
-						minefield.HandleCombatResult(CombatResult.DESTROY);
+						minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
 					foreach (Unit minefield in AttackTile.Units
 							 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
-						minefield.HandleCombatResult(CombatResult.DESTROY);
+						minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
 				}
 				return OrderStatus.FINISHED;
 			}

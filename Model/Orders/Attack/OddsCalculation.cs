@@ -170,5 +170,16 @@ namespace PanzerBlitz
 			var o = (OddsCalculation)Object;
 			return (int)Math.Ceiling((1f * TotalAttack / TotalDefense) - (1f * o.TotalAttack / o.TotalDefense));
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[OddsCalculation: OddsAgainst={0}, Odds={1}, DieModifier={2}, TotalAttack={3}, TotalDefense={4}]",
+				OddsAgainst,
+				Odds,
+				DieModifier,
+				TotalAttack,
+				TotalDefense);
+		}
 	}
 }

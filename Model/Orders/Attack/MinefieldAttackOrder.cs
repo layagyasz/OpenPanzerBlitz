@@ -15,11 +15,16 @@ namespace PanzerBlitz
 			}
 		}
 
-		public MinefieldAttackOrder(Army Army, Tile TargetTile)
-			: base(Army, TargetTile)
+		public override bool ResultPerDefender
 		{
-			Target = AttackTarget.EACH;
+			get
+			{
+				return true;
+			}
 		}
+
+		public MinefieldAttackOrder(Army Army, Tile TargetTile)
+			: base(Army, TargetTile) { }
 
 		public MinefieldAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
@@ -38,18 +43,9 @@ namespace PanzerBlitz
 			return TurnComponent == TurnComponent.MINEFIELD_ATTACK;
 		}
 
-		public override OrderInvalidReason AddAttacker(MinefieldSingleAttackOrder AttackOrder)
-		{
-			if (!_Attackers.Any(i => i.Attacker == AttackOrder.Attacker))
-			{
-				return base.AddAttacker(AttackOrder);
-			}
-			return OrderInvalidReason.UNIT_DUPLICATE;
-		}
-
 		public override OrderInvalidReason Validate()
 		{
-			if (Target != AttackTarget.EACH) return OrderInvalidReason.MUST_ATTACK_EACH;
+			if (Target != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
 
 			foreach (MinefieldSingleAttackOrder attacker in _Attackers)
 			{

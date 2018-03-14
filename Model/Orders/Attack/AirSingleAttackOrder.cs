@@ -47,7 +47,7 @@ namespace PanzerBlitz
 		public override OrderInvalidReason Validate()
 		{
 			if (AttackTile == null) return OrderInvalidReason.ILLEGAL;
-			if (Attacker.Position.HexCoordinate.Distance(Defender.Position.HexCoordinate) > 1)
+			if (Attacker.Position.HexCoordinate.Distance(AttackTile.HexCoordinate) > 1)
 				return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 
 			return Attacker.CanAttack(AttackMethod.AIR, TreatStackAsArmored, null, UseSecondaryWeapon);

@@ -20,7 +20,7 @@
 		public override bool Apply(Unit Unit)
 		{
 			if (Validate() != OrderInvalidReason.NONE) return false;
-			if (Unit == Object) Unit.HandleCombatResult(CombatResult.DISRUPT);
+			if (Unit == Object) Unit.HandleCombatResult(CombatResult.DISRUPT, AttackMethod.NONE, null);
 			return true;
 		}
 	}

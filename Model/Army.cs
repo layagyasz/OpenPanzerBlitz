@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Utilities;
+
 namespace PanzerBlitz
 {
 	public class Army : GameObject
@@ -15,6 +17,7 @@ namespace PanzerBlitz
 		int _Id;
 		IdGenerator _IdGenerator;
 
+		List<Unit> _CapturedUnits = new List<Unit>();
 		HashSet<Tile> _AttackedTiles = new HashSet<Tile>();
 		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
@@ -29,7 +32,7 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return Deployments.SelectMany(i => i.Units);
+				return Deployments.SelectMany(i => i.Units).Concat(_CapturedUnits);
 			}
 		}
 
@@ -40,7 +43,11 @@ namespace PanzerBlitz
 			Configuration = ArmyConfiguration;
 			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
 				i => i.GenerateDeployment(this, IdGenerator)).ToList();
-			foreach (Unit u in Units) u.OnDestroy += UnitDestroyed;
+			foreach (Unit u in Units)
+			{
+				u.OnDestroy += UnitDestroyed;
+				u.OnCapture += UnitCaptured;
+			}
 			_IdGenerator = IdGenerator;
 		}
 
@@ -162,6 +169,21 @@ namespace PanzerBlitz
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
 				wreckage.Place(unit.Position);
 			}
+		}
+
+		void UnitCaptured(object Sender, ValuedEventArgs<Army> E)
+		{
+			E.Value.CaptureUnit((Unit)Sender);
+		}
+
+		void CaptureUnit(Unit Unit)
+		{
+			var newUnit = new Unit(this, Unit.Configuration, _IdGenerator);
+			newUnit.OnDestroy += UnitDestroyed;
+			newUnit.OnCapture += UnitCaptured;
+			_CapturedUnits.Add(newUnit);
+			if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(newUnit));
+			newUnit.Place(Unit.Position);
 		}
 
 		public override string ToString()
