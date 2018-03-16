@@ -243,6 +243,9 @@ unit-render-details:pzkw-35_t {
 unit-render-details:pzkw-38_t {
 	string:image-path { lt-38.png }
 }
+unit-render-details:pzkw-38_t-corrected {
+	string:image-path { lt-38.png }
+}
 unit-render-details:lynx {
 	string:override-display-name { LYNX }
 	string:image-path { lynx.png }

@@ -161,7 +161,7 @@ unit-configuration:lt-35-corrected {
 	byte:defense { 3 }
 	byte:movement { 7 }
 }
-unit-configuration:lt-38-corrected {
+unit-configuration:lt-38 {
 	string:name { LT-38 }
 	unit-class:unit-class { tank }
 
@@ -169,6 +169,16 @@ unit-configuration:lt-38-corrected {
 	byte:attack { 5 }
 	byte:range { 2 }
 	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:lt-38-corrected {
+	string:name { LT-38 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
 	byte:movement { 9 }
 }
 unit-configuration:avia-b-71 {

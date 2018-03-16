@@ -50,6 +50,9 @@ unit-render-details:lt-34-corrected {
 unit-render-details:lt-35-corrected {
 	string:image-path { lt-35.png }
 }
+unit-render-details:lt-38 {
+	string:image-path { lt-38.png }
+}
 unit-render-details:lt-38-corrected {
 	string:image-path { lt-38.png }
 }

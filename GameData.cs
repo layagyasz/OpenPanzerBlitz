@@ -6,6 +6,7 @@ using System.Linq;
 using Cardamom.Interface;
 using Cardamom.Planar;
 using Cardamom.Serialization;
+using Cardamom.Utilities.Markov;
 
 using SFML.Graphics;
 
@@ -25,7 +26,8 @@ namespace PanzerBlitz
 			TILE_COMPONENT_RULES,
 			ENVIRONMENTS,
 			TILE_RENDERERS,
-			MAP_GENERATORS
+			NAME_GENERATORS,
+			MATCH_SETTINGS
 		};
 
 		public static ushort OnlinePort = 1000;
@@ -44,7 +46,8 @@ namespace PanzerBlitz
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
-		public static Dictionary<string, MapGeneratorConfiguration> MapGenerators;
+		public static Dictionary<string, MarkovGenerator<char>> NameGenerators;
+		public static Dictionary<string, MatchSetting> MatchSettings;
 
 		public static void Load(string Module)
 		{
@@ -70,7 +73,8 @@ namespace PanzerBlitz
 				ParseBlock.FromFile(path + "/Terrain.blk"),
 				ParseBlock.FromFile(path + "/Environments.blk"),
 				ParseBlock.FromFile(path + "/TerrainRenderers.blk"),
-				ParseBlock.FromFile(path + "/MapGeneratorConfigurations.blk"),
+				ParseBlock.FromFile(path + "/NameGenerators.blk"),
+				ParseBlock.FromFile(path + "/MatchSettings.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
@@ -148,8 +152,10 @@ namespace PanzerBlitz
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<TileRenderer>(typeof(TileRenderer));
-			Block.AddParser<MapGeneratorConfiguration>(
-				"map-generator-configuration", i => new MapGeneratorConfiguration(i, Path));
+			Block.AddParser<MapGeneratorConfiguration>(typeof(MapGeneratorConfiguration));
+			Block.AddParser<MatchSetting>(typeof(MatchSetting));
+			Block.AddParser<MarkovGenerator<char>>(
+				"name-generator", i => FileUtils.LoadLanguage(Path + "/NameGenerators/" + i.String));
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];
@@ -165,7 +171,8 @@ namespace PanzerBlitz
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
-			MapGenerators = (Dictionary<string, MapGeneratorConfiguration>)attributes[(int)Attribute.MAP_GENERATORS];
+			NameGenerators = (Dictionary<string, MarkovGenerator<char>>)attributes[(int)Attribute.NAME_GENERATORS];
+			MatchSettings = (Dictionary<string, MatchSetting>)attributes[(int)Attribute.MATCH_SETTINGS];
 
 			// Emit warnings for units without configured render details.
 			foreach (UnitConfiguration unit in UnitConfigurations.Values)
@@ -260,7 +267,10 @@ namespace PanzerBlitz
 			UnitConfigurationLinks = Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToList();
 			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
 			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
-			MapGenerators = Stream.ReadEnumerable(i => new MapGeneratorConfiguration(i)).ToDictionary(i => i.UniqueKey);
+			NameGenerators = Stream.ReadEnumerable(
+				i => new KeyValuePair<string, MarkovGenerator<char>>(Stream.ReadString(), new MarkovGenerator<char>(i)))
+								   .ToDictionary(i => i.Key, i => i.Value);
+			MatchSettings = Stream.ReadEnumerable(i => new MatchSetting(i)).ToDictionary(i => i.UniqueKey);
 			Wreckage = UnitConfigurations["wreckage"];
 		}
 
@@ -284,7 +294,8 @@ namespace PanzerBlitz
 			Stream.Write(UnitConfigurationLinks);
 			Stream.Write(Scenarios);
 			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
-			Stream.Write(MapGenerators, i => Stream.Write(i.Value));
+			Stream.Write(NameGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value); });
+			Stream.Write(MatchSettings, i => Stream.Write(i.Value));
 		}
 	}
 }

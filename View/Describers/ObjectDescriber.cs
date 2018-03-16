@@ -66,6 +66,11 @@ namespace PanzerBlitz
 			return Environment.UniqueKey;
 		}
 
+		public static string Describe(MatchSetting Setting)
+		{
+			return Setting.UniqueKey;
+		}
+
 		public static string Describe(Coordinate Coordinate)
 		{
 			return string.Format("({0}, {1})", Coordinate.X, IntToString(Coordinate.Y, ALPHABET));

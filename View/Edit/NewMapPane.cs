@@ -68,7 +68,8 @@ namespace PanzerBlitz
 
 				MapConfiguration configuration = null;
 				if (_GenerateRandomCheckbox.Value)
-					configuration = new RandomMapConfiguration(width, height, GameData.MapGenerators["russian"]);
+					configuration =
+						new RandomMapConfiguration(width, height, GameData.MatchSettings["russia-summer"].MapGenerator);
 				else configuration = new BlankMapConfiguration(width, height);
 				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<MapConfiguration>(configuration));
 

@@ -553,6 +553,10 @@ unit-configuration-link:pzkw-38_t {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
 }
+unit-configuration-link:pzkw-38_t-corrected {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+}
 unit-configuration-link:pzkw-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-i }

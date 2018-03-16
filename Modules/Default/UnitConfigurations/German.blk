@@ -790,7 +790,7 @@ unit-configuration:pzkw-35_t {
 	string:name { PzKw 35 (T) }
 	unit-class:unit-class { tank }
 
-	weapon-class:weapon-class { infantry }
+	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 2 }
 	byte:defense { 3 }
@@ -800,10 +800,20 @@ unit-configuration:pzkw-38_t {
 	string:name { PzKw 38 (T) }
 	unit-class:unit-class { tank }
 
-	weapon-class:weapon-class { infantry }
+	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 2 }
 	byte:defense { 5 }
+	byte:movement { 9 }
+}
+unit-configuration:pzkw-38_t-corrected {
+	string:name { PzKw 38 (T) }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 2 }
+	byte:defense { 3 }
 	byte:movement { 9 }
 }
 unit-configuration:pzkw-i {

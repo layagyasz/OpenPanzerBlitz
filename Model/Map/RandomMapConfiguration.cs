@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +28,7 @@ namespace PanzerBlitz
 		}
 
 		public RandomMapConfiguration(SerializationInputStream Stream)
-			: this(Stream.ReadInt32(), Stream.ReadInt32(), GameData.MapGenerators[Stream.ReadString()]) { }
+			: this(Stream.ReadInt32(), Stream.ReadInt32(), new MapGeneratorConfiguration(Stream)) { }
 
 		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
 		{
@@ -150,7 +150,7 @@ namespace PanzerBlitz
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
 				var name =
-					new string(_Configuration.Language.Generate(_Random).ToArray()).RemoveDiacritics();
+					new string(_Configuration.NameGenerator.Generate(_Random).ToArray()).RemoveDiacritics();
 				name = char.ToUpper(name[0]) + name.Substring(1);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
@@ -283,7 +283,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(_Width);
 			Stream.Write(_Height);
-			Stream.Write(_Configuration.UniqueKey);
+			Stream.Write(_Configuration);
 		}
 	}
 }

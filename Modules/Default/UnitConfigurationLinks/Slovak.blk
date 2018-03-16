@@ -143,6 +143,10 @@ unit-configuration-link:lt-35-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.lt-35-corrected }
 }
+unit-configuration-link:lt-38 {
+	!faction:faction { factions.slovak }
+	!unit-configuration:unit-configuration { unit-configurations.lt-38 }
+}
 unit-configuration-link:lt-38-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.lt-38-corrected }

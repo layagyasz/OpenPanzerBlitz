@@ -25,7 +25,7 @@ namespace PanzerBlitz
 		Button _Error = new Button("footer-error");
 
 		Select<uint> _YearSelect = new Select<uint>("scenario-builder-parameters-section-select");
-		Select<Environment> _EnvironmentSelect = new Select<Environment>("scenario-builder-parameters-section-select");
+		Select<MatchSetting> _SettingSelect = new Select<MatchSetting>("scenario-builder-parameters-section-select");
 		Select<Front> _FrontSelect = new Select<Front>("scenario-builder-parameters-section-select");
 		Select<byte> _TurnsSelect = new Select<byte>("scenario-builder-parameters-section-select");
 		TextInput _MapWidthInput = new TextInput("scenario-builder-parameters-section-text-input");
@@ -55,16 +55,16 @@ namespace PanzerBlitz
 					});
 			_YearSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Year);
 
-			MakeSection("Environment", _EnvironmentSelect, _LeftDisplay);
-			_EnvironmentSelect.OnChange += HandleParametersChanged;
-			foreach (Environment environment in GameData.Environments.Values)
-				_EnvironmentSelect.Add(
-					new SelectionOption<Environment>("scenario-builder-parameters-section-select-option")
+			MakeSection("Setting", _SettingSelect, _LeftDisplay);
+			_SettingSelect.OnChange += HandleParametersChanged;
+			foreach (MatchSetting setting in GameData.MatchSettings.Values)
+				_SettingSelect.Add(
+					new SelectionOption<MatchSetting>("scenario-builder-parameters-section-select-option")
 					{
-						DisplayedString = ObjectDescriber.Describe(environment),
-						Value = environment
+						DisplayedString = ObjectDescriber.Describe(setting),
+						Value = setting
 					});
-			_EnvironmentSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Environment);
+			_SettingSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Setting);
 
 			MakeSection("Front", _FrontSelect, _LeftDisplay);
 			_FrontSelect.OnChange += HandleParametersChanged;
@@ -175,7 +175,7 @@ namespace PanzerBlitz
 		{
 			if (_YearSelect.Value == null
 				|| _FrontSelect.Value == null
-				|| _EnvironmentSelect.Value == null
+				|| _SettingSelect.Value == null
 				|| _TurnsSelect.Value == null)
 				return;
 
@@ -189,7 +189,7 @@ namespace PanzerBlitz
 				new ScenarioParameters(
 					_YearSelect.Value.Value,
 					_FrontSelect.Value.Value,
-					_EnvironmentSelect.Value.Value,
+					_SettingSelect.Value.Value,
 					_TurnsSelect.Value.Value,
 					new Coordinate(width, height));
 			if (OnParametersChanged != null)

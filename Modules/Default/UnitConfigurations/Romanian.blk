@@ -127,7 +127,7 @@ unit-configuration:r-2 {
 	byte:attack { 5 }
 	byte:range { 2 }
 	byte:defense { 5 }
-	byte:movement { 9 }
+	byte:movement { 7 }
 }
 unit-configuration:r-2-corrected {
 	string:name { R-2 }
