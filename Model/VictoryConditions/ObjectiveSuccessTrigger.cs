@@ -31,8 +31,8 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			SuccessLevel = (ObjectiveSuccessLevel)attributes[(int)Attribute.SUCCESS_LEVEL];
-			Threshold = Parse.DefaultIfNull(attributes[(int)Attribute.THRESHOLD], 1);
-			Invert = Parse.DefaultIfNull(attributes[(int)Attribute.INVERT], false);
+			Threshold = (int)(attributes[(int)Attribute.THRESHOLD] ?? 1);
+			Invert = (bool)(attributes[(int)Attribute.INVERT] ?? false);
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
 
 			CanStopEarly = Objective.CanStopEarly();

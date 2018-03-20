@@ -22,7 +22,7 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Direction = (Direction)attributes[(int)Attribute.DIRECTION];
-			Matcher = Parse.DefaultIfNull<Matcher<Tile>>(attributes[(int)Attribute.MATCHER], new EmptyMatcher<Tile>());
+			Matcher = (Matcher<Tile>)(attributes[(int)Attribute.MATCHER] ?? new EmptyMatcher<Tile>());
 		}
 
 		public UnitHasEvacuated(SerializationInputStream Stream)

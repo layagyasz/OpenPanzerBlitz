@@ -29,10 +29,10 @@ namespace PanzerBlitz
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			Friendly = Parse.DefaultIfNull(attributes[(int)Attribute.FRIENDLY], true);
-			IncludeFieldOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.INCLUDE_FIELD_OF_SIGHT], true);
-			BreakThrough = Parse.DefaultIfNull(attributes[(int)Attribute.BREAK_THROUGH], false);
-			Width = Parse.DefaultIfNull(attributes[(int)Attribute.WIDTH], (byte)1);
+			Friendly = (bool)(attributes[(int)Attribute.FRIENDLY] ?? true);
+			IncludeFieldOfSight = (bool)(attributes[(int)Attribute.INCLUDE_FIELD_OF_SIGHT] ?? true);
+			BreakThrough = (bool)(attributes[(int)Attribute.BREAK_THROUGH] ?? false);
+			Width = (byte)(attributes[(int)Attribute.WIDTH] ?? (byte)1);
 			Vertical = (bool)attributes[(int)Attribute.VERTICAL];
 		}
 

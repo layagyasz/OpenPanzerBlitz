@@ -19,7 +19,7 @@ namespace PanzerBlitz
 
 		public MatchSetting(ParseBlock Block)
 		{
-			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 
 			UniqueKey = Block.Name;
 			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];

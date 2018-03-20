@@ -27,7 +27,7 @@ namespace PanzerBlitz
 
 			Matcher = (Matcher<Tile>)attributes[(int)Attribute.MATCHER];
 			Distance = (byte)attributes[(int)Attribute.DISTANCE];
-			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
+			Atleast = (bool)(attributes[(int)Attribute.ATLEAST] ?? false);
 		}
 
 		public TileDistanceFrom(SerializationInputStream Stream)

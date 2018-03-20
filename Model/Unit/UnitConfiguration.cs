@@ -196,19 +196,19 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			UnitClass = (UnitClass)attributes[(int)Attribute.UNIT_CLASS];
 
-			var weaponClass = Parse.DefaultIfNull(attributes[(int)Attribute.WEAPON_CLASS], WeaponClass.NA);
-			var attack = Parse.DefaultIfNull(attributes[(int)Attribute.ATTACK], (byte)0);
-			var range = Parse.DefaultIfNull(attributes[(int)Attribute.RANGE], (byte)0);
-			var canDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
+			var weaponClass = (WeaponClass)(attributes[(int)Attribute.WEAPON_CLASS] ?? WeaponClass.NA);
+			var attack = (byte)(attributes[(int)Attribute.ATTACK] ?? (byte)0);
+			var range = (byte)(attributes[(int)Attribute.RANGE] ?? (byte)0);
+			var canDoubleRange = (bool)(attributes[(int)Attribute.CAN_DOUBLE_RANGE] ?? false);
 
-			PrimaryWeapon = Parse.DefaultIfNull(
-				attributes[(int)Attribute.PRIMARY_WEAPON], new Weapon(weaponClass, attack, range, canDoubleRange, 0));
-			SecondaryWeapon = Parse.DefaultIfNull(attributes[(int)Attribute.SECONDARY_WEAPON], default(Weapon));
+			PrimaryWeapon = (Weapon)(
+				attributes[(int)Attribute.PRIMARY_WEAPON] ?? new Weapon(weaponClass, attack, range, canDoubleRange, 0));
+			SecondaryWeapon = (Weapon)(attributes[(int)Attribute.SECONDARY_WEAPON] ?? default(Weapon));
 			Defense = (byte)attributes[(int)Attribute.DEFENSE];
-			Movement = Parse.DefaultIfNull(attributes[(int)Attribute.MOVEMENT], IsAircraft() ? byte.MaxValue : (byte)0);
-			IsVehicle = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_VEHICLE],
-				IsAircraft()
+			Movement = (byte)(attributes[(int)Attribute.MOVEMENT] ?? (byte)(IsAircraft() ? byte.MaxValue : 0));
+			IsVehicle = (bool)(
+				attributes[(int)Attribute.IS_VEHICLE] ??
+				(IsAircraft()
 				|| UnitClass == UnitClass.AMPHIBIOUS_VEHICLE
 				|| UnitClass == UnitClass.ASSAULT_GUN
 				|| UnitClass == UnitClass.ENGINEER_VEHICLE
@@ -217,95 +217,86 @@ namespace PanzerBlitz
 				|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
 				|| UnitClass == UnitClass.TANK
 				|| UnitClass == UnitClass.TRANSPORT
-				|| UnitClass == UnitClass.WRECKAGE);
-			IsArmored = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_ARMORED],
-				(IsVehicle && UnitClass != UnitClass.TRANSPORT && !IsAircraft()) || UnitClass == UnitClass.FORT);
-			LeavesWreckWhenDestroyed = Parse.DefaultIfNull(
-				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED], IsArmored && IsVehicle);
-			IsParatroop = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PARATROOP], false);
-			IsCommando = Parse.DefaultIfNull(attributes[(int)Attribute.IS_COMMANDO], false);
-			HasLowProfile = Parse.DefaultIfNull(
-				attributes[(int)Attribute.HAS_LOW_PROFILE],
-				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST || UnitClass == UnitClass.FORT);
+			 	|| UnitClass == UnitClass.WRECKAGE));
+			IsArmored = (bool)(
+				attributes[(int)Attribute.IS_ARMORED] ??
+				((IsVehicle && UnitClass != UnitClass.TRANSPORT && !IsAircraft()) || UnitClass == UnitClass.FORT));
+			LeavesWreckWhenDestroyed = (bool)(
+				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED] ?? (IsArmored && IsVehicle));
+			IsParatroop = (bool)(attributes[(int)Attribute.IS_PARATROOP] ?? false);
+			IsCommando = (bool)(attributes[(int)Attribute.IS_COMMANDO] ?? false);
+			HasLowProfile = (bool)(
+				attributes[(int)Attribute.HAS_LOW_PROFILE] ??
+				(UnitClass == UnitClass.INFANTRY
+				 || UnitClass == UnitClass.COMMAND_POST
+				 || UnitClass == UnitClass.FORT));
 
-			MovementRules = Parse.DefaultIfNull(
-				attributes[(int)Attribute.MOVEMENT_RULES],
-				Block.Get<UnitMovementRules>(GetDefaultMovementRules()));
+			MovementRules = (UnitMovementRules)(attributes[(int)Attribute.MOVEMENT_RULES]
+												?? Block.Get<UnitMovementRules>(GetDefaultMovementRules()));
 
-			IsCarrier = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_CARRIER],
-				(IsVehicle && !IsAircraft()) || UnitClass == UnitClass.TRANSPORT);
-			CanOnlyCarryInfantry = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY], IsCarrier && UnitClass != UnitClass.TRANSPORT);
-			CanOnlyCarryLight = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT], false);
-			CanCarryInWater = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CARRY_IN_WATER], false);
-			IsPassenger = Parse.DefaultIfNull(attributes[(int)Attribute.IS_PASSENGER],
-											  UnitClass == UnitClass.INFANTRY
-											  || UnitClass == UnitClass.COMMAND_POST
-											  || UnitClass == UnitClass.TOWED_GUN);
-			IsLightPassenger = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_LIGHT_PASSENGER],
-				IsPassenger && (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST));
-			IsOversizedPassenger = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IS_OVERSIZED_PASSENGER], false);
-			CannotUseRoadMovementWithOversizedPassenger = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER], CanOnlyCarryInfantry);
-			OversizedPassengerMovementMultiplier = Parse.DefaultIfNull(
-				attributes[(int)Attribute.OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER], 1f);
-			WaterDieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.WATER_DIE_MODIFIER], 0);
+			IsCarrier = (bool)(attributes[(int)Attribute.IS_CARRIER]
+							   ?? ((IsVehicle && !IsAircraft()) || UnitClass == UnitClass.TRANSPORT));
+			CanOnlyCarryInfantry = (bool)(attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY]
+										  ?? IsCarrier && UnitClass != UnitClass.TRANSPORT);
+			CanOnlyCarryLight = (bool)(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT] ?? false);
+			CanCarryInWater = (bool)(attributes[(int)Attribute.CAN_CARRY_IN_WATER] ?? false);
+			IsPassenger = (bool)(attributes[(int)Attribute.IS_PASSENGER]
+								 ?? (UnitClass == UnitClass.INFANTRY
+									 || UnitClass == UnitClass.COMMAND_POST
+									 || UnitClass == UnitClass.TOWED_GUN));
+			IsLightPassenger = (bool)(attributes[(int)Attribute.IS_LIGHT_PASSENGER]
+									  ?? (IsPassenger
+										  && (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST)));
+			IsOversizedPassenger = (bool)(attributes[(int)Attribute.IS_OVERSIZED_PASSENGER] ?? false);
+			CannotUseRoadMovementWithOversizedPassenger = (bool)(
+				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER] ?? CanOnlyCarryInfantry);
+			OversizedPassengerMovementMultiplier = (float)(
+				attributes[(int)Attribute.OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER] ?? 1f);
+			WaterDieModifier = (int)(attributes[(int)Attribute.WATER_DIE_MODIFIER] ?? 0);
 
-			IsEngineer = Parse.DefaultIfNull(attributes[(int)Attribute.IS_ENGINEER], false);
-			CanDirectFire = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_DIRECT_FIRE],
-				PrimaryWeapon.Attack > 0 && UnitClass != UnitClass.MINEFIELD);
-			CanIndirectFire = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_INDIRECT_FIRE], UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY);
-			CanOverrun =
-				Parse.DefaultIfNull(
-					attributes[(int)Attribute.CAN_OVERRUN],
-					IsVehicle && IsArmored && UnitClass != UnitClass.SELF_PROPELLED_ARTILLERY && CanDirectFire);
-			CanOnlyOverrunUnarmored = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED],
-				CanOverrun && PrimaryWeapon.WeaponClass == WeaponClass.INFANTRY);
-			CanCloseAssault = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_CLOSE_ASSAULT],
-				UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY);
-			CanOnlySupportCloseAssault = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT], false);
-			CanAirAttack =
-				Parse.DefaultIfNull(attributes[(int)Attribute.CAN_AIR_ATTACK], UnitClass == UnitClass.FIGHTER_BOMBER);
-			CanAntiAircraft = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT], false);
-			CanClearMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_CLEAR_MINES], IsEngineer);
-			CanPlaceMines = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_MINES], IsEngineer);
-			CanPlaceBridges = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_PLACE_BRIDGES], IsEngineer);
-			InnatelyClearsMines = Parse.DefaultIfNull(attributes[(int)Attribute.INNATELY_CLEARS_MINES], false);
-			ImmuneToMines =
-				Parse.DefaultIfNull(attributes[(int)Attribute.IMMUNE_TO_MINES], InnatelyClearsMines || IsAircraft());
+			IsEngineer = (bool)(attributes[(int)Attribute.IS_ENGINEER] ?? false);
+			CanDirectFire = (bool)(attributes[(int)Attribute.CAN_DIRECT_FIRE]
+								   ?? (PrimaryWeapon.Attack > 0 && UnitClass != UnitClass.MINEFIELD));
+			CanIndirectFire = (bool)(attributes[(int)Attribute.CAN_INDIRECT_FIRE]
+									 ?? (UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
+										 || PrimaryWeapon.WeaponClass == WeaponClass.MORTAR));
+			CanOverrun = (bool)(attributes[(int)Attribute.CAN_OVERRUN]
+								?? (IsVehicle
+									&& IsArmored
+									&& UnitClass != UnitClass.SELF_PROPELLED_ARTILLERY && CanDirectFire));
+			CanOnlyOverrunUnarmored = (bool)(attributes[(int)Attribute.CAN_ONLY_OVERRUN_UNARMORED]
+											 ?? (CanOverrun && PrimaryWeapon.WeaponClass == WeaponClass.INFANTRY));
+			CanCloseAssault = (bool)(attributes[(int)Attribute.CAN_CLOSE_ASSAULT]
+									 ?? (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.CAVALRY));
+			CanOnlySupportCloseAssault = (bool)(attributes[(int)Attribute.CAN_ONLY_SUPPORT_CLOSE_ASSAULT] ?? false);
+			CanAirAttack = (bool)(attributes[(int)Attribute.CAN_AIR_ATTACK] ?? UnitClass == UnitClass.FIGHTER_BOMBER);
+			CanAntiAircraft = (bool)(attributes[(int)Attribute.CAN_ANTI_AIRCRAFT] ?? false);
+			CanClearMines = (bool)(attributes[(int)Attribute.CAN_CLEAR_MINES] ?? IsEngineer);
+			CanPlaceMines = (bool)(attributes[(int)Attribute.CAN_PLACE_MINES] ?? IsEngineer);
+			CanPlaceBridges = (bool)(attributes[(int)Attribute.CAN_PLACE_BRIDGES] ?? IsEngineer);
+			InnatelyClearsMines = (bool)(attributes[(int)Attribute.INNATELY_CLEARS_MINES] ?? false);
+			ImmuneToMines = (bool)(attributes[(int)Attribute.IMMUNE_TO_MINES] ?? (InnatelyClearsMines || IsAircraft()));
 
-			CanSpot = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CAN_SPOT],
-				!IsStackUnique()
-				&& !IsNeutral()
-				&& UnitClass != UnitClass.FIGHTER_BOMBER
-				&& PrimaryWeapon != default(Weapon));
-			SpotRange = (byte)Parse.DefaultIfNull(
-				attributes[(int)Attribute.SPOT_RANGE],
-				CanSpot
+			CanSpot = (bool)(attributes[(int)Attribute.CAN_SPOT]
+							 ?? (!IsStackUnique()
+								 && !IsNeutral()
+								 && UnitClass != UnitClass.FIGHTER_BOMBER
+								 && PrimaryWeapon != default(Weapon)));
+			SpotRange = (byte)(
+				attributes[(int)Attribute.SPOT_RANGE] ??
+				(byte)(CanSpot
 					? (UnitClass == UnitClass.OBSERVATION_AIRCRAFT
 					   ? 30
 					   : Math.Max(GetAdjustedRange(true), GetAdjustedRange(false)))
-					: 0);
+				 : 0));
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
-			CanRemount = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_REMOUNT], DismountAs != null);
+			CanRemount = (bool)(attributes[(int)Attribute.CAN_REMOUNT] ?? DismountAs != null);
 
-			CanSupportArmored = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_SUPPORT_ARMORED], false);
-			CloseAssaultCapture =
-				Parse.DefaultIfNull(
-					attributes[(int)Attribute.CLOSE_ASSAULT_CAPTURE], UnitClass == UnitClass.COMMAND_POST);
-			AreaControlCapture =
-				Parse.DefaultIfNull(attributes[(int)Attribute.AREA_CONTROL_CAPTURE], UnitClass == UnitClass.FORT);
+			CanSupportArmored = (bool)(attributes[(int)Attribute.CAN_SUPPORT_ARMORED] ?? false);
+			CloseAssaultCapture = (bool)(attributes[(int)Attribute.CLOSE_ASSAULT_CAPTURE]
+										 ?? UnitClass == UnitClass.COMMAND_POST);
+			AreaControlCapture = (bool)(attributes[(int)Attribute.AREA_CONTROL_CAPTURE] ?? UnitClass == UnitClass.FORT);
 		}
 
 		string GetDefaultMovementRules()

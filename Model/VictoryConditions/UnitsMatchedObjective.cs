@@ -26,7 +26,7 @@ namespace PanzerBlitz
 
 			Matcher = (Matcher<Unit>)attributes[(int)Attribute.MATCHER];
 			Friendly = (bool)attributes[(int)Attribute.FRIENDLY];
-			CountPoints = Parse.DefaultIfNull(attributes[(int)Attribute.COUNT_POINTS], false);
+			CountPoints = (bool)(attributes[(int)Attribute.COUNT_POINTS] ?? false);
 		}
 
 		public UnitsMatchedObjective(SerializationInputStream Stream)

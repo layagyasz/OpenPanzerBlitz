@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			UnitGroup = (UnitGroup)attributes[(int)Attribute.UNIT_GROUP];
-			Matcher = Parse.DefaultIfNull<Matcher<Tile>>(attributes[(int)Attribute.MATCHER], new EmptyMatcher<Tile>());
+			Matcher = (Matcher<Tile>)(attributes[(int)Attribute.MATCHER] ?? new EmptyMatcher<Tile>());
 		}
 
 		public PositionalDeploymentConfiguration(SerializationInputStream Stream)

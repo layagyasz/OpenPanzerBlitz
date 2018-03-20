@@ -101,61 +101,64 @@ namespace PanzerBlitz
 
 		static void Load(string Path, ParseBlock Block)
 		{
+			Cence.Module.AddParsers(Block);
+
 			Block.AddParser<Color>("color", i => ClassLibrary.Instance.ParseColor(i.String), false);
 			Block.AddParser<List<Color>>("color[]", i => ClassLibrary.Instance.ParseColors(i.String), false);
 			Block.AddParser<Dictionary<string, Color>>("color<>", i => i.BreakToDictionary<Color>(), false);
 
 			Block.AddParser<Polygon>("zone", i => new Polygon(i));
-			Block.AddParser<Coordinate>(typeof(Coordinate));
-			Block.AddParser<WeaponClass>(typeof(TileEdge));
-			Block.AddParser<WeaponClass>(typeof(TilePathOverlay));
-			Block.AddParser<WeaponClass>(typeof(TileBase));
-			Block.AddParser<WeaponClass>(typeof(WeaponClass));
-			Block.AddParser<UnitClass>(typeof(UnitClass));
-			Block.AddParser<UnitStatus>(typeof(UnitStatus));
-			Block.AddParser<BlockType>(typeof(BlockType));
-			Block.AddParser<Front>(typeof(Front));
-			Block.AddParser<Weapon>(typeof(Weapon));
+			Block.AddParser<Coordinate>();
+			Block.AddParser<TileBase>();
+			Block.AddParser<TileEdge>();
+			Block.AddParser<TilePathOverlay>();
+			Block.AddParser<WeaponClass>();
+			Block.AddParser<UnitClass>();
+			Block.AddParser<UnitStatus>();
+			Block.AddParser<BlockType>();
+			Block.AddParser<Front>();
+			Block.AddParser<Weapon>();
 
-			Block.AddParser<MovementRule>(typeof(MovementRule));
-			Block.AddParser<UnitMovementRules>(typeof(UnitMovementRules));
-			Block.AddParser<Faction>(typeof(Faction));
-			Block.AddParser<UnitConfiguration>(typeof(UnitConfiguration));
-			Block.AddParser<UnitConfigurationLink>(typeof(UnitConfigurationLink));
-			Block.AddParser<Direction>(typeof(Direction));
-			Block.AddParser<TileComponentRules>(typeof(TileComponentRules));
-			Block.AddParser<TileRuleSet>(typeof(TileRuleSet));
-			Block.AddParser<Environment>(typeof(Environment));
+			Block.AddParser<MovementRule>();
+			Block.AddParser<UnitMovementRules>();
+			Block.AddParser<Faction>();
+			Block.AddParser<UnitConfiguration>();
+			Block.AddParser<UnitConfigurationLink>();
+			Block.AddParser<Direction>();
+			Block.AddParser<TileComponentRules>();
+			Block.AddParser<TileRuleSet>();
+			Block.AddParser<Environment>();
 
 			Block.AddParsers<object>(MatcherSerializer.Instance.GetParsers());
 
-			Block.AddParser<UnitGroup>(typeof(UnitGroup));
-			Block.AddParser<UnitCount>(typeof(UnitCount));
-			Block.AddParser<ConvoyMovementAutomator>(typeof(ConvoyMovementAutomator));
-			Block.AddParser<DeploymentConfiguration>(typeof(PositionalDeploymentConfiguration));
-			Block.AddParser<DeploymentConfiguration>(typeof(ConvoyDeploymentConfiguration));
+			Block.AddParser<UnitGroup>();
+			Block.AddParser<UnitCount>();
+			Block.AddParser<ConvoyMovementAutomator>();
+			Block.AddParser<PositionalDeploymentConfiguration>();
+			Block.AddParser<ConvoyDeploymentConfiguration>();
 
-			Block.AddParser<ObjectiveSuccessLevel>(typeof(ObjectiveSuccessLevel));
-			Block.AddParser<VictoryCondition>(typeof(VictoryCondition));
-			Block.AddParser<ObjectiveSuccessTrigger>(typeof(ObjectiveSuccessTrigger));
+			Block.AddParser<ObjectiveSuccessLevel>();
+			Block.AddParser<VictoryCondition>();
+			Block.AddParser<ObjectiveSuccessTrigger>();
 
 			Block.AddParsers<Objective>(ObjectiveSerializer.Instance.GetParsers());
 
-			Block.AddParser<ArmyConfiguration>(typeof(ArmyConfiguration));
-			Block.AddParser<BoardConfiguration>(typeof(BoardConfiguration));
+			Block.AddParser<ArmyConfiguration>();
+			Block.AddParser<BoardConfiguration>();
 			Block.AddParser<BoardCompositeMapConfiguration>(
 				"map-configuration", i => new BoardCompositeMapConfiguration(i));
-			Block.AddParser<Scenario>(typeof(Scenario));
+			Block.AddParser<Scenario>();
 
 			Block.AddParser<FactionRenderDetails>(
 				"faction-render-details", i => new FactionRenderDetails(i, Path + "/FactionSymbols/"));
 			Block.AddParser<UnitRenderDetails>(
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
-			Block.AddParser<TileRenderer>(typeof(TileRenderer));
-			Block.AddParser<MapGeneratorConfiguration>(typeof(MapGeneratorConfiguration));
-			Block.AddParser<MatchSetting>(typeof(MatchSetting));
+			Block.AddParser<TileRenderer>();
+			Block.AddParser<MapGeneratorConfiguration>();
+			Block.AddParser<MatchSetting>();
 			Block.AddParser<MarkovGenerator<char>>(
 				"name-generator", i => FileUtils.LoadLanguage(Path + "/NameGenerators/" + i.String));
+			Block.AddParser<FeatureGenerator>();
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitMovementRules = (Dictionary<string, UnitMovementRules>)attributes[(int)Attribute.UNIT_MOVEMENT_RULES];

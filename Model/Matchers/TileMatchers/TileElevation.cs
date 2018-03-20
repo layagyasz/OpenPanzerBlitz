@@ -22,7 +22,7 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Elevation = (int)attributes[(int)Attribute.ELEVATION];
-			Atleast = Parse.DefaultIfNull(attributes[(int)Attribute.ATLEAST], false);
+			Atleast = (bool)(attributes[(int)Attribute.ATLEAST] ?? false);
 		}
 
 		public TileElevation(SerializationInputStream Stream)

@@ -368,6 +368,7 @@
     <Compile Include="Controller\Match\Subcontroller\AircraftController.cs" />
     <Compile Include="Model\Map\MapGeneratorConfiguration.cs" />
     <Compile Include="Model\MatchSetting.cs" />
+    <Compile Include="Model\Map\FeatureGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

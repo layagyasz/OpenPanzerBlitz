@@ -34,55 +34,22 @@ namespace PanzerBlitz
 		{
 			var map = new Map(_Width, _Height, Environment, IdGenerator);
 
-			var thresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.1),
-				Factor = .1,
-				Bias = .63
-			});
-			var waterThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.1),
-				Factor = .1,
-				Bias = .3
-			});
-			var noise = MakeNoiseGenerator(.1, .2, .5);
-
-			var swampThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.1),
-				Factor = .3,
-				Bias = .35
-			});
-			var swampNoise = MakeNoiseGenerator(.075, .175, .5);
-
-			var forestThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.15),
-				Factor = .1,
-				Bias = .6
-			});
-			var forestNoise = MakeNoiseGenerator(.25, .5, .5);
-
-			var townThresholdNoise = new LatticeNoiseGenerator(_Random, new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.1),
-				Factor = .2,
-				Bias = .72
-			});
-			var townNoise = MakeNoiseGenerator(.25, .5, .5);
+			var cache = new Dictionary<FunctionFactory, Func<double, double, double>>();
+			var elevationGenerator = _Configuration.ElevationGenerator.GetFeatureGenerator(_Random, cache);
+			var waterGenerator = _Configuration.WaterGenerator.GetFeatureGenerator(_Random, cache);
+			var swampGenerator = _Configuration.SwampGenerator.GetFeatureGenerator(_Random, cache);
+			var forestGenerator = _Configuration.ForestGenerator.GetFeatureGenerator(_Random, cache);
+			var townGenerator = _Configuration.TownGenerator.GetFeatureGenerator(_Random, cache);
 
 			foreach (Tile t in map.TilesEnumerable)
 			{
-				var elevation = noise.Generate(t.Center.X, t.Center.Y);
-				if (elevation > thresholdNoise.Generate(t.Center.X, t.Center.Y) && t.OnEdge(Direction.NONE))
+				if (elevationGenerator(t.Center.X, t.Center.Y) && t.OnEdge(Direction.NONE))
 					t.Configuration.SetElevation(1);
-				else if (elevation < waterThresholdNoise.Generate(t.Center.X, t.Center.Y))
+				else if (waterGenerator(t.Center.X, t.Center.Y))
 				{
 					for (int i = 0; i < 6; ++i) t.SetEdge(i, TileEdge.WATER);
 				}
-				if (t.Configuration.Elevation == 0 && swampNoise.Generate(t.Center.X, t.Center.Y)
-					< swampThresholdNoise.Generate(t.Center.X, t.Center.Y))
+				if (t.Configuration.Elevation == 0 && swampGenerator(t.Center.X, t.Center.Y))
 					t.Configuration.SetTileBase(TileBase.SWAMP);
 			}
 			foreach (Tile t in map.TilesEnumerable)
@@ -110,12 +77,10 @@ namespace PanzerBlitz
 						&& neighbor.Configuration.TileBase != TileBase.SWAMP)
 					{
 						Vector2f v = .5f * (t.Bounds[i].Point + t.Bounds[i].End);
-						if (forestNoise.Generate(v.X, v.Y) > forestThresholdNoise.Generate(v.X, v.Y))
+						if (forestGenerator(v.X, v.Y))
 							t.SetEdge(i, TileEdge.FOREST);
-						if (townNoise.Generate(t.Bounds[i].Point.X, t.Bounds[i].Point.Y)
-							> townThresholdNoise.Generate(t.Bounds[i].Point.X, t.Bounds[i].Point.Y)
-						   || townNoise.Generate(t.Bounds[i].End.X, t.Bounds[i].End.Y)
-							> townThresholdNoise.Generate(t.Bounds[i].End.X, t.Bounds[i].End.Y))
+						if (townGenerator(t.Bounds[i].Point.X, t.Bounds[i].Point.Y)
+							|| townGenerator(t.Bounds[i].End.X, t.Bounds[i].End.Y))
 							t.SetEdge(i, TileEdge.TOWN);
 					}
 				}
@@ -185,21 +150,6 @@ namespace PanzerBlitz
 		public StaticMapConfiguration MakeStaticMap()
 		{
 			return new StaticMapConfiguration(GenerateMap(null, new IdGenerator()));
-		}
-
-		LatticeNoiseGenerator MakeNoiseGenerator(double MinFrequency, double MaxFrequency, double Persistence)
-		{
-			var frequencySettings = new LatticeNoiseSettings
-			{
-				Frequency = Constant.Create(.1)
-			};
-			var frequencyGenerator = new LatticeNoiseGenerator(_Random, frequencySettings);
-			var settings = new LatticeNoiseSettings
-			{
-				Frequency = (i, j) => MinFrequency + (MaxFrequency - MinFrequency) * frequencyGenerator.Generate(i, j),
-				Persistence = Constant.Create(Persistence)
-			};
-			return new LatticeNoiseGenerator(_Random, settings);
 		}
 
 		void MakePath(Tile Start, Tile End, TilePathOverlay Path, Func<Tile, Tile, double> DistanceFunction)

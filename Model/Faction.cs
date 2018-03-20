@@ -42,7 +42,7 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			Colors = (Color[])attributes[(int)Attribute.COLORS];
 			StackLimit = (byte)attributes[(int)Attribute.STACK_LIMIT];
-			HalfPriceTrucks = Parse.DefaultIfNull(attributes[(int)Attribute.HALF_PRICE_TRUCKS], false);
+			HalfPriceTrucks = (bool)(attributes[(int)Attribute.HALF_PRICE_TRUCKS] ?? false);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

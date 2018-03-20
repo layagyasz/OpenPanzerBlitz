@@ -34,10 +34,10 @@ namespace PanzerBlitz
 
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
-			IntroduceYear = Parse.DefaultIfNull(attributes[(int)Attribute.INTRODUCE_YEAR], 0);
-			ObsoleteYear = Parse.DefaultIfNull(attributes[(int)Attribute.OBSOLETE_YEAR], 0);
-			Front = Parse.DefaultIfNull(attributes[(int)Attribute.FRONT], Front.ALL);
-			Environments = Parse.DefaultIfNull<List<Environment>>(attributes[(int)Attribute.ENVIRONMENTS], null);
+			IntroduceYear = (int)(attributes[(int)Attribute.INTRODUCE_YEAR] ?? 0);
+			ObsoleteYear = (int)(attributes[(int)Attribute.OBSOLETE_YEAR] ?? 0);
+			Front = (Front)(attributes[(int)Attribute.FRONT] ?? Front.ALL);
+			Environments = (List<Environment>)attributes[(int)Attribute.ENVIRONMENTS];
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

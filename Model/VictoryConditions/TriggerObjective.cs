@@ -25,7 +25,7 @@ namespace PanzerBlitz
 
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
 			Threshold = (int)attributes[(int)Attribute.THRESHOLD];
-			Invert = Parse.DefaultIfNull(attributes[(int)Attribute.INVERT], false);
+			Invert = (bool)(attributes[(int)Attribute.INVERT] ?? false);
 		}
 
 		public TriggerObjective(SerializationInputStream Stream)

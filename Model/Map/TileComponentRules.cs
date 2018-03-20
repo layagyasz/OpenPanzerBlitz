@@ -131,26 +131,26 @@ namespace PanzerBlitz
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			DieModifier = Parse.DefaultIfNull(attributes[(int)Attribute.DIE_MODIFIER], 0);
-			RoadMove = Parse.DefaultIfNull(attributes[(int)Attribute.ROAD_MOVE], false);
-			TreatUnitsAsArmored = Parse.DefaultIfNull(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED], false);
-			MustAttackAllUnits = Parse.DefaultIfNull(attributes[(int)Attribute.MUST_ATTACK_ALL_UNITS], false);
+			DieModifier = (int)(attributes[(int)Attribute.DIE_MODIFIER] ?? 0);
+			RoadMove = (bool)(attributes[(int)Attribute.ROAD_MOVE] ?? false);
+			TreatUnitsAsArmored = (bool)(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED] ?? false);
+			MustAttackAllUnits = (bool)(attributes[(int)Attribute.MUST_ATTACK_ALL_UNITS] ?? false);
 
-			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], false);
-			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], false);
-			Elevated = Parse.DefaultIfNull(attributes[(int)Attribute.ELEVATED], false);
-			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], false);
-			Loose = Parse.DefaultIfNull(attributes[(int)Attribute.LOOSE], false);
-			Roaded = Parse.DefaultIfNull(attributes[(int)Attribute.ROADED], false);
-			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], false);
-			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], false);
-			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], false);
+			DenseEdge = (bool)(attributes[(int)Attribute.DENSE_EDGE] ?? false);
+			Depressed = (bool)(attributes[(int)Attribute.DEPRESSED] ?? false);
+			Elevated = (bool)(attributes[(int)Attribute.ELEVATED] ?? false);
+			Frozen = (bool)(attributes[(int)Attribute.FROZEN] ?? false);
+			Loose = (bool)(attributes[(int)Attribute.LOOSE] ?? false);
+			Roaded = (bool)(attributes[(int)Attribute.ROADED] ?? false);
+			Rough = (bool)(attributes[(int)Attribute.ROUGH] ?? false);
+			Swamp = (bool)(attributes[(int)Attribute.SWAMP] ?? false);
+			Water = (bool)(attributes[(int)Attribute.WATER] ?? false);
 
-			OverrideBaseMovement = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_BASE_MOVEMENT], true);
-			DepressedTransition = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED_TRANSITION], false);
-			BlocksLineOfSight = Parse.DefaultIfNull(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT], false);
-			Concealing = Parse.DefaultIfNull(attributes[(int)Attribute.CONCEALING], false);
-			LowProfileConcealing = Parse.DefaultIfNull(attributes[(int)Attribute.LOW_PROFILE_CONCEALING], false);
+			OverrideBaseMovement = (bool)(attributes[(int)Attribute.OVERRIDE_BASE_MOVEMENT] ?? true);
+			DepressedTransition = (bool)(attributes[(int)Attribute.DEPRESSED_TRANSITION] ?? false);
+			BlocksLineOfSight = (bool)(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT] ?? false);
+			Concealing = (bool)(attributes[(int)Attribute.CONCEALING] ?? false);
+			LowProfileConcealing = (bool)(attributes[(int)Attribute.LOW_PROFILE_CONCEALING] ?? false);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

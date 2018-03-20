@@ -38,7 +38,7 @@ namespace PanzerBlitz
 			Destination = (Coordinate)attributes[(int)Attribute.DESTINATION];
 			Speed = (byte)attributes[(int)Attribute.SPEED];
 			StopCondition = (Matcher<Tile>)attributes[(int)Attribute.STOP_CONDITION];
-			ReciprocalStop = Parse.DefaultIfNull(attributes[(int)Attribute.RECIPROCAL_STOP], false);
+			ReciprocalStop = (bool)(attributes[(int)Attribute.RECIPROCAL_STOP] ?? false);
 		}
 
 		public ConvoyMovementAutomator(SerializationInputStream Stream)

@@ -36,7 +36,7 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			OverrideDisplayName = (string)attributes[(int)Attribute.OVERRIDE_DISPLAY_NAME];
-			OverrideColor = Parse.DefaultIfNull(attributes[(int)Attribute.OVERRIDE_COLOR], Color.Black);
+			OverrideColor = (Color)(attributes[(int)Attribute.OVERRIDE_COLOR] ?? Color.Black);
 			_RootPath = Path;
 			_ImagePath = (string)attributes[(int)Attribute.IMAGE_PATH];
 		}

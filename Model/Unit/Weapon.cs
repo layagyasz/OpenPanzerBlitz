@@ -28,8 +28,8 @@ namespace PanzerBlitz
 			WeaponClass = (WeaponClass)attributes[(int)Attribute.WEAPON_CLASS];
 			Attack = (byte)attributes[(int)Attribute.ATTACK];
 			Range = (byte)attributes[(int)Attribute.RANGE];
-			CanDoubleRange = Parse.DefaultIfNull(attributes[(int)Attribute.CAN_DOUBLE_RANGE], false);
-			Ammunition = Parse.DefaultIfNull(attributes[(int)Attribute.AMMUNITION], (byte)0);
+			CanDoubleRange = (bool)(attributes[(int)Attribute.CAN_DOUBLE_RANGE] ?? false);
+			Ammunition = (byte)(attributes[(int)Attribute.AMMUNITION] ?? (byte)0);
 		}
 
 		public Weapon(SerializationInputStream Stream)

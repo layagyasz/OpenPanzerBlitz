@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Window;
@@ -13,7 +14,8 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnAction;
 		public EventHandler<EventArgs> OnCancel;
 
-		readonly Select<FileInfo> _FileSelect = new Select<FileInfo>("io-select", false);
+		readonly ValuedScrollCollection<SelectionOption<FileInfo>, FileInfo> _FileSelect =
+			new ValuedScrollCollection<SelectionOption<FileInfo>, FileInfo>("io-select");
 		readonly Button _ActionButton = new Button("small-button");
 		readonly Button _CancelButton = new Button("small-button");
 		readonly TextInput _FileNameInput = new TextInput("io-text-input");

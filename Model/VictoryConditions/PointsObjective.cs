@@ -22,7 +22,7 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Objective = (Objective)attributes[(int)Attribute.OBJECTIVE];
-			Points = Parse.DefaultIfNull(attributes[(int)Attribute.POINTS], 1);
+			Points = (int)(attributes[(int)Attribute.POINTS] ?? 1);
 		}
 
 		public PointsObjective(SerializationInputStream Stream)

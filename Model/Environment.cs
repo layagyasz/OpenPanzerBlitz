@@ -43,10 +43,11 @@ namespace PanzerBlitz
 
 			UniqueKey = Block.Name;
 			TileRuleSet = (TileRuleSet)attributes[(int)Attribute.TILE_RULE_SET];
-			MovementMultiplier = Parse.DefaultIfNull(attributes[(int)Attribute.MOVEMENT_MULTIPLIER], 1f);
+			MovementMultiplier = (float)(attributes[(int)Attribute.MOVEMENT_MULTIPLIER] ?? 1f);
 
-			foreach (UnitClass unitClass in Parse.DefaultIfNull(
-				(List<UnitClass>)attributes[(int)Attribute.RESTRICT_ROAD_MOVEMENT], new List<UnitClass>()))
+			foreach (UnitClass unitClass in
+					 (IEnumerable<UnitClass>)(attributes[(int)Attribute.RESTRICT_ROAD_MOVEMENT]
+											  ?? Enumerable.Empty<UnitClass>()))
 			{
 				_RestrictRoadMovement[(int)unitClass] = true;
 			}

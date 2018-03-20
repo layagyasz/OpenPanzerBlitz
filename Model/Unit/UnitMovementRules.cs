@@ -45,22 +45,20 @@ namespace PanzerBlitz
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			DenseEdge = Parse.DefaultIfNull(attributes[(int)Attribute.DENSE_EDGE], default(MovementRule));
-			Depressed = Parse.DefaultIfNull(attributes[(int)Attribute.DEPRESSED], default(MovementRule));
-			Downhill = Parse.DefaultIfNull(attributes[(int)Attribute.DOWNHILL], default(MovementRule));
-			Frozen = Parse.DefaultIfNull(attributes[(int)Attribute.FROZEN], default(MovementRule));
-			Loose = Parse.DefaultIfNull(attributes[(int)Attribute.LOOSE], default(MovementRule));
-			Roaded = Parse.DefaultIfNull(attributes[(int)Attribute.ROADED], default(MovementRule));
-			Rough = Parse.DefaultIfNull(attributes[(int)Attribute.ROUGH], default(MovementRule));
-			Sloped = Parse.DefaultIfNull(attributes[(int)Attribute.SLOPED], default(MovementRule));
-			Swamp = Parse.DefaultIfNull(attributes[(int)Attribute.SWAMP], default(MovementRule));
-			Uphill = Parse.DefaultIfNull(attributes[(int)Attribute.UPHILL], default(MovementRule));
-			Water = Parse.DefaultIfNull(attributes[(int)Attribute.WATER], default(MovementRule));
+			DenseEdge = (MovementRule)(attributes[(int)Attribute.DENSE_EDGE] ?? default(MovementRule));
+			Depressed = (MovementRule)(attributes[(int)Attribute.DEPRESSED] ?? default(MovementRule));
+			Downhill = (MovementRule)(attributes[(int)Attribute.DOWNHILL] ?? default(MovementRule));
+			Frozen = (MovementRule)(attributes[(int)Attribute.FROZEN] ?? default(MovementRule));
+			Loose = (MovementRule)(attributes[(int)Attribute.LOOSE] ?? default(MovementRule));
+			Roaded = (MovementRule)(attributes[(int)Attribute.ROADED] ?? default(MovementRule));
+			Rough = (MovementRule)(attributes[(int)Attribute.ROUGH] ?? default(MovementRule));
+			Sloped = (MovementRule)(attributes[(int)Attribute.SLOPED] ?? default(MovementRule));
+			Swamp = (MovementRule)(attributes[(int)Attribute.SWAMP] ?? default(MovementRule));
+			Uphill = (MovementRule)(attributes[(int)Attribute.UPHILL] ?? default(MovementRule));
+			Water = (MovementRule)(attributes[(int)Attribute.WATER] ?? default(MovementRule));
 
-			IgnoresEnvironmentMovement = Parse.DefaultIfNull(
-				attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT], false);
-			CannotUseRoadMovement = Parse.DefaultIfNull(
-				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT], false);
+			IgnoresEnvironmentMovement = (bool)(attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT] ?? false);
+			CannotUseRoadMovement = (bool)(attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT] ?? false);
 		}
 
 		public UnitMovementRules(SerializationInputStream Stream)
