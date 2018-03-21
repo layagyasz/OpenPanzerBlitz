@@ -315,9 +315,29 @@ namespace PanzerBlitz
 			_ControllingArmy = Unit.Army;
 		}
 
-		public void ClearControl(Unit Unit)
+		public void UpdateControl()
 		{
-			if (_ControllingArmy == Unit.Army && Units.All(i => i.Army != Unit.Army)) _ControllingArmy = null;
+			UpdateControl(Units);
+		}
+
+		public void UpdateControl(Unit Unit)
+		{
+			UpdateControl(Units.Concat(Enumerable.Repeat(Unit, 1)));
+		}
+
+		void UpdateControl(IEnumerable<Unit> Units)
+		{
+			List<Army> armies = Units.Where(i => i.Configuration.CanControl()).Select(i => i.Army).Distinct().ToList();
+			if (armies.Count == 0) _ControllingArmy = null;
+			else if (armies.Count == 1)
+			{
+				_ControllingArmy = armies.First();
+				// Capture area control captureable units.
+				foreach (Unit unit in Units.ToList().Where(
+					i => i.Army != _ControllingArmy && i.Configuration.AreaControlCapture))
+					unit.Capture(_ControllingArmy);
+			}
+			else _ControllingArmy = null;
 		}
 
 		public void Enter(Unit Unit)

@@ -368,6 +368,11 @@ namespace PanzerBlitz
 			return UnitClass == UnitClass.OBSERVATION_AIRCRAFT || UnitClass == UnitClass.FIGHTER_BOMBER;
 		}
 
+		public bool CanControl()
+		{
+			return !IsNeutral() && !IsAircraft() && UnitClass != UnitClass.FORT;
+		}
+
 		public bool HasUnlimitedMovement()
 		{
 			return Movement == byte.MaxValue;

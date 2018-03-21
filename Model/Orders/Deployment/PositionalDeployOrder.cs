@@ -55,7 +55,6 @@ namespace PanzerBlitz
 
 			if (Tile == null)
 			{
-				if (Unit.Position != null) Unit.Position.ClearControl(Unit);
 				if (Unit.Carrier != null) Unit.Carrier.Unload(false);
 				if (Unit.Passenger != null) Unit.Unload(false);
 				Unit.Remove();
@@ -63,7 +62,6 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				Tile.Control(Unit);
 				Unit.Place(Tile);
 				Unit.Emplace(true);
 			}

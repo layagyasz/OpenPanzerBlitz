@@ -218,6 +218,17 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
+		public void Capture(Army Army)
+		{
+			if (Status != UnitStatus.DESTROYED && Status != UnitStatus.CAPTURED)
+			{
+				Status = UnitStatus.CAPTURED;
+				if (OnCapture != null) OnCapture(this, new ValuedEventArgs<Army>(Army));
+				CancelInteractions();
+				Remove();
+			}
+		}
+
 		public void HandleCombatResult(CombatResult CombatResult, AttackMethod AttackMethod, Army AttackingArmy)
 		{
 			if (Passenger != null) Passenger.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
@@ -227,17 +238,14 @@ namespace PanzerBlitz
 					return;
 				case CombatResult.DESTROY:
 					if (AttackMethod == AttackMethod.CLOSE_ASSAULT && Configuration.CloseAssaultCapture)
-					{
-						Status = UnitStatus.CAPTURED;
-						if (OnCapture != null) OnCapture(this, new ValuedEventArgs<Army>(AttackingArmy));
-					}
+						Capture(AttackingArmy);
 					else
 					{
 						Status = UnitStatus.DESTROYED;
 						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
+						CancelInteractions();
+						Remove();
 					}
-					CancelInteractions();
-					Remove();
 					return;
 				case CombatResult.DAMAGE:
 					Status = UnitStatus.DAMAGED;
@@ -256,6 +264,7 @@ namespace PanzerBlitz
 		public void Remove()
 		{
 			Position.Exit(this);
+			Position.UpdateControl();
 			Position = null;
 			if (OnRemove != null) OnRemove(this, EventArgs.Empty);
 		}
@@ -266,6 +275,7 @@ namespace PanzerBlitz
 			if (Position != null) Position.Exit(this);
 			Position = Tile;
 			Position.Enter(this);
+			Position.UpdateControl();
 
 			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path, Carrier));
 		}
