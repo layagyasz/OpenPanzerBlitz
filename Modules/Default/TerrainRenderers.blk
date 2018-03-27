@@ -18,6 +18,7 @@
 			color:town { 115,112,103 }
 			color:forest { 94,111,56 }
 			color:slope { 188,126,53 }
+			color:wall { 238,238,238 }
 			color:water { 43,122,119 }
 		}
 		color<>:edge-overlay-colors {
@@ -25,6 +26,7 @@
 			color:town { 138,134,122 }
 			color:forest { 125,150,72 }
 			color:slope { 169,150,71 }
+			color:wall { 0,0,0,0 }
 			color:water { 43,122,119 }
 		}
 		color<>:path-colors {
@@ -79,6 +81,7 @@
 			color:town { 115,112,103 }
 			color:forest { 94,111,56 }
 			color:slope { 188,126,53 }
+			color:wall { 238,238,238 }
 			color:water { 140,200,200 }
 		}
 		color<>:edge-overlay-colors {
@@ -86,6 +89,7 @@
 			color:town { 138,134,122 }
 			color:forest { 125,150,72 }
 			color:slope { 160,160,160 }
+			color:wall { 0,0,0,0 }
 			color:water { 140,200,200 }
 		}
 		color<>:path-colors {
@@ -140,6 +144,7 @@
 			color:town { 115,112,103 }
 			color:forest { 121,130,41 }
 			color:slope { 188,126,53 }
+			color:wall { 238,238,238 }
 			color:water { 91,138,192 }
 		}
 		color<>:edge-overlay-colors {
@@ -147,6 +152,7 @@
 			color:town { 138,134,122 }
 			color:forest { 125,150,72 }
 			color:slope { 121,130,41 }
+			color:wall { 0,0,0,0 }
 			color:water { 91,138,192 }
 		}
 		color<>:path-colors {
@@ -201,6 +207,7 @@
 			color:town { 115,112,103 }
 			color:forest { 150,153,73 }
 			color:slope { 188,126,53 }
+			color:wall { 238,238,238 }
 			color:water { 43,122,119 }
 		}
 		color<>:edge-overlay-colors {
@@ -208,6 +215,7 @@
 			color:town { 138,134,122 }
 			color:forest { 165,175,90 }
 			color:slope { 169,150,71 }
+			color:wall { 0,0,0,0 }
 			color:water { 43,122,119 }
 		}
 		color<>:path-colors {

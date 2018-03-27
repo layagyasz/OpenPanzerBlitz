@@ -55,6 +55,7 @@ namespace PanzerBlitz
 			_EditPane.OnAddMapRegion += HandleStartAddMapRegion;
 			_EditPane.OnDeleteMapRegion += HandleDeleteMapRegion;
 			_EditPane.OnMapRegionSelected += (sender, e) => HandleRegionChanged(e.Value, EventArgs.Empty);
+			_EditPane.OnElevationTransitionChanged += HandleElevationTransitionChanged;
 		}
 
 		void Highlight(IEnumerable<Tuple<Tile, Color>> Highlight)
@@ -104,6 +105,14 @@ namespace PanzerBlitz
 
 			var region = (MapRegion)Sender;
 			Highlight(region.Tiles.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLOR)));
+		}
+
+		void HandleElevationTransitionChanged(object Sender, EventArgs E)
+		{
+			Highlight(
+				_EditScreen.MapView.Map.TilesEnumerable
+					.Where(i => i.Configuration.ElevationTransition)
+					.Select(i => new Tuple<Tile, Color>(i, HIGHLIGHT_COLOR)));
 		}
 
 		void HandleTileClick(object Sender, MouseEventArgs E)

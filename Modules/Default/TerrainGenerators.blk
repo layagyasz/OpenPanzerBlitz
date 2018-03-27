@@ -1,0 +1,75 @@
+﻿terrain-generator-configuration<>:terrain-generators {
+	terrain-generator-configuration:default {
+		lattice-noise-settings<>:functions {
+			lattice-noise-settings:elevation-noise {
+				lattice-noise-settings:frequency {
+					constant:frequency { .1 }
+					double:bias { .15 }
+					double:factor { .1 }
+				}
+				constant:persistence { .5 }
+			}
+		}
+		feature-generator:elevation-generator {
+			!var-generator:generator { functions.elevation-noise }
+			lattice-noise-settings:threshold-generator {
+				constant:frequency { .1 }
+				double:factor { .1 }
+				double:bias { .63 }
+			}
+		}
+		feature-generator:water-generator {
+			lattice-noise-settings:generator {
+				constant:frequency { .1 }
+				double:factor { .1 }
+				double:bias { .3 }
+			}
+			!var:threshold-generator { functions.elevation-noise }
+		}
+		feature-generator:swamp-generator {
+			lattice-noise-settings:generator {
+				constant:frequency { .1 }
+				double:factor { .3 }
+				double:bias { .35 }
+			}
+			lattice-noise-settings:threshold-generator {
+				lattice-noise-settings:frequency {
+					constant:frequency { .1 }
+					double:bias { .125 }
+					double:factor { .1 }
+				}
+				constant:persistence { .5 }
+			}
+		}
+		feature-generator:forest-generator {
+			lattice-noise-settings:generator {
+				lattice-noise-settings:frequency {
+					constant:frequency { .1 }
+					double:bias { .375 }
+					double:factor { .25 }
+				}
+				constant:persistence { .5 }
+			}
+			lattice-noise-settings:threshold-generator {
+				constant:frequency { .15 }
+				double:factor { .1 }
+				double:bias { .6 }
+			}
+		}
+		feature-generator:town-generator {
+			lattice-noise-settings:generator {
+				lattice-noise-settings:frequency {
+					constant:frequency { .1 }
+					double:bias { .375 }
+					double:factor { .25 }
+				}
+				constant:persistence { .5 }
+			}
+			lattice-noise-settings:threshold-generator {
+				constant:frequency { .1 }
+				double:factor { .2 }
+				double:bias { .72 }
+			}
+		}
+	}
+}

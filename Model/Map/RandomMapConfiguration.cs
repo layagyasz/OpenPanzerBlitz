@@ -35,11 +35,12 @@ namespace PanzerBlitz
 			var map = new Map(_Width, _Height, Environment, IdGenerator);
 
 			var cache = new Dictionary<FunctionFactory, Func<double, double, double>>();
-			var elevationGenerator = _Configuration.ElevationGenerator.GetFeatureGenerator(_Random, cache);
-			var waterGenerator = _Configuration.WaterGenerator.GetFeatureGenerator(_Random, cache);
-			var swampGenerator = _Configuration.SwampGenerator.GetFeatureGenerator(_Random, cache);
-			var forestGenerator = _Configuration.ForestGenerator.GetFeatureGenerator(_Random, cache);
-			var townGenerator = _Configuration.TownGenerator.GetFeatureGenerator(_Random, cache);
+			var elevationGenerator =
+				_Configuration.TerrainGenerator.ElevationGenerator.GetFeatureGenerator(_Random, cache);
+			var waterGenerator = _Configuration.TerrainGenerator.WaterGenerator.GetFeatureGenerator(_Random, cache);
+			var swampGenerator = _Configuration.TerrainGenerator.SwampGenerator.GetFeatureGenerator(_Random, cache);
+			var forestGenerator = _Configuration.TerrainGenerator.ForestGenerator.GetFeatureGenerator(_Random, cache);
+			var townGenerator = _Configuration.TerrainGenerator.TownGenerator.GetFeatureGenerator(_Random, cache);
 
 			foreach (Tile t in map.TilesEnumerable)
 			{

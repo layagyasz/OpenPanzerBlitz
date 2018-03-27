@@ -86,6 +86,9 @@
 		bool:elevated { true }
 		bool:loose { true }
 	}
+	tile-component-rules:edge-wall {
+		bool:ledge { true }
+	}
 	tile-component-rules:edge-water {
 		bool:water { true }
 	}

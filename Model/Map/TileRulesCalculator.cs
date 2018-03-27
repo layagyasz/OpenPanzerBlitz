@@ -218,6 +218,7 @@ namespace PanzerBlitz
 				cost += MovementRules.Depressed.GetMoveCost(Adjacent, UnitMoved);
 			if (TileRules.Elevated && !Road) cost += MovementRules.Sloped.GetMoveCost(Adjacent, UnitMoved);
 			if (TileRules.Frozen && !Road) cost += MovementRules.Frozen.GetMoveCost(Adjacent, UnitMoved);
+			if (TileRules.Ledge && !Road) cost += MovementRules.Ledge.GetMoveCost(Adjacent, UnitMoved);
 			if (TileRules.Loose && !Road) cost += MovementRules.Loose.GetMoveCost(Adjacent, UnitMoved);
 			if (TileRules.Roaded && UseRoad) cost += MovementRules.Roaded.GetMoveCost(Adjacent, UnitMoved);
 			if (TileRules.Rough && !Road) cost += MovementRules.Rough.GetMoveCost(Adjacent, UnitMoved);

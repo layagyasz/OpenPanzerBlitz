@@ -1,11 +1,13 @@
 ﻿unit-movement-rules<>:unit-movement-rules {
 	unit-movement-rules:default-non-vehicle { 
+		movement-rule:ledge { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:water { impassable }
 	}
 	unit-movement-rules:default-vehicle {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:sloped { 2 }
 		movement-rule:swamp { impassable }
@@ -15,6 +17,7 @@
 	unit-movement-rules:amphibious-transport {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:sloped { 2 }
 		movement-rule:swamp { 7 }
@@ -23,6 +26,7 @@
 	unit-movement-rules:amphibious-vehicle {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:sloped { 2 }
 		movement-rule:swamp { hard-block }
@@ -31,6 +35,7 @@
 	unit-movement-rules:truck {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:loose { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:rough { 1 }
@@ -41,6 +46,7 @@
 	unit-movement-rules:wagon {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:loose { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:sloped { 2 }
@@ -50,6 +56,7 @@
 	unit-movement-rules:bicycle {
 		movement-rule:dense-edge { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:loose { impassable }
 		movement-rule:roaded { -.5 }
 		movement-rule:rough { 1 }
@@ -62,6 +69,7 @@
 		movement-rule:dense-edge { impassable }
 		movement-rule:depressed { impassable }
 		movement-rule:downhill { -2 }
+		movement-rule:ledge { impassable }
 		movement-rule:rough { 1 }
 		movement-rule:sloped { 4 }
 		movement-rule:swamp { impassable }
@@ -72,6 +80,7 @@
 	}
 	unit-movement-rules:ski {
 		movement-rule:downhill { -1 }
+		movement-rule:ledge { impassable }
 		movement-rule:sloped { 1 }
 		movement-rule:water { impassable }
 
@@ -82,6 +91,7 @@
 		movement-rule:dense-edge { impassable }
 		movement-rule:depressed { impassable }
 		movement-rule:frozen { impassable }
+		movement-rule:ledge { impassable }
 		movement-rule:sloped { 2 }
 		movement-rule:swamp { impassable }
 		movement-rule:water { impassable }

@@ -14,6 +14,7 @@ namespace PanzerBlitz
 		public EventHandler OnAddMapRegion;
 		public EventHandler<ValuedEventArgs<MapRegion>> OnDeleteMapRegion;
 		public EventHandler<ValuedEventArgs<MapRegion>> OnMapRegionSelected;
+		public EventHandler OnElevationTransitionChanged;
 
 		readonly Select<Pod> _ModeSelect = new Select<Pod>("select");
 
@@ -156,6 +157,7 @@ namespace PanzerBlitz
 			if (OnDeleteMapRegion != null)
 				OnDeleteMapRegion(this, new ValuedEventArgs<MapRegion>(_MapRegionSelect.Value.Value));
 		}
+
 		void HandleSelectMapRegion(object Sender, ValuedEventArgs<StandardItem<MapRegion>> E)
 		{
 			if (OnMapRegionSelected != null) OnMapRegionSelected(this, new ValuedEventArgs<MapRegion>(E.Value.Value));
@@ -192,6 +194,11 @@ namespace PanzerBlitz
 			if (_ModeSelect.Value.Value == _EdgePage)
 			{
 				for (int i = 0; i < 6; ++i) Tile.SetEdge(i, _EdgeSelect.Value.Value);
+			}
+			else if (_ModeSelect.Value.Value == _ElevationPage)
+			{
+				Tile.Configuration.SetElevationTransition(!Tile.Configuration.ElevationTransition);
+				if (OnElevationTransitionChanged != null) OnElevationTransitionChanged(this, EventArgs.Empty);
 			}
 		}
 

@@ -179,21 +179,31 @@ namespace PanzerBlitz
 		{
 			if (LineOfSight[0].Rules.SubTieredElevation
 				== LineOfSight[LineOfSight.Length - 1].Rules.SubTieredElevation)
-			{
-				return LineOfSight.Any(
-					i => i.Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation);
-			}
+				return CheckElevation(LineOfSight, LineOfSight.Length);
 
 			if (LineOfSight.Length == 3
 				&& LineOfSight[0].Configuration.Elevation == LineOfSight[1].Configuration.Elevation) return false;
-			for (int i = 0; i < Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1); ++i)
-			{
-				if (LineOfSight[i].Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation)
-					return true;
-			}
+			if (CheckElevation(LineOfSight, Math.Min(LineOfSight.Length - 1, (LineOfSight.Length - 1) / 2 + 1)))
+				return true;
 			return LineOfSight.Any(
 				i => i.Rules.SubTieredElevation > LineOfSight[0].Rules.SubTieredElevation
 				&& i.Rules.SubTieredElevation > LineOfSight[LineOfSight.Length - 1].Rules.SubTieredElevation);
+		}
+
+		static bool CheckElevation(Tile[] LineOfSight, int End)
+		{
+			int elevation = LineOfSight[0].Rules.SubTieredElevation;
+			for (int i = 0; i < End; ++i)
+			{
+				if (LineOfSight[i].Configuration.ElevationTransition)
+				{
+					if (i < LineOfSight.Length - 1 && LineOfSight[i].Rules.SubTieredElevation == elevation)
+						elevation = LineOfSight[i + 1].Rules.SubTieredElevation;
+					else elevation = LineOfSight[i].Rules.SubTieredElevation;
+				}
+				if (LineOfSight[i].Rules.SubTieredElevation > elevation) return true;
+			}
+			return false;
 		}
 	}
 }

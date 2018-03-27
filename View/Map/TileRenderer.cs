@@ -281,8 +281,11 @@ namespace PanzerBlitz
 			}
 
 			// IsHilltop.
-			var isHilltop = Tile.NeighborTiles.Any(i => i != null
-													&& i.Configuration.Elevation < Tile.Configuration.Elevation);
+			var isHilltop = !Tile.Configuration.ElevationTransition
+								 && Tile.NeighborTiles.Any(
+									i => i != null
+									   && i.Configuration.Elevation < Tile.Configuration.Elevation
+									   && !i.Configuration.ElevationTransition);
 
 			for (int i = 0; i < Tile.Bounds.Length; ++i)
 			{

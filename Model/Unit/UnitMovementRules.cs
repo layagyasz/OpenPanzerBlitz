@@ -10,6 +10,7 @@ namespace PanzerBlitz
 			DEPRESSED,
 			DOWNHILL,
 			FROZEN,
+			LEDGE,
 			LOOSE,
 			ROADED,
 			ROUGH,
@@ -28,6 +29,7 @@ namespace PanzerBlitz
 		public readonly MovementRule Depressed;
 		public readonly MovementRule Downhill;
 		public readonly MovementRule Frozen;
+		public readonly MovementRule Ledge;
 		public readonly MovementRule Loose;
 		public readonly MovementRule Roaded;
 		public readonly MovementRule Rough;
@@ -49,6 +51,7 @@ namespace PanzerBlitz
 			Depressed = (MovementRule)(attributes[(int)Attribute.DEPRESSED] ?? default(MovementRule));
 			Downhill = (MovementRule)(attributes[(int)Attribute.DOWNHILL] ?? default(MovementRule));
 			Frozen = (MovementRule)(attributes[(int)Attribute.FROZEN] ?? default(MovementRule));
+			Ledge = (MovementRule)(attributes[(int)Attribute.LEDGE] ?? default(MovementRule));
 			Loose = (MovementRule)(attributes[(int)Attribute.LOOSE] ?? default(MovementRule));
 			Roaded = (MovementRule)(attributes[(int)Attribute.ROADED] ?? default(MovementRule));
 			Rough = (MovementRule)(attributes[(int)Attribute.ROUGH] ?? default(MovementRule));
@@ -69,6 +72,7 @@ namespace PanzerBlitz
 			Depressed = new MovementRule(Stream);
 			Downhill = new MovementRule(Stream);
 			Frozen = new MovementRule(Stream);
+			Ledge = new MovementRule(Stream);
 			Loose = new MovementRule(Stream);
 			Roaded = new MovementRule(Stream);
 			Rough = new MovementRule(Stream);
@@ -89,6 +93,7 @@ namespace PanzerBlitz
 			Stream.Write(Depressed);
 			Stream.Write(Downhill);
 			Stream.Write(Frozen);
+			Stream.Write(Ledge);
 			Stream.Write(Loose);
 			Stream.Write(Roaded);
 			Stream.Write(Rough);

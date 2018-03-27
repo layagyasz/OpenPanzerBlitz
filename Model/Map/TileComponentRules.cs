@@ -15,6 +15,7 @@ namespace PanzerBlitz
 			DEPRESSED,
 			ELEVATED,
 			FROZEN,
+			LEDGE,
 			LOOSE,
 			ROADED,
 			ROUGH,
@@ -39,6 +40,7 @@ namespace PanzerBlitz
 		public readonly bool Depressed;
 		public readonly bool Elevated;
 		public readonly bool Frozen;
+		public readonly bool Ledge;
 		public readonly bool Loose;
 		public readonly bool Roaded;
 		public readonly bool Rough;
@@ -63,6 +65,7 @@ namespace PanzerBlitz
 			bool Depressed,
 			bool Elevated,
 			bool Frozen,
+			bool Ledge,
 			bool Loose,
 			bool Roaded,
 			bool Rough,
@@ -86,6 +89,7 @@ namespace PanzerBlitz
 			this.Depressed = Depressed;
 			this.Elevated = Elevated;
 			this.Frozen = Frozen;
+			this.Ledge = Ledge;
 			this.Loose = Loose;
 			this.Roaded = Roaded;
 			this.Rough = Rough;
@@ -108,6 +112,7 @@ namespace PanzerBlitz
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
 
+				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
@@ -140,6 +145,7 @@ namespace PanzerBlitz
 			Depressed = (bool)(attributes[(int)Attribute.DEPRESSED] ?? false);
 			Elevated = (bool)(attributes[(int)Attribute.ELEVATED] ?? false);
 			Frozen = (bool)(attributes[(int)Attribute.FROZEN] ?? false);
+			Ledge = (bool)(attributes[(int)Attribute.LEDGE] ?? false);
 			Loose = (bool)(attributes[(int)Attribute.LOOSE] ?? false);
 			Roaded = (bool)(attributes[(int)Attribute.ROADED] ?? false);
 			Rough = (bool)(attributes[(int)Attribute.ROUGH] ?? false);
@@ -166,6 +172,7 @@ namespace PanzerBlitz
 			Stream.Write(Depressed);
 			Stream.Write(Elevated);
 			Stream.Write(Frozen);
+			Stream.Write(Ledge);
 			Stream.Write(Loose);
 			Stream.Write(Roaded);
 			Stream.Write(Rough);

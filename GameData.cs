@@ -27,6 +27,7 @@ namespace PanzerBlitz
 			ENVIRONMENTS,
 			TILE_RENDERERS,
 			NAME_GENERATORS,
+			TERRAIN_GENERATORS,
 			MATCH_SETTINGS
 		};
 
@@ -47,6 +48,7 @@ namespace PanzerBlitz
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
 		public static Dictionary<string, MarkovGenerator<char>> NameGenerators;
+		public static Dictionary<string, TerrainGeneratorConfiguration> TerrainGenerators;
 		public static Dictionary<string, MatchSetting> MatchSettings;
 
 		public static void Load(string Module)
@@ -74,6 +76,7 @@ namespace PanzerBlitz
 				ParseBlock.FromFile(path + "/Environments.blk"),
 				ParseBlock.FromFile(path + "/TerrainRenderers.blk"),
 				ParseBlock.FromFile(path + "/NameGenerators.blk"),
+				ParseBlock.FromFile(path + "/TerrainGenerators.blk"),
 				ParseBlock.FromFile(path + "/MatchSettings.blk"),
 				new ParseBlock(
 					"unit-configuration<>",
@@ -155,6 +158,7 @@ namespace PanzerBlitz
 				"unit-render-details", i => new UnitRenderDetails(i, Path + "/UnitSprites/"));
 			Block.AddParser<TileRenderer>();
 			Block.AddParser<MapGeneratorConfiguration>();
+			Block.AddParser<TerrainGeneratorConfiguration>();
 			Block.AddParser<MatchSetting>();
 			Block.AddParser<MarkovGenerator<char>>(
 				"name-generator", i => FileUtils.LoadLanguage(Path + "/NameGenerators/" + i.String));
@@ -271,7 +275,12 @@ namespace PanzerBlitz
 			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
 			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
 			NameGenerators = Stream.ReadEnumerable(
-				i => new KeyValuePair<string, MarkovGenerator<char>>(Stream.ReadString(), new MarkovGenerator<char>(i)))
+				i => new KeyValuePair<string, MarkovGenerator<char>>(
+					Stream.ReadString(), Stream.ReadObject(j => new MarkovGenerator<char>(j))))
+								   .ToDictionary(i => i.Key, i => i.Value);
+			TerrainGenerators = Stream.ReadEnumerable(
+				i => new KeyValuePair<string, TerrainGeneratorConfiguration>(
+					Stream.ReadString(), Stream.ReadObject(j => new TerrainGeneratorConfiguration(j))))
 								   .ToDictionary(i => i.Key, i => i.Value);
 			MatchSettings = Stream.ReadEnumerable(i => new MatchSetting(i)).ToDictionary(i => i.UniqueKey);
 			Wreckage = UnitConfigurations["wreckage"];
@@ -297,7 +306,8 @@ namespace PanzerBlitz
 			Stream.Write(UnitConfigurationLinks);
 			Stream.Write(Scenarios);
 			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
-			Stream.Write(NameGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value); });
+			Stream.Write(NameGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value, false, true); });
+			Stream.Write(TerrainGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value, false, true); });
 			Stream.Write(MatchSettings, i => Stream.Write(i.Value));
 		}
 	}
