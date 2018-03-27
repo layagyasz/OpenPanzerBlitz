@@ -1,0 +1,164 @@
+﻿scenario:_ {
+	string:name { Remagen Bridge }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 8 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:american {
+			!faction:faction { factions.american }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:bridge-controlled {
+						bool:friendly { true }
+						tile-matches-all:matcher {
+							tile-has-bridge:_ { }
+							tile-not:_ {
+								tile-has-unit:matcher {
+									unit-has-class:matcher {
+										unit-class:unit-class { block }
+									}
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.bridge-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 0,8 4,5 7,5 8,8 11,8 11,33 0,33 }
+						}
+						tile-distance-from:_ {
+							bool:atleast { true }
+							byte:distance { 3 }
+							tile-in-region:matcher {
+								string:region-name { artain }
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { 9th Armored Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.armored-platoon-american }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-american }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-10 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-36 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-24 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 5 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,8 4,5 7,5 8,8 11,8 11,0 0,0 }
+					}
+					unit-group:unit-group {
+						string:name { German Garrison }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.security-platoon-german-west
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west 
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-bridge:matcher { }
+					unit-group:unit-group {
+						string:name { Bridge Block }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

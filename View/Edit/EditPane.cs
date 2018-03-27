@@ -179,7 +179,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _ElevationPage)
 			{
-				Tile.Configuration.SetElevation(Tile.Configuration.Elevation + 1);
+				Tile.Configuration.SetElevation((byte)(Tile.Configuration.Elevation + 1));
 			}
 			else if (_ModeSelect.Value.Value == _MapRegionPage)
 			{
@@ -213,7 +213,7 @@ namespace PanzerBlitz
 			}
 			else if (_ModeSelect.Value.Value == _ElevationPage)
 			{
-				Tile.Configuration.SetElevation(Tile.Configuration.Elevation - 1);
+				Tile.Configuration.SetElevation((byte)(Tile.Configuration.Elevation - 1));
 			}
 			else if (_ModeSelect.Value.Value == _MapRegionPage)
 			{

@@ -131,8 +131,10 @@ namespace PanzerBlitz
 			if (Tile.Configuration.TileBase == TileBase.SLOPE)
 				RenderTile(
 					Tile,
-					(i, j) => j != null && (j.Configuration.TileBase == TileBase.SLOPE
-											|| j.Configuration.Elevation > Tile.Configuration.Elevation),
+					(i, j) => j != null
+						&& !j.Configuration.ElevationTransition
+						&& (j.Configuration.TileBase == TileBase.SLOPE
+							|| j.Configuration.Elevation > Tile.Configuration.Elevation),
 					vertices,
 					TopColor(Tile.Configuration.TileBase));
 			// Swamp.

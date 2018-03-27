@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -100,6 +101,28 @@ namespace PanzerBlitz
 				}
 			}
 			return (stringBuilder.ToString().Normalize(NormalizationForm.FormC));
+		}
+
+		public static void Remap()
+		{
+			foreach (string file in Directory.EnumerateFiles("./Maps/"))
+			{
+				Map map;
+				using (FileStream stream = new FileStream(file, FileMode.Open))
+				{
+					using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))
+					{
+						map = new Map(new SerializationInputStream(compressionStream), null, new IdGenerator());
+					}
+				}
+				using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate))
+				{
+					using (GZipStream compressionStream = new GZipStream(stream, CompressionLevel.Optimal))
+					{
+						map.Serialize(new SerializationOutputStream(compressionStream));
+					}
+				}
+			}
 		}
 	}
 }

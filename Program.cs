@@ -20,6 +20,10 @@ namespace PanzerBlitz
 			{
 				FileUtils.MungeLanguage(args[1], args[2]);
 			}
+			if (args.Length == 1 && args[0] == "remap")
+			{
+				FileUtils.Remap();
+			}
 
 			string module = "Default";
 			string modulePath = "./Modules/" + module;

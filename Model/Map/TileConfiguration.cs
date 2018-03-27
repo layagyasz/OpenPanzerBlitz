@@ -9,25 +9,12 @@ namespace PanzerBlitz
 	{
 		public EventHandler<EventArgs> OnReconfigure;
 
-		int _Elevation;
-		TileBase _TileBase;
 		TileEdge[] _Edges = new TileEdge[6];
 		TilePathOverlay[] _PathOverlays = new TilePathOverlay[6];
 
-		public int Elevation
-		{
-			get
-			{
-				return _Elevation;
-			}
-		}
-		public TileBase TileBase
-		{
-			get
-			{
-				return _TileBase;
-			}
-		}
+		public byte Elevation { get; private set; }
+		public bool ElevationTransition { get; private set; }
+		public TileBase TileBase { get; private set; } = TileBase.CLEAR;
 		public IEnumerable<TilePathOverlay> PathOverlays
 		{
 			get
@@ -44,15 +31,12 @@ namespace PanzerBlitz
 			}
 		}
 
-		public TileConfiguration()
-		{
-			_TileBase = TileBase.CLEAR;
-		}
+		public TileConfiguration() { }
 
 		public TileConfiguration(TileConfiguration Copy, bool Invert = false)
 		{
-			_Elevation = Copy._Elevation;
-			_TileBase = Copy._TileBase;
+			Elevation = Copy.Elevation;
+			TileBase = Copy.TileBase;
 
 			if (Invert)
 			{
@@ -71,24 +55,26 @@ namespace PanzerBlitz
 
 		public TileConfiguration(SerializationInputStream Stream)
 		{
-			_Elevation = Stream.ReadByte();
-			_TileBase = (TileBase)Stream.ReadByte();
+			Elevation = Stream.ReadByte();
+			ElevationTransition = Stream.ReadBoolean();
+			TileBase = (TileBase)Stream.ReadByte();
 			_Edges = Stream.ReadArray(i => (TileEdge)Stream.ReadByte());
 			_PathOverlays = Stream.ReadArray(i => (TilePathOverlay)Stream.ReadByte());
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write((byte)_Elevation);
-			Stream.Write((byte)_TileBase);
+			Stream.Write(Elevation);
+			Stream.Write(ElevationTransition);
+			Stream.Write((byte)TileBase);
 			Stream.Write(_Edges, i => Stream.Write((byte)i));
 			Stream.Write(_PathOverlays, i => Stream.Write((byte)i));
 		}
 
 		public void Merge(TileConfiguration Configuration)
 		{
-			if (_TileBase == TileBase.CLEAR) _TileBase = Configuration._TileBase;
-			_Elevation = Math.Max(_Elevation, Configuration._Elevation);
+			if (TileBase == TileBase.CLEAR) TileBase = Configuration.TileBase;
+			Elevation = Math.Max(Elevation, Configuration.Elevation);
 			for (int i = 0; i < 6; ++i)
 			{
 				if (_PathOverlays[i] == TilePathOverlay.NONE) _PathOverlays[i] = Configuration._PathOverlays[i];
@@ -103,15 +89,21 @@ namespace PanzerBlitz
 			TriggerReconfigure();
 		}
 
-		public void SetElevation(int Elevation)
+		public void SetElevation(byte Elevation)
 		{
-			_Elevation = Elevation;
+			this.Elevation = Elevation;
+			TriggerReconfigure();
+		}
+
+		public void SetElevationTransition(bool ElevationTransition)
+		{
+			this.ElevationTransition = ElevationTransition;
 			TriggerReconfigure();
 		}
 
 		public void SetTileBase(TileBase TileBase)
 		{
-			_TileBase = TileBase;
+			this.TileBase = TileBase;
 			TriggerReconfigure();
 		}
 
