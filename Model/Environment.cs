@@ -14,7 +14,7 @@ namespace PanzerBlitz
 		public readonly TileRuleSet TileRuleSet;
 		public readonly float MovementMultiplier;
 
-		readonly bool[] _RestrictRoadMovement = new bool[Enum.GetValues(typeof(UnitClass)).Length];
+		readonly bool[] _RestrictRoadMovement;
 
 		public Environment(
 			string UniqueKey,
@@ -26,6 +26,7 @@ namespace PanzerBlitz
 			this.TileRuleSet = TileRuleSet;
 			this.MovementMultiplier = MovementMultiplier;
 
+			_RestrictRoadMovement = new bool[Enum.GetValues(typeof(UnitClass)).Length];
 			foreach (UnitClass unitClass in RoadMovementRestricted) _RestrictRoadMovement[(int)unitClass] = true;
 		}
 
@@ -45,6 +46,7 @@ namespace PanzerBlitz
 			TileRuleSet = (TileRuleSet)attributes[(int)Attribute.TILE_RULE_SET];
 			MovementMultiplier = (float)(attributes[(int)Attribute.MOVEMENT_MULTIPLIER] ?? 1f);
 
+			_RestrictRoadMovement = new bool[Enum.GetValues(typeof(UnitClass)).Length];
 			foreach (UnitClass unitClass in
 					 (IEnumerable<UnitClass>)(attributes[(int)Attribute.RESTRICT_ROAD_MOVEMENT]
 											  ?? Enumerable.Empty<UnitClass>()))

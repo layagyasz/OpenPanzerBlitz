@@ -128,6 +128,7 @@ namespace PanzerBlitz
 			Block.AddParser<UnitConfiguration>();
 			Block.AddParser<UnitConfigurationLink>();
 			Block.AddParser<Direction>();
+			Block.AddParser<TerrainAttribute>();
 			Block.AddParser<TileComponentRules>();
 			Block.AddParser<TileRuleSet>();
 			Block.AddParser<Environment>();

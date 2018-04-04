@@ -5,6 +5,13 @@ namespace PanzerBlitz
 {
 	public class TileRulesCalculator
 	{
+		static readonly TerrainAttribute[] LEAVING_DEPRESSED_ATTRIBUTES =
+		{
+			TerrainAttribute.SLOPED,
+			TerrainAttribute.ROUGH,
+			TerrainAttribute.UP_HILL
+		};
+
 		public readonly Tile Tile;
 
 		public bool MustAttackAllUnits { get; private set; }
@@ -41,9 +48,10 @@ namespace PanzerBlitz
 			TreatUnitsAsArmored = Tile.GetBaseRules().TreatUnitsAsArmored
 									   || Tile.GetEdgeRules().Any(i => i != null && i.TreatUnitsAsArmored)
 									   || Tile.GetPathOverlayRules().Any(i => i != null && i.TreatUnitsAsArmored);
-			Depressed = Tile.GetBaseRules().Depressed
-							 || Tile.GetEdgeRules().Any(i => i != null && i.Depressed)
-							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Depressed);
+			Depressed = Tile.GetBaseRules().HasAttribute(TerrainAttribute.DEPRESSED)
+							 || Tile.GetEdgeRules().Any(i => i != null && i.HasAttribute(TerrainAttribute.DEPRESSED))
+							 || Tile.GetPathOverlayRules().Any(
+								i => i != null && i.HasAttribute(TerrainAttribute.DEPRESSED));
 			DepressedTransition = Tile.GetBaseRules().DepressedTransition
 									   || Tile.GetEdgeRules().Any(i => i != null && i.DepressedTransition)
 									   || Tile.GetPathOverlayRules().Any(i => i != null && i.DepressedTransition);
@@ -53,14 +61,20 @@ namespace PanzerBlitz
 			LowProfileConcealing = Tile.GetBaseRules().LowProfileConcealing
 							  || Tile.GetEdgeRules().Any(i => i != null && i.LowProfileConcealing)
 							  || Tile.GetPathOverlayRules().Any(i => i != null && i.LowProfileConcealing);
-			Watery = Tile.GetBaseRules().Water
-						|| Tile.GetBaseRules().Swamp
-						|| Tile.GetEdgeRules().All(i => i != null && (i.Water || i.Swamp))
-					 	|| Tile.GetPathOverlayRules().Any(i => i != null && (i.Water || i.Swamp));
+			Watery = Tile.GetBaseRules().HasAttribute(TerrainAttribute.WATER)
+					 	|| Tile.GetBaseRules().HasAttribute(TerrainAttribute.SWAMP)
+						|| Tile.GetEdgeRules().All(
+							 i => i != null
+								 && (i.HasAttribute(TerrainAttribute.WATER) || i.HasAttribute(TerrainAttribute.SWAMP)))
+					 	|| Tile.GetPathOverlayRules().Any(
+							 i => i != null
+								 && (i.HasAttribute(TerrainAttribute.WATER) || i.HasAttribute(TerrainAttribute.SWAMP)));
 
 			var lowerPaths = Tile.GetPathOverlayRules()
 									 .Where(i => i != null)
-									 .Select(i => i.Water || i.Depressed || i.DepressedTransition)
+									 .Select(i => i.HasAttribute(TerrainAttribute.WATER)
+											 || i.HasAttribute(TerrainAttribute.DEPRESSED)
+											 || i.DepressedTransition)
 									 .ToArray();
 			int diffCount = 0;
 			for (int i = 0; i < lowerPaths.Length; ++i)
@@ -75,10 +89,14 @@ namespace PanzerBlitz
 					var edge = Tile.GetEdgeRules(i);
 					var path = Tile.GetPathOverlayRules(i);
 					if (edge == null || path == null) continue;
-					Bridged |= !path.Depressed && !path.Water && (edge.Depressed || edge.Water);
+					Bridged |= !path.HasAttribute(TerrainAttribute.DEPRESSED)
+									&& !path.HasAttribute(TerrainAttribute.WATER)
+									&& (edge.HasAttribute(TerrainAttribute.DEPRESSED)
+										|| edge.HasAttribute(TerrainAttribute.WATER));
 				}
 			}
-			Bridgeable = !Bridged && Tile.GetPathOverlayRules().Any(i => i != null && i.Depressed);
+			Bridgeable = !Bridged
+				&& Tile.GetPathOverlayRules().Any(i => i != null && i.HasAttribute(TerrainAttribute.DEPRESSED));
 
 			DieModifier =
 				Math.Max(
@@ -87,9 +105,10 @@ namespace PanzerBlitz
 						Tile.GetEdgeRules().Max(i => i == null ? 0 : i.DieModifier),
 						Tile.GetPathOverlayRules().Max(i => i == null ? 0 : i.DieModifier)));
 
-			bool elevated = Tile.GetBaseRules().Elevated
-							 || Tile.GetEdgeRules().Any(i => i != null && i.Elevated)
-							 || Tile.GetPathOverlayRules().Any(i => i != null && i.Elevated);
+			bool elevated = Tile.GetBaseRules().HasAttribute(TerrainAttribute.SLOPED)
+							 || Tile.GetEdgeRules().Any(i => i != null && i.HasAttribute(TerrainAttribute.SLOPED))
+							 || Tile.GetPathOverlayRules().Any(
+									i => i != null && i.HasAttribute(TerrainAttribute.SLOPED));
 			TieredElevation = Tile.Configuration.Elevation + (elevated ? 1 : 0);
 			SubTieredElevation = 2 * Tile.Configuration.Elevation + (elevated ? 1 : 0);
 		}
@@ -135,7 +154,7 @@ namespace PanzerBlitz
 				&& (!Unit.Configuration.IsArmored || i.Configuration.CanSupportArmored));
 
 			bool leavingDepressed = Tile.Rules.Depressed
-										&& (path == null || !path.Depressed)
+										&& (path == null || !path.HasAttribute(TerrainAttribute.DEPRESSED))
 										&& (path == null || !path.DepressedTransition)
 										&& !roaded;
 
@@ -143,13 +162,13 @@ namespace PanzerBlitz
 			var leaveCost = new MovementCost(0f);
 			if (leavingDepressed && !fromBridged)
 			{
-				leaveCost = 1 + movementRules.Sloped.GetMoveCost(adjacent, unitMoved)
-					+ movementRules.Rough.GetMoveCost(adjacent, unitMoved)
-					+ movementRules.Uphill.GetMoveCost(adjacent, unitMoved);
+				leaveCost = 1 + LEAVING_DEPRESSED_ATTRIBUTES
+					.Select(i => movementRules[i].GetMoveCost(adjacent, unitMoved))
+					.Aggregate((i, j) => i + j);
 			}
 
 			var crossCost = GetRulesMoveCost(
-				edge, movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit, true);
+				edge, movementRules, adjacent, unitMoved, roaded, useRoadMovement, Unit);
 
 			var enterCost = new MovementCost(0f);
 			if (!toBridged)
@@ -188,9 +207,9 @@ namespace PanzerBlitz
 				crossCost = new MovementCost(0f);
 			}
 			if (Tile.Rules.TieredElevation < To.Rules.TieredElevation)
-				enterCost += movementRules.Uphill.GetMoveCost(adjacent, unitMoved);
+				enterCost += movementRules[TerrainAttribute.UP_HILL].GetMoveCost(adjacent, unitMoved);
 			if (Tile.Configuration.Elevation > To.Configuration.Elevation)
-				enterCost += movementRules.Downhill.GetMoveCost(adjacent, unitMoved);
+				enterCost += movementRules[TerrainAttribute.DOWN_HILL].GetMoveCost(adjacent, unitMoved);
 
 			float multiplier = Unit.Passenger != null && Unit.Passenger.Configuration.IsOversizedPassenger
 								   ? Unit.Configuration.OversizedPassengerMovementMultiplier : 1;
@@ -205,27 +224,18 @@ namespace PanzerBlitz
 			bool UnitMoved,
 			bool Road,
 			bool UseRoad,
-			Unit Unit,
-			bool CrossesEdge = false)
+			Unit Unit)
 		{
 			if (TileRules == null) return new MovementCost(0f);
 
-			var cost = new MovementCost(0f);
+			var cost = TileRules.GetAttributes()
+							 	.Where(i => i == TerrainAttribute.ROADED ? UseRoad : !Road)
+					 			.Select(i => MovementRules[i].GetMoveCost(Adjacent, UnitMoved))
+								.Aggregate((i, j) => i + j);
 
-			if (TileRules.DenseEdge && !Road && CrossesEdge)
-				cost += MovementRules.DenseEdge.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Depressed && !Road)
-				cost += MovementRules.Depressed.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Elevated && !Road) cost += MovementRules.Sloped.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Frozen && !Road) cost += MovementRules.Frozen.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Ledge && !Road) cost += MovementRules.Ledge.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Loose && !Road) cost += MovementRules.Loose.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Roaded && UseRoad) cost += MovementRules.Roaded.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Rough && !Road) cost += MovementRules.Rough.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Swamp && !Road) cost += MovementRules.Swamp.GetMoveCost(Adjacent, UnitMoved);
-			if (TileRules.Water && !Road) cost += MovementRules.Water.GetMoveCost(Adjacent, UnitMoved);
-
-			if (!Unit.Configuration.CanCarryInWater && (TileRules.Water || TileRules.Swamp) && !Road)
+			if (!Unit.Configuration.CanCarryInWater
+				&& !Road
+				&& (TileRules.HasAttribute(TerrainAttribute.WATER) || TileRules.HasAttribute(TerrainAttribute.SWAMP)))
 				cost = new MovementCost(OrderInvalidReason.UNIT_NO_CARRY_IN_WATER);
 
 			if (!TileRules.OverrideBaseMovement && cost.UnableReason == OrderInvalidReason.NONE)

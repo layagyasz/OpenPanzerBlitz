@@ -370,6 +370,7 @@
     <Compile Include="Model\Map\Generation\FeatureGenerator.cs" />
     <Compile Include="Model\Map\Generation\MapGeneratorConfiguration.cs" />
     <Compile Include="Model\Map\Generation\TerrainGeneratorConfig.cs" />
+    <Compile Include="Model\Map\TerrainAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

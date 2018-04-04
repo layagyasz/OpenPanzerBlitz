@@ -1,119 +1,166 @@
 ﻿tile-component-rules<>:tile-component-rules {
 	tile-component-rules:base-clear {
+		terrain-attribute[]:movement-attributes { }
 	}
 	tile-component-rules:winter-base-clear {
-		bool:loose { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:base-swamp {
 		int:die-modifier { 1 }
-		bool:swamp { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { swamp }
+		}
 	}
 	tile-component-rules:winter-base-swamp {
 		int:die-modifier { -1 }
-		bool:frozen { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { frozen }
+		}
 	}
 	tile-component-rules:base-sand {
-		bool:loose { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:base-slope {
-		bool:elevated { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { sloped }
+		}
 	}
 	tile-component-rules:winter-base-slope {
-		bool:elevated { true }
-		bool:loose { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { sloped }
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:base-village {
 		int:die-modifier { 1 }
-		bool:roaded { true }
 		bool:treat-units-as-armored { true }
 		bool:must-attack-all-units { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:base-fort {
 		int:die-modifier { 1 }
-		bool:roaded { true }
 		bool:treat-units-as-armored { true }
 		bool:must-attack-all-units { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:base-wheat-field {
-		bool:rough { true }
 		bool:low-profile-concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { rough }
+		}
 	}
 	tile-component-rules:base-copse {
 		int:die-modifier { 1 }
-		bool:rough { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { rough }
+		}
 	}
 	tile-component-rules:winter-base-copse {
 		int:die-modifier { 1 }
-		bool:loose { true }
-		bool:rough { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { loose }
+			terrain-attribute:_ { roaded }
+		}
 	}
 
 	tile-component-rules:edge-town {
 		int:die-modifier { 1 }
-		bool:roaded { true }
 		bool:treat-units-as-armored { true }
 		bool:must-attack-all-units { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:edge-forest {
 		int:die-modifier { 1 }
-		bool:dense-edge { true }
-		bool:rough { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { dense }
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:winter-edge-forest {
 		int:die-modifier { 1 }
-		bool:dense-edge { true }
-		bool:loose { true }
-		bool:rough { true }
 		bool:blocks-line-of-sight { true }
 		bool:concealing { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { dense }
+			terrain-attribute:_ { loose }
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:edge-slope {
-		bool:elevated { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { sloped }
+		}
 	}
 	tile-component-rules:winter-edge-slope {
-		bool:elevated { true }
-		bool:loose { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { sloped }
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:edge-wall {
-		bool:ledge { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { ledge }
+		}
 	}
 	tile-component-rules:edge-water {
-		bool:water { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { water }
+		}
 	}
 	tile-component-rules:winter-edge-water {
 		int:die-modifier { -1 }
-		bool:frozen { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { frozen }
+		}
 	}
 
 	tile-component-rules:path-road {
-		bool:roaded { true }
 		bool:road-move { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { roaded }
+		}
 	}
 	tile-component-rules:path-stream {
-		bool:depressed { true }
 		bool:override-base-movement { false }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { depressed }
+		}
 	}
 	tile-component-rules:grassland-path-stream {
-		bool:depressed { true }
-		bool:swamp { true }
 		bool:override-base-movement { false }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { depressed }
+			terrain-attribute:_ { swamp }
+		}
 	}
 	tile-component-rules:winter-path-stream {
-		bool:depressed { true }
-		bool:loose { true }
 		bool:override-base-movement { false }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { depressed }
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:path-stream-ford {
 		bool:depressed-transition { true }
@@ -121,13 +168,17 @@
 	}
 	tile-component-rules:winter-path-stream-ford {
 		bool:depressed-transition { true }
-		bool:loose { true }
 		bool:override-base-movement { false }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { loose }
+		}
 	}
 	tile-component-rules:winter-path-dirt-road {
 		bool:road-move { true }
 	}
 	tile-component-rules:path-rail-road {
-		bool:rough { true }
+		terrain-attribute[]:movement-attributes {
+			terrain-attribute:_ { rough }
+		}
 	}
 }

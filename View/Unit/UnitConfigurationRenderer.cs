@@ -87,7 +87,11 @@ namespace PanzerBlitz
 			{
 				var moveText = new Text(
 					Object.Movement
-					+ (Object.MovementRules.Water.BlockType == BlockType.IMPASSABLE ? "" : "*"), Font, 36);
+					+ (Object.MovementRules[TerrainAttribute.WATER].BlockType == BlockType.IMPASSABLE
+					   ? ""
+					   : "*"),
+					Font,
+					36);
 				moveText.Color = Color.Black;
 				moveText.Position = SpriteSize * new Vector2f(5f / 6, 3f / 4) - GetCenter(moveText);
 				Target.Draw(moveText, r);

@@ -144,7 +144,8 @@ namespace PanzerBlitz
 					{
 						if (i < LineOfSight.Length - 2 && LineOfSight[i + 1].GetBaseRules().BlocksLineOfSight)
 							return true;
-						if (Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
+						if (Edges[i] != null
+							&& (Edges[i].BlocksLineOfSight || Edges[i].HasAttribute(TerrainAttribute.SLOPED)))
 							return true;
 					}
 				}
@@ -158,7 +159,8 @@ namespace PanzerBlitz
 					{
 						if (i < LineOfSight.Length - 2 && LineOfSight[i + 1].GetBaseRules().BlocksLineOfSight)
 							return true;
-						if (Edges[i] != null && (Edges[i].BlocksLineOfSight || Edges[i].Elevated))
+						if (Edges[i] != null
+							&& (Edges[i].BlocksLineOfSight || Edges[i].HasAttribute(TerrainAttribute.SLOPED)))
 							return true;
 					}
 				}

@@ -1,4 +1,8 @@
-﻿using Cardamom.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -11,22 +15,13 @@ namespace PanzerBlitz
 			TREAT_UNITS_AS_ARMORED,
 			MUST_ATTACK_ALL_UNITS,
 
-			DENSE_EDGE,
-			DEPRESSED,
-			ELEVATED,
-			FROZEN,
-			LEDGE,
-			LOOSE,
-			ROADED,
-			ROUGH,
-			SWAMP,
-			WATER,
-
 			OVERRIDE_BASE_MOVEMENT,
 			DEPRESSED_TRANSITION,
 			BLOCKS_LINE_OF_SIGHT,
 			CONCEALING,
-			LOW_PROFILE_CONCEALING
+			LOW_PROFILE_CONCEALING,
+
+			MOVEMENT_ATTRIBUTES
 		};
 
 		public readonly string UniqueKey;
@@ -36,22 +31,13 @@ namespace PanzerBlitz
 		public readonly bool TreatUnitsAsArmored;
 		public readonly bool MustAttackAllUnits;
 
-		public readonly bool DenseEdge;
-		public readonly bool Depressed;
-		public readonly bool Elevated;
-		public readonly bool Frozen;
-		public readonly bool Ledge;
-		public readonly bool Loose;
-		public readonly bool Roaded;
-		public readonly bool Rough;
-		public readonly bool Swamp;
-		public readonly bool Water;
-
 		public readonly bool OverrideBaseMovement;
 		public readonly bool DepressedTransition;
 		public readonly bool BlocksLineOfSight;
 		public readonly bool Concealing;
 		public readonly bool LowProfileConcealing;
+
+		bool[] _MovementAttributes;
 
 		public TileComponentRules(
 			string UniqueKey,
@@ -61,22 +47,13 @@ namespace PanzerBlitz
 			bool TreatUnitsAsArmored,
 			bool MustAttackAllUnits,
 
-			bool DenseEdge,
-			bool Depressed,
-			bool Elevated,
-			bool Frozen,
-			bool Ledge,
-			bool Loose,
-			bool Roaded,
-			bool Rough,
-			bool Swamp,
-			bool Water,
-
 			bool OverrideBaseMovement,
 			bool DepressedTransition,
 			bool BlocksLineOfSight,
 			bool Concealing,
-			bool LowProfileConcealing)
+			bool LowProfileConcealing,
+
+			IEnumerable<TerrainAttribute> MovementAttributes)
 		{
 			this.UniqueKey = UniqueKey;
 
@@ -85,22 +62,14 @@ namespace PanzerBlitz
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;
 			this.MustAttackAllUnits = MustAttackAllUnits;
 
-			this.DenseEdge = DenseEdge;
-			this.Depressed = Depressed;
-			this.Elevated = Elevated;
-			this.Frozen = Frozen;
-			this.Ledge = Ledge;
-			this.Loose = Loose;
-			this.Roaded = Roaded;
-			this.Rough = Rough;
-			this.Swamp = Swamp;
-			this.Water = Water;
-
 			this.OverrideBaseMovement = OverrideBaseMovement;
 			this.DepressedTransition = DepressedTransition;
 			this.BlocksLineOfSight = BlocksLineOfSight;
 			this.Concealing = Concealing;
 			this.LowProfileConcealing = LowProfileConcealing;
+
+			_MovementAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
+			foreach (TerrainAttribute attribute in MovementAttributes) _MovementAttributes[(int)attribute] = true;
 		}
 
 		public TileComponentRules(SerializationInputStream Stream)
@@ -117,18 +86,10 @@ namespace PanzerBlitz
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean(),
-				Stream.ReadBoolean())
-		{ }
+				Enumerable.Empty<TerrainAttribute>())
+		{
+			_MovementAttributes = Stream.ReadEnumerable(Stream.ReadBoolean).ToArray();
+		}
 
 		public TileComponentRules(ParseBlock Block)
 		{
@@ -141,22 +102,23 @@ namespace PanzerBlitz
 			TreatUnitsAsArmored = (bool)(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED] ?? false);
 			MustAttackAllUnits = (bool)(attributes[(int)Attribute.MUST_ATTACK_ALL_UNITS] ?? false);
 
-			DenseEdge = (bool)(attributes[(int)Attribute.DENSE_EDGE] ?? false);
-			Depressed = (bool)(attributes[(int)Attribute.DEPRESSED] ?? false);
-			Elevated = (bool)(attributes[(int)Attribute.ELEVATED] ?? false);
-			Frozen = (bool)(attributes[(int)Attribute.FROZEN] ?? false);
-			Ledge = (bool)(attributes[(int)Attribute.LEDGE] ?? false);
-			Loose = (bool)(attributes[(int)Attribute.LOOSE] ?? false);
-			Roaded = (bool)(attributes[(int)Attribute.ROADED] ?? false);
-			Rough = (bool)(attributes[(int)Attribute.ROUGH] ?? false);
-			Swamp = (bool)(attributes[(int)Attribute.SWAMP] ?? false);
-			Water = (bool)(attributes[(int)Attribute.WATER] ?? false);
-
 			OverrideBaseMovement = (bool)(attributes[(int)Attribute.OVERRIDE_BASE_MOVEMENT] ?? true);
 			DepressedTransition = (bool)(attributes[(int)Attribute.DEPRESSED_TRANSITION] ?? false);
 			BlocksLineOfSight = (bool)(attributes[(int)Attribute.BLOCKS_LINE_OF_SIGHT] ?? false);
 			Concealing = (bool)(attributes[(int)Attribute.CONCEALING] ?? false);
 			LowProfileConcealing = (bool)(attributes[(int)Attribute.LOW_PROFILE_CONCEALING] ?? false);
+
+			_MovementAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
+		}
+
+		public bool HasAttribute(TerrainAttribute Attribute)
+		{
+			return _MovementAttributes[(int)Attribute];
+		}
+
+		public IEnumerable<TerrainAttribute> GetAttributes()
+		{
+			return Enum.GetValues(typeof(TerrainAttribute)).Cast<TerrainAttribute>().Where(HasAttribute);
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -168,22 +130,13 @@ namespace PanzerBlitz
 			Stream.Write(TreatUnitsAsArmored);
 			Stream.Write(MustAttackAllUnits);
 
-			Stream.Write(DenseEdge);
-			Stream.Write(Depressed);
-			Stream.Write(Elevated);
-			Stream.Write(Frozen);
-			Stream.Write(Ledge);
-			Stream.Write(Loose);
-			Stream.Write(Roaded);
-			Stream.Write(Rough);
-			Stream.Write(Swamp);
-			Stream.Write(Water);
-
 			Stream.Write(OverrideBaseMovement);
 			Stream.Write(DepressedTransition);
 			Stream.Write(BlocksLineOfSight);
 			Stream.Write(Concealing);
 			Stream.Write(LowProfileConcealing);
+
+			Stream.Write(_MovementAttributes, Stream.Write);
 		}
 	}
 }
