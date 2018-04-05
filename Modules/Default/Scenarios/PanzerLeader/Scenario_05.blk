@@ -1,0 +1,248 @@
+﻿scenario:_ {
+	string:name { Operation Goodwood }
+	byte[]:deployment-order { 1 0 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-b.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-c.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:british {
+			!faction:faction { factions.british }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:tiles-controlled {
+						bool:friendly { true }
+						tile-matches-all:matcher {
+							tile-within:_ {
+								zone:zone { 10,0 20,0 20,33 10,33 }
+							}
+							tile-matches-any:_ {
+								tile-has-edge:_ {
+									tile-edge:edge { town }
+								}
+								tile-has-base:_ {
+									tile-base:base { village }
+								}
+								tile-has-bridge:_ { }
+							}
+						}
+					}
+					units-matched-objective:friendly-units-destroyed {
+						bool:friendly { true }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+					units-matched-objective:enemy-units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							trigger-objective:_ {
+								int:threshold { 26 }
+								!var:objective { objectives.tiles-controlled }
+							}
+							trigger-objective:_ {
+								int:threshold { 2 }
+								bool:invert { true }
+								ratio-objective:objective {
+									!var:numerator { objectives.friendly-units-destroyed }
+									!var:denominator { objectives.enemy-units-destroyed }
+								}
+							}
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 0,5 4,5 5,6 7,6 10,8 11,10 12,10 14,17 16,21 18,24 20,24 20,0 }
+					}
+					unit-group:unit-group {
+						string:name { 11th & Guards Armored Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-british-44
+								}
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25pdr-how }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.bren }
+								int:count { 14 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.typhoon-rockets }
+								int:count { 8 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 10,0 10,8 11,10 12,10 14,17 16,21 18,24 20,24 20,0 }
+					}
+					unit-group:unit-group {
+						string:name { 11th & Guards Armored Div. Armor }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sexton }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.achilles }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.cromwell }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sherman-uk }
+								int:count { 20 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy-objective { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy-objective }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-matches-any:matcher {
+						tile-matches-all:_ {
+							tile-within:_ {
+								zone:zone { 10,33 10,8 11,10 12,10 14,17 16,21 18,24 20,24 20,33 }
+							}
+							tile-not:_ {
+								tile-in-region:matcher {
+									string:region-name { grancelle }
+								}
+							}
+						}
+						tile-within:_ {
+							zone:zone { 20,0 31,0 31,33 20,33 }
+						}
+					}
+					unit-group:unit-group {
+						string:name { 1st SS & 21st Panzer Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.rifle-platoon-german-42-west 
+								}
+								int:count { 15 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm_4-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.nebelwerfer }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wespe }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.maultier }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hummel }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_w }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_w }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_ss }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.tiger-i }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

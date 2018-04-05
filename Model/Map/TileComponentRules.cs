@@ -21,7 +21,7 @@ namespace PanzerBlitz
 			CONCEALING,
 			LOW_PROFILE_CONCEALING,
 
-			MOVEMENT_ATTRIBUTES
+			TERRAIN_ATTRIBUTES
 		};
 
 		public readonly string UniqueKey;
@@ -37,7 +37,7 @@ namespace PanzerBlitz
 		public readonly bool Concealing;
 		public readonly bool LowProfileConcealing;
 
-		bool[] _MovementAttributes;
+		bool[] _TerrainAttributes;
 
 		public TileComponentRules(
 			string UniqueKey,
@@ -53,7 +53,7 @@ namespace PanzerBlitz
 			bool Concealing,
 			bool LowProfileConcealing,
 
-			IEnumerable<TerrainAttribute> MovementAttributes)
+			IEnumerable<TerrainAttribute> TerrainAttributes)
 		{
 			this.UniqueKey = UniqueKey;
 
@@ -68,8 +68,8 @@ namespace PanzerBlitz
 			this.Concealing = Concealing;
 			this.LowProfileConcealing = LowProfileConcealing;
 
-			_MovementAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
-			foreach (TerrainAttribute attribute in MovementAttributes) _MovementAttributes[(int)attribute] = true;
+			_TerrainAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
+			foreach (TerrainAttribute attribute in TerrainAttributes) _TerrainAttributes[(int)attribute] = true;
 		}
 
 		public TileComponentRules(SerializationInputStream Stream)
@@ -88,7 +88,7 @@ namespace PanzerBlitz
 				Stream.ReadBoolean(),
 				Enumerable.Empty<TerrainAttribute>())
 		{
-			_MovementAttributes = Stream.ReadEnumerable(Stream.ReadBoolean).ToArray();
+			_TerrainAttributes = Stream.ReadEnumerable(Stream.ReadBoolean).ToArray();
 		}
 
 		public TileComponentRules(ParseBlock Block)
@@ -108,12 +108,18 @@ namespace PanzerBlitz
 			Concealing = (bool)(attributes[(int)Attribute.CONCEALING] ?? false);
 			LowProfileConcealing = (bool)(attributes[(int)Attribute.LOW_PROFILE_CONCEALING] ?? false);
 
-			_MovementAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
+			_TerrainAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
+			foreach (TerrainAttribute attribute in
+					 (IEnumerable<TerrainAttribute>)(attributes[(int)Attribute.TERRAIN_ATTRIBUTES]
+													 ?? Enumerable.Empty<TerrainAttribute>()))
+			{
+				_TerrainAttributes[(int)attribute] = true;
+			}
 		}
 
 		public bool HasAttribute(TerrainAttribute Attribute)
 		{
-			return _MovementAttributes[(int)Attribute];
+			return _TerrainAttributes[(int)Attribute];
 		}
 
 		public IEnumerable<TerrainAttribute> GetAttributes()
@@ -136,7 +142,7 @@ namespace PanzerBlitz
 			Stream.Write(Concealing);
 			Stream.Write(LowProfileConcealing);
 
-			Stream.Write(_MovementAttributes, Stream.Write);
+			Stream.Write(_TerrainAttributes, Stream.Write);
 		}
 	}
 }
