@@ -85,7 +85,7 @@ namespace PanzerBlitz
 			else _PrimaryAmmunition--;
 		}
 
-		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod)
+		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod, bool IgnoreConcealment = false)
 		{
 			if (Position == null) return OrderInvalidReason.ILLEGAL;
 
@@ -119,7 +119,7 @@ namespace PanzerBlitz
 						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.NONE;
 			}
-			if (!Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
+			if (!IgnoreConcealment && !Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
 			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
 		}
@@ -383,7 +383,7 @@ namespace PanzerBlitz
 
 			if (Configuration.UnitClass == UnitClass.BRIDGE && !Position.Rules.Bridgeable)
 				return OrderInvalidReason.UNIT_EMPLACE_TERRAIN;
-			if (!Configuration.Emplaceable() || Emplaced) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
+			if (!Configuration.IsEmplaceable() || Emplaced) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
 			return OrderInvalidReason.NONE;
 		}
 
@@ -551,7 +551,7 @@ namespace PanzerBlitz
 
 		public void Emplace(bool Emplaced)
 		{
-			this.Emplaced = Emplaced && Configuration.Emplaceable();
+			this.Emplaced = Emplaced && Configuration.IsEmplaceable();
 		}
 
 		public void Fire(bool UseSecondary)
@@ -576,6 +576,11 @@ namespace PanzerBlitz
 			MovedMoreThanOneTile = false;
 			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
 			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
+			if (Status == UnitStatus.DAMAGED)
+			{
+				Remove();
+				CancelInteractions();
+			}
 
 			DoInteractions();
 		}

@@ -46,56 +46,28 @@
 			var[]:deployment-configurations {
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 4,10 }
+						coordinate:coordinate { 6,10 }
 					}
 					unit-group:unit-group {
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
-								int:count { 1 }
+								int:count { 2 }
 							}
 						}
 					}
 				}
 				positional-deployment-configuration:_ {
 					tile-has-coordinate:matcher {
-						coordinate:coordinate { 5,10 }
+						coordinate:coordinate { 7,9 }
 					}
 					unit-group:unit-group {
 						string:name { Test B }
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
-								int:count { 1 }
-							}
-						}
-					}
-				}
-				positional-deployment-configuration:_ {
-					tile-has-coordinate:matcher {
-						coordinate:coordinate { 4,12 }
-					}
-					unit-group:unit-group {
-						string:name { Test C }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
-								int:count { 1 }
-							}
-						}
-					}
-				}
-				positional-deployment-configuration:_ {
-					tile-has-coordinate:matcher {
-						coordinate:coordinate { 5,12 }
-					}
-					unit-group:unit-group {
-						string:name { Test D }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
-								int:count { 1 }
+								int:count { 2 }
 							}
 						}
 					}

@@ -4,7 +4,7 @@
 			lattice-noise-settings:elevation-noise {
 				lattice-noise-settings:frequency {
 					constant:frequency { .1 }
-					double:bias { .15 }
+					double:bias { .25 }
 					double:factor { .1 }
 				}
 				constant:persistence { .5 }
@@ -14,13 +14,13 @@
 			!var-generator:generator { functions.elevation-noise }
 			lattice-noise-settings:threshold-generator {
 				constant:frequency { .1 }
-				double:factor { .1 }
+				double:factor { .05 }
 				double:bias { .63 }
 			}
 		}
 		feature-generator:water-generator {
 			lattice-noise-settings:generator {
-				constant:frequency { .1 }
+				constant:frequency { .05 }
 				double:factor { .1 }
 				double:bias { .3 }
 			}
@@ -28,14 +28,14 @@
 		}
 		feature-generator:swamp-generator {
 			lattice-noise-settings:generator {
-				constant:frequency { .1 }
+				constant:frequency { .05 }
 				double:factor { .3 }
 				double:bias { .35 }
 			}
 			lattice-noise-settings:threshold-generator {
 				lattice-noise-settings:frequency {
 					constant:frequency { .1 }
-					double:bias { .125 }
+					double:bias { .2 }
 					double:factor { .1 }
 				}
 				constant:persistence { .5 }
@@ -45,10 +45,10 @@
 			lattice-noise-settings:generator {
 				lattice-noise-settings:frequency {
 					constant:frequency { .1 }
-					double:bias { .375 }
+					double:bias { .5 }
 					double:factor { .25 }
 				}
-				constant:persistence { .5 }
+				constant:persistence { .6 }
 			}
 			lattice-noise-settings:threshold-generator {
 				constant:frequency { .15 }
@@ -67,7 +67,7 @@
 			}
 			lattice-noise-settings:threshold-generator {
 				constant:frequency { .1 }
-				double:factor { .2 }
+				double:factor { .05 }
 				double:bias { .72 }
 			}
 		}

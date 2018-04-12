@@ -278,6 +278,47 @@ namespace PanzerBlitz
 			}
 		}
 
+		void HighlightScore(Func<Tile, double> Scorer)
+		{
+			Highlight(Match.GetMap().TilesEnumerable.Select(i => new Tuple<Tile, Color>(i, GetScoreColor(Scorer(i)))));
+		}
+
+		Func<Tile, double> ScoreByThreat()
+		{
+			if (_SelectedUnit == null) return i => 0;
+
+			TileEvaluator e = new TileEvaluator(Match, _CurrentTurn.Army);
+			e.ReEvaluate();
+			return i =>
+			{
+				return e.GetThreatRating(i, _SelectedUnit);
+			};
+		}
+
+		double ScoreByPotential(Tile Tile)
+		{
+			if (_SelectedUnit == null) return 0;
+			return new TileEvaluator(Match, _CurrentTurn.Army).GetPotentialRating(Tile, _SelectedUnit);
+		}
+
+		Func<Tile, double> ScoreByFavorability()
+		{
+			if (_SelectedUnit == null) return i => 0;
+
+			TileEvaluator e = new TileEvaluator(Match, _CurrentTurn.Army);
+			e.ReEvaluate();
+			return i =>
+			{
+				return e.GetTileFavorability(i, _SelectedUnit);
+			};
+		}
+
+		Color GetScoreColor(double Score)
+		{
+			byte c = (byte)Math.Min(255, 255 * (2 - 2 / (1 + Math.Exp(-Score))));
+			return new Color(255, c, c, 60);
+		}
+
 		public virtual void Clear()
 		{
 			if (_Pane != null)
@@ -416,7 +457,7 @@ namespace PanzerBlitz
 			var emplaceables =
 				SelectedUnit.Position.Neighbors()
 						   .SelectMany(i => i.Units)
-						   .Where(i => i.Configuration.Emplaceable());
+						   .Where(i => i.Configuration.IsEmplaceable());
 			if (emplaceables.Count() == 1) Emplace(emplaceables.First());
 			else if (emplaceables.Count() > 1)
 			{
@@ -570,6 +611,9 @@ namespace PanzerBlitz
 			{
 				if (E.Key == Keyboard.Key.S) HighlightEnemyFieldOfSight(phase.Army.Configuration.Team);
 				else if (E.Key == Keyboard.Key.V) HighlightVictoryConditionField(phase.Army);
+				else if (E.Key == Keyboard.Key.Num1) HighlightScore(ScoreByThreat());
+				else if (E.Key == Keyboard.Key.Num2) HighlightScore(ScoreByPotential);
+				else if (E.Key == Keyboard.Key.Num3) HighlightScore(ScoreByFavorability());
 				else _Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
 			}
 		}

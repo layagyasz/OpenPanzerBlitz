@@ -62,12 +62,6 @@ namespace PanzerBlitz
 
 		void GetAirAttack(Unit Unit, bool EnemyArmored, bool UseSecondaryWeapon)
 		{
-			if (Unit.CanAttack(AttackMethod.AIR, EnemyArmored, null, UseSecondaryWeapon) != OrderInvalidReason.NONE)
-			{
-				Attack = 0;
-				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
-				return;
-			}
 			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
 			Factors = new List<AttackFactorCalculationFactor>();
 			Attack = weapon.Attack;

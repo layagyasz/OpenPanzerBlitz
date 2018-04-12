@@ -231,7 +231,7 @@ namespace PanzerBlitz
 			var cost = TileRules.GetAttributes()
 							 	.Where(i => i == TerrainAttribute.ROADED ? UseRoad : !Road)
 					 			.Select(i => MovementRules[i].GetMoveCost(Adjacent, UnitMoved))
-								.Aggregate((i, j) => i + j);
+								.Aggregate(new MovementCost(0f), (i, j) => i + j);
 
 			if (!Unit.Configuration.CanCarryInWater
 				&& !Road

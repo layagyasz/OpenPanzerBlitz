@@ -8,10 +8,10 @@ namespace PanzerBlitz
 	{
 		public readonly ConvoyDeploymentConfiguration DeploymentConfiguration;
 
-		protected Tile _EntryTile;
 		protected List<Unit> _ConvoyOrder;
 		bool _StopAutomatedMovement;
 
+		public Tile EntryTile { get; private set; }
 		public override DeploymentConfiguration Configuration
 		{
 			get
@@ -19,18 +19,10 @@ namespace PanzerBlitz
 				return DeploymentConfiguration;
 			}
 		}
-		public Tile EntryTile
-		{
-			get
-			{
-				return _EntryTile;
-			}
-		}
 		public IEnumerable<Unit> ConvoyOrder
 		{
 			get
 			{
-
 				return _ConvoyOrder;
 			}
 		}
@@ -66,7 +58,7 @@ namespace PanzerBlitz
 		{
 			if (Unit.Position == null) return false;
 			if (!_StopAutomatedMovement) return true;
-			return Unit.Position == _EntryTile && _ConvoyOrder.Any(i => i.Position == null);
+			return Unit.Position == EntryTile && _ConvoyOrder.Any(i => i.Position == null);
 		}
 
 		public override void ReassessMatch()
@@ -84,7 +76,7 @@ namespace PanzerBlitz
 			var unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
 			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
 			{
-				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, _EntryTile));
+				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, EntryTile));
 			}
 		}
 
@@ -107,7 +99,7 @@ namespace PanzerBlitz
 
 		public override bool IsConfigured()
 		{
-			return Validate(_EntryTile) == OrderInvalidReason.NONE && Validate(_ConvoyOrder) == OrderInvalidReason.NONE;
+			return Validate(EntryTile) == OrderInvalidReason.NONE && Validate(_ConvoyOrder) == OrderInvalidReason.NONE;
 		}
 
 		public override OrderInvalidReason Validate(Unit Unit, Tile Tile)
@@ -115,8 +107,8 @@ namespace PanzerBlitz
 			var r = base.Validate(Unit, Tile);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			if (_EntryTile.Units.Count() > 0) return OrderInvalidReason.DEPLOYMENT_RULE;
-			if (Tile != _EntryTile) return OrderInvalidReason.DEPLOYMENT_RULE;
+			if (EntryTile.Units.Count() > 0) return OrderInvalidReason.DEPLOYMENT_RULE;
+			if (Tile != EntryTile) return OrderInvalidReason.DEPLOYMENT_RULE;
 			return OrderInvalidReason.NONE;
 		}
 
@@ -141,7 +133,7 @@ namespace PanzerBlitz
 
 		public void SetEntryTile(Tile Tile)
 		{
-			if (Validate(Tile) == OrderInvalidReason.NONE) _EntryTile = Tile;
+			if (Validate(Tile) == OrderInvalidReason.NONE) EntryTile = Tile;
 		}
 
 		public void SetConvoyOrder(IEnumerable<Unit> ConvoyOrder)

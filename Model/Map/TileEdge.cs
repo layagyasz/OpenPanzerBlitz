@@ -6,7 +6,7 @@ namespace PanzerBlitz
 		TOWN,
 		FOREST,
 		SLOPE,
-		WALL,
-		WATER
+		WATER,
+		WALL
 	}
 }

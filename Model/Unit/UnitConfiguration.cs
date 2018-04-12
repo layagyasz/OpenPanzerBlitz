@@ -323,7 +323,7 @@ namespace PanzerBlitz
 
 		public int GetStackSize()
 		{
-			if (IsNeutral() || IsAircraft()) return 0;
+			if (IsEmplaceable() || IsAircraft()) return 0;
 			return 1;
 		}
 
@@ -378,7 +378,7 @@ namespace PanzerBlitz
 			return Movement == byte.MaxValue;
 		}
 
-		public bool Emplaceable()
+		public bool IsEmplaceable()
 		{
 			return IsNeutral() || UnitClass == UnitClass.FORT;
 		}

@@ -140,9 +140,8 @@ namespace PanzerBlitz
 				edges.Add(
 					new Tuple<Tile, Tile>(nodes[_Random.Next(0, nodes.Count)], nodes[_Random.Next(0, nodes.Count)]));
 			}
-			double m = _Random.NextDouble() * 10;
 			foreach (Tuple<Tile, Tile> edge in edges)
-				MakePath(edge.Item1, edge.Item2, TilePathOverlay.ROAD, (i, j) => RoadDistanceFunction(i, j, m));
+				MakePath(edge.Item1, edge.Item2, TilePathOverlay.ROAD, (i, j) => RoadDistanceFunction(i, j, 6));
 
 			map.Ready();
 			return map;

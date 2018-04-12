@@ -1,4 +1,4 @@
-﻿namespace PanzerBlitz
+namespace PanzerBlitz
 {
 	public class EmplaceInteraction : InteractionBase
 	{
@@ -10,7 +10,7 @@
 		public override OrderInvalidReason Validate()
 		{
 			if (!Agent.Configuration.CanClearMines) return OrderInvalidReason.UNIT_NO_ENGINEER;
-			if (!Object.Configuration.Emplaceable()) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
+			if (!Object.Configuration.IsEmplaceable()) return OrderInvalidReason.TARGET_NOT_EMPLACEABLE;
 			if (Agent.Position == null
 				|| Object.Position == null
 				|| Agent.Position.HexCoordinate.Distance(Object.Position.HexCoordinate) > 1)
