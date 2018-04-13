@@ -55,7 +55,11 @@ namespace PanzerBlitz
 			_Selection = new ValuedScrollCollection<SingularUnitSelectionOption, StackView>("deployment-select");
 
 			var units = Deployment.Units.ToList();
-			units.Sort(SortUnits);
+			units.Sort(new FluentComparator<Unit>(i => i.Configuration.IsVehicle)
+					   .ThenCompare(i => i.Configuration.IsArmored)
+					   .ThenCompare(i => i.Configuration.UnitClass != UnitClass.TRANSPORT)
+					   .ThenCompare(i => i.Configuration.Movement)
+					   .Invert());
 			foreach (Unit u in units)
 			{
 				u.OnLoad += HandleLoad;

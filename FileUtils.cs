@@ -16,6 +16,12 @@ namespace PanzerBlitz
 {
 	public static class FileUtils
 	{
+		public static T Print<T>(T Object)
+		{
+			Console.WriteLine(Object);
+			return Object;
+		}
+
 		public static FileStream GetStream(string Path, FileMode FileMode, int Timeout)
 		{
 			var time = Stopwatch.StartNew();

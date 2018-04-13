@@ -19,6 +19,7 @@ namespace PanzerBlitz
 
 		public void ReEvaluate()
 		{
+			_ThreatRatings.Clear();
 			foreach (Unit unit in Match.GetArmies()
 					 .Where(i => i.Configuration.Team != Army.Configuration.Team)
 					 .SelectMany(i => i.Units))
@@ -43,15 +44,13 @@ namespace PanzerBlitz
 		public double GetPotentialRating(Tile Tile, Unit Unit)
 		{
 			double potential = 0;
-			foreach (LineOfSight los in Match.GetArmies().Where(i => i.Configuration.Team != Army.Configuration.Team)
+			foreach (Unit unit in Match.GetArmies().Where(i => i.Configuration.Team != Army.Configuration.Team)
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Position.HexCoordinate.Distance(Tile.HexCoordinate)
-							<= Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE, false))
-					 .Select(i => new LineOfSight(i.Position, Tile)))
+							<= Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE, false)))
 			{
-				potential += GetPotential(Unit, los);
+				potential += GetPotential(Unit, new LineOfSight(Tile, unit.Position)) / unit.Configuration.Defense;
 			}
-			if (potential > 0) Console.WriteLine(potential);
 			return potential;
 		}
 

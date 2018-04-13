@@ -128,6 +128,11 @@ namespace PanzerBlitz
 			return _Edges.Any(i => i == Edge);
 		}
 
+		public bool HasPathOverlay(TilePathOverlay PathOverlay)
+		{
+			return _PathOverlays.Any(i => i == PathOverlay);
+		}
+
 		public void TriggerReconfigure()
 		{
 			if (OnReconfigure != null) OnReconfigure(this, EventArgs.Empty);

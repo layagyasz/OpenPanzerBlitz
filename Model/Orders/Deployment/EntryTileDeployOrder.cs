@@ -52,5 +52,10 @@ namespace PanzerBlitz
 			}
 			return OrderStatus.ILLEGAL;
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[EntryTileDeployOrder: Tile={0}]", Tile);
+		}
 	}
 }

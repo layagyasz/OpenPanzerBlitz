@@ -372,6 +372,12 @@
     <Compile Include="Model\Map\Generation\TerrainGeneratorConfig.cs" />
     <Compile Include="Model\Map\TerrainAttribute.cs" />
     <Compile Include="AI\TileEvaluator.cs" />
+    <Compile Include="AI\ConvoyDeploymentHandler.cs" />
+    <Compile Include="AI\AIRoot.cs" />
+    <Compile Include="AI\UnitAssigner.cs" />
+    <Compile Include="AI\UnitAssignment.cs" />
+    <Compile Include="AI\UnitAssignmentType.cs" />
+    <Compile Include="Controller\Match\AIMatchPlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

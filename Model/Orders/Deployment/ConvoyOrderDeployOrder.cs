@@ -56,5 +56,12 @@ namespace PanzerBlitz
 			}
 			return OrderStatus.ILLEGAL;
 		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[ConvoyOrderDeployOrder: ConvoyOrder=`{0}`]",
+				string.Join(", ", ConvoyOrder.Select(i => i.ToString())));
+		}
 	}
 }
