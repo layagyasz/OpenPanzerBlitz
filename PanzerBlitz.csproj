@@ -378,6 +378,7 @@
     <Compile Include="AI\UnitAssignment.cs" />
     <Compile Include="AI\UnitAssignmentType.cs" />
     <Compile Include="Controller\Match\AIMatchPlayerController.cs" />
+    <Compile Include="AI\PositionalDeploymentHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

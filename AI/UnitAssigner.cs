@@ -9,14 +9,26 @@ namespace PanzerBlitz
 {
 	public class UnitAssigner
 	{
-		Dictionary<Unit, List<UnitAssignment>> _Assignments = new Dictionary<Unit, List<UnitAssignment>>();
+		public readonly AIRoot Root;
 
-		public void ClearAssignments()
+		readonly Dictionary<Unit, List<UnitAssignment>> _Assignments = new Dictionary<Unit, List<UnitAssignment>>();
+
+		public UnitAssigner(AIRoot Root)
+		{
+			this.Root = Root;
+		}
+
+		public void ReAssign()
+		{			ClearAssignments();
+			foreach (var deployment in Root.Army.Deployments) MakeAssignments(deployment);
+		}
+
+		void ClearAssignments()
 		{
 			_Assignments.Clear();
 		}
 
-		public void MakeAssignments(Deployment Deployment)
+		void MakeAssignments(Deployment Deployment)
 		{
 			AssignCarriers(Deployment);
 			AssignDefenders(Deployment);
@@ -26,6 +38,11 @@ namespace PanzerBlitz
 		{
 			if (_Assignments.ContainsKey(Unit)) return _Assignments[Unit];
 			return Enumerable.Empty<UnitAssignment>();
+		}
+
+		public IEnumerable<UnitAssignment> GetAssignments()
+		{
+			return _Assignments.Values.SelectMany(i => i).Distinct();
 		}
 
 		void AddAssignment(Unit Unit, UnitAssignment Assignment)
@@ -56,7 +73,7 @@ namespace PanzerBlitz
 			{
 				foreach (var carrier in carriers)
 				{
-					if (carrier.CanLoad(passenger) == OrderInvalidReason.NONE)
+					if (carrier.Configuration.CanLoad(passenger.Configuration) == OrderInvalidReason.NONE)
 					{
 						matching.SetPrimaryPreference(
 							carrier,
@@ -74,7 +91,9 @@ namespace PanzerBlitz
 					}
 				}
 			}
-			foreach (var assignment in matching.GetPairs().Where(i => i.Second != null))
+			foreach (var assignment in matching.GetPairs()
+					 .Where(i => i.Second != null
+							&& i.First.Configuration.CanLoad(i.Second.Configuration) == OrderInvalidReason.NONE))
 				AddAssignment(new UnitAssignment(assignment.First, assignment.Second, UnitAssignmentType.CARRIER));
 		}
 

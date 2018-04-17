@@ -6,22 +6,20 @@ namespace PanzerBlitz
 {
 	public class TileEvaluator
 	{
-		public readonly MatchAdapter Match;
-		public readonly Army Army;
+		public readonly AIRoot Root;
 
 		Dictionary<Tile, Tuple<double, double>> _ThreatRatings = new Dictionary<Tile, Tuple<double, double>>();
 
-		public TileEvaluator(MatchAdapter Match, Army Army)
+		public TileEvaluator(AIRoot Root)
 		{
-			this.Match = Match;
-			this.Army = Army;
+			this.Root = Root;
 		}
 
 		public void ReEvaluate()
 		{
 			_ThreatRatings.Clear();
-			foreach (Unit unit in Match.GetArmies()
-					 .Where(i => i.Configuration.Team != Army.Configuration.Team)
+			foreach (Unit unit in Root.Match.GetArmies()
+					 .Where(i => i.Configuration.Team != Root.Army.Configuration.Team)
 					 .SelectMany(i => i.Units))
 			{
 				foreach (LineOfSight los in unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(i => i.Item1))
@@ -36,7 +34,8 @@ namespace PanzerBlitz
 			if (_ThreatRatings.ContainsKey(Tile))
 			{
 				Tuple<double, double> threat = _ThreatRatings[Tile];
-				return (Unit.Configuration.IsArmored ? threat.Item1 : threat.Item2) / Unit.Configuration.Defense;
+				return Unit.GetPointValue() * (Unit.Configuration.IsArmored ? threat.Item1 : threat.Item2)
+						   / Unit.Configuration.Defense;
 			}
 			return 0;
 		}
@@ -44,12 +43,14 @@ namespace PanzerBlitz
 		public double GetPotentialRating(Tile Tile, Unit Unit)
 		{
 			double potential = 0;
-			foreach (Unit unit in Match.GetArmies().Where(i => i.Configuration.Team != Army.Configuration.Team)
+			foreach (Unit unit in Root.Match.GetArmies()
+					 .Where(i => i.Configuration.Team != Root.Army.Configuration.Team)
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Position.HexCoordinate.Distance(Tile.HexCoordinate)
 							<= Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE, false)))
 			{
-				potential += GetPotential(Unit, new LineOfSight(Tile, unit.Position)) / unit.Configuration.Defense;
+				potential += unit.GetPointValue() * GetPotential(Unit, new LineOfSight(Tile, unit.Position))
+								 / unit.Configuration.Defense;
 			}
 			return potential;
 		}
@@ -80,7 +81,7 @@ namespace PanzerBlitz
 		{
 			IEnumerable<Unit> defenders =
 				LineOfSight.Final.Units.Where(
-					i => i.CanBeAttackedBy(Army, AttackMethod.NORMAL_FIRE, true) == OrderInvalidReason.NONE);
+					i => i.CanBeAttackedBy(Root.Army, AttackMethod.NORMAL_FIRE, true) == OrderInvalidReason.NONE);
 			var armoredCount = defenders.Count(i => i.Configuration.IsArmored);
 			var unArmoredCount = defenders.Count(i => !i.Configuration.IsArmored);
 			if (armoredCount > unArmoredCount

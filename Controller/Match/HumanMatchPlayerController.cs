@@ -287,7 +287,7 @@ namespace PanzerBlitz
 		{
 			if (_SelectedUnit == null) return i => 0;
 
-			TileEvaluator e = new TileEvaluator(Match, _CurrentTurn.Army);
+			TileEvaluator e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
 			e.ReEvaluate();
 			return i =>
 			{
@@ -298,14 +298,14 @@ namespace PanzerBlitz
 		double ScoreByPotential(Tile Tile)
 		{
 			if (_SelectedUnit == null) return 0;
-			return new TileEvaluator(Match, _CurrentTurn.Army).GetPotentialRating(Tile, _SelectedUnit);
+			return new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army)).GetPotentialRating(Tile, _SelectedUnit);
 		}
 
 		Func<Tile, double> ScoreByFavorability()
 		{
 			if (_SelectedUnit == null) return i => 0;
 
-			TileEvaluator e = new TileEvaluator(Match, _CurrentTurn.Army);
+			TileEvaluator e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
 			e.ReEvaluate();
 			return i =>
 			{

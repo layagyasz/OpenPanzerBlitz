@@ -7,7 +7,7 @@ namespace PanzerBlitz
 		public readonly MatchAdapter Match;
 		public readonly Army Army;
 
-		public readonly UnitAssigner UnitAssignments = new UnitAssigner();
+		public readonly UnitAssigner UnitAssignments;
 		public readonly TileEvaluator TileEvaluations;
 
 		public readonly Random Random = new Random();
@@ -17,13 +17,8 @@ namespace PanzerBlitz
 			this.Match = Match;
 			this.Army = Army;
 
-			TileEvaluations = new TileEvaluator(Match, Army);
-		}
-
-		public void ReAssign()
-		{
-			UnitAssignments.ClearAssignments();
-			foreach (var deployment in Army.Deployments) UnitAssignments.MakeAssignments(deployment);
+			UnitAssignments = new UnitAssigner(this);
+			TileEvaluations = new TileEvaluator(this);
 		}
 	}
 }

@@ -31,13 +31,13 @@ namespace PanzerBlitz
 				yield return new LoadOrder(assignment.Subject, assignment.Object, false);
 			yield return new ConvoyOrderDeployOrder(Deployment, order);
 
-			List<Tile> entryTiles = Root.TileEvaluations.Match.GetMap().TilesEnumerable.Where(
+			List<Tile> entryTiles = Root.Match.GetMap().TilesEnumerable.Where(
 				i => i.Configuration.HasPathOverlay(TilePathOverlay.ROAD)
 					&& Deployment.Validate(i) == OrderInvalidReason.NONE).ToList();
 			yield return new EntryTileDeployOrder(
 				Deployment,
 				entryTiles.ArgMax(
-					i => (.9 + Root.Random.NextDouble() * .1)
+					i => Root.Random.NextDouble() - (.9 + Root.Random.NextDouble() * .1)
 					* order.Sum(j => Root.TileEvaluations.GetThreatRating(i, j))));
 		}
 	}

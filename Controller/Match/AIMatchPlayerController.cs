@@ -1,4 +1,8 @@
-﻿namespace PanzerBlitz
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace PanzerBlitz
 {
 	public class AIMatchPlayerController : MatchPlayerController
 	{
@@ -15,26 +19,29 @@
 
 		public void DoTurn(Turn Turn)
 		{
-			if (Turn.TurnInfo.TurnComponent == TurnComponent.DEPLOYMENT) DoDeployment();
+			IEnumerable<Order> orders = null;
+			if (Turn.TurnInfo.TurnComponent == TurnComponent.DEPLOYMENT) orders = DoDeployment();
 
-			Match.ExecuteOrder(new NextPhaseOrder(Army));
+			if (orders == null) return;
+			foreach (Order order in orders) Console.WriteLine(Match.ExecuteOrder(FileUtils.Print(order)));
+			Console.WriteLine(Match.ExecuteOrder(new NextPhaseOrder(Army)));
 		}
 
 		public void Unhook() { }
 
-		void DoDeployment()
+		IEnumerable<Order> DoDeployment()
 		{
 			Root.TileEvaluations.ReEvaluate();
-			Root.ReAssign();
+			Root.UnitAssignments.ReAssign();
 
-			foreach (var deployment in Army.Deployments)
+			return Army.Deployments.SelectMany(i =>
 			{
-				if (deployment is ConvoyDeployment)
-				{
-					foreach (Order order in new ConvoyDeploymentHandler(Root).Handle((ConvoyDeployment)deployment))
-						Match.ExecuteOrder(order);
-				}
-			}
+				if (i is ConvoyDeployment)
+					return new ConvoyDeploymentHandler(Root).Handle((ConvoyDeployment)i);
+				if (i is PositionalDeployment)
+					return new PositionalDeploymentHandler(Root).Handle((PositionalDeployment)i);
+				return Enumerable.Empty<Order>();
+			});
 		}
 	}
 }

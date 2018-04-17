@@ -437,8 +437,13 @@ namespace PanzerBlitz
 
 		public LineOfSight GetLineOfSight(Tile Tile)
 		{
-			if (Position == null) return null;
-			return new LineOfSight(Position, Tile);
+			return GetLineOfSight(Position, Tile);
+		}
+
+		public LineOfSight GetLineOfSight(Tile From, Tile To)
+		{
+			if (From == null || To == null) return null;
+			return new LineOfSight(From, To);
 		}
 
 		public Path<Tile> GetPathTo(Tile Tile, bool Combat)
@@ -470,16 +475,31 @@ namespace PanzerBlitz
 
 		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod)
 		{
-			if (Position != null && CanAttack(AttackMethod) == OrderInvalidReason.NONE)
+			return GetFieldOfSight(AttackMethod, Position);
+		}
+
+		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod, Tile Tile)
+		{
+			if (Configuration.CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
-				foreach (LineOfSight l in new Field<Tile>(
-					Position, Configuration.GetRange(AttackMethod, false), (i, j) => 1)
-						 .GetReachableNodes()
-						 .Select(i => GetLineOfSight(i.Item1))
-						 .Where(i => i.Final != Position))
+				return GetFieldOfSight(
+					Configuration.GetRange(AttackMethod, false), Tile, AttackMethod == AttackMethod.NORMAL_FIRE);
+			}
+			return Enumerable.Empty<Tuple<LineOfSight, bool>>();
+		}
+
+		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(int Range, Tile Tile, bool IndirectFire)
+		{
+			if (Tile != null)
+			{
+				foreach (LineOfSight l in Army.Match.Map.TilesEnumerable
+						 .Where(i => i.HexCoordinate.Distance(Tile.HexCoordinate) <= Range)
+						 .Select(i => GetLineOfSight(Tile, i))
+						 .Where(i => i.Final != Tile))
 				{
 					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
-					else if (CanAttack(AttackMethod, false, l, false) == OrderInvalidReason.NONE)
+					// Indirect fire.
+					else if (IndirectFire && CanAttack(AttackMethod.NORMAL_FIRE, false, l, false) == OrderInvalidReason.NONE)
 						yield return new Tuple<LineOfSight, bool>(l, false);
 				}
 			}
