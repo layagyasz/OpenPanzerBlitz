@@ -1,0 +1,182 @@
+﻿scenario:_ {
+	string:name { Philippenville: Rommel Attacks }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-c.map }
+				bool:invert { true }
+			}
+		}
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:french {
+			!faction:faction { factions.french }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { south }
+					}
+					unit-group:unit-group {
+						string:name { 1st Armored & 4th North African Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.amr-33 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hotchkiss-39 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-39 }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-french }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chenillette }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-french }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { true }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+					trigger-objective:wiln-controlled {
+						int:threshold { 2 }
+						tiles-controlled-objective:objective {
+							bool:friendly { true }
+							tile-in-region:matcher {
+								string:region-name { wiln }
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 1 }
+						achieve-all:objective {
+							trigger-objective:_ {
+								int:threshold { 10 }
+								bool:invert { true }
+								!var:objective { objectives.units-destroyed }
+							}
+							!var:_ { objectives.wiln-controlled }
+						}
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { north }
+					}
+					unit-group:unit-group {
+						string:name { 7th Panzer Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-d }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d-corrected }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ju-87-b }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

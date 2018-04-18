@@ -14,6 +14,10 @@ unit-render-details:mg-platoon-british {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
+unit-render-details:rifle-platoon-british-39 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
 unit-render-details:rifle-platoon-british-40 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }

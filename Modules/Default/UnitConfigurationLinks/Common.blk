@@ -7,6 +7,9 @@ unit-configuration-link:block {
 unit-configuration-link:minefield {
 	!unit-configuration:unit-configuration { unit-configurations.minefield }
 }
+unit-configuration-link:fort-10 {
+	!unit-configuration:unit-configuration { unit-configurations.fort-10 }
+}
 unit-configuration-link:fort-20 {
 	!unit-configuration:unit-configuration { unit-configurations.fort-20 }
 }

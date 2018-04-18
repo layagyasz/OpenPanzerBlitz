@@ -25,9 +25,9 @@ unit-configuration-link:25mm-aa-french {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.25mm-aa }
 }
-unit-configuration-link:37mm-how-company-french {
+unit-configuration-link:37mm-how-french {
 	!faction:faction { factions.french }
-	!unit-configuration:unit-configuration { unit-configurations.37mm-how-company }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-how }
 }
 unit-configuration-link:75mm-how-company-french {
 	!faction:faction { factions.french }

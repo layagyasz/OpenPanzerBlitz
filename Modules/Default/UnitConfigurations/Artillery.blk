@@ -134,6 +134,18 @@ unit-configuration:47mm-at {
 
 	bool:is-light-passenger { true }
 }
+unit-configuration:2pdr-at {
+	string:name { 2pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 6 }
+	byte:range { 3 }
+	byte:defense { 3 }
+	byte:movement { 0 }
+
+	bool:is-light-passenger { true }
+}
 unit-configuration:50mm-at {
 	string:name { 50mm }
 	unit-class:unit-class { towed-gun }
@@ -419,7 +431,7 @@ unit-configuration:80mm-aa {
 
 	bool:can-anti-aircraft { true }
 }
-unit-configuration:37mm-how-company {
+unit-configuration:37mm-how {
 	string:name { 37mm }
 	unit-class:unit-class { towed-gun }
 

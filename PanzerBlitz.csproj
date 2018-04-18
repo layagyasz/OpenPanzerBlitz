@@ -450,6 +450,7 @@
     <Folder Include="Modules\Default\NameGenerators\" />
     <Folder Include="Model\Map\Generation\" />
     <Folder Include="AI\" />
+    <Folder Include="Modules\Default\Scenarios\PathsOfRommel\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2298,6 +2299,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Maps\board-j.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_42.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_43.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_44.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_45.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_46.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_47.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

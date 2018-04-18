@@ -38,6 +38,16 @@ unit-configuration:minefield {
 	byte:defense { 0 }
 	byte:movement { 0 }
 }
+unit-configuration:fort-10 {
+	string:name { Fort }
+	unit-class:unit-class { fort }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 10 }
+	byte:movement { 0 }
+}
 unit-configuration:fort-20 {
 	string:name { Fort }
 	unit-class:unit-class { fort }

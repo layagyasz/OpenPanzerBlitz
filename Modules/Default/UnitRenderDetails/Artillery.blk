@@ -31,6 +31,9 @@ unit-render-details:45mm-at {
 unit-render-details:47mm-at {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:2pdr-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:50mm-at {
 	string:image-path { anti-armor.png }
 }
@@ -106,8 +109,8 @@ unit-render-details:76_2mm-aa {
 unit-render-details:80mm-aa {
 	string:image-path { anti-aircraft.png }
 }
-unit-render-details:37mm-how-company {
-	string:image-path { artillery-company.png }
+unit-render-details:37mm-how {
+	string:image-path { artillery.png }
 }
 unit-render-details:65mm-how-company {
 	string:image-path { artillery-company.png }

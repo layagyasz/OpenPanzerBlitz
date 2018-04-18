@@ -1,0 +1,171 @@
+﻿scenario:_ {
+	string:name { Cruinchy: Bridgehead on the Somme }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 10 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:british {
+			!faction:faction { factions.british }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,33 0,24 1,24 3,27 6,27 9,24 10,24 11,24 11,33 }
+					}
+					unit-group:unit-group {
+						string:name { Frankforce }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.a-10 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-39 }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-british }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.2pdr-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.76mm-at }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-british }
+								int:count { 4 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-bridge:matcher { }
+					unit-group:unit-group {
+						string:name { Frankforce Block }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:artain-controlled {
+						bool:friendly { true }
+						tile-in-region:matcher {
+							string:region-name { artain }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 3 }
+						!var:objective { objectives.artain-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-distance-from:_ {
+							byte:distance { 3 }
+							bool:atleast { true }
+							tile-has-unit:matcher {
+								unit-is-hostile:matcher {
+									byte:team { 2 }
+								}
+							}
+						}
+						tile-within:_ {
+							zone:zone { 0,0 0,24 1,24 3,27 6,27 9,24 10,24 11,24 11,0 }
+						}
+					}
+					unit-group:unit-group {
+						string:name { 7th Panzer Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

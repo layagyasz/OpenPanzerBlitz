@@ -45,6 +45,18 @@ unit-configuration:mg-platoon-british {
 	bool:can-only-support-close-assault { true }
 	bool:can-double-range { true }
 }
+unit-configuration:rifle-platoon-british-39 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+
+	bool:can-double-range { true }
+}
 unit-configuration:rifle-platoon-british-40 {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }

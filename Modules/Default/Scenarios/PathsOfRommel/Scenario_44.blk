@@ -1,0 +1,191 @@
+﻿scenario:_ {
+	string:name { Clairfayts: The Maginot Line }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 12 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { false }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:french {
+			!faction:faction { factions.french }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					prevent-enemy-objective:prevent-enemy { }
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 1 }
+						!var:objective { objectives.prevent-enemy }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 0,0 0,24 1,24 3,27 6,27 10,24 11,24 11,0 }
+						}
+						tile-matches-any:_ {
+							tile-has-edge:_ {
+								tile-edge:edge { forest }
+							}
+							tile-has-edge:_ {
+								tile-edge:edge { town }
+							}
+							tile-has-base:_ {
+								tile-base:base { village }
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { 4th North African Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-39 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-french }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa-early }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.37mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.fort-10 }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-evacuated {
+						bool:friendly { true }
+						unit-has-evacuated:matcher {
+							direction:direction { north }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-evacuated }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 15 }
+						!var:objective { objectives.units-evacuated }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 20 }
+						!var:objective { objectives.units-evacuated }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { south }
+					}
+					unit-group:unit-group {
+						string:name { 7th Panzer Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west
+								}
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-d }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

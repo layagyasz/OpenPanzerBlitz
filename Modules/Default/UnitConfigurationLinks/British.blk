@@ -4,6 +4,10 @@
 
 	int:obsolete-year { 1940 }
 }
+unit-configuration-link:2pdr-at-british {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.2pdr-at }
+}
 unit-configuration-link:6pdr-at-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.6pdr-at }
@@ -114,6 +118,12 @@ unit-configuration-link:scout-platoon-british {
 unit-configuration-link:mg-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-british }
+}
+unit-configuration-link:rifle-platoon-british-39 {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-39 }
+
+	int:obsolete-year { 1940 }
 }
 unit-configuration-link:rifle-platoon-british-40 {
 	!faction:faction { factions.british }

@@ -1,0 +1,185 @@
+﻿scenario:_ {
+	string:name { Pommerville: Attack on Combrai }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 1 0 }
+	byte:turns { 15 }
+	!environment:environment { environments.summer-grassland }
+	map-configuration:map-configuration {
+		board-configuration[]:_ {
+			board-configuration:_ {
+				string:board-path { Maps/board-a.map }
+				bool:invert { true }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-c.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-d.map }
+				bool:invert { true }
+			}
+		}
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:french {
+			!faction:faction { factions.french }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:grancelle-controlled {
+						bool:friendly { true }
+						tile-in-region:matcher {
+							string:region-name { grancelle }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 6 }
+						!var:objective { objectives.grancelle-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 0,0 20,0 20,33 0,33 }
+					}
+					unit-group:unit-group {
+						string:name { 3rd DLM and 4th North African Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.hotchkiss-35 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-39 }
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-french }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.25mm-aa }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chenillette }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-french }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:german {
+			!faction:faction { factions.german }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					tiles-controlled-objective:grancelle-controlled {
+						bool:friendly { true }
+						tile-in-region:matcher {
+							string:region-name { grancelle }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 15 }
+						!var:objective { objectives.grancelle-controlled }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-within:matcher {
+						zone:zone { 20,0 31,0 31,33 20,33 }
+					}
+					unit-group:unit-group {
+						string:name { 7th Panzer Div. }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+								int:count { 9 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { 
+									unit-configurations.engineer-platoon-german-west
+								}
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-d }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d-corrected }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.88mm-at }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								int:count { 6 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

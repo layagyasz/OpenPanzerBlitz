@@ -33,16 +33,14 @@ namespace PanzerBlitz
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
 				renderer,
 				factionRenderer);
-			/*
 			var controller =
 				new HumanMatchPlayerController(
 					_Context.MakeMatchAdapter(), armies, renderer, screen, ProgramContext.KeyController);
-			*/
 
 			var playerControllers = new Dictionary<Army, MatchPlayerController>();
 			foreach (Army a in _Context.Match.Armies)
 			{
-				var controller = new AIMatchPlayerController(_Context.MakeMatchAdapter(), a);
+				// var controller = new AIMatchPlayerController(_Context.MakeMatchAdapter(), a);
 				var overrideController = _Context.GetOverridePlayerController(a);
 				playerControllers.Add(a, overrideController ?? controller);
 			}

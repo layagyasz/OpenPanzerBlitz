@@ -16,6 +16,11 @@ unit-render-details:minefield {
 	string:override-display-name { }
 	string:image-path { mine.png }
 }
+unit-render-details:fort-10 {
+	string:override-display-name { }
+	string:image-path { fort.png }
+	color:override-color { #FFFFFF }
+}
 unit-render-details:fort-20 {
 	string:override-display-name { }
 	string:image-path { fort.png }
