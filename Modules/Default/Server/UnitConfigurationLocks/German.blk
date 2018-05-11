@@ -1,0 +1,747 @@
+﻿unit-configuration-lock:wagon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { wagon }
+	}
+	float:rarity { 3.6 }
+}
+unit-configuration-lock:28mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 28mm-at }
+	}
+	float:rarity { 12.6 }
+}
+unit-configuration-lock:37mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 37mm-at }
+	}
+	float:rarity { 9.7 }
+}
+unit-configuration-lock:47mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 47mm-at }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:50mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 50mm-at }
+	}
+	float:rarity { 10.8 }
+}
+unit-configuration-lock:75mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 75mm-at }
+	}
+	float:rarity { 9.5 }
+}
+unit-configuration-lock:88mm-at-early-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 88mm-at-early }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:88mm-at-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 88mm-at }
+	}
+	float:rarity { 13.0 }
+}
+unit-configuration-lock:20mm-aa-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 20mm-aa }
+	}
+	float:rarity { 10.2 }
+}
+unit-configuration-lock:20mm_4-aa-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 20mm_4-aa }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:37mm-aa-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 37mm-aa }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:75mm-how-company-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 75mm-how-company }
+	}
+	float:rarity { 10.3 }
+}
+unit-configuration-lock:75mm-how-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 75mm-how }
+	}
+	float:rarity { 16.7 }
+}
+unit-configuration-lock:100mm-how-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 100mm-how-german }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:105mm-how-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 105mm-how }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:150mm-how-company-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 150mm-how-company }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:150mm-how-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 150mm-how }
+	}
+	float:rarity { 10.7 }
+}
+unit-configuration-lock:170mm-how-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 170mm-how }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:81mm-mortar-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 81mm-mortar }
+	}
+	float:rarity { 10.6 }
+}
+unit-configuration-lock:120mm-mortar-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { 120mm-mortar-german }
+	}
+	float:rarity { 11.9 }
+}
+unit-configuration-lock:nebelwerfer-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { nebelwerfer }
+	}
+	float:rarity { 11.0 }
+}
+
+unit-configuration-lock:engineer-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { engineer-platoon-german }
+		string:_ { engineer-platoon-german-west }
+	}
+	float:rarity { 8.0 }
+}
+unit-configuration-lock:hmg-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { hmg-platoon-german }
+	}
+	float:rarity { 6.8 }
+}
+unit-configuration-lock:security-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { security-platoon-german }
+		string:_ { security-platoon-german-west }
+	}
+	float:rarity { 10.0 }
+}
+unit-configuration-lock:rifle-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { rifle-platoon-german-39 }
+		string:_ { rifle-platoon-german-40 }
+		string:_ { rifle-platoon-german-42 }
+		string:_ { rifle-platoon-german-42-west }
+	}
+	float:rarity { 5.4 }
+}
+unit-configuration-lock:smg-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { smg-platoon-german }
+		string:_ { smg-platoon-german-west }
+	}
+	float:rarity { 6.8 }
+}
+unit-configuration-lock:parachute-platoon-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { parachute-platoon-german }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:cavalry-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { cavalry-german }
+		string:_ { cavalry-german-west }
+	}
+	float:rarity { 9.0 }
+}
+unit-configuration-lock:truck-german {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { truck-german }
+	}
+	float:rarity { 5.6 }
+}
+unit-configuration-lock:motorcycle-german-40-west {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { motorcycle-german-40-west }
+		string:_ { motorcycle-german-42 }
+		string:_ { motorcycle-german-42-west }
+	}
+	float:rarity { 10.2 }
+}
+unit-configuration-lock:sdkfz-8 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-8 }
+	}
+	float:rarity { 12.0 }
+}
+unit-configuration-lock:sdkfz-251 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251 }
+		string:_ { sdkfz-251-west }
+	}
+	float:rarity { 10.6 }
+}
+unit-configuration-lock:sdkfz-250_1 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-250_1 }
+		string:_ { sdkfz-250_1-west }
+	}
+	float:rarity { 12.1 }
+}
+unit-configuration-lock:sdkfz-250_10 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-250_10 }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:sdkfz-251_10 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_10 }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:kfz-13 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { kfz-13 }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:sdkfz-6_2 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-6_2 }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:sdkfz-7_1 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-7_1 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:sdkfz-10_4 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-10_4 }
+	}
+	float:rarity { 12.4 }
+}
+unit-configuration-lock:sdkfz-221 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-221 }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:sdkfz-222 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-222 }
+	}
+	float:rarity { 14.0 }
+}
+unit-configuration-lock:sdkfz-231_6 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-231_6 }
+	}
+	float:rarity { 17.1 }
+}
+unit-configuration-lock:sdkfz-231_8 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-231_8 }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:sdkfz-233 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-233 }
+	}
+	float:rarity { 17.1 }
+}
+unit-configuration-lock:sdkfz-234_1 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-234_1 }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:sdkfz-234_3 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-234_3 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:puma {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { puma }
+	}
+	float:rarity { 17.3 }
+}
+unit-configuration-lock:sdkfz-234_4 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-234_4 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:sdkfz-250_7 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-250_7 }
+	}
+	float:rarity { 18.0 }
+}
+unit-configuration-lock:sdkfz-250_8 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-250_8 }
+	}
+	float:rarity { 17.9 }
+}
+unit-configuration-lock:sdkfz-250_9 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-250_9 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:sdkfz-251_2 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_2 }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:sdkfz-251_9 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_9 }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:sdkfz-251_16 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_16 }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:maultier {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { maultier }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:wespe {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { wespe }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:sdkfz-135_1-lrs {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sdkfz-135_1-lrs }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:hummel {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { hummel }
+	}
+	float:rarity { 14.5 }
+}
+unit-configuration-lock:gw-1 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { gw-1 }
+	}
+	float:rarity { 18.8 }
+}
+unit-configuration-lock:sig33-pzkw-ii {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { sig33-pzkw-ii }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:gw-38_m {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { gw-38_m }
+	}
+	float:rarity { 15.4 }
+}
+unit-configuration-lock:ostwind {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { ostwind }
+	}
+	float:rarity { 18.5 }
+}
+unit-configuration-lock:wirbelwind {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { wirbelwind }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:stuh-42 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { stuh-42 }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:diana {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { diana }
+	}
+	float:rarity { 20.8 }
+}
+unit-configuration-lock:marder-ii {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { marder-ii }
+	}
+	float:rarity { 14.7 }
+}
+unit-configuration-lock:marder-iii {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { marder-iii }
+	}
+	float:rarity { 13.2 }
+}
+unit-configuration-lock:stug-iii-b {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { stug-iii-b }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:stug-iii-g {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { stug-iii-g }
+	}
+	float:rarity { 11.0 }
+}
+unit-configuration-lock:stupz-iv {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { stupz-iv }
+	}
+	float:rarity { 15.7 }
+}
+unit-configuration-lock:flamingo {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { flamingo }
+	}
+	float:rarity { 16.7 }
+}
+unit-configuration-lock:hetzer {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { hetzer }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:ferdinand {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { ferdinand }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:elefant {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { elefant }
+	}
+	float:rarity { 18.4 }
+}
+unit-configuration-lock:nashorn {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { nashorn }
+	}
+	float:rarity { 15.1 }
+}
+unit-configuration-lock:pzjg-1 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzjg-1 }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:jgdpz-iv_48 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { jgdpz-iv_48 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:jgdpz-iv_70 {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { jgdpz-iv_70 }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:flammpanzer-38_t {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { flammpanzer-38_t }
+	}
+	float:rarity { 19.7 }
+}
+unit-configuration-lock:jagdpanther {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { jagdpanther }
+	}
+	float:rarity { 15.3 }
+}
+unit-configuration-lock:jagdtiger {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { jagdtiger }
+	}
+	float:rarity { 17.7 }
+}
+unit-configuration-lock:lynx {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { lynx }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:pzkw-35_t {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-35_t }
+	}
+	float:rarity { 15.2 }
+}
+unit-configuration-lock:pzkw-38_t {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-38_t }
+	}
+	float:rarity { 13.5 }
+}
+unit-configuration-lock:pzkw-i-a {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-i-a }
+	}
+	float:rarity { 14.3 }
+}
+unit-configuration-lock:pzkw-i-b {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-i-b }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:pzkw-ii-c {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-ii-c }
+	}
+	float:rarity { 13.9 }
+}
+unit-configuration-lock:pzkw-ii-d {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-ii-d }
+	}
+	float:rarity { 18.6 }
+}
+unit-configuration-lock:pzkw-ii-f {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-ii-f }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:pzkw-iii-d {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-d }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:pzkw-iii-f {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-f }
+	}
+	float:rarity { 14.9 }
+}
+unit-configuration-lock:pzkw-iii-g {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-g }
+	}
+	float:rarity { 14.8 }
+}
+unit-configuration-lock:pzkw-iii-j {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-j }
+	}
+	float:rarity { 13.4 }
+}
+unit-configuration-lock:pzkw-iii-n {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-n }
+	}
+	float:rarity { 14.7 }
+}
+unit-configuration-lock:flammpanzer-iii {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { flammpanzer-iii }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:pzkw-iv-a {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-a }
+	}
+	float:rarity { 18.9 }
+}
+unit-configuration-lock:pzkw-iv-d {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-d }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:pzkw-iv-e {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-e }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:pzkw-iv-g {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-g }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:pzkw-iv-h {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-h }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:pzkw-iv-j {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-j }
+	}
+	float:rarity { 12.4 }
+}
+unit-configuration-lock:panther-a {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { panther-a }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:panther-g {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { panther-g }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:tiger-i {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { tiger-i }
+	}
+	float:rarity { 13.6 }
+}
+unit-configuration-lock:tiger-ii {
+	string:faction { german }
+	string[]:unit-configurations { 
+		string:_ { tiger-ii }
+	}
+	float:rarity { 15.1 }
+}

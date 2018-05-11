@@ -26,22 +26,6 @@ namespace PanzerBlitz
 			Id = IdGenerator.GenerateId();
 			Number = (int)attributes[(int)Attribute.NUMBER];
 			UnitConfigurationLocks = new WeightedVector<UnitConfigurationLock>();
-
-			float cost = 0;
-			float totalCost = 0;
-			var locks = Block.Get<Dictionary<string, UnitConfigurationLock>>("unit-configuration-locks");
-			var m = (TagMatcher)attributes[(int)Attribute.TAG_MATCHER];
-			foreach (UnitConfigurationLock c in locks.Values)
-			{
-				float lockCost = c.UnitConfiguration.GetPointValue(c.Faction.HalfPriceTrucks) / c.Rarity;
-				if (m.Matches(c.Tags))
-				{
-					UnitConfigurationLocks.Add(c.Rarity, c);
-					cost += lockCost;
-				}
-				totalCost += lockCost;
-			}
-			Cost = RoundCost(cost / UnitConfigurationLocks.Length, COST_SCALE, COST_STEP);
 		}
 
 		public IEnumerable<UnitConfigurationLock> Open(Random Random)

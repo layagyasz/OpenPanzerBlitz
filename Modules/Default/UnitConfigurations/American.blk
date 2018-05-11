@@ -297,7 +297,7 @@ unit-configuration:m-12 {
 	byte:movement { 8 }
 }
 unit-configuration:m4-poa-cws-h1 {
-	string:name { M4 POA HWS H1 }
+	string:name { M4 POA CWS H1 }
 	unit-class:unit-class { flame-tank }
 
 	weapon-class:weapon-class { high-explosive }

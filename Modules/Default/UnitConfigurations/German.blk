@@ -543,7 +543,7 @@ unit-configuration:gw-1 {
 	byte:movement { 6 }
 }
 unit-configuration:sig33-pzkw-ii {
-	string:name { sIG33 Pzkw II }
+	string:name { sIG33 PzKw II }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -553,7 +553,7 @@ unit-configuration:sig33-pzkw-ii {
 	byte:movement { 8 }
 }
 unit-configuration:gw-38_m {
-	string:name { GW 38(M) }
+	string:name { GW 38(m) }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -676,16 +676,6 @@ unit-configuration:hetzer {
 	byte:defense { 12 }
 	byte:movement { 6 }
 }
-unit-configuration:jgdpz-iv {
-	string:name { JgdPz IV }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 16 }
-	byte:range { 12 }
-	byte:defense { 9 }
-	byte:movement { 8 }
-}
 unit-configuration:ferdinand {
 	string:name { Ferdinand }
 	unit-class:unit-class { tank }
@@ -716,8 +706,8 @@ unit-configuration:nashorn {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
-unit-configuration:pzjg-47 {
-	string:name { PzJg 47 }
+unit-configuration:pzjg-1 {
+	string:name { PzJg 1 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -726,8 +716,8 @@ unit-configuration:pzjg-47 {
 	byte:defense { 3 }
 	byte:movement { 6 }
 }
-unit-configuration:pzjd-iv_48 {
-	string:name { PzJd IV/48 }
+unit-configuration:jgdpz-iv_48 {
+	string:name { JgdPz IV/48 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -736,8 +726,8 @@ unit-configuration:pzjd-iv_48 {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:pzjd-iv_70 {
-	string:name { PzJd IV/70}
+unit-configuration:jgdpz-iv_70 {
+	string:name { JgdPz IV/70}
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -746,8 +736,8 @@ unit-configuration:pzjd-iv_70 {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:jgdpz-38-t-flame {
-	string:name { JgdPz 38t (FL) }
+unit-configuration:flammpanzer-38_t {
+	string:name { Flpz 38(t) }
 	unit-class:unit-class { flame-tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -756,8 +746,8 @@ unit-configuration:jgdpz-38-t-flame {
 	byte:defense { 12 }
 	byte:movement { 6 }
 }
-unit-configuration:jgdpz-v {
-	string:name { JgdPz V }
+unit-configuration:jagdpanther {
+	string:name { Jagdpanther }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -766,8 +756,8 @@ unit-configuration:jgdpz-v {
 	byte:defense { 15 }
 	byte:movement { 9 }
 }
-unit-configuration:jgdpz-vi {
-	string:name { JgdPz VI }
+unit-configuration:jagdtiger {
+	string:name { Jagdtiger }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -787,7 +777,7 @@ unit-configuration:lynx {
 	byte:movement { 10 }
 }
 unit-configuration:pzkw-35_t {
-	string:name { PzKw 35 (T) }
+	string:name { PzKw 35(t) }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -797,17 +787,7 @@ unit-configuration:pzkw-35_t {
 	byte:movement { 7 }
 }
 unit-configuration:pzkw-38_t {
-	string:name { PzKw 38 (T) }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 5 }
-	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 9 }
-}
-unit-configuration:pzkw-38_t-corrected {
-	string:name { PzKw 38 (T) }
+	string:name { PzKw 38(t) }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -815,16 +795,6 @@ unit-configuration:pzkw-38_t-corrected {
 	byte:range { 2 }
 	byte:defense { 3 }
 	byte:movement { 9 }
-}
-unit-configuration:pzkw-i {
-	string:name { PzKw I }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 8 }
 }
 unit-configuration:pzkw-i-a {
 	string:name { PzKw I A }
@@ -846,16 +816,6 @@ unit-configuration:pzkw-i-b {
 	byte:defense { 2 }
 	byte:movement { 8 }
 }
-unit-configuration:pzkw-ii {
-	string:name { PzKw II }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 2 }
-	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 10 }
-}
 unit-configuration:pzkw-ii-c {
 	string:name { PzKw II C }
 	unit-class:unit-class { tank }
@@ -867,16 +827,6 @@ unit-configuration:pzkw-ii-c {
 	byte:movement { 8 }
 }
 unit-configuration:pzkw-ii-d {
-	string:name { PzKw II D }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 2 }
-	byte:range { 4 }
-	byte:defense { 5 }
-	byte:movement { 10 }
-}
-unit-configuration:pzkw-ii-d-corrected {
 	string:name { PzKw II D }
 	unit-class:unit-class { tank }
 
@@ -903,16 +853,6 @@ unit-configuration:pzkw-iii-d {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 6 }
 	byte:range { 2 }
-	byte:defense { 6 }
-	byte:movement { 8 }
-}
-unit-configuration:pzkw-iii-d-corrected {
-	string:name { PzKw III D }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 6 }
-	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 8 }
 }
@@ -927,16 +867,6 @@ unit-configuration:pzkw-iii-f {
 	byte:movement { 8 }
 }
 unit-configuration:pzkw-iii-g {
-	string:name { PzKw III G }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 8 }
-	byte:range { 3 }
-	byte:defense { 6 }
-	byte:movement { 8 }
-}
-unit-configuration:pzkw-iii-g-corrected {
 	string:name { PzKw III G }
 	unit-class:unit-class { tank }
 
@@ -966,24 +896,14 @@ unit-configuration:pzkw-iii-n {
 	byte:defense { 7 }
 	byte:movement { 9 }
 }
-unit-configuration:pzkw-iii-flame {
-	string:name { PzKw III (FL) }
+unit-configuration:flammpanzer-iii {
+	string:name { Flpz III }
 	unit-class:unit-class { flame-tank }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 40 }
 	byte:range { 1 }
 	byte:defense { 8 }
-	byte:movement { 8 }
-}
-unit-configuration:pzkw-iv-how {
-	string:name { PzKw IV }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { high-explosive }
-	byte:attack { 5 }
-	byte:range { 8 }
-	byte:defense { 5 }
 	byte:movement { 8 }
 }
 unit-configuration:pzkw-iv-a {
@@ -1016,8 +936,8 @@ unit-configuration:pzkw-iv-e {
 	byte:defense { 7 }
 	byte:movement { 8 }
 }
-unit-configuration:pzkw-iv-f_2 {
-	string:name { PzKw IV F/2 }
+unit-configuration:pzkw-iv-g {
+	string:name { PzKw IV G }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -1036,18 +956,8 @@ unit-configuration:pzkw-iv-h {
 	byte:defense { 8 }
 	byte:movement { 8 }
 }
-unit-configuration:pzkw-iv_ss {
-	string:name { PzKw IV (SS) }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 14 }
-	byte:range { 8 }
-	byte:defense { 8 }
-	byte:movement { 8 }
-}
-unit-configuration:pzkw-iv_w {
-	string:name { PzKw IV (W) }
+unit-configuration:pzkw-iv-j {
+	string:name { PzKw IV J }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -1056,18 +966,8 @@ unit-configuration:pzkw-iv_w {
 	byte:defense { 7 }
 	byte:movement { 8 }
 }
-unit-configuration:panther {
-	string:name { Panther }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 16 }
-	byte:range { 12 }
-	byte:defense { 12 }
-	byte:movement { 10 }
-}
-unit-configuration:pzkw-v_w {
-	string:name { PzKw V (W) }
+unit-configuration:panther-a {
+	string:name { Panther A }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -1076,8 +976,8 @@ unit-configuration:pzkw-v_w {
 	byte:defense { 11 }
 	byte:movement { 10 }
 }
-unit-configuration:pzkw-v_ss {
-	string:name { PzKw V (SS) }
+unit-configuration:panther-g {
+	string:name { Panther G }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

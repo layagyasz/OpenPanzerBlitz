@@ -159,7 +159,7 @@
 						string:name { 5th SS Pz. Div. & Supporting Units }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.panther }
+								!unit-configuration:unit-configuration { unit-configurations.panther-g }
 								int:count { 3 }
 							}
 							unit-count:_ {

@@ -146,11 +146,11 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t-corrected }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d-corrected }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d }
 								int:count { 2 }
 							}
 							unit-count:_ {

@@ -216,19 +216,19 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_w }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-j }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_w }
+								!unit-configuration:unit-configuration { unit-configurations.panther-a }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_ss }
+								!unit-configuration:unit-configuration { unit-configurations.panther-g }
 								int:count { 4 }
 							}
 							unit-count:_ {

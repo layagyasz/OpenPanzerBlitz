@@ -174,7 +174,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 								int:count { 1 }
 							}
 							unit-count:_ {

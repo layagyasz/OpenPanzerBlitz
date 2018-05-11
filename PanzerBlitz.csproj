@@ -203,7 +203,6 @@
     <Compile Include="Server\UnitConfigurationLock.cs" />
     <Compile Include="IdGenerator.cs" />
     <Compile Include="Server\UnitConfigurationPack.cs" />
-    <Compile Include="Server\TagMatcher.cs" />
     <Compile Include="Server\ServerData.cs" />
     <Compile Include="Server\PanzerBlitzServer.cs" />
     <Compile Include="Controller\Server\ServerStateController.cs" />
@@ -451,6 +450,7 @@
     <Folder Include="Model\Map\Generation\" />
     <Folder Include="AI\" />
     <Folder Include="Modules\Default\Scenarios\PathsOfRommel\" />
+    <Folder Include="Modules\Default\Server\UnitConfigurationLocks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -512,12 +512,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\Default\Scenario_06.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Russian.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationPacks.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitConfigurationLinks\German.blk">
@@ -2317,6 +2311,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_47.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Server\UnitConfigurationLocks\German.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

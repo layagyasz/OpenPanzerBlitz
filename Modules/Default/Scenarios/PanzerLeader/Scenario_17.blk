@@ -379,7 +379,7 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_w }
+								!unit-configuration:unit-configuration { unit-configurations.panther-a }
 								int:count { 10 }
 							}
 							unit-count:_ {

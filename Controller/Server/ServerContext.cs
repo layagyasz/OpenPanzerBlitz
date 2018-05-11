@@ -14,7 +14,7 @@ namespace PanzerBlitz
 
 		new public static ServerContext CreateServer(ushort Port)
 		{
-			var pbServer = new PanzerBlitzServer("./BLKConfigurations/Server");
+			var pbServer = new PanzerBlitzServer("./" + GameData.LoadedModule + "/Server");
 			var server = new TCPServer(Port);
 			server.Start();
 			server.MessageAdapter = new NonMatchMessageSerializer();

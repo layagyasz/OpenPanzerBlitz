@@ -111,7 +111,7 @@
 						string:name { Panzer Spearhead }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzjg-47 }
+								!unit-configuration:unit-configuration { unit-configurations.pzjg-1 }
 								int:count { 2 }
 							}
 							unit-count:_ {

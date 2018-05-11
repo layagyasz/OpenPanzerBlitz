@@ -131,10 +131,6 @@ unit-configuration-link:pzkw-ii-d-slovak {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d }
 }
-unit-configuration-link:pzkw-ii-d-corrected-slovak {
-	!faction:faction { factions.slovak }
-	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d-corrected }
-}
 unit-configuration-link:lt-34-corrected {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.lt-34-corrected }

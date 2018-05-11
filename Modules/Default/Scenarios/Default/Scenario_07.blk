@@ -205,7 +205,7 @@
 								int:count { 6 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.panther }
+								!unit-configuration:unit-configuration { unit-configurations.panther-g }
 								int:count { 5 }
 							}
 							unit-count:_ {

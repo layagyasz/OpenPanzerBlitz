@@ -150,18 +150,15 @@ unit-render-details:sdkfz-251_16 {
 	string:image-path { sdkfz-251_16.png }
 }
 unit-render-details:maultier {
-	string:override-display-name { MAULTIER }
 	string:image-path { maultier.png }
 }
 unit-render-details:wespe {
-	string:override-display-name { WESPE }
 	string:image-path { wespe.png }
 }
 unit-render-details:sdkfz-135_1-lrs {
 	string:image-path { sdkfz-135_1-lrs.png }
 }
 unit-render-details:hummel {
-	string:override-display-name { HUMMEL }
 	string:image-path { hummel.png }
 }
 unit-render-details:gw-1 {
@@ -206,9 +203,6 @@ unit-render-details:flamingo {
 unit-render-details:hetzer {
 	string:image-path { hetzer.png }
 }
-unit-render-details:jgdpz-iv {
-	string:image-path { pzjd-iv_70.png }
-}
 unit-render-details:ferdinand  {
 	string:image-path { ferdinand.png }
 }
@@ -219,22 +213,22 @@ unit-render-details:nashorn {
 	string:override-display-name { NASHORN }
 	string:image-path { nashorn.png }
 }
-unit-render-details:pzjg-47 {
+unit-render-details:pzjg-1 {
 	string:image-path { pzjg-47.png }
 }
-unit-render-details:pzjd-iv_48 {
+unit-render-details:jgdpz-iv_48 {
 	string:image-path { pzjd-iv_48.png }
 }
-unit-render-details:pzjd-iv_70 {
+unit-render-details:jgdpz-iv_70 {
 	string:image-path { pzjd-iv_70.png }
 }
-unit-render-details:jgdpz-38-t-flame {
+unit-render-details:flammpanzer-38_t {
 	string:image-path { jgdpz-38-t-fl.png }
 }
-unit-render-details:jgdpz-v {
+unit-render-details:jagdpanther {
 	string:image-path { jgdpz-v.png }
 }
-unit-render-details:jgdpz-vi {
+unit-render-details:jagdtiger {
 	string:image-path { jgdpz-vi.png }
 }
 unit-render-details:pzkw-35_t {
@@ -243,15 +237,8 @@ unit-render-details:pzkw-35_t {
 unit-render-details:pzkw-38_t {
 	string:image-path { lt-38.png }
 }
-unit-render-details:pzkw-38_t-corrected {
-	string:image-path { lt-38.png }
-}
 unit-render-details:lynx {
-	string:override-display-name { LYNX }
 	string:image-path { lynx.png }
-}
-unit-render-details:pzkw-i {
-	string:image-path { pzkw-i.png }
 }
 unit-render-details:pzkw-i-a {
 	string:image-path { pzkw-i.png }
@@ -259,16 +246,10 @@ unit-render-details:pzkw-i-a {
 unit-render-details:pzkw-i-b {
 	string:image-path { pzkw-i.png }
 }
-unit-render-details:pzkw-ii {
-	string:image-path { pzkw-ii.png }
-}
 unit-render-details:pzkw-ii-c {
 	string:image-path { pzkw-ii.png }
 }
 unit-render-details:pzkw-ii-d {
-	string:image-path { pzkw-ii.png }
-}
-unit-render-details:pzkw-ii-d-corrected {
 	string:image-path { pzkw-ii.png }
 }
 unit-render-details:pzkw-ii-f {
@@ -277,16 +258,10 @@ unit-render-details:pzkw-ii-f {
 unit-render-details:pzkw-iii-d {
 	string:image-path { pzkw-iii-early.png }
 }
-unit-render-details:pzkw-iii-d-corrected {
-	string:image-path { pzkw-iii-early.png }
-}
 unit-render-details:pzkw-iii-f {
 	string:image-path { pzkw-iii-early.png }
 }
 unit-render-details:pzkw-iii-g {
-	string:image-path { pzkw-iii-medium.png }
-}
-unit-render-details:pzkw-iii-g-corrected {
 	string:image-path { pzkw-iii-medium.png }
 }
 unit-render-details:pzkw-iii-j {
@@ -295,7 +270,7 @@ unit-render-details:pzkw-iii-j {
 unit-render-details:pzkw-iii-n {
 	string:image-path { pzkw-iii-short.png }
 }
-unit-render-details:pzkw-iii-flame {
+unit-render-details:flammpanzer-iii {
 	string:image-path { pzkw-iii-fl.png }
 }
 unit-render-details:pzkw-iv-a {
@@ -307,29 +282,19 @@ unit-render-details:pzkw-iv-d {
 unit-render-details:pzkw-iv-e {
 	string:image-path { pzkw-iv-short.png }
 }
-unit-render-details:pzkw-iv-f_2 {
+unit-render-details:pzkw-iv-g {
 	string:image-path { pzkw-iv-medium.png }
 }
 unit-render-details:pzkw-iv-h {
 	string:image-path { pzkw-iv-long.png }
 }
-unit-render-details:pzkw-iv-how {
-	string:image-path { pzkw-iv-early.png }
-}
-unit-render-details:pzkw-iv_ss {
+unit-render-details:pzkw-iv-j {
 	string:image-path { pzkw-iv-long.png }
 }
-unit-render-details:pzkw-iv_w {
-	string:image-path { pzkw-iv-long.png }
-}
-unit-render-details:panther {
-	string:override-display-name { PANTH }
+unit-render-details:panther-a {
 	string:image-path { panther.png }
 }
-unit-render-details:pzkw-v_ss {
-	string:image-path { panther.png }
-}
-unit-render-details:pzkw-v_w {
+unit-render-details:panther-g {
 	string:image-path { panther.png }
 }
 unit-render-details:tiger-i {

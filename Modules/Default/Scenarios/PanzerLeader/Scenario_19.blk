@@ -269,11 +269,11 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv_ss }
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.pzkw-v_ss }
+								!unit-configuration:unit-configuration { unit-configurations.panther-g }
 								int:count { 5 }
 							}
 							unit-count:_ {

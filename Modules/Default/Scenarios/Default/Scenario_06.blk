@@ -157,7 +157,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.panther }
+								!unit-configuration:unit-configuration { unit-configurations.panther-g }
 								int:count { 1 }
 							}
 							unit-count:_ {
@@ -169,7 +169,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv }
+								!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv_70 }
 								int:count { 1 }
 							}
 							unit-count:_ {
