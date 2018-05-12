@@ -262,7 +262,7 @@ unit-configuration:tractor {
 	byte:movement { 4 }
 }
 unit-configuration:truck-russian {
-	string:name { SIS-5 Truck }
+	string:name { ZIS-5 Truck }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { na }
@@ -374,8 +374,8 @@ unit-configuration:rf-8 {
 	bool:leaves-wreck-when-destroyed { false }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
-unit-configuration:sis-33 {
-	string:name { SIS-33 Halftrack }
+unit-configuration:m-2 {
+	string:name { M-2 Halftrack }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { infantry }
@@ -386,8 +386,8 @@ unit-configuration:sis-33 {
 
 	bool:is-armored { true }
 }
-unit-configuration:zis-42-transport {
-	string:name { ZIS-42 Halftrack }
+unit-configuration:zis-42 {
+	string:name { ZIS-42 }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { na }
@@ -468,8 +468,8 @@ unit-configuration:su-57 {
 	byte:defense { 4 }
 	byte:movement { 10 }
 }
-unit-configuration:zis-42 {
-	string:name { ZIS-42 }
+unit-configuration:zis-43 {
+	string:name { ZIS-43 }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { high-explosive }
@@ -613,8 +613,8 @@ unit-configuration:su-152 {
 	byte:defense { 16 }
 	byte:movement { 7 }
 }
-unit-configuration:jsu-152 {
-	string:name { JSU-152 }
+unit-configuration:isu-152 {
+	string:name { ISU-152 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -623,8 +623,8 @@ unit-configuration:jsu-152 {
 	byte:defense { 17 }
 	byte:movement { 7 }
 }
-unit-configuration:kv-ii {
-	string:name { KV-II }
+unit-configuration:kv-2 {
+	string:name { KV-2 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -733,8 +733,8 @@ unit-configuration:su-100 {
 	byte:defense { 15 }
 	byte:movement { 8 }
 }
-unit-configuration:jsu-122 {
-	string:name { JSU-122 }
+unit-configuration:isu-122 {
+	string:name { ISU-122 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -823,8 +823,8 @@ unit-configuration:bt-5 {
 	byte:defense { 5 }
 	byte:movement { 13 } 
 }
-unit-configuration:kv-i-a {
-	string:name { KV-I A }
+unit-configuration:kv-1-a {
+	string:name { KV-1 A }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -833,8 +833,8 @@ unit-configuration:kv-i-a {
 	byte:defense { 10 }
 	byte:movement { 8 }
 }
-unit-configuration:kv-i-c {
-	string:name { KV-I C }
+unit-configuration:kv-1-c {
+	string:name { KV-1 C }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -843,8 +843,8 @@ unit-configuration:kv-i-c {
 	byte:defense { 13 }
 	byte:movement { 7 }
 }
-unit-configuration:kv-i-s {
-	string:name { KV-I S }
+unit-configuration:kv-1-s {
+	string:name { KV-1 S }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -893,8 +893,8 @@ unit-configuration:t-34_85 {
 	byte:defense { 10 }
 	byte:movement { 11 }	
 }
-unit-configuration:js-ii {
-	string:name { JS-II }
+unit-configuration:is-2 {
+	string:name { IS-2 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -903,8 +903,8 @@ unit-configuration:js-ii {
 	byte:defense { 12 }
 	byte:movement { 8 }	
 }
-unit-configuration:js-iii {
-	string:name { JS-III }
+unit-configuration:is-3 {
+	string:name { IS-3 }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

@@ -309,33 +309,31 @@ unit-configuration-link:rf-8 {
 		!environment:_ { environments.winter-steppe }
 	}
 }
-unit-configuration-link:sis-33 {
+unit-configuration-link:m-2 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+	!unit-configuration:unit-configuration { unit-configurations.m-2 }
 }
-unit-configuration-link:zis-42-transport {
+unit-configuration-link:zis-42 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.zis-42-transport }
+	!unit-configuration:unit-configuration { unit-configurations.zis-42 }
 
 	int:introduce-year { 1942 }
 }
 unit-configuration-link:t-20 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-20 }
-
-	int:obsolete-year { 1941 }
 }
 unit-configuration-link:ba-10-infantry {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-10-infantry }
 
-	int:obsolete-year { 1941 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:ba-10-at {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-10-at }
 
-	int:obsolete-year { 1941 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:ba-20 {
 	!faction:faction { factions.russian }
@@ -345,7 +343,7 @@ unit-configuration-link:ba-32-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-32-a }
 
-	int:obsolete-year { 1941 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:ba-64-b {
 	!faction:faction { factions.russian }
@@ -359,9 +357,9 @@ unit-configuration-link:su-57 {
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:zis-42 {
+unit-configuration-link:zis-43 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.zis-42 }
+	!unit-configuration:unit-configuration { unit-configurations.zis-43 }
 
 	int:introduce-year { 1942 }
 }
@@ -400,6 +398,8 @@ unit-configuration-link:t-40 {
 unit-configuration-link:t-28-e {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-28-e }
+
+	int:introduce-year { 1940 }
 }
 unit-configuration-link:bt-7-a {
 	!faction:faction { factions.russian }
@@ -429,15 +429,15 @@ unit-configuration-link:su-152 {
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:jsu-152 {
+unit-configuration-link:isu-152 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.jsu-152 }
+	!unit-configuration:unit-configuration { unit-configurations.isu-152 }
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:kv-ii {
+unit-configuration-link:kv-2 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.kv-ii }
+	!unit-configuration:unit-configuration { unit-configurations.kv-2 }
 }
 unit-configuration-link:m-13 {
 	!faction:faction { factions.russian }
@@ -472,6 +472,8 @@ unit-configuration-link:ot-34_85 {
 unit-configuration-link:kv-8 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-8 }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:su-76 {
 	!faction:faction { factions.russian }
@@ -495,11 +497,11 @@ unit-configuration-link:su-100 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-100 }
 
-	int:introduce-year { 1945 }
+	int:introduce-year { 1944 }
 }
-unit-configuration-link:jsu-122 {
+unit-configuration-link:isu-122 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.jsu-122 }
+	!unit-configuration:unit-configuration { unit-configurations.isu-122 }
 
 	int:introduce-year { 1944 }
 }
@@ -543,21 +545,23 @@ unit-configuration-link:bt-5 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.bt-5 }
 }
-unit-configuration-link:kv-i-a {
+unit-configuration-link:kv-1-a {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.kv-i-a }
+	!unit-configuration:unit-configuration { unit-configurations.kv-1-a }
+
+	int:introduce-year { 1940 }
 }
-unit-configuration-link:kv-i-c {
+unit-configuration-link:kv-1-c {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.kv-i-c }
+	!unit-configuration:unit-configuration { unit-configurations.kv-1-c }
 
 	int:introduce-year { 1942 }
 }
-unit-configuration-link:kv-i-s {
+unit-configuration-link:kv-1-s {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.kv-i-s }
+	!unit-configuration:unit-configuration { unit-configurations.kv-1-s }
 
-	int:introduce-year { 1943 }
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:kv-85 {
 	!faction:faction { factions.russian }
@@ -583,15 +587,15 @@ unit-configuration-link:t-34_85 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:js-ii {
+unit-configuration-link:is-2 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.js-ii }
+	!unit-configuration:unit-configuration { unit-configurations.is-2 }
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:js-iii {
+unit-configuration-link:is-3 {
 	!faction:faction { factions.russian }
-	!unit-configuration:unit-configuration { unit-configurations.js-iii }
+	!unit-configuration:unit-configuration { unit-configurations.is-3 }
 
 	int:introduce-year { 1943 }
 }

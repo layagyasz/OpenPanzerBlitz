@@ -86,11 +86,11 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.js-ii }
+								!unit-configuration:unit-configuration { unit-configurations.is-2 }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.jsu-152 }
+								!unit-configuration:unit-configuration { unit-configurations.isu-152 }
 								int:count { 1 }
 							}
 							unit-count:_ {
@@ -114,7 +114,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+								!unit-configuration:unit-configuration { unit-configurations.m-2 }
 								int:count { 3 }
 							}
 							unit-count:_ {
@@ -176,7 +176,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.kv-i-a }
+								!unit-configuration:unit-configuration { unit-configurations.kv-1-a }
 								int:count { 1 }
 							}
 							unit-count:_ {

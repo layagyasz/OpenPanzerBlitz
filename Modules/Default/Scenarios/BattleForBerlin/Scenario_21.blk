@@ -331,7 +331,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.js-ii }
+								!unit-configuration:unit-configuration { unit-configurations.is-2 }
 								int:count { 2 }
 							}
 							unit-count:_ {

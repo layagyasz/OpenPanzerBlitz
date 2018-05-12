@@ -48,10 +48,10 @@
 						direction:edge { south }
 					}
 					unit-group:unit-group {
-						string:name { KV-I Formation }
+						string:name { KV-1 Formation }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.kv-i-c }
+								!unit-configuration:unit-configuration { unit-configurations.kv-1-c }
 								int:count { 4 }
 							}
 							unit-count:_ {

@@ -117,12 +117,11 @@ unit-render-details:asd-400 {
 unit-render-details:rf-8 {
 	string:image-path { rf-8.png }
 }
-unit-render-details:sis-33 {
+unit-render-details:m-2 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sis-33.png }
 }
-unit-render-details:zis-42-transport {
-	string:override-display-name { ZIS-42 }
+unit-render-details:zis-42 {
 	string:image-path { zis-42-transport.png }
 }
 unit-render-details:t-20 {
@@ -146,7 +145,7 @@ unit-render-details:ba-64-b {
 unit-render-details:su-57 {
 	string:image-path { su-57.png }
 }
-unit-render-details:zis-42 {
+unit-render-details:zis-43 {
 	string:image-path { zis-42.png }
 }
 unit-render-details:gaz-aa {
@@ -185,10 +184,10 @@ unit-render-details:su-122 {
 unit-render-details:su-152 {
 	string:image-path { su-152.png }
 }
-unit-render-details:jsu-152 {
+unit-render-details:isu-152 {
 	string:image-path { jsu-152.png }
 }
-unit-render-details:kv-ii {
+unit-render-details:kv-2 {
 	string:image-path { kv-ii.png }
 }
 unit-render-details:m-13 {
@@ -218,7 +217,7 @@ unit-render-details:su-85 {
 unit-render-details:su-100 {
 	string:image-path { su-100.png }
 }
-unit-render-details:jsu-122 {
+unit-render-details:isu-122 {
 	string:image-path { jsu-122.png }
 }
 unit-render-details:t-26-b {
@@ -248,13 +247,13 @@ unit-render-details:t-70-a {
 unit-render-details:bt-5 {
 	string:image-path { bt-5.png }
 }
-unit-render-details:kv-i-a {
+unit-render-details:kv-1-a {
 	string:image-path { kv-i.png }
 }
-unit-render-details:kv-i-c {
+unit-render-details:kv-1-c {
 	string:image-path { kv-i.png }
 }
-unit-render-details:kv-i-s {
+unit-render-details:kv-1-s {
 	string:image-path { kv-i.png }
 }
 unit-render-details:kv-85 {
@@ -269,10 +268,10 @@ unit-render-details:t-34-c {
 unit-render-details:t-34_85 {
 	string:image-path { t-34_85.png }
 }
-unit-render-details:js-ii {
+unit-render-details:is-2 {
 	string:image-path { js-ii.png }
 }
-unit-render-details:js-iii {
+unit-render-details:is-3 {
 	string:image-path { js-iii.png }
 }
 unit-render-details:il-2-bombs {

@@ -123,7 +123,7 @@
 								int:count { 12 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sis-33 }
+								!unit-configuration:unit-configuration { unit-configurations.m-2 }
 								int:count { 2 }
 							}
 							unit-count:_ {
