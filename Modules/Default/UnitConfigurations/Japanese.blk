@@ -86,8 +86,8 @@ unit-configuration:truck-japanese {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
-unit-configuration:type-1-ho-ki {
-	string:name { Type 1 Ho-Ki }
+unit-configuration:ho-ki {
+	string:name { Ho-Ki }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { na }
@@ -124,7 +124,7 @@ unit-configuration:type-93 {
 }
 unit-configuration:ho-ni-1-sph {
 	string:name { Ho-Ni 1 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
@@ -136,7 +136,7 @@ unit-configuration:ho-ni-1-sph {
 }
 unit-configuration:ho-ni-1 {
 	string:name { Ho-Ni 1 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 5 }
@@ -146,7 +146,7 @@ unit-configuration:ho-ni-1 {
 }
 unit-configuration:ho-ni-2 {
 	string:name { Ho-Ni 2 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
@@ -156,17 +156,19 @@ unit-configuration:ho-ni-2 {
 }
 unit-configuration:ho-ro {
 	string:name { Ho-Ro }
-	unit-class:unit-class { assault-gun }
+	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
 	byte:range { 12 }
 	byte:defense { 5 }
 	byte:movement { 8 }
+
+	bool:can-indirect-fire { true }
 }
 unit-configuration:ho-ni-3 {
 	string:name { Ho-Ni 3 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -225,7 +227,7 @@ unit-configuration:ha-go {
 	byte:movement { 8 }
 }
 unit-configuration:otsu {
-	string:name { OTSU }
+	string:name { Otsu }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -234,7 +236,7 @@ unit-configuration:otsu {
 	byte:defense { 2 }
 	byte:movement { 5 }
 }
-unit-configuration:chi-ha-he {
+unit-configuration:chi-ha {
 	string:name { Chi-Ha }
 	unit-class:unit-class { tank }
 
@@ -244,8 +246,8 @@ unit-configuration:chi-ha-he {
 	byte:defense { 3 }
 	byte:movement { 8 }
 }
-unit-configuration:chi-ha-at {
-	string:name { Chi-Ha }
+unit-configuration:shinhoto-chi-ha {
+	string:name { Shinhoto Chi-Ha }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

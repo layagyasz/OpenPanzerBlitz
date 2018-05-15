@@ -395,6 +395,10 @@ unit-configuration-link:t-40 {
 
 	int:introduce-year { 1941 }
 }
+unit-configuration-link:t-28 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.t-28 }
+}
 unit-configuration-link:t-28-e {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-28-e }
@@ -544,6 +548,10 @@ unit-configuration-link:t-70-a {
 unit-configuration-link:bt-5 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.bt-5 }
+}
+unit-configuration-link:bt-7 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.bt-7 }
 }
 unit-configuration-link:kv-1-a {
 	!faction:faction { factions.russian }

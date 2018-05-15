@@ -28,7 +28,7 @@ unit-render-details:wagon-japanese {
 unit-render-details:truck-japanese {
 	string:image-path { truck-10.png }
 }
-unit-render-details:type-1-ho-ki {
+unit-render-details:ho-ki {
 	string:image-path { type-1-ho-ki.png }
 }
 unit-render-details:type-92 {
@@ -70,10 +70,10 @@ unit-render-details:ha-go {
 unit-render-details:otsu {
 	string:image-path { ke-ni.png }
 }
-unit-render-details:chi-ha-he {
+unit-render-details:chi-ha {
 	string:image-path { chi-ha-h.png }
 }
-unit-render-details:chi-ha-at {
+unit-render-details:shinhoto-chi-ha {
 	string:image-path { chi-ha-a.png }
 }
 unit-render-details:te-ke {

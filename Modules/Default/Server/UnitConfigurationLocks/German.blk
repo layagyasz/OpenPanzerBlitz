@@ -1,91 +1,91 @@
 ﻿unit-configuration-lock:wagon-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { wagon }
+		string:_ { wagon-german }
 	}
 	float:rarity { 3.6 }
 }
 unit-configuration-lock:28mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 28mm-at }
+		string:_ { 28mm-at-german }
 	}
 	float:rarity { 12.6 }
 }
 unit-configuration-lock:37mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 37mm-at }
+		string:_ { 37mm-at-german }
 	}
 	float:rarity { 9.7 }
 }
 unit-configuration-lock:47mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 47mm-at }
+		string:_ { 47mm-at-german }
 	}
 	float:rarity { 14.4 }
 }
 unit-configuration-lock:50mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 50mm-at }
+		string:_ { 50mm-at-german }
 	}
 	float:rarity { 10.8 }
 }
 unit-configuration-lock:75mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 75mm-at }
+		string:_ { 75mm-at-german }
 	}
 	float:rarity { 9.5 }
 }
 unit-configuration-lock:88mm-at-early-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 88mm-at-early }
+		string:_ { 88mm-at-early-german }
 	}
 	float:rarity { 9.6 }
 }
 unit-configuration-lock:88mm-at-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 88mm-at }
+		string:_ { 88mm-at-german }
 	}
 	float:rarity { 13.0 }
 }
 unit-configuration-lock:20mm-aa-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 20mm-aa }
+		string:_ { 20mm-aa-german }
 	}
 	float:rarity { 10.2 }
 }
 unit-configuration-lock:20mm_4-aa-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 20mm_4-aa }
+		string:_ { 20mm_4-aa-german }
 	}
 	float:rarity { 12.9 }
 }
 unit-configuration-lock:37mm-aa-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 37mm-aa }
+		string:_ { 37mm-aa-german }
 	}
 	float:rarity { 12.8 }
 }
 unit-configuration-lock:75mm-how-company-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 75mm-how-company }
+		string:_ { 75mm-how-company-german }
 	}
 	float:rarity { 10.3 }
 }
 unit-configuration-lock:75mm-how-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 75mm-how }
+		string:_ { 75mm-how-german }
 	}
 	float:rarity { 16.7 }
 }
@@ -99,37 +99,37 @@ unit-configuration-lock:100mm-how-german {
 unit-configuration-lock:105mm-how-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 105mm-how }
+		string:_ { 105mm-how-germn }
 	}
 	float:rarity { 9.6 }
 }
 unit-configuration-lock:150mm-how-company-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 150mm-how-company }
+		string:_ { 150mm-how-company-german }
 	}
 	float:rarity { 11.8 }
 }
 unit-configuration-lock:150mm-how-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 150mm-how }
+		string:_ { 150mm-how-german }
 	}
 	float:rarity { 10.7 }
 }
 unit-configuration-lock:170mm-how-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 170mm-how }
+		string:_ { 170mm-how-german }
 	}
 	float:rarity { 15.6 }
 }
 unit-configuration-lock:81mm-mortar-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { 81mm-mortar }
+		string:_ { 81mm-mortar-german }
 	}
-	float:rarity { 10.6 }
+	float:rarity { 8.8 }
 }
 unit-configuration-lock:120mm-mortar-german {
 	string:faction { german }
@@ -141,7 +141,7 @@ unit-configuration-lock:120mm-mortar-german {
 unit-configuration-lock:nebelwerfer-german {
 	string:faction { german }
 	string[]:unit-configurations { 
-		string:_ { nebelwerfer }
+		string:_ { nebelwerfer-german }
 	}
 	float:rarity { 11.0 }
 }
@@ -192,7 +192,7 @@ unit-configuration-lock:parachute-platoon-german {
 	string[]:unit-configurations { 
 		string:_ { parachute-platoon-german }
 	}
-	float:rarity { 17.2 }
+	float:rarity { 13.7 }
 }
 unit-configuration-lock:cavalry-german {
 	string:faction { german }

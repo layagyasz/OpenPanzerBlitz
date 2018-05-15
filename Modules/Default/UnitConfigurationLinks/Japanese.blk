@@ -26,10 +26,6 @@ unit-configuration-link:70mm-how-company-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.70mm-how-company }
 }
-unit-configuration-link:75mm-how-company-japanese {
-	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.75mm-how-company }
-}
 unit-configuration-link:75mm-how-mountain-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-how-mountain }
@@ -38,17 +34,9 @@ unit-configuration-link:75mm-how-long-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
 }
-unit-configuration-link:105mm-how-company-japanese {
-	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
-}
 unit-configuration-link:105mm-how-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
-}
-unit-configuration-link:150mm-how-company-japanese {
-	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.150mm-how-company }
 }
 unit-configuration-link:150mm-how-japanese {
 	!faction:faction { factions.japanese }
@@ -109,9 +97,9 @@ unit-configuration-link:truck-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.truck-japanese }
 }
-unit-configuration-link:type-1-ho-ki {
+unit-configuration-link:ho-ki {
 	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.type-1-ho-ki }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ki }
 
 	int:introduce-year { 1944 }
 }
@@ -181,13 +169,13 @@ unit-configuration-link:otsu {
 
 	int:obsolete-year { 1942 }
 }
-unit-configuration-link:chi-ha-he {
+unit-configuration-link:chi-ha {
 	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.chi-ha-he }
+	!unit-configuration:unit-configuration { unit-configurations.chi-ha }
 }
-unit-configuration-link:chi-ha-at {
+unit-configuration-link:shinhoto-chi-ha {
 	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.chi-ha-at }
+	!unit-configuration:unit-configuration { unit-configurations.chi-ha }
 }
 unit-configuration-link:te-ke {
 	!faction:faction { factions.japanese }

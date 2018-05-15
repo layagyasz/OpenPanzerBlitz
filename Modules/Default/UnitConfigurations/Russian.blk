@@ -553,6 +553,16 @@ unit-configuration:t-40 {
 	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
 	int:water-die-modifier { 2 }
 }
+unit-configuration:t-28 {
+	string:name { T-28 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 6 }
+	byte:defense { 3 }
+	byte:movement { 6 }	
+}
 unit-configuration:t-28-e {
 	string:name { T-28 E }
 	unit-class:unit-class { tank }
@@ -570,8 +580,8 @@ unit-configuration:bt-7-a {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
 	byte:range { 5 }
-	byte:defense { 5 }
-	byte:movement { 13 }	
+	byte:defense { 4 }
+	byte:movement { 11 }	
 }
 unit-configuration:t-35 {
 	string:name { T-35 }
@@ -628,10 +638,10 @@ unit-configuration:kv-2 {
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
-	byte:attack { 50 }
+	byte:attack { 40 }
 	byte:range { 10 }
 	byte:defense { 10 }
-	byte:movement { 8 }	
+	byte:movement { 5 }	
 }
 unit-configuration:m-13 {
 	string:name { M-13 }
@@ -660,7 +670,7 @@ unit-configuration:ot-133 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 30 }
 	byte:range { 1 }
-	byte:defense { 5 }
+	byte:defense { 2 }
 	byte:movement { 6 }
 }
 unit-configuration:ot-34 {
@@ -695,7 +705,7 @@ unit-configuration:kv-8 {
 }
 unit-configuration:su-76 {
 	string:name { SU-76 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -705,7 +715,7 @@ unit-configuration:su-76 {
 }
 unit-configuration:su-85 {
 	string:name { SU-85 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -725,7 +735,7 @@ unit-configuration:t-44 {
 }
 unit-configuration:su-100 {
 	string:name { SU-100 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }
@@ -750,7 +760,7 @@ unit-configuration:t-26-b {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 5 }
+	byte:defense { 3 }
 	byte:movement { 6 } 
 }
 unit-configuration:t-26-c {
@@ -760,7 +770,7 @@ unit-configuration:t-26-c {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 5 }
+	byte:defense { 3 }
 	byte:movement { 6 }	
 }
 unit-configuration:t-26-e {
@@ -770,7 +780,7 @@ unit-configuration:t-26-e {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 5 }
+	byte:defense { 3 }
 	byte:movement { 6 }	
 }
 unit-configuration:t-46 {
@@ -820,18 +830,28 @@ unit-configuration:bt-5 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 5 }
-	byte:movement { 13 } 
+	byte:defense { 3 }
+	byte:movement { 11 } 
+}
+unit-configuration:bt-7 {
+	string:name { BT-7 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 5 }
+	byte:range { 3 }
+	byte:defense { 4 }
+	byte:movement { 11 } 
 }
 unit-configuration:kv-1-a {
 	string:name { KV-1 A }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
-	byte:attack { 12 }
+	byte:attack { 8 }
 	byte:range { 5 }
 	byte:defense { 10 }
-	byte:movement { 8 }
+	byte:movement { 7 }
 }
 unit-configuration:kv-1-c {
 	string:name { KV-1 C }
@@ -868,7 +888,7 @@ unit-configuration:t-34-a {
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
-	byte:attack { 12 }
+	byte:attack { 8 }
 	byte:range { 5 }
 	byte:defense { 9 }
 	byte:movement { 11 }	

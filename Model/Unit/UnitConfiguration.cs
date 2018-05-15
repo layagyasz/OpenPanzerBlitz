@@ -216,6 +216,7 @@ namespace PanzerBlitz
 				|| UnitClass == UnitClass.RECONNAISSANCE_VEHICLE
 				|| UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
 				|| UnitClass == UnitClass.TANK
+			 	|| UnitClass == UnitClass.TANK_DESTROYER
 				|| UnitClass == UnitClass.TRANSPORT
 			 	|| UnitClass == UnitClass.WRECKAGE));
 			IsArmored = (bool)(
@@ -492,6 +493,7 @@ namespace PanzerBlitz
 		{
 			switch (UnitClass)
 			{
+				case UnitClass.TANK_DESTROYER:
 				case UnitClass.TANK:
 					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
 					return Weapon.Attack + Weapon.Range + Defense + Movement;

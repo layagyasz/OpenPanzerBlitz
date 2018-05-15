@@ -608,7 +608,7 @@ unit-configuration:diana {
 }
 unit-configuration:marder-ii {
 	string:name { Marder II }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -618,7 +618,7 @@ unit-configuration:marder-ii {
 }
 unit-configuration:marder-iii {
 	string:name { Marder III }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -668,7 +668,7 @@ unit-configuration:flamingo {
 }
 unit-configuration:hetzer {
 	string:name { Hetzer }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -678,7 +678,7 @@ unit-configuration:hetzer {
 }
 unit-configuration:ferdinand {
 	string:name { Ferdinand }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 18 }
@@ -688,7 +688,7 @@ unit-configuration:ferdinand {
 }
 unit-configuration:elefant {
 	string:name { Elefant }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -698,7 +698,7 @@ unit-configuration:elefant {
 }
 unit-configuration:nashorn {
 	string:name { Nashorn }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -708,7 +708,7 @@ unit-configuration:nashorn {
 }
 unit-configuration:pzjg-1 {
 	string:name { PzJg 1 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 8 }
@@ -718,7 +718,7 @@ unit-configuration:pzjg-1 {
 }
 unit-configuration:jgdpz-iv_48 {
 	string:name { JgdPz IV/48 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
@@ -728,7 +728,7 @@ unit-configuration:jgdpz-iv_48 {
 }
 unit-configuration:jgdpz-iv_70 {
 	string:name { JgdPz IV/70}
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }
@@ -748,7 +748,7 @@ unit-configuration:flammpanzer-38_t {
 }
 unit-configuration:jagdpanther {
 	string:name { Jagdpanther }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 20 }
@@ -758,7 +758,7 @@ unit-configuration:jagdpanther {
 }
 unit-configuration:jagdtiger {
 	string:name { Jagdtiger }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 22 }

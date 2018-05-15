@@ -166,6 +166,9 @@ unit-render-details:t-38-m2 {
 unit-render-details:t-40 {
 	string:image-path { t-40.png }
 }
+unit-render-details:t-28 {
+	string:image-path { t-28-e.png }
+}
 unit-render-details:t-28-e {
 	string:image-path { t-28-e.png }
 }
@@ -245,6 +248,9 @@ unit-render-details:t-70-a {
 	string:image-path { t-70-a.png }
 }
 unit-render-details:bt-5 {
+	string:image-path { bt-5.png }
+}
+unit-render-details:bt-7 {
 	string:image-path { bt-5.png }
 }
 unit-render-details:kv-1-a {
