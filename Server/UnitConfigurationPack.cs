@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-using Cardamom.Serialization;
 using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
 	public class UnitConfigurationPack
 	{
-		static readonly int COST_SCALE = 100;
-		static readonly int COST_STEP = 5;
-
-		enum Attribute { NAME, NUMBER, TAG_MATCHER }
-
 		public readonly int Id;
+		public readonly string Name;
 		public readonly int Number;
-		public readonly int Cost;
+		public readonly long Cost;
 		public readonly WeightedVector<UnitConfigurationLock> UnitConfigurationLocks;
 
 		public UnitConfigurationPack(
-			ParseBlock Block, IdGenerator IdGenerator)
+			IdGenerator IdGenerator, string Name, int Number, IEnumerable<UnitConfigurationLock> UnitConfigurationLocks)
 		{
-			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
-
 			Id = IdGenerator.GenerateId();
-			Number = (int)attributes[(int)Attribute.NUMBER];
-			UnitConfigurationLocks = new WeightedVector<UnitConfigurationLock>();
+			this.Name = Name;
+			this.Number = Number;
+			this.UnitConfigurationLocks = new WeightedVector<UnitConfigurationLock>();
+			foreach (var ucl in UnitConfigurationLocks) this.UnitConfigurationLocks.Add(ucl.GetWeight(), ucl);
+
+			Cost = RoundCost(
+				Number
+				* Multiplier(this.UnitConfigurationLocks.Length)
+				* HarmonicAverage(UnitConfigurationLocks.Select(i => i.GetValue())),
+				5);
 		}
 
 		public IEnumerable<UnitConfigurationLock> Open(Random Random)
@@ -36,9 +38,31 @@ namespace PanzerBlitz
 			}
 		}
 
-		static int RoundCost(float Cost, int Scale, int Step)
+		static double Multiplier(int Count)
 		{
-			return Step * (int)(Cost * Scale / Step);
+			if (Count > 1) return Math.Log(Count) / Math.Log(2);
+			return 2;
+		}
+
+		static double HarmonicAverage(IEnumerable<double> Values)
+		{
+			return Values.Count() / Values.Sum(i => 1.0 / i);
+		}
+
+		static long RoundCost(double Cost, int Step)
+		{
+			return (long)(Step * Math.Round(Cost / Step));
+		}
+
+		public override string ToString()
+		{
+			return string.Format(
+				"[UnitConfigurationPack: Id={0}, Name={1}, Number={2}, Cost={3}, UnitConfigurationLocks={4}]",
+				Id,
+				Name,
+				Number,
+				Cost,
+				UnitConfigurationLocks.Length);
 		}
 	}
 }

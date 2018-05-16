@@ -1,104 +1,89 @@
 ﻿unit-configuration-lock:wagon-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { wagon-russian }
 		string:_ { limber-russian }
 	}
-	float:rarity { 5.5 }
+	float:rarity { 4.9 }
 }
 unit-configuration-lock:12_7mm-mg-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 12_7mm-mg-russian }
 	}
 	float:rarity { 12.7 }
 }
 unit-configuration-lock:45mm-at-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 45mm-at-russian }
 	}
 	float:rarity { 9.2 }
 }
 unit-configuration-lock:57mm-at-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 57mm-at-russian }
 	}
 	float:rarity { 12.0 }
 }
 unit-configuration-lock:76_2mm-at-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 76_2mm-at-russian  }
 	}
 	float:rarity { 8.6 }
 }
 unit-configuration-lock:85mm-at-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 85mm-at-russian }
 	}
 	float:rarity { 11.9 }
 }
 unit-configuration-lock:100mm-at-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 100mm-at-russian }
 	}
 	float:rarity { 12.3 }
 }
 unit-configuration-lock:37mm-aa-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 37mm-aa-russian }
 	}
 	float:rarity { 11.0 }
 }
 unit-configuration-lock:76_2mm-aa-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 76_2mm-aa-russian }
 	}
 	float:rarity { 12.8 }
 }
 unit-configuration-lock:76_2mm-how-company-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 76_2mm-how-company-russian }
 	}
 	float:rarity { 10.9 }
 }
 unit-configuration-lock:76_2mm-how-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 76_2mm-how-russian }
 	}
 	float:rarity { 12.0 }
 }
 unit-configuration-lock:122mm-how-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 122mm-how-russian }
 	}
 	float:rarity { 10.5 }
 }
 unit-configuration-lock:152mm-how-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 152mm-how-russian }
 	}
 	float:rarity { 11.5 }
 }
 unit-configuration-lock:203mm-how-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 203mm-how-russian }
 	}
 	float:rarity { 15.5 }
 }
 unit-configuration-lock:82mm-mortar-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 82mm-mortar-russian }
 		string:_ { 82mm-mortar-motorized-russian }
@@ -106,36 +91,30 @@ unit-configuration-lock:82mm-mortar-russian {
 	float:rarity { 7.8 }
 }
 unit-configuration-lock:120mm-mortar-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 120mm-mortar-russian }
 	}
 	float:rarity { 10.1 }
 }
 unit-configuration-lock:160mm-mortar-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { 160mm-mortar-russian }
 	}
 	float:rarity { 14.9 }
 }
-
 unit-configuration-lock:engineer-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { engineer-company }
 	}
 	float:rarity { 8.8 }
 }
 unit-configuration-lock:recon-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { recon-company }
 	}
 	float:rarity { 11.9 }
 }
 unit-configuration-lock:rifle-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { rifle-company-39 }
 		string:_ { rifle-company-41 }
@@ -146,7 +125,6 @@ unit-configuration-lock:rifle-company {
 	float:rarity { 6.2 }
 }
 unit-configuration-lock:ski-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ski-company-39 }
 		string:_ { ski-company-41 }
@@ -155,7 +133,6 @@ unit-configuration-lock:ski-company {
 	float:rarity { 16.5 }
 }
 unit-configuration-lock:guards-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { guards-company-41 }
 		string:_ { guards-company-43 }
@@ -164,16 +141,14 @@ unit-configuration-lock:guards-company {
 	float:rarity { 11.2 }
 }
 unit-configuration-lock:smg-company {
-	string:faction { russian }
 	string[]:unit-configurations { 
-		string:_ { smg-company-39 }
+		string:_ { smg-company-40 }
 		string:_ { smg-company-41 }
 		string:_ { smg-company-43 }
 	}
 	float:rarity { 9.4 }
 }
-unit-configuration-lock:cavalry-russian9 {
-	string:faction { russian }
+unit-configuration-lock:cavalry-russian {
 	string[]:unit-configurations { 
 		string:_ { cavalry-russian-39 }
 		string:_ { cavalry-russian-41 }
@@ -182,7 +157,6 @@ unit-configuration-lock:cavalry-russian9 {
 	float:rarity { 9.8 }
 }
 unit-configuration-lock:motorcycle-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { motorcycle-russian-39 }
 		string:_ { motorcycle-russian-42 }
@@ -191,441 +165,378 @@ unit-configuration-lock:motorcycle-russian {
 	float:rarity { 11.1 }
 }
 unit-configuration-lock:tractor {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { tractor }
 	}
 	float:rarity { 12.0 }
 }
 unit-configuration-lock:truck-russian {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { truck-russian }
 	}
 	float:rarity { 5.4 }
 }
 unit-configuration-lock:t-27-tractor {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-27-tractor }
 	}
 	float:rarity { 14.2 }
 }
 unit-configuration-lock:nkl-6 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { nkl-6 }
 	}
 	float:rarity { 15.3 }
 }
 unit-configuration-lock:nkl-6-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { nkl-6-a }
 	}
 	float:rarity { 18.3 }
 }
 unit-configuration-lock:nkl-16 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { nkl-16 }
 	}
 	float:rarity { 15.9 }
 }
 unit-configuration-lock:nkl-26 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { nkl-26 }
 	}
 	float:rarity { 18.9 }
 }
 unit-configuration-lock:asd-400 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { asd-400 }
 	}
 	float:rarity { 21.3 }
 }
 unit-configuration-lock:rf-8 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { rf-8 }
 	}
 	float:rarity { 13.3 }
 }
 unit-configuration-lock:m-2 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { m-2 }
 	}
 	float:rarity { 15.1 }
 }
 unit-configuration-lock:zis-42 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { zis-42 }
 	}
 	float:rarity { 12.7 }
 }
 unit-configuration-lock:t-20 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-20 }
 	}
 	float:rarity { 12.2 }
 }
 unit-configuration-lock:ba-10-infantry {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ba-10-infantry }
 	}
 	float:rarity { 15.6 }
 }
 unit-configuration-lock:ba-10-at {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ba-10-at }
 	}
 	float:rarity { 15.6 }
 }
 unit-configuration-lock:ba-20 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ba-20 }
 	}
 	float:rarity { 14.7 }
 }
 unit-configuration-lock:ba-32-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ba-32-a }
 	}
 	float:rarity { 14.7 }
 }
 unit-configuration-lock:ba-64-b {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ba-64-b }
 	}
 	float:rarity { 12.1 }
 }
 unit-configuration-lock:su-57 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-57 }
 	}
 	float:rarity { 16.0 }
 }
 unit-configuration-lock:zis-43 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { zis-43 }
 	}
 	float:rarity { 18.7 }
 }
 unit-configuration-lock:gaz-aa {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { gaz-aa }
 	}
 	float:rarity { 14.3 }
 }
 unit-configuration-lock:yag-10 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { yag-10 }
 	}
 	float:rarity { 19.4 }
 }
 unit-configuration-lock:t-26-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-26-a }
 	}
 	float:rarity { 14.3 }
 }
 unit-configuration-lock:t-38 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-38 }
 	}
 	float:rarity { 14.9 }
 }
 unit-configuration-lock:t-38-m2 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-38-m2 }
 	}
 	float:rarity { 22.5 }
 }
 unit-configuration-lock:t-40 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-40 }
 	}
 	float:rarity { 17.5 }
 }
 unit-configuration-lock:t-28 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-28 }
 	}
 	float:rarity { 16.3 }
 }
 unit-configuration-lock:t-28-e {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-28-e }
 	}
 	float:rarity { 18.7 }
 }
 unit-configuration-lock:bt-7-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { bt-7-a }
 	}
 	float:rarity { 18.0 }
 }
 unit-configuration-lock:t-35 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-35 }
 	}
 	float:rarity { 19.4 }
 }
 unit-configuration-lock:t-100 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-100 }
 	}
 	float:rarity { 24.3 }
 }
 unit-configuration-lock:su-122 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-122 }
 	}
 	float:rarity { 15.1 }
 }
 unit-configuration-lock:su-152 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-152 }
 	}
 	float:rarity { 15.8 }
 }
 unit-configuration-lock:isu-152 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { isu-152 }
 	}
 	float:rarity { 13.1 }
 }
 unit-configuration-lock:kv-2 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-2 }
 	}
 	float:rarity { 16.9 }
 }
 unit-configuration-lock:m-13 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { m-13 }
 	}
 	float:rarity { 12.2 }
 }
 unit-configuration-lock:m-31 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { m-31 }
 	}
 	float:rarity { 15.3 }
 }
 unit-configuration-lock:ot-133 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ot-133 }
 	}
 	float:rarity { 17.3 }
 }
 unit-configuration-lock:ot-34 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ot-34 }
 	}
 	float:rarity { 15.1 }
 }
 unit-configuration-lock:ot-34_85 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { ot-34_85 }
 	}
 	float:rarity { 17.6 }
 }
 unit-configuration-lock:kv-8 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-8 }
 	}
 	float:rarity { 19.9 }
 }
 unit-configuration-lock:su-76 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-76 }
 	}
 	float:rarity { 11.5 }
 }
 unit-configuration-lock:su-85 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-85 }
 	}
 	float:rarity { 14.3 }
 }
 unit-configuration-lock:t-44 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-44 }
 	}
 	float:rarity { 17.7 }
 }
 unit-configuration-lock:su-100 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { su-100 }
 	}
 	float:rarity { 14.1 }
 }
 unit-configuration-lock:isu-122 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { isu-122 }
 	}
 	float:rarity { 15.1 }
 }
 unit-configuration-lock:t-26-b {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-26-b }
 	}
 	float:rarity { 12.3 }
 }
 unit-configuration-lock:t-26-c {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-26-c }
 	}
 	float:rarity { 14.4 }
 }
 unit-configuration-lock:t-26-e {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-26-e }
 	}
 	float:rarity { 18.8 }
 }
 unit-configuration-lock:t-46 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-46 }
 	}
 	float:rarity { 23.3 }
 }
 unit-configuration-lock:t-50 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-50 }
 	}
 	float:rarity { 19.2 }
 }
 unit-configuration-lock:t-60-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-60-a }
 	}
 	float:rarity { 12.7 }
 }
 unit-configuration-lock:t-70-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-70-a }
 	}
 	float:rarity { 12.3 }
 }
 unit-configuration-lock:bt-5 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { bt-5 }
 	}
 	float:rarity { 14.4 }
 }
 unit-configuration-lock:bt-7 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { bt-7 }
 	}
 	float:rarity { 13.0 }
 }
 unit-configuration-lock:kv-1-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-1-a }
 	}
 	float:rarity { 15.0 }
 }
 unit-configuration-lock:kv-1-c {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-1-c }
 	}
 	float:rarity { 14.5 }
 }
 unit-configuration-lock:kv-1-s {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-1-s }
 	}
 	float:rarity { 14.9 }
 }
 unit-configuration-lock:kv-85 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { kv-85 }
 	}
 	float:rarity { 18.3 }
 }
 unit-configuration-lock:t-34-a {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-34-a }
 	}
 	float:rarity { 16.7 }
 }
 unit-configuration-lock:t-34-c {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-34-c }
 	}
 	float:rarity { 10.2 }
 }
 unit-configuration-lock:t-34_85 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { t-34_85 }
 	}
 	float:rarity { 9.7 }
 }
 unit-configuration-lock:is-2 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { is-2 }
 	}
 	float:rarity { 13.4 }
 }
 unit-configuration-lock:is-3 {
-	string:faction { russian }
 	string[]:unit-configurations { 
 		string:_ { is-3 }
 	}

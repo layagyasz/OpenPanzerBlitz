@@ -20,10 +20,10 @@ namespace PanzerBlitz
 			var screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,
-					GameData.UnitConfigurationLinks,
+					GameData.UnitConfigurationLinks.Values,
 					builder.Parameters,
 					new UnitConfigurationRenderer(
-						GameData.UnitConfigurationLinks.Where(
+						GameData.UnitConfigurationLinks.Values.Where(
 							i => builder.Parameters.Matches(i)).Select(i => i.UnitConfiguration),
 						GameData.UnitRenderDetails,
 						128,

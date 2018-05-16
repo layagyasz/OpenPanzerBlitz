@@ -378,6 +378,8 @@
     <Compile Include="AI\UnitAssignmentType.cs" />
     <Compile Include="Controller\Match\AIMatchPlayerController.cs" />
     <Compile Include="AI\PositionalDeploymentHandler.cs" />
+    <Compile Include="Server\UnitConfigurationPackGenerator.cs" />
+    <Compile Include="Server\Rarity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2320,6 +2322,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Server\UnitConfigurationLocks\Japanese.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Server\UnitConfigurationLocks\Finnish.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

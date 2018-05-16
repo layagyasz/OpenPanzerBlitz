@@ -9,6 +9,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute { FACTION, UNIT_CONFIGURATION, INTRODUCE_YEAR, OBSOLETE_YEAR, FRONT, ENVIRONMENTS };
 
+		public readonly string UniqueKey;
 		public readonly Faction Faction;
 		public readonly UnitConfiguration UnitConfiguration;
 		public readonly int IntroduceYear;
@@ -18,6 +19,7 @@ namespace PanzerBlitz
 
 		public UnitConfigurationLink(SerializationInputStream Stream)
 		{
+			UniqueKey = Stream.ReadString();
 			Faction = Stream.ReadObject(i => new Faction(i), false, true);
 			UnitConfiguration = Stream.ReadObject(i => new UnitConfiguration(i), false, true);
 			IntroduceYear = Stream.ReadInt32();
@@ -32,6 +34,7 @@ namespace PanzerBlitz
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
+			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
 			IntroduceYear = (int)(attributes[(int)Attribute.INTRODUCE_YEAR] ?? 0);
@@ -42,6 +45,7 @@ namespace PanzerBlitz
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
+			Stream.Write(UniqueKey);
 			Stream.Write(Faction, false, true);
 			Stream.Write(UnitConfiguration, false, true);
 			Stream.Write(IntroduceYear);

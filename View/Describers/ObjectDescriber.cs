@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,6 +39,11 @@ namespace PanzerBlitz
 		public static string Describe(UnitConfiguration Configuration)
 		{
 			return Configuration.Name;
+		}
+
+		public static string Describe(UnitClass UnitClass)
+		{
+			return string.Join(" ", UnitClass.ToString().Split('_').Select(Capitalize));
 		}
 
 		public static string Describe(TileBase TileBase)
@@ -90,10 +95,16 @@ namespace PanzerBlitz
 				new TriggerObjective(Trigger.Objective, Trigger.Threshold, Trigger.Invert)));
 		}
 
+		public static string Capitalize(string Input)
+		{
+			if (Input.Length == 0) return Input;
+			return char.ToUpper(Input[0]) + Input.Substring(1).ToLower();
+		}
+
 		public static string Sentencify(string Input)
 		{
 			if (Input.Length == 0) return Input;
-			return char.ToUpper(Input[0]) + Input.Substring(1) + ".";
+			return Capitalize(Input) + ".";
 		}
 
 		public static string Listify(IEnumerable<string> Parts, string Joiner, string TerminalJoiner)

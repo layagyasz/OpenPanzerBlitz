@@ -43,7 +43,7 @@ namespace PanzerBlitz
 		public static Dictionary<string, FactionRenderDetails> FactionRenderDetails;
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
 		public static Dictionary<string, UnitRenderDetails> UnitRenderDetails;
-		public static List<UnitConfigurationLink> UnitConfigurationLinks;
+		public static Dictionary<string, UnitConfigurationLink> UnitConfigurationLinks;
 		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
@@ -84,7 +84,7 @@ namespace PanzerBlitz
 					Directory.EnumerateFiles(path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
-					"unit-configuration-link[]",
+					"unit-configuration-link<>",
 					"unit-configuration-links",
 					Directory.EnumerateFiles(path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
@@ -174,7 +174,8 @@ namespace PanzerBlitz
 			FactionRenderDetails =
 				(Dictionary<string, FactionRenderDetails>)attributes[(int)Attribute.FACTION_RENDER_DETAILS];
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
-			UnitConfigurationLinks = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
+			UnitConfigurationLinks =
+				(Dictionary<string, UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
@@ -300,7 +301,8 @@ namespace PanzerBlitz
 				i => new KeyValuePair<string, UnitRenderDetails>(
 					i.ReadString(),
 					new UnitRenderDetails(i, Path + "/UnitSprites/"))).ToDictionary(i => i.Key, i => i.Value);
-			UnitConfigurationLinks = Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToList();
+			UnitConfigurationLinks =
+				Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToDictionary(i => i.UniqueKey);
 			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
 			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
 			NameGenerators = Stream.ReadEnumerable(
@@ -332,7 +334,7 @@ namespace PanzerBlitz
 				Stream.Write(i.Key);
 				Stream.Write(i.Value);
 			});
-			Stream.Write(UnitConfigurationLinks);
+			Stream.Write(UnitConfigurationLinks.Values);
 			Stream.Write(Scenarios);
 			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
 			Stream.Write(NameGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value, false, true); });

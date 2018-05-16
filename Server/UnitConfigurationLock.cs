@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -7,22 +8,35 @@ namespace PanzerBlitz
 {
 	public class UnitConfigurationLock
 	{
-		enum Attribute { UNIT_CONFIGURATIONS, FACTION, RARITY }
+		enum Attribute { UNIT_CONFIGURATIONS, RARITY }
 
-		public readonly int Id;
-		public readonly List<UnitConfiguration> UnitConfigurations;
-		public readonly Faction Faction;
+		public readonly string UniqueId;
+		public readonly List<UnitConfigurationLink> UnitConfigurations;
 		public readonly float Rarity;
 
-		public UnitConfigurationLock(ParseBlock Block, IdGenerator IdGenerator)
+		public UnitConfigurationLock(ParseBlock Block)
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			Id = IdGenerator.GenerateId();
+			UniqueId = Block.Name;
 			UnitConfigurations = ((List<string>)attributes[(int)Attribute.UNIT_CONFIGURATIONS])
-				.Select(i => GameData.UnitConfigurations[i]).ToList();
-			Faction = GameData.Factions[(string)attributes[(int)Attribute.FACTION]];
+				.Select(i => GameData.UnitConfigurationLinks[i]).ToList();
 			Rarity = (float)attributes[(int)Attribute.RARITY];
+		}
+
+		public double GetWeight()
+		{
+			return Math.Pow(2, -Rarity);
+		}
+
+		public double GetValue()
+		{
+			return Math.Pow(2, Rarity);
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[UnitConfigurationLock: UniqueId={0}]", UniqueId);
 		}
 	}
 }

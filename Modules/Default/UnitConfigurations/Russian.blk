@@ -745,7 +745,7 @@ unit-configuration:su-100 {
 }
 unit-configuration:isu-122 {
 	string:name { ISU-122 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 17 }

@@ -33,9 +33,9 @@ namespace PanzerBlitz
 			_LandingSelect.Add(LocalMatchRecordButton);
 			_LandingSelect.Add(EditButton);
 			_LandingSelect.Add(ScenarioBuilderButton);
-			// Commenting these out for now.  Maybe one day in the future work on PanzerBlitz online will continue!
-			//_LandingSelect.Add(JoinServerButton);
-			//_LandingSelect.Add(StartServerButton);
+
+			_LandingSelect.Add(JoinServerButton);
+			_LandingSelect.Add(StartServerButton);
 
 			_Items.Add(_LandingSelect);
 		}
