@@ -27,7 +27,7 @@ namespace PanzerBlitz
 						yield return new UnitConfigurationPack(
 							idGenerator,
 							PackName(faction, unitClass),
-							50,
+							9,
 							locks);
 					}
 				}

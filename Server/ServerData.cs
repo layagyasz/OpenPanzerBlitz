@@ -30,21 +30,30 @@ namespace PanzerBlitz
 			UnitConfigurationLocks =
 				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
 
-			/*
 			Random random = new Random();
 			foreach (var pack in new UnitConfigurationPackGenerator(
 				GameData.Factions.Values).Generate(UnitConfigurationLocks.Values))
 			{
 				Console.WriteLine(pack);
-				foreach (var unit in pack.Open(random))
+				while (Console.ReadLine() != string.Empty)
 				{
-					Console.ForegroundColor = RarityExtensions.GetRarity(unit.Rarity).GetConsoleColor();
-					Console.WriteLine(unit);
+					Dictionary<UnitConfigurationLock, int> counts = new Dictionary<UnitConfigurationLock, int>();
+					for (int i = 0; i < 20; ++i)
+					{
+						foreach (var unit in pack.Open(random))
+						{
+							if (counts.ContainsKey(unit)) counts[unit] += 1;
+							else counts.Add(unit, 1);
+						}
+					}
+					foreach (var count in counts)
+					{
+						Console.ForegroundColor = RarityExtensions.GetRarity(count.Key.Rarity).GetConsoleColor();
+						Console.WriteLine("{0} {1}", count.Key, count.Value);
+					}
+					Console.ResetColor();
 				}
-				Console.ResetColor();
-				Console.ReadLine();
 			}
-			*/
 		}
 	}
 }

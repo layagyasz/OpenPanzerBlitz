@@ -176,7 +176,7 @@ unit-configuration-lock:engineer-platoon-finnish {
 	}
 	float:rarity { 12.1 }
 }
-unit-configuration-lock:cavalry-finnish-39 {
+unit-configuration-lock:cavalry-finnish {
 	string[]:unit-configurations {
 		string:_ { cavalry-finnish-39 }
 		string:_ { cavalry-finnish-41 }

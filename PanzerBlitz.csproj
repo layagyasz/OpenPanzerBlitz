@@ -2327,6 +2327,9 @@
     <None Include="Modules\Default\Server\UnitConfigurationLocks\Finnish.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\Server\UnitConfigurationLocks\Slovak.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

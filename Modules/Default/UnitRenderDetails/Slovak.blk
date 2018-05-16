@@ -41,19 +41,16 @@ unit-render-details:oa-27{
 unit-render-details:oa-30 {
 	string:image-path { oa-30.png }
 }
-unit-render-details:tancik-33-corrected {
+unit-render-details:tancik-33 {
 	string:image-path { tancik-33.png }
 }
-unit-render-details:lt-34-corrected {
+unit-render-details:lt-34 {
 	string:image-path { lt-34.png }
 }
-unit-render-details:lt-35-corrected {
+unit-render-details:lt-35 {
 	string:image-path { lt-35.png }
 }
 unit-render-details:lt-38 {
-	string:image-path { lt-38.png }
-}
-unit-render-details:lt-38-corrected {
 	string:image-path { lt-38.png }
 }
 unit-render-details:avia-b-71 {

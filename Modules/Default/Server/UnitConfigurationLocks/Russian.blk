@@ -3,7 +3,7 @@
 		string:_ { wagon-russian }
 		string:_ { limber-russian }
 	}
-	float:rarity { 4.9 }
+	float:rarity { 5.9 }
 }
 unit-configuration-lock:12_7mm-mg-russian {
 	string[]:unit-configurations { 
@@ -174,7 +174,7 @@ unit-configuration-lock:truck-russian {
 	string[]:unit-configurations { 
 		string:_ { truck-russian }
 	}
-	float:rarity { 5.4 }
+	float:rarity { 6.4 }
 }
 unit-configuration-lock:t-27-tractor {
 	string[]:unit-configurations { 
@@ -216,7 +216,7 @@ unit-configuration-lock:rf-8 {
 	string[]:unit-configurations { 
 		string:_ { rf-8 }
 	}
-	float:rarity { 13.3 }
+	float:rarity { 14.3 }
 }
 unit-configuration-lock:m-2 {
 	string[]:unit-configurations { 

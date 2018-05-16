@@ -24,7 +24,8 @@ namespace PanzerBlitz
 			foreach (var ucl in UnitConfigurationLocks) this.UnitConfigurationLocks.Add(ucl.GetWeight(), ucl);
 
 			Cost = RoundCost(
-				Number
+				.002
+				* Number
 				* Multiplier(this.UnitConfigurationLocks.Length)
 				* HarmonicAverage(UnitConfigurationLocks.Select(i => i.GetValue())),
 				5);

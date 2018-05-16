@@ -2,7 +2,7 @@
 	string[]:unit-configurations { 
 		string:_ { wagon-german }
 	}
-	float:rarity { 3.6 }
+	float:rarity { 4.6 }
 }
 unit-configuration-lock:28mm-at-german {
 	string[]:unit-configurations { 
@@ -159,7 +159,7 @@ unit-configuration-lock:smg-platoon-german {
 		string:_ { smg-platoon-german }
 		string:_ { smg-platoon-german-west }
 	}
-	float:rarity { 6.8 }
+	float:rarity { 10.0 }
 }
 unit-configuration-lock:parachute-platoon-german {
 	string[]:unit-configurations { 
@@ -178,9 +178,9 @@ unit-configuration-lock:truck-german {
 	string[]:unit-configurations { 
 		string:_ { truck-german }
 	}
-	float:rarity { 5.6 }
+	float:rarity { 6.6 }
 }
-unit-configuration-lock:motorcycle-german-40-west {
+unit-configuration-lock:motorcycle-german {
 	string[]:unit-configurations { 
 		string:_ { motorcycle-german-40-west }
 		string:_ { motorcycle-german-42 }
