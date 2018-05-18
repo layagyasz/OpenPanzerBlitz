@@ -15,12 +15,10 @@ unit-configuration:hmg-platoon-romanian {
 	unit-class:unit-class { infantry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 4 }
-	byte:range { 4 }
-	byte:defense { 4 }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 6 }
 	byte:movement { 1 }
-
-	bool:can-only-support-close-assault { true }
 }
 unit-configuration:rifle-platoon-romanian-39 {
 	string:name { Rifle Platoon }
@@ -106,30 +104,10 @@ unit-configuration:r-1 {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
-	byte:defense { 3 }
-	byte:movement { 11 }
-}
-unit-configuration:r-1-corrected {
-	string:name { R-1 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
-	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 11 }
 }
 unit-configuration:r-2 {
-	string:name { R-2 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 5 }
-	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 7 }
-}
-unit-configuration:r-2-corrected {
 	string:name { R-2 }
 	unit-class:unit-class { tank }
 
@@ -146,7 +124,7 @@ unit-configuration:r-35_45 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 7 }
 	byte:range { 3 }
-	byte:defense { 6 }
+	byte:defense { 4 }
 	byte:movement { 4 }
 }
 unit-configuration:tacam-t-60 {
@@ -166,7 +144,7 @@ unit-configuration:tacam-r-2 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
 	byte:range { 5 }
-	byte:defense { 5 }
+	byte:defense { 3 }
 	byte:movement { 8 }
 }
 unit-configuration:maresal {

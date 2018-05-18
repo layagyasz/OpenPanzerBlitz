@@ -22,6 +22,9 @@ unit-render-details:37mm-at {
 unit-render-details:37mm-at-american {
 	string:image-path { anti-armor.png }
 }
+unit-render-details:40mm-at {
+	string:image-path { anti-armor.png }
+}
 unit-render-details:45mm-at-early {
 	string:image-path { anti-armor.png }
 }
@@ -183,6 +186,9 @@ unit-render-details:170mm-how {
 }
 unit-render-details:203mm-how {
 	string:image-path { artillery-motorized.png }
+}
+unit-render-details:210mm-how {
+	string:image-path { artillery-heavy.png }
 }
 unit-render-details:18pdr-how {
 	string:image-path { artillery-heavy.png }

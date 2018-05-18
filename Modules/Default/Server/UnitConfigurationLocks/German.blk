@@ -506,7 +506,7 @@ unit-configuration-lock:pzkw-35_t {
 	string[]:unit-configurations { 
 		string:_ { pzkw-35_t }
 	}
-	float:rarity { 15.2 }
+	float:rarity { 16.1 }
 }
 unit-configuration-lock:pzkw-38_t {
 	string[]:unit-configurations { 

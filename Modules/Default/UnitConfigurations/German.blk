@@ -27,12 +27,10 @@ unit-configuration:hmg-platoon-german {
 	unit-class:unit-class { infantry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 4 }
-	byte:range { 4 }
-	byte:defense { 4 }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 6 }
 	byte:movement { 1 }
-
-	bool:can-only-support-close-assault { true }
 }
 unit-configuration:security-platoon-german {
 	string:name { Security Platoon }

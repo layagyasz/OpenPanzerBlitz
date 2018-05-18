@@ -1,0 +1,206 @@
+﻿unit-configuration-lock:wagon-hungarian {
+	string[]:unit-configurations { 
+		string:_ { wagon-hungarian }
+		string:_ { limber-hungarian }
+	}
+	float:rarity { 11.2 }
+}
+unit-configuration-lock:37mm-at-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 37mm-at-hungarian }
+	}
+	float:rarity { 18.9 }
+}
+unit-configuration-lock:40mm-at-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 40mm-at-hungarian }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:47mm-at-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 47mm-at-hungarian }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:50mm-at-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 50mm-at-hungarian }
+	}
+	float:rarity { 18.2 }
+}
+unit-configuration-lock:75mm-at-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-at-hungarian }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:40mm-aa-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 40mm-aa-hungarian }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:80mm-aa-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 80mm-aa-hungarian }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:75mm-how-company-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-how-company-hungarian }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:75mm-how-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-how-hungarian }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:100mm-how-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 100mm-how-hungarian }
+	}
+	float:rarity { 15.2 }
+}
+unit-configuration-lock:105mm-how-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 105mm-how-hungarian }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:149mm-how-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 149mm-how-hungarian }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:210mm-how-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 210mm-how-hungarian }
+	}
+	float:rarity { 19.7 }
+}
+unit-configuration-lock:81mm-mortar-hungarian {
+	string[]:unit-configurations { 
+		string:_ { 81mm-mortar-hungarian }
+	}
+	float:rarity { 11.9 }
+}
+unit-configuration-lock:engineer-platoon-hungarian {
+	string[]:unit-configurations { 
+		string:_ { engineer-platoon-hungarian }
+	}
+	float:rarity { 13.3 }
+}
+unit-configuration-lock:hmg-platoon-hungarian {
+	string[]:unit-configurations { 
+		string:_ { hmg-platoon-hungarian }
+	}
+	float:rarity { 11.2 }
+}
+unit-configuration-lock:rifle-platoon-hungarian {
+	string[]:unit-configurations { 
+		string:_ { rifle-platoon-hungarian-39 }
+		string:_ { rifle-platoon-hungarian-41 }
+	}
+	float:rarity { 9.3 }
+}
+unit-configuration-lock:mountain-platoon-hungarian {
+	string[]:unit-configurations { 
+		string:_ { mountain-platoon-hungarian }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:cavalry-hungarian {
+	string[]:unit-configurations { 
+		string:_ { cavalry-hungarian }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:truck-hungarian {
+	string[]:unit-configurations { 
+		string:_ { truck-hungarian }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:bicycle-hungarian {
+	string[]:unit-configurations { 
+		string:_ { bicycle-hungarian }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:motorcycle-hungarian {
+	string[]:unit-configurations { 
+		string:_ { motorcycle-hungarian }
+	}
+	float:rarity { 19.0 }
+}
+unit-configuration-lock:csaba {
+	string[]:unit-configurations { 
+		string:_ { csaba }
+	}
+	float:rarity { 17.3 }
+}
+unit-configuration-lock:leggero-3-hungarian {
+	string[]:unit-configurations { 
+		string:_ { leggero-3-hungarian }
+	}
+	float:rarity { 18.0 }
+}
+unit-configuration-lock:nimrod {
+	string[]:unit-configurations { 
+		string:_ { nimrod }
+	}
+	float:rarity { 16.9 }
+}
+unit-configuration-lock:zrinyi-i {
+	string[]:unit-configurations { 
+		string:_ { zrinyi-i }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:zrinyi-ii {
+	string[]:unit-configurations { 
+		string:_ { zrinyi-ii }
+	}
+	float:rarity { 18.0 }
+}
+unit-configuration-lock:toldi-i {
+	string[]:unit-configurations { 
+		string:_ { toldi-i }
+	}
+	float:rarity { 17.7 }
+}
+unit-configuration-lock:toldi-ii {
+	string[]:unit-configurations { 
+		string:_ { toldi-ii }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:turan-i {
+	string[]:unit-configurations { 
+		string:_ { turan-i }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:turan-ii {
+	string[]:unit-configurations { 
+		string:_ { turan-ii }
+	}
+	float:rarity { 16.9 }
+}
+unit-configuration-lock:turan-iii {
+	string[]:unit-configurations { 
+		string:_ { turan-iii }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:pzkw-38_t-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-38_t-hungarian }
+	}
+	float:rarity { 17.3 }
+}

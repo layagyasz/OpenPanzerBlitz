@@ -2,7 +2,7 @@
 	string[]:unit-configurations { 
 		string:_ { wagon-slovak }
 	}
-	float:rarity { 12.0 }
+	float:rarity { 13.0 }
 }
 
 unit-configuration-lock:37mm-at-slovak {
@@ -101,7 +101,7 @@ unit-configuration-lock:truck-slovak {
 	string[]:unit-configurations { 
 		string:_ { truck-slovak }
 	}
-	float:rarity { 13.6 }
+	float:rarity { 14.6 }
 }
 unit-configuration-lock:praga-iv {
 	string[]:unit-configurations { 

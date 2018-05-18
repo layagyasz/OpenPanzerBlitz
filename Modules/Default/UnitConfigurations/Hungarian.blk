@@ -15,12 +15,10 @@ unit-configuration:hmg-platoon-hungarian {
 	unit-class:unit-class { infantry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 4 }
-	byte:range { 4 }
-	byte:defense { 4 }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 6 }
 	byte:movement { 1 }
-
-	bool:can-only-support-close-assault { true }
 }
 unit-configuration:rifle-platoon-hungarian-39 {
 	string:name { Rifle Platoon }
@@ -38,6 +36,16 @@ unit-configuration:rifle-platoon-hungarian-41 {
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:mountain-platoon-hungarian {
+	string:name { Mountain Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
 	byte:range { 4 }
 	byte:defense { 5 }
 	byte:movement { 1 }
@@ -63,6 +71,21 @@ unit-configuration:truck-hungarian {
 	byte:movement { 12 }
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:bicycle-hungarian {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-hungarian-41 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
 }
 unit-configuration:motorcycle-hungarian {
 	string:name { Motorcycle }
@@ -120,16 +143,6 @@ unit-configuration:zrinyi-ii {
 	byte:movement { 8 }
 }
 unit-configuration:toldi-i {
-	string:name { Toldi I }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 2 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 10 }
-}
-unit-configuration:toldi-i-corrected {
 	string:name { Toldi I }
 	unit-class:unit-class { tank }
 

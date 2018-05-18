@@ -14,6 +14,10 @@ unit-render-details:rifle-platoon-hungarian-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
+unit-render-details:mountain-platoon-hungarian {
+	string:override-display-name { MOUNTAIN }
+	string:image-path { mountain-platoon.png }
+}
 unit-render-details:cavalry-hungarian {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry-2.png }
@@ -21,6 +25,9 @@ unit-render-details:cavalry-hungarian {
 unit-render-details:truck-hungarian {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-4.png }
+}
+unit-render-details:bicycle-hungarian {
+	string:image-path { bicycle.png }
 }
 unit-render-details:motorcycle-hungarian {
 	string:image-path { motorcycle-2.png }

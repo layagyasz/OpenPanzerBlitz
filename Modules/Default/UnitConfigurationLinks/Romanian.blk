@@ -15,19 +15,19 @@ unit-configuration-link:50mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 
-	int:introduce-year { 1940 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:75mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:76_2mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:20mm-aa-early-romanian {
 	!faction:faction { factions.romanian }
@@ -49,13 +49,17 @@ unit-configuration-link:75mm-how-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-how }
 }
-unit-configuration-link:105mm-how-company-romanian {
-	!faction:faction { factions.romanian }
-	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
-}
 unit-configuration-link:105mm-how-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:150mm-how-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.150mm-how }
+}
+unit-configuration-link:155mm-how-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.155mm-how }
 }
 unit-configuration-link:81mm-mortar-romanian {
 	!faction:faction { factions.romanian }
@@ -91,8 +95,6 @@ unit-configuration-link:rifle-platoon-romanian-41 {
 unit-configuration-link:mountain-platoon-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.mountain-platoon-romanian }
-
-	int:introduce-year { 1941 }
 }
 unit-configuration-link:cavalry-romanian {
 	!faction:faction { factions.romanian }
@@ -117,28 +119,16 @@ unit-configuration-link:malaxa {
 unit-configuration-link:r-1 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.r-1 }
-}
-unit-configuration-link:r-1-corrected {
-	!faction:faction { factions.romanian }
-	!unit-configuration:unit-configuration { unit-configurations.r-1-corrected }
+
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:r-2 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.r-2 }
 }
-unit-configuration-link:r-2-corrected {
-	!faction:faction { factions.romanian }
-	!unit-configuration:unit-configuration { unit-configurations.r-2-corrected }
-}
 unit-configuration-link:renault-35-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.renault-35 }
-
-	int:introduce-year { 1939 }
-}
-unit-configuration-link:renault-35-corrected-romanian {
-	!faction:faction { factions.romanian }
-	!unit-configuration:unit-configuration { unit-configurations.renault-35-corrected }
 
 	int:introduce-year { 1939 }
 }
@@ -165,7 +155,6 @@ unit-configuration-link:maresal {
 	!unit-configuration:unit-configuration { unit-configurations.maresal }
 
 	int:introduce-year { 1943 }
-	int:obsolete-year { 1944 }
 }
 unit-configuration-link:iar-81-a {
 	!faction:faction { factions.romanian }

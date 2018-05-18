@@ -1,0 +1,187 @@
+﻿unit-configuration-lock:wagon-romanian {
+	string[]:unit-configurations { 
+		string:_ { wagon-romanian }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:37mm-at-romanian {
+	string[]:unit-configurations { 
+		string:_ { 37mm-at-romanian }
+	}
+	float:rarity { 14.9 }
+}
+unit-configuration-lock:47mm-at-romanian {
+	string[]:unit-configurations { 
+		string:_ { 47mm-at-romanian }
+	}
+	float:rarity { 13.9 }
+}
+unit-configuration-lock:50mm-at-romanian {
+	string[]:unit-configurations { 
+		string:_ { 50mm-at-romanian }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:75mm-at-romanian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-at-romanian }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:76_2mm-at-romanian {
+	string[]:unit-configurations { 
+		string:_ { 76_2mm-at-romanian }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:20mm-aa-early-romanian {
+	string[]:unit-configurations { 
+		string:_ { 20mm-aa-early-romanian }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:20mm-aa-romanian {
+	string[]:unit-configurations { 
+		string:_ { 20mm-aa-romanian }
+	}
+	float:rarity { 17.8 }
+}
+unit-configuration-lock:75mm-aa-romanian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-aa-romanian }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:75mm-how-company-romanian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-how-company-romanian }
+	}
+	float:rarity { 15.1 }
+}
+unit-configuration-lock:75mm-how-romanian {
+	string[]:unit-configurations { 
+		string:_ { 75mm-how-romanian }
+	}
+	float:rarity { 15.7 }
+}
+unit-configuration-lock:105mm-how-romanian {
+	string[]:unit-configurations { 
+		string:_ { 105mm-how-romanian }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:150mm-how-romanian {
+	string[]:unit-configurations { 
+		string:_ { 150mm-how-romanian }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:155mm-how-romanian {
+	string[]:unit-configurations { 
+		string:_ { 155mm-how-romanian }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:81mm-mortar-romanian {
+	string[]:unit-configurations { 
+		string:_ { 81mm-mortar-romanian }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:120mm-mortar-romanian {
+	string[]:unit-configurations { 
+		string:_ { 120mm-mortar-romanian }
+	}
+	float:rarity { 13.3}
+}
+unit-configuration-lock:engineer-platoon-romanian {
+	string[]:unit-configurations { 
+		string:_ { engineer-platoon-romanian }
+	}
+	float:rarity { 11.4 }
+}
+unit-configuration-lock:hmg-platoon-romanian {
+	string[]:unit-configurations { 
+		string:_ { hmg-platoon-romanian }
+	}
+	float:rarity { 10.8 }
+}
+unit-configuration-lock:rifle-platoon-romanian {
+	string[]:unit-configurations { 
+		string:_ { rifle-platoon-romanian-39 }
+		string:_ { rifle-platoon-romanian-41 }
+	}
+	float:rarity { 8.8 }
+}
+unit-configuration-lock:mountain-platoon-romanian {
+	string[]:unit-configurations { 
+		string:_ { mountain-platoon-romanian }
+	}
+	float:rarity { 11.9 }
+}
+unit-configuration-lock:cavalry-romanian {
+	string[]:unit-configurations { 
+		string:_ { cavalry-romanian }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:truck-romanian {
+	string[]:unit-configurations { 
+		string:_ { truck-romanian }
+	}
+	float:rarity { 14.3 }
+}
+unit-configuration-lock:motorcycle-romanian {
+	string[]:unit-configurations { 
+		string:_ { motorcycle-romanian }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:malaxa {
+	string[]:unit-configurations { 
+		string:_ { malaxa }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:r-1 {
+	string[]:unit-configurations { 
+		string:_ { r-1 }
+	}
+	float:rarity { 18.3 }
+}
+unit-configuration-lock:r-2 {
+	string[]:unit-configurations { 
+		string:_ { r-2 }
+	}
+	float:rarity { 17.0 }
+}
+unit-configuration-lock:renault-35-romanian {
+	string[]:unit-configurations { 
+		string:_ { renault-35-romanian }
+	}
+	float:rarity { 17.8 }
+}
+unit-configuration-lock:r-35_45 {
+	string[]:unit-configurations { 
+		string:_ { r-35_45 }
+	}
+	float:rarity { 19.0 }
+}
+unit-configuration-lock:tacam-t-60 {
+	string[]:unit-configurations { 
+		string:_ { tacam-t-60 }
+	}
+	float:rarity { 18.9 }
+}
+unit-configuration-lock:tacam-r-2 {
+	string[]:unit-configurations { 
+		string:_ { tacam-r-2 }
+	}
+	float:rarity { 19.6 }
+}
+unit-configuration-lock:maresal {
+	string[]:unit-configurations { 
+		string:_ { maresal }
+	}
+	float:rarity { 20.4 }
+}

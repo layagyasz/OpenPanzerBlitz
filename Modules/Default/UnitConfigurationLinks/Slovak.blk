@@ -98,6 +98,8 @@ unit-configuration-link:praga-iv {
 unit-configuration-link:bicycle-slovak {
 	!faction:faction { factions.slovak }
 	!unit-configuration:unit-configuration { unit-configurations.bicycle-slovak }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:motorcycle-slovak {
 	!faction:faction { factions.slovak }
