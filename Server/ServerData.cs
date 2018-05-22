@@ -38,7 +38,8 @@ namespace PanzerBlitz
 				while (Console.ReadLine() != string.Empty)
 				{
 					Dictionary<UnitConfigurationLock, int> counts = new Dictionary<UnitConfigurationLock, int>();
-					for (int i = 0; i < 20; ++i)
+					int trials = 2000;
+					for (int i = 0; i < trials; ++i)
 					{
 						foreach (var unit in pack.Open(random))
 						{
@@ -46,11 +47,13 @@ namespace PanzerBlitz
 							else counts.Add(unit, 1);
 						}
 					}
-					foreach (var count in counts)
+					foreach (var count in counts.OrderBy(i => i.Key.Rarity))
 					{
 						Console.ForegroundColor = RarityExtensions.GetRarity(count.Key.Rarity).GetConsoleColor();
 						Console.WriteLine("{0} {1}", count.Key, count.Value);
 					}
+					Console.WriteLine(counts.Sum(i => i.Key.GetValue() * i.Value));
+					Console.WriteLine(pack.ExpectedValue * trials);
 					Console.ResetColor();
 				}
 			}

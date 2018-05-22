@@ -648,7 +648,7 @@ unit-configuration:stupz-iv {
 	string:name { StuPz IV }
 	unit-class:unit-class { assault-gun }
 
-	weapon-class:weapon-class { anti-armor }
+	weapon-class:weapon-class { high-explosive }
 	byte:attack { 20 }
 	byte:range { 12 }
 	byte:defense { 12 }

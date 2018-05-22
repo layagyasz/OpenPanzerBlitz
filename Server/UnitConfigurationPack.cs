@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		public readonly string Name;
 		public readonly int Number;
 		public readonly long Cost;
+		public readonly double ExpectedValue;
 		public readonly WeightedVector<UnitConfigurationLock> UnitConfigurationLocks;
 
 		public UnitConfigurationPack(
@@ -23,11 +24,11 @@ namespace PanzerBlitz
 			this.UnitConfigurationLocks = new WeightedVector<UnitConfigurationLock>();
 			foreach (var ucl in UnitConfigurationLocks) this.UnitConfigurationLocks.Add(ucl.GetWeight(), ucl);
 
+			ExpectedValue = Number * HarmonicAverage(UnitConfigurationLocks.Select(i => i.GetValue()));
 			Cost = RoundCost(
-				.002
-				* Number
+				.005
 				* Multiplier(this.UnitConfigurationLocks.Length)
-				* HarmonicAverage(UnitConfigurationLocks.Select(i => i.GetValue())),
+				* ExpectedValue,
 				5);
 		}
 
@@ -58,11 +59,13 @@ namespace PanzerBlitz
 		public override string ToString()
 		{
 			return string.Format(
-				"[UnitConfigurationPack: Id={0}, Name={1}, Number={2}, Cost={3}, UnitConfigurationLocks={4}]",
+				"[UnitConfigurationPack: " + "" +
+				"Id={0}, Name={1}, Number={2}, Cost={3}, ExpectedValue={4} UnitConfigurationLocks={5}]",
 				Id,
 				Name,
 				Number,
 				Cost,
+				ExpectedValue,
 				UnitConfigurationLocks.Length);
 		}
 	}

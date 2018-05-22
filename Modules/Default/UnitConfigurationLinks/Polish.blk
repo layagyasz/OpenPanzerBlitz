@@ -11,10 +11,6 @@ unit-configuration-link:37mm-at-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at }
 }
-unit-configuration-link:47mm-at-polish {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
-}
 unit-configuration-link:40mm-aa-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
@@ -22,6 +18,10 @@ unit-configuration-link:40mm-aa-polish {
 unit-configuration-link:75mm-aa-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-aa }
+}
+unit-configuration-link:65mm-how-company-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.65mm-how-company }
 }
 unit-configuration-link:75mm-how-company-polish {
 	!faction:faction { factions.polish }
@@ -31,10 +31,6 @@ unit-configuration-link:75mm-how-long-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-how-long }
 }
-unit-configuration-link:76_2mm-how-company-polish {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-company }
-}
 unit-configuration-link:76_2mm-how-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.76_2mm-how-polish }
@@ -43,13 +39,13 @@ unit-configuration-link:100mm-how-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.100mm-how }
 }
-unit-configuration-link:105mm-how-company-polish {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
-}
 unit-configuration-link:105mm-how-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
+}
+unit-configuration-link:120mm-how-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.120mm-how }
 }
 unit-configuration-link:155mm-how-polish {
 	!faction:faction { factions.polish }
@@ -81,6 +77,10 @@ unit-configuration-link:rifle-platoon-polish-41 {
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-polish-41 }
 
 	int:introduce-year { 1941 }
+}
+unit-configuration-link:mountain-platoon-polish {
+	!faction:faction { factions.polish }
+	!unit-configuration:unit-configuration { unit-configurations.mountain-platoon-polish }
 }
 unit-configuration-link:cavalry-polish {
 	!faction:faction { factions.polish }
@@ -146,33 +146,17 @@ unit-configuration-link:7tp-at {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.7tp-at }
 }
-unit-configuration-link:7tp-infantry-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.7tp-infantry-corrected }
-}
-unit-configuration-link:7tp-at-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.7tp-at-corrected }
-}
 unit-configuration-link:4tp {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.4tp }
 }
-unit-configuration-link:4tp-corrected {
+unit-configuration-link:10tp {
 	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.4tp-corrected }
-}
-unit-configuration-link:10tp-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.10tp-corrected }
+	!unit-configuration:unit-configuration { unit-configurations.10tp }
 }
 unit-configuration-link:14tp {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.14tp }
-}
-unit-configuration-link:14tp-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.14tp-corrected }
 }
 unit-configuration-link:vau-33-infantry {
 	!faction:faction { factions.polish }
@@ -181,14 +165,6 @@ unit-configuration-link:vau-33-infantry {
 unit-configuration-link:vau-33-at {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.vau-33-at }
-}
-unit-configuration-link:vau-33-infantry-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.vau-33-infantry-corrected }
-}
-unit-configuration-link:vau-33-at-corrected {
-	!faction:faction { factions.polish }
-	!unit-configuration:unit-configuration { unit-configurations.vau-33-at-corrected }
 }
 unit-configuration-link:p-7 {
 	!faction:faction { factions.polish }

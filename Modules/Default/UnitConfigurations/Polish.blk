@@ -30,6 +30,16 @@ unit-configuration:rifle-platoon-polish-41 {
 	byte:defense { 6 }
 	byte:movement { 1 }
 }
+unit-configuration:mountain-platoon-polish {
+	string:name { Mountain Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 3 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
 unit-configuration:cavalry-polish {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
@@ -179,30 +189,10 @@ unit-configuration:7tp-infantry {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 6 }
-}
-unit-configuration:7tp-at {
-	string:name { 7TP }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 5 }
-	byte:range { 2 }
-	byte:defense { 5 }
-	byte:movement { 6 }
-}
-unit-configuration:7tp-infantry-corrected {
-	string:name { 7TP }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
-	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 6 }
 }
-unit-configuration:7tp-at-corrected {
+unit-configuration:7tp-at {
 	string:name { 7TP }
 	unit-class:unit-class { tank }
 
@@ -219,20 +209,10 @@ unit-configuration:4tp {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 2 }
 	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 12 }
-}
-unit-configuration:4tp-corrected {
-	string:name { 4TP }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 2 }
-	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 12 }
 }
-unit-configuration:10tp-corrected {
+unit-configuration:10tp {
 	string:name { 10TP }
 	unit-class:unit-class { tank }
 
@@ -249,16 +229,6 @@ unit-configuration:14tp {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 6 }
 	byte:range { 3 }
-	byte:defense { 6 }
-	byte:movement { 8 }
-}
-unit-configuration:14tp-corrected {
-	string:name { 14TP }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 6 }
-	byte:range { 3 }
 	byte:defense { 5 }
 	byte:movement { 10 }
 }
@@ -269,30 +239,10 @@ unit-configuration:vau-33-infantry {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 6 }
-}
-unit-configuration:vau-33-at {
-	string:name { VAU-33 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 4 }
-	byte:range { 2 }
-	byte:defense { 4 }
-	byte:movement { 6 }
-}
-unit-configuration:vau-33-infantry-corrected {
-	string:name { VAU-33 }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
-	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 6 }
 }
-unit-configuration:vau-33-at-corrected {
+unit-configuration:vau-33-at {
 	string:name { VAU-33 }
 	unit-class:unit-class { tank }
 

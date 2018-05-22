@@ -2,7 +2,7 @@
 	string[]:unit-configurations { 
 		string:_ { wagon-german }
 	}
-	float:rarity { 4.6 }
+	float:rarity { 5.6 }
 }
 unit-configuration-lock:28mm-at-german {
 	string[]:unit-configurations { 

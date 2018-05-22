@@ -236,34 +236,6 @@ namespace PanzerBlitz
 					}
 				}
 			}
-
-			// Write unit tiers.
-			using (FileStream file = FileUtils.GetStream("./TierAnalysis.txt", FileMode.OpenOrCreate, 1000))
-			{
-				using (StreamWriter writer = new StreamWriter(file))
-				{
-					List<UnitConfiguration> configurations = UnitConfigurations.Values.ToList();
-					foreach (var group in UnitConfigurations.Values.GroupBy(i => i.UnitClass))
-					{
-						writer.WriteLine("### " + group.Key);
-						double step = group.Count() * .1;
-						List<UnitConfiguration> configurationGroup = group.ToList();
-						configurationGroup.Sort((i, j) => i.GetPointValue(false).CompareTo(j.GetPointValue(false)));
-						for (int i = 0; i < 10; ++i)
-						{
-							writer.WriteLine("# Tier " + (i + 1));
-							for (int j = (int)Math.Round(step * i); j < (int)Math.Round((i + 1) * step); ++j)
-							{
-								writer.WriteLine(
-									"{0} {1} {2}",
-									configurationGroup[j],
-									configurationGroup[j].UniqueKey,
-									configurationGroup[j].GetPointValue(false));
-							}
-						}
-					}
-				}
-			}
 		}
 
 		public static void Load(string Module, SerializationInputStream Stream)

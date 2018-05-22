@@ -2324,6 +2324,9 @@
     <None Include="Modules\Default\Server\UnitConfigurationLocks\Japanese.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\Server\UnitConfigurationLocks\Polish.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Modules\Default\Server\UnitConfigurationLocks\Finnish.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

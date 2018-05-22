@@ -10,6 +10,10 @@ unit-render-details:rifle-platoon-polish-41 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
+unit-render-details:mountain-platoon-polish {
+	string:override-display-name { MOUNTAIN }
+	string:image-path { mountain-platoon.png }
+}
 unit-render-details:cavalry-polish {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry-3.png }
@@ -57,37 +61,19 @@ unit-render-details:7tp-infantry {
 unit-render-details:7tp-at {
 	string:image-path { 7tp-a.png }
 }
-unit-render-details:7tp-infantry-corrected {
-	string:image-path { 7tp-i.png }
-}
-unit-render-details:7tp-at-corrected {
-	string:image-path { 7tp-a.png }
-}
 unit-render-details:4tp {
 	string:image-path { 4tp.png }
 }
-unit-render-details:4tp-corrected {
-	string:image-path { 4tp.png }
-}
-unit-render-details:10tp-corrected {
+unit-render-details:10tp {
 	string:image-path { 7tp-a.png }
 }
 unit-render-details:14tp {
-	string:image-path { 14tp.png }
-}
-unit-render-details:14tp-corrected {
 	string:image-path { 14tp.png }
 }
 unit-render-details:vau-33-infantry {
 	string:image-path { vau-33-i.png }
 }
 unit-render-details:vau-33-at {
-	string:image-path { vau-33-a.png }
-}
-unit-render-details:vau-33-infantry-corrected {
-	string:image-path { vau-33-i.png }
-}
-unit-render-details:vau-33-at-corrected {
 	string:image-path { vau-33-a.png }
 }
 unit-render-details:p-7 {

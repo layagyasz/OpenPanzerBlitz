@@ -1,9 +1,6 @@
 ﻿unit-render-details:12_7mm-mg {
 	string:image-path { anti-aircraft.png }
 }
-unit-render-details:20mm-mg {
-	string:image-path { anti-aircraft.png }
-}
 unit-render-details:50cal-mg {
 	string:image-path { anti-aircraft.png }
 }
@@ -161,6 +158,9 @@ unit-render-details:105mm-how-company {
 	string:image-path { artillery-heavy-company.png }
 }
 unit-render-details:105mm-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:120mm-how {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:122mm-how {
