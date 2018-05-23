@@ -47,10 +47,6 @@ unit-configuration-link:100mm-how-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.100mm-how }
 }
-unit-configuration-link:105mm-how-company-italian {
-	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.105mm-how-company }
-}
 unit-configuration-link:105mm-how-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.105mm-how }
@@ -200,7 +196,8 @@ unit-configuration-link:milmart {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.milmart }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:ab-40 {
 	!faction:faction { factions.italian }
@@ -242,42 +239,42 @@ unit-configuration-link:47_32 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.47_32 }
 }
-unit-configuration-link:semovente-43-m {
+unit-configuration-link:semovente-105_25 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semovente-43-m }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-105_25 }
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:semo-75_18 {
+unit-configuration-link:semovente-75_18 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semo-75_18 }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-75_18 }
 
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1944 }
 }
-unit-configuration-link:semo-75_34 {
+unit-configuration-link:semovente-75_34 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semo-75_34 }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-75_34 }
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:semovente-40 {
+unit-configuration-link:semovente-47_32 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semovente-40 }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-47_32 }
 
-	int:introduce-year { 1940 }
+	int:introduce-year { 1942 }
 }
-unit-configuration-link:semo-75_46 {
+unit-configuration-link:semovente-75_46 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semo-75_46 }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-75_46 }
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:semovente-41-m {
+unit-configuration-link:semovente-90_53 {
 	!faction:faction { factions.italian }
-	!unit-configuration:unit-configuration { unit-configurations.semovente-41-m }
+	!unit-configuration:unit-configuration { unit-configurations.semovente-90_53 }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:l-3-fiamme {
 	!faction:faction { factions.italian }
@@ -306,14 +303,12 @@ unit-configuration-link:medio-11_39 {
 	!unit-configuration:unit-configuration { unit-configurations.medio-11_39 }
 
 	int:introduce-year { 1939 }
-	int:obsolete-year { 1944 }
 }
 unit-configuration-link:medio-13_40 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.medio-13_40 }
 
 	int:introduce-year { 1940 }
-	int:obsolete-year { 1943 }
 }
 unit-configuration-link:medio-14_41 {
 	!faction:faction { factions.italian }

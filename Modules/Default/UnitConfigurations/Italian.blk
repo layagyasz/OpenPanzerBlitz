@@ -346,8 +346,8 @@ unit-configuration:47_32 {
 	byte:defense { 1 }
 	byte:movement { 10 }
 }
-unit-configuration:semovente-43-m {
-	string:name { Semovente 43m }
+unit-configuration:semovente-105_25 {
+	string:name { Semovente 105/25 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -356,8 +356,8 @@ unit-configuration:semovente-43-m {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:semo-75_18 {
-	string:name { Semo 75/18 }
+unit-configuration:semovente-75_18 {
+	string:name { Semovente 75/18 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -366,8 +366,8 @@ unit-configuration:semo-75_18 {
 	byte:defense { 7 }
 	byte:movement { 8 }
 }
-unit-configuration:semo-75_34 {
-	string:name { Semo 75/34 }
+unit-configuration:semovente-75_34 {
+	string:name { Semovente 75/34 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -376,8 +376,8 @@ unit-configuration:semo-75_34 {
 	byte:defense { 7 }
 	byte:movement { 8 }
 }
-unit-configuration:semovente-40 {
-	string:name { Semovente 40 }
+unit-configuration:semovente-47_32 {
+	string:name { Semovente 47/32 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
@@ -386,8 +386,8 @@ unit-configuration:semovente-40 {
 	byte:defense { 3 }
 	byte:movement { 9 }
 }
-unit-configuration:semo-75_46 {
-	string:name { Semo 75/46 }
+unit-configuration:semovente-75_46 {
+	string:name { Semovente 75/46 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }
@@ -396,8 +396,8 @@ unit-configuration:semo-75_46 {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:semovente-41-m {
-	string:name { Semovente 41m }
+unit-configuration:semovente-90_53 {
+	string:name { Semovente 90/53 }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { anti-armor }

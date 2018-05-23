@@ -106,22 +106,22 @@ unit-render-details:desertica-43 {
 unit-render-details:47_32 {
 	string:image-path {47_32.png }
 }
-unit-render-details:semovente-43-m {
+unit-render-details:semovente-105_25 {
 	string:image-path { semovente-43m.png }
 }
-unit-render-details:semo-75_18 {
+unit-render-details:semovente-75_18 {
 	string:image-path { semo-75_18.png }
 }
-unit-render-details:semo-75_34 {
+unit-render-details:semovente-75_34 {
 	string:image-path { semo-75_34.png }
 }
-unit-render-details:semovente-40 {
+unit-render-details:semovente-47_32 {
 	string:image-path { semovente-40.png }
 }
-unit-render-details:semo-75_46 {
+unit-render-details:semovente-75_46 {
 	string:image-path { semo-75_46.png }
 }
-unit-render-details:semovente-41-m {
+unit-render-details:semovente-90_53 {
 	string:image-path { semovente-41m.png }
 }
 unit-render-details:l-3-fiamme {
