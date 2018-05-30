@@ -128,7 +128,6 @@
     <Compile Include="Model\LobbyActions\LobbyActionSerializer.cs" />
     <Compile Include="Network\Messages\ApplyLobbyActionRequest.cs" />
     <Compile Include="Network\NonMatchMessageSerializer.cs" />
-    <Compile Include="Network\LobbyRPCHandler.cs" />
     <Compile Include="Network\Messages\GetLobbyResponse.cs" />
     <Compile Include="Network\Messages\GetLobbyRequest.cs" />
     <Compile Include="Controller\Match\MatchController.cs" />
@@ -157,7 +156,6 @@
     <Compile Include="Controller\Chat\RemoteChatAdapter.cs" />
     <Compile Include="Network\Messages\ApplyChatActionRequest.cs" />
     <Compile Include="Model\LobbyActions\LaunchAction.cs" />
-    <Compile Include="Network\MatchRPCHandler.cs" />
     <Compile Include="View\Chat\ChatView.cs" />
     <Compile Include="View\Landing\LandingScreen.cs" />
     <Compile Include="View\MatchLobby\MatchLobbyPlayerSection.cs" />
@@ -183,8 +181,6 @@
     <Compile Include="View\Map\Camera.cs" />
     <Compile Include="View\MapScreenBase.cs" />
     <Compile Include="View\Edit\EditScreen.cs" />
-    <Compile Include="Network\LobbyServerRPCHandler.cs" />
-    <Compile Include="Network\MatchServerRPCHandler.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="View\Edit\NewMapPane.cs" />
     <Compile Include="Model\Map\BoardCompositeMapConfiguration.cs" />
@@ -217,7 +213,6 @@
     <Compile Include="Controller\LogInPlayer\LogInPlayerStateController.cs" />
     <Compile Include="Controller\PlayerContext.cs" />
     <Compile Include="Network\Messages\LogInPlayerResponse.cs" />
-    <Compile Include="Network\PanzerBlitzServerRPCHandler.cs" />
     <Compile Include="Controller\LogInPlayer\LogInPlayerController.cs" />
     <Compile Include="View\RegisterPlayer\RegisterPlayerScreen.cs" />
     <Compile Include="Controller\RegisterPlayer\RegisterPlayerStateController.cs" />
@@ -380,6 +375,14 @@
     <Compile Include="AI\PositionalDeploymentHandler.cs" />
     <Compile Include="Server\UnitConfigurationPackGenerator.cs" />
     <Compile Include="Server\Rarity.cs" />
+    <Compile Include="Network\LobbyLayer.cs" />
+    <Compile Include="Network\LobbyServerLayer.cs" />
+    <Compile Include="Network\ChatLayer.cs" />
+    <Compile Include="Network\ChatServerLayer.cs" />
+    <Compile Include="Network\ConnectionCache.cs" />
+    <Compile Include="Network\MatchLayer.cs" />
+    <Compile Include="Network\MatchServerLayer.cs" />
+    <Compile Include="Network\PanzerBlitzServerLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

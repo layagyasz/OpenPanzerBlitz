@@ -27,8 +27,13 @@ namespace PanzerBlitz
 			this.Army = Army;
 		}
 
-		public MatchContext(TCPServer Server, Match Match, OrderSerializer OrderSerializer, Army Army)
-			: base(Server)
+		public MatchContext(
+			TCPServer Server,
+			ConnectionCache<Player> ConnectionCache,
+			Match Match,
+			OrderSerializer OrderSerializer,
+			Army Army)
+			: base(Server, ConnectionCache)
 		{
 			this.Match = Match;
 			this.OrderSerializer = OrderSerializer;

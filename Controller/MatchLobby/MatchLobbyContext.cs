@@ -17,8 +17,9 @@ namespace PanzerBlitz
 			this.Chat = Chat;
 		}
 
-		public MatchLobbyContext(TCPServer Server, MatchLobby Lobby, Chat Chat)
-			: base(Server)
+		public MatchLobbyContext(
+			TCPServer Server, ConnectionCache<Player> ConnectionCache, MatchLobby Lobby, Chat Chat)
+			: base(Server, ConnectionCache)
 		{
 			this.Lobby = Lobby;
 			this.Chat = Chat;
@@ -43,28 +44,30 @@ namespace PanzerBlitz
 
 			if (IsHost)
 			{
-				var currentHandler = (LobbyServerRPCHandler)Server.RPCHandler;
-				var armyConnections = new Dictionary<Army, TCPConnection>();
+				var armyConnections = new Dictionary<Army, Player>();
 				foreach (Player p in Lobby.Players)
 				{
-					if (currentHandler.PlayerConnections.ContainsKey(p))
+					if (ConnectionCache.Connections.ContainsKey(p))
 					{
 						var a = match.Armies.FirstOrDefault(i => i.Configuration == Lobby.GetPlayerArmy(p));
-						armyConnections.Add(a, currentHandler.PlayerConnections[p]);
+						armyConnections.Add(a, p);
 					}
 				}
 
 				Server.MessageAdapter = new MatchMessageSerializer(serializer);
-				Server.RPCHandler = new MatchServerRPCHandler(match, armyConnections);
+				Server.RPCHandler =
+					new RPCHandler().Install(new MatchServerLayer(match, armyConnections, ConnectionCache));
 				match.OnExecuteOrder += (sender, e) => Server.Broadcast(new ExecuteOrderRequest(e.Order, serializer));
 				return new MatchContext(
 					Server,
+					ConnectionCache,
 					match,
 					serializer,
 					match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
 			}
+
 			Client.MessageAdapter = new MatchMessageSerializer(serializer);
-			Client.RPCHandler = new MatchRPCHandler(match);
+			Client.RPCHandler = new RPCHandler().Install(new MatchLayer(match));
 			return new MatchContext(
 				Client,
 				match,

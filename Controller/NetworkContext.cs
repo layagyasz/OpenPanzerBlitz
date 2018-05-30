@@ -6,6 +6,7 @@ namespace PanzerBlitz
 	{
 		public readonly TCPClient Client;
 		public readonly TCPServer Server;
+		public readonly ConnectionCache<Player> ConnectionCache;
 
 		public bool IsHost
 		{
@@ -22,9 +23,10 @@ namespace PanzerBlitz
 			this.Client = Client;
 		}
 
-		protected NetworkContext(TCPServer Server)
+		protected NetworkContext(TCPServer Server, ConnectionCache<Player> ConnectionCache)
 		{
 			this.Server = Server;
+			this.ConnectionCache = ConnectionCache;
 		}
 
 		public void Close()
@@ -36,7 +38,7 @@ namespace PanzerBlitz
 		public PlayerContext MakePlayerContext(Player Player)
 		{
 			if (Client != null) return new PlayerContext(Client, Player);
-			if (Server != null) return new PlayerContext(Server, Player);
+			if (Server != null) return new PlayerContext(Server, ConnectionCache, Player);
 			return new PlayerContext(Player);
 		}
 
@@ -61,7 +63,7 @@ namespace PanzerBlitz
 		{
 			var server = new TCPServer(Port);
 			server.Start();
-			return new NetworkContext(server);
+			return new NetworkContext(server, new ConnectionCache<Player>());
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace PanzerBlitz
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
 				typeof(ValidateOrderRequest), i => new ValidateOrderRequest(i, OrderSerializer)),
 			new Tuple<Type, Func<SerializationInputStream, Serializable>>(
-				typeof(BooleanResponse), i => new BooleanResponse(i))
+				typeof(ByteResponse), i => new ByteResponse(i))
 		})
 		{
 			_OrderSerializer = OrderSerializer;

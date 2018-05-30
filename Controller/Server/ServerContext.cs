@@ -6,8 +6,9 @@ namespace PanzerBlitz
 	{
 		public readonly PanzerBlitzServer PanzerBlitzServer;
 
-		public ServerContext(TCPServer Server, PanzerBlitzServer PanzerBlitzServer)
-			: base(Server)
+		public ServerContext(
+			TCPServer Server, ConnectionCache<Player> ConnectionCache, PanzerBlitzServer PanzerBlitzServer)
+			: base(Server, ConnectionCache)
 		{
 			this.PanzerBlitzServer = PanzerBlitzServer;
 		}
@@ -18,8 +19,8 @@ namespace PanzerBlitz
 			var server = new TCPServer(Port);
 			server.Start();
 			server.MessageAdapter = new NonMatchMessageSerializer();
-			server.RPCHandler = new PanzerBlitzServerRPCHandler(pbServer);
-			return new ServerContext(server, pbServer);
+			server.RPCHandler = new RPCHandler().Install(new PanzerBlitzServerLayer(pbServer));
+			return new ServerContext(server, new ConnectionCache<Player>(), pbServer);
 		}
 	}
 }
