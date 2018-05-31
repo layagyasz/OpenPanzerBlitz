@@ -33,7 +33,7 @@ namespace PanzerBlitz
 
 		public static ushort OnlinePort = 1000;
 		public static Player Player =
-			new Player((int)DateTime.Now.Ticks, "Player " + DateTime.Now.Ticks.ToString(), true);
+			new Player(OnlineId.Temporary(DateTime.Now.Ticks), "Player " + DateTime.Now.Ticks.ToString());
 		public static string LoadedModule;
 
 		public static Dictionary<string, UnitMovementRules> UnitMovementRules;

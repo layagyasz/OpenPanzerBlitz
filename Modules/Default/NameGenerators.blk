@@ -1,5 +1,6 @@
 ﻿name-generator<>:name-generators {
-	name-generator:russian { Russian.mkvc }
-	name-generator:german { German.mkvc }
 	name-generator:french { French.mkvc }
+	name-generator:german { German.mkvc }
+	name-generator:polish { Polish.mkvc }
+	name-generator:russian { Russian.mkvc }
 }

@@ -107,6 +107,11 @@ namespace PanzerBlitz
 			return Capitalize(Input) + ".";
 		}
 
+		public static string CapitalizeAll(string Input)
+		{
+			return string.Join(" ", Input.Split(' ').Select(Capitalize));
+		}
+
 		public static string Listify(IEnumerable<string> Parts, string Joiner, string TerminalJoiner)
 		{
 			return string.Format(

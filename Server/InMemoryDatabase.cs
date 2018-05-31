@@ -3,18 +3,21 @@ using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class Database
+	public class InMemoryDatabase : Database
 	{
 		IdGenerator _IdGenerator = new IdGenerator();
 
-		readonly Dictionary<int, PlayerOrm> _Players = new Dictionary<int, PlayerOrm>();
+		readonly Dictionary<long, PlayerOrm> _Players = new Dictionary<long, PlayerOrm>();
 
 		public PlayerOrm AddPlayer(string Username, string Password)
 		{
 			var p = GetPlayer(Username);
 			if (p == null) return null;
 			p = new PlayerOrm(_IdGenerator, Username, Password);
-			_Players.Add(p.Id, p);
+			lock (_Players)
+			{
+				_Players.Add(p.Id, p);
+			}
 			return p;
 		}
 

@@ -29,34 +29,6 @@ namespace PanzerBlitz
 			var attributes = block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitConfigurationLocks =
 				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
-
-			Random random = new Random();
-			foreach (var pack in new UnitConfigurationPackGenerator(
-				GameData.Factions.Values).Generate(UnitConfigurationLocks.Values))
-			{
-				Console.WriteLine(pack);
-				while (Console.ReadLine() != string.Empty)
-				{
-					Dictionary<UnitConfigurationLock, int> counts = new Dictionary<UnitConfigurationLock, int>();
-					int trials = 2000;
-					for (int i = 0; i < trials; ++i)
-					{
-						foreach (var unit in pack.Open(random))
-						{
-							if (counts.ContainsKey(unit)) counts[unit] += 1;
-							else counts.Add(unit, 1);
-						}
-					}
-					foreach (var count in counts.OrderBy(i => i.Key.Rarity))
-					{
-						Console.ForegroundColor = RarityExtensions.GetRarity(count.Key.Rarity).GetConsoleColor();
-						Console.WriteLine("{0} {1}", count.Key, count.Value);
-					}
-					Console.WriteLine(counts.Sum(i => i.Key.GetValue() * i.Value));
-					Console.WriteLine(pack.ExpectedValue * trials);
-					Console.ResetColor();
-				}
-			}
 		}
 	}
 }

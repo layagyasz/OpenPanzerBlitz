@@ -1,4 +1,32 @@
 ﻿match-setting<>:match-settings {
+	match-setting:france-summer {
+		!var:environment { environments.summer-grassland }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.french }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
+	match-setting:germany-summer {
+		!var:environment { environments.summer-grassland }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.german }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
+	match-setting:poland-summer {
+		!var:environment { environments.summer-steppe }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.polish }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
+	match-setting:poland-winter {
+		!var:environment { environments.winter-steppe }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.polish }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:russia-summer {
 		!var:environment { environments.summer-steppe }
 		map-generator-configuration:map-generator {
@@ -10,20 +38,6 @@
 		!var:environment { environments.winter-steppe }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.russian }
-			!var:terrain-generator { terrain-generators.default }
-		}
-	}
-	match-setting:germany-summer {
-		!var:environment { environments.summer-grassland }
-		map-generator-configuration:map-generator {
-			!var:name-generator { name-generators.german }
-			!var:terrain-generator { terrain-generators.default }
-		}
-	}
-	match-setting:france-summer {
-		!var:environment { environments.summer-grassland }
-		map-generator-configuration:map-generator {
-			!var:name-generator { name-generators.french }
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}

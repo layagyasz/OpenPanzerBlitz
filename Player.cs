@@ -4,25 +4,22 @@ namespace PanzerBlitz
 {
 	public class Player : Serializable
 	{
-		public readonly int TemporaryId;
-		public readonly int PermanentId;
+		public readonly OnlineId Id;
 		public readonly string Name;
 
-		public Player(int Id, string Name, bool IsTemporaryId)
+		public Player(OnlineId Id, string Name)
 		{
+			this.Id = Id;
 			this.Name = Name;
-			if (IsTemporaryId) TemporaryId = Id;
-			else PermanentId = Id;
 		}
 
 		public Player(SerializationInputStream Stream)
-			: this(Stream.ReadInt32(), Stream.ReadString(), Stream.ReadBoolean()) { }
+			: this(new OnlineId(Stream), Stream.ReadString()) { }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(TemporaryId == 0 ? PermanentId : TemporaryId);
+			Stream.Write(Id);
 			Stream.Write(Name);
-			Stream.Write(PermanentId == 0);
 		}
 
 		public override bool Equals(object obj)
@@ -31,14 +28,14 @@ namespace PanzerBlitz
 			if (obj is Player)
 			{
 				var o = (Player)obj;
-				return TemporaryId == o.TemporaryId && PermanentId == o.PermanentId && Name == o.Name;
+				return Id == o.Id && Name == o.Name;
 			}
 			return false;
 		}
 
 		public override int GetHashCode()
 		{
-			return TemporaryId.GetHashCode() ^ PermanentId.GetHashCode() ^ Name.GetHashCode();
+			return Id.GetHashCode() ^ Name.GetHashCode();
 		}
 
 		public static bool operator ==(Player p1, Player p2)

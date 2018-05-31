@@ -1,13 +1,14 @@
-﻿namespace PanzerBlitz
+namespace PanzerBlitz
 {
 	public class PanzerBlitzServer
 	{
 		readonly ServerData _ServerData;
-		readonly Database _Database = new Database();
+		readonly Database _Database;
 
-		public PanzerBlitzServer(string Path)
+		public PanzerBlitzServer(string Path, Database Database)
 		{
 			_ServerData = new ServerData(Path);
+			_Database = Database;
 		}
 
 		public Player LogInPlayer(string Username, string Password)

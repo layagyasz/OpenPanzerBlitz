@@ -6,7 +6,7 @@ namespace PanzerBlitz
 {
 	public class PlayerOrm
 	{
-		public readonly int Id;
+		public readonly long Id;
 		public readonly string Username;
 		public readonly string PasswordHash;
 
@@ -24,7 +24,7 @@ namespace PanzerBlitz
 
 		public Player MakePlayer()
 		{
-			return new Player(Id, Username, false);
+			return new Player(OnlineId.Permanent(Id), Username);
 		}
 
 		string ComputeHash(string Value)

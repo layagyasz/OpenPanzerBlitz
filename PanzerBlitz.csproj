@@ -38,6 +38,8 @@
     <Reference Include="sfmlnet-window-2">
       <HintPath>..\..\..\Code\ROTNS\ROTNS\sfmlnet-window-2.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,7 +207,7 @@
     <Compile Include="Controller\Server\ServerContext.cs" />
     <Compile Include="View\Server\ServerScreen.cs" />
     <Compile Include="Server\Orm\PlayerOrm.cs" />
-    <Compile Include="Server\Database.cs" />
+    <Compile Include="Server\InMemoryDatabase.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Network\Messages\LogInPlayerRequest.cs" />
     <Compile Include="Network\Messages\RegisterPlayerRequest.cs" />
@@ -383,6 +385,9 @@
     <Compile Include="Network\MatchLayer.cs" />
     <Compile Include="Network\MatchServerLayer.cs" />
     <Compile Include="Network\PanzerBlitzServerLayer.cs" />
+    <Compile Include="OnlineId.cs" />
+    <Compile Include="Server\Database.cs" />
+    <Compile Include="Server\SqlDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2343,6 +2348,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Server\UnitConfigurationLocks\Italian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\NameGenerators\Polish.mkvc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

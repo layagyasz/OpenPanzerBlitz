@@ -20,7 +20,6 @@ namespace PanzerBlitz
 
 			UniqueId = Block.Name;
 			UnitConfigurations = ((List<string>)attributes[(int)Attribute.UNIT_CONFIGURATIONS])
-				.Where(i => { Console.WriteLine(i); return true; })
 				.Select(i => GameData.UnitConfigurationLinks[i]).ToList();
 			Rarity = (float)attributes[(int)Attribute.RARITY];
 		}

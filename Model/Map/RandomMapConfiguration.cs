@@ -63,18 +63,27 @@ namespace PanzerBlitz
 			}
 			foreach (Tile t in map.TilesEnumerable)
 			{
-				if (t.Configuration.TileBase == TileBase.SLOPE
-					|| t.Configuration.TileBase == TileBase.SWAMP)
-					continue;
+				if (t.Configuration.TileBase == TileBase.SWAMP) continue;
 
+				double[] slopes = GetSlopeDirections(t).ToArray();
 				for (int i = 0; i < 6; ++i)
 				{
-					if (t.Configuration.TileBase == TileBase.SLOPE || t.Configuration.GetEdge(i) == TileEdge.WATER)
-						continue;
+					if (t.Configuration.GetEdge(i) == TileEdge.WATER) continue;
 
 					Tile neighbor = t.NeighborTiles[i];
-					if (neighbor != null
-						&& neighbor.Configuration.TileBase != TileBase.SLOPE
+					if (neighbor == null) continue;
+
+					if (t.Configuration.TileBase == TileBase.SLOPE)
+					{
+						if (neighbor.Configuration.TileBase == TileBase.SLOPE)
+						{
+							double[] nSlopes = GetSlopeDirections(neighbor).ToArray();
+							if (!slopes.All(v => nSlopes.Any(w => DoublesEqual(v, w)))) t.SetEdge(i, TileEdge.SLOPE);
+						}
+						continue;
+					}
+
+					if (neighbor.Configuration.TileBase != TileBase.SLOPE
 						&& neighbor.Configuration.TileBase != TileBase.SWAMP)
 					{
 						Vector2f v = .5f * (t.Bounds[i].Point + t.Bounds[i].End);
@@ -117,7 +126,7 @@ namespace PanzerBlitz
 			{
 				var name =
 					new string(_Configuration.NameGenerator.Generate(_Random).ToArray()).RemoveDiacritics();
-				name = char.ToUpper(name[0]) + name.Substring(1);
+				name = ObjectDescriber.CapitalizeAll(name);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
 				for (int i = 0; i < Math.Max(1, tiles.Count / 4); ++i)
@@ -150,6 +159,31 @@ namespace PanzerBlitz
 		public StaticMapConfiguration MakeStaticMap()
 		{
 			return new StaticMapConfiguration(GenerateMap(null, new IdGenerator()));
+		}
+
+		bool DoublesEqual(double X, double Y)
+		{
+			return Math.Abs(X - Y) < double.Epsilon;
+		}
+
+		IEnumerable<double> GetSlopeDirections(Tile Tile)
+		{
+			for (int i = 0; i < 5; ++i)
+			{
+				if (Tile.NeighborTiles[i] != null && Tile.NeighborTiles[i].Configuration.TileBase == TileBase.SLOPE)
+				{
+					for (int j = i + 1; j < 6; ++j)
+					{
+						if (Tile.NeighborTiles[j] != null
+							&& Tile.NeighborTiles[j].Configuration.TileBase == TileBase.SLOPE)
+						{
+							Vector2f p1 = .5f * (Tile.Bounds[i].Point + Tile.Bounds[i].End);
+							Vector2f p2 = .5f * (Tile.Bounds[j].Point + Tile.Bounds[j].End);
+							yield return Math.Atan2(p2.Y - p1.Y, p2.X - p1.X);
+						}
+					}
+				}
+			}
 		}
 
 		void MakePath(Tile Start, Tile End, TilePathOverlay Path, Func<Tile, Tile, double> DistanceFunction)
