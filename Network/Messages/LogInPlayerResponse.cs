@@ -15,7 +15,7 @@ namespace PanzerBlitz
 		public LogInPlayerResponse(SerializationInputStream Stream)
 		: base(Stream)
 		{
-			Player = Stream.ReadObject(i => new Player(Stream));
+			Player = Stream.ReadObject(i => new Player(Stream), true);
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)

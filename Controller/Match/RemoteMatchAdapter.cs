@@ -40,14 +40,14 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason ValidateOrder(Order Order)
 		{
-			return (OrderInvalidReason)((ByteResponse)_Client.Call(
-				new ValidateOrderRequest(Order, _Serializer)).Get()).Value;
+			return (OrderInvalidReason)_Client.Call(
+				new ValidateOrderRequest(Order, _Serializer)).Get<ByteResponse>().Value;
 		}
 
 		public OrderInvalidReason ExecuteOrder(Order Order)
 		{
-			return (OrderInvalidReason)((ByteResponse)_Client.Call(
-				new ExecuteOrderRequest(Order, _Serializer)).Get()).Value;
+			return (OrderInvalidReason)_Client.Call(
+				new ExecuteOrderRequest(Order, _Serializer)).Get<ByteResponse>().Value;
 		}
 	}
 }

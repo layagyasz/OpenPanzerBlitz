@@ -19,14 +19,14 @@ namespace PanzerBlitz
 
 		public bool SetPlayerArmy(Player Player, ArmyConfiguration Army)
 		{
-			return ((BooleanResponse)_Client.Call(
-				new ApplyLobbyActionRequest(new SetPlayerArmyAction(Player, Army))).Get()).Value;
+			return _Client.Call(
+				new ApplyLobbyActionRequest(new SetPlayerArmyAction(Player, Army))).Get<BooleanResponse>().Value;
 		}
 
 		public bool SetPlayerReady(Player Player, bool Ready)
 		{
-			return ((BooleanResponse)_Client.Call(
-				new ApplyLobbyActionRequest(new SetPlayerReadyAction(Player, Ready))).Get()).Value;
+			return _Client.Call(
+				new ApplyLobbyActionRequest(new SetPlayerReadyAction(Player, Ready))).Get<BooleanResponse>().Value;
 		}
 
 		public bool Start()

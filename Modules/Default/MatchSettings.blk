@@ -13,6 +13,13 @@
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}
+	match-setting:hungary-summer {
+		!var:environment { environments.summer-grassland }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.hungarian }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:poland-summer {
 		!var:environment { environments.summer-steppe }
 		map-generator-configuration:map-generator {

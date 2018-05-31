@@ -7,7 +7,7 @@
 class:join-server-display {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 213 }
+		int:height { 323 }
 	}
 }
 class:join-server-header-1 {

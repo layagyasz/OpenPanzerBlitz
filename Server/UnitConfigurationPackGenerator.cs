@@ -25,7 +25,7 @@ namespace PanzerBlitz
 					if (locks.Count > 0)
 					{
 						yield return new UnitConfigurationPack(
-							idGenerator,
+							idGenerator.GenerateId(),
 							PackName(faction, unitClass),
 							9,
 							locks);

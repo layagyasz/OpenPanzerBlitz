@@ -47,7 +47,7 @@ namespace PanzerBlitz
 			Client.MessageAdapter = new NonMatchMessageSerializer();
 			Client.RPCHandler = new RPCHandler();
 
-			Player p = ((LogInPlayerResponse)Client.Call(new LogInPlayerRequest(Username, Password)).Get()).Player;
+			Player p = Client.Call(new LogInPlayerRequest(Username, Password)).Get<LogInPlayerResponse>().Player;
 			if (p == null) return null;
 			return new PlayerContext(Client, p);
 		}

@@ -52,10 +52,10 @@ namespace PanzerBlitz
 				var handler = new RPCHandler().Install(lobbyLayer, new ChatLayer(chat));
 				Client.RPCHandler = handler;
 
-				if (((BooleanResponse)Client.Call(
-					new ApplyLobbyActionRequest(new AddPlayerAction(Player))).Get()).Value)
+				if (Client.Call(
+					new ApplyLobbyActionRequest(new AddPlayerAction(Player))).Get<BooleanResponse>().Value)
 				{
-					MatchLobby lobby = ((GetLobbyResponse)Client.Call(new GetLobbyRequest()).Get()).Lobby;
+					MatchLobby lobby = Client.Call(new GetLobbyRequest()).Get<GetLobbyResponse>().Lobby;
 					lobbyLayer.Lobby = lobby;
 					return new MatchLobbyContext(Client, lobby, chat);
 				}

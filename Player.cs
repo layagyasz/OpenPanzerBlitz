@@ -48,5 +48,10 @@ namespace PanzerBlitz
 		{
 			return !(p1 == p2);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[Player: Id={0}, Name={1}]", Id, Name);
+		}
 	}
 }

@@ -9,11 +9,12 @@ namespace PanzerBlitz
 
 		readonly Dictionary<long, PlayerOrm> _Players = new Dictionary<long, PlayerOrm>();
 
-		public PlayerOrm AddPlayer(string Username, string Password)
+		public PlayerOrm AddPlayer(PlayerOrm Player)
 		{
-			var p = GetPlayer(Username);
-			if (p == null) return null;
-			p = new PlayerOrm(_IdGenerator, Username, Password);
+			var p = GetPlayer(Player.Username);
+			if (p != null) return null;
+
+			p = new PlayerOrm(_IdGenerator.GenerateId(), Player.Username, Player.PasswordHash, Player.PasswordSalt);
 			lock (_Players)
 			{
 				_Players.Add(p.Id, p);

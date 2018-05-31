@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		enum Attribute { UNIT_CONFIGURATION_LOCKS };
 
 		public readonly Dictionary<string, UnitConfigurationLock> UnitConfigurationLocks;
+		public readonly List<UnitConfigurationPack> UnitConfigurationPacks;
 
 		public ServerData(string Path)
 		{
@@ -29,6 +30,9 @@ namespace PanzerBlitz
 			var attributes = block.BreakToAttributes<object>(typeof(Attribute), true);
 			UnitConfigurationLocks =
 				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
+			UnitConfigurationPacks =
+				new UnitConfigurationPackGenerator(GameData.Factions.Values)
+					.Generate(UnitConfigurationLocks.Values).ToList();
 		}
 	}
 }

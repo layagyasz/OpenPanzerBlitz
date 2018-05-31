@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Serialization;
 using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
-	public class UnitConfigurationPack
+	public class UnitConfigurationPack : Serializable
 	{
 		public readonly int Id;
 		public readonly string Name;
@@ -16,9 +17,9 @@ namespace PanzerBlitz
 		public readonly WeightedVector<UnitConfigurationLock> UnitConfigurationLocks;
 
 		public UnitConfigurationPack(
-			IdGenerator IdGenerator, string Name, int Number, IEnumerable<UnitConfigurationLock> UnitConfigurationLocks)
+			int Id, string Name, int Number, IEnumerable<UnitConfigurationLock> UnitConfigurationLocks)
 		{
-			Id = IdGenerator.GenerateId();
+			this.Id = Id;
 			this.Name = Name;
 			this.Number = Number;
 			this.UnitConfigurationLocks = new WeightedVector<UnitConfigurationLock>();
@@ -30,6 +31,22 @@ namespace PanzerBlitz
 				* Multiplier(this.UnitConfigurationLocks.Length)
 				* ExpectedValue,
 				5);
+		}
+
+		public UnitConfigurationPack(SerializationInputStream Stream)
+			: this(
+				Stream.ReadInt32(),
+				Stream.ReadString(),
+				Stream.ReadInt32(),
+				Stream.ReadEnumerable(i => new UnitConfigurationLock(i)))
+		{ }
+
+		public void Serialize(SerializationOutputStream Stream)
+		{
+			Stream.Write(Id);
+			Stream.Write(Name);
+			Stream.Write(Number);
+			Stream.Write(UnitConfigurationLocks);
 		}
 
 		public IEnumerable<UnitConfigurationLock> Open(Random Random)

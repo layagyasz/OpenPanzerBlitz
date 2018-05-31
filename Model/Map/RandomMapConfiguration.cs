@@ -125,7 +125,7 @@ namespace PanzerBlitz
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
 				var name =
-					new string(_Configuration.NameGenerator.Generate(_Random).ToArray()).RemoveDiacritics();
+					new string(_Configuration.NameGenerator.Generate(_Random).ToArray());
 				name = ObjectDescriber.CapitalizeAll(name);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();

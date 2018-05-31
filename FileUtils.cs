@@ -70,7 +70,7 @@ namespace PanzerBlitz
 		{
 			var g = new MarkovGenerator<char>(3);
 			var regex = new Regex("\\(.*\\)");
-			foreach (var line in File.ReadAllLines(ExamplePath))
+			foreach (var line in File.ReadAllLines(ExamplePath, Encoding.UTF8))
 			{
 				var name = line.ToLower();
 				if (name.Length == 0) continue;
@@ -91,22 +91,6 @@ namespace PanzerBlitz
 					stream.Write(g);
 				}
 			}
-		}
-
-		public static string RemoveDiacritics(this string value)
-		{
-			var valueFormD = value.Normalize(NormalizationForm.FormD);
-			var stringBuilder = new StringBuilder();
-
-			foreach (var item in valueFormD)
-			{
-				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(item);
-				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-				{
-					stringBuilder.Append(item);
-				}
-			}
-			return (stringBuilder.ToString().Normalize(NormalizationForm.FormC));
 		}
 
 		public static void Remap()

@@ -21,10 +21,17 @@ namespace PanzerBlitz
 			return new LogInPlayerResponse(Server.RegisterPlayer(Request.Username, Request.Password));
 		}
 
+		public GetUnitConfigurationPacksResponse GetUnitConfigurationPacks(
+			GetUnitConfigurationPacksRequest Request, TCPConnection Connection)
+		{
+			return new GetUnitConfigurationPacksResponse(Server.GetUnitConfigurationPacks());
+		}
+
 		public void Install(RPCHandler Handler)
 		{
 			Handler.RegisterRPC<LogInPlayerRequest>(LogInPlayer);
 			Handler.RegisterRPC<RegisterPlayerRequest>(RegisterPlayer);
+			Handler.RegisterRPC<GetUnitConfigurationPacksRequest>(GetUnitConfigurationPacks);
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Cardamom.Network;
+﻿using System.Security.Cryptography;
+
+using Cardamom.Network;
 
 namespace PanzerBlitz
 {
@@ -18,6 +20,7 @@ namespace PanzerBlitz
 			var pbServer =
 				new PanzerBlitzServer(
 					"./Modules/" + GameData.LoadedModule + "/Server",
+					new RNGCryptoServiceProvider(),
 					new SqlDatabase("127.0.0.1", "_panzerblitzonline", "root", "panzerblitzonline"));
 			var server = new TCPServer(Port);
 			server.Start();

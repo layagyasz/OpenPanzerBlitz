@@ -14,8 +14,8 @@ namespace PanzerBlitz
 
 		public bool SendMessage(ChatMessage Message)
 		{
-			return ((BooleanResponse)_Client.Call(
-				new ApplyChatActionRequest(new AddChatMessageAction(Message))).Get()).Value;
+			return _Client.Call(
+				new ApplyChatActionRequest(new AddChatMessageAction(Message))).Get<BooleanResponse>().Value;
 		}
 	}
 }

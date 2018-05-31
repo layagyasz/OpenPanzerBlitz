@@ -60,5 +60,10 @@ namespace PanzerBlitz
 		{
 			return !(i1 == i2);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[OnlineId: Id={0}, IsTemporary={1}]", Id, IsTemporary);
+		}
 	}
 }

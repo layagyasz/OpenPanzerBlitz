@@ -388,6 +388,8 @@
     <Compile Include="OnlineId.cs" />
     <Compile Include="Server\Database.cs" />
     <Compile Include="Server\SqlDatabase.cs" />
+    <Compile Include="Network\Messages\GetUnitConfigurationPacksRequest.cs" />
+    <Compile Include="Network\Messages\GetUnitConfigurationPacksResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2351,6 +2353,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\NameGenerators\Polish.mkvc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\NameGenerators\Hungarian.mkvc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
