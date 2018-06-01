@@ -22,7 +22,7 @@ namespace PanzerBlitz
 					 .Where(i => i.Configuration.Team != Root.Army.Configuration.Team)
 					 .SelectMany(i => i.Units))
 			{
-				foreach (LineOfSight los in unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(i => i.Item1))
+				foreach (var los in unit.GetFieldOfSight(AttackMethod.DIRECT_FIRE))
 				{
 					AddThreat(los.Final, GetThreat(unit, los, true), GetThreat(unit, los, false));
 				}
@@ -47,7 +47,7 @@ namespace PanzerBlitz
 					 .Where(i => i.Configuration.Team != Root.Army.Configuration.Team)
 					 .SelectMany(i => i.Units)
 					 .Where(i => i.Position.HexCoordinate.Distance(Tile.HexCoordinate)
-							<= Unit.Configuration.GetRange(AttackMethod.NORMAL_FIRE, false)))
+							<= Unit.Configuration.GetRange(AttackMethod.DIRECT_FIRE, false)))
 			{
 				potential += unit.GetPointValue() * GetPotential(Unit, new LineOfSight(Tile, unit.Position))
 								 / unit.Configuration.Defense;
@@ -73,15 +73,15 @@ namespace PanzerBlitz
 		double GetThreat(Unit Unit, LineOfSight LineOfSight, bool EnemyArmored)
 		{
 			return Math.Max(
-				new AttackFactorCalculation(Unit, AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight, true).Attack,
-				new AttackFactorCalculation(Unit, AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight, false).Attack);
+				new AttackFactorCalculation(Unit, AttackMethod.DIRECT_FIRE, EnemyArmored, LineOfSight, true).Attack,
+				new AttackFactorCalculation(Unit, AttackMethod.DIRECT_FIRE, EnemyArmored, LineOfSight, false).Attack);
 		}
 
 		double GetPotential(Unit Unit, LineOfSight LineOfSight)
 		{
 			IEnumerable<Unit> defenders =
 				LineOfSight.Final.Units.Where(
-					i => i.CanBeAttackedBy(Root.Army, AttackMethod.NORMAL_FIRE, true) == OrderInvalidReason.NONE);
+					i => i.CanBeAttackedBy(Root.Army, AttackMethod.DIRECT_FIRE, true) == OrderInvalidReason.NONE);
 			var armoredCount = defenders.Count(i => i.Configuration.IsArmored);
 			var unArmoredCount = defenders.Count(i => !i.Configuration.IsArmored);
 			if (armoredCount > unArmoredCount

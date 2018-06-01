@@ -1,42 +1,33 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class NormalSingleAttackOrder : SingleAttackOrder
+	public class IndirectFireSingleAttackOrder : SingleAttackOrder
 	{
 		public readonly LineOfSight LineOfSight;
 
-		public override Tile AttackTile
+		public override Tile AttackTile { get; protected set; }
+
+		public IndirectFireSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
+			: base(Attacker, null, UseSecondaryWeapon)
 		{
-			get
-			{
-				return Defender.Position;
-			}
-			protected set
-			{
-				throw new NotSupportedException();
-			}
+			this.AttackTile = AttackTile;
+			LineOfSight = Attacker.GetLineOfSight(AttackTile);
 		}
 
-		public NormalSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
-			: base(Attacker, Defender, UseSecondaryWeapon)
-		{
-			LineOfSight = Attacker.GetLineOfSight(Defender.Position);
-		}
-
-		public NormalSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: base((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
+		public IndirectFireSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+			: base((Unit)Objects[Stream.ReadInt32()], null, Stream.ReadBoolean())
 		{
 			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
+			AttackTile = LineOfSight.Final;
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
-			Stream.Write(Defender.Id);
 			Stream.Write(UseSecondaryWeapon);
 			Stream.Write(LineOfSight.Initial.Id);
 			Stream.Write(LineOfSight.Final.Id);
@@ -46,7 +37,7 @@ namespace PanzerBlitz
 		{
 			if (Validate() == OrderInvalidReason.NONE)
 				return new AttackFactorCalculation(
-					Attacker, AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
+					Attacker, AttackMethod.INDIRECT_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 			return new AttackFactorCalculation(
 				0,
 				new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK });
@@ -54,7 +45,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new NormalAttackOrder(Army, AttackTile);
+			return new IndirectFireAttackOrder(Army, AttackTile);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -64,8 +55,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Defender == null) return OrderInvalidReason.ILLEGAL;
-			return Attacker.CanAttack(AttackMethod.NORMAL_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
+			return Attacker.CanAttack(AttackMethod.INDIRECT_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 
 		public override OrderStatus Execute(Random Random)
@@ -80,7 +70,7 @@ namespace PanzerBlitz
 
 		public override string ToString()
 		{
-			return string.Format("[NormalSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);
+			return string.Format("[IndirectFireSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);
 		}
 	}
 }

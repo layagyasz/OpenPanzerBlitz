@@ -66,7 +66,12 @@ namespace PanzerBlitz
 		public abstract void HandleUnitRightClick(Unit Unit);
 		public abstract void HandleKeyPress(Keyboard.Key Key);
 
-		public void HandleUnitShiftLeftClick(Unit Unit)
+		public virtual void HandleUnitShiftLeftClick(Unit Unit)
+		{
+			return;
+		}
+
+		public void HandleUnitShiftRightClick(Unit Unit)
 		{
 			_Controller.Clear();
 			var pane = new UnitInfoPane(Unit, _Controller.UnitConfigurationRenderer);

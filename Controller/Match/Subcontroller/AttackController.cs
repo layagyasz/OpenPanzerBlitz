@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 
 using SFML.Graphics;
+using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -16,14 +17,23 @@ namespace PanzerBlitz
 
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
-			if (Unit.Army == _Controller.CurrentTurn.Army
-				&& Unit.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE)
+			HandleClick(Unit, AttackMethod.DIRECT_FIRE);
+		}
+
+		public override void HandleUnitShiftLeftClick(Unit Unit)
+		{
+			HandleClick(Unit, AttackMethod.INDIRECT_FIRE);
+		}
+
+		void HandleClick(Unit Unit, AttackMethod AttackMethod)
+		{
+			if (Unit.Army == _Controller.CurrentTurn.Army && Unit.CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
 				_Controller.SelectUnit(Unit);
 
 				_Controller.Highlight(
-					Unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
-						i => new Tuple<Tile, Color>(i.Item1.Final, _Controller.GetRangeColor(i.Item1, Unit, i.Item2))));
+					Unit.GetFieldOfSight(AttackMethod).Select(
+						i => new Tuple<Tile, Color>(i.Final, _Controller.GetRangeColor(i, Unit))));
 			}
 			else if (Unit.Army != _Controller.CurrentTurn.Army)
 			{
@@ -38,10 +48,20 @@ namespace PanzerBlitz
 					}
 					else
 					{
-						AddAttack(
-							Unit.Position,
-							new NormalSingleAttackOrder(
-								_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
+						if (AttackMethod == AttackMethod.INDIRECT_FIRE)
+						{
+							AddAttack(
+								Unit.Position,
+								new IndirectFireSingleAttackOrder(
+									_Controller.SelectedUnit, Unit.Position, _Controller.UseSecondaryWeapon()));
+						}
+						else
+						{
+							AddAttack(
+								Unit.Position,
+								new DirectFireSingleAttackOrder(
+									_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
+						}
 					}
 				}
 			}

@@ -47,9 +47,6 @@ unit-render-details:zrinyi-ii {
 unit-render-details:toldi-i {
 	string:image-path { toldi-i.png }
 }
-unit-render-details:toldi-i-corrected {
-	string:image-path { toldi-i.png }
-}
 unit-render-details:toldi-ii {
 	string:image-path { toldi-ii.png }
 }

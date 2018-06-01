@@ -33,6 +33,7 @@ namespace PanzerBlitz
 					didAnything |= !(o is ResetOrder);
 				}
 				if (didAnything) Thread.Sleep(WaitMillis(Turn.TurnInfo.TurnComponent));
+				if (_Orders.Count < 2) Thread.Sleep(2500);
 				_Match.ExecuteOrder(_Orders.Dequeue());
 			}
 			catch (Exception e) { Console.WriteLine(e); }

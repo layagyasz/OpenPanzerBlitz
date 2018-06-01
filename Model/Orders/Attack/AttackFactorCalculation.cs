@@ -21,10 +21,22 @@ namespace PanzerBlitz
 			LineOfSight LineOfSight,
 			bool UseSecondaryWeapon)
 		{
+			if (Unit.CanAttack(AttackMethod, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
+			{
+				Attack = 0;
+				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
+				return;
+			}
+
 			switch (AttackMethod)
 			{
-				case AttackMethod.NORMAL_FIRE:
+				case AttackMethod.DIRECT_FIRE:
 					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+					break;
+				case AttackMethod.INDIRECT_FIRE:
+					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+					Attack /= 4;
+					Factors.Add(AttackFactorCalculationFactor.INDIRECT_FIRE);
 					break;
 				case AttackMethod.AIR:
 					GetAirAttack(Unit, EnemyArmored, UseSecondaryWeapon);
@@ -85,14 +97,6 @@ namespace PanzerBlitz
 
 		void GetNormalAttack(Unit Unit, bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
-			if (Unit.CanAttack(
-				AttackMethod.NORMAL_FIRE, EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
-			{
-				Attack = 0;
-				Factors = new List<AttackFactorCalculationFactor> { AttackFactorCalculationFactor.CANNOT_ATTACK };
-				return;
-			}
-
 			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
 			Factors = new List<AttackFactorCalculationFactor>();
 			Attack = weapon.Attack;

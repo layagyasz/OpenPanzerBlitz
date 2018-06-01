@@ -35,13 +35,7 @@ unit-render-details:malaxa {
 unit-render-details:r-1 {
 	string:image-path { r-1.png }
 }
-unit-render-details:r-1-corrected {
-	string:image-path { r-1.png }
-}
 unit-render-details:r-2 {
-	string:image-path { lt-35.png }
-}
-unit-render-details:r-2-corrected {
 	string:image-path { lt-35.png }
 }
 unit-render-details:r-35_45 {

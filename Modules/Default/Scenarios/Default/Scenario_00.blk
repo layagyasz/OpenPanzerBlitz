@@ -2,7 +2,7 @@
 	string:name { Test Scenario }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
-	byte:turns { 8 }
+	byte:turns { 3 }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
@@ -52,8 +52,8 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
-								int:count { 2 }
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								int:count { 1 }
 							}
 						}
 					}
@@ -128,7 +128,7 @@
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.chi-he }
-								int:count { 1 }
+								int:count { 3 }
 							}
 						}
 					}

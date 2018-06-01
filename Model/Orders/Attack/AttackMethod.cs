@@ -3,7 +3,8 @@
 	public enum AttackMethod
 	{
 		NONE,
-		NORMAL_FIRE,
+		DIRECT_FIRE,
+		INDIRECT_FIRE,
 		CLOSE_ASSAULT,
 		OVERRUN,
 		MINEFIELD,

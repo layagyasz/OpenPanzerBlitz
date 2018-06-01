@@ -193,16 +193,21 @@ namespace PanzerBlitz
 			if (Configuration.GetWeapon(UseSecondaryWeapon).Ammunition > 0 && GetAmmunition(UseSecondaryWeapon) == 0)
 				return OrderInvalidReason.UNIT_NO_AMMUNITION;
 
-			if (AttackMethod == AttackMethod.NORMAL_FIRE)
+			if (AttackMethod == AttackMethod.DIRECT_FIRE)
 			{
-				if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return OrderInvalidReason.ATTACK_NO_LOS;
-				r = Configuration.CanDirectFireAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
-				if (r != OrderInvalidReason.UNIT_NO_ATTACK)
-					return r;
+				return Configuration.CanDirectFireAt(EnemyArmored, LineOfSight, UseSecondaryWeapon);
+			}
+			if (AttackMethod == AttackMethod.INDIRECT_FIRE)
+			{
 				r = Configuration.CanIndirectFireAt(LineOfSight, UseSecondaryWeapon);
 				if (r != OrderInvalidReason.NONE) return r;
-				if (!Army.CanSpotTile(LineOfSight.Final))
+
+				if (Configuration.CanDirectFireAt(
+					EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
+				{
+					if (Army.CanSpotTile(LineOfSight.Final)) return OrderInvalidReason.NONE;
 					return OrderInvalidReason.ATTACK_NO_SPOTTER;
+				}
 				return OrderInvalidReason.NONE;
 			}
 			if (AttackMethod == AttackMethod.OVERRUN) return Configuration.CanOverrunAt(EnemyArmored);
@@ -473,22 +478,22 @@ namespace PanzerBlitz
 			return Enumerable.Empty<Tile>();
 		}
 
-		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod)
+		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod)
 		{
 			return GetFieldOfSight(AttackMethod, Position);
 		}
 
-		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(AttackMethod AttackMethod, Tile Tile)
+		public IEnumerable<LineOfSight> GetFieldOfSight(AttackMethod AttackMethod, Tile Tile)
 		{
 			if (Configuration.CanAttack(AttackMethod) == OrderInvalidReason.NONE)
 			{
 				return GetFieldOfSight(
-					Configuration.GetRange(AttackMethod, false), Tile, AttackMethod == AttackMethod.NORMAL_FIRE);
+					Configuration.GetRange(AttackMethod, false), Tile, AttackMethod);
 			}
-			return Enumerable.Empty<Tuple<LineOfSight, bool>>();
+			return Enumerable.Empty<LineOfSight>();
 		}
 
-		public IEnumerable<Tuple<LineOfSight, bool>> GetFieldOfSight(int Range, Tile Tile, bool IndirectFire)
+		public IEnumerable<LineOfSight> GetFieldOfSight(int Range, Tile Tile, AttackMethod AttackMethod)
 		{
 			if (Tile != null)
 			{
@@ -497,10 +502,8 @@ namespace PanzerBlitz
 						 .Select(i => GetLineOfSight(Tile, i))
 						 .Where(i => i.Final != Tile))
 				{
-					if (l.Validate() == NoLineOfSightReason.NONE) yield return new Tuple<LineOfSight, bool>(l, true);
-					// Indirect fire.
-					else if (IndirectFire && CanAttack(AttackMethod.NORMAL_FIRE, false, l, false) == OrderInvalidReason.NONE)
-						yield return new Tuple<LineOfSight, bool>(l, false);
+					if (CanAttack(AttackMethod, false, l, false) == OrderInvalidReason.NONE)
+						yield return l;
 				}
 			}
 		}

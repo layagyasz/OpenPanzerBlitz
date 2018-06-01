@@ -160,10 +160,6 @@ unit-configuration-link:ft-17 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.ft-17 }
 }
-unit-configuration-link:ft-17-corrected {
-	!faction:faction { factions.french }
-	!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
-}
 unit-configuration-link:char-d1b {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.char-d1b }
@@ -201,10 +197,6 @@ unit-configuration-link:hotchkiss-39 {
 unit-configuration-link:renault-35 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.renault-35 }
-}
-unit-configuration-link:renault-35-corrected {
-	!faction:faction { factions.french }
-	!unit-configuration:unit-configuration { unit-configurations.renault-35-corrected }
 }
 unit-configuration-link:renault-40 {
 	!faction:faction { factions.french }

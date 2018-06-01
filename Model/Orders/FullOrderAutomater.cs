@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 
 namespace PanzerBlitz
 {
-	public class OrderAutomator
+	public class FullOrderAutomater : OrderAutomater
 	{
+		public static Func<Match, OrderAutomater> PROVIDER = i => new FullOrderAutomater(i);
+
 		public readonly Match Match;
 
-		Dictionary<TurnInfo, List<Order>> _RecurringOrderBuffer = new Dictionary<TurnInfo, List<Order>>();
+		OrderAutomater _MultiTurnAutomater;
 
-		public OrderAutomator(Match Match)
+		public FullOrderAutomater(Match Match)
 		{
 			this.Match = Match;
 
@@ -17,13 +19,14 @@ namespace PanzerBlitz
 					i => i.Deployments.ForEach(
 						j => j.Units.ForEach(
 						k => k.OnMove += (sender, e) => j.EnterUnits(k.Configuration.IsVehicle))));
+			_MultiTurnAutomater = new MultiTurnOrderAutomater(Match);
 		}
 
 		public bool AutomateTurn(TurnInfo TurnInfo)
 		{
 			Match.ExecuteOrder(new ResetOrder(TurnInfo.Army, TurnInfo.TurnComponent == TurnComponent.RESET));
 
-			DoBufferedOrders(TurnInfo);
+			_MultiTurnAutomater.AutomateTurn(TurnInfo);
 
 			switch (TurnInfo.TurnComponent)
 			{
@@ -39,7 +42,7 @@ namespace PanzerBlitz
 					return TurnInfo.Army.Units.All(i => !i.Configuration.IsAircraft());
 				case TurnComponent.ATTACK:
 					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.NORMAL_FIRE) == OrderInvalidReason.NONE);
+						i => i.CanAttack(AttackMethod.DIRECT_FIRE) == OrderInvalidReason.NONE);
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
 													&& i.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE);
@@ -63,20 +66,7 @@ namespace PanzerBlitz
 
 		public void BufferOrder(Order Order, TurnInfo TurnInfo)
 		{
-			if (!_RecurringOrderBuffer.ContainsKey(TurnInfo)) _RecurringOrderBuffer.Add(TurnInfo, new List<Order>());
-
-			List<Order> orders = _RecurringOrderBuffer[TurnInfo];
-			if (!orders.Contains(Order)) orders.Add(Order);
-		}
-
-		void DoBufferedOrders(TurnInfo TurnInfo)
-		{
-			if (_RecurringOrderBuffer.ContainsKey(TurnInfo))
-			{
-				List<Order> orders = _RecurringOrderBuffer[TurnInfo];
-				_RecurringOrderBuffer.Remove(TurnInfo);
-				orders.ForEach(i => Match.ExecuteOrder(i));
-			}
+			_MultiTurnAutomater.BufferOrder(Order, TurnInfo);
 		}
 
 		void DoMinefieldAttacks(Army Army)

@@ -30,8 +30,8 @@ namespace PanzerBlitz
 								.Where(i => Deployment.Validate(unit, i) == OrderInvalidReason.NONE)
 								.ArgMax(i => ScoreSeedTile(unit, i, coveredTiles));
 				deployments.Add(unit, tile);
-				foreach (var t in unit.GetFieldOfSight(AttackMethod.NORMAL_FIRE, tile))
-					coveredTiles.Add(t.Item1.Final);
+				foreach (var t in unit.GetFieldOfSight(AttackMethod.DIRECT_FIRE, tile))
+					coveredTiles.Add(t.Final);
 				yield return new PositionalDeployOrder(unit, tile);
 			}
 
@@ -74,8 +74,9 @@ namespace PanzerBlitz
 		{
 			List<Tile> tiles =
 				Unit.GetFieldOfSight(
-					Unit.Configuration.SpotRange > 0 ? Unit.Configuration.SpotRange : 20, Tile, true)
-					.Select(i => i.Item1.Final)
+					Unit.Configuration.SpotRange > 0
+						? Unit.Configuration.SpotRange : 20, Tile, AttackMethod.DIRECT_FIRE)
+					.Select(i => i.Final)
 					.ToList();
 			return BaseTileScore(Tile) * (tiles.Count + tiles.Except(CoveredTiles).Count());
 		}

@@ -20,7 +20,7 @@ namespace PanzerBlitz
 
 		public MatchRecord(SerializationInputStream Stream)
 		{
-			Match = new Match(new Scenario(Stream), false);
+			Match = new Match(new Scenario(Stream), MultiTurnOrderAutomater.PROVIDER);
 			OrderSerializer = new OrderSerializer(Match);
 			Orders = Stream.ReadEnumerable(() => OrderSerializer.Deserialize(Stream)).ToList();
 		}

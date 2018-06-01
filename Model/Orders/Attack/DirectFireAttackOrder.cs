@@ -5,13 +5,13 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class NormalAttackOrder : AttackOrderBase<NormalSingleAttackOrder>
+	public class DirectFireAttackOrder : AttackOrderBase<DirectFireSingleAttackOrder>
 	{
 		public override AttackMethod AttackMethod
 		{
 			get
 			{
-				return AttackMethod.NORMAL_FIRE;
+				return AttackMethod.DIRECT_FIRE;
 			}
 		}
 
@@ -23,13 +23,13 @@ namespace PanzerBlitz
 			}
 		}
 
-		public NormalAttackOrder(Army Army, Tile TargetTile)
+		public DirectFireAttackOrder(Army Army, Tile TargetTile)
 			: base(Army, TargetTile) { }
 
-		public NormalAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
+		public DirectFireAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
 		{
-			_Attackers = Stream.ReadEnumerable(i => new NormalSingleAttackOrder(Stream, Objects)).ToList();
+			_Attackers = Stream.ReadEnumerable(i => new DirectFireSingleAttackOrder(Stream, Objects)).ToList();
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
@@ -51,7 +51,7 @@ namespace PanzerBlitz
 
 			if (Target == AttackTarget.EACH)
 			{
-				foreach (NormalSingleAttackOrder attacker in _Attackers)
+				foreach (DirectFireSingleAttackOrder attacker in _Attackers)
 				{
 					var r = attacker.Defender.CanBeAttackedBy(Army, AttackMethod);
 					if (r != OrderInvalidReason.NONE) return r;

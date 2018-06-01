@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		{
 			OnProgramStateTransition(
 				this, new ProgramStateTransitionEventArgs(
-					ProgramState.MATCH, new MatchContext(new Match(E.Value))));
+					ProgramState.MATCH, new MatchContext(new Match(E.Value, FullOrderAutomater.PROVIDER))));
 		}
 	}
 }

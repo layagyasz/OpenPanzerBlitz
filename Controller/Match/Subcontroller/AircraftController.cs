@@ -45,8 +45,8 @@ namespace PanzerBlitz
 		{
 			_Controller.Highlight(Unit.GetFieldOfSight(AttackMethod.AIR).Select(
 				i => new Tuple<Tile, Color>(
-					i.Item1.Final,
-					_Controller.GetRangeColor(i.Item1, Unit, i.Item2, AttackMethod.AIR))));
+					i.Final,
+					_Controller.GetRangeColor(i, Unit, AttackMethod.AIR))));
 		}
 	}
 }

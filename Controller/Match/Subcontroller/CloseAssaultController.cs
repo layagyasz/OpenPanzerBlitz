@@ -45,8 +45,8 @@ namespace PanzerBlitz
 		{
 			var attackRange = Unit.GetFieldOfSight(AttackMethod.CLOSE_ASSAULT).Select(
 				i => new Tuple<Tile, Color>(
-					i.Item1.Final,
-					_Controller.GetRangeColor(i.Item1, Unit, i.Item2, AttackMethod.CLOSE_ASSAULT)));
+					i.Final,
+					_Controller.GetRangeColor(i, Unit, AttackMethod.CLOSE_ASSAULT)));
 
 			var moveRange = Unit.GetFieldOfMovement(true).Select(
 				i => new Tuple<Tile, Color>(

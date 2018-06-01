@@ -22,6 +22,7 @@ namespace PanzerBlitz
 		void HandleUnitLeftClick(Unit Unit);
 		void HandleUnitShiftLeftClick(Unit Unit);
 		void HandleUnitRightClick(Unit Unit);
+		void HandleUnitShiftRightClick(Unit Unit);
 		void HandleKeyPress(Keyboard.Key key);
 	}
 }

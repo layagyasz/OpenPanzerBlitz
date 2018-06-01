@@ -18,7 +18,7 @@ namespace PanzerBlitz
 
 		IEnumerator<Turn> _TurnOrder;
 
-		OrderAutomator _OrderAutomater;
+		OrderAutomater _OrderAutomater;
 		List<Order> _OrderBuffer = new List<Order>();
 		Random _Random = new Random();
 
@@ -30,7 +30,7 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Match(Scenario Scenario, bool AutomateTurns = true)
+		public Match(Scenario Scenario, Func<Match, OrderAutomater> OrderAutomater)
 		{
 			this.Scenario = Scenario;
 			Map = Scenario.MapConfiguration.GenerateMap(Scenario.Environment, IdGenerator);
@@ -48,7 +48,7 @@ namespace PanzerBlitz
 				u.OnMove += UpdateUnitVisibilityFromMove;
 				u.OnFire += UpdateUnitVisibilityFromFire;
 			}
-			if (AutomateTurns) _OrderAutomater = new OrderAutomator(this);
+			_OrderAutomater = OrderAutomater(this);
 		}
 
 		public Dictionary<Army, ObjectiveSuccessLevel> GetArmyObjectiveSuccessLevels()
@@ -127,7 +127,7 @@ namespace PanzerBlitz
 			var r = ValidateOrder(Order);
 			if (r != OrderInvalidReason.NONE) return r;
 
-			ExecutedOrders.Add(Order);
+			if (!ExecutedOrders.Contains(Order)) ExecutedOrders.Add(Order);
 
 			if (Order is NextPhaseOrder)
 			{
@@ -138,7 +138,9 @@ namespace PanzerBlitz
 
 			var executed = Order.Execute(_Random);
 			if (executed == OrderStatus.IN_PROGRESS && _OrderAutomater != null)
+			{
 				_OrderAutomater.BufferOrder(Order, _TurnOrder.Current.TurnInfo);
+			}
 			if (executed == OrderStatus.ILLEGAL)
 				throw new Exception(string.Format("Tried to execute illegal order. {0} {1}", Order, Order.Validate()));
 

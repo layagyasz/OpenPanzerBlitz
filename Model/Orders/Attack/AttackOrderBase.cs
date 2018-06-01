@@ -23,6 +23,13 @@ namespace PanzerBlitz
 				return CombatResultsTable.STANDARD_CRT;
 			}
 		}
+		public virtual bool AllowNoFurtherAttacks
+		{
+			get
+			{
+				return true;
+			}
+		}
 
 		protected List<T> _Attackers = new List<T>();
 		protected List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
@@ -102,7 +109,7 @@ namespace PanzerBlitz
 			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
 		}
 
-		void Recalculate()
+		protected virtual void Recalculate()
 		{
 			_OddsCalculations.Clear();
 			if (_Attackers.Count == 0) return;
@@ -173,11 +180,15 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
-		public OrderStatus Execute(Random Random)
+		public virtual OrderStatus Execute(Random Random)
 		{
 			Recalculate();
 			if (Validate() != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
+			return DoExecute(Random);
+		}
 
+		protected OrderStatus DoExecute(Random Random)
+		{
 			if (_Results.Count == 0)
 			{
 				foreach (OddsCalculation odds in _OddsCalculations)
@@ -194,7 +205,7 @@ namespace PanzerBlitz
 			{
 				result.Item1.HandleCombatResult(result.Item2, AttackMethod, Army);
 			}
-			Army.AttackTile(TargetTile);
+			if (AllowNoFurtherAttacks) Army.AttackTile(TargetTile);
 			_Attackers.ForEach(i => i.Execute(Random));
 
 			return OrderStatus.FINISHED;

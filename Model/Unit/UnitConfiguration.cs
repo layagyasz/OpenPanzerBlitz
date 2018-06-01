@@ -393,6 +393,7 @@ namespace PanzerBlitz
 		public OrderInvalidReason CanDirectFireAt(bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
 			if (!CanDirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
+			if (LineOfSight.Validate() != NoLineOfSightReason.NONE) return OrderInvalidReason.ATTACK_NO_LOS;
 			if (LineOfSight.Range > GetAdjustedRange(UseSecondaryWeapon)) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (GetWeapon(UseSecondaryWeapon).WeaponClass == WeaponClass.INFANTRY && EnemyArmored)
 				return OrderInvalidReason.TARGET_ARMORED;
@@ -435,9 +436,10 @@ namespace PanzerBlitz
 			{
 				case AttackMethod.OVERRUN:
 					return CanOverrun ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
-				case AttackMethod.NORMAL_FIRE:
-					return CanDirectFire || CanIndirectFire
-						? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+				case AttackMethod.DIRECT_FIRE:
+					return CanDirectFire ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
+				case AttackMethod.INDIRECT_FIRE:
+					return CanIndirectFire ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
 				case AttackMethod.CLOSE_ASSAULT:
 					return CanCloseAssault ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_ATTACK;
 				case AttackMethod.MINEFIELD:
@@ -458,7 +460,8 @@ namespace PanzerBlitz
 			switch (AttackMethod)
 			{
 				case AttackMethod.OVERRUN: return 0;
-				case AttackMethod.NORMAL_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
+				case AttackMethod.DIRECT_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
+				case AttackMethod.INDIRECT_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
 				case AttackMethod.CLOSE_ASSAULT: return CanCloseAssault ? 1 : 0;
 				case AttackMethod.MINEFIELD: return 0;
 				case AttackMethod.AIR: return CanAirAttack ? 1 : 0;

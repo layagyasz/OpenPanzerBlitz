@@ -77,9 +77,6 @@ unit-render-details:37-r {
 unit-render-details:ft-17 {
 	string:image-path { ft-17.png }
 }
-unit-render-details:ft-17-corrected {
-	string:image-path { ft-17.png }
-}
 unit-render-details:char-d1b {
 	string:image-path { char-d1b.png }
 }
@@ -105,9 +102,6 @@ unit-render-details:hotchkiss-39 {
 	string:image-path { hotchkiss-39.png }
 }
 unit-render-details:renault-35 {
-	string:image-path { renault-35.png }
-}
-unit-render-details:renault-35-corrected {
 	string:image-path { renault-35.png }
 }
 unit-render-details:renault-40 {

@@ -21,14 +21,6 @@ namespace PanzerBlitz
 			new Color(255, 0, 0, 120)
 		};
 
-		public static readonly Color[] DIM_HIGHLIGHT_COLORS =
-		{
-			new Color(0, 255, 0, 60),
-			new Color(255, 255, 0, 60),
-			new Color(255, 128, 0, 60),
-			new Color(255, 0, 0, 60)
-		};
-
 		enum HighlightToggle { ENEMY_SIGHT_FIELD, VICTORY_CONDITION_FIELD };
 
 		public readonly MatchAdapter Match;
@@ -228,14 +220,13 @@ namespace PanzerBlitz
 		}
 
 		public Color GetRangeColor(
-			LineOfSight LineOfSight, Unit Unit, bool DirectFire, AttackMethod AttackMethod = AttackMethod.NORMAL_FIRE)
+			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.DIRECT_FIRE)
 		{
-			return (DirectFire ? HIGHLIGHT_COLORS : DIM_HIGHLIGHT_COLORS)[
-				PosterizeLineOfSight(LineOfSight, Unit, AttackMethod)];
+			return HIGHLIGHT_COLORS[PosterizeLineOfSight(LineOfSight, Unit, AttackMethod)];
 		}
 
 		public int PosterizeLineOfSight(
-			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.NORMAL_FIRE)
+			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.DIRECT_FIRE)
 		{
 			return Math.Min(
 				LineOfSight.Range * HIGHLIGHT_COLORS.Length / (Unit.Configuration.GetRange(AttackMethod, false) + 1),
@@ -258,8 +249,8 @@ namespace PanzerBlitz
 					 .Where(i => i.Configuration.Team != Team)
 					 .SelectMany(i => i.Units)
 					 .SelectMany(i =>
-								 i.GetFieldOfSight(AttackMethod.NORMAL_FIRE).Select(
-									 j => new Tuple<Tile, int>(j.Item1.Final, PosterizeLineOfSight(j.Item1, i))))
+								 i.GetFieldOfSight(AttackMethod.DIRECT_FIRE).Select(
+									 j => new Tuple<Tile, int>(j.Final, PosterizeLineOfSight(j, i))))
 					 .GroupBy(i => i.Item1)
 						  .Select(i => new Tuple<Tile, Color>(i.Key, HIGHLIGHT_COLORS[i.Min(j => j.Item2)])));
 				_HighlightToggles[(int)HighlightToggle.ENEMY_SIGHT_FIELD] = true;
@@ -601,7 +592,11 @@ namespace PanzerBlitz
 		{
 			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
-				_Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
+			{
+				if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+					_Controllers[phase.TurnComponent].HandleUnitShiftRightClick(((UnitView)sender).Unit);
+				else _Controllers[phase.TurnComponent].HandleUnitRightClick(((UnitView)sender).Unit);
+			}
 		}
 
 		void OnKeyPressed(object sender, KeyPressedEventArgs E)

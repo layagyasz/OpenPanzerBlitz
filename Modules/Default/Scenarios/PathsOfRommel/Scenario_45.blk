@@ -54,7 +54,7 @@
 								int:count { 6 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.ft-17-corrected }
+								!unit-configuration:unit-configuration { unit-configurations.ft-17 }
 								int:count { 2 }
 							}
 							unit-count:_ {
