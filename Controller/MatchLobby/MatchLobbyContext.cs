@@ -39,7 +39,7 @@ namespace PanzerBlitz
 
 		public MatchContext MakeMatchContext()
 		{
-			var match = new Match(Lobby.Scenario, IsHost ? FullOrderAutomater.PROVIDER : i => null);
+			var match = new Match(Lobby.Scenario, IsHost ? new FullOrderAutomater() : null);
 			var serializer = new OrderSerializer(match);
 
 			if (IsHost)

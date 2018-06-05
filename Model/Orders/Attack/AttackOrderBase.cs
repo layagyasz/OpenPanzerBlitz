@@ -13,9 +13,10 @@ namespace PanzerBlitz
 
 		public Army Army { get; }
 		public Tile TargetTile { get; }
+		public AttackTarget Target { get; protected set; }
+
 		public abstract AttackMethod AttackMethod { get; }
 		public abstract bool ResultPerDefender { get; }
-		public AttackTarget Target { get; protected set; }
 		public virtual CombatResultsTable CombatResultsTable
 		{
 			get
@@ -52,6 +53,13 @@ namespace PanzerBlitz
 			Target = AttackTarget.ALL;
 		}
 
+		protected AttackOrderBase(AttackOrderBase<T> Copy) : this(Copy.Army, Copy.TargetTile)
+		{
+			Target = Copy.Target;
+			_Attackers = Copy._Attackers.Select(i => (T)i.CloneIfStateful()).ToList();
+			_Results = Copy._Results.ToList();
+		}
+
 		protected AttackOrderBase(SerializationInputStream Stream, List<GameObject> Objects)
 			: this(
 				(Army)Objects[Stream.ReadInt32()],
@@ -83,6 +91,11 @@ namespace PanzerBlitz
 			this.Target = Target;
 			Recalculate();
 			if (OnChanged != null) OnChanged(this, EventArgs.Empty);
+		}
+
+		public bool IsCompatible(SingleAttackOrder AttackOrder)
+		{
+			return AttackOrder.GetType() == typeof(T);
 		}
 
 		public OrderInvalidReason AddAttacker(SingleAttackOrder AttackOrder)
@@ -156,6 +169,11 @@ namespace PanzerBlitz
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)
 				odds.AttackFactorCalculations.ForEach(i => i.Item1.TreatStackAsArmored = odds.StackArmored);
+		}
+
+		public virtual Order CloneIfStateful()
+		{
+			return this;
 		}
 
 		public virtual OrderInvalidReason Validate()

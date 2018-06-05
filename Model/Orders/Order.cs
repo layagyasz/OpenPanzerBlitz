@@ -8,6 +8,7 @@ namespace PanzerBlitz
 	{
 		Army Army { get; }
 		bool MatchesTurnComponent(TurnComponent TurnComponent);
+		Order CloneIfStateful();
 		OrderInvalidReason Validate();
 		OrderStatus Execute(Random Random);
 	}

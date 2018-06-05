@@ -68,7 +68,6 @@
     <Compile Include="Model\Orders\Attack\AttackFactorCalculation.cs" />
     <Compile Include="Model\Orders\Attack\AttackFactorCalculationFactor.cs" />
     <Compile Include="Model\Orders\Attack\CombatResult.cs" />
-    <Compile Include="Model\Orders\Attack\LineOfSight.cs" />
     <Compile Include="Model\Orders\Attack\OddsCalculation.cs" />
     <Compile Include="Model\Orders\Attack\OddsCalculationFactor.cs" />
     <Compile Include="Model\Orders\Order.cs" />
@@ -394,6 +393,13 @@
     <Compile Include="Model\Orders\Attack\IndirectFireAttackOrder.cs" />
     <Compile Include="Model\Orders\OrderAutomater.cs" />
     <Compile Include="Model\Orders\MultiTurnOrderAutomater.cs" />
+    <Compile Include="Model\Sight\LineOfSight.cs" />
+    <Compile Include="Model\Sight\SightFinder.cs" />
+    <Compile Include="Model\Sight\LazySightFinder.cs" />
+    <Compile Include="Model\Sight\TileSightLevel.cs" />
+    <Compile Include="Model\Sight\SightUpdatedEventArgs.cs" />
+    <Compile Include="Model\EventRelay.cs" />
+    <Compile Include="Model\Sight\UnitVisibility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -467,6 +473,7 @@
     <Folder Include="AI\" />
     <Folder Include="Modules\Default\Scenarios\PathsOfRommel\" />
     <Folder Include="Modules\Default\Server\UnitConfigurationLocks\" />
+    <Folder Include="Model\Sight\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2360,6 +2367,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\NameGenerators\Hungarian.mkvc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\NameGenerators\Japanese.mkvc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

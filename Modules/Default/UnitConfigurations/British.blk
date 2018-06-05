@@ -416,7 +416,7 @@ unit-configuration:a-13 {
 }
 unit-configuration:archer {
 	string:name { Archer }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -426,7 +426,7 @@ unit-configuration:archer {
 }
 unit-configuration:wolverine {
 	string:name { Wolverine }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -436,7 +436,7 @@ unit-configuration:wolverine {
 }
 unit-configuration:achilles {
 	string:name { Achilles }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }

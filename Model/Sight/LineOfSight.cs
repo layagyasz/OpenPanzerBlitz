@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Cardamom.Graphing;
-using Cardamom.Planar;
-
 namespace PanzerBlitz
 {
 	public class LineOfSight
@@ -45,16 +42,16 @@ namespace PanzerBlitz
 
 		public LineOfSight(Tile From, Tile To)
 		{
+			if (From == To)
+			{
+				_LineOfSight = new Tile[] { From };
+				_CrossedEdges = new TileComponentRules[0];
+				_Validated = NoLineOfSightReason.NONE;
+				return;
+			}
+
 			// We calculate lines of sight to and from to make sure sighting is symmetrical.
-			var s = new Segment(From.Center, To.Center);
-			var losA = new Path<Tile>(
-				From,
-				To,
-				i => true,
-				(i, j) => 0,
-				(i, j) => s.DistanceSquared(i.Center),
-				i => i.Neighbors(),
-				(i, j) => i == j).Nodes.ToArray();
+			var losA = FindLOS(From.Map, From.HexCoordinate, To.HexCoordinate, false);
 			TileComponentRules[] crossedEdgesA = new TileComponentRules[losA.Length - 1];
 
 			for (int i = 0; i < losA.Length - 1; ++i)
@@ -71,14 +68,7 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				var losB = new Path<Tile>(
-					To,
-					From,
-					i => true,
-					(i, j) => 0,
-					(i, j) => s.DistanceSquared(i.Center),
-					i => i.Neighbors(),
-					(i, j) => i == j).Nodes.Reverse().ToArray();
+				var losB = FindLOS(From.Map, From.HexCoordinate, To.HexCoordinate, true);
 				TileComponentRules[] crossedEdgesB = new TileComponentRules[losB.Length - 1];
 
 				for (int i = 0; i < losB.Length - 1; ++i)
@@ -105,6 +95,19 @@ namespace PanzerBlitz
 		public NoLineOfSightReason Validate()
 		{
 			return _Validated;
+		}
+
+		static Tile[] FindLOS(Map Map, HexCoordinate From, HexCoordinate To, bool Dither)
+		{
+			int count = From.Distance(To);
+			Tile[] tiles = new Tile[count + 1];
+			double step = 1.0 / count;
+			for (int i = 0; i < count + 1; ++i)
+			{
+				Coordinate c = HexCoordinate.Interpolate(From, To, step * i, Dither ? -.01 : 0).ToCoordinate();
+				tiles[i] = Map.Tiles[c.X, c.Y];
+			}
+			return tiles;
 		}
 
 		static NoLineOfSightReason Verify(Tile[] LineOfSight, TileComponentRules[] CrossedEdges)

@@ -6,6 +6,8 @@ namespace PanzerBlitz
 	{
 		public int Compare(UnitView x, UnitView y)
 		{
+			if (x.Unit.Configuration.UnitClass == UnitClass.WRECKAGE) return -1;
+			if (y.Unit.Configuration.UnitClass == UnitClass.WRECKAGE) return 1;
 			if (x.Unit.Carrier == y.Unit) return -1;
 			if (x.Unit == y.Unit.Carrier) return 1;
 			if (y.Unit.Configuration.CanLoad(x.Unit.Configuration) == OrderInvalidReason.NONE) return 1;

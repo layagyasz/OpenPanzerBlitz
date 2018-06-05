@@ -30,6 +30,11 @@ namespace PanzerBlitz
 			return CompleteReset || TurnComponent == TurnComponent.RESET;
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			return OrderInvalidReason.NONE;

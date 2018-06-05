@@ -11,6 +11,7 @@ namespace PanzerBlitz
 		public EventHandler<NewUnitEventArgs> OnUnitAdded;
 
 		public readonly Match Match;
+		public readonly SightFinder SightFinder;
 		public readonly ArmyConfiguration Configuration;
 		public readonly List<Deployment> Deployments;
 
@@ -19,7 +20,6 @@ namespace PanzerBlitz
 
 		List<Unit> _CapturedUnits = new List<Unit>();
 		HashSet<Tile> _AttackedTiles = new HashSet<Tile>();
-		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
 		public int Id
 		{
@@ -36,18 +36,21 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Army(Match Match, ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
+		public Army(Match Match, SightFinder SightFinder, ArmyConfiguration ArmyConfiguration, IdGenerator IdGenerator)
 		{
 			_Id = IdGenerator.GenerateId();
 			this.Match = Match;
+			this.SightFinder = SightFinder;
+
 			Configuration = ArmyConfiguration;
 			Deployments = ArmyConfiguration.DeploymentConfigurations.Select(
 				i => i.GenerateDeployment(this, IdGenerator)).ToList();
-			foreach (Unit u in Units)
-			{
-				u.OnDestroy += UnitDestroyed;
-				u.OnCapture += UnitCaptured;
-			}
+
+			Match.Relay.OnUnitDestroy += UnitDestroyed;
+			Match.Relay.OnUnitCapture += UnitCaptured;
+
+			SightFinder.SetTrackingArmy(this);
+			SightFinder.Hook(Match.Relay);
 			_IdGenerator = IdGenerator;
 		}
 
@@ -97,72 +100,11 @@ namespace PanzerBlitz
 			return Units.Any(i => i.MustMove() && i.CanMove(Vehicle, false) == OrderInvalidReason.NONE);
 		}
 
-		public bool CanSeeUnit(Unit Unit)
-		{
-			if (Unit.Position == null) return false;
-			if (Unit.Configuration.IsAircraft()) return true;
-
-			bool lowProfile = Unit.Configuration.HasLowProfile
-								  || Unit.Position.Units.Any(
-									  i => i.Configuration.UnitClass == UnitClass.FORT
-									  && i.Army == Unit.Army
-									  && i.Configuration.HasLowProfile);
-			bool concealed = Unit.Position.Rules.Concealing
-								 || (Unit.Position.Rules.LowProfileConcealing && lowProfile);
-			return !concealed || CanSpotTile(Unit.Position) || _OverrideVisibleUnits.Contains(Unit);
-		}
-
-		public bool CanSeeTile(Tile Tile, bool OverrideConcealment = false)
-		{
-			if (Tile == null) return false;
-			if (Tile.Rules.Concealing && !OverrideConcealment) return CanSpotTile(Tile);
-			foreach (Unit u in Units.Where(
-				i => i.Status == UnitStatus.ACTIVE && i.Configuration.CanSpot))
-			{
-				var s = u.GetLineOfSight(Tile);
-				if (s != null && s.Validate() == NoLineOfSightReason.NONE && u.Configuration.SpotRange >= s.Range)
-					return true;
-			}
-			return false;
-		}
-
-		public bool CanSpotTile(Tile Tile)
-		{
-			if (Tile == null) return false;
-			return Units.Any(
-				i => i.Position != null
-				&& i.Status == UnitStatus.ACTIVE
-				&& i.Configuration.CanSpot
-				&& (i.Position == Tile || i.Position.Neighbors().Contains(Tile)));
-		}
-
-		public void SetUnitVisibility(Unit Unit, bool Visible)
-		{
-			if (Unit.Army == this || Unit.Position == null || CanSeeUnit(Unit)) return;
-
-			if (Unit.Position != null && CanSeeTile(Unit.Position, true))
-			{
-				if (Visible) _OverrideVisibleUnits.Add(Unit);
-				else _OverrideVisibleUnits.Remove(Unit);
-			}
-			else _OverrideVisibleUnits.Remove(Unit);
-		}
-
-		public void UpdateUnitVisibility(Unit Unit, Tile MovedFrom, Tile MovedTo)
-		{
-			if (Unit.Army == this || !MovedTo.Rules.Concealing) return;
-			if (CanSeeTile(MovedFrom)) _OverrideVisibleUnits.Add(Unit);
-			else _OverrideVisibleUnits.Remove(Unit);
-		}
-
-		public void UpdateUnitVisibility(Unit Unit, Tile MovedTo)
-		{
-			UpdateUnitVisibility(Unit, null, MovedTo);
-		}
-
 		void UnitDestroyed(object Sender, EventArgs E)
 		{
 			var unit = (Unit)Sender;
+			if (unit.Army != this) return;
+
 			if (unit.Configuration.LeavesWreckWhenDestroyed)
 			{
 				var wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
@@ -173,17 +115,15 @@ namespace PanzerBlitz
 
 		void UnitCaptured(object Sender, ValuedEventArgs<Army> E)
 		{
-			E.Value.CaptureUnit((Unit)Sender);
-		}
+			Unit unit = (Unit)Sender;
+			if (unit.Army != this) return;
 
-		void CaptureUnit(Unit Unit)
-		{
-			var newUnit = new Unit(this, Unit.Configuration, _IdGenerator);
+			var newUnit = new Unit(this, unit.Configuration, _IdGenerator);
 			newUnit.OnDestroy += UnitDestroyed;
 			newUnit.OnCapture += UnitCaptured;
 			_CapturedUnits.Add(newUnit);
 			if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(newUnit));
-			newUnit.Place(Unit.Position);
+			newUnit.Place(unit.Position);
 		}
 
 		public override string ToString()

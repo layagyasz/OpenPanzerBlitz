@@ -15,6 +15,12 @@ namespace PanzerBlitz
 
 		readonly TransparentArrayList<Vertex> _VertexBuffer = new TransparentArrayList<Vertex>();
 
+		public void Clear()
+		{
+			_Highlights.Clear();
+			_DirtyBuffer = true;
+		}
+
 		public void AddHighlight(Highlight Highlight)
 		{
 			_Highlights.Add(Highlight);

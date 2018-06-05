@@ -47,6 +47,11 @@ namespace PanzerBlitz
 			return TurnComponent == TurnComponent.DEPLOYMENT;
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			return Carrier.CanLoad(Passenger);

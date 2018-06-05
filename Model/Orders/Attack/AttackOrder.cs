@@ -13,6 +13,7 @@ namespace PanzerBlitz
 		IEnumerable<OddsCalculation> OddsCalculations { get; }
 		CombatResultsTable CombatResultsTable { get; }
 
+		bool IsCompatible(SingleAttackOrder AttackOrder);
 		OrderInvalidReason AddAttacker(SingleAttackOrder AttackOrder);
 		void RemoveAttacker(Unit Attacker);
 		void SetAttackTarget(AttackTarget Target);

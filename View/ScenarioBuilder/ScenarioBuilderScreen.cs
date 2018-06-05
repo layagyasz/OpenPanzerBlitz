@@ -26,7 +26,6 @@ namespace PanzerBlitz
 
 		Select<uint> _YearSelect = new Select<uint>("scenario-builder-parameters-section-select");
 		Select<MatchSetting> _SettingSelect = new Select<MatchSetting>("scenario-builder-parameters-section-select");
-		Select<Front> _FrontSelect = new Select<Front>("scenario-builder-parameters-section-select");
 		Select<byte> _TurnsSelect = new Select<byte>("scenario-builder-parameters-section-select");
 		TextInput _MapWidthInput = new TextInput("scenario-builder-parameters-section-text-input");
 		TextInput _MapHeightInput = new TextInput("scenario-builder-parameters-section-text-input");
@@ -65,17 +64,6 @@ namespace PanzerBlitz
 						Value = setting
 					});
 			_SettingSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Setting);
-
-			MakeSection("Front", _FrontSelect, _LeftDisplay);
-			_FrontSelect.OnChange += HandleParametersChanged;
-			foreach (Front front in Enum.GetValues(typeof(Front)).Cast<Front>().Skip(1))
-				_FrontSelect.Add(
-					new SelectionOption<Front>("scenario-builder-parameters-section-select-option")
-					{
-						DisplayedString = ObjectDescriber.Describe(front),
-						Value = front
-					});
-			_FrontSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Front);
 
 			MakeSection("Turns", _TurnsSelect, _LeftDisplay);
 			_TurnsSelect.OnChange += HandleParametersChanged;
@@ -174,7 +162,6 @@ namespace PanzerBlitz
 		void HandleParametersChanged(object Sender, EventArgs E)
 		{
 			if (_YearSelect.Value == null
-				|| _FrontSelect.Value == null
 				|| _SettingSelect.Value == null
 				|| _TurnsSelect.Value == null)
 				return;
@@ -188,10 +175,10 @@ namespace PanzerBlitz
 			var parameters =
 				new ScenarioParameters(
 					_YearSelect.Value.Value,
-					_FrontSelect.Value.Value,
 					_SettingSelect.Value.Value,
 					_TurnsSelect.Value.Value,
-					new Coordinate(width, height));
+					new Coordinate(width, height),
+					true);
 			if (OnParametersChanged != null)
 				OnParametersChanged(this, new ValuedEventArgs<ScenarioParameters>(parameters));
 		}

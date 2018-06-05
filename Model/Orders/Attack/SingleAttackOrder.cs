@@ -28,6 +28,11 @@ namespace PanzerBlitz
 			this.UseSecondaryWeapon = UseSecondaryWeapon;
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public abstract void Serialize(SerializationOutputStream Stream);
 
 		public abstract OrderInvalidReason Validate();

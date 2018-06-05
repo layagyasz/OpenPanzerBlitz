@@ -1,9 +1,9 @@
-﻿using System;
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public interface OrderAutomater
 	{
-		bool AutomateTurn(TurnInfo TurnInfo);
+		void Hook(EventRelay Relay);
+		bool AutomateTurn(Match Match, TurnInfo TurnInfo);
 		void BufferOrder(Order Order, TurnInfo TurnInfo);
 	}
 }

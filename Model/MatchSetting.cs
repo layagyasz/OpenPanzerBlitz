@@ -4,16 +4,19 @@ namespace PanzerBlitz
 {
 	public class MatchSetting : Serializable
 	{
-		enum Attribute { ENVIRONMENT, MAP_GENERATOR }
+		enum Attribute { ENVIRONMENT, FRONT, MAP_GENERATOR }
 
 		public readonly string UniqueKey;
 		public readonly Environment Environment;
+		public readonly Front Front;
 		public readonly MapGeneratorConfiguration MapGenerator;
 
-		public MatchSetting(string UniqueKey, Environment Environment, MapGeneratorConfiguration MapGenerator)
+		public MatchSetting(
+			string UniqueKey, Environment Environment, Front Front, MapGeneratorConfiguration MapGenerator)
 		{
 			this.UniqueKey = UniqueKey;
 			this.Environment = Environment;
+			this.Front = Front;
 			this.MapGenerator = MapGenerator;
 		}
 
@@ -23,6 +26,7 @@ namespace PanzerBlitz
 
 			UniqueKey = Block.Name;
 			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];
+			Front = (Front)attributes[(int)Attribute.FRONT];
 			MapGenerator = (MapGeneratorConfiguration)attributes[(int)Attribute.MAP_GENERATOR];
 		}
 
@@ -30,6 +34,7 @@ namespace PanzerBlitz
 			: this(
 				Stream.ReadString(),
 				GameData.Environments[Stream.ReadString()],
+				(Front)Stream.ReadByte(),
 				new MapGeneratorConfiguration(Stream))
 		{ }
 
@@ -37,6 +42,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(UniqueKey);
 			Stream.Write(Environment.UniqueKey);
+			Stream.Write((byte)Front);
 			Stream.Write(MapGenerator);
 		}
 

@@ -23,7 +23,9 @@ namespace PanzerBlitz
 		protected void AddAttack(Tile Tile, SingleAttackOrder NewAttack)
 		{
 			AttackOrder attack = null;
-			if (_AttackBuilder == null || _AttackBuilder.TargetTile != Tile)
+			if (_AttackBuilder == null
+				|| _AttackBuilder.TargetTile != Tile
+				|| !_AttackBuilder.IsCompatible(NewAttack))
 				attack = NewAttack.GenerateNewAttackOrder();
 			else attack = _AttackBuilder;
 			var r = attack.AddAttacker(NewAttack);

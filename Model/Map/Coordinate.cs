@@ -15,6 +15,12 @@ namespace PanzerBlitz
 			this.Y = Y;
 		}
 
+		public Coordinate(HexCoordinate From)
+		{
+			X = From.X + (From.Z + 1) / 2;
+			Y = From.Z;
+		}
+
 		public Coordinate(SerializationInputStream Stream)
 		{
 			X = Stream.ReadInt32();
@@ -32,6 +38,11 @@ namespace PanzerBlitz
 		{
 			Stream.Write(X);
 			Stream.Write(Y);
+		}
+
+		public HexCoordinate ToHexCoordinate()
+		{
+			return new HexCoordinate(this);
 		}
 
 		public override bool Equals(object obj)

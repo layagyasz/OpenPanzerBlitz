@@ -11,10 +11,10 @@ namespace PanzerBlitz
 	{
 		public EventHandler<EventArgs> OnLoad;
 		public EventHandler<ValuedEventArgs<Unit>> OnUnload;
-		public EventHandler<EventArgs> OnConfigurationChange;
+		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnConfigurationChange;
 		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnFire;
-		public EventHandler<EventArgs> OnRemove;
+		public EventHandler<ValuedEventArgs<Tile>> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 		public EventHandler<ValuedEventArgs<Army>> OnCapture;
 
@@ -119,7 +119,7 @@ namespace PanzerBlitz
 						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.NONE;
 			}
-			if (!IgnoreConcealment && !Army.CanSeeUnit(this)) return OrderInvalidReason.TARGET_CONCEALED;
+			if (!IgnoreConcealment && !Army.SightFinder.IsSighted(this)) return OrderInvalidReason.TARGET_CONCEALED;
 			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
 		}
@@ -205,7 +205,8 @@ namespace PanzerBlitz
 				if (Configuration.CanDirectFireAt(
 					EnemyArmored, LineOfSight, UseSecondaryWeapon) != OrderInvalidReason.NONE)
 				{
-					if (Army.CanSpotTile(LineOfSight.Final)) return OrderInvalidReason.NONE;
+					if (Army.SightFinder.HasTileSightLevel(LineOfSight.Final, TileSightLevel.SOFT_SPOTTED))
+						return OrderInvalidReason.NONE;
 					return OrderInvalidReason.ATTACK_NO_SPOTTER;
 				}
 				return OrderInvalidReason.NONE;
@@ -270,8 +271,9 @@ namespace PanzerBlitz
 		{
 			Position.Exit(this);
 			Position.UpdateControl();
+			var position = Position;
 			Position = null;
-			if (OnRemove != null) OnRemove(this, EventArgs.Empty);
+			if (OnRemove != null) OnRemove(this, new ValuedEventArgs<Tile>(position));
 		}
 
 		public void Place(Tile Tile, Path<Tile> Path = null)
@@ -392,17 +394,29 @@ namespace PanzerBlitz
 			return OrderInvalidReason.NONE;
 		}
 
+		public bool CanSight()
+		{
+			return Status == UnitStatus.ACTIVE && Position != null && Carrier == null && !Configuration.IsEmplaceable();
+		}
+
+		public bool CanSpot()
+		{
+			return Status == UnitStatus.ACTIVE && Position != null && Carrier == null && Configuration.CanSpot;
+		}
+
 		public void Dismount(bool UseMovement)
 		{
 			_Dismounted = true;
-			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
+			if (OnConfigurationChange != null)
+				OnConfigurationChange(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration));
 			if (UseMovement) Halt();
 		}
 
 		public void Mount(bool UseMovement)
 		{
 			_Dismounted = false;
-			if (OnConfigurationChange != null) OnConfigurationChange(this, EventArgs.Empty);
+			if (OnConfigurationChange != null)
+				OnConfigurationChange(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration.DismountAs));
 			if (UseMovement) Halt();
 		}
 
@@ -495,15 +509,31 @@ namespace PanzerBlitz
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(int Range, Tile Tile, AttackMethod AttackMethod)
 		{
+			return GetLinesOfSight(Range, Tile)
+				.Where(i => CanAttack(AttackMethod, false, i, false) == OrderInvalidReason.NONE);
+		}
+
+		public IEnumerable<LineOfSight> GetFieldOfSight(int Range, Tile Tile)
+		{
+			return GetLinesOfSight(Range, Tile).Where(i => i.Validate() == NoLineOfSightReason.NONE);
+		}
+
+		public IEnumerable<LineOfSight> GetLinesOfSight(int Range, Tile Tile)
+		{
 			if (Tile != null)
 			{
-				foreach (LineOfSight l in Army.Match.Map.TilesEnumerable
-						 .Where(i => i.HexCoordinate.Distance(Tile.HexCoordinate) <= Range)
-						 .Select(i => GetLineOfSight(Tile, i))
-						 .Where(i => i.Final != Tile))
+				for (int i = -Range; i <= Range; ++i)
 				{
-					if (CanAttack(AttackMethod, false, l, false) == OrderInvalidReason.NONE)
-						yield return l;
+					for (int j = Math.Max(-Range, -(i + Range)); j <= Math.Min(Range, Range - i); ++j)
+					{
+						HexCoordinate p = Tile.HexCoordinate;
+						Coordinate c = new HexCoordinate(p.X + i, p.Y + j, p.Z - i - j).ToCoordinate();
+						if (c.X >= 0 && c.X < Tile.Map.Tiles.GetLength(0)
+							&& c.Y >= 0 && c.Y < Tile.Map.Tiles.GetLength(1))
+						{
+							yield return GetLineOfSight(Tile, Tile.Map.Tiles[c.X, c.Y]);
+						}
+					}
 				}
 			}
 		}

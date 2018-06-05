@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		readonly Vertex[] _BorderVertices;
 
 		Vertex[] _Vertices;
+		Vertex[] _MaskVertices;
 
 		public override Vector2f Size
 		{
@@ -44,6 +45,17 @@ namespace PanzerBlitz
 			_Vertices = TileRenderer.Render(Tile);
 		}
 
+		public void SetMask(Color Color)
+		{
+			if (_MaskVertices == null) _MaskVertices = new Vertex[Tile.Bounds.Length * 3];
+			for (int i = 0; i < Tile.Bounds.Length; ++i)
+			{
+				_MaskVertices[i * 3] = new Vertex(Tile.Bounds[i].Point, Color);
+				_MaskVertices[i * 3 + 1] = new Vertex(Tile.Bounds[i].End, Color);
+				_MaskVertices[i * 3 + 2] = new Vertex(Tile.Center, Color);
+			}
+		}
+
 		public override bool IsCollision(Vector2f Point)
 		{
 			return Tile.Bounds.ContainsPoint(Point);
@@ -60,6 +72,7 @@ namespace PanzerBlitz
 			var r = new RenderStates(Transform);
 			Target.Draw(_Vertices, PrimitiveType.Triangles, r);
 			Target.Draw(_BorderVertices, PrimitiveType.LinesStrip, r);
+			if (_MaskVertices != null) Target.Draw(_MaskVertices, PrimitiveType.Triangles, r);
 		}
 	}
 }

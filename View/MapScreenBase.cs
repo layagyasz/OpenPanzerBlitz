@@ -17,27 +17,20 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnPulse;
 
 		public readonly Camera Camera;
+		public MapView MapView { get; private set; }
 		public readonly HighlightLayer HighlightLayer = new HighlightLayer();
 		public readonly Vector2f Size;
 		public readonly PaneLayer PaneLayer = new PaneLayer();
 
 		protected Vertex[] _Backdrop;
-		protected MapView _MapView;
 		protected TileRenderer _TileRenderer;
+		protected List<Pod> _TransformedItems = new List<Pod>();
 		protected List<Pod> _Items = new List<Pod>();
 		protected AlertText _AlertText = new AlertText(2500);
 
-		public MapView MapView
-		{
-			get
-			{
-				return _MapView;
-			}
-		}
-
 		public MapScreenBase(Vector2f WindowSize, Map Map, TileRenderer TileRenderer)
 		{
-			_MapView = new MapView(Map, TileRenderer);
+			MapView = new MapView(Map, TileRenderer);
 			_TileRenderer = TileRenderer;
 
 			Size = WindowSize;
@@ -51,8 +44,9 @@ namespace PanzerBlitz
 				new Vertex(WindowSize, backdropColor),
 				new Vertex(new Vector2f(0, WindowSize.Y), backdropColor)
 			};
-			_MapView = MapView;
 			_AlertText.Position = new Vector2f(.5f * WindowSize.X, 0);
+			_TransformedItems.Add(MapView);
+			_TransformedItems.Add(HighlightLayer);
 			_Items.Add(_AlertText);
 		}
 
@@ -66,7 +60,9 @@ namespace PanzerBlitz
 
 		public void SetMap(Map Map)
 		{
-			_MapView = new MapView(Map, _TileRenderer);
+			_TransformedItems.Remove(MapView);
+			MapView = new MapView(Map, _TileRenderer);
+			_TransformedItems.Insert(0, MapView);
 		}
 
 		public void Alert(string Alert)
@@ -85,9 +81,7 @@ namespace PanzerBlitz
 			Camera.Update(MouseController, KeyController, DeltaT, PaneLayer.Any(i => i.Hover));
 			Transform = Camera.GetTransform();
 
-			MapView.Update(MouseController, KeyController, DeltaT, Transform);
-			HighlightLayer.Update(MouseController, KeyController, DeltaT, Transform);
-
+			foreach (Pod p in _TransformedItems) p.Update(MouseController, KeyController, DeltaT, Transform);
 			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
 		}
@@ -100,6 +94,7 @@ namespace PanzerBlitz
 			MapView.Draw(Target, Transform);
 			HighlightLayer.Draw(Target, Transform);
 
+			foreach (Pod p in _TransformedItems) p.Draw(Target, Transform);
 			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
 			PaneLayer.Draw(Target, Transform.Identity);
 		}

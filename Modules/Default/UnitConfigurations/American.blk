@@ -267,7 +267,7 @@ unit-configuration:m-8-hmc {
 	bool:can-indirect-fire { false }
 }
 unit-configuration:m-21 {
-	string:name { M-12 }
+	string:name { M-21 }
 	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { mortar }
@@ -348,7 +348,7 @@ unit-configuration:m-4_105 {
 }
 unit-configuration:m-10 {
 	string:name { M-10 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -358,7 +358,7 @@ unit-configuration:m-10 {
 }
 unit-configuration:m-18 {
 	string:name { M-18 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
@@ -368,7 +368,7 @@ unit-configuration:m-18 {
 }
 unit-configuration:m-36 {
 	string:name { M-36 }
-	unit-class:unit-class { tank }
+	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 15 }

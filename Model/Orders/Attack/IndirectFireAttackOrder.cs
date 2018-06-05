@@ -32,21 +32,29 @@ namespace PanzerBlitz
 			}
 		}
 
-		bool _Waited;
+		bool _Targeted;
 
 		public IndirectFireAttackOrder(Army Army, Tile TargetTile)
 			: base(Army, TargetTile) { }
+
+		public IndirectFireAttackOrder(IndirectFireAttackOrder Copy)
+			: base(Copy)
+		{
+			_Targeted = Copy._Targeted;
+		}
 
 		public IndirectFireAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
 		{
 			_Attackers = Stream.ReadEnumerable(i => new IndirectFireSingleAttackOrder(Stream, Objects)).ToList();
+			_Targeted = Stream.ReadBoolean();
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			base.Serialize(Stream);
 			Stream.Write(_Attackers);
+			Stream.Write(_Targeted);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -72,6 +80,11 @@ namespace PanzerBlitz
 				odds.AttackFactorCalculations.ForEach(i => i.Item1.TreatStackAsArmored = odds.StackArmored);
 		}
 
+		public override Order CloneIfStateful()
+		{
+			return new IndirectFireAttackOrder(this);
+		}
+
 		public override OrderInvalidReason Validate()
 		{
 			if (Target != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
@@ -82,11 +95,11 @@ namespace PanzerBlitz
 		{
 			Recalculate();
 
-			if (_Waited) return DoExecute(Random);
+			if (_Targeted) return DoExecute(Random);
 
 			if (Validate() == OrderInvalidReason.NONE)
 			{
-				_Waited = true;
+				_Targeted = true;
 				_Attackers.ForEach(i => i.Execute(Random));
 				return OrderStatus.IN_PROGRESS;
 			}

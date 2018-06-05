@@ -3,11 +3,20 @@
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 3 }
+	bool:fog-of-war { true }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-a.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-06.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-g.map }
 				bool:invert { false }
 			}
 		}

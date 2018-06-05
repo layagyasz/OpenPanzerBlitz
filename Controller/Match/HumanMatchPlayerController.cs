@@ -70,7 +70,7 @@ namespace PanzerBlitz
 
 			_MatchScreen = MatchScreen;
 			_MatchScreen.OnFinishClicked += EndTurn;
-			_MatchScreen.OnUnitAdded += _NewUnitBuffer.Hook(AddUnit).Invoke;
+			_MatchScreen.OnUnitAdded += _NewUnitBuffer.Hook<ValuedEventArgs<UnitView>>(AddUnit).Invoke;
 			_MatchScreen.OnPulse += (sender, e) => _NewUnitBuffer.DispatchEvents();
 
 			_Controllers = new Dictionary<TurnComponent, Subcontroller>

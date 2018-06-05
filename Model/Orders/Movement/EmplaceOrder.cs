@@ -43,6 +43,11 @@ namespace PanzerBlitz
 							   : TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			var r = Target.Configuration.UnitClass == UnitClass.MINEFIELD

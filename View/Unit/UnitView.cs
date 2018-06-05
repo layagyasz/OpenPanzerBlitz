@@ -42,7 +42,8 @@ namespace PanzerBlitz
 			_Renderer = Renderer;
 			_UnitConfigurationView = new UnitConfigurationView(
 				Unit.Configuration, Unit.Army.Configuration.Faction, Renderer, Scale);
-			Unit.OnConfigurationChange += _UnitConfigurationChangedBuffer.Hook(UpdateConfigurationView).Invoke;
+			Unit.OnConfigurationChange +=
+				_UnitConfigurationChangedBuffer.Hook<EventArgs>(UpdateConfigurationView).Invoke;
 
 			Vector2f tl = new Vector2f(-.5f, -.15f) * Scale;
 			Vector2f tr = new Vector2f(.5f, -.15f) * Scale;

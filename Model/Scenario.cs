@@ -15,7 +15,8 @@ namespace PanzerBlitz
 			ARMY_CONFIGURATIONS,
 			DEPLOYMENT_ORDER,
 			TURN_ORDER,
-			TURNS
+			TURNS,
+			FOG_OF_WAR
 		};
 
 		public readonly string Name;
@@ -23,6 +24,7 @@ namespace PanzerBlitz
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly List<ArmyConfiguration> TurnOrder;
 		public readonly byte Turns;
+		public readonly bool FogOfWar;
 		public readonly Environment Environment;
 		public readonly MapConfiguration MapConfiguration;
 
@@ -34,6 +36,7 @@ namespace PanzerBlitz
 		public Scenario(
 			IEnumerable<ArmyConfiguration> ArmyConfigurations,
 			byte Turns,
+			bool FogOfWar,
 			Environment Environment,
 			MapConfiguration MapConfiguration)
 		{
@@ -41,6 +44,7 @@ namespace PanzerBlitz
 			DeploymentOrder = this.ArmyConfigurations;
 			TurnOrder = this.ArmyConfigurations;
 			this.Turns = Turns;
+			this.FogOfWar = FogOfWar;
 			this.Environment = Environment;
 			this.MapConfiguration = MapConfiguration;
 		}
@@ -55,6 +59,7 @@ namespace PanzerBlitz
 			var deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
 			var turnOrderIndices = (byte[])attributes[(int)Attribute.TURN_ORDER];
 			Turns = (byte)attributes[(int)Attribute.TURNS];
+			FogOfWar = (bool)(attributes[(int)Attribute.FOG_OF_WAR] ?? false);
 			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
@@ -69,6 +74,7 @@ namespace PanzerBlitz
 			DeploymentOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
 			Turns = Stream.ReadByte();
+			FogOfWar = Stream.ReadBoolean();
 			Environment = GameData.Environments[Stream.ReadString()];
 			MapConfiguration = (MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream);
 		}
@@ -80,6 +86,7 @@ namespace PanzerBlitz
 			Stream.Write(DeploymentOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
 			Stream.Write(Turns);
+			Stream.Write(FogOfWar);
 			Stream.Write(Environment.UniqueKey);
 			MapConfigurationSerializer.Instance.Serialize(MapConfiguration, Stream);
 		}

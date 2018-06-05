@@ -33,6 +33,11 @@ namespace PanzerBlitz
 			}
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			return OrderInvalidReason.NONE;

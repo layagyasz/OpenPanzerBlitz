@@ -126,7 +126,7 @@ namespace PanzerBlitz
 			{
 				var name =
 					new string(_Configuration.NameGenerator.Generate(_Random).ToArray());
-				name = ObjectDescriber.CapitalizeAll(name);
+				name = ObjectDescriber.Namify(name);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
 				for (int i = 0; i < Math.Max(1, tiles.Count / 4); ++i)

@@ -2,6 +2,7 @@
 	name-generator:french { French.mkvc }
 	name-generator:german { German.mkvc }
 	name-generator:hungarian { Hungarian.mkvc }
+	name-generator:japanese { Japanese.mkvc }
 	name-generator:polish { Polish.mkvc }
 	name-generator:russian { Russian.mkvc }
 }

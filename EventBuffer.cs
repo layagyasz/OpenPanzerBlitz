@@ -17,9 +17,9 @@ namespace PanzerBlitz
 			}
 		}
 
-		public Action<object, T> Hook(Action<object, T> Handler)
+		public Action<object, T> Hook<K>(Action<object, K> Handler) where K : T
 		{
-			return (Sender, E) => QueueEvent(Handler, Sender, E);
+			return (Sender, E) => QueueEvent((s, e) => Handler(s, (K)e), Sender, E);
 		}
 
 		public void DispatchEvents()

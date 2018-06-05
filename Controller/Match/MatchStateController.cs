@@ -46,7 +46,7 @@ namespace PanzerBlitz
 			}
 			_MatchController = new MatchController(_Context.Match, playerControllers);
 			screen.OnPulse += HandlePulse;
-			_Context.Match.OnMatchEnded += _MatchEndBuffer.Hook(HandleMatchEnd).Invoke;
+			_Context.Match.OnMatchEnded += _MatchEndBuffer.Hook<EventArgs>(HandleMatchEnd).Invoke;
 			_Context.Match.Start();
 
 			return screen;

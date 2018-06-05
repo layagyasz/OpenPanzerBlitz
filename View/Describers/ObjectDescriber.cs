@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 using Cardamom.Planar;
 
 namespace PanzerBlitz
@@ -107,9 +107,9 @@ namespace PanzerBlitz
 			return Capitalize(Input) + ".";
 		}
 
-		public static string CapitalizeAll(string Input)
+		public static string Namify(string Input)
 		{
-			return string.Join(" ", Input.Split(' ').Select(Capitalize));
+			return string.Join(string.Empty, Regex.Split(Input, @"(?<=[ -])").Select(Capitalize));
 		}
 
 		public static string Listify(IEnumerable<string> Parts, string Joiner, string TerminalJoiner)

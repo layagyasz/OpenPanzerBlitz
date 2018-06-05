@@ -5,20 +5,16 @@ namespace PanzerBlitz
 {
 	public class MultiTurnOrderAutomater : OrderAutomater
 	{
-		public static readonly Func<Match, OrderAutomater> PROVIDER = i => new MultiTurnOrderAutomater(i);
-
-		public readonly Match Match;
-
 		readonly Dictionary<TurnInfo, List<Order>> _RecurringOrderBuffer = new Dictionary<TurnInfo, List<Order>>();
 
-		public MultiTurnOrderAutomater(Match Match)
+		public void Hook(EventRelay Relay)
 		{
-			this.Match = Match;
+			return;
 		}
 
-		public bool AutomateTurn(TurnInfo TurnInfo)
+		public bool AutomateTurn(Match Match, TurnInfo TurnInfo)
 		{
-			DoBufferedOrders(TurnInfo);
+			DoBufferedOrders(Match, TurnInfo);
 			return false;
 		}
 
@@ -30,7 +26,7 @@ namespace PanzerBlitz
 			if (!orders.Contains(Order)) orders.Add(Order);
 		}
 
-		void DoBufferedOrders(TurnInfo TurnInfo)
+		void DoBufferedOrders(Match Match, TurnInfo TurnInfo)
 		{
 			if (_RecurringOrderBuffer.ContainsKey(TurnInfo))
 			{

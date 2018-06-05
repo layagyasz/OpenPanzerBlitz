@@ -49,6 +49,7 @@ namespace PanzerBlitz
 			return new Scenario(
 				_Armies.Select(i => i.BuildArmyConfiguration()),
 				Parameters.Turns,
+				Parameters.FogOfWar,
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(
 					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting.MapGenerator)

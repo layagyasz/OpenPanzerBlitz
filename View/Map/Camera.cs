@@ -1,4 +1,6 @@
-﻿using Cardamom.Interface;
+﻿using System;
+
+using Cardamom.Interface;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -52,6 +54,7 @@ namespace PanzerBlitz
 			if (!Blocked)
 			{
 				_Zoom += MouseController.WheelDelta * 20 * step;
+				_Zoom = Math.Max(_Zoom, 16);
 				_Center -= MouseController.DragDelta / _Zoom;
 			}
 		}

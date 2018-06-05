@@ -5,28 +5,24 @@ namespace PanzerBlitz
 {
 	public class FullOrderAutomater : OrderAutomater
 	{
-		public static Func<Match, OrderAutomater> PROVIDER = i => new FullOrderAutomater(i);
+		OrderAutomater _MultiTurnAutomater = new MultiTurnOrderAutomater();
 
-		public readonly Match Match;
-
-		OrderAutomater _MultiTurnAutomater;
-
-		public FullOrderAutomater(Match Match)
+		public void Hook(EventRelay Relay)
 		{
-			this.Match = Match;
-
-			Match.Armies.ForEach(
-					i => i.Deployments.ForEach(
-						j => j.Units.ForEach(
-						k => k.OnMove += (sender, e) => j.EnterUnits(k.Configuration.IsVehicle))));
-			_MultiTurnAutomater = new MultiTurnOrderAutomater(Match);
+			Relay.OnUnitMove += HandleUnitMove;
 		}
 
-		public bool AutomateTurn(TurnInfo TurnInfo)
+		void HandleUnitMove(object Sender, MovementEventArgs E)
+		{
+			Unit unit = (Unit)Sender;
+			unit.Deployment?.EnterUnits(unit.Configuration.IsVehicle);
+		}
+
+		public bool AutomateTurn(Match Match, TurnInfo TurnInfo)
 		{
 			Match.ExecuteOrder(new ResetOrder(TurnInfo.Army, TurnInfo.TurnComponent == TurnComponent.RESET));
 
-			_MultiTurnAutomater.AutomateTurn(TurnInfo);
+			_MultiTurnAutomater.AutomateTurn(Match, TurnInfo);
 
 			switch (TurnInfo.TurnComponent)
 			{
@@ -35,7 +31,7 @@ namespace PanzerBlitz
 					return TurnInfo.Army.Deployments.All(i => i.IsConfigured());
 
 				case TurnComponent.MINEFIELD_ATTACK:
-					DoMinefieldAttacks(TurnInfo.Army);
+					DoMinefieldAttacks(Match, TurnInfo.Army);
 					return true;
 
 				case TurnComponent.AIRCRAFT:
@@ -69,7 +65,7 @@ namespace PanzerBlitz
 			_MultiTurnAutomater.BufferOrder(Order, TurnInfo);
 		}
 
-		void DoMinefieldAttacks(Army Army)
+		void DoMinefieldAttacks(Match Match, Army Army)
 		{
 			foreach (Unit u in Army.Units)
 			{

@@ -31,6 +31,15 @@ namespace PanzerBlitz
 			_RemainingTurns = Turns;
 		}
 
+		public ReconOrder(ReconOrder Copy)
+		{
+			Unit = Copy.Unit;
+			Direction = Copy.Direction;
+			Turns = Copy.Turns;
+			ExitTile = Copy.ExitTile;
+			_RemainingTurns = Copy._RemainingTurns;
+		}
+
 		public ReconOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: this((Unit)Objects[Stream.ReadInt32()], (Direction)Stream.ReadByte())
 		{
@@ -53,6 +62,11 @@ namespace PanzerBlitz
 			return Unit.Configuration.IsVehicle
 					   ? TurnComponent == TurnComponent.VEHICLE_MOVEMENT
 							: TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
+		}
+
+		public Order CloneIfStateful()
+		{
+			return new ReconOrder(this);
 		}
 
 		public OrderInvalidReason Validate()

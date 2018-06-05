@@ -13,6 +13,14 @@ namespace PanzerBlitz
 {
 	public class MatchScreen : MapScreenBase
 	{
+		readonly static Color[] FOG_OF_WAR_MASKS =
+		{
+			new Color(0, 0, 0, 180),
+			new Color(0, 0, 0, 120),
+			new Color(0, 0, 0, 60),
+			new Color(255, 255, 255, 0)
+		};
+
 		public EventHandler<EventArgs> OnFinishClicked;
 		public EventHandler<ValuedEventArgs<UnitView>> OnUnitAdded;
 
@@ -32,7 +40,11 @@ namespace PanzerBlitz
 		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly FactionRenderer FactionRenderer;
 
-		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
+		readonly EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
+
+		bool _FogOfWar;
+		SightFinder _SightFinder;
+		Action<object, EventArgs> _FogOfWarHandler;
 
 		VictoryConditionDisplay _VictoryConditionDisplay = new VictoryConditionDisplay();
 		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
@@ -70,13 +82,15 @@ namespace PanzerBlitz
 			FactionRenderer FactionRenderer)
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
-			Match.OnStartPhase += _EventBuffer.Hook((s, e) => HandleNewTurn(s, (StartTurnComponentEventArgs)e)).Invoke;
+			Match.OnStartPhase += _EventBuffer.Hook<StartTurnComponentEventArgs>(HandleNewTurn).Invoke;
+			_StackLayer.Hook(Match.Relay);
 
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
+			_FogOfWar = Match.Scenario.FogOfWar;
+			_FogOfWarHandler = _EventBuffer.Hook<SightUpdatedEventArgs>(HandleSightUpdated);
 
-			EventHandler<NewUnitEventArgs> addUnitHandler =
-				_EventBuffer.Hook((s, e) => AddUnit(s, (NewUnitEventArgs)e)).Invoke;
+			EventHandler<NewUnitEventArgs> addUnitHandler = _EventBuffer.Hook<NewUnitEventArgs>(AddUnit).Invoke;
 			foreach (Army a in Match.Armies)
 			{
 				a.OnUnitAdded += addUnitHandler;
@@ -93,6 +107,8 @@ namespace PanzerBlitz
 				_InfoDisplay.Position - new Vector2f(0, _VictoryConditionDisplay.Size.Y + 16);
 			_ActionDisplay.Position = new Vector2f(WindowSize.X - _ActionDisplay.Size.X - 16, 16);
 
+			_TransformedItems.Add(_StackLayer);
+
 			_Items.Add(_FinishButton);
 			_Items.Add(_InfoDisplay);
 			_Items.Add(_VictoryConditionDisplay);
@@ -104,6 +120,38 @@ namespace PanzerBlitz
 		{
 			SetTurn(E.Turn);
 			_InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, FactionRenderer, 80));
+			SetSightFinder(E.Turn.TurnInfo.Army.SightFinder);
+		}
+
+		void SetSightFinder(SightFinder SightFinder)
+		{
+			if (_FogOfWar && _SightFinder != SightFinder)
+			{
+				if (_SightFinder != null) _SightFinder.OnSightUpdated -= _FogOfWarHandler.Invoke;
+				_SightFinder = SightFinder;
+				_SightFinder.OnSightUpdated += _FogOfWarHandler.Invoke;
+				SetFogOfWar();
+			}
+		}
+
+		void SetFogOfWar()
+		{
+			foreach (TileView t in MapView.TilesEnumerable)
+				t.SetMask(FOG_OF_WAR_MASKS[FogIndex(t.Tile, _SightFinder.GetTileSightLevel(t.Tile))]);
+		}
+
+		void HandleSightUpdated(object Sender, SightUpdatedEventArgs E)
+		{
+			foreach (var delta in E.TileDeltas)
+				MapView.Tiles[delta.Item1.Coordinate.X, delta.Item1.Coordinate.Y]
+					   .SetMask(FOG_OF_WAR_MASKS[FogIndex(delta.Item1, delta.Item2)]);
+		}
+
+		int FogIndex(Tile Tile, TileSightLevel Level)
+		{
+			if (Level == TileSightLevel.NONE || Level == TileSightLevel.HARD_SPOTTED) return (int)Level;
+			if (Tile.Rules.Concealing || Tile.Rules.LowProfileConcealing) return 1;
+			return (int)Level + 1;
 		}
 
 		void AddUnit(object Sender, NewUnitEventArgs E)
@@ -158,37 +206,10 @@ namespace PanzerBlitz
 		}
 
 		public override void Update(
-			MouseController MouseController,
-			KeyController KeyController,
-			int DeltaT,
-			Transform Transform)
+			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
 			_EventBuffer.DispatchEvents();
-
-			if (OnPulse != null) OnPulse(this, EventArgs.Empty);
-
-			Camera.Update(MouseController, KeyController, DeltaT, PaneLayer.Any(i => i.Hover));
-			Transform = Camera.GetTransform();
-
-			MapView.Update(MouseController, KeyController, DeltaT, Transform);
-			HighlightLayer.Update(MouseController, KeyController, DeltaT, Transform);
-			_StackLayer.Update(MouseController, KeyController, DeltaT, Transform);
-
-			foreach (Pod p in _Items) p.Update(MouseController, KeyController, DeltaT, Transform.Identity);
-			PaneLayer.Update(MouseController, KeyController, DeltaT, Transform.Identity);
-		}
-
-		public override void Draw(RenderTarget Target, Transform Transform)
-		{
-			Transform = Camera.GetTransform();
-
-			Target.Draw(_Backdrop, PrimitiveType.Quads);
-			MapView.Draw(Target, Transform);
-			HighlightLayer.Draw(Target, Transform);
-			_StackLayer.Draw(Target, Transform);
-
-			foreach (Pod p in _Items) p.Draw(Target, Transform.Identity);
-			PaneLayer.Draw(Target, Transform.Identity);
+			base.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿match-setting<>:match-settings {
 	match-setting:france-summer {
 		!var:environment { environments.summer-grassland }
+		front:front { west }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.french }
 			!var:terrain-generator { terrain-generators.default }
@@ -8,6 +9,7 @@
 	}
 	match-setting:germany-summer {
 		!var:environment { environments.summer-grassland }
+		front:front { west }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.german }
 			!var:terrain-generator { terrain-generators.default }
@@ -15,13 +17,23 @@
 	}
 	match-setting:hungary-summer {
 		!var:environment { environments.summer-grassland }
+		front:front { east }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.hungarian }
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}
+	match-setting:japan-summer {
+		!var:environment { environments.summer-grassland }
+		front:front { pacific }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.japanese }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:poland-summer {
 		!var:environment { environments.summer-steppe }
+		front:front { east }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.polish }
 			!var:terrain-generator { terrain-generators.default }
@@ -29,6 +41,7 @@
 	}
 	match-setting:poland-winter {
 		!var:environment { environments.winter-steppe }
+		front:front { east }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.polish }
 			!var:terrain-generator { terrain-generators.default }
@@ -36,6 +49,7 @@
 	}
 	match-setting:russia-summer {
 		!var:environment { environments.summer-steppe }
+		front:front { east }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.russian }
 			!var:terrain-generator { terrain-generators.default }
@@ -43,6 +57,7 @@
 	}
 	match-setting:russia-winter {
 		!var:environment { environments.winter-steppe }
+		front:front { east }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.russian }
 			!var:terrain-generator { terrain-generators.default }

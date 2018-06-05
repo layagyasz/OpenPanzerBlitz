@@ -63,6 +63,11 @@ namespace PanzerBlitz
 						   : TurnComponent == TurnComponent.NON_VEHICLE_MOVEMENT;
 		}
 
+		public Order CloneIfStateful()
+		{
+			return this;
+		}
+
 		public OrderInvalidReason Validate()
 		{
 			Path = Unit.GetPathTo(To, Combat);

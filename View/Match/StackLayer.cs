@@ -8,7 +8,7 @@ using SFML.Graphics;
 
 namespace PanzerBlitz
 {
-	public class StackLayer
+	public class StackLayer : Pod
 	{
 		Dictionary<Unit, UnitView> _UnitViews = new Dictionary<Unit, UnitView>();
 
@@ -24,15 +24,18 @@ namespace PanzerBlitz
 			}
 		}
 
+		public void Hook(EventRelay Relay)
+		{
+			var updateHandler = _EventBuffer.Hook<EventArgs>(UpdateStack);
+			Relay.OnUnitLoad += updateHandler.Invoke;
+			Relay.OnUnitUnload += updateHandler.Invoke;
+			Relay.OnUnitMove += _EventBuffer.Hook<MovementEventArgs>(MoveUnit).Invoke;
+			Relay.OnUnitRemove += _EventBuffer.Hook<EventArgs>(RemoveUnit).Invoke;
+		}
+
 		public void AddUnitView(UnitView UnitView)
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
-
-			var updateHandler = _EventBuffer.Hook(UpdateStack);
-			UnitView.Unit.OnLoad += updateHandler.Invoke;
-			UnitView.Unit.OnUnload += updateHandler.Invoke;
-			UnitView.Unit.OnMove += _EventBuffer.Hook((s, e) => MoveUnit(s, (MovementEventArgs)e)).Invoke;
-			UnitView.Unit.OnRemove += _EventBuffer.Hook(RemoveUnit).Invoke;
 			if (UnitView.Unit.Position != null)
 				MoveUnit(UnitView.Unit, new MovementEventArgs(UnitView.Unit.Position, null, null));
 		}
