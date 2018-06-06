@@ -83,7 +83,6 @@ namespace PanzerBlitz
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
 			Match.OnStartPhase += _EventBuffer.Hook<StartTurnComponentEventArgs>(HandleNewTurn).Invoke;
-			_StackLayer.Hook(Match.Relay);
 
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
@@ -125,26 +124,35 @@ namespace PanzerBlitz
 
 		void SetSightFinder(SightFinder SightFinder)
 		{
-			if (_FogOfWar && _SightFinder != SightFinder)
+			if (_SightFinder != SightFinder)
 			{
 				if (_SightFinder != null) _SightFinder.OnSightUpdated -= _FogOfWarHandler.Invoke;
+				SightFinder.OnSightUpdated += _FogOfWarHandler.Invoke;
+				SetFogOfWar(SightFinder);
 				_SightFinder = SightFinder;
-				_SightFinder.OnSightUpdated += _FogOfWarHandler.Invoke;
-				SetFogOfWar();
 			}
+
 		}
 
-		void SetFogOfWar()
+		void SetFogOfWar(SightFinder SightFinder)
 		{
-			foreach (TileView t in MapView.TilesEnumerable)
-				t.SetMask(FOG_OF_WAR_MASKS[FogIndex(t.Tile, _SightFinder.GetTileSightLevel(t.Tile))]);
+			_StackLayer.SetUnitVisibilities(SightFinder);
+			if (_FogOfWar)
+			{
+				foreach (TileView t in MapView.TilesEnumerable)
+					t.SetMask(FOG_OF_WAR_MASKS[FogIndex(t.Tile, SightFinder.GetTileSightLevel(t.Tile))]);
+			}
 		}
 
 		void HandleSightUpdated(object Sender, SightUpdatedEventArgs E)
 		{
-			foreach (var delta in E.TileDeltas)
-				MapView.Tiles[delta.Item1.Coordinate.X, delta.Item1.Coordinate.Y]
-					   .SetMask(FOG_OF_WAR_MASKS[FogIndex(delta.Item1, delta.Item2)]);
+			_StackLayer.UpdateUnitVisibilities(E.Unit, E.Movement, E.UnitDeltas);
+			if (_FogOfWar)
+			{
+				foreach (var delta in E.TileDeltas)
+					MapView.Tiles[delta.Item1.Coordinate.X, delta.Item1.Coordinate.Y]
+						   .SetMask(FOG_OF_WAR_MASKS[FogIndex(delta.Item1, delta.Item2)]);
+			}
 		}
 
 		int FogIndex(Tile Tile, TileSightLevel Level)
@@ -162,7 +170,7 @@ namespace PanzerBlitz
 		public void AddUnit(Unit Unit)
 		{
 			var unitView = new UnitView(Unit, UnitRenderer, .625f, true);
-			_StackLayer.AddUnitView(unitView);
+			_StackLayer.AddUnitView(unitView, _SightFinder);
 			if (OnUnitAdded != null) OnUnitAdded(this, new ValuedEventArgs<UnitView>(unitView));
 		}
 

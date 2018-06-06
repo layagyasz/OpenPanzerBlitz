@@ -59,6 +59,7 @@ namespace PanzerBlitz
 
 			CAN_SPOT,
 			SPOT_RANGE,
+			SIGHT_RANGE,
 			DISMOUNT_AS,
 			CAN_REMOUNT,
 
@@ -114,6 +115,7 @@ namespace PanzerBlitz
 
 		public readonly bool CanSpot;
 		public readonly byte SpotRange;
+		public readonly byte SightRange;
 
 		public readonly UnitConfiguration DismountAs;
 		public readonly bool CanRemount;
@@ -179,6 +181,7 @@ namespace PanzerBlitz
 
 			CanSpot = Stream.ReadBoolean();
 			SpotRange = Stream.ReadByte();
+			SightRange = Stream.ReadByte();
 
 			DismountAs = Stream.ReadObject(i => new UnitConfiguration(i), true, true);
 			CanRemount = Stream.ReadBoolean();
@@ -290,6 +293,7 @@ namespace PanzerBlitz
 					   ? 30
 					   : Math.Max(GetAdjustedRange(true), GetAdjustedRange(false)))
 				 : 0));
+			SightRange = IsEmplaceable() ? (byte)0 : Math.Max((byte)20, GetAdjustedRange(false));
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 			CanRemount = (bool)(attributes[(int)Attribute.CAN_REMOUNT] ?? DismountAs != null);
@@ -629,6 +633,7 @@ namespace PanzerBlitz
 
 			Stream.Write(CanSpot);
 			Stream.Write(SpotRange);
+			Stream.Write(SightRange);
 
 			Stream.Write(DismountAs, true, true);
 			Stream.Write(CanRemount);

@@ -6,12 +6,14 @@ namespace PanzerBlitz
 	{
 		EventHandler<SightUpdatedEventArgs> OnSightUpdated { get; set; }
 
-		void SetTrackingArmy(Army Army);
+		Army TrackingArmy { get; set; }
 		void Hook(EventRelay Relay);
 
 		TileSightLevel GetTileSightLevel(Tile Tile, TileSightLevel Max = TileSightLevel.HARD_SPOTTED);
 		bool HasTileSightLevel(Tile Tile, TileSightLevel Level);
+		UnitVisibility GetUnitVisibility(Unit Unit);
 
+		bool IsSighted(Unit Unit, TileSightLevel Level);
 		bool IsSighted(Unit Unit);
 	}
 }

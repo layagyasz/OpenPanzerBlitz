@@ -81,12 +81,21 @@ namespace PanzerBlitz
 		public void Move(MovementEventArgs E)
 		{
 			if (E.Path != null) _Movement = new MovementDolly(this, E.Path, E.Carrier);
-			else Position = E.Tile.Center;
+			else
+			{
+				_Movement = null;
+				Position = E.Tile.Center;
+			}
 		}
 
 		public override bool IsCollision(Vector2f Point)
 		{
 			return _UnitConfigurationView.IsCollision(Point);
+		}
+
+		public void SetAlpha(byte Alpha)
+		{
+			_UnitConfigurationView.SetAlpha(Alpha);
 		}
 
 		public override void Update(

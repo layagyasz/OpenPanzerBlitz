@@ -396,10 +396,13 @@
     <Compile Include="Model\Sight\LineOfSight.cs" />
     <Compile Include="Model\Sight\SightFinder.cs" />
     <Compile Include="Model\Sight\LazySightFinder.cs" />
+    <Compile Include="Model\Sight\UnitTracker.cs" />
     <Compile Include="Model\Sight\TileSightLevel.cs" />
     <Compile Include="Model\Sight\SightUpdatedEventArgs.cs" />
     <Compile Include="Model\EventRelay.cs" />
     <Compile Include="Model\Sight\UnitVisibility.cs" />
+    <Compile Include="Model\Sight\OmniscientUnitTracker.cs" />
+    <Compile Include="Model\Sight\FogOfWarUnitTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

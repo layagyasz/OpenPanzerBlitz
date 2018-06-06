@@ -80,6 +80,12 @@ namespace PanzerBlitz
 			_Bounds = new Rectangle(new Vector2f(-.5f, -.5f) * Scale, new Vector2f(1, 1) * Scale);
 		}
 
+		public void SetAlpha(byte Alpha)
+		{
+			for (int i = 0; i < _Vertices.Length; ++i) _Vertices[i].Color.A = Alpha;
+			for (int i = 0; i < _ImageVertices.Length; ++i) _ImageVertices[i].Color.A = Alpha;
+		}
+
 		public bool IsCollision(Vector2f Point)
 		{
 			return _Bounds.ContainsPoint(Point);

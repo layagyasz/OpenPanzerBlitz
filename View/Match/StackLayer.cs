@@ -10,11 +10,11 @@ namespace PanzerBlitz
 {
 	public class StackLayer : Pod
 	{
+		static byte LAST_SEEN_ALPHA = 128;
+
 		Dictionary<Unit, UnitView> _UnitViews = new Dictionary<Unit, UnitView>();
 
 		readonly List<KeyValuePair<Tile, StackView>> _Stacks = new List<KeyValuePair<Tile, StackView>>();
-
-		EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
 		public IEnumerable<UnitView> UnitViews
 		{
@@ -24,34 +24,38 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void Hook(EventRelay Relay)
+		public void SetUnitVisibilities(SightFinder SightFinder)
 		{
-			var updateHandler = _EventBuffer.Hook<EventArgs>(UpdateStack);
-			Relay.OnUnitLoad += updateHandler.Invoke;
-			Relay.OnUnitUnload += updateHandler.Invoke;
-			Relay.OnUnitMove += _EventBuffer.Hook<MovementEventArgs>(MoveUnit).Invoke;
-			Relay.OnUnitRemove += _EventBuffer.Hook<EventArgs>(RemoveUnit).Invoke;
+			foreach (var unit in _UnitViews) SetUnitVisibility(unit.Key, SightFinder.GetUnitVisibility(unit.Key));
 		}
 
-		public void AddUnitView(UnitView UnitView)
+		public void UpdateUnitVisibilities(
+			Unit Unit, MovementEventArgs Movement, List<Tuple<Unit, UnitVisibility>> UnitDeltas)
+		{
+			foreach (var delta in UnitDeltas) SetUnitVisibility(delta.Item1, delta.Item2);
+			if (Unit != null && Movement != null) MoveUnit(Unit, Movement, true);
+			else if (Unit != null) UpdateStack(Unit);
+		}
+
+		public void AddUnitView(UnitView UnitView, SightFinder SightFinder)
 		{
 			_UnitViews.Add(UnitView.Unit, UnitView);
-			if (UnitView.Unit.Position != null)
-				MoveUnit(UnitView.Unit, new MovementEventArgs(UnitView.Unit.Position, null, null));
+			if (SightFinder != null) SetUnitVisibility(UnitView.Unit, SightFinder.GetUnitVisibility(UnitView.Unit));
 		}
 
-		void MoveUnit(object Sender, MovementEventArgs E)
+		void SetUnitVisibility(Unit Unit, UnitVisibility Visibility)
 		{
-			MoveUnit((Unit)Sender, E);
+			if (Visibility.LastSeen == null) RemoveUnit(Unit);
+			else MoveUnit(Unit, new MovementEventArgs(Visibility.LastSeen, null, null), Visibility.Visible);
 		}
 
-		void MoveUnit(Unit Unit, MovementEventArgs E)
+		void MoveUnit(Unit Unit, MovementEventArgs E, bool Visible)
 		{
 			Tile tile = E.Tile;
-			if (tile != Unit.Position) return; // Received out-of-date notification.
 
 			UnitView view = _UnitViews[Unit];
 			view.Move(E);
+			view.SetAlpha(Visible ? (byte)255 : LAST_SEEN_ALPHA);
 
 			var from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
 			StackView fromStack = from.Value;
@@ -71,11 +75,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		void RemoveUnit(object Sender, EventArgs E)
-		{
-			RemoveUnit((Unit)Sender);
-		}
-
 		void RemoveUnit(Unit Unit)
 		{
 			var from = _Stacks.FirstOrDefault(i => i.Value.Contains(Unit));
@@ -85,11 +84,6 @@ namespace PanzerBlitz
 				fromStack.Remove(Unit);
 				if (fromStack.Units.Count() == 0) _Stacks.Remove(from);
 			}
-		}
-
-		void UpdateStack(object Sender, EventArgs E)
-		{
-			UpdateStack((Unit)Sender);
 		}
 
 		void UpdateStack(Unit Unit)
@@ -102,8 +96,6 @@ namespace PanzerBlitz
 		public void Update(
 			MouseController MouseController, KeyController KeyController, int DeltaT, Transform Transform)
 		{
-			_EventBuffer.DispatchEvents();
-
 			foreach (var s in _Stacks) s.Value.Update(MouseController, KeyController, DeltaT, Transform);
 		}
 

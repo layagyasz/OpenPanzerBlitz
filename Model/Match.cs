@@ -36,7 +36,13 @@ namespace PanzerBlitz
 			this.Scenario = Scenario;
 			Map = Scenario.MapConfiguration.GenerateMap(Scenario.Environment, IdGenerator);
 
-			Armies = Scenario.TurnOrder.Select(i => new Army(this, new LazySightFinder(), i, IdGenerator)).ToList();
+			Armies = Scenario.TurnOrder.Select(
+				i => new Army(
+					this,
+					new LazySightFinder(
+						Scenario.FogOfWar ? (UnitTracker)new FogOfWarUnitTracker() : new OmniscientUnitTracker()),
+					i,
+					IdGenerator)).ToList();
 			_TurnOrder = Scenario.DeploymentOrder.Select(
 				i => new Turn(0, new TurnInfo(
 					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT)))

@@ -10,13 +10,26 @@ namespace PanzerBlitz
 	{
 		public EventHandler<SightUpdatedEventArgs> OnSightUpdated { get; set; }
 
-		public Army TrackingArmy { get; private set; }
+		public Army TrackingArmy
+		{
+			get
+			{
+				return _TrackingArmy;
+			}
+			set
+			{
+				UnitTracker.TrackingArmy = value;
+				_TrackingArmy = value;
+			}
+		}
+		public UnitTracker UnitTracker { get; }
 
+		Army _TrackingArmy;
 		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
-		public void SetTrackingArmy(Army Army)
+		public LazySightFinder(UnitTracker UnitTracker)
 		{
-			TrackingArmy = Army;
+			this.UnitTracker = UnitTracker;
 		}
 
 		public void Hook(EventRelay Relay)
@@ -30,31 +43,166 @@ namespace PanzerBlitz
 
 		void HandleFire(object Sender, EventArgs E)
 		{
-			SightFiringUnit((Unit)Sender);
+			Unit unit = (Unit)Sender;
+			if (unit.Army == TrackingArmy) return;
+
+			SightFiringUnit(unit);
+
+			var delta = UnitTracker.Update(this, unit);
+			if (OnSightUpdated != null)
+			{
+				OnSightUpdated(
+					this,
+					new SightUpdatedEventArgs(
+						null,
+						null,
+						new List<Tuple<Tile, TileSightLevel>>(),
+						delta));
+			}
 		}
 
 		void HandleMove(object Sender, MovementEventArgs E)
 		{
 			Unit unit = (Unit)Sender;
-			if (unit.Army == TrackingArmy) UpdateFriendlyMove(unit, E);
-			else SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
+			if (unit.Army == TrackingArmy)
+			{
+				HashSet<Tile> recalculateTiles = new HashSet<Tile>();
+				if (unit.CanSight())
+				{
+					if (E.Path != null && E.Path.Count > 1)
+					{
+						foreach (var tile in unit.GetFieldOfSight(
+							unit.Configuration.SightRange, E.Path[0]).Select(i => i.Final))
+							recalculateTiles.Add(tile);
+					}
+					foreach (var tile in unit.GetFieldOfSight(unit.Configuration.SightRange, E.Tile)
+							 .Select(i => i.Final))
+						recalculateTiles.Add(tile);
+				}
+				var tileDeltas =
+					recalculateTiles.Select(i => new Tuple<Tile, TileSightLevel>(i, GetTileSightLevel(i))).ToList();
+				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(unit, E, tileDeltas, unitDeltas));
+				}
+			}
+			else
+			{
+				SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
+
+				var delta = UnitTracker.ComputeDelta(this, unit, E);
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							unit,
+							E,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							delta));
+				}
+			}
 		}
 
 		void HandleLoad(object Sender, EventArgs E)
 		{
 			Unit unit = (Unit)Sender;
-			if (unit.Army == TrackingArmy) UpdateFriendlyUnmoved(unit, unit.Position);
+			if (unit.Army == TrackingArmy)
+			{
+				var tileDeltas =
+					unit.GetFieldOfSight(unit.Configuration.SightRange, unit.Position)
+						.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
+						.ToList();
+				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(unit, null, tileDeltas, unitDeltas));
+				}
+			}
+			else
+			{
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							unit,
+							null,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							new List<Tuple<Unit, UnitVisibility>>()));
+				}
+			}
 		}
 
 		void HandleUnload(object Sender, ValuedEventArgs<Unit> E)
 		{
-			if (E.Value.Army == TrackingArmy) UpdateFriendlyUnmoved(E.Value, E.Value.Position);
+			Unit unit = (Unit)Sender;
+
+			if (unit.Army == TrackingArmy)
+			{
+				var tileDeltas =
+					unit.GetFieldOfSight(E.Value.Configuration.SightRange, unit.Position)
+						.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
+						.ToList();
+				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(unit, null, tileDeltas, unitDeltas));
+				}
+			}
+			else
+			{
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							unit,
+							null,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							new List<Tuple<Unit, UnitVisibility>>()));
+				}
+			}
 		}
 
 		void HandleRemove(object Sender, ValuedEventArgs<Tile> E)
 		{
 			Unit unit = (Unit)Sender;
-			if (unit.Army == TrackingArmy) UpdateFriendlyUnmoved(unit, E.Value);
+			if (unit.Army == TrackingArmy)
+			{
+				if (OnSightUpdated != null)
+				{
+					var tileDeltas =
+						unit.GetFieldOfSight(unit.Configuration.SightRange, E.Value)
+							.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
+							.ToList();
+					var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+					unitDeltas.AddRange(UnitTracker.Remove(this, unit));
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(unit, null, tileDeltas, unitDeltas));
+				}
+			}
+			else
+			{
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							unit,
+							null,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							UnitTracker.Remove(this, unit)));
+				}
+			}
 		}
 
 		public TileSightLevel GetTileSightLevel(Tile Tile, TileSightLevel Max = TileSightLevel.HARD_SPOTTED)
@@ -74,6 +222,11 @@ namespace PanzerBlitz
 		public bool HasTileSightLevel(Tile Tile, TileSightLevel Level)
 		{
 			return GetTileSightLevel(Tile, Level) >= Level;
+		}
+
+		public UnitVisibility GetUnitVisibility(Unit Unit)
+		{
+			return UnitTracker.GetVisibility(this, Unit);
 		}
 
 		TileSightLevel GetTileSightLevel(Unit Unit, Tile Tile)
@@ -110,6 +263,13 @@ namespace PanzerBlitz
 				Tile, TileConceals(Unit, Tile) ? TileSightLevel.HARD_SPOTTED : TileSightLevel.SIGHTED);
 		}
 
+		public bool IsSighted(Unit Unit, TileSightLevel Level)
+		{
+			return _OverrideVisibleUnits.Contains(Unit) ||
+										(TileConceals(Unit, Unit.Position)
+										 ? Level >= TileSightLevel.HARD_SPOTTED : Level >= TileSightLevel.SIGHTED);
+		}
+
 		public bool IsSighted(Unit Unit)
 		{
 			return _OverrideVisibleUnits.Contains(Unit) || IsSighted(Unit, Unit.Position);
@@ -129,40 +289,6 @@ namespace PanzerBlitz
 			if (Unit.Army == TrackingArmy || !MovedTo.Rules.Concealing) return;
 			if (IsSighted(Unit, MovedFrom)) _OverrideVisibleUnits.Add(Unit);
 			else _OverrideVisibleUnits.Remove(Unit);
-		}
-
-		void UpdateFriendlyUnmoved(Unit Unit, Tile Tile)
-		{
-			if (OnSightUpdated != null)
-				OnSightUpdated(
-					this,
-					new SightUpdatedEventArgs(
-						Unit.GetFieldOfSight(
-							Math.Max((byte)20, Unit.Configuration.GetAdjustedRange(false)), Tile)
-						.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
-						.ToList()));
-		}
-
-		void UpdateFriendlyMove(Unit Unit, MovementEventArgs E)
-		{
-			if (!Unit.CanSight()) return;
-
-			HashSet<Tile> recalculateTiles = new HashSet<Tile>();
-			if (E.Path != null && E.Path.Count > 1)
-			{
-				foreach (var tile in Unit.GetFieldOfSight(
-					Math.Max((byte)20, Unit.Configuration.GetAdjustedRange(false)), E.Path[0]).Select(i => i.Final))
-					recalculateTiles.Add(tile);
-			}
-			foreach (var tile in Unit.GetFieldOfSight(
-				Math.Max((byte)20, Unit.Configuration.GetAdjustedRange(false)), E.Tile).Select(i => i.Final))
-				recalculateTiles.Add(tile);
-			if (OnSightUpdated != null)
-				OnSightUpdated(
-					this,
-					new SightUpdatedEventArgs(
-						recalculateTiles.Select(i => new Tuple<Tile, TileSightLevel>(i, GetTileSightLevel(i)))
-						.ToList()));
 		}
 	}
 }

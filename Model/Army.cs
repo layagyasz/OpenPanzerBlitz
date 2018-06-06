@@ -49,7 +49,7 @@ namespace PanzerBlitz
 			Match.Relay.OnUnitDestroy += UnitDestroyed;
 			Match.Relay.OnUnitCapture += UnitCaptured;
 
-			SightFinder.SetTrackingArmy(this);
+			SightFinder.TrackingArmy = this;
 			SightFinder.Hook(Match.Relay);
 			_IdGenerator = IdGenerator;
 		}
