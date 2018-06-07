@@ -293,7 +293,7 @@ namespace PanzerBlitz
 					   ? 30
 					   : Math.Max(GetAdjustedRange(true), GetAdjustedRange(false)))
 				 : 0));
-			SightRange = IsEmplaceable() ? (byte)0 : Math.Max((byte)20, GetAdjustedRange(false));
+			SightRange = IsEmplaceable() ? (byte)0 : Math.Max((byte)20, SpotRange);
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
 			CanRemount = (bool)(attributes[(int)Attribute.CAN_REMOUNT] ?? DismountAs != null);

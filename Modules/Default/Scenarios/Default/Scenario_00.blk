@@ -3,7 +3,7 @@
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
 	byte:turns { 3 }
-	bool:fog-of-war { false }
+	bool:fog-of-war { true }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
@@ -79,7 +79,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-british }
+								!unit-configuration:unit-configuration { unit-configurations.kangaroo }
 								int:count { 1 }
 							}
 						}

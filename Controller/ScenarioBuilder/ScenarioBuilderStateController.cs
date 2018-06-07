@@ -16,7 +16,7 @@ namespace PanzerBlitz
 		{
 			var defaultParameters =
 				new ScenarioParameters(
-					1939, GameData.MatchSettings.Values.First(), 8, new Coordinate(33, 33), true);
+					1939, GameData.MatchSettings.Values.First(), 8, new Coordinate(33, 33), false);
 			_ScenarioBuilder = new ScenarioBuilder(defaultParameters);
 
 			var screen = new ScenarioBuilderScreen(ProgramContext.ScreenResolution, _ScenarioBuilder);

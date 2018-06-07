@@ -30,7 +30,7 @@ namespace PanzerBlitz
 			}
 			return new List<Tuple<Unit, UnitVisibility>>
 			{
-				new Tuple<Unit, UnitVisibility>(Unit, MergeVisibility(Unit, SightFinder.IsSighted(Unit), false))
+				new Tuple<Unit, UnitVisibility>(Unit, MergeVisibility(Unit, SightFinder.IsSighted(Unit)))
 			};
 		}
 
@@ -59,9 +59,22 @@ namespace PanzerBlitz
 					new Tuple<Unit, UnitVisibility>(Unit, new UnitVisibility(true, Movement.Tile))
 				};
 			}
+			bool visible = SightFinder.IsSighted(Unit);
+			Tile lastSeen = null;
+			if (Movement.Path != null)
+			{
+				for (int i = Movement.Path.Count - 2; i >= 0; --i)
+				{
+					if (SightFinder.IsSighted(Unit, Movement.Path[i]))
+					{
+						lastSeen = Movement.Path[i + 1];
+						break;
+					}
+				}
+			}
 			return new List<Tuple<Unit, UnitVisibility>>
 			{
-				new Tuple<Unit, UnitVisibility>(Unit, MergeVisibility(Unit, SightFinder.IsSighted(Unit), false))
+				new Tuple<Unit, UnitVisibility>(Unit, MergeVisibility(Unit, visible, OverrideLastSeen: lastSeen))
 			};
 		}
 
@@ -75,19 +88,35 @@ namespace PanzerBlitz
 				{
 					deltas.Add(
 						new Tuple<Unit, UnitVisibility>(
-							unit, MergeVisibility(unit, SightFinder.IsSighted(unit, tileDelta.Item2), false)));
+							unit, MergeVisibility(unit, SightFinder.IsSighted(unit, tileDelta.Item2))));
+				}
+				if (tileDelta.Item2 == TileSightLevel.HARD_SPOTTED
+					|| (tileDelta.Item2 != TileSightLevel.NONE
+						&& !tileDelta.Item1.Rules.Concealing
+						&& !tileDelta.Item1.Rules.LowProfileConcealing))
+				{
+					foreach (var unit in _UnitVisibilities.Where(
+						i => i.Value.LastSeen == tileDelta.Item1 && i.Key.Position != i.Value.LastSeen).ToList())
+					{
+						if (tileDelta.Item2 == TileSightLevel.HARD_SPOTTED
+							|| !SightFinder.TileConceals(unit.Key, tileDelta.Item1))
+						{
+							deltas.Add(
+								new Tuple<Unit, UnitVisibility>(unit.Key, MergeVisibility(unit.Key, false, true)));
+						}
+					}
 				}
 			}
 			return deltas;
 		}
 
-		UnitVisibility MergeVisibility(Unit Unit, bool Visible, bool Remove)
+		UnitVisibility MergeVisibility(Unit Unit, bool Visible, bool Remove = false, Tile OverrideLastSeen = null)
 		{
 			UnitVisibility visibility;
 			_UnitVisibilities.TryGetValue(Unit, out visibility);
 
 			if (Visible) visibility = new UnitVisibility(Visible, Unit.Position);
-			else visibility = new UnitVisibility(Visible, Remove ? null : visibility.LastSeen);
+			else visibility = new UnitVisibility(Visible, Remove ? null : (OverrideLastSeen ?? visibility.LastSeen));
 
 			_UnitVisibilities[Unit] = visibility;
 			return visibility;

@@ -27,6 +27,8 @@ namespace PanzerBlitz
 		Select<uint> _YearSelect = new Select<uint>("scenario-builder-parameters-section-select");
 		Select<MatchSetting> _SettingSelect = new Select<MatchSetting>("scenario-builder-parameters-section-select");
 		Select<byte> _TurnsSelect = new Select<byte>("scenario-builder-parameters-section-select");
+		Checkbox _FogOfWarCheckbox =
+			new Checkbox("scenario-builder-parameters-section-checkbox") { DisplayedString = "Enable" };
 		TextInput _MapWidthInput = new TextInput("scenario-builder-parameters-section-text-input");
 		TextInput _MapHeightInput = new TextInput("scenario-builder-parameters-section-text-input");
 
@@ -75,6 +77,10 @@ namespace PanzerBlitz
 						Value = i
 					});
 			_TurnsSelect.SetValue(i => i.Value == ScenarioBuilder.Parameters.Turns);
+
+			MakeSection("Fog of War", _FogOfWarCheckbox, _LeftDisplay);
+			_FogOfWarCheckbox.OnChange += HandleParametersChanged;
+			_FogOfWarCheckbox.Value = ScenarioBuilder.Parameters.FogOfWar;
 
 			MakeSection("Map Width", _MapWidthInput, _LeftDisplay);
 			_MapWidthInput.OnChange += HandleParametersChanged;
@@ -178,7 +184,7 @@ namespace PanzerBlitz
 					_SettingSelect.Value.Value,
 					_TurnsSelect.Value.Value,
 					new Coordinate(width, height),
-					true);
+					_FogOfWarCheckbox.Value);
 			if (OnParametersChanged != null)
 				OnParametersChanged(this, new ValuedEventArgs<ScenarioParameters>(parameters));
 		}

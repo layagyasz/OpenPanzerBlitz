@@ -63,10 +63,6 @@ unit-configuration-link:149mm-how-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.149mm-how }
 }
-unit-configuration-link:210mm-how-hungarian {
-	!faction:faction { factions.hungarian }
-	!unit-configuration:unit-configuration { unit-configurations.210mm-how }
-}
 unit-configuration-link:81mm-mortar-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }

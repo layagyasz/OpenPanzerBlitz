@@ -7,7 +7,7 @@
 class:text-pane-display {
 	!class:parent { pane-display }
 	mode:default {
-		int:height { 114 }
+		int:height { 158 }
 	}
 }
 class:text-pane-input {

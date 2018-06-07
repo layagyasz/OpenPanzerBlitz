@@ -13,7 +13,9 @@ namespace PanzerBlitz
 		bool HasTileSightLevel(Tile Tile, TileSightLevel Level);
 		UnitVisibility GetUnitVisibility(Unit Unit);
 
+		bool TileConceals(Unit Unit, Tile Tile);
 		bool IsSighted(Unit Unit, TileSightLevel Level);
+		bool IsSighted(Unit Unit, Tile Tile);
 		bool IsSighted(Unit Unit);
 	}
 }

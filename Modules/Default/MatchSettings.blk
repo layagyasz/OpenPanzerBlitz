@@ -1,4 +1,12 @@
 ﻿match-setting<>:match-settings {
+	match-setting:china-summer {
+		!var:environment { environments.summer-grassland }
+		front:front { pacific }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.chinese }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:france-summer {
 		!var:environment { environments.summer-grassland }
 		front:front { west }
@@ -28,6 +36,14 @@
 		front:front { pacific }
 		map-generator-configuration:map-generator {
 			!var:name-generator { name-generators.japanese }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
+	match-setting:north-africa {
+		!var:environment { environments.desert }
+		front:front { west }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.north-african }
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}

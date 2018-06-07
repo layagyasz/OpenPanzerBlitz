@@ -15,7 +15,8 @@ namespace PanzerBlitz
 		readonly SingleColumnTable _Display = new SingleColumnTable("new-map-display");
 		readonly TextInput _HeightInput = new TextInput("new-map-text-input");
 		readonly TextInput _WidthInput = new TextInput("new-map-text-input");
-		readonly Checkbox _GenerateRandomCheckbox = new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
+		readonly Checkbox _GenerateRandomCheckbox =
+			new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
 		readonly Button _Error = new Button("new-map-error");
 		readonly Button _CancelButton = new Button("small-button") { DisplayedString = "Cancel" };
 		readonly Button _CreateButton = new Button("small-button") { DisplayedString = "Create" };
@@ -70,7 +71,7 @@ namespace PanzerBlitz
 				if (_GenerateRandomCheckbox.Value)
 					configuration =
 						new RandomMapConfiguration(
-							width, height, GameData.MatchSettings["japan-summer"].MapGenerator);
+							width, height, GameData.MatchSettings["china-summer"].MapGenerator);
 				else configuration = new BlankMapConfiguration(width, height);
 				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<MapConfiguration>(configuration));
 

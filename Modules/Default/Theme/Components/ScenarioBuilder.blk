@@ -44,6 +44,12 @@ class:scenario-builder-parameters-section-text-input {
 		int:width { 272 }
 	}
 }
+class:scenario-builder-parameters-section-checkbox {
+	!class:parent { checkbox }
+	mode:default {
+		int:width { 272 }
+	}
+}
 class:scenario-builder-army-section-table {
 	!class:parent { pane-display }
 	mode:default {

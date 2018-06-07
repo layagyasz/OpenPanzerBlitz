@@ -87,6 +87,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanBeAttackedBy(Army Army, AttackMethod AttackMethod, bool IgnoreConcealment = false)
 		{
+			IgnoreConcealment |= AttackMethod == AttackMethod.INDIRECT_FIRE;
 			if (Position == null) return OrderInvalidReason.ILLEGAL;
 
 			if (AttackMethod == AttackMethod.MINEFIELD)
