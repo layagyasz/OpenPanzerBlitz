@@ -120,7 +120,7 @@ namespace PanzerBlitz
 						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.NONE;
 			}
-			if (!IgnoreConcealment && !Army.SightFinder.GetUnitVisibility(this).Visible)
+			if (!IgnoreConcealment && !Army.SightFinder.IsSighted(this))
 				return OrderInvalidReason.TARGET_CONCEALED;
 			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
@@ -631,6 +631,8 @@ namespace PanzerBlitz
 
 		public void Reset()
 		{
+			if (Position == null) return;
+
 			Fired = false;
 			Moved = false;
 			MovedMoreThanOneTile = false;

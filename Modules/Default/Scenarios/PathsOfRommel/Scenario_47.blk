@@ -37,7 +37,7 @@
 						string:name { Frankforce }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.a-10 }
+								!unit-configuration:unit-configuration { unit-configurations.cruiser-ii }
 								int:count { 3 }
 							}
 							unit-count:_ {

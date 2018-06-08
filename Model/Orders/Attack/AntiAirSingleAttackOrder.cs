@@ -9,27 +9,37 @@ namespace PanzerBlitz
 	{
 		public readonly LineOfSight LineOfSight;
 
-		public override Tile AttackTile { get; protected set; }
-
-		public AntiAirSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
-			: base(Attacker, null, UseSecondaryWeapon)
+		public override Tile AttackTile
 		{
-			this.AttackTile = AttackTile;
-			LineOfSight = Attacker.GetLineOfSight(AttackTile);
+			get
+			{
+				return Defender.Position;
+			}
+			protected set
+			{
+				throw new NotSupportedException();
+			}
+		}
+
+		public AntiAirSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
+			: base(Attacker, Defender, UseSecondaryWeapon)
+		{
+			LineOfSight = Attacker.GetLineOfSight(Defender.Position);
 		}
 
 		public AntiAirSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
+			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean())
 		{
-			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], AttackTile);
+			LineOfSight = new LineOfSight((Tile)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()]);
 		}
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
-			Stream.Write(AttackTile.Id);
+			Stream.Write(Defender.Id);
 			Stream.Write(UseSecondaryWeapon);
 			Stream.Write(LineOfSight.Initial.Id);
+			Stream.Write(LineOfSight.Final.Id);
 		}
 
 		public override AttackFactorCalculation GetAttack()
@@ -44,7 +54,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new AntiAirAttackOrder(Army, AttackTile);
+			return new AntiAirAttackOrder(Army, Defender.Position);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -54,7 +64,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (AttackTile == null) return OrderInvalidReason.ILLEGAL;
+			if (Defender == null) return OrderInvalidReason.ILLEGAL;
 			return Attacker.CanAttack(AttackMethod.ANTI_AIRCRAFT, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 

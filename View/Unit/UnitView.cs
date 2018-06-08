@@ -130,7 +130,8 @@ namespace PanzerBlitz
 		{
 			Transform.Translate(Position);
 
-			_UnitConfigurationView.Flipped = Unit.Status == UnitStatus.DISRUPTED && Reactive;
+			_UnitConfigurationView.Flipped =
+				(Unit.Status == UnitStatus.DAMAGED || Unit.Status == UnitStatus.DISRUPTED) && Reactive;
 			_UnitConfigurationView.Draw(Target, Transform);
 
 			if (Reactive)

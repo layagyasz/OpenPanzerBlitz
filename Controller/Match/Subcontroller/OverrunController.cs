@@ -44,7 +44,9 @@ namespace PanzerBlitz
 				_Controller.SelectUnit(Unit);
 
 				_Controller.Highlight(
-					Unit.GetFieldOfMovement(true).Select(
+					Unit.GetFieldOfMovement(true)
+					.Where(i => _Controller.FilterVisible(i.Item1))
+					.Select(
 						i => new Tuple<Tile, Color>(
 							i.Item1,
 								HumanMatchPlayerController.HIGHLIGHT_COLORS[

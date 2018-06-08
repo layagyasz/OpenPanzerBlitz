@@ -66,15 +66,15 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-10 }
+								!unit-configuration:unit-configuration { unit-configurations.wolverine }
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-36 }
+								!unit-configuration:unit-configuration { unit-configurations.pershing }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-24 }
+								!unit-configuration:unit-configuration { unit-configurations.chaffee }
 								int:count { 1 }
 							}
 							unit-count:_ {

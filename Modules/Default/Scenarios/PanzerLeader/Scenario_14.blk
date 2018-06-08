@@ -60,7 +60,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-10 }
+								!unit-configuration:unit-configuration { unit-configurations.wolverine }
 								int:count { 2 }
 							}
 							unit-count:_ {

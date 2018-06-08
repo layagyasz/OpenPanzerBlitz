@@ -60,7 +60,7 @@ scenario:_ {
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								!unit-configuration:unit-configuration { unit-configurations.priest }
 								int:count { 3 }
 							}
 							unit-count:_ {

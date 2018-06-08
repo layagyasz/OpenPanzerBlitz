@@ -243,6 +243,15 @@ namespace PanzerBlitz
 			return HIGHLIGHT_COLORS.Last();
 		}
 
+		public bool FilterVisible(Tile Tile)
+		{
+			if (!Match.GetScenario().FogOfWar) return true;
+
+			if (Tile.Rules.Concealing || Tile.Rules.LowProfileConcealing)
+				return _CurrentTurn.Army.SightFinder.HasTileSightLevel(Tile, TileSightLevel.HARD_SPOTTED);
+			return _CurrentTurn.Army.SightFinder.HasTileSightLevel(Tile, TileSightLevel.SIGHTED);
+		}
+
 		void HighlightEnemyFieldOfSight(byte Team)
 		{
 			if (_HighlightToggles[(int)HighlightToggle.ENEMY_SIGHT_FIELD]) UnHighlight();

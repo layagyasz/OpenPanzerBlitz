@@ -62,7 +62,7 @@ unit-render-details:m-20 {
 unit-render-details:m-6-gmc {
 	string:image-path { m-6-gmc.png }
 }
-unit-render-details:m-8 {
+unit-render-details:greyhound {
 	string:image-path { m-8.png }
 }
 unit-render-details:m-13-aa {
@@ -80,7 +80,7 @@ unit-render-details:m-8-hmc {
 unit-render-details:m-21 {
 	string:image-path { m-21.png }
 }
-unit-render-details:m-7-priest {
+unit-render-details:priest {
 	string:image-path { m-7-priest.png }
 }
 unit-render-details:m-12 {
@@ -101,13 +101,13 @@ unit-render-details:m-3-lee {
 unit-render-details:m-4_105 {
 	string:image-path { m-4_105.png }
 }
-unit-render-details:m-10 {
+unit-render-details:wolverine {
 	string:image-path { m-10.png }
 }
-unit-render-details:m-18 {
+unit-render-details:hellcat {
 	string:image-path { m-18.png }
 }
-unit-render-details:m-36 {
+unit-render-details:jackson {
 	string:image-path { m-36.png }
 }
 unit-render-details:m-5 {
@@ -119,7 +119,7 @@ unit-render-details:m-4_75 {
 unit-render-details:m-4_76 {
 	string:image-path { m-4_76.png }
 }
-unit-render-details:m-24 {
+unit-render-details:chaffee {
 	string:image-path { m-24.png }
 }
 unit-render-details:m-4a3e2_75 {
@@ -128,7 +128,7 @@ unit-render-details:m-4a3e2_75 {
 unit-render-details:m-4a3e2_76 {
 	string:image-path { m-4a3e2_76.png }
 }
-unit-render-details:m-26 {
+unit-render-details:pershing {
 	string:image-path { m-26.png }
 }
 unit-render-details:m-2a4 {
@@ -140,7 +140,7 @@ unit-render-details:m-4a2_75 {
 unit-render-details:m-4a2_76 {
 	string:image-path { m-4a2.png }
 }
-unit-render-details:sherman-flail {
+unit-render-details:sherman-crab {
 	string:image-path { sherman-flail.png }
 }
 unit-render-details:lvt-1 {

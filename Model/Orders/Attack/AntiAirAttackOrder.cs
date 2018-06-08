@@ -19,7 +19,7 @@ namespace PanzerBlitz
 		{
 			get
 			{
-				return true;
+				return false;
 			}
 		}
 
@@ -32,7 +32,10 @@ namespace PanzerBlitz
 		}
 
 		public AntiAirAttackOrder(Army Army, Tile TargetTile)
-			: base(Army, TargetTile) { }
+			: base(Army, TargetTile)
+		{
+			SetAttackTarget(AttackTarget.EACH);
+		}
 
 		public AntiAirAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
@@ -53,7 +56,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Target != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
+			if (Target != AttackTarget.EACH) return OrderInvalidReason.MUST_ATTACK_EACH;
 
 			return base.Validate();
 		}

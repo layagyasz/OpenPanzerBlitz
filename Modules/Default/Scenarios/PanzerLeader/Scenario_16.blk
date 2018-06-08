@@ -55,7 +55,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								!unit-configuration:unit-configuration { unit-configurations.priest }
 								int:count { 2 }
 							}
 							unit-count:_ {

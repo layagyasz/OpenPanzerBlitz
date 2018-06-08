@@ -210,8 +210,8 @@ unit-configuration:m-6-gmc {
 	byte:defense { 1 }
 	byte:movement { 12 }
 }
-unit-configuration:m-8 {
-	string:name { M-8 }
+unit-configuration:greyhound {
+	string:name { Greyhound }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -253,6 +253,8 @@ unit-configuration:m-16 {
 	byte:range { 4 }
 	byte:defense { 3 }
 	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
 }
 unit-configuration:m-8-hmc {
 	string:name { M-8 HMC }
@@ -276,8 +278,8 @@ unit-configuration:m-21 {
 	byte:defense { 3 }
 	byte:movement { 10 }
 }
-unit-configuration:m-7-priest {
-	string:name { M-7 Priest }
+unit-configuration:priest {
+	string:name { Priest }
 	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { high-explosive }
@@ -346,8 +348,8 @@ unit-configuration:m-4_105 {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:m-10 {
-	string:name { M-10 }
+unit-configuration:wolverine {
+	string:name { Wolverine }
 	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
@@ -356,8 +358,8 @@ unit-configuration:m-10 {
 	byte:defense { 6 }
 	byte:movement { 9 }
 }
-unit-configuration:m-18 {
-	string:name { M-18 }
+unit-configuration:hellcat {
+	string:name { Hellcat }
 	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
@@ -366,8 +368,8 @@ unit-configuration:m-18 {
 	byte:defense { 4 }
 	byte:movement { 12 }
 }
-unit-configuration:m-36 {
-	string:name { M-36 }
+unit-configuration:jackson {
+	string:name { Jackson }
 	unit-class:unit-class { tank-destroyer }
 
 	weapon-class:weapon-class { anti-armor }
@@ -406,8 +408,8 @@ unit-configuration:m-4_76 {
 	byte:defense { 10 }
 	byte:movement { 9 }
 }
-unit-configuration:m-24 {
-	string:name { M-24 }
+unit-configuration:chaffee {
+	string:name { Chaffee }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -436,8 +438,8 @@ unit-configuration:m-4a3e2_76 {
 	byte:defense { 15 }
 	byte:movement { 7 }
 }
-unit-configuration:m-26 {
-	string:name { M-26 }
+unit-configuration:pershing {
+	string:name { Pershing }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -476,8 +478,8 @@ unit-configuration:m-4a2_76 {
 	byte:defense { 10 }
 	byte:movement { 9 }
 }
-unit-configuration:sherman-flail {
-	string:name { Sherman Flail }
+unit-configuration:sherman-crab {
+	string:name { Sherman Crab }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }

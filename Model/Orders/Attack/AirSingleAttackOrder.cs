@@ -6,21 +6,28 @@ namespace PanzerBlitz
 {
 	public class AirSingleAttackOrder : SingleAttackOrder
 	{
-		public override Tile AttackTile { get; protected set; }
-
-		public AirSingleAttackOrder(Unit Attacker, Tile AttackTile, bool UseSecondaryWeapon)
-			: base(Attacker, null, UseSecondaryWeapon)
+		public override Tile AttackTile
 		{
-			this.AttackTile = AttackTile;
+			get
+			{
+				return Defender.Position;
+			}
+			protected set
+			{
+				throw new NotSupportedException();
+			}
 		}
 
+		public AirSingleAttackOrder(Unit Attacker, Unit Defender, bool UseSecondaryWeapon)
+			: base(Attacker, Defender, UseSecondaryWeapon) { }
+
 		public AirSingleAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
-			: this((Unit)Objects[Stream.ReadInt32()], (Tile)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
+			: this((Unit)Objects[Stream.ReadInt32()], (Unit)Objects[Stream.ReadInt32()], Stream.ReadBoolean()) { }
 
 		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Attacker.Id);
-			Stream.Write(AttackTile.Id);
+			Stream.Write(Defender.Id);
 			Stream.Write(UseSecondaryWeapon);
 		}
 
@@ -36,7 +43,7 @@ namespace PanzerBlitz
 
 		public override AttackOrder GenerateNewAttackOrder()
 		{
-			return new AirAttackOrder(Army, AttackTile);
+			return new AirAttackOrder(Army, Defender.Position);
 		}
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
@@ -46,8 +53,8 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (AttackTile == null) return OrderInvalidReason.ILLEGAL;
-			if (Attacker.Position.HexCoordinate.Distance(AttackTile.HexCoordinate) > 1)
+			if (Defender == null) return OrderInvalidReason.ILLEGAL;
+			if (Attacker.Position.HexCoordinate.Distance(Defender.Position.HexCoordinate) > 1)
 				return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 
 			return Attacker.CanAttack(AttackMethod.AIR, TreatStackAsArmored, null, UseSecondaryWeapon);

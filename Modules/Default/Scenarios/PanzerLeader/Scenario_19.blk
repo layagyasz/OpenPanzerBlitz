@@ -115,11 +115,11 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-8 }
+								!unit-configuration:unit-configuration { unit-configurations.greyhound }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								!unit-configuration:unit-configuration { unit-configurations.priest }
 								int:count { 3 }
 							}
 							unit-count:_ {
@@ -131,7 +131,7 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-18 }
+								!unit-configuration:unit-configuration { unit-configurations.hellcat }
 								int:count { 1 }
 							}
 							unit-count:_ {

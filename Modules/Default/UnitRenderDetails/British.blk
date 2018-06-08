@@ -62,10 +62,10 @@ unit-render-details:humber-sc {
 unit-render-details:daimler {
 	string:image-path { daimler.png }
 }
-unit-render-details:aec-6pdr {
+unit-render-details:aec-ii {
 	string:image-path { aec-6pdr.png }
 }
-unit-render-details:aec-75mm {
+unit-render-details:aec-iii {
 	string:image-path { aec-75mm.png }
 }
 unit-render-details:recon-hq {
@@ -98,35 +98,29 @@ unit-render-details:skink {
 unit-render-details:mk-vi-b {
 	string:image-path { mk-vi-b.png }
 }
-unit-render-details:matilda {
-	string:image-path { matilda.png }
-}
 unit-render-details:matilda-ii {
 	string:image-path { matilda.png }
 }
-unit-render-details:a-9 {
+unit-render-details:cruiser-i {
 	string:image-path { a-9.png }
 }
-unit-render-details:a-9-cs {
+unit-render-details:cruiser-i-cs {
 	string:image-path { a-9-cs.png }
 }
-unit-render-details:a-10 {
+unit-render-details:cruiser-ii {
 	string:image-path { a-10.png }
 }
-unit-render-details:a-10-cs {
+unit-render-details:cruiser-ii-cs {
 	string:image-path { a-10-cs.png }
 }
-unit-render-details:a-11 {
+unit-render-details:matilda {
 	string:image-path { a-11.png }
 }
-unit-render-details:a-13 {
+unit-render-details:cruiser-iv {
 	string:image-path { a-13.png }
 }
 unit-render-details:archer {
 	string:image-path { archer.png }
-}
-unit-render-details:wolverine {
-	string:image-path { m-10.png }
 }
 unit-render-details:achilles {
 	string:image-path { achilles.png }
@@ -134,7 +128,7 @@ unit-render-details:achilles {
 unit-render-details:cromwell-cs {
 	string:image-path { cromwell-cs.png }
 }
-unit-render-details:churchill-cs {
+unit-render-details:churchill-viii {
 	string:image-path { churchill-cs.png }
 }
 unit-render-details:sexton {
@@ -155,7 +149,7 @@ unit-render-details:sherman-uk-a {
 unit-render-details:firefly {
 	string:image-path { m-4_105.png }
 }
-unit-render-details:cromwell {
+unit-render-details:cromwell-iv {
 	string:image-path { cromwell.png }
 }
 unit-render-details:comet {
@@ -164,13 +158,10 @@ unit-render-details:comet {
 unit-render-details:challenger {
 	string:image-path { challenger.png }
 }
-unit-render-details:centurion {
-	string:image-path { centurion.png }
-}
-unit-render-details:churchill-6pdr {
+unit-render-details:churchill-iii {
 	string:image-path { churchill.png }
 }
-unit-render-details:churchill-75 {
+unit-render-details:churchill-vii {
 	string:image-path { churchill.png }
 }
 unit-render-details:churchill-iv {
@@ -179,7 +170,7 @@ unit-render-details:churchill-iv {
 unit-render-details:matilda-cs {
 	string:image-path { matilda-cs.png }
 }
-unit-render-details:crusader-cs {
+unit-render-details:crusader-ii-cs {
 	string:image-path { crusader.png }
 }
 unit-render-details:crusader-ii {

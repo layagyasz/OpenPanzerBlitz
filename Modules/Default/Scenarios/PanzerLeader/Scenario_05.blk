@@ -126,7 +126,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.cromwell }
+								!unit-configuration:unit-configuration { unit-configurations.cromwell-iv }
 								int:count { 4 }
 							}
 							unit-count:_ {

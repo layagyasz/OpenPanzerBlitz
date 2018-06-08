@@ -16,9 +16,9 @@ namespace PanzerBlitz
 
 		public static void Main(string[] args)
 		{
-			if (args.Length == 3 && args[0] == "lang")
+			if (args.Length == 4 && args[0] == "lang")
 			{
-				FileUtils.MungeLanguage(args[1], args[2]);
+				FileUtils.MungeLanguage(Convert.ToUInt32(args[1]), args[2], args[3]);
 			}
 			if (args.Length == 1 && args[0] == "remap")
 			{

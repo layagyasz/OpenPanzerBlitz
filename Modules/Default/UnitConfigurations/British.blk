@@ -210,8 +210,8 @@ unit-configuration:daimler {
 	byte:defense { 3 }
 	byte:movement { 16 }
 }
-unit-configuration:aec-6pdr {
-	string:name { AEC 6pdr }
+unit-configuration:aec-ii {
+	string:name { AEC II }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -220,8 +220,8 @@ unit-configuration:aec-6pdr {
 	byte:defense { 5 }
 	byte:movement { 16 }
 }
-unit-configuration:aec-75mm {
-	string:name { AEC 75mm }
+unit-configuration:aec-iii {
+	string:name { AEC III }
 	unit-class:unit-class { reconnaissance-vehicle }
 
 	weapon-class:weapon-class { anti-armor }
@@ -334,8 +334,8 @@ unit-configuration:mk-vi-b {
 	byte:defense { 2 }
 	byte:movement { 11 }
 }
-unit-configuration:matilda {
-	string:name { Matilda }
+unit-configuration:matilda-ii {
+	string:name { Matilda II }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -344,18 +344,8 @@ unit-configuration:matilda {
 	byte:defense { 8 }
 	byte:movement { 5 }
 }
-unit-configuration:matilda-ii {
-	string:name { Matilda II }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 6 }
-	byte:range { 3 }
-	byte:defense { 10 }
-	byte:movement { 5 }
-}
-unit-configuration:a-9 {
-	string:name { A-9 }
+unit-configuration:cruiser-i {
+	string:name { Cruiser I }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -364,8 +354,8 @@ unit-configuration:a-9 {
 	byte:defense { 2 }
 	byte:movement { 8 }
 }
-unit-configuration:a-9-cs {
-	string:name { A-9 CS }
+unit-configuration:cruiser-i-cs {
+	string:name { Cruiser I CS }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -374,8 +364,8 @@ unit-configuration:a-9-cs {
 	byte:defense { 2 }
 	byte:movement { 8 }
 }
-unit-configuration:a-10 {
-	string:name { A-10 }
+unit-configuration:cruiser-ii {
+	string:name { Cruiser II }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -384,8 +374,8 @@ unit-configuration:a-10 {
 	byte:defense { 3 }
 	byte:movement { 5 }
 }
-unit-configuration:a-10-cs {
-	string:name { A-10 CS }
+unit-configuration:cruiser-ii-cs {
+	string:name { Cruiser II CS }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -394,8 +384,8 @@ unit-configuration:a-10-cs {
 	byte:defense { 3 }
 	byte:movement { 5 }
 }
-unit-configuration:a-11 {
-	string:name { A-11 }
+unit-configuration:matilda {
+	string:name { Matilda }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { infantry }
@@ -404,8 +394,8 @@ unit-configuration:a-11 {
 	byte:defense { 6 }
 	byte:movement { 2 }
 }
-unit-configuration:a-13 {
-	string:name { A-13 }
+unit-configuration:cruiser-iv {
+	string:name { Cruiser IV }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -423,16 +413,6 @@ unit-configuration:archer {
 	byte:range { 10 }
 	byte:defense { 6 }
 	byte:movement { 8 }
-}
-unit-configuration:wolverine {
-	string:name { Wolverine }
-	unit-class:unit-class { tank-destroyer }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 14 }
-	byte:range { 10 }
-	byte:defense { 6 }
-	byte:movement { 9 }
 }
 unit-configuration:achilles {
 	string:name { Achilles }
@@ -454,8 +434,8 @@ unit-configuration:cromwell-cs {
 	byte:defense { 8 }
 	byte:movement { 12 }
 }
-unit-configuration:churchill-cs {
-	string:name { Churchill CS }
+unit-configuration:churchill-viii {
+	string:name { Churchill VIII }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -524,8 +504,8 @@ unit-configuration:firefly {
 	byte:defense { 9 }
 	byte:movement { 8 }
 }
-unit-configuration:cromwell {
-	string:name { Cromwell }
+unit-configuration:cromwell-iv {
+	string:name { Cromwell IV }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -554,18 +534,8 @@ unit-configuration:challenger {
 	byte:defense { 6 }
 	byte:movement { 9 }
 }
-unit-configuration:centurion {
-	string:name { Centurion }
-	unit-class:unit-class { tank }
-
-	weapon-class:weapon-class { anti-armor }
-	byte:attack { 14 }
-	byte:range { 10 }
-	byte:defense { 12 }
-	byte:movement { 7 }
-}
-unit-configuration:churchill-6pdr {
-	string:name { Churchill 6pdr }
+unit-configuration:churchill-iii {
+	string:name { Churchill III }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -574,8 +544,8 @@ unit-configuration:churchill-6pdr {
 	byte:defense { 10 }
 	byte:movement { 5 }
 }
-unit-configuration:churchill-75 {
-	string:name { Churchill 75 }
+unit-configuration:churchill-vii {
+	string:name { Churchill VII }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { anti-armor }
@@ -604,8 +574,8 @@ unit-configuration:matilda-cs {
 	byte:defense { 8 }
 	byte:movement { 5 }
 }
-unit-configuration:crusader-cs {
-	string:name { Crusader CS }
+unit-configuration:crusader-ii-cs {
+	string:name { Crusader II CS }
 	unit-class:unit-class { tank }
 
 	weapon-class:weapon-class { high-explosive }
@@ -683,6 +653,8 @@ unit-configuration:matilda-baron {
 	byte:range { 3 }
 	byte:defense { 8 }
 	byte:movement { 5 }
+
+	bool:innately-clears-mines { true }
 }
 unit-configuration:grant {
 	string:name { Grant }

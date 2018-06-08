@@ -44,7 +44,7 @@ namespace PanzerBlitz
 						AddAttack(
 							Unit.Position,
 							new AntiAirSingleAttackOrder(
-								_Controller.SelectedUnit, Unit.Position, _Controller.UseSecondaryWeapon()));
+								_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
 					}
 					else
 					{

@@ -160,7 +160,7 @@
 								int:count { 8 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.achilles }
+								!unit-configuration:unit-configuration { unit-configurations.wolverine }
 								int:count { 2 }
 							}
 							unit-count:_ {
@@ -176,7 +176,7 @@
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+								!unit-configuration:unit-configuration { unit-configurations.priest }
 								int:count { 3 }
 							}
 							unit-count:_ {

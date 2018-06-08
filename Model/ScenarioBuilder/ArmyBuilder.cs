@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Cardamom.Planar;
+
+using SFML.Window;
+
 namespace PanzerBlitz
 {
 	public class ArmyBuilder : GameObject
@@ -57,6 +61,16 @@ namespace PanzerBlitz
 			Objective objective =
 				new HighestScoreObjective(
 					new UnitsMatchedObjective(new UnitHasStatus(UnitStatus.DESTROYED), false, true));
+			int x1 = (Parameters.Team % 2) * Parameters.Parameters.MapSize.X / 2;
+			int x2 = (Parameters.Team % 2 + 1) * Parameters.Parameters.MapSize.X / 2;
+			var zone = new Polygon(
+				new Vector2f[]
+				{
+					new Vector2f(x1, 0),
+					new Vector2f(x2, 0),
+					new Vector2f(x2, Parameters.Parameters.MapSize.Y + 1),
+					new Vector2f(x1, Parameters.Parameters.MapSize.Y + 1)
+				});
 			return new ArmyConfiguration(
 				Id.ToString(),
 				Parameters.Faction,
@@ -66,7 +80,7 @@ namespace PanzerBlitz
 						new UnitGroup(
 							Parameters.Faction.Name + " Deployment",
 							_Units.Select(i => new UnitCount(i.Item1.UnitConfiguration, i.Item2))),
-						new EmptyMatcher<Tile>())
+						new TileWithin(zone))
 					, 1),
 				new VictoryCondition(
 					Enumerable.Repeat(objective, 1),

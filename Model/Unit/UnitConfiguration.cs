@@ -523,7 +523,6 @@ namespace PanzerBlitz
 						return Weapon.Attack + .25f * Weapon.Range + Defense + Movement;
 					return Weapon.Attack + 4 + Defense + Movement;
 				case UnitClass.RECONNAISSANCE_VEHICLE:
-					if (CanSpot) return 5 + Defense + Movement;
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
@@ -581,9 +580,9 @@ namespace PanzerBlitz
 				case UnitClass.OBSERVATION_AIRCRAFT:
 					return 50;
 				case UnitClass.FIGHTER_BOMBER:
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
-					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 3 * Weapon.Attack;
-					return Weapon.Attack;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 5 + Weapon.Attack / 2;
+					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 5 + 3 * Weapon.Attack;
+					return 5 + Weapon.Attack;
 				default:
 					return Weapon.Attack + Weapon.Range + Defense + Movement;
 			}

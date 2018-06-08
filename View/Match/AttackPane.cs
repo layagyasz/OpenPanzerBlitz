@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Cardamom.Interface;
 using Cardamom.Interface.Items;
@@ -25,21 +26,15 @@ namespace PanzerBlitz
 			this.Attack = Attack;
 			Attack.OnChanged += UpdateDescription;
 
-			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+			foreach (var target in Enum.GetValues(typeof(AttackTarget)).Cast<AttackTarget>())
 			{
-				DisplayedString = AttackTarget.ALL.ToString(),
-				Value = AttackTarget.ALL
-			});
-			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
-			{
-				DisplayedString = AttackTarget.WEAKEST.ToString(),
-				Value = AttackTarget.WEAKEST
-			});
-			_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
-			{
-				DisplayedString = AttackTarget.EACH.ToString(),
-				Value = AttackTarget.EACH
-			});
+				_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+				{
+					DisplayedString = ObjectDescriber.Describe(target),
+					Value = target
+				});
+			}
+			_AttackTargetSelect.SetValue(i => i.Value == Attack.Target);
 			_AttackTargetSelect.OnChange += HandleAttackTargetChanged;
 			_OrderButton.Position = new Vector2f(0, Size.Y - _OrderButton.Size.Y - 32);
 			_OrderButton.OnClick += (sender, e) => { if (OnExecute != null) OnExecute(this, EventArgs.Empty); };

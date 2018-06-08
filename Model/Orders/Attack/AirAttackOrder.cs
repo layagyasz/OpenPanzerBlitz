@@ -45,7 +45,23 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Target != AttackTarget.ALL) return OrderInvalidReason.MUST_ATTACK_ALL;
+			if (Target != AttackTarget.ALL && (TargetTile.Rules.MustAttackAllUnits
+				 || TargetTile.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)))
+				return OrderInvalidReason.MUST_ATTACK_ALL;
+
+			if (Target == AttackTarget.EACH)
+			{
+				foreach (var attacker in _Attackers)
+				{
+					var r = attacker.Defender.CanBeAttackedBy(Army, AttackMethod);
+					if (r != OrderInvalidReason.NONE) return r;
+				}
+				if (_OddsCalculations.Count != TargetTile.Units.Count(
+					i => i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
+					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
+				if (_OddsCalculations.Any(i => i.Odds > 1 && i.OddsAgainst))
+					return OrderInvalidReason.ILLEGAL_ATTACK_EACH;
+			}
 
 			return base.Validate();
 		}

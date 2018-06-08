@@ -178,9 +178,9 @@ unit-configuration-link:m-6-gmc {
 
 	int:introduce-year { 1942 }
 }
-unit-configuration-link:m-8 {
+unit-configuration-link:greyhound {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-8 }
+	!unit-configuration:unit-configuration { unit-configurations.greyhound }
 
 	int:introduce-year { 1943 }
 }
@@ -215,9 +215,9 @@ unit-configuration-link:m-21 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:m-7-priest {
+unit-configuration-link:priest {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+	!unit-configuration:unit-configuration { unit-configurations.priest }
 
 	int:introduce-year { 1942 }
 }
@@ -231,7 +231,7 @@ unit-configuration-link:m4-poa-cws-h1 {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.m4-poa-cws-h1 }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1945 }
 }
 unit-configuration-link:m-3a1-satan {
 	!faction:faction { factions.american }
@@ -258,21 +258,21 @@ unit-configuration-link:m-4_105 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:m-10 {
+unit-configuration-link:wolverine {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-10 }
+	!unit-configuration:unit-configuration { unit-configurations.wolverine }
 
 	int:introduce-year { 1942 }
 }
-unit-configuration-link:m-18 {
+unit-configuration-link:hellcat {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-18 }
+	!unit-configuration:unit-configuration { unit-configurations.hellcat }
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:m-36 {
+unit-configuration-link:jackson {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-36 }
+	!unit-configuration:unit-configuration { unit-configurations.jackson }
 
 	int:introduce-year { 1944 }
 }
@@ -294,9 +294,9 @@ unit-configuration-link:m-4_76 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:m-24 {
+unit-configuration-link:chaffee {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-24 }
+	!unit-configuration:unit-configuration { unit-configurations.chaffee }
 
 	int:introduce-year { 1944 }
 }
@@ -312,11 +312,11 @@ unit-configuration-link:m-4a3e2_76 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:m-26 {
+unit-configuration-link:pershing {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-26 }
+	!unit-configuration:unit-configuration { unit-configurations.pershing }
 
-	int:introduce-year { 1945 }
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:m-2a4 {
 	!faction:faction { factions.american }
@@ -336,9 +336,9 @@ unit-configuration-link:m-4a2_76 {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:sherman-flail {
+unit-configuration-link:sherman-crab {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.sherman-flail }
+	!unit-configuration:unit-configuration { unit-configurations.sherman-crab }
 
 	int:introduce-year { 1942 }
 }

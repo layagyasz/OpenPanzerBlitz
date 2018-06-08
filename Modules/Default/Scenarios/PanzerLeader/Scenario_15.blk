@@ -61,15 +61,11 @@
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-10 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-10 }
+								!unit-configuration:unit-configuration { unit-configurations.wolverine }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-8 }
+								!unit-configuration:unit-configuration { unit-configurations.greyhound }
 								int:count { 3 }
 							}
 							unit-count:_ {

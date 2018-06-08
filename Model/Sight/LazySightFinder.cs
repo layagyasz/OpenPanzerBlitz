@@ -22,6 +22,7 @@ namespace PanzerBlitz
 				_TrackingArmy = value;
 			}
 		}
+
 		public UnitTracker UnitTracker { get; }
 
 		Army _TrackingArmy;
@@ -194,6 +195,7 @@ namespace PanzerBlitz
 			}
 			else
 			{
+				var unitDeltas = UnitTracker.Remove(this, unit);
 				if (OnSightUpdated != null)
 				{
 					OnSightUpdated(
@@ -202,7 +204,7 @@ namespace PanzerBlitz
 							unit,
 							null,
 							new List<Tuple<Tile, TileSightLevel>>(),
-							UnitTracker.Remove(this, unit)));
+							unitDeltas));
 				}
 			}
 		}

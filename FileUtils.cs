@@ -66,9 +66,9 @@ namespace PanzerBlitz
 			}
 		}
 
-		public static MarkovGenerator<char> GenerateLanguage(string ExamplePath)
+		public static MarkovGenerator<char> GenerateLanguage(uint PrefixLength, string ExamplePath)
 		{
-			var g = new MarkovGenerator<char>(3);
+			var g = new MarkovGenerator<char>(PrefixLength);
 			var parentheticals = new Regex("\\(.*\\)");
 			var capitals = new Regex("[A-Z- ]*");
 			foreach (var line in File.ReadAllLines(ExamplePath, Encoding.UTF8))
@@ -83,9 +83,11 @@ namespace PanzerBlitz
 			return g;
 		}
 
-		public static void MungeLanguage(string ExamplePath, string OutputPath)
+		public static void MungeLanguage(uint PrefixLength, string ExamplePath, string OutputPath)
 		{
-			var g = GenerateLanguage(ExamplePath);
+			var g = GenerateLanguage(PrefixLength, ExamplePath);
+			var random = new Random();
+			for (int i = 0; i < 20; ++i) Console.WriteLine(new string(g.Generate(random).ToArray()));
 			using (FileStream fileStream = new FileStream(OutputPath, FileMode.Create))
 			{
 				using (GZipStream compressionStream = new GZipStream(fileStream, CompressionLevel.Optimal))

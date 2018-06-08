@@ -194,15 +194,15 @@ unit-configuration-link:daimler {
 
 	int:introduce-year { 1941 }
 }
-unit-configuration-link:aec-6pdr {
+unit-configuration-link:aec-ii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.aec-6pdr }
+	!unit-configuration:unit-configuration { unit-configurations.aec-ii }
 
 	int:introduce-year { 1942 }
 }
-unit-configuration-link:aec-75mm {
+unit-configuration-link:aec-iii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.aec-75mm }
+	!unit-configuration:unit-configuration { unit-configurations.aec-iii }
 
 	int:introduce-year { 1942 }
 }
@@ -262,56 +262,49 @@ unit-configuration-link:mk-vi-b {
 
 	int:obsolete-year { 1942 }
 }
-unit-configuration-link:matilda {
-	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.matilda }
-
-	int:introduce-year { 1938 }
-	int:obsolete-year { 1940 }
-}
 unit-configuration-link:matilda-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda-ii }
 
 	int:introduce-year { 1939 }
 }
-unit-configuration-link:a-9 {
+unit-configuration-link:cruiser-i {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-9 }
+	!unit-configuration:unit-configuration { unit-configurations.cruiser-i }
 
 	int:obsolete-year { 1941 }
 }
-unit-configuration-link:a-9-cs {
+unit-configuration-link:cruiser-i-cs {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-9-cs }
+	!unit-configuration:unit-configuration { unit-configurations.cruiser-i-cs }
 
 	int:obsolete-year { 1941 }
 }
-unit-configuration-link:a-10 {
+unit-configuration-link:cruiser-ii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-10 }
-
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
-}
-unit-configuration-link:a-10-cs {
-	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-10-cs }
+	!unit-configuration:unit-configuration { unit-configurations.cruiser-ii }
 
 	int:introduce-year { 1940 }
 	int:obsolete-year { 1941 }
 }
-unit-configuration-link:a-11 {
+unit-configuration-link:cruiser-ii-cs {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-11 }
+	!unit-configuration:unit-configuration { unit-configurations.cruiser-ii-cs }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+}
+unit-configuration-link:matilda {
+	!faction:faction { factions.british }
+	!unit-configuration:unit-configuration { unit-configurations.matilda }
 
 	int:obsolete-year { 1940 }
 }
-unit-configuration-link:a-13 {
+unit-configuration-link:cruiser-iv {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.a-13 }
+	!unit-configuration:unit-configuration { unit-configurations.cruiser-iv }
 
-	int:introduce-year { 1938 }
+	int:introduce-year { 1940 }
 	int:obsolete-year { 1941 }
 }
 unit-configuration-link:archer {
@@ -320,7 +313,7 @@ unit-configuration-link:archer {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:wolverine {
+unit-configuration-link:wolverine-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.wolverine }
 
@@ -338,11 +331,11 @@ unit-configuration-link:cromwell-cs {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:churchill-cs {
+unit-configuration-link:churchill-viii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.churchill-cs }
+	!unit-configuration:unit-configuration { unit-configurations.churchill-viii }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:sexton {
 	!faction:faction { factions.british }
@@ -357,9 +350,9 @@ unit-configuration-link:bishop {
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1942 }
 }
-unit-configuration-link:m-7-priest-british {
+unit-configuration-link:priest-british {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.m-7-priest }
+	!unit-configuration:unit-configuration { unit-configurations.priest }
 
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1942 }
@@ -388,9 +381,9 @@ unit-configuration-link:firefly {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:cromwell {
+unit-configuration-link:cromwell-iv {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.cromwell }
+	!unit-configuration:unit-configuration { unit-configurations.cromwell-iv }
 
 	int:introduce-year { 1944 }
 }
@@ -406,23 +399,17 @@ unit-configuration-link:challenger {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:centurion {
+unit-configuration-link:churchill-iii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.centurion }
+	!unit-configuration:unit-configuration { unit-configurations.churchill-iii }
 
-	int:introduce-year { 1946 }
+	int:introduce-year { 1942 }
 }
-unit-configuration-link:churchill-6pdr {
+unit-configuration-link:churchill-vii {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.churchill-6pdr }
+	!unit-configuration:unit-configuration { unit-configurations.churchill-vii }
 
-	int:introduce-year { 1943 }
-}
-unit-configuration-link:churchill-75 {
-	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.churchill-75 }
-
-	int:introduce-year { 1943 }
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:churchill-iv {
 	!faction:faction { factions.british }
@@ -436,9 +423,9 @@ unit-configuration-link:matilda-cs {
 
 	int:introduce-year { 1939 }
 }
-unit-configuration-link:crusader-cs {
+unit-configuration-link:crusader-ii-cs {
 	!faction:faction { factions.british }
-	!unit-configuration:unit-configuration { unit-configurations.crusader-cs }
+	!unit-configuration:unit-configuration { unit-configurations.crusader-ii-cs }
 
 	int:introduce-year { 1941 }
 }

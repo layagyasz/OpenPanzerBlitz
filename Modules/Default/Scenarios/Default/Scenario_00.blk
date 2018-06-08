@@ -62,7 +62,7 @@
 						unit-count[]:unit-counts {
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.80mm-aa }
-								int:count { 1 }
+								int:count { 2 }
 							}
 						}
 					}
@@ -126,8 +126,8 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.minefield }
-								int:count { 1 }
+								!unit-configuration:unit-configuration { unit-configurations.a6-m2 }
+								int:count { 2 }
 							}
 						}
 					}
