@@ -33,6 +33,7 @@ namespace PanzerBlitz
 			AddBasicAttributes(Unit);
 			AddComposition(Unit);
 			AddCombatCapabilities(Unit);
+			AddSightCapabilities(Unit);
 			AddTransportCapabilities(Unit);
 			AddMovementAttributes(Unit);
 			AddMountedInfantryAttributes(Unit);
@@ -101,8 +102,6 @@ namespace PanzerBlitz
 				|| Unit.Configuration.CanOnlySupportCloseAssault
 				|| Unit.Configuration.CanAntiAircraft
 				|| Unit.Configuration.PrimaryWeapon.CanDoubleRange
-				|| Unit.Configuration.CanSpot
-				|| Unit.Configuration.SpotRange > 0
 				|| Unit.Configuration.CanClearMines
 				|| Unit.Configuration.CanPlaceMines
 				|| Unit.Configuration.CanPlaceBridges
@@ -121,14 +120,23 @@ namespace PanzerBlitz
 			if (Unit.Configuration.CanOnlySupportCloseAssault) AddAttribute("Close Assault Support");
 			if (Unit.Configuration.CanAntiAircraft) AddAttribute("Anti-Aircraft");
 			if (Unit.Configuration.PrimaryWeapon.CanDoubleRange) AddAttribute("Can Double Range");
-			if (Unit.Configuration.CanSpot) AddAttribute("Can Spot");
-			if (Unit.Configuration.SpotRange > 0) AddAttribute("Spot Range " + Unit.Configuration.SpotRange);
 			if (Unit.Configuration.CanClearMines) AddAttribute("Can Clear Mines");
 			if (Unit.Configuration.CanPlaceMines) AddAttribute("Can Place Mines");
 			if (Unit.Configuration.CanPlaceBridges) AddAttribute("Can Place Bridges");
 			if (Unit.Configuration.InnatelyClearsMines) AddAttribute("Innately Clears Mines");
 			if (Unit.Configuration.ImmuneToMines) AddAttribute("Immune To Mines");
 			if (Unit.Configuration.HasLowProfile) AddAttribute("Low Profile");
+		}
+
+		void AddSightCapabilities(Unit Unit)
+		{
+			if (Unit.Configuration.SightRange > 0
+				|| Unit.Configuration.SpotRange > 0
+				|| Unit.Configuration.CanReveal)
+				AddSection("Sight Capabilities");
+			if (Unit.Configuration.SightRange > 0) AddAttribute("Sight Range - " + Unit.Configuration.SightRange);
+			if (Unit.Configuration.SpotRange > 0) AddAttribute("Spot Range - " + Unit.Configuration.SpotRange);
+			if (Unit.Configuration.CanReveal) AddAttribute("Can Reveal");
 		}
 
 		void AddTransportCapabilities(Unit Unit)

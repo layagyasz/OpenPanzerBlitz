@@ -109,7 +109,7 @@ namespace PanzerBlitz
 
 		public static string Namify(string Input)
 		{
-			return string.Join(string.Empty, Regex.Split(Input, @"(?<=[ -])").Select(Capitalize));
+			return string.Join(string.Empty, Regex.Split(Input, @"(?<=[ -'])").Select(Capitalize));
 		}
 
 		public static string Listify(IEnumerable<string> Parts, string Joiner, string TerminalJoiner)

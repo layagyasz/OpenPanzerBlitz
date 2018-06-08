@@ -90,6 +90,14 @@ namespace PanzerBlitz
 
 		class StandardCombatResultsTable : CombatResultsTable
 		{
+			public override int OddsClamp
+			{
+				get
+				{
+					return 4;
+				}
+			}
+
 			public override CombatResult GetCombatResult(OddsCalculation Odds, int Roll)
 			{
 				return STANDARD_CRT_RESULTS[GetOddsIndex(Odds), Roll + Odds.DieModifier + 2];
@@ -165,6 +173,14 @@ namespace PanzerBlitz
 
 		class AntiAirCombatResultsTable : CombatResultsTable
 		{
+			public override int OddsClamp
+			{
+				get
+				{
+					return 40;
+				}
+			}
+
 			public override CombatResult GetCombatResult(OddsCalculation Odds, int Roll)
 			{
 				return AA_CRT_RESULTS[GetOddsIndex(Odds), Roll];
@@ -182,6 +198,8 @@ namespace PanzerBlitz
 				return 0;
 			}
 		}
+
+		public abstract int OddsClamp { get; }
 
 		public abstract CombatResult GetCombatResult(OddsCalculation Odds, int Roll);
 

@@ -11,6 +11,7 @@
 		CLOSE_ASSAULT,
 		NON_VEHICLE_MOVEMENT,
 		RESET,
+		WAIT,
 		SPECTATE    // Not used by match.
 	}
 }

@@ -43,7 +43,8 @@ namespace PanzerBlitz
 			IEnumerable<SingleAttackOrder> AttackOrders,
 			IEnumerable<Unit> Defenders,
 			AttackMethod AttackMethod,
-			Tile Tile)
+			Tile Tile,
+			int OddsClamp)
 		{
 			OddsCalculationFactors = new List<OddsCalculationFactor>();
 
@@ -128,7 +129,7 @@ namespace PanzerBlitz
 			if (_DieModifier > 1) _DieModifier = 1;
 
 			// Clamp the odds.
-			if (_Odds > 4) _Odds = 4;
+			if (_Odds > OddsClamp) _Odds = OddsClamp;
 		}
 
 		void IncreaseOdds()
@@ -140,7 +141,6 @@ namespace PanzerBlitz
 				_OddsAgainst = false;
 				_Odds = 1;
 			}
-			if (_Odds > 4) _Odds = 4;
 		}
 
 		public static bool TreatStackAsArmored(

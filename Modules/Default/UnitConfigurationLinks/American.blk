@@ -77,6 +77,8 @@ unit-configuration-link:81mm-mortar-american {
 unit-configuration-link:107mm-mortar-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+
+	int:introduce-year { 1943 }
 }
 
 unit-configuration-link:engineer-platoon-american {

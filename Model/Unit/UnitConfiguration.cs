@@ -57,6 +57,7 @@ namespace PanzerBlitz
 			OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER,
 			WATER_DIE_MODIFIER,
 
+			CAN_REVEAL,
 			CAN_SPOT,
 			SPOT_RANGE,
 			SIGHT_RANGE,
@@ -113,6 +114,7 @@ namespace PanzerBlitz
 		public readonly float OversizedPassengerMovementMultiplier;
 		public readonly int WaterDieModifier;
 
+		public readonly bool CanReveal;
 		public readonly bool CanSpot;
 		public readonly byte SpotRange;
 		public readonly byte SightRange;
@@ -179,6 +181,7 @@ namespace PanzerBlitz
 			OversizedPassengerMovementMultiplier = Stream.ReadFloat();
 			WaterDieModifier = Stream.ReadInt32();
 
+			CanReveal = Stream.ReadBoolean();
 			CanSpot = Stream.ReadBoolean();
 			SpotRange = Stream.ReadByte();
 			SightRange = Stream.ReadByte();
@@ -286,6 +289,7 @@ namespace PanzerBlitz
 								 && !IsNeutral()
 								 && UnitClass != UnitClass.FIGHTER_BOMBER
 								 && PrimaryWeapon != default(Weapon)));
+			CanReveal = (bool)(attributes[(int)Attribute.CAN_REVEAL] ?? CanSpot && !IsAircraft());
 			SpotRange = (byte)(
 				attributes[(int)Attribute.SPOT_RANGE] ??
 				(byte)(CanSpot
@@ -631,6 +635,7 @@ namespace PanzerBlitz
 			Stream.Write(OversizedPassengerMovementMultiplier);
 			Stream.Write(WaterDieModifier);
 
+			Stream.Write(CanReveal);
 			Stream.Write(CanSpot);
 			Stream.Write(SpotRange);
 			Stream.Write(SightRange);

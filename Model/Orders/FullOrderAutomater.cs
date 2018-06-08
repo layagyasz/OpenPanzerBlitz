@@ -35,7 +35,8 @@ namespace PanzerBlitz
 					return true;
 
 				case TurnComponent.AIRCRAFT:
-					return TurnInfo.Army.Units.All(i => !i.Configuration.IsAircraft());
+					return TurnInfo.Army.Units.All(
+						i => !i.Configuration.IsAircraft() || i.Status == UnitStatus.DESTROYED);
 				case TurnComponent.ATTACK:
 					return !TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.DIRECT_FIRE) == OrderInvalidReason.NONE);
@@ -54,6 +55,8 @@ namespace PanzerBlitz
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
 
+				case TurnComponent.WAIT:
+					return false;
 				case TurnComponent.RESET:
 					return true;
 			}

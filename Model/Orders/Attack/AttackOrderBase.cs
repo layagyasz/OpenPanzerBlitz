@@ -139,7 +139,8 @@ namespace PanzerBlitz
 						_Attackers,
 						defenders,
 						AttackMethod,
-						TargetTile));
+						TargetTile,
+						CombatResultsTable.OddsClamp));
 			}
 			else if (Target == AttackTarget.WEAKEST)
 			{
@@ -155,7 +156,8 @@ namespace PanzerBlitz
 								_Attackers,
 								new Unit[] { i },
 								AttackMethod,
-								TargetTile))
+							TargetTile,
+							CombatResultsTable.OddsClamp))
 					.ArgMax(i => i.TotalAttack));
 			}
 			else
@@ -163,7 +165,9 @@ namespace PanzerBlitz
 				_OddsCalculations.AddRange(
 					_Attackers
 						.GroupBy(i => i.Defender)
-						.Select(i => new OddsCalculation(i, new Unit[] { i.Key }, AttackMethod, TargetTile)));
+					.Select(
+						i => new OddsCalculation(
+							i, new Unit[] { i.Key }, AttackMethod, TargetTile, CombatResultsTable.OddsClamp)));
 				_OddsCalculations.Sort((x, y) => x.CompareTo(y));
 			}
 			// Sync TreatStackAsArmored

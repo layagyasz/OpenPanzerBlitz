@@ -43,6 +43,7 @@ namespace PanzerBlitz
 		{
 			switch (TurnComponent)
 			{
+				case TurnComponent.WAIT: return 0;
 				case TurnComponent.RESET: return 0;
 				case TurnComponent.MINEFIELD_ATTACK: return 0;
 				case TurnComponent.ATTACK: return 1000;

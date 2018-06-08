@@ -91,6 +91,8 @@ unit-configuration-link:76mm-mortar-british {
 unit-configuration-link:107mm-mortar-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:land-mattress-british {
 	!faction:faction { factions.british }

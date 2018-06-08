@@ -3,6 +3,7 @@
 	name-generator:french { French.mkvc }
 	name-generator:german { German.mkvc }
 	name-generator:hungarian { Hungarian.mkvc }
+	name-generator:italian { Italian.mkvc }
 	name-generator:japanese { Japanese.mkvc }
 	name-generator:north-african { NorthAfrican.mkvc }
 	name-generator:polish { Polish.mkvc }

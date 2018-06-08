@@ -71,7 +71,7 @@ namespace PanzerBlitz
 				if (_GenerateRandomCheckbox.Value)
 					configuration =
 						new RandomMapConfiguration(
-							width, height, GameData.MatchSettings["china-summer"].MapGenerator);
+							width, height, GameData.MatchSettings["italy-summer"].MapGenerator);
 				else configuration = new BlankMapConfiguration(width, height);
 				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<MapConfiguration>(configuration));
 

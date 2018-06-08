@@ -91,6 +91,8 @@ namespace PanzerBlitz
 				if (!Unit.Moved && Path.Count <= 2) return OrderInvalidReason.NONE;
 				return OrderInvalidReason.UNIT_NO_MOVE;
 			}
+			if (Unit.Configuration.HasUnlimitedMovement() && Unit.RemainingMovement < float.Epsilon)
+				return OrderInvalidReason.UNIT_NO_MOVE;
 			if (Combat && Unit.Configuration.CanCloseAssault && Path.Count > 2) return OrderInvalidReason.UNIT_NO_MOVE;
 			return OrderInvalidReason.NONE;
 		}

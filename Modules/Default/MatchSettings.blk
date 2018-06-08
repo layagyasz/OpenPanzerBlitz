@@ -31,6 +31,14 @@
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}
+	match-setting:italy-summer {
+		!var:environment { environments.summer-grassland }
+		front:front { west }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.italian }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:japan-summer {
 		!var:environment { environments.summer-grassland }
 		front:front { pacific }

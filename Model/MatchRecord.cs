@@ -20,7 +20,9 @@ namespace PanzerBlitz
 
 		public MatchRecord(SerializationInputStream Stream)
 		{
-			Match = new Match(new Scenario(Stream), null);
+			var scenario = new Scenario(Stream);
+			scenario.FogOfWar = false;
+			Match = new Match(scenario, null);
 			OrderSerializer = new OrderSerializer(Match);
 			Orders = Stream.ReadEnumerable(() => OrderSerializer.Deserialize(Stream)).ToList();
 		}

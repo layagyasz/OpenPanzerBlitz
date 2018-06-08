@@ -24,7 +24,7 @@ namespace PanzerBlitz
 		public readonly List<ArmyConfiguration> DeploymentOrder;
 		public readonly List<ArmyConfiguration> TurnOrder;
 		public readonly byte Turns;
-		public readonly bool FogOfWar;
+		public bool FogOfWar { get; set; }
 		public readonly Environment Environment;
 		public readonly MapConfiguration MapConfiguration;
 
@@ -89,6 +89,11 @@ namespace PanzerBlitz
 			Stream.Write(FogOfWar);
 			Stream.Write(Environment.UniqueKey);
 			MapConfigurationSerializer.Instance.Serialize(MapConfiguration, Stream);
+		}
+
+		public void SetFogOfWar(bool FogOfWar)
+		{
+			this.FogOfWar = FogOfWar;
 		}
 	}
 }

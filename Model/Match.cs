@@ -160,6 +160,7 @@ namespace PanzerBlitz
 
 		static IEnumerable<TurnComponent> TurnComponents()
 		{
+			yield return TurnComponent.WAIT;
 			yield return TurnComponent.MINEFIELD_ATTACK;
 			yield return TurnComponent.AIRCRAFT;
 			yield return TurnComponent.ATTACK;

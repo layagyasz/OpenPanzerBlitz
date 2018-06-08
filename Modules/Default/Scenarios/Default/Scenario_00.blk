@@ -61,7 +61,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-how }
+								!unit-configuration:unit-configuration { unit-configurations.80mm-aa }
 								int:count { 1 }
 							}
 						}
@@ -126,7 +126,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.fort-40 }
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
 								int:count { 1 }
 							}
 						}

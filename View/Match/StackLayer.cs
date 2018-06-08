@@ -43,6 +43,11 @@ namespace PanzerBlitz
 			if (SightFinder != null) SetUnitVisibility(UnitView.Unit, SightFinder.GetUnitVisibility(UnitView.Unit));
 		}
 
+		public void RemoveAll()
+		{
+			foreach (var unit in _UnitViews) RemoveUnit(unit.Key);
+		}
+
 		void SetUnitVisibility(Unit Unit, UnitVisibility Visibility)
 		{
 			if (Visibility.LastSeen == null) RemoveUnit(Unit);

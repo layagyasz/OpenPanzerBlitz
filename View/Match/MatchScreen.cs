@@ -119,7 +119,9 @@ namespace PanzerBlitz
 		{
 			SetTurn(E.Turn);
 			_InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, FactionRenderer, 80));
-			SetSightFinder(E.Turn.TurnInfo.Army.SightFinder);
+
+			if (E.Turn.TurnInfo.TurnComponent == TurnComponent.WAIT && _FogOfWar) FogOver();
+			else SetSightFinder(E.Turn.TurnInfo.Army.SightFinder);
 		}
 
 		void SetSightFinder(SightFinder SightFinder)
@@ -132,6 +134,12 @@ namespace PanzerBlitz
 				_SightFinder = SightFinder;
 			}
 
+		}
+
+		void FogOver()
+		{
+			foreach (TileView t in MapView.TilesEnumerable) t.SetMask(FOG_OF_WAR_MASKS[0]);
+			_StackLayer.RemoveAll();
 		}
 
 		void SetFogOfWar(SightFinder SightFinder)

@@ -79,7 +79,8 @@ namespace PanzerBlitz
 			foreach (var defender in defenders)
 			{
 				_OddsCalculations.Add(
-					new OddsCalculation(_Attackers, new Unit[] { defender }, AttackMethod, Tile));
+					new OddsCalculation(
+						_Attackers, new Unit[] { defender }, AttackMethod, Tile, CombatResultsTable.OddsClamp));
 			}
 			// Sync TreatStackAsArmored
 			foreach (OddsCalculation odds in _OddsCalculations)

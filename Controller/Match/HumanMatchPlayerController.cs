@@ -81,7 +81,10 @@ namespace PanzerBlitz
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },
 				{ TurnComponent.CLOSE_ASSAULT, new CloseAssaultController(this) },
-				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(this, false) }
+				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(this, false) },
+				{ TurnComponent.RESET, new NoOpController(this) },
+				{ TurnComponent.WAIT, new NoOpController(this) },
+				{ TurnComponent.SPECTATE, new NoOpController(this) },
 			};
 
 			foreach (TileView t in MatchScreen.MapView.TilesEnumerable)
@@ -249,7 +252,9 @@ namespace PanzerBlitz
 					 .Where(i => i.Configuration.Team != Team)
 					 .SelectMany(i => i.Units)
 					 .SelectMany(i =>
-								 i.GetFieldOfSight(AttackMethod.DIRECT_FIRE).Select(
+								 i.GetFieldOfSight(
+									 AttackMethod.DIRECT_FIRE,
+									 _CurrentTurn.Army.SightFinder.GetUnitVisibility(i).LastSeen).Select(
 									 j => new Tuple<Tile, int>(j.Final, PosterizeLineOfSight(j, i))))
 					 .GroupBy(i => i.Item1)
 						  .Select(i => new Tuple<Tile, Color>(i.Key, HIGHLIGHT_COLORS[i.Min(j => j.Item2)])));

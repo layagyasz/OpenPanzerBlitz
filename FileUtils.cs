@@ -69,12 +69,15 @@ namespace PanzerBlitz
 		public static MarkovGenerator<char> GenerateLanguage(string ExamplePath)
 		{
 			var g = new MarkovGenerator<char>(3);
-			var regex = new Regex("\\(.*\\)");
+			var parentheticals = new Regex("\\(.*\\)");
+			var capitals = new Regex("[A-Z- ]*");
 			foreach (var line in File.ReadAllLines(ExamplePath, Encoding.UTF8))
 			{
 				var name = line.ToLower();
 				if (name.Length == 0) continue;
-				name = regex.Replace(name, "").Trim();
+				name = parentheticals.Replace(name, "");
+				name = capitals.Replace(name, "");
+				name = name.Trim();
 				g.AddSequence(name);
 			}
 			return g;

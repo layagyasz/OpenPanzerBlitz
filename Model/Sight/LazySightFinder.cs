@@ -81,6 +81,7 @@ namespace PanzerBlitz
 				}
 				var tileDeltas =
 					recalculateTiles.Select(i => new Tuple<Tile, TileSightLevel>(i, GetTileSightLevel(i))).ToList();
+				HandleDeltas(tileDeltas);
 				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
 				if (OnSightUpdated != null)
 				{
@@ -92,7 +93,6 @@ namespace PanzerBlitz
 			else
 			{
 				SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
-
 				var delta = UnitTracker.ComputeDelta(this, unit, E);
 				if (OnSightUpdated != null)
 				{
@@ -116,6 +116,7 @@ namespace PanzerBlitz
 					unit.GetFieldOfSight(unit.Configuration.SightRange, unit.Position)
 						.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
 						.ToList();
+				HandleDeltas(tileDeltas);
 				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
 				if (OnSightUpdated != null)
 				{
@@ -177,14 +178,15 @@ namespace PanzerBlitz
 			Unit unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy)
 			{
+				var tileDeltas =
+				unit.GetFieldOfSight(unit.Configuration.SightRange, E.Value)
+					.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
+					.ToList();
+				HandleDeltas(tileDeltas);
+				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+				unitDeltas.AddRange(UnitTracker.Remove(this, unit));
 				if (OnSightUpdated != null)
 				{
-					var tileDeltas =
-						unit.GetFieldOfSight(unit.Configuration.SightRange, E.Value)
-							.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
-							.ToList();
-					var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
-					unitDeltas.AddRange(UnitTracker.Remove(this, unit));
 					OnSightUpdated(
 						this,
 						new SightUpdatedEventArgs(unit, null, tileDeltas, unitDeltas));
@@ -234,11 +236,12 @@ namespace PanzerBlitz
 			if (!Unit.CanSight()) return TileSightLevel.NONE;
 
 			LineOfSight los = Unit.GetLineOfSight(Tile);
-			if (los.Validate() != NoLineOfSightReason.NONE) return TileSightLevel.NONE;
-			if (los.Range > Math.Max((byte)20, Unit.Configuration.GetAdjustedRange(false))) return TileSightLevel.NONE;
+			if (!Unit.Configuration.IsAircraft() && los.Validate() != NoLineOfSightReason.NONE)
+				return TileSightLevel.NONE;
+			if (los.Range > Unit.Configuration.SightRange) return TileSightLevel.NONE;
 			if (los.Range > Unit.Configuration.SpotRange || !Unit.CanSpot()) return TileSightLevel.SIGHTED;
 			if (los.Range > 1) return TileSightLevel.SOFT_SPOTTED;
-			return TileSightLevel.HARD_SPOTTED;
+			return Unit.Configuration.CanReveal ? TileSightLevel.HARD_SPOTTED : TileSightLevel.SOFT_SPOTTED;
 		}
 
 		public bool TileConceals(Unit Unit, Tile Tile)
@@ -259,12 +262,14 @@ namespace PanzerBlitz
 
 		public bool IsSighted(Unit Unit, Tile Tile)
 		{
+			if (Unit.Configuration.IsAircraft()) return true;
 			return HasTileSightLevel(
 				Tile, TileConceals(Unit, Tile) ? TileSightLevel.HARD_SPOTTED : TileSightLevel.SIGHTED);
 		}
 
 		public bool IsSighted(Unit Unit, TileSightLevel Level)
 		{
+			if (Unit.Configuration.IsAircraft()) return true;
 			return _OverrideVisibleUnits.Contains(Unit) ||
 										(TileConceals(Unit, Unit.Position)
 										 ? Level >= TileSightLevel.HARD_SPOTTED : Level >= TileSightLevel.SIGHTED);
@@ -275,7 +280,7 @@ namespace PanzerBlitz
 			return _OverrideVisibleUnits.Contains(Unit) || IsSighted(Unit, Unit.Position);
 		}
 
-		public void SightFiringUnit(Unit Unit)
+		void SightFiringUnit(Unit Unit)
 		{
 			if (Unit.Army == TrackingArmy || Unit.Position == null || IsSighted(Unit)) return;
 
@@ -284,11 +289,20 @@ namespace PanzerBlitz
 			else _OverrideVisibleUnits.Remove(Unit);
 		}
 
-		public void SightMovingUnit(Unit Unit, Tile MovedFrom, Tile MovedTo)
+		void SightMovingUnit(Unit Unit, Tile MovedFrom, Tile MovedTo)
 		{
 			if (Unit.Army == TrackingArmy || !MovedTo.Rules.Concealing) return;
 			if (IsSighted(Unit, MovedFrom)) _OverrideVisibleUnits.Add(Unit);
 			else _OverrideVisibleUnits.Remove(Unit);
+		}
+
+		void HandleDeltas(IEnumerable<Tuple<Tile, TileSightLevel>> Deltas)
+		{
+			foreach (var delta in Deltas.Where(i => i.Item2 == TileSightLevel.NONE))
+			{
+				foreach (var unit in delta.Item1.Units.Where(i => i.Army != TrackingArmy))
+					_OverrideVisibleUnits.Remove(unit);
+			}
 		}
 	}
 }

@@ -93,10 +93,10 @@ namespace PanzerBlitz
 			if (AttackMethod == AttackMethod.MINEFIELD)
 			{
 				if (Configuration.ImmuneToMines) return OrderInvalidReason.TARGET_IMMUNE;
-				if (!Configuration.IsNeutral()) return OrderInvalidReason.NONE;
 				if (Position.Units.Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD)
 					== HasInteraction<ClearMinefieldInteraction>(i => true)?.Object)
 					return OrderInvalidReason.TARGET_IMMUNE;
+				if (!Configuration.IsNeutral()) return OrderInvalidReason.NONE;
 			}
 
 			if (Configuration.IsAircraft() && AttackMethod != AttackMethod.ANTI_AIRCRAFT)
@@ -120,7 +120,8 @@ namespace PanzerBlitz
 						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.NONE;
 			}
-			if (!IgnoreConcealment && !Army.SightFinder.IsSighted(this)) return OrderInvalidReason.TARGET_CONCEALED;
+			if (!IgnoreConcealment && !Army.SightFinder.GetUnitVisibility(this).Visible)
+				return OrderInvalidReason.TARGET_CONCEALED;
 			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
 			return OrderInvalidReason.NONE;
 		}
@@ -299,6 +300,10 @@ namespace PanzerBlitz
 				RemainingMovement -= movement;
 				MovedMoreThanOneTile = Path.Count > 2 || Moved;
 				Moved = true;
+			}
+			else
+			{
+				RemainingMovement = 0;
 			}
 			Place(Tile, Path);
 		}
@@ -516,6 +521,7 @@ namespace PanzerBlitz
 
 		public IEnumerable<LineOfSight> GetFieldOfSight(int Range, Tile Tile)
 		{
+			if (Configuration.IsAircraft()) return GetLinesOfSight(Range, Tile);
 			return GetLinesOfSight(Range, Tile).Where(i => i.Validate() == NoLineOfSightReason.NONE);
 		}
 
