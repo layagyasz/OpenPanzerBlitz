@@ -34,7 +34,7 @@ namespace PanzerBlitz
 		public Match(Scenario Scenario, OrderAutomater OrderAutomater)
 		{
 			this.Scenario = Scenario;
-			Map = Scenario.MapConfiguration.GenerateMap(Scenario.Environment, IdGenerator);
+			Map = Scenario.MapConfiguration.GenerateMap(new Random(), Scenario.Environment, IdGenerator);
 
 			Armies = Scenario.TurnOrder.Select(
 				i => new Army(
@@ -81,7 +81,7 @@ namespace PanzerBlitz
 		{
 			if (!AdvancePhaseIterator()) return;
 			if (_OrderAutomater != null && _OrderAutomater.AutomateTurn(this, _TurnOrder.Current.TurnInfo))
-				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.TurnInfo.Army));
+				ExecuteOrder(new NextPhaseOrder(_TurnOrder.Current.TurnInfo));
 			else if (OnStartPhase != null)
 				OnStartPhase(this, new StartTurnComponentEventArgs(_TurnOrder.Current));
 		}

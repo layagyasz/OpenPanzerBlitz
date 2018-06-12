@@ -50,51 +50,28 @@ namespace PanzerBlitz
 				return;
 			}
 
-			// We calculate lines of sight to and from to make sure sighting is symmetrical.
-			var losA = FindLOS(From.Map, From.HexCoordinate, To.HexCoordinate, false);
-			TileComponentRules[] crossedEdgesA = new TileComponentRules[losA.Length - 1];
-
-			for (int i = 0; i < losA.Length - 1; ++i)
-			{
-				crossedEdgesA[i] = losA[i].GetEdgeRules(losA[i + 1]);
-			}
-
-			var losAVerify = Verify(losA, crossedEdgesA);
-			if (losAVerify != NoLineOfSightReason.NONE)
-			{
-				_Validated = losAVerify;
-				_LineOfSight = losA;
-				_CrossedEdges = crossedEdgesA;
-			}
-			else
-			{
-				var losB = FindLOS(From.Map, From.HexCoordinate, To.HexCoordinate, true);
-				TileComponentRules[] crossedEdgesB = new TileComponentRules[losB.Length - 1];
-
-				for (int i = 0; i < losB.Length - 1; ++i)
-				{
-					crossedEdgesB[i] = losB[i].GetEdgeRules(losB[i + 1]);
-				}
-
-				var losBVerify = Verify(losB, crossedEdgesB);
-				if (losBVerify != NoLineOfSightReason.NONE)
-				{
-					_Validated = losBVerify;
-					_LineOfSight = losB;
-					_CrossedEdges = crossedEdgesB;
-				}
-				else
-				{
-					_Validated = losAVerify;
-					_LineOfSight = losA;
-					_CrossedEdges = crossedEdgesA;
-				}
-			}
+			FindLOS(From, To, false);
+			if (_Validated == NoLineOfSightReason.NONE) FindLOS(From, To, true);
+			if (_LineOfSight == null) _Validated = NoLineOfSightReason.TERRAIN;
 		}
 
 		public NoLineOfSightReason Validate()
 		{
 			return _Validated;
+		}
+
+		void FindLOS(Tile From, Tile To, bool Dither)
+		{
+			var los = FindLOS(From.Map, From.HexCoordinate, To.HexCoordinate, Dither);
+			if (los == null) return;
+
+			_LineOfSight = los;
+			_CrossedEdges = new TileComponentRules[_LineOfSight.Length - 1];
+			for (int i = 0; i < _LineOfSight.Length - 1; ++i)
+			{
+				_CrossedEdges[i] = _LineOfSight[i].GetEdgeRules(_LineOfSight[i + 1]);
+			}
+			_Validated = Verify(_LineOfSight, _CrossedEdges);
 		}
 
 		static Tile[] FindLOS(Map Map, HexCoordinate From, HexCoordinate To, bool Dither)
@@ -105,6 +82,8 @@ namespace PanzerBlitz
 			for (int i = 0; i < count + 1; ++i)
 			{
 				Coordinate c = HexCoordinate.Interpolate(From, To, step * i, Dither ? -.01 : 0).ToCoordinate();
+				if (c.X < 0 || c.X >= Map.Tiles.GetLength(0) || c.Y < 0 || c.Y >= Map.Tiles.GetLength(1))
+					return null;
 				tiles[i] = Map.Tiles[c.X, c.Y];
 			}
 			return tiles;

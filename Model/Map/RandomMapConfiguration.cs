@@ -14,33 +14,46 @@ namespace PanzerBlitz
 {
 	public class RandomMapConfiguration : MapConfiguration
 	{
-		readonly int _Width;
-		readonly int _Height;
-		readonly MapGeneratorConfiguration _Configuration;
-		readonly Random _Random;
+		enum Attribute { WIDTH, HEIGHT, MATCH_SETTING }
+
+		public readonly int Width;
+		public readonly int Height;
+		public readonly MapGeneratorConfiguration Configuration;
+
+		public RandomMapConfiguration(ParseBlock Block)
+		{
+			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
+			Width = (int)attributes[(int)Attribute.WIDTH];
+			Height = (int)attributes[(int)Attribute.HEIGHT];
+			Configuration = ((MatchSetting)attributes[(int)Attribute.MATCH_SETTING]).MapGenerator;
+		}
 
 		public RandomMapConfiguration(int Width, int Height, MapGeneratorConfiguration Configuration)
 		{
-			_Width = Width;
-			_Height = Height;
-			_Configuration = Configuration;
-			_Random = new Random();
+			this.Width = Width;
+			this.Height = Height;
+			this.Configuration = Configuration;
 		}
 
 		public RandomMapConfiguration(SerializationInputStream Stream)
 			: this(Stream.ReadInt32(), Stream.ReadInt32(), new MapGeneratorConfiguration(Stream)) { }
 
-		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
+		public MapConfiguration MakeStatic(Random Random)
 		{
-			var map = new Map(_Width, _Height, Environment, IdGenerator);
+			return new StaticMapConfiguration(GenerateMap(Random, null, new IdGenerator()));
+		}
+
+		public Map GenerateMap(Random Random, Environment Environment, IdGenerator IdGenerator)
+		{
+			var map = new Map(Width, Height, Environment, IdGenerator);
 
 			var cache = new Dictionary<FunctionFactory, Func<double, double, double>>();
 			var elevationGenerator =
-				_Configuration.TerrainGenerator.ElevationGenerator.GetFeatureGenerator(_Random, cache);
-			var waterGenerator = _Configuration.TerrainGenerator.WaterGenerator.GetFeatureGenerator(_Random, cache);
-			var swampGenerator = _Configuration.TerrainGenerator.SwampGenerator.GetFeatureGenerator(_Random, cache);
-			var forestGenerator = _Configuration.TerrainGenerator.ForestGenerator.GetFeatureGenerator(_Random, cache);
-			var townGenerator = _Configuration.TerrainGenerator.TownGenerator.GetFeatureGenerator(_Random, cache);
+				Configuration.TerrainGenerator.ElevationGenerator.GetFeatureGenerator(Random, cache);
+			var waterGenerator = Configuration.TerrainGenerator.WaterGenerator.GetFeatureGenerator(Random, cache);
+			var swampGenerator = Configuration.TerrainGenerator.SwampGenerator.GetFeatureGenerator(Random, cache);
+			var forestGenerator = Configuration.TerrainGenerator.ForestGenerator.GetFeatureGenerator(Random, cache);
+			var townGenerator = Configuration.TerrainGenerator.TownGenerator.GetFeatureGenerator(Random, cache);
 
 			foreach (Tile t in map.TilesEnumerable)
 			{
@@ -98,14 +111,14 @@ namespace PanzerBlitz
 
 			// Rivers
 			var riverNodes = new HashSet<Tile>();
-			for (int i = 0; i < Math.Max(1, _Width * _Height / 160); ++i)
+			for (int i = 0; i < Math.Max(1, Width * Height / 160); ++i)
 			{
-				var t = GetRandomTile(map);
+				var t = GetRandomTile(Random, map);
 				if (!IsElevated(t)) riverNodes.Add(t);
 			}
-			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
+			for (int i = 0; i < Math.Max(2, (Width + Height - 2) / 8); ++i)
 			{
-				var t = GetRandomEdgeTile(map);
+				var t = GetRandomEdgeTile(Random, map);
 				if (!IsElevated(t))
 				{
 					EdgePathOverlay(t, TilePathOverlay.STREAM);
@@ -115,9 +128,9 @@ namespace PanzerBlitz
 			var mst = new MinimalSpanning<Tile>(riverNodes, i => riverNodes, (i, j) => i.HeuristicDistanceTo(j));
 			var edges = mst.GetEdges().ToList();
 			for (int i = 0; i < edges.Count / 4; ++i)
-				edges.RemoveAt(_Random.Next(0, edges.Count));
+				edges.RemoveAt(Random.Next(0, edges.Count));
 			foreach (Tuple<Tile, Tile> edge in edges)
-				MakePath(edge.Item1, edge.Item2, TilePathOverlay.STREAM, RiverDistanceFunction);
+				MakePath(edge.Item1, edge.Item2, TilePathOverlay.STREAM, RiverDistanceFunction(Random));
 
 			// Roads and Towns
 			var towns = new Partitioning<Tile>(map.TilesEnumerable, (i, j) => i.GetEdge(j) == TileEdge.TOWN);
@@ -125,18 +138,18 @@ namespace PanzerBlitz
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
 				var name =
-					new string(_Configuration.NameGenerator.Generate(_Random).ToArray());
+					new string(Configuration.NameGenerator.Generate(Random).ToArray());
 				name = ObjectDescriber.Namify(name);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
 				for (int i = 0; i < Math.Max(1, tiles.Count / 4); ++i)
-					roadNodes.Add(tiles[_Random.Next(0, tiles.Count)]);
+					roadNodes.Add(tiles[Random.Next(0, tiles.Count)]);
 			}
-			for (int i = 0; i < Math.Max(1, _Width * _Height / 160); ++i)
-				roadNodes.Add(GetRandomTile(map));
-			for (int i = 0; i < Math.Max(2, (_Width + _Height - 2) / 8); ++i)
+			for (int i = 0; i < Math.Max(1, Width * Height / 160); ++i)
+				roadNodes.Add(GetRandomTile(Random, map));
+			for (int i = 0; i < Math.Max(2, (Width + Height - 2) / 8); ++i)
 			{
-				var t = GetRandomEdgeTile(map);
+				var t = GetRandomEdgeTile(Random, map);
 				EdgePathOverlay(t, TilePathOverlay.ROAD);
 				roadNodes.Add(t);
 			}
@@ -147,18 +160,13 @@ namespace PanzerBlitz
 			for (int i = 0; i < edges.Count / 4; ++i)
 			{
 				edges.Add(
-					new Tuple<Tile, Tile>(nodes[_Random.Next(0, nodes.Count)], nodes[_Random.Next(0, nodes.Count)]));
+					new Tuple<Tile, Tile>(nodes[Random.Next(0, nodes.Count)], nodes[Random.Next(0, nodes.Count)]));
 			}
 			foreach (Tuple<Tile, Tile> edge in edges)
-				MakePath(edge.Item1, edge.Item2, TilePathOverlay.ROAD, (i, j) => RoadDistanceFunction(i, j, 6));
+				MakePath(edge.Item1, edge.Item2, TilePathOverlay.ROAD, (i, j) => RoadDistanceFunction(Random, i, j, 6));
 
 			map.Ready();
 			return map;
-		}
-
-		public StaticMapConfiguration MakeStaticMap()
-		{
-			return new StaticMapConfiguration(GenerateMap(null, new IdGenerator()));
 		}
 
 		bool DoublesEqual(double X, double Y)
@@ -200,26 +208,26 @@ namespace PanzerBlitz
 				path[i].SetPathOverlay(Array.IndexOf(path[i].NeighborTiles, path[i + 1]), Path);
 		}
 
-		Tile GetRandomTile(Map Map)
+		Tile GetRandomTile(Random Random, Map Map)
 		{
-			return Map.Tiles[_Random.Next(0, _Width), _Random.Next(0, _Height)];
+			return Map.Tiles[Random.Next(0, Width), Random.Next(0, Height)];
 		}
 
-		Tile GetRandomEdgeTile(Map Map)
+		Tile GetRandomEdgeTile(Random Random, Map Map)
 		{
-			bool xEdge = _Random.Next(0, 2) == 0;
-			bool yEdge = _Random.Next(0, 2) == 0;
+			bool xEdge = Random.Next(0, 2) == 0;
+			bool yEdge = Random.Next(0, 2) == 0;
 			int x = 0;
 			int y = 0;
 			if (xEdge)
 			{
-				x = _Random.Next(0, _Width);
-				y = yEdge ? 0 : _Height - 1;
+				x = Random.Next(0, Width);
+				y = yEdge ? 0 : Height - 1;
 			}
 			else
 			{
-				x = yEdge ? 0 : _Width - 1;
-				y = _Random.Next(0, _Height);
+				x = yEdge ? 0 : Width - 1;
+				y = Random.Next(0, Height);
 			}
 			return Map.Tiles[x, y];
 		}
@@ -232,7 +240,7 @@ namespace PanzerBlitz
 			else if (Tile.OnEdge(Direction.EAST)) Tile.SetPathOverlay(3, Path);
 		}
 
-		double RoadDistanceFunction(Tile a, Tile b, double TerrainMultiplier)
+		double RoadDistanceFunction(Random Random, Tile a, Tile b, double TerrainMultiplier)
 		{
 			if (a.GetPathOverlay(b) == TilePathOverlay.ROAD) return 0;
 			if (a.GetPathOverlay(b) != TilePathOverlay.NONE) return float.MaxValue;
@@ -244,7 +252,7 @@ namespace PanzerBlitz
 			if (b.Configuration.PathOverlays.Count(i => i == TilePathOverlay.STREAM) > 0) return 6 * TerrainMultiplier;
 			if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return 3;
 
-			return 6 * _Random.NextDouble() + 2;
+			return 6 * Random.NextDouble() + 2;
 		}
 
 		bool IsElevated(Tile Tile)
@@ -254,20 +262,23 @@ namespace PanzerBlitz
 					   || Tile.Configuration.Edges.Count(i => i == TileEdge.SLOPE) > 0;
 		}
 
-		double RiverDistanceFunction(Tile a, Tile b)
+		Func<Tile, Tile, double> RiverDistanceFunction(Random Random)
 		{
-			if (a.GetPathOverlay(b) == TilePathOverlay.STREAM) return 0;
-			if (IsElevated(b)) return float.MaxValue;
-			if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return .5;
+			return (a, b) =>
+			{
+				if (a.GetPathOverlay(b) == TilePathOverlay.STREAM) return 0;
+				if (IsElevated(b)) return float.MaxValue;
+				if (b.Configuration.Edges.Count(i => i == TileEdge.FOREST) > 0) return .5;
 
-			return 6 * _Random.NextDouble() + 2;
+				return 6 * Random.NextDouble() + 2;
+			};
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_Width);
-			Stream.Write(_Height);
-			Stream.Write(_Configuration);
+			Stream.Write(Width);
+			Stream.Write(Height);
+			Stream.Write(Configuration);
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Cardamom.Serialization;
+﻿using System;
+
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -14,7 +16,12 @@ namespace PanzerBlitz
 		public StaticMapConfiguration(SerializationInputStream Stream)
 			: this(new Map(Stream, null, new IdGenerator())) { }
 
-		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
+		public MapConfiguration MakeStatic(Random Random)
+		{
+			return this;
+		}
+
+		public Map GenerateMap(Random Random, Environment Environment, IdGenerator IdGenerator)
 		{
 			var map = new Map(Map.Width, Map.Height, Environment, IdGenerator);
 			map.CopyTo(Map, 0, 0, false);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PanzerBlitz
@@ -53,7 +54,7 @@ namespace PanzerBlitz
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(
 					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting.MapGenerator)
-				.MakeStaticMap());
+				.MakeStatic(new Random()));
 		}
 	}
 }

@@ -1,32 +1,39 @@
-﻿using Cardamom.Serialization;
+﻿using System;
+
+using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
 	public class BlankMapConfiguration : MapConfiguration
 	{
-		readonly int _Width;
-		readonly int _Height;
+		public readonly int Width;
+		public readonly int Height;
 
 		public BlankMapConfiguration(int Width, int Height)
 		{
-			_Width = Width;
-			_Height = Height;
+			this.Width = Width;
+			this.Height = Height;
 		}
 
 		public BlankMapConfiguration(SerializationInputStream Stream)
 			: this(Stream.ReadInt32(), Stream.ReadInt32()) { }
 
-		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
+		public MapConfiguration MakeStatic(Random Random)
 		{
-			var map = new Map(_Width, _Height, Environment, IdGenerator);
+			return this;
+		}
+
+		public Map GenerateMap(Random Random, Environment Environment, IdGenerator IdGenerator)
+		{
+			var map = new Map(Width, Height, Environment, IdGenerator);
 			map.Ready();
 			return map;
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(_Width);
-			Stream.Write(_Height);
+			Stream.Write(Width);
+			Stream.Write(Height);
 		}
 	}
 }

@@ -151,6 +151,7 @@ namespace PanzerBlitz
 			Block.AddParser<BoardConfiguration>();
 			Block.AddParser<BoardCompositeMapConfiguration>(
 				"map-configuration", i => new BoardCompositeMapConfiguration(i));
+			Block.AddParser<RandomMapConfiguration>();
 			Block.AddParser<Scenario>();
 
 			Block.AddParser<FactionRenderDetails>(

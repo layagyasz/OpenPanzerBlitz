@@ -24,7 +24,7 @@ namespace PanzerBlitz
 
 			if (orders == null) return;
 			foreach (Order order in orders) Console.WriteLine(Match.ExecuteOrder(FileUtils.Print(order)));
-			Console.WriteLine(Match.ExecuteOrder(new NextPhaseOrder(Army)));
+			Console.WriteLine(Match.ExecuteOrder(new NextPhaseOrder(Turn.TurnInfo)));
 		}
 
 		public void Unhook() { }

@@ -628,6 +628,12 @@ unit-configuration-lock:panther-g {
 	}
 	float:rarity { 12.5 }
 }
+unit-configuration-lock:porsche-tiger {
+	string[]:unit-configurations { 
+		string:_ { porsche-tiger }
+	}
+	float:rarity { 20.7 }
+}
 unit-configuration-lock:tiger-i {
 	string[]:unit-configurations { 
 		string:_ { tiger-i }
@@ -639,4 +645,10 @@ unit-configuration-lock:tiger-ii {
 		string:_ { tiger-ii }
 	}
 	float:rarity { 15.1 }
+}
+unit-configuration-lock:maus {
+	string[]:unit-configurations { 
+		string:_ { maus }
+	}
+	float:rarity { 23.0 }
 }

@@ -158,7 +158,7 @@ namespace PanzerBlitz
 		{
 			TurnComponent t = Match.GetTurn().TurnInfo.TurnComponent;
 			if (_Controllers.ContainsKey(t) && _Controllers[t].Finish())
-				Match.ExecuteOrder(new NextPhaseOrder(Match.GetTurn().TurnInfo.Army));
+				ExecuteOrderAndAlert(new NextPhaseOrder(Match.GetTurn().TurnInfo));
 		}
 
 		public void SetPane(Pane Pane)

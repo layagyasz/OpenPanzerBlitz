@@ -143,17 +143,11 @@ unit-configuration-lock:type-93 {
 	}
 	float:rarity { 21.7 }
 }
-unit-configuration-lock:ho-ni-1-sph {
-	string[]:unit-configurations { 
-		string:_ { ho-ni-1-sph }
-	}
-	float:rarity { 20.3 }
-}
 unit-configuration-lock:ho-ni-1 {
 	string[]:unit-configurations { 
 		string:_ { ho-ni-1 }
 	}
-	float:rarity { 20.3 }
+	float:rarity { 19.3 }
 }
 unit-configuration-lock:ho-ni-2 {
 	string[]:unit-configurations { 

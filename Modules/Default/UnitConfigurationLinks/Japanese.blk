@@ -111,12 +111,6 @@ unit-configuration-link:type-93 {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.type-93 }
 }
-unit-configuration-link:ho-ni-1-sph {
-	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.ho-ni-1-sph }
-
-	int:introduce-year { 1943 }
-}
 unit-configuration-link:ho-ni-1 {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.ho-ni-1 }

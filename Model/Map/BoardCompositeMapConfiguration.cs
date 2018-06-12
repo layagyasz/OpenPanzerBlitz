@@ -26,7 +26,12 @@ namespace PanzerBlitz
 					j => new BoardConfiguration(Stream.ReadString(), Stream.ReadBoolean()))))
 		{ }
 
-		public Map GenerateMap(Environment Environment, IdGenerator IdGenerator)
+		public MapConfiguration MakeStatic(Random Random)
+		{
+			return this;
+		}
+
+		public Map GenerateMap(Random Random, Environment Environment, IdGenerator IdGenerator)
 		{
 			var boards = Boards.Select(i => i.Select(j => j.LoadMap()).ToList()).ToList();
 

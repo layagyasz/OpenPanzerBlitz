@@ -297,12 +297,18 @@ unit-render-details:panther-a {
 unit-render-details:panther-g {
 	string:image-path { panther.png }
 }
+unit-render-details:porsche-tiger {
+	string:override-display-name { Tiger (P) }
+	string:image-path { porsche-tiger.png }
+}
 unit-render-details:tiger-i {
-	string:override-display-name { Tiger I }
 	string:image-path { tiger-i.png }
 }
 unit-render-details:tiger-ii {
 	string:image-path { tiger-ii.png }
+}
+unit-render-details:maus {
+	string:image-path { maus.png }
 }
 unit-render-details:fw-190 {
 	string:image-path { fw-190.png }

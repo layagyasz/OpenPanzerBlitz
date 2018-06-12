@@ -31,6 +31,8 @@ unit-configuration:hmg-platoon-german {
 	byte:range { 6 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+
+	bool:can-close-assault { false }
 }
 unit-configuration:security-platoon-german {
 	string:name { Security Platoon }
@@ -984,6 +986,16 @@ unit-configuration:panther-g {
 	byte:defense { 12 }
 	byte:movement { 10 }
 }
+unit-configuration:porsche-tiger {
+	string:name { Porsche Tiger }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 15 }
+	byte:range { 12 }
+	byte:defense { 10 }
+	byte:movement { 5 }
+}
 unit-configuration:tiger-i {
 	string:name { Tiger I }
 	unit-class:unit-class { tank }
@@ -1003,6 +1015,16 @@ unit-configuration:tiger-ii {
 	byte:range { 12 }
 	byte:defense { 16 }
 	byte:movement { 6 }
+}
+unit-configuration:maus {
+	string:name { Maus }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 22 }
+	byte:range { 12 }
+	byte:defense { 22 }
+	byte:movement { 4 }
 }
 unit-configuration:fw-190 {
 	string:name { FW-190 }

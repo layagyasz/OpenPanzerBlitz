@@ -631,14 +631,12 @@ namespace PanzerBlitz
 
 		public void Reset()
 		{
-			if (Position == null) return;
-
 			Fired = false;
 			Moved = false;
 			MovedMoreThanOneTile = false;
 			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
 			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
-			if (Status == UnitStatus.DAMAGED)
+			if (Status == UnitStatus.DAMAGED && Position != null)
 			{
 				Remove();
 				CancelInteractions();

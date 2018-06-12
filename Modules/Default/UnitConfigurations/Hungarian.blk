@@ -19,6 +19,8 @@ unit-configuration:hmg-platoon-hungarian {
 	byte:range { 6 }
 	byte:defense { 6 }
 	byte:movement { 1 }
+
+	bool:can-close-assault { false }
 }
 unit-configuration:rifle-platoon-hungarian-39 {
 	string:name { Rifle Platoon }

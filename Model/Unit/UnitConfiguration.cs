@@ -284,19 +284,9 @@ namespace PanzerBlitz
 			InnatelyClearsMines = (bool)(attributes[(int)Attribute.INNATELY_CLEARS_MINES] ?? false);
 			ImmuneToMines = (bool)(attributes[(int)Attribute.IMMUNE_TO_MINES] ?? (InnatelyClearsMines || IsAircraft()));
 
-			CanSpot = (bool)(attributes[(int)Attribute.CAN_SPOT]
-							 ?? (!IsStackUnique()
-								 && !IsNeutral()
-								 && UnitClass != UnitClass.FIGHTER_BOMBER
-								 && PrimaryWeapon != default(Weapon)));
+			CanSpot = (bool)(attributes[(int)Attribute.CAN_SPOT] ?? GetDefaultCanSpot());
 			CanReveal = (bool)(attributes[(int)Attribute.CAN_REVEAL] ?? CanSpot && !IsAircraft());
-			SpotRange = (byte)(
-				attributes[(int)Attribute.SPOT_RANGE] ??
-				(byte)(CanSpot
-					? (UnitClass == UnitClass.OBSERVATION_AIRCRAFT
-					   ? 30
-					   : Math.Max(GetAdjustedRange(true), GetAdjustedRange(false)))
-				 : 0));
+			SpotRange = (byte)(attributes[(int)Attribute.SPOT_RANGE] ?? GetDefaultSpotRange());
 			SightRange = IsEmplaceable() ? (byte)0 : Math.Max((byte)20, SpotRange);
 
 			DismountAs = (UnitConfiguration)attributes[(int)Attribute.DISMOUNT_AS];
@@ -313,6 +303,23 @@ namespace PanzerBlitz
 			if (IsAircraft()) return "unit-movement-rules.default-aircraft";
 			if (IsVehicle) return "unit-movement-rules.default-vehicle";
 			return "unit-movement-rules.default-non-vehicle";
+		}
+
+		bool GetDefaultCanSpot()
+		{
+			if (UnitClass == UnitClass.COMMAND_POST) return true;
+			return !IsStackUnique()
+					&& !IsNeutral()
+					&& UnitClass != UnitClass.FIGHTER_BOMBER
+					 && PrimaryWeapon != default(Weapon);
+		}
+
+		byte GetDefaultSpotRange()
+		{
+			if (!CanSpot) return 0;
+			if (UnitClass == UnitClass.COMMAND_POST) return 20;
+			if (UnitClass == UnitClass.OBSERVATION_AIRCRAFT) return 30;
+			return Math.Max(GetAdjustedRange(true), GetAdjustedRange(false));
 		}
 
 		public Weapon GetWeapon(bool Secondary)

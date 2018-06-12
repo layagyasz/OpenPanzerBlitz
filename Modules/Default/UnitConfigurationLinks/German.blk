@@ -658,6 +658,12 @@ unit-configuration-link:panther-g {
 
 	int:introduce-year { 1944 }
 }
+unit-configuration-link:porsche-tiger {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.porsche-tiger }
+
+	int:introduce-year { 1942 }
+}
 unit-configuration-link:tiger-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.tiger-i }
@@ -669,6 +675,12 @@ unit-configuration-link:tiger-ii {
 	!unit-configuration:unit-configuration { unit-configurations.tiger-ii }
 
 	int:introduce-year { 1944 }
+}
+unit-configuration-link:maus {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.maus }
+
+	int:introduce-year { 1945 }
 }
 unit-configuration-link:fw-190 {
 	!faction:faction { factions.german }
