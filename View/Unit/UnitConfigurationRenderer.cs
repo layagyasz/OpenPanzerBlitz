@@ -13,6 +13,7 @@ namespace PanzerBlitz
 		public readonly Font Font;
 		public readonly uint SpriteSize;
 
+		Texture _BackgroundImage;
 		List<Texture> _Textures = new List<Texture>();
 		Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>> _RenderInfo =
 			new Dictionary<UnitConfiguration, Tuple<Texture, Vector2f[]>>();
@@ -24,11 +25,12 @@ namespace PanzerBlitz
 			uint TextureSize,
 			Font Font)
 		{
+			_BackgroundImage = new Texture("unit-background.png");
 			this.RenderDetails = RenderDetails;
 			this.Font = Font;
 			this.SpriteSize = SpriteSize;
 
-			RenderAll(UnitConfigurations, SpriteSize, TextureSize);
+			RenderAll(new UnitConfiguration[] { null }.Concat(UnitConfigurations), SpriteSize, TextureSize);
 		}
 
 		public UnitConfigurationRenderer(
@@ -47,6 +49,12 @@ namespace PanzerBlitz
 
 		public override void Render(RenderTarget Target, Transform Transform, UnitConfiguration Object)
 		{
+			if (Object == null)
+			{
+				Target.Draw(new Sprite(_BackgroundImage), new RenderStates(Transform));
+				return;
+			}
+
 			UnitRenderDetails renderDetails = RenderDetails[Object.UniqueKey];
 
 			var image = new Sprite(new Texture(renderDetails.ImagePath));

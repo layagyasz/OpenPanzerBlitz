@@ -44,7 +44,7 @@ unit-render-details:ho-ni-2 {
 	string:image-path { ho-ni-2.png }
 }
 unit-render-details:ho-ro {
-	string:image-path { ho-ni-2.png }
+	string:image-path { ho-ro.png }
 }
 unit-render-details:ho-ni-3 {
 	string:image-path { ho-ni-3.png }

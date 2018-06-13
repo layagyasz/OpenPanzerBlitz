@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -10,6 +11,7 @@ namespace PanzerBlitz
 	{
 		List<Texture> _Textures = new List<Texture>();
 		Dictionary<T, Tuple<Texture, Vector2f[]>> _RenderInfo = new Dictionary<T, Tuple<Texture, Vector2f[]>>();
+		Tuple<Texture, Vector2f[]> _DefaultRenderInfo;
 
 		protected void RenderAll(IEnumerable<T> Objects, uint SpriteSize, uint TextureSize)
 		{
@@ -60,13 +62,18 @@ namespace PanzerBlitz
 		{
 			foreach (KeyValuePair<T, Vector2f[]> k in Cache)
 			{
-				try
+				if (Equals(k.Key, default(T)))
+					_DefaultRenderInfo = new Tuple<Texture, Vector2f[]>(Texture, k.Value);
+				else
 				{
-					_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(Texture, k.Value));
-				}
-				catch (Exception e)
-				{
-					throw new Exception(string.Format("Error Caching {0}: {1}", k.Key, e));
+					try
+					{
+						_RenderInfo.Add(k.Key, new Tuple<Texture, Vector2f[]>(Texture, k.Value));
+					}
+					catch (Exception e)
+					{
+						throw new Exception(string.Format("Error Caching {0}: {1}", k.Key, e));
+					}
 				}
 			}
 			Cache.Clear();
@@ -74,7 +81,7 @@ namespace PanzerBlitz
 
 		public Tuple<Texture, Vector2f[]> GetRenderInfo(T Object)
 		{
-			return _RenderInfo[Object];		}
+			return Equals(Object, default(T)) ? _DefaultRenderInfo : _RenderInfo[Object];		}
 
 		public abstract void Render(RenderTarget Target, Transform Transform, T Object);
 	}

@@ -97,6 +97,7 @@ namespace PanzerBlitz
 			}
 			Bridgeable = !Bridged
 				&& Tile.GetPathOverlayRules().Any(i => i != null && i.HasAttribute(TerrainAttribute.DEPRESSED));
+			Depressed &= !Bridged;
 
 			DieModifier =
 				Math.Max(

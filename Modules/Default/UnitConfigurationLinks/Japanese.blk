@@ -169,7 +169,7 @@ unit-configuration-link:chi-ha {
 }
 unit-configuration-link:shinhoto-chi-ha {
 	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.chi-ha }
+	!unit-configuration:unit-configuration { unit-configurations.shinhoto-chi-ha }
 }
 unit-configuration-link:te-ke {
 	!faction:faction { factions.japanese }

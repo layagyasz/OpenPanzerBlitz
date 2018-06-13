@@ -33,7 +33,7 @@ namespace PanzerBlitz
 
 		public static string Describe(Unit Unit)
 		{
-			return string.Format("{0} (#{1})", Unit.Configuration.Name, Unit.Id);
+			return string.Format("{0} (#{1})", Describe(Unit.Configuration), Unit.Id);
 		}
 
 		public static string Describe(UnitConfiguration Configuration)
@@ -98,7 +98,7 @@ namespace PanzerBlitz
 		public static string Capitalize(string Input)
 		{
 			if (Input.Length == 0) return Input;
-			return char.ToUpper(Input[0]) + Input.Substring(1).ToLower();
+			return char.ToUpper(Input[0]) + Input.Substring(1);
 		}
 
 		public static string Sentencify(string Input)

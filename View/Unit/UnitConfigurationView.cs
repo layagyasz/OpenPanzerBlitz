@@ -17,6 +17,7 @@ namespace PanzerBlitz
 	{
 		public readonly float Scale;
 
+		readonly Texture _BackgroundTexture;
 		readonly Texture _Texture;
 		readonly Rectangle _Bounds;
 		readonly Vertex[] _ImageVertices;
@@ -46,23 +47,32 @@ namespace PanzerBlitz
 				{
 					var f = new FloatingColor(colors[i]);
 					f = f.MakeHSL();
-					f.B = (float)Math.Min(1, f.B + .1);
+					f.B = Math.Min(1, f.B + .1f);
 					colors[i] = f.MakeRGB().ConvertToColor();
 				}
 			}
 
 			_Vertices = new Vertex[colors.Length * 4];
 			float barHeight = 1f / colors.Length;
+			var backgroundRenderInfo = Renderer.GetRenderInfo(null);
+			_BackgroundTexture = backgroundRenderInfo.Item1;
+			var v = backgroundRenderInfo.Item2;
+			for (int i = 0; i < colors.Length; ++i)
+			{
+				float yT = v[0].Y + ((float)i / colors.Length) * (v[0].Y + v[2].Y);
+				float yB = v[0].Y + ((float)(i + 1) / colors.Length) * (v[0].Y + v[2].Y);
+				_Vertices[i * 4] =
+					new Vertex(new Vector2f(-.5f, i * barHeight - .5f), colors[i], new Vector2f(v[0].X, yT));
+				_Vertices[i * 4 + 1] =
+					new Vertex(new Vector2f(.5f, i * barHeight - .5f), colors[i], new Vector2f(v[2].X, yT));
+				_Vertices[i * 4 + 2] =
+					new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f), colors[i], new Vector2f(v[2].X, yB));
+				_Vertices[i * 4 + 3] =
+					new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f), colors[i], new Vector2f(v[0].X, yB));
+			}
 
 			var renderInfo = Renderer.GetRenderInfo(UnitConfiguration);
 			_Texture = renderInfo.Item1;
-			for (int i = 0; i < colors.Length; ++i)
-			{
-				_Vertices[i * 4] = new Vertex(new Vector2f(-.5f, i * barHeight - .5f), colors[i]);
-				_Vertices[i * 4 + 1] = new Vertex(new Vector2f(.5f, i * barHeight - .5f), colors[i]);
-				_Vertices[i * 4 + 2] = new Vertex(new Vector2f(.5f, (i + 1) * barHeight - .5f), colors[i]);
-				_Vertices[i * 4 + 3] = new Vertex(new Vector2f(-.5f, (i + 1) * barHeight - .5f), colors[i]);
-			}
 			_ImageVertices = new Vertex[4];
 			Color c = Renderer.RenderDetails[UnitConfiguration.UniqueKey].OverrideColor;
 			if (c.R == 0 && c.G == 0 && c.B == 0)
@@ -104,6 +114,7 @@ namespace PanzerBlitz
 			Transform.Scale(Scale, Scale);
 			var r = new RenderStates();
 			r.Transform = Transform;
+			r.Texture = _BackgroundTexture;
 
 			Target.Draw(_Vertices, PrimitiveType.Quads, r);
 
