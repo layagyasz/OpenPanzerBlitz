@@ -395,6 +395,10 @@ unit-configuration-link:t-40 {
 
 	int:introduce-year { 1941 }
 }
+unit-configuration-link:at-26 {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.at-26 }
+}
 unit-configuration-link:t-28 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-28 }
@@ -442,6 +446,14 @@ unit-configuration-link:isu-152 {
 unit-configuration-link:kv-2 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-2 }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:m-8-rocket {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.m-8-rocket }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:m-13 {
 	!faction:faction { factions.russian }
@@ -557,7 +569,7 @@ unit-configuration-link:kv-1-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-1-a }
 
-	int:introduce-year { 1940 }
+	int:introduce-year { 1939 }
 }
 unit-configuration-link:kv-1-c {
 	!faction:faction { factions.russian }
@@ -606,6 +618,18 @@ unit-configuration-link:is-3 {
 	!unit-configuration:unit-configuration { unit-configurations.is-3 }
 
 	int:introduce-year { 1943 }
+}
+unit-configuration-link:t-34-t {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.t-34-t }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:kv-1-t {
+	!faction:faction { factions.russian }
+	!unit-configuration:unit-configuration { unit-configurations.kv-1-t }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:il-2-bombs {
 	!faction:faction { factions.russian }

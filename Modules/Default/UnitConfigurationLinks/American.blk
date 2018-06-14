@@ -394,7 +394,7 @@ unit-configuration-link:m-32-arv {
 	!unit-configuration:unit-configuration { unit-configurations.m-32-arv }
 
 	int:introduce-year { 1943 }
-}
+} 
 unit-configuration-link:t-28e1 {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.t-28e1 }

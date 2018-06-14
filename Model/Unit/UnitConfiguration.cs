@@ -534,16 +534,17 @@ namespace PanzerBlitz
 						return Weapon.Attack + .25f * Weapon.Range + Defense + Movement;
 					return Weapon.Attack + 4 + Defense + Movement;
 				case UnitClass.RECONNAISSANCE_VEHICLE:
+					float v = SpotRange > GetDefaultSpotRange() ? 5 : 0;
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
-							return .5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
-						return 1.5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+							return v + .5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+						return v + 1.5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
 					}
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return v + Defense + Movement;
 					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR)
-						return Weapon.Attack + Weapon.Range + Defense + Movement;
-					return Weapon.Attack + Math.Min((int)Weapon.Range, 6) + Defense + Movement;
+						return v + Weapon.Attack + Weapon.Range + Defense + Movement;
+					return v + Weapon.Attack + Math.Min((int)Weapon.Range, 6) + Defense + Movement;
 				case UnitClass.TRANSPORT:
 					if (IsVehicle)
 					{

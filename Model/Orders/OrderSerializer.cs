@@ -71,14 +71,13 @@ namespace PanzerBlitz
 
 		public void Serialize(Order Order, SerializationOutputStream Stream)
 		{
-			Console.WriteLine("{0} {1}", Array.IndexOf(ORDER_TYPES, Order.GetType()), Order);
 			Stream.Write((byte)Array.IndexOf(ORDER_TYPES, Order.GetType()));
 			Stream.Write(Order);
 		}
 
 		public Order Deserialize(SerializationInputStream Stream)
 		{
-			return FileUtils.Print(DESERIALIZERS[FileUtils.Print(Stream.ReadByte())](Stream, _GameObjects));
+			return DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
 		}
 	}
 }

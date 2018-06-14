@@ -166,6 +166,9 @@ unit-render-details:t-38-m2 {
 unit-render-details:t-40 {
 	string:image-path { t-40.png }
 }
+unit-render-details:at-26 {
+	string:image-path { at-26.png }
+}
 unit-render-details:t-28 {
 	string:image-path { t-28-e.png }
 }
@@ -192,6 +195,9 @@ unit-render-details:isu-152 {
 }
 unit-render-details:kv-2 {
 	string:image-path { kv-ii.png }
+}
+unit-render-details:m-8-rocket {
+	string:image-path { m-8-rocket.png }
 }
 unit-render-details:m-13 {
 	string:image-path { m-13.png }
@@ -279,6 +285,12 @@ unit-render-details:is-2 {
 }
 unit-render-details:is-3 {
 	string:image-path { js-iii.png }
+}
+unit-render-details:t-34-t {
+	string:image-path { t-34-t.png }
+}
+unit-render-details:kv-1-t {
+	string:image-path { kv-1-t.png }
 }
 unit-render-details:il-2-bombs {
 	string:image-path { il-2.png }

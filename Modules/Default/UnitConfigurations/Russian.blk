@@ -511,7 +511,7 @@ unit-configuration:t-26-a {
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
 	byte:range { 2 }
-	byte:defense { 4 }
+	byte:defense { 2 }
 	byte:movement { 6 }	
 }
 unit-configuration:t-38 {
@@ -553,6 +553,16 @@ unit-configuration:t-40 {
 	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
 	int:water-die-modifier { 2 }
 }
+unit-configuration:at-26 {
+	string:name { AT-26 }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 6 }
+	byte:defense { 2 }
+	byte:movement { 6 }	
+}
 unit-configuration:t-28 {
 	string:name { T-28 }
 	unit-class:unit-class { tank }
@@ -590,7 +600,7 @@ unit-configuration:t-35 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
 	byte:range { 6 }
-	byte:defense { 9 }
+	byte:defense { 3 }
 	byte:movement { 6 }	
 }
 unit-configuration:t-100 {
@@ -600,7 +610,7 @@ unit-configuration:t-100 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }
 	byte:range { 6 }
-	byte:defense { 12 }
+	byte:defense { 6 }
 	byte:movement { 6 }	
 }
 unit-configuration:su-122 {
@@ -610,7 +620,7 @@ unit-configuration:su-122 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 30 }
 	byte:range { 8 }
-	byte:defense { 11 }
+	byte:defense { 9 }
 	byte:movement { 11 }
 }
 unit-configuration:su-152 {
@@ -620,7 +630,7 @@ unit-configuration:su-152 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 40 }
 	byte:range { 10 }
-	byte:defense { 16 }
+	byte:defense { 9 }
 	byte:movement { 7 }
 }
 unit-configuration:isu-152 {
@@ -630,7 +640,7 @@ unit-configuration:isu-152 {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 40 }
 	byte:range { 10 }
-	byte:defense { 17 }
+	byte:defense { 11 }
 	byte:movement { 7 }
 }
 unit-configuration:kv-2 {
@@ -642,6 +652,16 @@ unit-configuration:kv-2 {
 	byte:range { 10 }
 	byte:defense { 10 }
 	byte:movement { 5 }	
+}
+unit-configuration:m-8-rocket {
+	string:name { M-8 }
+	unit-class:unit-class { self-propelled-artillery }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 20 }
+	byte:range { 16 }
+	byte:defense { 2 }
+	byte:movement { 12 }	
 }
 unit-configuration:m-13 {
 	string:name { M-13 }
@@ -710,7 +730,7 @@ unit-configuration:su-76 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 12 }
 	byte:range { 5 }
-	byte:defense { 9 }
+	byte:defense { 8 }
 	byte:movement { 9 }
 }
 unit-configuration:su-85 {
@@ -720,7 +740,7 @@ unit-configuration:su-85 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 14 }
 	byte:range { 8 }
-	byte:defense { 12 }
+	byte:defense { 9 }
 	byte:movement { 11 }
 }
 unit-configuration:t-44 {
@@ -740,7 +760,7 @@ unit-configuration:su-100 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 16 }
 	byte:range { 8 }
-	byte:defense { 15 }
+	byte:defense { 11 }
 	byte:movement { 8 }
 }
 unit-configuration:isu-122 {
@@ -750,7 +770,7 @@ unit-configuration:isu-122 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 17 }
 	byte:range { 10 }
-	byte:defense { 15 }
+	byte:defense { 11 }
 	byte:movement { 7 }
 }
 unit-configuration:t-26-b {
@@ -760,7 +780,7 @@ unit-configuration:t-26-b {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 5 }
 	byte:range { 3 }
-	byte:defense { 3 }
+	byte:defense { 2 }
 	byte:movement { 6 } 
 }
 unit-configuration:t-26-c {
@@ -930,8 +950,28 @@ unit-configuration:is-3 {
 	weapon-class:weapon-class { anti-armor }
 	byte:attack { 18 }
 	byte:range { 12 }
-	byte:defense { 14 }
+	byte:defense { 19 }
 	byte:movement { 8 }	
+}
+unit-configuration:t-34-t {
+	string:name { T-34 T }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 9 }
+	byte:movement { 11 }
+}
+unit-configuration:kv-1-t {
+	string:name { KV-1 T }
+	unit-class:unit-class { engineer-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 11 }
+	byte:movement { 8 }
 }
 unit-configuration:il-2-bombs {
 	string:name { Il-2 Bombs }

@@ -71,6 +71,10 @@ unit-render-details:sdkfz-8 {
 	string:override-display-name { SdKfz 8 }
 	string:image-path { sdkfz-8.png }
 }
+unit-render-details:sdkfz-10 {
+	string:override-display-name { SdKfz 10 }
+	string:image-path { sdkfz-10.png }
+}
 unit-render-details:sdkfz-251 {
 	string:override-display-name { HALFTRK }
 	string:image-path { sdkfz-251.png }
@@ -91,6 +95,9 @@ unit-render-details:sdkfz-250_10 {
 unit-render-details:sdkfz-251_10 {
 	string:image-path { sdkfz-251_10.png }
 }
+unit-render-details:kubelwagen {
+	string:image-path { kubelwagen.png }
+}
 unit-render-details:kfz-13 {
 	string:image-path { kfz-13.png }
 }
@@ -99,6 +106,9 @@ unit-render-details:sdkfz-6_2 {
 }
 unit-render-details:sdkfz-7_1 {
 	string:image-path { sdkfz-7_1.png }
+}
+unit-render-details:sdkfz-8-at {
+	string:image-path { sdkfz-8-at.png }
 }
 unit-render-details:sdkfz-10_4 {
 	string:image-path { sdkfz-10_4.png }
@@ -140,6 +150,9 @@ unit-render-details:sdkfz-250_8 {
 unit-render-details:sdkfz-250_9 {
 	string:image-path { sdkfz-250_9.png }
 }
+unit-render-details:sdkfz-251_1_ii {
+	string:image-path { sdkfz-251_1_ii.png }
+}
 unit-render-details:sdkfz-251_2 {
 	string:image-path { sdkfz-251_2.png }
 }
@@ -148,6 +161,15 @@ unit-render-details:sdkfz-251_9 {
 }
 unit-render-details:sdkfz-251_16 {
 	string:image-path { sdkfz-251_16.png }
+}
+unit-render-details:sdkfz-251_17 {
+	string:image-path { sdkfz-251_17.png }
+}
+unit-render-details:sdkfz-251_21 {
+	string:image-path { sdkfz-251_21.png }
+}
+unit-render-details:sdkfz-251_22 {
+	string:image-path { sdkfz-251_22.png }
 }
 unit-render-details:maultier {
 	string:image-path { maultier.png }
@@ -182,6 +204,9 @@ unit-render-details:stuh-42 {
 unit-render-details:diana {
 	string:image-path { diana.png }
 }
+unit-render-details:marder-i {
+	string:image-path { marder-i.png }
+}
 unit-render-details:marder-ii {
 	string:image-path { marder-ii.png }
 }
@@ -196,6 +221,9 @@ unit-render-details:stug-iii-g {
 }
 unit-render-details:stupz-iv {
 	string:image-path { stupz-iv.png }
+}
+unit-render-details:stupz-vi {
+	string:image-path { stupz-vi.png }
 }
 unit-render-details:flamingo {
 	string:image-path { flamingo.png }
@@ -309,6 +337,21 @@ unit-render-details:tiger-ii {
 }
 unit-render-details:maus {
 	string:image-path { maus.png }
+}
+unit-render-details:bgpz-i {
+	string:image-path { bgpz-i.png }
+}
+unit-render-details:bgpz-38 {
+	string:image-path { bgpz-38.png }
+}
+unit-render-details:bgpz-iii {
+	string:image-path { bgpz-iii.png }
+}
+unit-render-details:bgpz-iv {
+	string:image-path { bgpz-iv.png }
+}
+unit-render-details:bgpz-v {
+	string:image-path { bgpz-v.png }
 }
 unit-render-details:fw-190 {
 	string:image-path { fw-190.png }

@@ -1,6 +1,7 @@
 ﻿unit-configuration-lock:wagon-german {
 	string[]:unit-configurations { 
 		string:_ { wagon-german }
+		string:_ { limber-german }
 	}
 	float:rarity { 5.6 }
 }
@@ -194,6 +195,12 @@ unit-configuration-lock:sdkfz-8 {
 	}
 	float:rarity { 12.0 }
 }
+unit-configuration-lock:sdkfz-10 {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-10 }
+	}
+	float:rarity { 10.4 }
+}
 unit-configuration-lock:sdkfz-251 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-251 }
@@ -220,6 +227,12 @@ unit-configuration-lock:sdkfz-251_10 {
 	}
 	float:rarity { 16.1 }
 }
+unit-configuration-lock:kubelwagen {
+	string[]:unit-configurations { 
+		string:_ { kubelwagen }
+	}
+	float:rarity { 9.4 }
+}
 unit-configuration-lock:kfz-13 {
 	string[]:unit-configurations { 
 		string:_ { kfz-13 }
@@ -238,11 +251,17 @@ unit-configuration-lock:sdkfz-7_1 {
 	}
 	float:rarity { 14.4 }
 }
+unit-configuration-lock:sdkfz-8-at {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-8-at }
+	}
+	float:rarity { 20.7 }
+}
 unit-configuration-lock:sdkfz-10_4 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-10_4 }
 	}
-	float:rarity { 12.4 }
+	float:rarity { 13.6 }
 }
 unit-configuration-lock:sdkfz-221 {
 	string[]:unit-configurations { 
@@ -316,6 +335,12 @@ unit-configuration-lock:sdkfz-250_9 {
 	}
 	float:rarity { 14.4 }
 }
+unit-configuration-lock:sdkfz-251_1_ii {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_1_ii }
+	}
+	float:rarity { 16.1 }
+}
 unit-configuration-lock:sdkfz-251_2 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-251_2 }
@@ -333,6 +358,24 @@ unit-configuration-lock:sdkfz-251_16 {
 		string:_ { sdkfz-251_16 }
 	}
 	float:rarity { 15.6 }
+}
+unit-configuration-lock:sdkfz-251_17 {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_17 }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:sdkfz-251_21 {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_21 }
+	}
+	float:rarity { 15.4 }
+}
+unit-configuration-lock:sdkfz-251_22 {
+	string[]:unit-configurations { 
+		string:_ { sdkfz-251_22 }
+	}
+	float:rarity { 15.9 }
 }
 unit-configuration-lock:maultier {
 	string[]:unit-configurations { 
@@ -400,6 +443,12 @@ unit-configuration-lock:diana {
 	}
 	float:rarity { 20.8 }
 }
+unit-configuration-lock:marder-i {
+	string[]:unit-configurations { 
+		string:_ { marder-i }
+	}
+	float:rarity { 16.6 }
+}
 unit-configuration-lock:marder-ii {
 	string[]:unit-configurations { 
 		string:_ { marder-ii }
@@ -429,6 +478,12 @@ unit-configuration-lock:stupz-iv {
 		string:_ { stupz-iv }
 	}
 	float:rarity { 15.7 }
+}
+unit-configuration-lock:stupz-vi {
+	string[]:unit-configurations { 
+		string:_ { stupz-vi }
+	}
+	float:rarity { 19.8 }
 }
 unit-configuration-lock:flamingo {
 	string[]:unit-configurations { 
@@ -651,4 +706,34 @@ unit-configuration-lock:maus {
 		string:_ { maus }
 	}
 	float:rarity { 23.0 }
+}
+unit-configuration-lock:bgpz-i {
+	string[]:unit-configurations { 
+		string:_ { bgpz-i }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:bgpz-38 {
+	string[]:unit-configurations { 
+		string:_ { bgpz-38 }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:bgpz-iii {
+	string[]:unit-configurations { 
+		string:_ { bgpz-iii }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:bgpz-iv {
+	string[]:unit-configurations { 
+		string:_ { bgpz-iv }
+	}
+	float:rarity { 19.6 }
+}
+unit-configuration-lock:bgpz-v {
+	string[]:unit-configurations { 
+		string:_ { bgpz-v }
+	}
+	float:rarity { 15.6 }
 }

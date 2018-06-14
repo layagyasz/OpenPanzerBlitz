@@ -314,6 +314,12 @@ unit-configuration-lock:t-40 {
 	}
 	float:rarity { 17.5 }
 }
+unit-configuration-lock:at-26 {
+	string[]:unit-configurations { 
+		string:_ { at-26 }
+	}
+	float:rarity { 22.0 }
+}
 unit-configuration-lock:t-28 {
 	string[]:unit-configurations { 
 		string:_ { t-28 }
@@ -368,17 +374,23 @@ unit-configuration-lock:kv-2 {
 	}
 	float:rarity { 16.9 }
 }
+unit-configuration-lock:m-8-rocket {
+	string[]:unit-configurations { 
+		string:_ { m-8-rocket }
+	}
+	float:rarity { 14.1 }
+}
 unit-configuration-lock:m-13 {
 	string[]:unit-configurations { 
 		string:_ { m-13 }
 	}
-	float:rarity { 12.2 }
+	float:rarity { 12.6 }
 }
 unit-configuration-lock:m-31 {
 	string[]:unit-configurations { 
 		string:_ { m-31 }
 	}
-	float:rarity { 15.3 }
+	float:rarity { 14.5 }
 }
 unit-configuration-lock:ot-133 {
 	string[]:unit-configurations { 
@@ -541,4 +553,16 @@ unit-configuration-lock:is-3 {
 		string:_ { is-3 }
 	}
 	float:rarity { 23.7 }
+}
+unit-configuration-lock:t-34-t {
+	string[]:unit-configurations { 
+		string:_ { t-34-t }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:kv-1-t {
+	string[]:unit-configurations { 
+		string:_ { kv-1-t }
+	}
+	float:rarity { 18.7 }
 }
