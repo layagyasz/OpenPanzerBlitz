@@ -47,13 +47,16 @@ namespace PanzerBlitz
 
 		public Scenario BuildScenario()
 		{
+			var armyConfigurations = _Armies.Select(i => i.BuildArmyConfiguration()).ToList();
 			return new Scenario(
-				_Armies.Select(i => i.BuildArmyConfiguration()),
+				armyConfigurations,
+				armyConfigurations,
+				armyConfigurations,
 				Parameters.Turns,
 				Parameters.FogOfWar,
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(
-					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting.MapGenerator)
+					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting)
 				.MakeStatic(new Random()));
 		}
 	}

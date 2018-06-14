@@ -9,7 +9,7 @@
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:50cal-mg {
 	string:name { .50 cal }
@@ -22,7 +22,7 @@ unit-configuration:50cal-mg {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:wz-30 {
 	string:name { wz 30 }
@@ -35,7 +35,7 @@ unit-configuration:wz-30 {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:25mm-at {
 	string:name { 25mm }
@@ -47,7 +47,7 @@ unit-configuration:25mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:28mm-at {
 	string:name { 28mm }
@@ -59,7 +59,7 @@ unit-configuration:28mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:37mm-at {
 	string:name { 37mm }
@@ -71,7 +71,7 @@ unit-configuration:37mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:37mm-at-american {
 	string:name { 37mm }
@@ -83,7 +83,7 @@ unit-configuration:37mm-at-american {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:40mm-at {
 	string:name { 40mm }
@@ -95,7 +95,7 @@ unit-configuration:40mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:45mm-at-early {
 	string:name { 45mm }
@@ -107,7 +107,7 @@ unit-configuration:45mm-at-early {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:45mm-at {
 	string:name { 45mm }
@@ -119,7 +119,7 @@ unit-configuration:45mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:47mm-at {
 	string:name { 47mm }
@@ -131,7 +131,7 @@ unit-configuration:47mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:2pdr-at {
 	string:name { 2pdr }
@@ -143,7 +143,7 @@ unit-configuration:2pdr-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:50mm-at {
 	string:name { 50mm }
@@ -155,7 +155,7 @@ unit-configuration:50mm-at {
 	byte:defense { 3 }
 	byte:movement { 0 }
 
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:57mm-at {
 	string:name { 57mm }
@@ -166,8 +166,6 @@ unit-configuration:57mm-at {
 	byte:range { 4 }
 	byte:defense { 3 }
 	byte:movement { 0 }
-
-	bool:is-light-passenger { true }
 }
 unit-configuration:57mm-at-american {
 	string:name { 57mm }
@@ -178,8 +176,6 @@ unit-configuration:57mm-at-american {
 	byte:range { 5 }
 	byte:defense { 2 }
 	byte:movement { 0 }
-
-	bool:is-light-passenger { true }
 }
 unit-configuration:6pdr-at {
 	string:name { 6pdr }
@@ -190,8 +186,6 @@ unit-configuration:6pdr-at {
 	byte:range { 5 }
 	byte:defense { 2 }
 	byte:movement { 0 }
-
-	bool:is-light-passenger { true }
 }
 unit-configuration:75mm-at-early {
 	string:name { 75mm }
@@ -272,6 +266,8 @@ unit-configuration:88mm-at-early {
 	byte:range { 20 }
 	byte:defense { 1 }
 	byte:movement { 0 }
+
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:88mm-at {
 	string:name { 88mm }
@@ -282,6 +278,8 @@ unit-configuration:88mm-at {
 	byte:range { 20 }
 	byte:defense { 1 }
 	byte:movement { 0 }
+
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:90mm-at {
 	string:name { 90mm }
@@ -292,6 +290,8 @@ unit-configuration:90mm-at {
 	byte:range { 20 }
 	byte:defense { 1 }
 	byte:movement { 0 }
+
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:100mm-at {
 	string:name { 100mm }
@@ -302,6 +302,8 @@ unit-configuration:100mm-at {
 	byte:range { 8 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:20mm-aa-early {
 	string:name { 20mm }
@@ -314,7 +316,7 @@ unit-configuration:20mm-aa-early {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:20mm-aa {
 	string:name { 20mm }
@@ -327,7 +329,7 @@ unit-configuration:20mm-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:20mm_2-aa {
 	string:name { 20(2)mm }
@@ -340,7 +342,7 @@ unit-configuration:20mm_2-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:20mm_4-aa {
 	string:name { 20(4)mm }
@@ -353,7 +355,7 @@ unit-configuration:20mm_4-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:25mm-aa {
 	string:name { 25mm }
@@ -366,7 +368,7 @@ unit-configuration:25mm-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:37mm-aa {
 	string:name { 37mm }
@@ -379,7 +381,7 @@ unit-configuration:37mm-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:40mm-aa {
 	string:name { 40mm }
@@ -392,7 +394,7 @@ unit-configuration:40mm-aa {
 	byte:movement { 0 }
 
 	bool:can-anti-aircraft { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:75mm-aa {
 	string:name { 75mm }
@@ -439,6 +441,8 @@ unit-configuration:37mm-how {
 	byte:range { 2 }
 	byte:defense { 4 }
 	byte:movement { 1 }
+
+	unit-weight:unit-weight { light }
 }
 unit-configuration:65mm-how-company {
 	string:name { 65mm }
@@ -587,6 +591,7 @@ unit-configuration:100mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:100mm-how-german {
 	string:name { 100mm }
@@ -599,6 +604,7 @@ unit-configuration:100mm-how-german {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:105mm-how-company {
 	string:name { 105mm }
@@ -611,6 +617,7 @@ unit-configuration:105mm-how-company {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:105mm-how {
 	string:name { 105mm }
@@ -623,6 +630,7 @@ unit-configuration:105mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:120mm-how {
 	string:name { 120mm }
@@ -635,6 +643,7 @@ unit-configuration:120mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:122mm-how {
 	string:name { 122mm }
@@ -647,6 +656,7 @@ unit-configuration:122mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:149mm-how {
 	string:name { 149mm }
@@ -659,6 +669,7 @@ unit-configuration:149mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:150mm-how-company {
 	string:name { 150mm }
@@ -669,6 +680,9 @@ unit-configuration:150mm-how-company {
 	byte:range { 12 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:150mm-how {
 	string:name { 150mm }
@@ -681,6 +695,7 @@ unit-configuration:150mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:152mm-how {
 	string:name { 152mm }
@@ -693,6 +708,7 @@ unit-configuration:152mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:155mm-how {
 	string:name { 155mm }
@@ -705,6 +721,7 @@ unit-configuration:155mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:170mm-how {
 	string:name { 170mm }
@@ -717,6 +734,7 @@ unit-configuration:170mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:203mm-how {
 	string:name { 203mm }
@@ -729,6 +747,7 @@ unit-configuration:203mm-how {
 	byte:movement { 2 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:210mm-how {
 	string:name { 210mm }
@@ -741,6 +760,7 @@ unit-configuration:210mm-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:18pdr-how {
 	string:name { 18pdr }
@@ -789,6 +809,7 @@ unit-configuration:4_5in-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:4_5in-how-american {
 	string:name { 4.5inch }
@@ -801,6 +822,7 @@ unit-configuration:4_5in-how-american {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:5_5in-how {
 	string:name { 5.5inch }
@@ -813,6 +835,7 @@ unit-configuration:5_5in-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:7_2in-how {
 	string:name { 7.2inch }
@@ -825,6 +848,7 @@ unit-configuration:7_2in-how {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:8in-how-allied {
 	string:name { 8inch }
@@ -837,6 +861,7 @@ unit-configuration:8in-how-allied {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:8in-how-finnish {
 	string:name { 8inch }
@@ -849,6 +874,7 @@ unit-configuration:8in-how-finnish {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:long-tom {
 	string:name { Long Tom }
@@ -861,6 +887,7 @@ unit-configuration:long-tom {
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:76mm-mortar {
 	string:name { 76mm }
@@ -873,7 +900,7 @@ unit-configuration:76mm-mortar {
 	byte:movement { 1 }
 
 	bool:can-indirect-fire { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:81mm-mortar {
 	string:name { 81mm }
@@ -886,7 +913,7 @@ unit-configuration:81mm-mortar {
 	byte:movement { 1 }
 
 	bool:can-indirect-fire { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:82mm-mortar-motorized {
 	string:name { 82mm }
@@ -899,56 +926,59 @@ unit-configuration:82mm-mortar-motorized {
 	byte:movement { 1 }
 
 	bool:can-indirect-fire { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:82mm-mortar {
 	string:name { 82mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 3 }
 	byte:range { 12 }
 	byte:defense { 3 }
 	byte:movement { 1 }
 
 	bool:can-indirect-fire { true }
-	bool:is-light-passenger { true }
+	unit-weight:unit-weight { light }
 }
 unit-configuration:90mm-mortar {
 	string:name { 90mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 3 }
 	byte:range { 17 }
 	byte:defense { 3 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:107mm-mortar {
 	string:name { 107mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 10 }
 	byte:range { 17 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:120mm-mortar-german {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 15 }
 	byte:range { 20 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:120mm-mortar-russian {
 	string:name { 120mm }
@@ -959,43 +989,48 @@ unit-configuration:120mm-mortar-russian {
 	byte:range { 20 }
 	byte:defense { 2 }
 	byte:movement { 0 }
+
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:120mm-mortar-early {
 	string:name { 120mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 12 }
 	byte:range { 20 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:150mm-mortar {
 	string:name { 150mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 60 }
 	byte:range { 16 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:160mm-mortar {
 	string:name { 160mm }
 	unit-class:unit-class { towed-gun }
 
-	weapon-class:weapon-class { mortar}
+	weapon-class:weapon-class { mortar }
 	byte:attack { 60 }
 	byte:range { 30 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 
 	bool:can-indirect-fire { true }
+	unit-weight:unit-weight { heavy }
 }
 unit-configuration:land-mattress {
 	string:name { Land Mattress }

@@ -1,4 +1,6 @@
-﻿namespace PanzerBlitz
+﻿using System;
+
+namespace PanzerBlitz
 {
 	public class LocalMatchLobbyAdapter : MatchLobbyAdapter
 	{
@@ -26,7 +28,7 @@
 
 		public bool Start()
 		{
-			return _Lobby.ApplyAction(new LaunchAction());
+			return _Lobby.ApplyAction(new LaunchAction(_Lobby.Scenario.MakeStatic(new Random())));
 		}
 	}
 }

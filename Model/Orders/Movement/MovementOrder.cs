@@ -119,13 +119,17 @@ namespace PanzerBlitz
 
 		public override string ToString()
 		{
-			return string.Format(
-				"[MovementOrder: Unit={0}, From={1}, To={2}, Distance={3}, Path={4}]",
-				Unit,
-				Path.Nodes.First(),
-				Path.Destination,
-				Path.Distance,
-				string.Join(", ", Path.Nodes.Select(i => i.Coordinate.ToString())));
+			if (Path != null)
+			{
+				return string.Format(
+					"[MovementOrder: Unit={0}, From={1}, To={2}, Distance={3}, Path={4}]",
+					Unit,
+					Path.Nodes.First(),
+					Path.Destination,
+					Path.Distance,
+					string.Join(", ", Path.Nodes.Select(i => i.Coordinate.ToString())));
+			}
+			return string.Format("MovementOrder: Unit={0}, To={1}", Unit, To);
 		}
 	}
 }

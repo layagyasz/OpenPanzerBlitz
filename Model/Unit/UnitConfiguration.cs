@@ -37,6 +37,7 @@ namespace PanzerBlitz
 			IS_VEHICLE,
 			IS_ARMORED,
 			LEAVES_WRECK_WHEN_DESTROYED,
+			UNIT_WEIGHT,
 			IS_ENGINEER,
 			IS_PARATROOP,
 			IS_COMMANDO,
@@ -51,7 +52,6 @@ namespace PanzerBlitz
 			CAN_ONLY_OVERRUN_UNARMORED,
 			CAN_ONLY_SUPPORT_CLOSE_ASSAULT,
 			IS_PASSENGER,
-			IS_LIGHT_PASSENGER,
 			IS_OVERSIZED_PASSENGER,
 			CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER,
 			OVERSIZED_PASSENGER_MOVEMENT_MULTIPLIER,
@@ -93,6 +93,7 @@ namespace PanzerBlitz
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
 		public readonly bool LeavesWreckWhenDestroyed;
+		public readonly UnitWeight UnitWeight;
 		public readonly bool IsEngineer;
 		public readonly bool IsParatroop;
 		public readonly bool IsCommando;
@@ -108,7 +109,6 @@ namespace PanzerBlitz
 		public readonly bool CanOnlyOverrunUnarmored;
 		public readonly bool CanOnlySupportCloseAssault;
 		public readonly bool IsPassenger;
-		public readonly bool IsLightPassenger;
 		public readonly bool IsOversizedPassenger;
 		public readonly bool CannotUseRoadMovementWithOversizedPassenger;
 		public readonly float OversizedPassengerMovementMultiplier;
@@ -161,6 +161,7 @@ namespace PanzerBlitz
 			IsVehicle = Stream.ReadBoolean();
 			IsArmored = Stream.ReadBoolean();
 			LeavesWreckWhenDestroyed = Stream.ReadBoolean();
+			UnitWeight = (UnitWeight)Stream.ReadByte();
 			IsEngineer = Stream.ReadBoolean();
 			IsParatroop = Stream.ReadBoolean();
 			IsCommando = Stream.ReadBoolean();
@@ -175,7 +176,6 @@ namespace PanzerBlitz
 			CanOnlyOverrunUnarmored = Stream.ReadBoolean();
 			CanOnlySupportCloseAssault = Stream.ReadBoolean();
 			IsPassenger = Stream.ReadBoolean();
-			IsLightPassenger = Stream.ReadBoolean();
 			IsOversizedPassenger = Stream.ReadBoolean();
 			CannotUseRoadMovementWithOversizedPassenger = Stream.ReadBoolean();
 			OversizedPassengerMovementMultiplier = Stream.ReadFloat();
@@ -230,6 +230,7 @@ namespace PanzerBlitz
 				((IsVehicle && UnitClass != UnitClass.TRANSPORT && !IsAircraft()) || UnitClass == UnitClass.FORT));
 			LeavesWreckWhenDestroyed = (bool)(
 				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED] ?? (IsArmored && IsVehicle));
+			UnitWeight = (UnitWeight)(attributes[(int)Attribute.UNIT_WEIGHT] ?? GetDefaultUnitWeight());
 			IsParatroop = (bool)(attributes[(int)Attribute.IS_PARATROOP] ?? false);
 			IsCommando = (bool)(attributes[(int)Attribute.IS_COMMANDO] ?? false);
 			HasLowProfile = (bool)(
@@ -251,9 +252,6 @@ namespace PanzerBlitz
 								 ?? (UnitClass == UnitClass.INFANTRY
 									 || UnitClass == UnitClass.COMMAND_POST
 									 || UnitClass == UnitClass.TOWED_GUN));
-			IsLightPassenger = (bool)(attributes[(int)Attribute.IS_LIGHT_PASSENGER]
-									  ?? (IsPassenger
-										  && (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST)));
 			IsOversizedPassenger = (bool)(attributes[(int)Attribute.IS_OVERSIZED_PASSENGER] ?? false);
 			CannotUseRoadMovementWithOversizedPassenger = (bool)(
 				attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT_WITH_OVERSIZED_PASSENGER] ?? CanOnlyCarryInfantry);
@@ -298,6 +296,12 @@ namespace PanzerBlitz
 			AreaControlCapture = (bool)(attributes[(int)Attribute.AREA_CONTROL_CAPTURE] ?? UnitClass == UnitClass.FORT);
 		}
 
+		UnitWeight GetDefaultUnitWeight()
+		{
+			if (UnitClass == UnitClass.INFANTRY || UnitClass == UnitClass.COMMAND_POST) return UnitWeight.LIGHT;
+			return IsVehicle ? UnitWeight.HEAVY : UnitWeight.MEDIUM;
+		}
+
 		string GetDefaultMovementRules()
 		{
 			if (IsAircraft()) return "unit-movement-rules.default-aircraft";
@@ -332,7 +336,7 @@ namespace PanzerBlitz
 			if (!IsCarrier
 				|| !UnitConfiguration.IsPassenger
 				|| (CanOnlyCarryInfantry && UnitConfiguration.UnitClass != UnitClass.INFANTRY)
-				|| (CanOnlyCarryLight && !UnitConfiguration.IsLightPassenger))
+				|| (CanOnlyCarryLight && UnitConfiguration.UnitWeight > UnitWeight.LIGHT))
 				return OrderInvalidReason.UNIT_NO_CARRY;
 			return OrderInvalidReason.NONE;
 		}
@@ -587,7 +591,7 @@ namespace PanzerBlitz
 				case UnitClass.OBSERVATION_AIRCRAFT:
 					return 50;
 				case UnitClass.FIGHTER_BOMBER:
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 5 + Weapon.Attack / 2;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 5 + .5f * Weapon.Attack;
 					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 5 + 3 * Weapon.Attack;
 					return 5 + Weapon.Attack;
 				default:
@@ -621,6 +625,7 @@ namespace PanzerBlitz
 			Stream.Write(IsVehicle);
 			Stream.Write(IsArmored);
 			Stream.Write(LeavesWreckWhenDestroyed);
+			Stream.Write((byte)UnitWeight);
 			Stream.Write(IsEngineer);
 			Stream.Write(IsParatroop);
 			Stream.Write(IsCommando);
@@ -635,7 +640,6 @@ namespace PanzerBlitz
 			Stream.Write(CanOnlyOverrunUnarmored);
 			Stream.Write(CanOnlySupportCloseAssault);
 			Stream.Write(IsPassenger);
-			Stream.Write(IsLightPassenger);
 			Stream.Write(IsOversizedPassenger);
 			Stream.Write(CannotUseRoadMovementWithOversizedPassenger);
 			Stream.Write(OversizedPassengerMovementMultiplier);

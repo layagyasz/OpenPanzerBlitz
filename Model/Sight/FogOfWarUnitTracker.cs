@@ -56,12 +56,12 @@ namespace PanzerBlitz
 			{
 				return new List<Tuple<Unit, UnitVisibility>>
 				{
-					new Tuple<Unit, UnitVisibility>(Unit, new UnitVisibility(true, Movement.Tile))
+					new Tuple<Unit, UnitVisibility>(Unit, new UnitVisibility(true, Unit.Position))
 				};
 			}
 			bool visible = SightFinder.IsSighted(Unit);
 			Tile lastSeen = null;
-			if (Movement.Path != null)
+			if (Movement != null && Movement.Path != null)
 			{
 				for (int i = Movement.Path.Count - 2; i >= 0; --i)
 				{

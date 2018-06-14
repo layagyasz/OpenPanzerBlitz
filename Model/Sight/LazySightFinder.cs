@@ -128,6 +128,21 @@ namespace PanzerBlitz
 			}
 			else
 			{
+				bool carrierOverride = _OverrideVisibleUnits.Contains(unit);
+				bool passengerOverride = _OverrideVisibleUnits.Contains(unit.Passenger);
+
+				var unitDeltas = new List<Tuple<Unit, UnitVisibility>>();
+				if (carrierOverride && !passengerOverride)
+				{
+					_OverrideVisibleUnits.Add(unit.Passenger);
+					unitDeltas.AddRange(UnitTracker.ComputeDelta(this, unit.Passenger, null));
+				}
+				else if (!carrierOverride && passengerOverride)
+				{
+					_OverrideVisibleUnits.Add(unit);
+					unitDeltas.AddRange(UnitTracker.ComputeDelta(this, unit, null));
+				}
+
 				if (OnSightUpdated != null)
 				{
 					OnSightUpdated(
@@ -136,7 +151,7 @@ namespace PanzerBlitz
 							unit,
 							null,
 							new List<Tuple<Tile, TileSightLevel>>(),
-							new List<Tuple<Unit, UnitVisibility>>()));
+							unitDeltas));
 				}
 			}
 		}

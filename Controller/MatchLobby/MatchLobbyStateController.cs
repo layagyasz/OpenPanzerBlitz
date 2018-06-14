@@ -1,6 +1,7 @@
 using System;
 
 using Cardamom.Interface;
+using Cardamom.Utilities;
 
 namespace PanzerBlitz
 {
@@ -9,7 +10,7 @@ namespace PanzerBlitz
 		MatchLobbyController _Controller;
 		ChatController _ChatController;
 
-		bool _Launch;
+		readonly EventBuffer<ValuedEventArgs<Scenario>> _LaunchBuffer = new EventBuffer<ValuedEventArgs<Scenario>>();
 
 		public MatchLobbyStateController()
 			: base(ProgramState.LANDING) { }
@@ -28,22 +29,22 @@ namespace PanzerBlitz
 				GameData.Scenarios);
 			_Controller = new MatchLobbyController(context.MakeMatchLobbyAdapter(), screen);
 			_ChatController = new ChatController(context.MakeChatAdapter(), screen.ChatView, GameData.Player);
-			context.Lobby.OnLaunched += HandleLaunch;
+			context.Lobby.OnLaunched += _LaunchBuffer.Hook<ValuedEventArgs<Scenario>>(HandleLaunch).Invoke;
 			screen.OnPulse += HandlePulse;
 			screen.OnMainMenuButtonClicked += HandleBack;
 			return screen;
 		}
 
-		void HandleLaunch(object Sender, EventArgs E)
+		void HandleLaunch(object Sender, ValuedEventArgs<Scenario> E)
 		{
-			_Launch = true;
+			OnProgramStateTransition(
+				this, new ProgramStateTransitionEventArgs(
+					ProgramState.MATCH, ((MatchLobbyContext)_Context).MakeMatchContext(E.Value)));
 		}
 
 		void HandlePulse(object Sender, EventArgs E)
 		{
-			if (_Launch) OnProgramStateTransition(
-				this, new ProgramStateTransitionEventArgs(
-					ProgramState.MATCH, ((MatchLobbyContext)_Context).MakeMatchContext()));
+			_LaunchBuffer.DispatchEvents();
 		}
 	}
 }

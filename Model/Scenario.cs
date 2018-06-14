@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,14 +36,16 @@ namespace PanzerBlitz
 
 		public Scenario(
 			IEnumerable<ArmyConfiguration> ArmyConfigurations,
+			IEnumerable<ArmyConfiguration> DeploymentOrder,
+			IEnumerable<ArmyConfiguration> TurnOrder,
 			byte Turns,
 			bool FogOfWar,
 			Environment Environment,
 			MapConfiguration MapConfiguration)
 		{
 			this.ArmyConfigurations = ArmyConfigurations.ToList();
-			DeploymentOrder = this.ArmyConfigurations;
-			TurnOrder = this.ArmyConfigurations;
+			this.DeploymentOrder = DeploymentOrder.ToList();
+			this.TurnOrder = TurnOrder.ToList();
 			this.Turns = Turns;
 			this.FogOfWar = FogOfWar;
 			this.Environment = Environment;
@@ -94,6 +97,18 @@ namespace PanzerBlitz
 		public void SetFogOfWar(bool FogOfWar)
 		{
 			this.FogOfWar = FogOfWar;
+		}
+
+		public Scenario MakeStatic(Random Random)
+		{
+			return new Scenario(
+				ArmyConfigurations,
+				DeploymentOrder,
+				TurnOrder,
+				Turns,
+				FogOfWar,
+				Environment,
+				MapConfiguration.MakeStatic(Random));
 		}
 	}
 }

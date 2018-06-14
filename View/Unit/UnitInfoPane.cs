@@ -80,10 +80,8 @@ namespace PanzerBlitz
 
 		void AddComposition(Unit Unit)
 		{
-			if (Unit.Configuration.IsVehicle
-				|| Unit.Configuration.IsArmored
-				|| Unit.Configuration.LeavesWreckWhenDestroyed)
-				AddSection("Composition");
+			AddSection("Composition");
+			AddAttribute(string.Format("Weight - {0}", Unit.Configuration.UnitWeight));
 			if (Unit.Configuration.IsVehicle) AddAttribute("Vehicular");
 			if (Unit.Configuration.IsArmored) AddAttribute("Armored");
 			if (Unit.Configuration.LeavesWreckWhenDestroyed) AddAttribute("Wreck When Destroyed");
@@ -134,15 +132,16 @@ namespace PanzerBlitz
 				|| Unit.Configuration.SpotRange > 0
 				|| Unit.Configuration.CanReveal)
 				AddSection("Sight Capabilities");
-			if (Unit.Configuration.SightRange > 0) AddAttribute("Sight Range - " + Unit.Configuration.SightRange);
-			if (Unit.Configuration.SpotRange > 0) AddAttribute("Spot Range - " + Unit.Configuration.SpotRange);
+			if (Unit.Configuration.SightRange > 0)
+				AddAttribute(string.Format("Sight Range - {0}", Unit.Configuration.SightRange));
+			if (Unit.Configuration.SpotRange > 0)
+				AddAttribute(string.Format("Spot Range - {0}", Unit.Configuration.SpotRange));
 			if (Unit.Configuration.CanReveal) AddAttribute("Can Reveal");
 		}
 
 		void AddTransportCapabilities(Unit Unit)
 		{
 			if (Unit.Configuration.IsPassenger
-				|| Unit.Configuration.IsLightPassenger
 				|| Unit.Configuration.IsOversizedPassenger
 				|| Unit.Configuration.IsCarrier
 				|| Unit.Configuration.CanOnlyCarryLight
@@ -150,7 +149,6 @@ namespace PanzerBlitz
 				|| Unit.Configuration.CanCarryInWater)
 				AddSection("Transport Capabilities");
 			if (Unit.Configuration.IsPassenger) AddAttribute("Passenger");
-			if (Unit.Configuration.IsLightPassenger) AddAttribute("Light Passenger");
 			if (Unit.Configuration.IsOversizedPassenger) AddAttribute("Oversized Passenger");
 			if (Unit.Configuration.IsCarrier) AddAttribute("Carrier");
 			if (Unit.Configuration.CanOnlyCarryLight) AddAttribute("Carry Only Light Units");

@@ -133,6 +133,7 @@ namespace PanzerBlitz
 			if (r != OrderInvalidReason.NONE) return r;
 
 			ExecutedOrders.Add(Order.CloneIfStateful());
+			if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 
 			if (Order is NextPhaseOrder)
 			{
@@ -149,7 +150,6 @@ namespace PanzerBlitz
 			if (executed == OrderStatus.ILLEGAL)
 				throw new Exception(string.Format("Tried to execute illegal order. {0} {1}", Order, Order.Validate()));
 
-			if (OnExecuteOrder != null) OnExecuteOrder(this, new ExecuteOrderEventArgs(Order));
 			return OrderInvalidReason.NONE;
 		}
 
@@ -162,8 +162,8 @@ namespace PanzerBlitz
 		{
 			yield return TurnComponent.WAIT;
 			yield return TurnComponent.MINEFIELD_ATTACK;
-			yield return TurnComponent.AIRCRAFT;
 			yield return TurnComponent.ATTACK;
+			yield return TurnComponent.AIRCRAFT;
 			yield return TurnComponent.VEHICLE_COMBAT_MOVEMENT;
 			yield return TurnComponent.VEHICLE_MOVEMENT;
 			yield return TurnComponent.CLOSE_ASSAULT;

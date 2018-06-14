@@ -108,7 +108,9 @@ namespace PanzerBlitz
 							i.Item1,
 							HumanMatchPlayerController.HIGHLIGHT_COLORS[
 								Math.Max(0, Math.Min(
-									(int)(Math.Ceiling(i.Item3) * 4 / Unit.RemainingMovement),
+									(int)(Math.Ceiling(
+										i.Item3 + Unit.Configuration.Movement - Unit.RemainingMovement)
+										  * 4 / Unit.Configuration.Movement),
 									HumanMatchPlayerController.HIGHLIGHT_COLORS.Length - 1))])));
 			}
 			else _Controller.UnHighlight();

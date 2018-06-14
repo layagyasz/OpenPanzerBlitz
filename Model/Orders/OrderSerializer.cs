@@ -11,7 +11,7 @@ namespace PanzerBlitz
 		static readonly Type[] ORDER_TYPES =
 		{
 			typeof(AirAttackOrder),
-			typeof(AntiAirSingleAttackOrder),
+			typeof(AntiAirAttackOrder),
 			typeof(ClearMinefieldOrder),
 			typeof(CloseAssaultAttackOrder),
 			typeof(ConvoyOrderDeployOrder),
@@ -36,7 +36,7 @@ namespace PanzerBlitz
 		static readonly Func<SerializationInputStream, List<GameObject>, Order>[] DESERIALIZERS =
 		{
 			(i, j) => new AirAttackOrder(i, j),
-			(i, j) => new AntiAirSingleAttackOrder(i, j),
+			(i, j) => new AntiAirAttackOrder(i, j),
 			(i, j) => new ClearMinefieldOrder(i, j),
 			(i, j) => new CloseAssaultAttackOrder(i, j),
 			(i, j) => new ConvoyOrderDeployOrder(i, j),
@@ -71,13 +71,14 @@ namespace PanzerBlitz
 
 		public void Serialize(Order Order, SerializationOutputStream Stream)
 		{
+			Console.WriteLine("{0} {1}", Array.IndexOf(ORDER_TYPES, Order.GetType()), Order);
 			Stream.Write((byte)Array.IndexOf(ORDER_TYPES, Order.GetType()));
 			Stream.Write(Order);
 		}
 
 		public Order Deserialize(SerializationInputStream Stream)
 		{
-			return DESERIALIZERS[Stream.ReadByte()](Stream, _GameObjects);
+			return FileUtils.Print(DESERIALIZERS[FileUtils.Print(Stream.ReadByte())](Stream, _GameObjects));
 		}
 	}
 }

@@ -21,14 +21,14 @@ namespace PanzerBlitz
 		{
 			if (_PlayerConnections.PlayerMatches(_PlayerMap[Request.Order.Army], Connection))
 				return base.ExecuteOrder(Request, Connection);
-			return new BooleanResponse(false);
+			return new ByteResponse((byte)OrderInvalidReason.ILLEGAL);
 		}
 
 		public override RPCResponse ValidateOrder(ValidateOrderRequest Request, TCPConnection Connection)
 		{
 			if (_PlayerConnections.PlayerMatches(_PlayerMap[Request.Order.Army], Connection))
 				return base.ValidateOrder(Request, Connection);
-			return new BooleanResponse(false);
+			return new ByteResponse((byte)OrderInvalidReason.ILLEGAL);
 		}
 	}
 }

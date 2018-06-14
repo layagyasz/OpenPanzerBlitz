@@ -405,6 +405,7 @@
     <Compile Include="Model\Sight\OmniscientUnitTracker.cs" />
     <Compile Include="Model\Sight\FogOfWarUnitTracker.cs" />
     <Compile Include="Controller\Match\Subcontroller\NoOpController.cs" />
+    <Compile Include="Model\Unit\UnitWeight.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

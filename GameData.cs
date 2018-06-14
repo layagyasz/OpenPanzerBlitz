@@ -117,6 +117,7 @@ namespace PanzerBlitz
 			Block.AddParser<TilePathOverlay>();
 			Block.AddParser<WeaponClass>();
 			Block.AddParser<UnitClass>();
+			Block.AddParser<UnitWeight>();
 			Block.AddParser<UnitStatus>();
 			Block.AddParser<BlockType>();
 			Block.AddParser<Front>();

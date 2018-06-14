@@ -37,9 +37,9 @@ namespace PanzerBlitz
 			return new RemoteChatAdapter(Client);
 		}
 
-		public MatchContext MakeMatchContext()
+		public MatchContext MakeMatchContext(Scenario StaticScenario)
 		{
-			var match = new Match(Lobby.Scenario, IsHost ? new FullOrderAutomater() : null);
+			var match = new Match(StaticScenario, IsHost ? new FullOrderAutomater() : null);
 			var serializer = new OrderSerializer(match);
 
 			if (IsHost)
@@ -49,11 +49,13 @@ namespace PanzerBlitz
 				{
 					if (ConnectionCache.Connections.ContainsKey(p))
 					{
-						var a = match.Armies.FirstOrDefault(i => i.Configuration == Lobby.GetPlayerArmy(p));
+						var a = match.Armies.FirstOrDefault(
+							i => i.Configuration.UniqueKey == Lobby.GetPlayerArmy(p).UniqueKey);
 						armyConnections.Add(a, p);
 					}
 				}
 
+				Server.RPCHandler.WaitForPromises();
 				Server.MessageAdapter = new MatchMessageSerializer(serializer);
 				Server.RPCHandler =
 					new RPCHandler().Install(new MatchServerLayer(match, armyConnections, ConnectionCache));
@@ -63,7 +65,8 @@ namespace PanzerBlitz
 					ConnectionCache,
 					match,
 					serializer,
-					match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
+					match.Armies.First(
+						i => i.Configuration.UniqueKey == Lobby.GetPlayerArmy(GameData.Player).UniqueKey));
 			}
 
 			Client.MessageAdapter = new MatchMessageSerializer(serializer);
@@ -72,7 +75,8 @@ namespace PanzerBlitz
 				Client,
 				match,
 				serializer,
-				match.Armies.First(i => i.Configuration == Lobby.GetPlayerArmy(GameData.Player)));
+				match.Armies.First(
+					i => i.Configuration.UniqueKey == Lobby.GetPlayerArmy(GameData.Player).UniqueKey));
 		}
 	}
 }

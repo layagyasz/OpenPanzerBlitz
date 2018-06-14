@@ -18,25 +18,25 @@ namespace PanzerBlitz
 
 		public readonly int Width;
 		public readonly int Height;
-		public readonly MapGeneratorConfiguration Configuration;
+		public readonly MatchSetting Setting;
 
 		public RandomMapConfiguration(ParseBlock Block)
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 			Width = (int)attributes[(int)Attribute.WIDTH];
 			Height = (int)attributes[(int)Attribute.HEIGHT];
-			Configuration = ((MatchSetting)attributes[(int)Attribute.MATCH_SETTING]).MapGenerator;
+			Setting = (MatchSetting)attributes[(int)Attribute.MATCH_SETTING];
 		}
 
-		public RandomMapConfiguration(int Width, int Height, MapGeneratorConfiguration Configuration)
+		public RandomMapConfiguration(int Width, int Height, MatchSetting Setting)
 		{
 			this.Width = Width;
 			this.Height = Height;
-			this.Configuration = Configuration;
+			this.Setting = Setting;
 		}
 
 		public RandomMapConfiguration(SerializationInputStream Stream)
-			: this(Stream.ReadInt32(), Stream.ReadInt32(), new MapGeneratorConfiguration(Stream)) { }
+			: this(Stream.ReadInt32(), Stream.ReadInt32(), GameData.MatchSettings[Stream.ReadString()]) { }
 
 		public MapConfiguration MakeStatic(Random Random)
 		{
@@ -49,11 +49,15 @@ namespace PanzerBlitz
 
 			var cache = new Dictionary<FunctionFactory, Func<double, double, double>>();
 			var elevationGenerator =
-				Configuration.TerrainGenerator.ElevationGenerator.GetFeatureGenerator(Random, cache);
-			var waterGenerator = Configuration.TerrainGenerator.WaterGenerator.GetFeatureGenerator(Random, cache);
-			var swampGenerator = Configuration.TerrainGenerator.SwampGenerator.GetFeatureGenerator(Random, cache);
-			var forestGenerator = Configuration.TerrainGenerator.ForestGenerator.GetFeatureGenerator(Random, cache);
-			var townGenerator = Configuration.TerrainGenerator.TownGenerator.GetFeatureGenerator(Random, cache);
+				Setting.MapGenerator.TerrainGenerator.ElevationGenerator.GetFeatureGenerator(Random, cache);
+			var waterGenerator =
+				Setting.MapGenerator.TerrainGenerator.WaterGenerator.GetFeatureGenerator(Random, cache);
+			var swampGenerator =
+				Setting.MapGenerator.TerrainGenerator.SwampGenerator.GetFeatureGenerator(Random, cache);
+			var forestGenerator =
+				Setting.MapGenerator.TerrainGenerator.ForestGenerator.GetFeatureGenerator(Random, cache);
+			var townGenerator =
+				Setting.MapGenerator.TerrainGenerator.TownGenerator.GetFeatureGenerator(Random, cache);
 
 			foreach (Tile t in map.TilesEnumerable)
 			{
@@ -138,7 +142,7 @@ namespace PanzerBlitz
 			foreach (ISet<Tile> town in towns.GetPartitions())
 			{
 				var name =
-					new string(Configuration.NameGenerator.Generate(Random).ToArray());
+					new string(Setting.MapGenerator.NameGenerator.Generate(Random).ToArray());
 				name = ObjectDescriber.Namify(name);
 				map.Regions.Add(new MapRegion(name, town));
 				var tiles = town.ToList();
@@ -278,7 +282,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(Width);
 			Stream.Write(Height);
-			Stream.Write(Configuration);
+			Stream.Write(Setting.UniqueKey);
 		}
 	}
 }

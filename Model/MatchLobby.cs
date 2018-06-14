@@ -10,7 +10,7 @@ namespace PanzerBlitz
 	public class MatchLobby : Serializable
 	{
 		public EventHandler<ValuedEventArgs<LobbyAction>> OnActionApplied;
-		public EventHandler<EventArgs> OnLaunched;
+		public EventHandler<ValuedEventArgs<Scenario>> OnLaunched;
 
 		Scenario _Scenario;
 		List<Player> _Players;
@@ -113,7 +113,7 @@ namespace PanzerBlitz
 			return false;
 		}
 
-		public bool Start()
+		public bool Start(Scenario StaticScenario)
 		{
 			// All players are in the ready state.
 			if (!_PlayerReady.Values.All(i => i)) return false;
@@ -124,7 +124,7 @@ namespace PanzerBlitz
 			// All armies are picked.
 			if (!_Scenario.ArmyConfigurations.All(i => pickedArmies.Contains(i))) return false;
 
-			if (OnLaunched != null) OnLaunched(this, EventArgs.Empty);
+			if (OnLaunched != null) OnLaunched(this, new ValuedEventArgs<Scenario>(StaticScenario));
 			return true;
 		}
 
