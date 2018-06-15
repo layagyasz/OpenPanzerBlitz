@@ -45,8 +45,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
-			if (Target != AttackTarget.ALL && (TargetTile.Rules.MustAttackAllUnits
-				 || TargetTile.Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT)))
+			if (Target != AttackTarget.ALL && TargetTile.Rules.MustAttackAllUnits)
 				return OrderInvalidReason.MUST_ATTACK_ALL;
 
 			if (Target == AttackTarget.EACH)

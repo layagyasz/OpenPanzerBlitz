@@ -77,12 +77,6 @@ unit-configuration-lock:149mm-how-hungarian {
 	}
 	float:rarity { 16.8 }
 }
-unit-configuration-lock:210mm-how-hungarian {
-	string[]:unit-configurations { 
-		string:_ { 210mm-how-hungarian }
-	}
-	float:rarity { 19.7 }
-}
 unit-configuration-lock:81mm-mortar-hungarian {
 	string[]:unit-configurations { 
 		string:_ { 81mm-mortar-hungarian }

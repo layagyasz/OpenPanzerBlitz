@@ -47,9 +47,9 @@ namespace PanzerBlitz
 			Unit unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy) return;
 
-			SightFiringUnit(unit);
-
+			IEnumerable<Unit> otherUnits = SightFiringUnit(unit);
 			var delta = UnitTracker.Update(this, unit);
+			foreach (var otherUnit in otherUnits) delta.AddRange(UnitTracker.Update(this, otherUnit));
 			if (OnSightUpdated != null)
 			{
 				OnSightUpdated(
@@ -93,8 +93,11 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
+				IEnumerable<Unit> otherUnits =
+					SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
 				var delta = UnitTracker.ComputeDelta(this, unit, E);
+				foreach (var otherUnit in otherUnits) delta.AddRange(UnitTracker.Update(this, otherUnit));
+
 				if (OnSightUpdated != null)
 				{
 					OnSightUpdated(
@@ -135,12 +138,12 @@ namespace PanzerBlitz
 				if (carrierOverride && !passengerOverride)
 				{
 					_OverrideVisibleUnits.Add(unit.Passenger);
-					unitDeltas.AddRange(UnitTracker.ComputeDelta(this, unit.Passenger, null));
+					unitDeltas.AddRange(UnitTracker.Update(this, unit.Passenger));
 				}
 				else if (!carrierOverride && passengerOverride)
 				{
 					_OverrideVisibleUnits.Add(unit);
-					unitDeltas.AddRange(UnitTracker.ComputeDelta(this, unit, null));
+					unitDeltas.AddRange(UnitTracker.Update(this, unit));
 				}
 
 				if (OnSightUpdated != null)
@@ -297,20 +300,38 @@ namespace PanzerBlitz
 			return _OverrideVisibleUnits.Contains(Unit) || IsSighted(Unit, Unit.Position);
 		}
 
-		void SightFiringUnit(Unit Unit)
+		IEnumerable<Unit> SightFiringUnit(Unit Unit)
 		{
-			if (Unit.Army == TrackingArmy || Unit.Position == null || IsSighted(Unit)) return;
+			var units = new List<Unit>();
+			if (Unit.Army == TrackingArmy || Unit.Position == null || IsSighted(Unit)) return units;
 
 			if (Unit.Position != null && HasTileSightLevel(Unit.Position, TileSightLevel.SIGHTED))
+			{
 				_OverrideVisibleUnits.Add(Unit);
-			else _OverrideVisibleUnits.Remove(Unit);
+				foreach (var unit in Unit.Position.Units.Where(i => i.Covers(Unit) || Unit.Covers(i)))
+				{
+					_OverrideVisibleUnits.Add(Unit);
+					units.Add(unit);
+				}
+			}
+			return units;
 		}
 
-		void SightMovingUnit(Unit Unit, Tile MovedFrom, Tile MovedTo)
+		IEnumerable<Unit> SightMovingUnit(Unit Unit, Tile MovedFrom, Tile MovedTo)
 		{
-			if (Unit.Army == TrackingArmy || !MovedTo.Rules.Concealing) return;
-			if (IsSighted(Unit, MovedFrom)) _OverrideVisibleUnits.Add(Unit);
+			var units = new List<Unit>();
+			if (Unit.Army == TrackingArmy || !MovedTo.Rules.Concealing) return units;
+			if (IsSighted(Unit, MovedFrom))
+			{
+				_OverrideVisibleUnits.Add(Unit);
+				foreach (var unit in Unit.Position.Units.Where(i => i.Covers(Unit) || Unit.Covers(i)))
+				{
+					_OverrideVisibleUnits.Add(Unit);
+					units.Add(unit);
+				}
+			}
 			else _OverrideVisibleUnits.Remove(Unit);
+			return units;
 		}
 
 		void HandleDeltas(IEnumerable<Tuple<Tile, TileSightLevel>> Deltas)

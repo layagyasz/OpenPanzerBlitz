@@ -51,18 +51,8 @@ namespace PanzerBlitz
 			StackArmored = Defenders.Any(i => i.Configuration.UnitClass == UnitClass.FORT)
 					 			|| Tile.Rules.TreatUnitsAsArmored
 								|| TreatStackAsArmored(AttackOrders, Defenders);
-			// If there is a fort, only use its defense.
-			Unit fort = null;
-			if (AttackMethod != AttackMethod.ANTI_AIRCRAFT)
-				fort = Defenders.First().Position.Units.FirstOrDefault(
-					i => i.Configuration.UnitClass == UnitClass.FORT && i.Army == Defenders.First().Army);
-			if (fort != null)
-			{
-				TotalDefense = fort.Configuration.Defense;
-				StackArmored = fort.Configuration.IsArmored;
-				OddsCalculationFactors.Add(OddsCalculationFactor.FORT);
-			}
-			else TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
+
+			TotalDefense = Defenders.Sum(i => i.Configuration.Defense);
 			foreach (SingleAttackOrder a in AttackOrders) a.TreatStackAsArmored = StackArmored;
 			AttackFactorCalculations = AttackOrders.Select(
 				i => new Tuple<SingleAttackOrder, AttackFactorCalculation>(

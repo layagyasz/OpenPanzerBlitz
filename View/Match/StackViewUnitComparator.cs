@@ -12,8 +12,8 @@ namespace PanzerBlitz
 			if (x.Unit == y.Unit.Carrier) return 1;
 			if (y.Unit.Configuration.CanLoad(x.Unit.Configuration) == OrderInvalidReason.NONE) return 1;
 			if (x.Unit.Configuration.CanLoad(y.Unit.Configuration) == OrderInvalidReason.NONE) return -1;
-			if (x.Unit.Configuration.UnitClass == UnitClass.FORT) return 1;
-			if (y.Unit.Configuration.UnitClass == UnitClass.FORT) return -1;
+			if (x.Unit.Covers(y.Unit)) return 1;
+			if (y.Unit.Covers(x.Unit)) return -1;
 			if (y.Unit.Configuration.UnitClass == UnitClass.BLOCK
 				|| y.Unit.Configuration.UnitClass == UnitClass.MINEFIELD
 				|| y.Unit.Configuration.UnitClass == UnitClass.BRIDGE) return 1;

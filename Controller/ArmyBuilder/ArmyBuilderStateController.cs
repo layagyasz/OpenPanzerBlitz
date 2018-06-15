@@ -44,7 +44,8 @@ namespace PanzerBlitz
 			if (builder.Armies.All(i => i.Validate()))
 				transition = new ProgramStateTransitionEventArgs(
 					ProgramState.MATCH,
-					new MatchContext(new Match(builder.BuildScenario(), new FullOrderAutomater())));
+					new MatchContext(
+						new Match(builder.BuildScenario().MakeStatic(new Random()), new FullOrderAutomater())));
 			else transition = new ProgramStateTransitionEventArgs(ProgramState.BUILD_ARMY, _Context);
 			OnProgramStateTransition(this, transition);
 		}

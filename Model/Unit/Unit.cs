@@ -112,18 +112,15 @@ namespace PanzerBlitz
 					i => i != this && i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
 					return OrderInvalidReason.TARGET_COVERED;
 			}
-			if (Configuration.UnitClass == UnitClass.FORT)
-			{
-				if (Position.Units.Any(
-					i => i != this
-						&& i.Army == this.Army
-						&& i.CanBeAttackedBy(Army, AttackMethod) == OrderInvalidReason.NONE))
-					return OrderInvalidReason.NONE;
-			}
 			if (!IgnoreConcealment && !Army.SightFinder.IsSighted(this))
 				return OrderInvalidReason.TARGET_CONCEALED;
-			if (Carrier != null) return OrderInvalidReason.UNIT_NO_ACTION;
+			if (Carrier != null || Position.Units.Any(i => i.Covers(this))) return OrderInvalidReason.TARGET_COVERED;
 			return OrderInvalidReason.NONE;
+		}
+
+		public bool Covers(Unit Unit)
+		{
+			return this != Unit && Army == Unit.Army && Configuration.Covers(Unit.Configuration);
 		}
 
 		public bool CanExitDirection(Direction Direction)
@@ -239,7 +236,10 @@ namespace PanzerBlitz
 
 		public void HandleCombatResult(CombatResult CombatResult, AttackMethod AttackMethod, Army AttackingArmy)
 		{
+			if (Position == null) return;
 			if (Passenger != null) Passenger.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
+			foreach (var unit in Position.Units.Where(i => Covers(i)).ToList())
+				unit.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
 			switch (CombatResult)
 			{
 				case CombatResult.MISS:

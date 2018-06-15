@@ -747,7 +747,8 @@ unit-configuration:203mm-how {
 	byte:movement { 2 }
 
 	bool:can-indirect-fire { true }
-	unit-weight:unit-weight { heavy }
+	bool:is-passenger { false }
+	bool:is-vehicle { true }
 }
 unit-configuration:210mm-how {
 	string:name { 210mm }

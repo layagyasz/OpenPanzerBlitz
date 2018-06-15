@@ -56,8 +56,7 @@ namespace PanzerBlitz
 				Parameters.FogOfWar,
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(
-					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting)
-				.MakeStatic(new Random()));
+					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting));
 		}
 	}
 }

@@ -1,0 +1,135 @@
+﻿scenario:_ {
+	string:name { Saunders }
+	byte[]:deployment-order { 0 1 }
+	byte[]:turn-order { 0 1 }
+	byte:turns { 16 }
+	bool:fog-of-war { true }
+	!environment:environment { environments.summer-grassland }
+	random-map-configuration:map-configuration {
+		int:width { 31 }
+		int:height { 33 }
+		!match-setting:match-setting { match-settings.france-summer }
+	}
+	army-configuration[]:army-configurations {
+		army-configuration:ooarai {
+			!faction:faction { factions.japanese }
+			byte:team { 1 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					temporal-objective:flag-tank-destroyed {
+						trigger-objective:objective {
+							int:threshold { 1 }
+							units-matched-objective:objective {
+								bool:friendly { false }
+								unit-matches-all:matcher {
+									unit-has-status:_ {
+										unit-status:status { destroyed }
+									}
+									unit-has-configuration:_ {
+										!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+									}
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 16 }
+						bool:invert { true }
+						!var:objective { objectives.flag-tank-destroyed }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { west }
+					}
+					unit-group:unit-group {
+						string:name { Ooarai }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3-lee }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.otsu }
+								int:count { 1 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:saunders {
+			!faction:faction { factions.american }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					temporal-objective:flag-tank-destroyed {
+						trigger-objective:objective {
+							int:threshold { 1 }
+							units-matched-objective:objective {
+								bool:friendly { false }
+								unit-matches-all:matcher {
+									unit-has-status:_ {
+										unit-status:status { destroyed }
+									}
+									unit-has-configuration:_ {
+										!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
+									}
+								}
+							}
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { victory }
+						int:threshold { 16 }
+						bool:invert { true }
+						!var:objective { objectives.flag-tank-destroyed }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				convoy-deployment-configuration:_ {
+					tile-on-edge:matcher {
+						direction:edge { east }
+					}
+					unit-group:unit-group {
+						string:name { Saunders }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.firefly }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_76 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-4_75 }
+								int:count { 8 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

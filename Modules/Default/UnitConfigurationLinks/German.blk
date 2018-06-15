@@ -257,6 +257,10 @@ unit-configuration-link:sdkfz-250_10 {
 
 	int:introduce-year { 1941 }
 }
+unit-configuration-link:sdkfz-251_10 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_10 }
+}
 unit-configuration-link:kubelwagen {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.kubelwagen }
@@ -374,10 +378,14 @@ unit-configuration-link:sdkfz-251_2 {
 unit-configuration-link:sdkfz-251_9 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_9 }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:sdkfz-251_16 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_16 }
+
+	int:introduce-year { 1943 }
 }
 unit-configuration-link:sdkfz-251_17 {
 	!faction:faction { factions.german }

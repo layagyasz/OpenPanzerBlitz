@@ -1,3 +1,5 @@
+using System;
+
 using Cardamom.Interface;
 using Cardamom.Utilities;
 
@@ -24,7 +26,8 @@ namespace PanzerBlitz
 		{
 			OnProgramStateTransition(
 				this, new ProgramStateTransitionEventArgs(
-					ProgramState.MATCH, new MatchContext(new Match(E.Value, new FullOrderAutomater()))));
+					ProgramState.MATCH,
+					new MatchContext(new Match(E.Value.MakeStatic(new Random()), new FullOrderAutomater()))));
 		}
 	}
 }

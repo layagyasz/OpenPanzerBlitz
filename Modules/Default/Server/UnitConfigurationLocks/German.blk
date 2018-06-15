@@ -363,19 +363,19 @@ unit-configuration-lock:sdkfz-251_17 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-251_17 }
 	}
-	float:rarity { 16.3 }
+	float:rarity { 16.1 }
 }
 unit-configuration-lock:sdkfz-251_21 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-251_21 }
 	}
-	float:rarity { 15.4 }
+	float:rarity { 16.1 }
 }
 unit-configuration-lock:sdkfz-251_22 {
 	string[]:unit-configurations { 
 		string:_ { sdkfz-251_22 }
 	}
-	float:rarity { 15.9 }
+	float:rarity { 13.8 }
 }
 unit-configuration-lock:maultier {
 	string[]:unit-configurations { 

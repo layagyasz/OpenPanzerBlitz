@@ -61,7 +61,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.80mm-aa }
+								!unit-configuration:unit-configuration { unit-configurations.bishop }
 								int:count { 2 }
 							}
 						}
@@ -126,8 +126,12 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.a6-m2 }
-								int:count { 2 }
+								!unit-configuration:unit-configuration { unit-configurations.fort-20 }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-41 }
+								int:count { 1 }
 							}
 						}
 					}

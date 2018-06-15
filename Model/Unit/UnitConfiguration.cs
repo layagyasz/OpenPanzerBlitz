@@ -421,7 +421,10 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanIndirectFireAt(LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
-			if (LineOfSight.Range > GetAdjustedRange(UseSecondaryWeapon)) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			byte range = GetAdjustedRange(UseSecondaryWeapon);
+			if (LineOfSight.Range > range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (UnitClass != UnitClass.TOWED_GUN && LineOfSight.Range <= range / 2)
+				return OrderInvalidReason.TARGET_TOO_CLOSE;
 			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
 			return OrderInvalidReason.NONE;
 		}
@@ -488,6 +491,13 @@ namespace PanzerBlitz
 			}
 			// Should not end up here.
 			return 0;
+		}
+
+		public bool Covers(UnitConfiguration Configuration)
+		{
+			return UnitClass == UnitClass.FORT
+										 && Configuration.UnitClass != UnitClass.FIGHTER_BOMBER
+										 && Defense > Configuration.Defense;
 		}
 
 		public float GetMaxMovement(Environment Environment)

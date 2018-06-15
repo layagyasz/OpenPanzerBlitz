@@ -31,7 +31,7 @@ unit-configuration-link:85mm-at-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.85mm-at }
 
-	int:introduce-year { 1944 }
+	int:introduce-year { 1939 }
 }
 unit-configuration-link:100mm-at-russian {
 	!faction:faction { factions.russian }
