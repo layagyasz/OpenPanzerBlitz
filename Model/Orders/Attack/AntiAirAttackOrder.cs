@@ -51,7 +51,7 @@ namespace PanzerBlitz
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
-			return TurnComponent == TurnComponent.ATTACK;
+			return TurnComponent == TurnComponent.ANTI_AIRCRAFT;
 		}
 
 		public override OrderInvalidReason Validate()

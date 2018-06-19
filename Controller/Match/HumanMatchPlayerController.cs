@@ -77,6 +77,7 @@ namespace PanzerBlitz
 			{
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(this) },
 				{ TurnComponent.AIRCRAFT, new AircraftController(this) },
+				{ TurnComponent.ANTI_AIRCRAFT, new AntiAircraftController(this) },
 				{ TurnComponent.ATTACK, new AttackController(this) },
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },

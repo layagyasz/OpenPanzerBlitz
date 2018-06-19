@@ -58,12 +58,23 @@ namespace PanzerBlitz
 			AddDetail(
 				"Deploy Order", Scenario.DeploymentOrder.Select(i => ObjectDescriber.Describe(i.Faction)).ToArray());
 			AddDetail("Turn Order", Scenario.TurnOrder.Select(i => ObjectDescriber.Describe(i.Faction)).ToArray());
+			AddDetail("Strength", Scenario.ArmyConfigurations.Select(i => DescribeStrength(i)).ToArray());
 		}
 
 		void AddDetail(string Attribute, params string[] Values)
 		{
 			_DetailDisplay.Add(new Button("header-2") { DisplayedString = Attribute });
 			foreach (string value in Values) _DetailDisplay.Add(new Button("regular") { DisplayedString = value });
+		}
+
+		string DescribeStrength(ArmyConfiguration Configuration)
+		{
+			var unitList = Configuration.BuildUnitConfigurationList().ToList();
+			return string.Format(
+				"{0} - {1} Points / {2} Units",
+				ObjectDescriber.Describe(Configuration.Faction),
+				unitList.Sum(i => i.GetPointValue(Configuration.Faction.HalfPriceTrucks)),
+				unitList.Count);
 		}
 	}
 }

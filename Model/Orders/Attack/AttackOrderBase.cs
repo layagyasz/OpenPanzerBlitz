@@ -24,13 +24,6 @@ namespace PanzerBlitz
 				return CombatResultsTable.STANDARD_CRT;
 			}
 		}
-		public virtual bool AllowNoFurtherAttacks
-		{
-			get
-			{
-				return true;
-			}
-		}
 
 		protected List<T> _Attackers = new List<T>();
 		protected List<OddsCalculation> _OddsCalculations = new List<OddsCalculation>();
@@ -158,7 +151,7 @@ namespace PanzerBlitz
 								AttackMethod,
 							TargetTile,
 							CombatResultsTable.OddsClamp))
-					.ArgMax(i => i.TotalAttack));
+					.ArgMax(i => i.TotalAttack / i.TotalDefense));
 			}
 			else
 			{
@@ -227,7 +220,7 @@ namespace PanzerBlitz
 			{
 				result.Item1.HandleCombatResult(result.Item2, AttackMethod, Army);
 			}
-			if (AllowNoFurtherAttacks) Army.AttackTile(TargetTile);
+			Army.AttackTile(TargetTile);
 			_Attackers.ForEach(i => i.Execute(Random));
 
 			return OrderStatus.FINISHED;

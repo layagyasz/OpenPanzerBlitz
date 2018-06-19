@@ -70,10 +70,11 @@ namespace PanzerBlitz
 			Stream.Write(VictoryCondition);
 		}
 
-		IEnumerable<UnitConfiguration> BuildUnitConfigurationList(
-			IEnumerable<Tuple<UnitConfiguration, int>> UnitCountPairs)
+		public IEnumerable<UnitConfiguration> BuildUnitConfigurationList()
 		{
-			return UnitCountPairs.SelectMany(i => Enumerable.Repeat(i.Item1, i.Item2));
+			return DeploymentConfigurations
+				.SelectMany(i => i.UnitGroup.UnitCounts)
+				.SelectMany(i => Enumerable.Repeat(i.UnitConfiguration, i.Count));
 		}
 	}
 }

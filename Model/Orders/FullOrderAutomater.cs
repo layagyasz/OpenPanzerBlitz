@@ -33,13 +33,23 @@ namespace PanzerBlitz
 				case TurnComponent.MINEFIELD_ATTACK:
 					DoMinefieldAttacks(Match, TurnInfo.Army);
 					return true;
-
-				case TurnComponent.AIRCRAFT:
+				case TurnComponent.ARTILLERY:
 					return !TurnInfo.Army.Units.Any(
-						i => i.Configuration.IsAircraft() && i.Status == UnitStatus.ACTIVE);
+						i => i.CanAttack(AttackMethod.INDIRECT_FIRE) == OrderInvalidReason.NONE);
 				case TurnComponent.ATTACK:
 					return !TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.DIRECT_FIRE) == OrderInvalidReason.NONE);
+
+				case TurnComponent.AIRCRAFT:
+					return !TurnInfo.Army.Units.Any(
+						i => i.Configuration.IsAircraft() && i.Status == UnitStatus.ACTIVE)
+						|| !Match.Armies.Where(i => i.Configuration.Team != TurnInfo.Army.Configuration.Team)
+										.SelectMany(i => i.Units)
+										.Any(i => i.Configuration.IsAircraft() && i.Position != null);
+				case TurnComponent.ANTI_AIRCRAFT:
+					return !TurnInfo.Army.Units.Any(
+						i => i.CanAttack(AttackMethod.ANTI_AIRCRAFT) == OrderInvalidReason.NONE);
+
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
 													&& i.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE);

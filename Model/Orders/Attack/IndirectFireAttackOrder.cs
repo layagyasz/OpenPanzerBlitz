@@ -24,14 +24,6 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override bool AllowNoFurtherAttacks
-		{
-			get
-			{
-				return false;
-			}
-		}
-
 		bool _Targeted;
 		byte _ScatterRoll = 255;
 		byte _ScatterDirectionRoll = 255;
@@ -65,7 +57,7 @@ namespace PanzerBlitz
 
 		public override bool MatchesTurnComponent(TurnComponent TurnComponent)
 		{
-			return TurnComponent == TurnComponent.ATTACK;
+			return TurnComponent == TurnComponent.ARTILLERY;
 		}
 
 		void Recalculate(Tile Tile)

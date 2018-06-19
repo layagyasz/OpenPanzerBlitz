@@ -1,14 +1,13 @@
-using System;
+﻿using System;
 using System.Linq;
 
 using SFML.Graphics;
-using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class AttackController : BaseAttackController
+	public class AntiAircraftController : BaseAttackController
 	{
-		public AttackController(HumanMatchPlayerController Controller)
+		public AntiAircraftController(HumanMatchPlayerController Controller)
 			: base(Controller) { }
 
 		public override void HandleTileLeftClick(Tile Tile) { }
@@ -18,15 +17,15 @@ namespace PanzerBlitz
 		public override void HandleUnitLeftClick(Unit Unit)
 		{
 			if (Unit.Army == _Controller.CurrentTurn.Army
-				&& Unit.CanAttack(AttackMethod.DIRECT_FIRE) == OrderInvalidReason.NONE)
-				SelectUnit(Unit, AttackMethod.DIRECT_FIRE);
+				&& Unit.CanAttack(AttackMethod.ANTI_AIRCRAFT) == OrderInvalidReason.NONE)
+				SelectUnit(Unit, AttackMethod.ANTI_AIRCRAFT);
 			else if (Unit.Army != _Controller.CurrentTurn.Army)
 			{
 				if (_Controller.SelectedUnit != null)
 				{
 					AddAttack(
 						Unit.Position,
-						new DirectFireSingleAttackOrder(
+						new AntiAirSingleAttackOrder(
 							_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
 				}
 			}

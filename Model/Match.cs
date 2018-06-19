@@ -162,8 +162,10 @@ namespace PanzerBlitz
 		{
 			yield return TurnComponent.WAIT;
 			yield return TurnComponent.MINEFIELD_ATTACK;
+			yield return TurnComponent.ARTILLERY;
 			yield return TurnComponent.ATTACK;
 			yield return TurnComponent.AIRCRAFT;
+			yield return TurnComponent.ANTI_AIRCRAFT;
 			yield return TurnComponent.VEHICLE_COMBAT_MOVEMENT;
 			yield return TurnComponent.VEHICLE_MOVEMENT;
 			yield return TurnComponent.CLOSE_ASSAULT;

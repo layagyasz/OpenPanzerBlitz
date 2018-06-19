@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 
 using Cardamom.Utilities;
 
+using SFML.Graphics;
 using SFML.Window;
 
 namespace PanzerBlitz
@@ -19,6 +21,14 @@ namespace PanzerBlitz
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key) { }
+
+		protected void SelectUnit(Unit Unit, AttackMethod AttackMethod)
+		{
+			_Controller.SelectUnit(Unit);
+			_Controller.Highlight(
+				Unit.GetFieldOfSight(AttackMethod).Select(
+				i => new Tuple<Tile, Color>(i.Final, _Controller.GetRangeColor(i, Unit))));
+		}
 
 		protected void AddAttack(Tile Tile, SingleAttackOrder NewAttack)
 		{
