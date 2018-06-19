@@ -30,6 +30,7 @@ namespace PanzerBlitz
 			var screen = new MatchScreen(
 				ProgramContext.ScreenResolution,
 				_Context.Match,
+				armies,
 				GameData.TileRenderers[_Context.Match.Scenario.Environment.UniqueKey],
 				renderer,
 				factionRenderer);

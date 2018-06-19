@@ -30,6 +30,7 @@ namespace PanzerBlitz
 			typeof(PositionalDeployOrder),
 			typeof(ReconOrder),
 			typeof(ResetOrder),
+			typeof(TargetOrder),
 			typeof(UnloadOrder)
 		};
 
@@ -55,6 +56,7 @@ namespace PanzerBlitz
 			(i, j) => new PositionalDeployOrder(i, j),
 			(i, j) => new ReconOrder(i, j),
 			(i, j) => new ResetOrder(i, j),
+			(i, j) => new TargetOrder(i, j),
 			(i, j) => new UnloadOrder(i, j)
 		};
 

@@ -55,6 +55,7 @@ namespace PanzerBlitz
 
 		public override OrderInvalidReason Validate()
 		{
+			if (AttackTile != Attacker.Target) return OrderInvalidReason.TARGET_NOT_TARGETED;
 			return Attacker.CanAttack(AttackMethod.INDIRECT_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 

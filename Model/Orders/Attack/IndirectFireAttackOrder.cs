@@ -24,24 +24,16 @@ namespace PanzerBlitz
 			}
 		}
 
-		bool _Targeted;
 		byte _ScatterRoll = 255;
 		byte _ScatterDirectionRoll = 255;
 
 		public IndirectFireAttackOrder(Army Army, Tile TargetTile)
 			: base(Army, TargetTile) { }
 
-		public IndirectFireAttackOrder(IndirectFireAttackOrder Copy)
-			: base(Copy)
-		{
-			_Targeted = Copy._Targeted;
-		}
-
 		public IndirectFireAttackOrder(SerializationInputStream Stream, List<GameObject> Objects)
 			: base(Stream, Objects)
 		{
 			_Attackers = Stream.ReadEnumerable(i => new IndirectFireSingleAttackOrder(Stream, Objects)).ToList();
-			_Targeted = Stream.ReadBoolean();
 			_ScatterRoll = Stream.ReadByte();
 			_ScatterDirectionRoll = Stream.ReadByte();
 		}
@@ -50,7 +42,6 @@ namespace PanzerBlitz
 		{
 			base.Serialize(Stream);
 			Stream.Write(_Attackers);
-			Stream.Write(_Targeted);
 			Stream.Write(_ScatterRoll);
 			Stream.Write(_ScatterDirectionRoll);
 		}
@@ -86,7 +77,7 @@ namespace PanzerBlitz
 
 		public override Order CloneIfStateful()
 		{
-			return new IndirectFireAttackOrder(this);
+			return this;
 		}
 
 		public override OrderInvalidReason Validate()
@@ -99,34 +90,22 @@ namespace PanzerBlitz
 		{
 			Recalculate();
 
-			if (_Targeted)
+			Tile tile = TargetTile;
+			var v = Validate();
+			if (v == OrderInvalidReason.ATTACK_NO_SPOTTER)
 			{
-				Tile tile = TargetTile;
-				var v = Validate();
-				if (v == OrderInvalidReason.ATTACK_NO_SPOTTER)
+				if (_ScatterRoll == 255) _ScatterRoll = (byte)Random.Next(0, 6);
+
+				if (_ScatterRoll == 5) tile = null;
+				else if (_ScatterRoll > 1)
 				{
-					if (_ScatterRoll == 255) _ScatterRoll = (byte)Random.Next(0, 6);
-
-					if (_ScatterRoll == 5) tile = null;
-					else if (_ScatterRoll > 1)
-					{
-						if (_ScatterDirectionRoll == 255) _ScatterDirectionRoll = (byte)Random.Next(0, 6);
-						tile = TargetTile.NeighborTiles[_ScatterDirectionRoll];
-					}
-					Recalculate(tile);
-					return DoExecute(Random);
+					if (_ScatterDirectionRoll == 255) _ScatterDirectionRoll = (byte)Random.Next(0, 6);
+					tile = TargetTile.NeighborTiles[_ScatterDirectionRoll];
 				}
-				if (v != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
-				return DoExecute(Random);
+				Recalculate(tile);
 			}
-
-			if (Validate() == OrderInvalidReason.NONE)
-			{
-				_Targeted = true;
-				_Attackers.ForEach(i => i.Execute(Random));
-				return OrderStatus.IN_PROGRESS;
-			}
-			return OrderStatus.ILLEGAL;
+			else if (v != OrderInvalidReason.NONE) return OrderStatus.ILLEGAL;
+			return DoExecute(Random);
 		}
 	}
 }

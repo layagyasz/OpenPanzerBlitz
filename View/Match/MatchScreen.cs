@@ -40,6 +40,7 @@ namespace PanzerBlitz
 		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly FactionRenderer FactionRenderer;
 
+		readonly HashSet<Army> _FollowedArmies;
 		readonly EventBuffer<EventArgs> _EventBuffer = new EventBuffer<EventArgs>();
 
 		bool _FogOfWar;
@@ -77,6 +78,7 @@ namespace PanzerBlitz
 		public MatchScreen(
 			Vector2f WindowSize,
 			Match Match,
+			IEnumerable<Army> FollowedArmies,
 			TileRenderer TileRenderer,
 			UnitConfigurationRenderer UnitRenderer,
 			FactionRenderer FactionRenderer)
@@ -86,6 +88,7 @@ namespace PanzerBlitz
 
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
+			_FollowedArmies = new HashSet<Army>(FollowedArmies);
 			_FogOfWar = Match.Scenario.FogOfWar;
 			_FogOfWarHandler = _EventBuffer.Hook<SightUpdatedEventArgs>(HandleSightUpdated);
 
@@ -120,8 +123,11 @@ namespace PanzerBlitz
 			SetTurn(E.Turn);
 			_InfoDisplay.SetViewItem(new FactionView(E.Turn.TurnInfo.Army.Configuration.Faction, FactionRenderer, 80));
 
-			if (E.Turn.TurnInfo.TurnComponent == TurnComponent.WAIT && _FogOfWar) FogOver();
-			else SetSightFinder(E.Turn.TurnInfo.Army.SightFinder);
+			if (_FollowedArmies.Contains(E.Turn.TurnInfo.Army))
+			{
+				if (E.Turn.TurnInfo.TurnComponent == TurnComponent.WAIT && _FogOfWar) FogOver();
+				else SetSightFinder(E.Turn.TurnInfo.Army.SightFinder);
+			}
 		}
 
 		void SetSightFinder(SightFinder SightFinder)

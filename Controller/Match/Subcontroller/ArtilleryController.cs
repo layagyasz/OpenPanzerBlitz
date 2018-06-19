@@ -2,7 +2,6 @@
 using System.Linq;
 
 using SFML.Graphics;
-using SFML.Window;
 
 namespace PanzerBlitz
 {
@@ -11,7 +10,24 @@ namespace PanzerBlitz
 		public ArtilleryController(HumanMatchPlayerController Controller)
 			: base(Controller) { }
 
-		public override void HandleTileLeftClick(Tile Tile) { }
+		public override void HandleTileLeftClick(Tile Tile)
+		{
+			if (_Controller.SelectedUnit != null)
+			{
+				if (_Controller.SelectedUnit.Target == Tile)
+				{
+					AddAttack(
+						Tile,
+						new IndirectFireSingleAttackOrder(
+							_Controller.SelectedUnit, Tile, _Controller.UseSecondaryWeapon()));
+				}
+				else
+				{
+					_Controller.ExecuteOrderAndAlert(new TargetOrder(_Controller.SelectedUnit, Tile));
+					_Controller.Clear();
+				}
+			}
+		}
 
 		public override void HandleTileRightClick(Tile Tile) { }
 
@@ -19,16 +35,15 @@ namespace PanzerBlitz
 		{
 			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& Unit.CanAttack(AttackMethod.INDIRECT_FIRE) == OrderInvalidReason.NONE)
-				SelectUnit(Unit, AttackMethod.INDIRECT_FIRE);
-			else if (Unit.Army != _Controller.CurrentTurn.Army)
 			{
-				if (_Controller.SelectedUnit != null)
-				{
-					AddAttack(
-						Unit.Position,
-						new IndirectFireSingleAttackOrder(
-							_Controller.SelectedUnit, Unit.Position, _Controller.UseSecondaryWeapon()));
-				}
+				_Controller.SelectUnit(Unit);
+				_Controller.Highlight(
+					Unit.GetFieldOfSight(AttackMethod.INDIRECT_FIRE).Select(
+						i => new Tuple<Tile, Color>(
+							i.Final,
+							i.Final == Unit.Target
+								? HumanMatchPlayerController.ACCENT_COLOR
+								: _Controller.GetRangeColor(i, Unit))));
 			}
 		}
 	}

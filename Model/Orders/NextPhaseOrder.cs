@@ -51,8 +51,12 @@ namespace PanzerBlitz
 
 		public OrderStatus Execute(Random Random)
 		{
-			Army.Reset(false);
-			return OrderStatus.FINISHED;
+			if (Validate() == OrderInvalidReason.NONE)
+			{
+				Army.Reset(false);
+				return OrderStatus.FINISHED;
+			}
+			return OrderStatus.ILLEGAL;
 		}
 
 		public override string ToString()

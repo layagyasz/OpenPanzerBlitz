@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using SFML.Graphics;
-
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public class AntiAircraftController : BaseAttackController
 	{

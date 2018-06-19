@@ -183,8 +183,7 @@
     <Compile Include="View\MapScreenBase.cs" />
     <Compile Include="View\Edit\EditScreen.cs" />
     <Compile Include="FileUtils.cs" />
-    <Compile Include="View\Edit\NewMapPane.cs">
-    </Compile>
+    <Compile Include="View\Edit\NewMapPane.cs"></Compile>
     <Compile Include="Model\Map\BoardCompositeMapConfiguration.cs" />
     <Compile Include="Model\Map\Coordinate.cs" />
     <Compile Include="Model\Map\Direction.cs" />
@@ -408,6 +407,7 @@
     <Compile Include="Model\Unit\UnitWeight.cs" />
     <Compile Include="Controller\Match\Subcontroller\AntiAircraftController.cs" />
     <Compile Include="Controller\Match\Subcontroller\ArtilleryController.cs" />
+    <Compile Include="Model\Orders\Attack\TargetOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

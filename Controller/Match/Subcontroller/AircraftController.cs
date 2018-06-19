@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using SFML.Graphics;
-
-namespace PanzerBlitz
+﻿namespace PanzerBlitz
 {
 	public class AircraftController : BaseAttackController
 	{
@@ -15,7 +10,7 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				var order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
-				if (_Controller.ExecuteOrderAndAlert(order)) SetAircraftHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order)) SelectUnit(_Controller.SelectedUnit, AttackMethod.AIR);
 			}
 		}
 
@@ -25,10 +20,7 @@ namespace PanzerBlitz
 		{
 			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& Unit.Configuration.IsAircraft())
-			{
-				_Controller.SelectUnit(Unit);
-				SetAircraftHighlight(Unit);
-			}
+				SelectUnit(Unit, AttackMethod.AIR);
 			else if (Unit.Army != _Controller.CurrentTurn.Army)
 			{
 				if (_Controller.SelectedUnit != null)
@@ -39,14 +31,6 @@ namespace PanzerBlitz
 							_Controller.SelectedUnit, Unit, _Controller.UseSecondaryWeapon()));
 				}
 			}
-		}
-
-		void SetAircraftHighlight(Unit Unit)
-		{
-			_Controller.Highlight(Unit.GetFieldOfSight(AttackMethod.AIR).Select(
-				i => new Tuple<Tile, Color>(
-					i.Final,
-					_Controller.GetRangeColor(i, Unit, AttackMethod.AIR))));
 		}
 	}
 }

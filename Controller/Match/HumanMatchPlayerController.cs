@@ -21,6 +21,8 @@ namespace PanzerBlitz
 			new Color(255, 0, 0, 120)
 		};
 
+		public static readonly Color ACCENT_COLOR = new Color(0, 0, 255, 120);
+
 		enum HighlightToggle { ENEMY_SIGHT_FIELD, VICTORY_CONDITION_FIELD };
 
 		public readonly MatchAdapter Match;
@@ -78,6 +80,7 @@ namespace PanzerBlitz
 				{ TurnComponent.DEPLOYMENT, new DeploymentController(this) },
 				{ TurnComponent.AIRCRAFT, new AircraftController(this) },
 				{ TurnComponent.ANTI_AIRCRAFT, new AntiAircraftController(this) },
+				{ TurnComponent.ARTILLERY, new ArtilleryController(this) },
 				{ TurnComponent.ATTACK, new AttackController(this) },
 				{ TurnComponent.VEHICLE_COMBAT_MOVEMENT, new OverrunController(this) },
 				{ TurnComponent.VEHICLE_MOVEMENT, new MovementController(this, true) },
@@ -332,6 +335,7 @@ namespace PanzerBlitz
 				RemovePane(_Pane);
 				_Pane = null;
 			}
+			UnHighlight();
 		}
 
 		public IEnumerable<Direction> GetReconDirections()

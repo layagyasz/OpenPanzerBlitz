@@ -29,6 +29,7 @@ namespace PanzerBlitz
 		public float RemainingMovement { get; private set; }
 		public UnitStatus Status { get; private set; }
 		public Tile Position { get; private set; }
+		public Tile Target { get; set; }
 		public Unit Passenger { get; private set; }
 		public Unit Carrier { get; private set; }
 		public Tile Evacuated { get; set; }
