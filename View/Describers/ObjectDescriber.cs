@@ -12,8 +12,14 @@ namespace PanzerBlitz
 
 		public static string Describe(object Object)
 		{
+			if (Object is Enum) return Describe((Enum)Object);
 			if (Object is Unit) return Describe((Unit)Object);
 			return Object.ToString();
+		}
+
+		public static string Describe(Enum EnumValue)
+		{
+			return Describe(EnumValue.ToString(), '_');
 		}
 
 		public static string Describe(Faction Faction)
@@ -26,11 +32,6 @@ namespace PanzerBlitz
 			return Describe(Army.Configuration.Faction);
 		}
 
-		public static string Describe(ObjectiveSuccessLevel ObjectiveSuccessLevel)
-		{
-			return ObjectiveSuccessLevel.ToString();
-		}
-
 		public static string Describe(Unit Unit)
 		{
 			return string.Format("{0} (#{1})", Describe(Unit.Configuration), Unit.Id);
@@ -41,26 +42,6 @@ namespace PanzerBlitz
 			return Configuration.Name;
 		}
 
-		public static string Describe(UnitClass UnitClass)
-		{
-			return string.Join(" ", UnitClass.ToString().Split('_').Select(Capitalize));
-		}
-
-		public static string Describe(TileBase TileBase)
-		{
-			return TileBase.ToString();
-		}
-
-		public static string Describe(TileEdge TileEdge)
-		{
-			return TileEdge.ToString();
-		}
-
-		public static string Describe(TilePathOverlay TilePathOverlay)
-		{
-			return TilePathOverlay.ToString();
-		}
-
 		public static string Describe(MapRegion Region)
 		{
 			return Region.Name;
@@ -68,12 +49,12 @@ namespace PanzerBlitz
 
 		public static string Describe(Environment Environment)
 		{
-			return Environment.UniqueKey;
+			return Describe(Environment.UniqueKey, '-');
 		}
 
 		public static string Describe(MatchSetting Setting)
 		{
-			return Setting.UniqueKey;
+			return Describe(Setting.UniqueKey, '-');
 		}
 
 		public static string Describe(Coordinate Coordinate)
@@ -93,6 +74,11 @@ namespace PanzerBlitz
 			return Sentencify(
 				ObjectiveDescriber.Describe(
 				new TriggerObjective(Trigger.Objective, Trigger.Threshold, Trigger.Invert)));
+		}
+
+		public static string Describe(string Value, char Separator)
+		{
+			return string.Join(" ", Value.ToLower().Split(Separator).Select(Capitalize));
 		}
 
 		public static string Capitalize(string Input)

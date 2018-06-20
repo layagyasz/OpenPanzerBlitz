@@ -28,6 +28,9 @@ unit-render-details:wagon-japanese {
 unit-render-details:truck-japanese {
 	string:image-path { truck-10.png }
 }
+unit-render-details:bicycle-japanese {
+	string:image-path { bicycle.png }
+}
 unit-render-details:ho-ki {
 	string:image-path { type-1-ho-ki.png }
 }

@@ -61,7 +61,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.bishop }
+								!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
 								int:count { 2 }
 							}
 						}

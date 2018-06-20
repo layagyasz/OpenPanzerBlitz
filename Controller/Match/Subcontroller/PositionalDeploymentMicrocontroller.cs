@@ -42,12 +42,12 @@ namespace PanzerBlitz
 		public override bool CanLoad()
 		{
 			return _Controller.SelectedUnit.Position.Units.Any(
-				i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
+				i => _Controller.SelectedUnit.CanLoad(i, false) == OrderInvalidReason.NONE);
 		}
 
 		public override bool CanUnload()
 		{
-			return _Controller.SelectedUnit.CanUnload() == OrderInvalidReason.NONE;
+			return _Controller.SelectedUnit.CanUnload(false) == OrderInvalidReason.NONE;
 		}
 
 		public override bool CanDismount()
@@ -96,7 +96,7 @@ namespace PanzerBlitz
 		{
 			switch (Key)
 			{
-				case Keyboard.Key.L: _Controller.LoadUnit(); break;
+				case Keyboard.Key.L: _Controller.LoadUnit(false); break;
 				case Keyboard.Key.U: _Controller.UnloadUnit(); break;
 				case Keyboard.Key.M: _Controller.Mount(); break;
 				case Keyboard.Key.D: _Controller.Dismount(); break;

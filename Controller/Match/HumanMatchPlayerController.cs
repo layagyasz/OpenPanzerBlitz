@@ -103,7 +103,8 @@ namespace PanzerBlitz
 			_KeyController = KeyController;
 			KeyController.OnKeyPressed += OnKeyPressed;
 
-			MatchScreen.LoadButton.OnClick += (sender, e) => LoadUnit();
+			MatchScreen.LoadButton.OnClick +=
+				(sender, e) => LoadUnit(_CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 			MatchScreen.UnloadButton.OnClick += (sender, e) => UnloadUnit();
 			MatchScreen.DismountButton.OnClick += (sender, e) => Dismount();
 			MatchScreen.MountButton.OnClick += (sender, e) => Mount();
@@ -227,13 +228,13 @@ namespace PanzerBlitz
 		}
 
 		public Color GetRangeColor(
-			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.DIRECT_FIRE)
+			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod)
 		{
 			return HIGHLIGHT_COLORS[PosterizeLineOfSight(LineOfSight, Unit, AttackMethod)];
 		}
 
 		public int PosterizeLineOfSight(
-			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod = AttackMethod.DIRECT_FIRE)
+			LineOfSight LineOfSight, Unit Unit, AttackMethod AttackMethod)
 		{
 			return Math.Min(
 				LineOfSight.Range * HIGHLIGHT_COLORS.Length / (Unit.Configuration.GetRange(AttackMethod, false) + 1),
@@ -264,11 +265,12 @@ namespace PanzerBlitz
 				Highlight(Match.GetArmies()
 					 .Where(i => i.Configuration.Team != Team)
 					 .SelectMany(i => i.Units)
-					 .SelectMany(i =>
-								 i.GetFieldOfSight(
-									 AttackMethod.DIRECT_FIRE,
-									 _CurrentTurn.Army.SightFinder.GetUnitVisibility(i).LastSeen).Select(
-									 j => new Tuple<Tile, int>(j.Final, PosterizeLineOfSight(j, i))))
+					 .SelectMany(
+							  i => i.GetFieldOfSight(
+								 AttackMethod.DIRECT_FIRE,
+								 _CurrentTurn.Army.SightFinder.GetUnitVisibility(i).LastSeen).Select(
+									 j => new Tuple<Tile, int>(
+										 j.Final, PosterizeLineOfSight(j, i, AttackMethod.DIRECT_FIRE))))
 					 .GroupBy(i => i.Item1)
 						  .Select(i => new Tuple<Tile, Color>(i.Key, HIGHLIGHT_COLORS[i.Min(j => j.Item2)])));
 				_HighlightToggles[(int)HighlightToggle.ENEMY_SIGHT_FIELD] = true;
@@ -497,12 +499,13 @@ namespace PanzerBlitz
 			Clear();
 		}
 
-		public void LoadUnit()
+		public void LoadUnit(bool UseMovement)
 		{
 			if (SelectedUnit == null) return;
 
-			var canLoad =
-				SelectedUnit.Position.Units.Where(i => SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE).ToList();
+			var canLoad = SelectedUnit.Position.Units
+									  .Where(i => SelectedUnit.CanLoad(i, UseMovement) == OrderInvalidReason.NONE)
+									  .ToList();
 			if (canLoad.Count == 1)
 			{
 				LoadUnit(canLoad.First());

@@ -43,7 +43,7 @@ namespace PanzerBlitz
 							i.Final,
 							i.Final == Unit.Target
 								? HumanMatchPlayerController.ACCENT_COLOR
-								: _Controller.GetRangeColor(i, Unit))));
+								: _Controller.GetRangeColor(i, Unit, AttackMethod.INDIRECT_FIRE))));
 			}
 		}
 	}

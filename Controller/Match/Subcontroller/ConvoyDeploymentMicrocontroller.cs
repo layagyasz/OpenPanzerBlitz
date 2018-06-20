@@ -99,8 +99,8 @@ namespace PanzerBlitz
 		{
 			if (_DeploymentPage.SelectedUnit != null)
 			{
-				var units =
-					Deployment.Units.Where(i => _DeploymentPage.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
+				var units = Deployment.Units.Where(
+					i => _DeploymentPage.SelectedUnit.CanLoad(i, false) == OrderInvalidReason.NONE);
 				if (units.Count() > 0)
 				{
 					Clear();

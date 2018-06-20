@@ -27,7 +27,7 @@ namespace PanzerBlitz
 			_Controller.SelectUnit(Unit);
 			_Controller.Highlight(
 				Unit.GetFieldOfSight(AttackMethod).Select(
-				i => new Tuple<Tile, Color>(i.Final, _Controller.GetRangeColor(i, Unit))));
+					i => new Tuple<Tile, Color>(i.Final, _Controller.GetRangeColor(i, Unit, AttackMethod))));
 		}
 
 		protected void AddAttack(Tile Tile, SingleAttackOrder NewAttack)

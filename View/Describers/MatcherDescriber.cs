@@ -71,12 +71,12 @@ namespace PanzerBlitz
 
 		public static string Describe(TileInRegion Matcher)
 		{
-			return string.Format("within {0}", Matcher.NormalizedRegionName);
+			return string.Format("within {0}", ObjectDescriber.Describe(Matcher.NormalizedRegionName, '-'));
 		}
 
 		public static string Describe(TileOnEdge Matcher)
 		{
-			return string.Format("on the {0} edge of the board", ObjectDescriber.Describe(Matcher.Edge));
+			return string.Format("on {0} edge of the board", ObjectDescriber.Describe(Matcher.Edge));
 		}
 
 		public static string Describe(TileWithin Matcher)

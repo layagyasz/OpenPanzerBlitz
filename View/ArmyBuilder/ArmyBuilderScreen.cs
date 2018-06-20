@@ -45,7 +45,7 @@ namespace PanzerBlitz
 				DisplayedString =
 					string.Format(
 						"{0} - {1} - {2}",
-						ObjectDescriber.Describe(Parameters.Faction.Name),
+						ObjectDescriber.Describe(Parameters.Faction),
 						ObjectDescriber.Describe(Parameters.Parameters.Setting.Front),
 						Parameters.Parameters.Year)
 			};

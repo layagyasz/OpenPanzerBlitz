@@ -261,7 +261,7 @@ namespace PanzerBlitz
 
 			IsEngineer = (bool)(attributes[(int)Attribute.IS_ENGINEER] ?? false);
 			CanDirectFire = (bool)(attributes[(int)Attribute.CAN_DIRECT_FIRE]
-								   ?? (PrimaryWeapon.Attack > 0 && UnitClass != UnitClass.MINEFIELD));
+								   ?? (PrimaryWeapon.Attack > 0 && UnitClass != UnitClass.MINEFIELD && !IsAircraft()));
 			CanIndirectFire = (bool)(attributes[(int)Attribute.CAN_INDIRECT_FIRE]
 									 ?? (UnitClass == UnitClass.SELF_PROPELLED_ARTILLERY
 										 || PrimaryWeapon.WeaponClass == WeaponClass.MORTAR));
@@ -313,9 +313,9 @@ namespace PanzerBlitz
 		{
 			if (UnitClass == UnitClass.COMMAND_POST) return true;
 			return !IsStackUnique()
-					&& !IsNeutral()
-					&& UnitClass != UnitClass.FIGHTER_BOMBER
-					 && PrimaryWeapon != default(Weapon);
+				&& !IsNeutral()
+				&& UnitClass != UnitClass.FIGHTER_BOMBER
+				&& PrimaryWeapon != default(Weapon);
 		}
 
 		byte GetDefaultSpotRange()
@@ -350,9 +350,9 @@ namespace PanzerBlitz
 		public bool IsStackUnique()
 		{
 			return UnitClass == UnitClass.FORT
-										 || UnitClass == UnitClass.BLOCK
-										 || UnitClass == UnitClass.MINEFIELD
-										 || UnitClass == UnitClass.BRIDGE;
+				|| UnitClass == UnitClass.BLOCK
+				|| UnitClass == UnitClass.MINEFIELD
+				|| UnitClass == UnitClass.BRIDGE;
 		}
 
 		public bool MustBeAttackedAlone()
@@ -371,16 +371,16 @@ namespace PanzerBlitz
 		public bool OverridesBlockType()
 		{
 			return UnitClass == UnitClass.FORT
-										 || UnitClass == UnitClass.BLOCK
-										 || UnitClass == UnitClass.MINEFIELD;
+				|| UnitClass == UnitClass.BLOCK
+				|| UnitClass == UnitClass.MINEFIELD;
 		}
 
 		public bool IsNeutral()
 		{
 			return UnitClass == UnitClass.MINEFIELD
-										 || UnitClass == UnitClass.BLOCK
-										 || UnitClass == UnitClass.WRECKAGE
-										 || UnitClass == UnitClass.BRIDGE;
+				|| UnitClass == UnitClass.BLOCK
+				|| UnitClass == UnitClass.WRECKAGE
+				|| UnitClass == UnitClass.BRIDGE;
 		}
 
 		public bool IsAircraft()
@@ -482,8 +482,8 @@ namespace PanzerBlitz
 			switch (AttackMethod)
 			{
 				case AttackMethod.OVERRUN: return 0;
-				case AttackMethod.DIRECT_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
-				case AttackMethod.INDIRECT_FIRE: return GetAdjustedRange(UseSecondaryWeapon);
+				case AttackMethod.DIRECT_FIRE: return CanDirectFire ? GetAdjustedRange(UseSecondaryWeapon) : 0;
+				case AttackMethod.INDIRECT_FIRE: return CanIndirectFire ? GetAdjustedRange(UseSecondaryWeapon) : 0;
 				case AttackMethod.CLOSE_ASSAULT: return CanCloseAssault ? 1 : 0;
 				case AttackMethod.MINEFIELD: return 0;
 				case AttackMethod.AIR: return CanAirAttack ? 1 : 0;
@@ -496,8 +496,8 @@ namespace PanzerBlitz
 		public bool Covers(UnitConfiguration Configuration)
 		{
 			return UnitClass == UnitClass.FORT
-										 && Configuration.UnitClass != UnitClass.FIGHTER_BOMBER
-										 && Defense > Configuration.Defense;
+				&& Configuration.UnitClass != UnitClass.FIGHTER_BOMBER
+				&& Defense > Configuration.Defense;
 		}
 
 		public float GetMaxMovement(Environment Environment)

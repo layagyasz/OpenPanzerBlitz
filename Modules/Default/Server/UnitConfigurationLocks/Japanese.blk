@@ -125,6 +125,12 @@ unit-configuration-lock:truck-japanese {
 	}
 	float:rarity { 11.7 }
 }
+unit-configuration-lock:bicycle-japanese {
+	string[]:unit-configurations { 
+		string:_ { bicycle-japanese }
+	}
+	float:rarity { 9.5 }
+}
 unit-configuration-lock:ho-ki {
 	string[]:unit-configurations { 
 		string:_ { ho-ki }

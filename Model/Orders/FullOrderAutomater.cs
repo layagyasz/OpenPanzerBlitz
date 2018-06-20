@@ -42,13 +42,13 @@ namespace PanzerBlitz
 
 				case TurnComponent.AIRCRAFT:
 					return !TurnInfo.Army.Units.Any(
-						i => i.Configuration.IsAircraft() && i.Status == UnitStatus.ACTIVE)
-						|| !Match.Armies.Where(i => i.Configuration.Team != TurnInfo.Army.Configuration.Team)
-										.SelectMany(i => i.Units)
-										.Any(i => i.Configuration.IsAircraft() && i.Position != null);
+						i => i.Configuration.IsAircraft() && i.Status == UnitStatus.ACTIVE);
 				case TurnComponent.ANTI_AIRCRAFT:
 					return !TurnInfo.Army.Units.Any(
-						i => i.CanAttack(AttackMethod.ANTI_AIRCRAFT) == OrderInvalidReason.NONE);
+						i => i.CanAttack(AttackMethod.ANTI_AIRCRAFT) == OrderInvalidReason.NONE)
+						|| !Match.Armies.Where(i => i.Configuration.Team != TurnInfo.Army.Configuration.Team)
+						.SelectMany(i => i.Units)
+						.Any(i => i.Configuration.IsAircraft() && i.Position != null);
 
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
 					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE

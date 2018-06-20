@@ -329,10 +329,13 @@ namespace PanzerBlitz
 			return CanDismount();
 		}
 
-		public OrderInvalidReason CanLoad(Unit Unit)
+		public OrderInvalidReason CanLoad(Unit Unit, bool UseMovement)
 		{
-			if (Unit.Moved || RemainingMovement < GetLoadCost(Unit) || Unit.Fired || Status != UnitStatus.ACTIVE)
-				return OrderInvalidReason.UNIT_NO_MOVE;
+			if (UseMovement)
+			{
+				if (Unit.Moved || RemainingMovement < GetLoadCost(Unit) || Unit.Fired || Status != UnitStatus.ACTIVE)
+					return OrderInvalidReason.UNIT_NO_MOVE;
+			}
 			if (Unit.Army != Army) return OrderInvalidReason.TARGET_TEAM;
 			if (Unit.Position != Position) return OrderInvalidReason.ILLEGAL;
 			if (Passenger != null) return OrderInvalidReason.UNIT_CARRYING;
@@ -344,11 +347,14 @@ namespace PanzerBlitz
 			return Configuration.CanLoad(Unit.Configuration);
 		}
 
-		public OrderInvalidReason CanUnload()
+		public OrderInvalidReason CanUnload(bool UseMovement)
 		{
 			if (Passenger == null) return OrderInvalidReason.UNIT_NO_PASSENGER;
-			if (Status != UnitStatus.ACTIVE || RemainingMovement < GetLoadCost(Passenger))
-				return OrderInvalidReason.UNIT_NO_MOVE;
+			if (UseMovement)
+			{
+				if (Status != UnitStatus.ACTIVE || RemainingMovement < GetLoadCost(Passenger))
+					return OrderInvalidReason.UNIT_NO_MOVE;
+			}
 			if (Position != null)
 			{
 				var r = Passenger.CanEnter(Position);

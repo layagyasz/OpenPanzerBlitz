@@ -86,6 +86,21 @@ unit-configuration:truck-japanese {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
+unit-configuration:bicycle-japanese {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-japanese-41 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+}
 unit-configuration:ho-ki {
 	string:name { Ho-Ki }
 	unit-class:unit-class { transport }

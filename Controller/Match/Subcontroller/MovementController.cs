@@ -19,12 +19,12 @@ namespace PanzerBlitz
 		public override bool CanLoad()
 		{
 			return _Controller.SelectedUnit.Position.Units.Any(
-				i => _Controller.SelectedUnit.CanLoad(i) == OrderInvalidReason.NONE);
+				i => _Controller.SelectedUnit.CanLoad(i, true) == OrderInvalidReason.NONE);
 		}
 
 		public override bool CanUnload()
 		{
-			return _Controller.SelectedUnit.CanUnload() == OrderInvalidReason.NONE;
+			return _Controller.SelectedUnit.CanUnload(true) == OrderInvalidReason.NONE;
 		}
 
 		public override bool CanDismount()
@@ -84,7 +84,7 @@ namespace PanzerBlitz
 			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& !Unit.Configuration.IsAircraft()
 				&& (Unit.CanMove(VehicleMovement, false) == OrderInvalidReason.NONE
-					|| Unit.CanUnload() == OrderInvalidReason.NONE))
+					|| Unit.CanUnload(true) == OrderInvalidReason.NONE))
 			{
 				_Controller.SelectUnit(Unit);
 				SetMovementHighlight(Unit);
@@ -123,7 +123,7 @@ namespace PanzerBlitz
 				case Keyboard.Key.D: _Controller.Dismount(); break;
 				case Keyboard.Key.E: _Controller.Evacuate(); break;
 				case Keyboard.Key.I: _Controller.ClearMinefield(); break;
-				case Keyboard.Key.L: _Controller.LoadUnit(); break;
+				case Keyboard.Key.L: _Controller.LoadUnit(true); break;
 				case Keyboard.Key.M: _Controller.Mount(); break;
 				case Keyboard.Key.P: _Controller.Emplace(); break;
 				case Keyboard.Key.R: _Controller.Recon(); break;

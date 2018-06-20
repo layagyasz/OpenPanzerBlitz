@@ -97,6 +97,12 @@ unit-configuration-link:truck-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.truck-japanese }
 }
+unit-configuration-link:bicycle-japanese {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-japanese }
+
+	int:introduce-year { 1941 }
+}
 unit-configuration-link:ho-ki {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.ho-ki }

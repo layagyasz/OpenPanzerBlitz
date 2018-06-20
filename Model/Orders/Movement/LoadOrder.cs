@@ -54,7 +54,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason Validate()
 		{
-			return Carrier.CanLoad(Passenger);
+			return Carrier.CanLoad(Passenger, UseMovement);
 		}
 
 		public OrderStatus Execute(Random Random)
