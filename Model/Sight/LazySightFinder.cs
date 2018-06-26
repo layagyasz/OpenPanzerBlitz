@@ -310,7 +310,7 @@ namespace PanzerBlitz
 				_OverrideVisibleUnits.Add(Unit);
 				foreach (var unit in Unit.Position.Units.Where(i => i.Covers(Unit) || Unit.Covers(i)))
 				{
-					_OverrideVisibleUnits.Add(Unit);
+					_OverrideVisibleUnits.Add(unit);
 					units.Add(unit);
 				}
 			}
@@ -326,7 +326,7 @@ namespace PanzerBlitz
 				_OverrideVisibleUnits.Add(Unit);
 				foreach (var unit in Unit.Position.Units.Where(i => i.Covers(Unit) || Unit.Covers(i)))
 				{
-					_OverrideVisibleUnits.Add(Unit);
+					_OverrideVisibleUnits.Add(unit);
 					units.Add(unit);
 				}
 			}

@@ -138,6 +138,8 @@ namespace PanzerBlitz
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
+			if (Configuration.UnitClass == UnitClass.FORT && Tile.Rules.Watery)
+				return OrderInvalidReason.UNIT_EMPLACE_TERRAIN;
 			if (Terminal
 				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
 				&& !Tile.Units.Contains(this))
@@ -261,11 +263,16 @@ namespace PanzerBlitz
 					return;
 				case CombatResult.DISRUPT:
 					Status = UnitStatus.DISRUPTED;
+					if (Configuration.UnloadsWhenDisrupted && Passenger != null) Unload(false);
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
 					if (Status == UnitStatus.DISRUPTED)
 						HandleCombatResult(CombatResult.DESTROY, AttackMethod, AttackingArmy);
-					else Status = UnitStatus.DISRUPTED;
+					else
+					{
+						Status = UnitStatus.DISRUPTED;
+						if (Configuration.UnloadsWhenDisrupted && Passenger != null) Unload(false);
+					}
 					return;
 			}
 		}
@@ -638,9 +645,10 @@ namespace PanzerBlitz
 			this.Emplaced = Emplaced && Configuration.IsEmplaceable();
 		}
 
-		public void Fire(bool UseSecondary)
+		public void Fire(Tile Tile, bool UseSecondary)
 		{
 			Fired = true;
+			if (Tile != Target) Target = null;
 			if (Configuration.GetWeapon(UseSecondary).Ammunition > 0) UseAmmunition(UseSecondary);
 			CancelInteractions();
 			if (OnFire != null) OnFire(this, EventArgs.Empty);

@@ -82,22 +82,18 @@ namespace PanzerBlitz
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == OrderInvalidReason.NONE)
+			Attacker.Fire(AttackTile, UseSecondaryWeapon);
+			_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
+			if (Attacker.Configuration.InnatelyClearsMines)
 			{
-				Attacker.Fire(UseSecondaryWeapon);
-				_InitialMovement.Unit.MoveTo(ExitTile, _MovementPath);
-				if (Attacker.Configuration.InnatelyClearsMines)
-				{
-					foreach (Unit minefield in ExitTile.Units
-							 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
-						minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
-					foreach (Unit minefield in AttackTile.Units
-							 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
-						minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
-				}
-				return OrderStatus.FINISHED;
+				foreach (Unit minefield in ExitTile.Units
+						 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
+					minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
+				foreach (Unit minefield in AttackTile.Units
+						 .Where(i => i.Configuration.UnitClass == UnitClass.MINEFIELD).ToList())
+					minefield.HandleCombatResult(CombatResult.DESTROY, AttackMethod.NONE, null);
 			}
-			return OrderStatus.ILLEGAL;
+			return OrderStatus.FINISHED;
 		}
 
 		public override string ToString()

@@ -62,12 +62,8 @@ namespace PanzerBlitz
 
 		public override OrderStatus Execute(Random Random)
 		{
-			if (Validate() == OrderInvalidReason.NONE)
-			{
-				Attacker.Fire(UseSecondaryWeapon);
-				return OrderStatus.FINISHED;
-			}
-			return OrderStatus.ILLEGAL;
+			Attacker.Fire(AttackTile, UseSecondaryWeapon);
+			return OrderStatus.FINISHED;
 		}
 
 		public override string ToString()

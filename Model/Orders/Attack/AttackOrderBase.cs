@@ -175,6 +175,7 @@ namespace PanzerBlitz
 
 		public virtual OrderInvalidReason Validate()
 		{
+			OrderInvalidReason r;
 			if (_OddsCalculations.Count == 0)
 			{
 				if (TargetTile.Units.Count() == 0) return OrderInvalidReason.TARGET_EMPTY;
@@ -184,11 +185,11 @@ namespace PanzerBlitz
 			if (Army.HasAttackedTile(TargetTile)) return OrderInvalidReason.TARGET_ALREADY_ATTACKED;
 			foreach (SingleAttackOrder order in _Attackers)
 			{
-				var r = order.Validate();
+				r = order.Validate();
 				if (r != OrderInvalidReason.NONE) return r;
 			}
-			if (TargetTile.CanBeAttacked(AttackMethod) != OrderInvalidReason.NONE)
-				return TargetTile.CanBeAttacked(AttackMethod);
+			r = TargetTile.CanBeAttacked(AttackMethod);
+			if (r != OrderInvalidReason.NONE) return r;
 			if (_Attackers.Select(i => i.AttackTile).Distinct().Count() > 1)
 				return OrderInvalidReason.ILLEGAL;
 
@@ -220,6 +221,7 @@ namespace PanzerBlitz
 			{
 				result.Item1.HandleCombatResult(result.Item2, AttackMethod, Army);
 			}
+
 			Army.AttackTile(TargetTile);
 			_Attackers.ForEach(i => i.Execute(Random));
 

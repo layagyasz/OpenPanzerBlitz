@@ -60,7 +60,7 @@ namespace PanzerBlitz
 
 		public override OrderStatus Execute(Random Random)
 		{
-			return Validate() == OrderInvalidReason.NONE ? OrderStatus.FINISHED : OrderStatus.ILLEGAL;
+			return OrderStatus.FINISHED;
 		}
 
 		public override string ToString()

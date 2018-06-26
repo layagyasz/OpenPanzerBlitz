@@ -207,8 +207,8 @@ namespace PanzerBlitz
 		{
 			if (AttackMethod == AttackMethod.OVERRUN)
 			{
-				if (Units.Any(i => i.Configuration.UnitClass == UnitClass.FORT))
-					return OrderInvalidReason.OVERRUN_FORT;
+				if (Units.Any(i => i.Configuration.IsEmplaceable()))
+					return OrderInvalidReason.TARGET_IMMUNE;
 				if (Configuration.TileBase != TileBase.CLEAR
 					|| Configuration.Edges.Any(i => i != TileEdge.NONE)
 					|| Configuration.PathOverlays.Any(

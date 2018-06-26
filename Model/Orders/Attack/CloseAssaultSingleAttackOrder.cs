@@ -54,14 +54,9 @@ namespace PanzerBlitz
 			return Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null, UseSecondaryWeapon);
 		}
 
-		public override OrderStatus Execute(Random Random)
+		public override string ToString()
 		{
-			if (Validate() == OrderInvalidReason.NONE)
-			{
-				Attacker.Fire(UseSecondaryWeapon);
-				return OrderStatus.FINISHED;
-			}
-			return OrderStatus.ILLEGAL;
+			return string.Format("[CloseAssaultSingleAttackOrder: Attacker={0}, AttackTile={1}]", Attacker, AttackTile);
 		}
 	}
 }

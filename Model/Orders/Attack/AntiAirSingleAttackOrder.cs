@@ -68,14 +68,9 @@ namespace PanzerBlitz
 			return Attacker.CanAttack(AttackMethod.ANTI_AIRCRAFT, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 
-		public override OrderStatus Execute(Random Random)
+		public override string ToString()
 		{
-			if (Validate() == OrderInvalidReason.NONE)
-			{
-				Attacker.Fire(UseSecondaryWeapon);
-				return OrderStatus.FINISHED;
-			}
-			return OrderStatus.ILLEGAL;
+			return string.Format("[AntiAirSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);
 		}
 	}
 }

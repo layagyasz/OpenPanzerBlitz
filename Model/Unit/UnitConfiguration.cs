@@ -46,6 +46,7 @@ namespace PanzerBlitz
 			MOVEMENT_RULES,
 
 			IS_CARRIER,
+			UNLOADS_WHEN_DISRUPTED,
 			CAN_ONLY_CARRY_INFANTRY,
 			CAN_ONLY_CARRY_LIGHT,
 			CAN_CARRY_IN_WATER,
@@ -102,7 +103,7 @@ namespace PanzerBlitz
 		public readonly UnitMovementRules MovementRules;
 
 		public readonly bool IsCarrier;
-
+		public readonly bool UnloadsWhenDisrupted;
 		public readonly bool CanOnlyCarryInfantry;
 		public readonly bool CanOnlyCarryLight;
 		public readonly bool CanCarryInWater;
@@ -170,6 +171,7 @@ namespace PanzerBlitz
 			MovementRules = Stream.ReadObject(i => new UnitMovementRules(i), false, true);
 
 			IsCarrier = Stream.ReadBoolean();
+			UnloadsWhenDisrupted = Stream.ReadBoolean();
 			CanOnlyCarryInfantry = Stream.ReadBoolean();
 			CanOnlyCarryLight = Stream.ReadBoolean();
 			CanCarryInWater = Stream.ReadBoolean();
@@ -246,6 +248,7 @@ namespace PanzerBlitz
 							   ?? ((IsVehicle && !IsAircraft()) || UnitClass == UnitClass.TRANSPORT));
 			CanOnlyCarryInfantry = (bool)(attributes[(int)Attribute.CAN_ONLY_CARRY_INFANTRY]
 										  ?? IsCarrier && UnitClass != UnitClass.TRANSPORT);
+			UnloadsWhenDisrupted = (bool)(attributes[(int)Attribute.UNLOADS_WHEN_DISRUPTED] ?? CanOnlyCarryInfantry);
 			CanOnlyCarryLight = (bool)(attributes[(int)Attribute.CAN_ONLY_CARRY_LIGHT] ?? false);
 			CanCarryInWater = (bool)(attributes[(int)Attribute.CAN_CARRY_IN_WATER] ?? false);
 			IsPassenger = (bool)(attributes[(int)Attribute.IS_PASSENGER]
@@ -645,6 +648,7 @@ namespace PanzerBlitz
 			Stream.Write(MovementRules, false, true);
 
 			Stream.Write(IsCarrier);
+			Stream.Write(UnloadsWhenDisrupted);
 			Stream.Write(CanOnlyCarryInfantry);
 			Stream.Write(CanOnlyCarryLight);
 			Stream.Write(CanCarryInWater);

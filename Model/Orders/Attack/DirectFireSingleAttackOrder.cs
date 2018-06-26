@@ -68,16 +68,6 @@ namespace PanzerBlitz
 			return Attacker.CanAttack(AttackMethod.DIRECT_FIRE, TreatStackAsArmored, LineOfSight, UseSecondaryWeapon);
 		}
 
-		public override OrderStatus Execute(Random Random)
-		{
-			if (Validate() == OrderInvalidReason.NONE)
-			{
-				Attacker.Fire(UseSecondaryWeapon);
-				return OrderStatus.FINISHED;
-			}
-			return OrderStatus.ILLEGAL;
-		}
-
 		public override string ToString()
 		{
 			return string.Format("[DirectFireSingleAttackOrder: Attacker={0}, Defender={1}]", Attacker, Defender);

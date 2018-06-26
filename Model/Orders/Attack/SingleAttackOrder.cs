@@ -38,6 +38,11 @@ namespace PanzerBlitz
 		public abstract OrderInvalidReason Validate();
 		public abstract AttackOrder GenerateNewAttackOrder();
 		public abstract bool MatchesTurnComponent(TurnComponent TurnComponent);
-		public abstract OrderStatus Execute(Random Random);
+
+		public virtual OrderStatus Execute(Random Random)
+		{
+			Attacker.Fire(AttackTile, UseSecondaryWeapon);
+			return OrderStatus.FINISHED;
+		}
 	}
 }

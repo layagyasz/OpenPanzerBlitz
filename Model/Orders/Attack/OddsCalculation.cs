@@ -96,7 +96,7 @@ namespace PanzerBlitz
 				IncreaseOdds();
 			}
 
-			if (AttackMethod != AttackMethod.ANTI_AIRCRAFT)
+			if (AttackMethod != AttackMethod.ANTI_AIRCRAFT && AttackMethod != AttackMethod.MINEFIELD)
 			{
 				// Terrain modifiers.
 				int totalDieModifier = Defenders.First().Position.Rules.DieModifier

@@ -15,13 +15,13 @@ namespace PanzerBlitz
 	{
 		public static readonly Color[] HIGHLIGHT_COLORS =
 		{
-			new Color(0, 255, 0, 120),
-			new Color(255, 255, 0, 120),
-			new Color(255, 128, 0, 120),
-			new Color(255, 0, 0, 120)
+			new Color(0, 255, 0, 60),
+			new Color(255, 255, 0, 60),
+			new Color(255, 128, 0, 60),
+			new Color(255, 0, 0, 60)
 		};
 
-		public static readonly Color ACCENT_COLOR = new Color(0, 0, 255, 120);
+		public static readonly Color ACCENT_COLOR = new Color(0, 0, 255, 60);
 
 		enum HighlightToggle { ENEMY_SIGHT_FIELD, VICTORY_CONDITION_FIELD };
 

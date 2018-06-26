@@ -31,10 +31,10 @@ namespace PanzerBlitz
 			switch (AttackMethod)
 			{
 				case AttackMethod.DIRECT_FIRE:
-					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon, true);
 					break;
 				case AttackMethod.INDIRECT_FIRE:
-					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon);
+					GetNormalAttack(Unit, EnemyArmored, LineOfSight, UseSecondaryWeapon, false);
 					Attack /= 4;
 					Factors.Add(AttackFactorCalculationFactor.INDIRECT_FIRE);
 					break;
@@ -95,7 +95,8 @@ namespace PanzerBlitz
 			}
 		}
 
-		void GetNormalAttack(Unit Unit, bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon)
+		void GetNormalAttack(
+			Unit Unit, bool EnemyArmored, LineOfSight LineOfSight, bool UseSecondaryWeapon, bool FactorElevation)
 		{
 			var weapon = Unit.Configuration.GetWeapon(UseSecondaryWeapon);
 			Factors = new List<AttackFactorCalculationFactor>();
@@ -128,11 +129,14 @@ namespace PanzerBlitz
 				Factors.Add(AttackFactorCalculationFactor.NOT_ARMORED);
 			}
 
-			if (LineOfSight.Initial.Rules.SubTieredElevation
-				< LineOfSight.Final.Rules.SubTieredElevation)
+			if (FactorElevation)
 			{
-				Attack /= 2;
-				Factors.Add(AttackFactorCalculationFactor.ELEVATION);
+				if (LineOfSight.Initial.Rules.SubTieredElevation
+					< LineOfSight.Final.Rules.SubTieredElevation)
+				{
+					Attack /= 2;
+					Factors.Add(AttackFactorCalculationFactor.ELEVATION);
+				}
 			}
 
 			if (weapon.Range < LineOfSight.Range && weapon.CanDoubleRange)
