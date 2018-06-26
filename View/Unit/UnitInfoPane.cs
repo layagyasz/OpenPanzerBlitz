@@ -84,7 +84,8 @@ namespace PanzerBlitz
 			AddAttribute(string.Format("Weight - {0}", Unit.Configuration.UnitWeight));
 			if (Unit.Configuration.IsVehicle) AddAttribute("Vehicular");
 			if (Unit.Configuration.IsArmored) AddAttribute("Armored");
-			if (Unit.Configuration.LeavesWreckWhenDestroyed) AddAttribute("Wreck When Destroyed");
+			if (Unit.Configuration.WrecksAs != null)
+				AddAttribute(string.Format("Wrecks As - {0}", ObjectDescriber.Describe(Unit.Configuration.WrecksAs)));
 		}
 
 		void AddCombatCapabilities(Unit Unit)
@@ -144,6 +145,7 @@ namespace PanzerBlitz
 			if (Unit.Configuration.IsPassenger
 				|| Unit.Configuration.IsOversizedPassenger
 				|| Unit.Configuration.IsCarrier
+				|| Unit.Configuration.UnloadsWhenDisrupted
 				|| Unit.Configuration.CanOnlyCarryLight
 				|| Unit.Configuration.CanOnlyCarryInfantry
 				|| Unit.Configuration.CanCarryInWater)
@@ -151,6 +153,7 @@ namespace PanzerBlitz
 			if (Unit.Configuration.IsPassenger) AddAttribute("Passenger");
 			if (Unit.Configuration.IsOversizedPassenger) AddAttribute("Oversized Passenger");
 			if (Unit.Configuration.IsCarrier) AddAttribute("Carrier");
+			if (Unit.Configuration.UnloadsWhenDisrupted) AddAttribute("Unloads When Disrupted");
 			if (Unit.Configuration.CanOnlyCarryLight) AddAttribute("Carry Only Light Units");
 			if (Unit.Configuration.CanOnlyCarryInfantry) AddAttribute("Carry Only Infantry");
 			if (Unit.Configuration.CanCarryInWater) AddAttribute("Can Carry In Water");

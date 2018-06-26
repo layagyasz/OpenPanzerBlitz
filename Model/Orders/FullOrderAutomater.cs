@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -14,7 +13,7 @@ namespace PanzerBlitz
 
 		void HandleUnitMove(object Sender, MovementEventArgs E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			unit.Deployment?.EnterUnits(unit.Configuration.IsVehicle);
 		}
 

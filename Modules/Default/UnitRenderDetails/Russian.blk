@@ -118,7 +118,6 @@ unit-render-details:rf-8 {
 	string:image-path { rf-8.png }
 }
 unit-render-details:m-2 {
-	string:override-display-name { HALFTRK }
 	string:image-path { sis-33.png }
 }
 unit-render-details:zis-42 {

@@ -1,5 +1,6 @@
 ﻿tile-component-rules<>:tile-component-rules {
 	tile-component-rules:base-clear {
+		bool:is-clear { true }
 		terrain-attribute[]:terrain-attributes { }
 	}
 	tile-component-rules:winter-base-clear {
@@ -137,6 +138,7 @@
 	}
 
 	tile-component-rules:path-road {
+		bool:is-clear { true }
 		bool:road-move { true }
 		terrain-attribute[]:terrain-attributes {
 			terrain-attribute:_ { roaded }
@@ -164,16 +166,19 @@
 	}
 	tile-component-rules:path-stream-ford {
 		bool:depressed-transition { true }
+		bool:is-clear { true }
 		bool:override-base-movement { false }
 	}
 	tile-component-rules:winter-path-stream-ford {
 		bool:depressed-transition { true }
+		bool:is-clear { true }
 		bool:override-base-movement { false }
 		terrain-attribute[]:terrain-attributes {
 			terrain-attribute:_ { loose }
 		}
 	}
 	tile-component-rules:winter-path-dirt-road {
+		bool:is-clear { true }
 		bool:road-move { true }
 	}
 	tile-component-rules:path-rail-road {

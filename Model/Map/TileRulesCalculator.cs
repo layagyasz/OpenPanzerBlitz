@@ -163,7 +163,7 @@ namespace PanzerBlitz
 			var leaveCost = new MovementCost(0f);
 			if (leavingDepressed && !fromBridged)
 			{
-				leaveCost = 1 + LEAVING_DEPRESSED_ATTRIBUTES
+				leaveCost = movementRules.BaseCost + LEAVING_DEPRESSED_ATTRIBUTES
 					.Select(i => movementRules[i].GetMoveCost(adjacent, unitMoved))
 					.Aggregate((i, j) => i + j);
 			}
@@ -215,7 +215,7 @@ namespace PanzerBlitz
 			float multiplier = Unit.Passenger != null && Unit.Passenger.Configuration.IsOversizedPassenger
 								   ? Unit.Configuration.OversizedPassengerMovementMultiplier : 1;
 
-			return multiplier * (1 + enterCost + leaveCost + crossCost);
+			return multiplier * (movementRules.BaseCost + enterCost + leaveCost + crossCost);
 		}
 
 		MovementCost GetRulesMoveCost(

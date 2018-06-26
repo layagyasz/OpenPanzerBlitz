@@ -26,7 +26,7 @@ namespace PanzerBlitz
 		public UnitTracker UnitTracker { get; }
 
 		Army _TrackingArmy;
-		HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
+		readonly HashSet<Unit> _OverrideVisibleUnits = new HashSet<Unit>();
 
 		public LazySightFinder(UnitTracker UnitTracker)
 		{
@@ -44,10 +44,10 @@ namespace PanzerBlitz
 
 		void HandleFire(object Sender, EventArgs E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy) return;
 
-			IEnumerable<Unit> otherUnits = SightFiringUnit(unit);
+			var otherUnits = SightFiringUnit(unit);
 			var delta = UnitTracker.Update(this, unit);
 			foreach (var otherUnit in otherUnits) delta.AddRange(UnitTracker.Update(this, otherUnit));
 			if (OnSightUpdated != null)
@@ -64,10 +64,10 @@ namespace PanzerBlitz
 
 		void HandleMove(object Sender, MovementEventArgs E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy)
 			{
-				HashSet<Tile> recalculateTiles = new HashSet<Tile>();
+				var recalculateTiles = new HashSet<Tile>();
 				if (unit.CanSight())
 				{
 					if (E.Path != null && E.Path.Count > 1)
@@ -93,7 +93,7 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				IEnumerable<Unit> otherUnits =
+				var otherUnits =
 					SightMovingUnit(unit, E.Path != null && E.Path.Count > 1 ? E.Path[E.Path.Count - 2] : null, E.Tile);
 				var delta = UnitTracker.ComputeDelta(this, unit, E);
 				foreach (var otherUnit in otherUnits) delta.AddRange(UnitTracker.Update(this, otherUnit));
@@ -113,7 +113,7 @@ namespace PanzerBlitz
 
 		void HandleLoad(object Sender, EventArgs E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy)
 			{
 				var tileDeltas =
@@ -131,8 +131,8 @@ namespace PanzerBlitz
 			}
 			else
 			{
-				bool carrierOverride = _OverrideVisibleUnits.Contains(unit);
-				bool passengerOverride = _OverrideVisibleUnits.Contains(unit.Passenger);
+				var carrierOverride = _OverrideVisibleUnits.Contains(unit);
+				var passengerOverride = _OverrideVisibleUnits.Contains(unit.Passenger);
 
 				var unitDeltas = new List<Tuple<Unit, UnitVisibility>>();
 				if (carrierOverride && !passengerOverride)
@@ -161,7 +161,7 @@ namespace PanzerBlitz
 
 		void HandleUnload(object Sender, ValuedEventArgs<Unit> E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 
 			if (unit.Army == TrackingArmy)
 			{
@@ -194,7 +194,7 @@ namespace PanzerBlitz
 
 		void HandleRemove(object Sender, ValuedEventArgs<Tile> E)
 		{
-			Unit unit = (Unit)Sender;
+			var unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy)
 			{
 				var tileDeltas =
@@ -255,7 +255,7 @@ namespace PanzerBlitz
 		{
 			if (!Unit.CanSight()) return TileSightLevel.NONE;
 
-			LineOfSight los = Unit.GetLineOfSight(Tile);
+			var los = Unit.GetLineOfSight(Tile);
 			if (!Unit.Configuration.IsAircraft() && los.Validate() != NoLineOfSightReason.NONE)
 				return TileSightLevel.NONE;
 			if (los.Range > Unit.Configuration.SightRange) return TileSightLevel.NONE;

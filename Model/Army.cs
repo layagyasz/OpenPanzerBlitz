@@ -105,9 +105,9 @@ namespace PanzerBlitz
 			var unit = (Unit)Sender;
 			if (unit.Army != this) return;
 
-			if (unit.Configuration.LeavesWreckWhenDestroyed)
+			if (unit.Configuration.WrecksAs != null)
 			{
-				var wreckage = new Unit(this, GameData.Wreckage, _IdGenerator);
+				var wreckage = new Unit(this, unit.Configuration.WrecksAs, _IdGenerator);
 				if (OnUnitAdded != null) OnUnitAdded(this, new NewUnitEventArgs(wreckage));
 				wreckage.Place(unit.Position);
 			}
@@ -115,8 +115,8 @@ namespace PanzerBlitz
 
 		void UnitCaptured(object Sender, ValuedEventArgs<Army> E)
 		{
-			Unit unit = (Unit)Sender;
-			if (unit.Army != this) return;
+			var unit = (Unit)Sender;
+			if (this != E.Value) return;
 
 			var newUnit = new Unit(this, unit.Configuration, _IdGenerator);
 			newUnit.OnDestroy += UnitDestroyed;

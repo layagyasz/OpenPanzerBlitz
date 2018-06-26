@@ -341,7 +341,7 @@ unit-configuration:nkl-26 {
 	bool:can-only-carry-light { true }
 	float:oversized-passenger-movement-multiplier { 2 }
 	bool:is-armored { true }
-	bool:leaves-wreck-when-destroyed { false }
+	string:wrecks-as { }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:asd-400 {
@@ -357,7 +357,7 @@ unit-configuration:asd-400 {
 	bool:can-only-carry-light { true }
 	float:oversized-passenger-movement-multiplier { 2 }
 	bool:is-armored { true }
-	bool:leaves-wreck-when-destroyed { false }
+	string:wrecks-as { }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:rf-8 {
@@ -371,7 +371,7 @@ unit-configuration:rf-8 {
 	byte:movement { 25 }
 
 	float:oversized-passenger-movement-multiplier { 2 }
-	bool:leaves-wreck-when-destroyed { false }
+	string:wrecks-as { }
 	!unit-movement-rules:movement-rules { unit-movement-rules.aerosan }
 }
 unit-configuration:m-2 {

@@ -9,6 +9,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute
 		{
+			BASE_COST,
 			IGNORES_ENVIRONMENT_MOVEMENT,
 			CANNOT_USE_ROAD_MOVEMENT,
 			MOVEMENT_RULES
@@ -16,6 +17,7 @@ namespace PanzerBlitz
 
 		public readonly string UniqueKey;
 
+		public readonly int BaseCost;
 		public readonly bool IgnoresEnvironmentMovement;
 		public readonly bool CannotUseRoadMovement;
 
@@ -35,6 +37,7 @@ namespace PanzerBlitz
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
+			BaseCost = (int)(attributes[(int)Attribute.BASE_COST] ?? 1);
 			IgnoresEnvironmentMovement = (bool)(attributes[(int)Attribute.IGNORES_ENVIRONMENT_MOVEMENT] ?? false);
 			CannotUseRoadMovement = (bool)(attributes[(int)Attribute.CANNOT_USE_ROAD_MOVEMENT] ?? false);
 
@@ -46,6 +49,7 @@ namespace PanzerBlitz
 		{
 			UniqueKey = Stream.ReadString();
 
+			BaseCost = Stream.ReadInt32();
 			IgnoresEnvironmentMovement = Stream.ReadBoolean();
 			CannotUseRoadMovement = Stream.ReadBoolean();
 
@@ -56,6 +60,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(UniqueKey);
 
+			Stream.Write(BaseCost);
 			Stream.Write(IgnoresEnvironmentMovement);
 			Stream.Write(CannotUseRoadMovement);
 

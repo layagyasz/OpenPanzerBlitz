@@ -16,17 +16,17 @@ namespace PanzerBlitz
 
 		public IEnumerable<Order> Handle(PositionalDeployment Deployment)
 		{
-			Dictionary<Unit, Tile> deployments = new Dictionary<Unit, Tile>();
+			var deployments = new Dictionary<Unit, Tile>();
 
-			List<Unit> seeds = Deployment.Units.Where(
+			var seeds = Deployment.Units.Where(
 				i => i.Position == null && Root.UnitAssignments.GetAssignments(i).All(j => j.Subject != i)).ToList();
 			seeds.Sort(new FluentComparator<Unit>(i => i.Configuration.UnitClass == UnitClass.COMMAND_POST)
 					   .ThenCompare(i => i.Configuration.SpotRange)
 					   .Invert());
-			HashSet<Tile> coveredTiles = new HashSet<Tile>();
+			var coveredTiles = new HashSet<Tile>();
 			foreach (var unit in seeds)
 			{
-				Tile tile = Root.Match.GetMap().TilesEnumerable
+				var tile = Root.Match.GetMap().TilesEnumerable
 								.Where(i => Deployment.Validate(unit, i) == OrderInvalidReason.NONE)
 								.ArgMax(i => ScoreSeedTile(unit, i, coveredTiles));
 				deployments.Add(unit, tile);
@@ -35,28 +35,28 @@ namespace PanzerBlitz
 				yield return new PositionalDeployOrder(unit, tile);
 			}
 
-			List<UnitAssignment> defenders =
+			var defenders =
 				Deployment.Units
 						  .SelectMany(i => Root.UnitAssignments.GetAssignments(i).Where(
 							  j => j.Subject == i && j.AssignmentType == UnitAssignmentType.DEFENDER))
 						  .ToList();
 			foreach (var assignment in defenders)
 			{
-				Tile tile = Root.Match.GetMap().TilesEnumerable
+				var tile = Root.Match.GetMap().TilesEnumerable
 								.Where(i => Deployment.Validate(assignment.Subject, i) == OrderInvalidReason.NONE)
 								.ArgMax(i => ScoreDefenseTile(assignment, i, deployments));
 				deployments.Add(assignment.Subject, tile);
 				yield return new PositionalDeployOrder(assignment.Subject, tile);
 			}
 
-			List<UnitAssignment> carriers =
+			var carriers =
 				Deployment.Units
 						  .SelectMany(i => Root.UnitAssignments.GetAssignments(i).Where(
 							  j => j.Subject == i && j.AssignmentType == UnitAssignmentType.CARRIER))
 							.ToList();
 			foreach (var assignment in carriers)
 			{
-				Tile tile = Root.Match.GetMap().TilesEnumerable
+				var tile = Root.Match.GetMap().TilesEnumerable
 								.Where(i => Deployment.Validate(assignment.Subject, i) == OrderInvalidReason.NONE)
 								.ArgMax(i => ScoreCarrierTile(assignment, i, deployments));
 				deployments.Add(assignment.Subject, tile);
@@ -72,7 +72,7 @@ namespace PanzerBlitz
 
 		double ScoreSeedTile(Unit Unit, Tile Tile, HashSet<Tile> CoveredTiles)
 		{
-			List<Tile> tiles =
+			var tiles =
 				Unit.GetFieldOfSight(
 					Unit.Configuration.SpotRange > 0
 						? Unit.Configuration.SpotRange : 20, Tile, AttackMethod.DIRECT_FIRE)

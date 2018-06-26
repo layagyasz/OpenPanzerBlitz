@@ -7,6 +7,8 @@
 	byte:range { 0 }
 	byte:defense { 0 }
 	byte:movement { 0 }
+
+	string:wrecks-as { }
 }
 unit-configuration:command-post {
 	string:name { Command Post }

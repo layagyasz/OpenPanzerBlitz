@@ -48,12 +48,13 @@
 			movement-rule:frozen { impassable }
 			movement-rule:ledge { impassable }
 			movement-rule:loose { impassable }
-			movement-rule:roaded { -.5 }
-			movement-rule:rough { 1 }
-			movement-rule:sloped { 3 }
+			movement-rule:roaded { -1.5 }
+			movement-rule:sloped { 2 }
 			movement-rule:swamp { impassable }
 			movement-rule:water { impassable }
 		}
+
+		int:base-cost { 2 }
 	}
 	unit-movement-rules:wagon {
 		movement-rule<>:movement-rules {
@@ -87,12 +88,12 @@
 			movement-rule:depressed { impassable }
 			movement-rule:down-hill { -2 }
 			movement-rule:ledge { impassable }
-			movement-rule:rough { 1 }
-			movement-rule:sloped { 4 }
+			movement-rule:sloped { 3 }
 			movement-rule:swamp { impassable }
 			movement-rule:water { impassable }
 		}
 
+		int:base-cost { 2 }
 		bool:ignores-environment-movement { true }
 		bool:cannot-use-road-movement { true }
 	}

@@ -40,7 +40,7 @@ namespace PanzerBlitz
 			uint TextureSize,
 			Font Font)
 			: this(
-				new UnitConfiguration[] { GameData.Wreckage }.Concat(Scenario.UnitConfigurations.Distinct()),
+				Scenario.UnitConfigurations.Distinct(),
   	 			RenderDetails,
 				SpriteSize,
 				TextureSize,
@@ -105,7 +105,7 @@ namespace PanzerBlitz
 				Target.Draw(moveText, r);
 			}
 
-			var nameText = new Text(renderDetails.OverrideDisplayName ?? Object.Name, Font, 24);
+			var nameText = new Text(renderDetails.OverrideDisplayName ?? Object.Name, Font, 18);
 			nameText.Color = Color.Black;
 			nameText.Position = SpriteSize * new Vector2f(.5f, 13f / 16) - GetCenter(nameText);
 

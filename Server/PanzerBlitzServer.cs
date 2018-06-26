@@ -27,7 +27,7 @@ namespace PanzerBlitz
 
 		public Player RegisterPlayer(string Username, string Password)
 		{
-			string salt = MakeSalt();
+			var salt = MakeSalt();
 			var p = _Database.AddPlayer(new PlayerOrm(0, Username, ComputeHash(Password, salt), salt));
 			if (p == null) return null;
 			return p.MakePlayer();

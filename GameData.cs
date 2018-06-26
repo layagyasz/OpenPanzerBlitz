@@ -44,7 +44,6 @@ namespace PanzerBlitz
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
 		public static Dictionary<string, UnitRenderDetails> UnitRenderDetails;
 		public static Dictionary<string, UnitConfigurationLink> UnitConfigurationLinks;
-		public static UnitConfiguration Wreckage;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
 		public static Dictionary<string, MarkovGenerator<char>> NameGenerators;
@@ -82,6 +81,7 @@ namespace PanzerBlitz
 					"unit-configuration<>",
 					"unit-configurations",
 					Directory.EnumerateFiles(path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
+						.OrderBy(i => i)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"unit-configuration-link<>",
@@ -179,7 +179,6 @@ namespace PanzerBlitz
 			UnitConfigurationLinks =
 				(Dictionary<string, UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
-			Wreckage = UnitConfigurations["wreckage"];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
 			NameGenerators = (Dictionary<string, MarkovGenerator<char>>)attributes[(int)Attribute.NAME_GENERATORS];
@@ -288,7 +287,6 @@ namespace PanzerBlitz
 					Stream.ReadString(), Stream.ReadObject(j => new TerrainGeneratorConfiguration(j))))
 								   .ToDictionary(i => i.Key, i => i.Value);
 			MatchSettings = Stream.ReadEnumerable(i => new MatchSetting(i)).ToDictionary(i => i.UniqueKey);
-			Wreckage = UnitConfigurations["wreckage"];
 		}
 
 		public static void Serialize(SerializationOutputStream Stream)

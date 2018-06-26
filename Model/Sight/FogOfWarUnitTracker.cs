@@ -59,7 +59,7 @@ namespace PanzerBlitz
 					new Tuple<Unit, UnitVisibility>(Unit, new UnitVisibility(true, Unit.Position))
 				};
 			}
-			bool visible = SightFinder.IsSighted(Unit);
+			var visible = SightFinder.IsSighted(Unit);
 			Tile lastSeen = null;
 			if (Movement != null && Movement.Path != null)
 			{

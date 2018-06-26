@@ -209,10 +209,9 @@ namespace PanzerBlitz
 			{
 				if (Units.Any(i => i.Configuration.IsEmplaceable()))
 					return OrderInvalidReason.TARGET_IMMUNE;
-				if (Configuration.TileBase != TileBase.CLEAR
-					|| Configuration.Edges.Any(i => i != TileEdge.NONE)
-					|| Configuration.PathOverlays.Any(
-						i => i != TilePathOverlay.NONE && !RuleSet.GetRules(i).RoadMove))
+				if (!GetBaseRules().IsClear
+					|| GetEdgeRules().Any(i => !i?.IsClear ?? false)
+					|| GetPathOverlayRules().Any(i => !i?.IsClear ?? false))
 					return OrderInvalidReason.OVERRUN_TERRAIN;
 			}
 			return OrderInvalidReason.NONE;
@@ -327,7 +326,7 @@ namespace PanzerBlitz
 
 		void UpdateControl(IEnumerable<Unit> Units)
 		{
-			List<Army> armies = Units.Where(i => i.Configuration.CanControl()).Select(i => i.Army).Distinct().ToList();
+			var armies = Units.Where(i => i.Configuration.CanControl()).Select(i => i.Army).Distinct().ToList();
 			if (armies.Count == 0) _ControllingArmy = null;
 			else if (armies.Count == 1)
 			{

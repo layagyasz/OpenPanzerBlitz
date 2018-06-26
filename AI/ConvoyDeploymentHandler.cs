@@ -31,7 +31,7 @@ namespace PanzerBlitz
 				yield return new LoadOrder(assignment.Subject, assignment.Object, false);
 			yield return new ConvoyOrderDeployOrder(Deployment, order);
 
-			List<Tile> entryTiles = Root.Match.GetMap().TilesEnumerable.Where(
+			var entryTiles = Root.Match.GetMap().TilesEnumerable.Where(
 				i => i.Configuration.HasPathOverlay(TilePathOverlay.ROAD)
 					&& Deployment.Validate(i) == OrderInvalidReason.NONE).ToList();
 			yield return new EntryTileDeployOrder(

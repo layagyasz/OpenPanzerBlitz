@@ -76,9 +76,9 @@ namespace PanzerBlitz
 
 		static Tile[] FindLOS(Map Map, HexCoordinate From, HexCoordinate To, bool Dither)
 		{
-			int count = From.Distance(To);
-			Tile[] tiles = new Tile[count + 1];
-			double step = 1.0 / count;
+			var count = From.Distance(To);
+			var tiles = new Tile[count + 1];
+			var step = 1.0 / count;
 			for (int i = 0; i < count + 1; ++i)
 			{
 				Coordinate c = HexCoordinate.Interpolate(From, To, step * i, Dither ? -.01 : 0).ToCoordinate();

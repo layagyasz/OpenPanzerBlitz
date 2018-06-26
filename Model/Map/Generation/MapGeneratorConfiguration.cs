@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 using Cardamom.Utilities.Markov;
 
 namespace PanzerBlitz

@@ -76,7 +76,7 @@ namespace PanzerBlitz
 				_Interaction.Tick();
 				if (!_PreExisting)
 				{
-					Engineer.CancelInteractions();
+					Engineer.CancelInteractions(null);
 					Engineer.AddInteraction(_Interaction);
 					Target.AddInteraction(_Interaction);
 				}

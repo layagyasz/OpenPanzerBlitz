@@ -88,7 +88,7 @@ namespace PanzerBlitz
 				{ TurnComponent.NON_VEHICLE_MOVEMENT, new MovementController(this, false) },
 				{ TurnComponent.RESET, new NoOpController(this) },
 				{ TurnComponent.WAIT, new NoOpController(this) },
-				{ TurnComponent.SPECTATE, new NoOpController(this) },
+				{ TurnComponent.SPECTATE, new NoOpController(this) }
 			};
 
 			foreach (TileView t in MatchScreen.MapView.TilesEnumerable)
@@ -298,7 +298,7 @@ namespace PanzerBlitz
 		{
 			if (_SelectedUnit == null) return i => 0;
 
-			TileEvaluator e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
+			var e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
 			e.ReEvaluate();
 			return i =>
 			{
@@ -316,7 +316,7 @@ namespace PanzerBlitz
 		{
 			if (_SelectedUnit == null) return i => 0;
 
-			TileEvaluator e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
+			var e = new TileEvaluator(new AIRoot(Match, _CurrentTurn.Army));
 			e.ReEvaluate();
 			return i =>
 			{
@@ -326,7 +326,7 @@ namespace PanzerBlitz
 
 		Color GetScoreColor(double Score)
 		{
-			byte c = (byte)Math.Min(255, 255 * (2 - 2 / (1 + Math.Exp(-Score))));
+			var c = (byte)Math.Min(255, 255 * (2 - 2 / (1 + Math.Exp(-Score))));
 			return new Color(255, c, c, 60);
 		}
 

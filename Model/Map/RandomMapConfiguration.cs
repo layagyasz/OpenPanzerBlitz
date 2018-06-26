@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Cardamom.Graphing;
 using Cardamom.Serialization;
@@ -82,7 +81,7 @@ namespace PanzerBlitz
 			{
 				if (t.Configuration.TileBase == TileBase.SWAMP) continue;
 
-				double[] slopes = GetSlopeDirections(t).ToArray();
+				var slopes = GetSlopeDirections(t).ToArray();
 				for (int i = 0; i < 6; ++i)
 				{
 					if (t.Configuration.GetEdge(i) == TileEdge.WATER) continue;
@@ -94,7 +93,7 @@ namespace PanzerBlitz
 					{
 						if (neighbor.Configuration.TileBase == TileBase.SLOPE)
 						{
-							double[] nSlopes = GetSlopeDirections(neighbor).ToArray();
+							var nSlopes = GetSlopeDirections(neighbor).ToArray();
 							if (!slopes.All(v => nSlopes.Any(w => DoublesEqual(v, w)))) t.SetEdge(i, TileEdge.SLOPE);
 						}
 						continue;

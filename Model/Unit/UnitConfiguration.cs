@@ -36,7 +36,7 @@ namespace PanzerBlitz
 
 			IS_VEHICLE,
 			IS_ARMORED,
-			LEAVES_WRECK_WHEN_DESTROYED,
+			WRECKS_AS,
 			UNIT_WEIGHT,
 			IS_ENGINEER,
 			IS_PARATROOP,
@@ -93,7 +93,7 @@ namespace PanzerBlitz
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
-		public readonly bool LeavesWreckWhenDestroyed;
+		public readonly UnitConfiguration WrecksAs;
 		public readonly UnitWeight UnitWeight;
 		public readonly bool IsEngineer;
 		public readonly bool IsParatroop;
@@ -132,6 +132,7 @@ namespace PanzerBlitz
 			get
 			{
 				yield return this;
+				if (WrecksAs != null) yield return WrecksAs;
 				if (DismountAs != null) yield return DismountAs;
 			}
 		}
@@ -161,7 +162,7 @@ namespace PanzerBlitz
 
 			IsVehicle = Stream.ReadBoolean();
 			IsArmored = Stream.ReadBoolean();
-			LeavesWreckWhenDestroyed = Stream.ReadBoolean();
+			WrecksAs = Stream.ReadObject(i => new UnitConfiguration(i), true, true);
 			UnitWeight = (UnitWeight)Stream.ReadByte();
 			IsEngineer = Stream.ReadBoolean();
 			IsParatroop = Stream.ReadBoolean();
@@ -230,8 +231,8 @@ namespace PanzerBlitz
 			IsArmored = (bool)(
 				attributes[(int)Attribute.IS_ARMORED] ??
 				((IsVehicle && UnitClass != UnitClass.TRANSPORT && !IsAircraft()) || UnitClass == UnitClass.FORT));
-			LeavesWreckWhenDestroyed = (bool)(
-				attributes[(int)Attribute.LEAVES_WRECK_WHEN_DESTROYED] ?? (IsArmored && IsVehicle));
+			var wrecksAs = (string)(attributes[(int)Attribute.WRECKS_AS] ?? GetDefaultWreck());
+			WrecksAs = wrecksAs == string.Empty ? null : Block.Get<UnitConfiguration>(wrecksAs);
 			UnitWeight = (UnitWeight)(attributes[(int)Attribute.UNIT_WEIGHT] ?? GetDefaultUnitWeight());
 			IsParatroop = (bool)(attributes[(int)Attribute.IS_PARATROOP] ?? false);
 			IsCommando = (bool)(attributes[(int)Attribute.IS_COMMANDO] ?? false);
@@ -310,6 +311,13 @@ namespace PanzerBlitz
 			if (IsAircraft()) return "unit-movement-rules.default-aircraft";
 			if (IsVehicle) return "unit-movement-rules.default-vehicle";
 			return "unit-movement-rules.default-non-vehicle";
+		}
+
+		string GetDefaultWreck()
+		{
+			if (IsArmored && IsVehicle) return "wreckage";
+			if (UnitClass == UnitClass.FORT) return "block";
+			return string.Empty;
 		}
 
 		bool GetDefaultCanSpot()
@@ -393,7 +401,7 @@ namespace PanzerBlitz
 
 		public bool CanControl()
 		{
-			return !IsNeutral() && !IsAircraft() && UnitClass != UnitClass.FORT;
+			return CanReveal;
 		}
 
 		public bool HasUnlimitedMovement()
@@ -424,7 +432,7 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanIndirectFireAt(LineOfSight LineOfSight, bool UseSecondaryWeapon)
 		{
-			byte range = GetAdjustedRange(UseSecondaryWeapon);
+			var range = GetAdjustedRange(UseSecondaryWeapon);
 			if (LineOfSight.Range > range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
 			if (UnitClass != UnitClass.TOWED_GUN && LineOfSight.Range <= range / 2)
 				return OrderInvalidReason.TARGET_TOO_CLOSE;
@@ -638,7 +646,7 @@ namespace PanzerBlitz
 
 			Stream.Write(IsVehicle);
 			Stream.Write(IsArmored);
-			Stream.Write(LeavesWreckWhenDestroyed);
+			Stream.Write(WrecksAs, true, true);
 			Stream.Write((byte)UnitWeight);
 			Stream.Write(IsEngineer);
 			Stream.Write(IsParatroop);

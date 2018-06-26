@@ -10,13 +10,13 @@ namespace PanzerBlitz
 
 		public static HexCoordinate Round(double X, double Y, double Z, double Dither = 0)
 		{
-			int x = (int)Math.Floor(X + .5 + Dither);
-			int y = (int)Math.Floor(Y + .5 + Dither);
-			int z = (int)Math.Floor(Z + .5 + Dither);
+			var x = (int)Math.Floor(X + .5 + Dither);
+			var y = (int)Math.Floor(Y + .5 + Dither);
+			var z = (int)Math.Floor(Z + .5 + Dither);
 
-			double dX = Math.Abs(X - x);
-			double dY = Math.Abs(Y - y);
-			double dZ = Math.Abs(Z - z);
+			var dX = Math.Abs(X - x);
+			var dY = Math.Abs(Y - y);
+			var dZ = Math.Abs(Z - z);
 
 			if (dX > dY && dX > dZ) x = -(y + z);
 			else if (dY > dZ) y = -(x + z);

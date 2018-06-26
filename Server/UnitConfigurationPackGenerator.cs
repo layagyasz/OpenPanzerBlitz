@@ -20,7 +20,7 @@ namespace PanzerBlitz
 			{
 				foreach (UnitClass unitClass in Enum.GetValues(typeof(UnitClass)).Cast<UnitClass>())
 				{
-					List<UnitConfigurationLock> locks =
+					var locks =
 						UnitConfigurationLocks.Where(FactionFilter(faction)).Where(UnitClassFilter(unitClass)).ToList();
 					if (locks.Count > 0)
 					{

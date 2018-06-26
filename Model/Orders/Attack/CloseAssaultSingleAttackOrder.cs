@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -48,8 +47,10 @@ namespace PanzerBlitz
 		public override OrderInvalidReason Validate()
 		{
 			if (AttackTile == null) return OrderInvalidReason.ILLEGAL;
-			if (Attacker.Position.HexCoordinate.Distance(AttackTile.HexCoordinate) > 1)
+			var distance = Attacker.Position.HexCoordinate.Distance(AttackTile.HexCoordinate);
+			if (distance > 1)
 				return OrderInvalidReason.TARGET_OUT_OF_RANGE;
+			if (Attacker.IsCovered() && distance == 0) return OrderInvalidReason.TARGET_TOO_CLOSE;
 
 			return Attacker.CanAttack(AttackMethod.CLOSE_ASSAULT, TreatStackAsArmored, null, UseSecondaryWeapon);
 		}

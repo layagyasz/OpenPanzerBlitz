@@ -53,5 +53,10 @@
 			if (c.UnableReason == OrderInvalidReason.NONE) return new MovementCost(m * c.Cost);
 			return c;
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[MovementCost: UnableReason={0}, Cost={1}]", UnableReason, Cost);
+		}
 	}
 }

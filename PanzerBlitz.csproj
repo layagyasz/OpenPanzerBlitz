@@ -408,6 +408,7 @@
     <Compile Include="Controller\Match\Subcontroller\AntiAircraftController.cs" />
     <Compile Include="Controller\Match\Subcontroller\ArtilleryController.cs" />
     <Compile Include="Model\Orders\Attack\TargetOrder.cs" />
+    <Compile Include="Model\Interactions\FortifyInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -552,7 +553,7 @@
     <None Include="Modules\Default\UnitConfigurationLinks\Russian.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitConfigurations\Common.blk">
+    <None Include="Modules\Default\UnitConfigurations\_Common.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitConfigurations\German.blk">
@@ -561,7 +562,7 @@
     <None Include="Modules\Default\UnitConfigurations\Russian.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitRenderDetails\Common.blk">
+    <None Include="Modules\Default\UnitRenderDetails\_Common.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitRenderDetails\German.blk">
@@ -2081,7 +2082,7 @@
     <None Include="Maps\board-l.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitConfigurationLinks\Common.blk">
+    <None Include="Modules\Default\UnitConfigurationLinks\_Common.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Theme\Components\ScenarioBuilder.blk">

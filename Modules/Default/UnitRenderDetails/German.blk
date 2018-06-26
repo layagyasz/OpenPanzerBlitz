@@ -68,19 +68,15 @@ unit-render-details:motorcycle-german-42-west {
 	string:image-path { motorcycle-2.png }
 }
 unit-render-details:sdkfz-8 {
-	string:override-display-name { SdKfz 8 }
 	string:image-path { sdkfz-8.png }
 }
 unit-render-details:sdkfz-10 {
-	string:override-display-name { SdKfz 10 }
 	string:image-path { sdkfz-10.png }
 }
 unit-render-details:sdkfz-251 {
-	string:override-display-name { HALFTRK }
 	string:image-path { sdkfz-251.png }
 }
 unit-render-details:sdkfz-251-west {
-	string:override-display-name { HALFTRK }
 	string:image-path { sdkfz-251.png }
 }
 unit-render-details:sdkfz-250_1 {
@@ -238,7 +234,6 @@ unit-render-details:elefant {
 	string:image-path { elefant.png }
 }
 unit-render-details:nashorn {
-	string:override-display-name { NASHORN }
 	string:image-path { nashorn.png }
 }
 unit-render-details:pzjg-1 {

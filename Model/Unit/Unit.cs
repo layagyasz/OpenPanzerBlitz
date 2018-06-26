@@ -121,7 +121,12 @@ namespace PanzerBlitz
 
 		public bool Covers(Unit Unit)
 		{
-			return this != Unit && Army == Unit.Army && Configuration.Covers(Unit.Configuration);
+			return HasInteraction<FortifyInteraction>(i => i.Master == Unit) != null;
+		}
+
+		public bool IsCovered()
+		{
+			return HasInteraction<FortifyInteraction>(i => i.Master == this) != null;
 		}
 
 		public bool CanExitDirection(Direction Direction)
@@ -133,8 +138,12 @@ namespace PanzerBlitz
 
 		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false, bool IgnoreEnemyUnits = false)
 		{
-			if (!IgnoreEnemyUnits && !Configuration.IsAircraft() && Tile.GetUnitBlockType() == BlockType.STANDARD
-				&& Tile.Units.Any(i => !i.Configuration.IsNeutral() && !i.Configuration.IsAircraft() && i.Army != Army))
+			if (!IgnoreEnemyUnits
+				&& !Configuration.IsAircraft()
+				&& Tile.Units.Any(
+					i => !i.Configuration.IsEmplaceable()
+					&& !i.Configuration.IsAircraft()
+					&& i.Army != Army && !i.IsCovered()))
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
@@ -228,11 +237,12 @@ namespace PanzerBlitz
 
 		public void Capture(Army Army)
 		{
+			Console.WriteLine(this);
 			if (Status != UnitStatus.DESTROYED && Status != UnitStatus.CAPTURED)
 			{
 				Status = UnitStatus.CAPTURED;
 				if (OnCapture != null) OnCapture(this, new ValuedEventArgs<Army>(Army));
-				CancelInteractions();
+				CancelInteractions(null);
 				Remove();
 			}
 		}
@@ -254,7 +264,7 @@ namespace PanzerBlitz
 					{
 						Status = UnitStatus.DESTROYED;
 						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
-						CancelInteractions();
+						CancelInteractions(null);
 						Remove();
 					}
 					return;
@@ -299,13 +309,13 @@ namespace PanzerBlitz
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
+			CancelInteractions(i => i is FortifyInteraction);
 			if (Tile == Position && (Path == null || Path.Count < 2)) return;
 			foreach (Tile t in Path.Nodes) t.Control(this);
 
 			if (!Configuration.HasUnlimitedMovement())
 			{
-				var movement = (float)Path.Distance;
-				RemainingMovement -= movement;
+				RemainingMovement -= (float)Path.Distance;
 				MovedMoreThanOneTile = Path.Count > 2 || Moved;
 				Moved = true;
 			}
@@ -488,7 +498,8 @@ namespace PanzerBlitz
 
 		public int GetStackSize()
 		{
-			return Carrier == null ? Configuration.GetStackSize() : 0;
+			if (Carrier != null || HasInteraction<FortifyInteraction>(null) != null) return 0;
+			return Configuration.GetStackSize();
 		}
 
 		public LineOfSight GetLineOfSight(Tile Tile)
@@ -565,7 +576,7 @@ namespace PanzerBlitz
 					for (int j = Math.Max(-Range, -(i + Range)); j <= Math.Min(Range, Range - i); ++j)
 					{
 						HexCoordinate p = Tile.HexCoordinate;
-						Coordinate c = new HexCoordinate(p.X + i, p.Y + j, p.Z - i - j).ToCoordinate();
+						var c = new HexCoordinate(p.X + i, p.Y + j, p.Z - i - j).ToCoordinate();
 						if (c.X >= 0 && c.X < Tile.Map.Tiles.GetLength(0)
 							&& c.Y >= 0 && c.Y < Tile.Map.Tiles.GetLength(1))
 						{
@@ -615,9 +626,10 @@ namespace PanzerBlitz
 			_Interactions.Add(Interaction);
 		}
 
-		public void CancelInteractions()
+		public void CancelInteractions(Func<Interaction, bool> Selector)
 		{
-			_Interactions.ToList().ForEach(CancelInteraction);
+			if (Selector == null) _Interactions.ToList().ForEach(i => i.Cancel());
+			else _Interactions.Where(Selector).ToList().ForEach(i => i.Cancel());
 		}
 
 		public void CancelInteraction(Interaction Interaction)
@@ -627,12 +639,13 @@ namespace PanzerBlitz
 
 		public T HasInteraction<T>(Func<T, bool> Predicate)
 		{
+			if (Predicate == null) return (T)_Interactions.FirstOrDefault(i => i is T);
 			return (T)_Interactions.FirstOrDefault(i => i is T && Predicate((T)i));
 		}
 
 		public void DoInteractions()
 		{
-			_Interactions.ForEach(DoInteraction);
+			_Interactions.ToList().ForEach(DoInteraction);
 		}
 
 		public void DoInteraction(Interaction Interaction)
@@ -648,9 +661,9 @@ namespace PanzerBlitz
 		public void Fire(Tile Tile, bool UseSecondary)
 		{
 			Fired = true;
-			if (Tile != Target) Target = null;
+			if (Target != Tile) Target = null;
 			if (Configuration.GetWeapon(UseSecondary).Ammunition > 0) UseAmmunition(UseSecondary);
-			CancelInteractions();
+			CancelInteractions(i => !(i is FortifyInteraction));
 			if (OnFire != null) OnFire(this, EventArgs.Empty);
 		}
 
@@ -671,7 +684,7 @@ namespace PanzerBlitz
 			if (Status == UnitStatus.DAMAGED && Position != null)
 			{
 				Remove();
-				CancelInteractions();
+				CancelInteractions(null);
 			}
 
 			DoInteractions();

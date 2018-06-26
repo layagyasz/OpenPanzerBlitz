@@ -59,8 +59,8 @@ namespace PanzerBlitz
 
 		void AssignCarriers(Deployment Deployment)
 		{
-			List<Unit> passengers = Deployment.Units.Where(i => i.Configuration.IsPassenger).ToList();
-			List<Unit> carriers = Deployment.Units.Where(i => i.Configuration.IsCarrier).ToList();
+			var passengers = Deployment.Units.Where(i => i.Configuration.IsPassenger).ToList();
+			var carriers = Deployment.Units.Where(i => i.Configuration.IsCarrier).ToList();
 			if (passengers.Count == 0 || carriers.Count == 0) return;
 			carriers.Sort(new FluentComparator<Unit>(i => i.Configuration.UnitClass == UnitClass.TRANSPORT).Invert());
 			carriers = carriers.Take(passengers.Count).ToList();
@@ -99,8 +99,8 @@ namespace PanzerBlitz
 
 		void AssignDefenders(Deployment Deployment)
 		{
-			List<Unit> guns = Deployment.Units.Where(i => i.Configuration.UnitClass == UnitClass.TOWED_GUN).ToList();
-			List<Unit> defenders = Deployment.Units.Where(
+			var guns = Deployment.Units.Where(i => i.Configuration.UnitClass == UnitClass.TOWED_GUN).ToList();
+			var defenders = Deployment.Units.Where(
 							i => i.Configuration.UnitClass == UnitClass.INFANTRY).ToList();
 			if (guns.Count == 0 || defenders.Count == 0) return;
 			guns.Sort(new FluentComparator<Unit>(i => i.GetPointValue()).Invert());

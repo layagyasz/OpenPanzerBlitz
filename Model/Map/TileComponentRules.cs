@@ -10,6 +10,7 @@ namespace PanzerBlitz
 	{
 		enum Attribute
 		{
+			IS_CLEAR,
 			DIE_MODIFIER,
 			ROAD_MOVE,
 			TREAT_UNITS_AS_ARMORED,
@@ -26,6 +27,7 @@ namespace PanzerBlitz
 
 		public readonly string UniqueKey;
 
+		public readonly bool IsClear;
 		public readonly int DieModifier;
 		public readonly bool RoadMove;
 		public readonly bool TreatUnitsAsArmored;
@@ -42,6 +44,7 @@ namespace PanzerBlitz
 		public TileComponentRules(
 			string UniqueKey,
 
+			bool IsClear,
 			int DieModifier,
 			bool RoadMove,
 			bool TreatUnitsAsArmored,
@@ -57,6 +60,7 @@ namespace PanzerBlitz
 		{
 			this.UniqueKey = UniqueKey;
 
+			this.IsClear = IsClear;
 			this.DieModifier = DieModifier;
 			this.RoadMove = RoadMove;
 			this.TreatUnitsAsArmored = TreatUnitsAsArmored;
@@ -76,6 +80,7 @@ namespace PanzerBlitz
 			: this(
 				Stream.ReadString(),
 
+				Stream.ReadBoolean(),
 			   	Stream.ReadInt32(),
 				Stream.ReadBoolean(),
 				Stream.ReadBoolean(),
@@ -97,6 +102,7 @@ namespace PanzerBlitz
 
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
+			IsClear = (bool)(attributes[(int)Attribute.IS_CLEAR] ?? false);
 			DieModifier = (int)(attributes[(int)Attribute.DIE_MODIFIER] ?? 0);
 			RoadMove = (bool)(attributes[(int)Attribute.ROAD_MOVE] ?? false);
 			TreatUnitsAsArmored = (bool)(attributes[(int)Attribute.TREAT_UNITS_AS_ARMORED] ?? false);
@@ -131,6 +137,7 @@ namespace PanzerBlitz
 		{
 			Stream.Write(UniqueKey);
 
+			Stream.Write(IsClear);
 			Stream.Write(DieModifier);
 			Stream.Write(RoadMove);
 			Stream.Write(TreatUnitsAsArmored);

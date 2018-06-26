@@ -231,7 +231,7 @@ unit-configuration:sdkfz-10 {
 	bool:is-armored { true }
 }
 unit-configuration:sdkfz-251 {
-	string:name { SdKfz 251 Halftrack }
+	string:name { SdKfz 251 }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { infantry }
@@ -243,7 +243,7 @@ unit-configuration:sdkfz-251 {
 	bool:is-armored { true }
 }
 unit-configuration:sdkfz-251-west {
-	string:name { SdKfz 251 Halftrack }
+	string:name { SdKfz 251 }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { infantry }

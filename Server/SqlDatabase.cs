@@ -55,7 +55,7 @@ namespace PanzerBlitz
 		List<Dictionary<string, object>> ExecuteDictionary(MySqlCommand Command)
 		{
 			var reader = Command.ExecuteReader();
-			List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+			var rows = new List<Dictionary<string, object>>();
 			while (reader.Read())
 			{
 				rows.Add(Enumerable.Range(0, reader.FieldCount).ToDictionary(reader.GetName, reader.GetValue));
@@ -123,7 +123,7 @@ namespace PanzerBlitz
 			command.CommandText = "SELECT * FROM players WHERE username = @username";
 			command.Parameters.AddWithValue("@username", Username);
 
-			List<Dictionary<string, object>> rows = ExecuteReader(command);
+			var rows = ExecuteReader(command);
 			if (rows.Count == 0) return null;
 			return RowToPlayer(rows.First());
 		}

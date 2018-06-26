@@ -79,7 +79,7 @@ namespace PanzerBlitz
 
 		double GetPotential(Unit Unit, LineOfSight LineOfSight)
 		{
-			IEnumerable<Unit> defenders =
+			var defenders =
 				LineOfSight.Final.Units.Where(
 					i => i.CanBeAttackedBy(Root.Army, AttackMethod.DIRECT_FIRE, true) == OrderInvalidReason.NONE);
 			var armoredCount = defenders.Count(i => i.Configuration.IsArmored);
