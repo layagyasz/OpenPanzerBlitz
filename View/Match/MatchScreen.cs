@@ -24,18 +24,21 @@ namespace PanzerBlitz
 		public EventHandler<EventArgs> OnFinishClicked;
 		public EventHandler<ValuedEventArgs<UnitView>> OnUnitAdded;
 
-		public readonly Button LoadButton = new Button("action-button") { DisplayedString = "Load" };
-		public readonly Button UnloadButton = new Button("action-button") { DisplayedString = "Unload" };
+		public readonly Button LoadButton = new Button("action-button") { DisplayedString = "(L)oad" };
+		public readonly Button UnloadButton = new Button("action-button") { DisplayedString = "(U)nload" };
 
-		public readonly Button DismountButton = new Button("action-button") { DisplayedString = "Dismount" };
-		public readonly Button MountButton = new Button("action-button") { DisplayedString = "Mount" };
+		public readonly Button FortifyButton = new Button("action-button") { DisplayedString = "(F)ortify" };
+		public readonly Button AbandonButton = new Button("action-button") { DisplayedString = "(A)bandon" };
 
-		public readonly Button EvacuateButton = new Button("action-button") { DisplayedString = "Evacuate" };
-		public readonly Button ReconButton = new Button("action-button") { DisplayedString = "Recon" };
+		public readonly Button DismountButton = new Button("action-button") { DisplayedString = "(D)ismount" };
+		public readonly Button MountButton = new Button("action-button") { DisplayedString = "(M)ount" };
+
+		public readonly Button EvacuateButton = new Button("action-button") { DisplayedString = "(E)vacuate" };
+		public readonly Button ReconButton = new Button("action-button") { DisplayedString = "(R)econ" };
 
 		public readonly Button ClearMinefieldButton =
-			new Button("action-button") { DisplayedString = "Clear Minefield" };
-		public readonly Button EmplaceButton = new Button("action-button") { DisplayedString = "Emplace" };
+			new Button("action-button") { DisplayedString = "Clear M(I)nefield" };
+		public readonly Button EmplaceButton = new Button("action-button") { DisplayedString = "Em(P)lace" };
 
 		public readonly UnitConfigurationRenderer UnitRenderer;
 		public readonly FactionRenderer FactionRenderer;
@@ -67,6 +70,8 @@ namespace PanzerBlitz
 			{
 				yield return LoadButton;
 				yield return UnloadButton;
+				yield return FortifyButton;
+				yield return AbandonButton;
 				yield return DismountButton;
 				yield return MountButton;
 				yield return EvacuateButton;
@@ -144,6 +149,7 @@ namespace PanzerBlitz
 
 		void FogOver()
 		{
+			_SightFinder = null;
 			foreach (TileView t in MapView.TilesEnumerable) t.SetMask(FOG_OF_WAR_MASKS[0]);
 			_StackLayer.RemoveAll();
 		}

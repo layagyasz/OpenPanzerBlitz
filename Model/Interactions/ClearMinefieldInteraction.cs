@@ -2,6 +2,14 @@
 {
 	public class ClearMinefieldInteraction : InteractionBase
 	{
+		public override bool IsWork
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public ClearMinefieldInteraction(Unit Agent, Unit Object)
 			: base(Agent, Object) { }
 

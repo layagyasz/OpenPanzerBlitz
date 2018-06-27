@@ -27,7 +27,7 @@ namespace PanzerBlitz
 			{
 				case TurnComponent.DEPLOYMENT:
 					TurnInfo.Army.Deployments.ForEach(i => i.AutomateDeployment());
-					return TurnInfo.Army.Deployments.All(i => i.IsConfigured());
+					return false;
 
 				case TurnComponent.MINEFIELD_ATTACK:
 					DoMinefieldAttacks(Match, TurnInfo.Army);

@@ -42,7 +42,7 @@ namespace PanzerBlitz
 			_Selection.OnChange +=
 				(sender, e) => { if (OnSelectedStack != null) OnSelectedStack(this, EventArgs.Empty); };
 
-			foreach (var g in Deployment.Units.GroupBy(i => i.Configuration))
+			foreach (var g in Deployment.Units.Where(i => i.Position == null).GroupBy(i => i.Configuration))
 				_Selection.Add(
 					new GroupedUnitSelectionOption(
 						"deployment-selection-option", "deployment-selection-option-overlay", g, _Renderer));

@@ -431,9 +431,9 @@ unit-configuration-link:calliope {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:m-8-hmc-2 {
+unit-configuration-link:m-8-hmc-spa {
 	!faction:faction { factions.american }
-	!unit-configuration:unit-configuration { unit-configurations.m-8-hmc-2 }
+	!unit-configuration:unit-configuration { unit-configurations.m-8-hmc-spa }
 
 	int:introduce-year { 1942 }
 }

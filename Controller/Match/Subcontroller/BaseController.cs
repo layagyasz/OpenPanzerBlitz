@@ -35,6 +35,16 @@ namespace PanzerBlitz
 			return false;
 		}
 
+		public virtual bool CanFortify()
+		{
+			return false;
+		}
+
+		public virtual bool CanAbandon()
+		{
+			return false;
+		}
+
 		public virtual bool CanMount()
 		{
 			return false;

@@ -50,6 +50,16 @@ namespace PanzerBlitz
 			return _Controller.SelectedUnit.CanUnload(false) == OrderInvalidReason.NONE;
 		}
 
+		public override bool CanFortify()
+		{
+			return new FortifyOrder(_Controller.SelectedUnit).Validate() == OrderInvalidReason.NONE;
+		}
+
+		public override bool CanAbandon()
+		{
+			return _Controller.SelectedUnit.CanAbandon() == OrderInvalidReason.NONE;
+		}
+
 		public override bool CanDismount()
 		{
 			return _Controller.SelectedUnit.CanDismount() == OrderInvalidReason.NONE;
@@ -100,6 +110,8 @@ namespace PanzerBlitz
 				case Keyboard.Key.U: _Controller.UnloadUnit(); break;
 				case Keyboard.Key.M: _Controller.Mount(); break;
 				case Keyboard.Key.D: _Controller.Dismount(); break;
+				case Keyboard.Key.F: _Controller.FortifyUnit(); break;
+				case Keyboard.Key.A: _Controller.AbandonUnit(); break;
 			}
 		}
 

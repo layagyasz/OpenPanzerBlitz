@@ -125,10 +125,13 @@ namespace PanzerBlitz
 			bool unitMoved = Unit.Moved || !Tile.Units.Contains(Unit);
 			bool adjacent = !unitMoved && !Unit.Moved && To.NeighborTiles.Any(i => i != null && i.Units.Contains(Unit));
 
-			if (toBlock == BlockType.HARD_BLOCK && !adjacent)
-				return new MovementCost(OrderInvalidReason.UNIT_NO_MOVE);
-			if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && unitMoved)
-				return new MovementCost(OrderInvalidReason.UNIT_NO_MOVE);
+			if (!Unit.Configuration.IsAircraft())
+			{
+				if (toBlock == BlockType.HARD_BLOCK && !adjacent)
+					return new MovementCost(OrderInvalidReason.UNIT_NO_MOVE);
+				if ((fromBlock == BlockType.HARD_BLOCK || fromBlock == BlockType.SOFT_BLOCK) && unitMoved)
+					return new MovementCost(OrderInvalidReason.UNIT_NO_MOVE);
+			}
 
 			bool useRoadMovement = RoadMovement
 							&& !Tile.Map.Environment.IsRoadMovementRestricted(Unit.Configuration.UnitClass)

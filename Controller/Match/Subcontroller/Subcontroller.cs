@@ -10,6 +10,8 @@ namespace PanzerBlitz
 
 		bool CanLoad();
 		bool CanUnload();
+		bool CanFortify();
+		bool CanAbandon();
 		bool CanDismount();
 		bool CanMount();
 		bool CanEvacuate();

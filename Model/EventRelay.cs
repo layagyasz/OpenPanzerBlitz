@@ -8,9 +8,13 @@ namespace PanzerBlitz
 		// Unit Events
 		public EventHandler<EventArgs> OnUnitLoad;
 		public EventHandler<ValuedEventArgs<Unit>> OnUnitUnload;
+		public EventHandler<ValuedEventArgs<Unit>> OnUnitFortify;
+		public EventHandler<EventArgs> OnUnitAbandon;
 		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnUnitConfigurationChange;
 		public EventHandler<MovementEventArgs> OnUnitMove;
 		public EventHandler<EventArgs> OnUnitFire;
+		public EventHandler<EventArgs> OnUnitRecover;
+		public EventHandler<EventArgs> OnUnitDisrupt;
 		public EventHandler<ValuedEventArgs<Tile>> OnUnitRemove;
 		public EventHandler<EventArgs> OnUnitDestroy;
 		public EventHandler<ValuedEventArgs<Army>> OnUnitCapture;
@@ -33,9 +37,13 @@ namespace PanzerBlitz
 		{
 			Unit.OnLoad += HandleUnitLoad;
 			Unit.OnUnload += HandleUnitUnload;
+			Unit.OnFortify += HandleUnitFortify;
+			Unit.OnAbandon += HandleUnitAbandon;
 			Unit.OnConfigurationChange += HandleUnitConfigurationChange;
 			Unit.OnMove += HandleUnitMove;
 			Unit.OnFire += HandleUnitFire;
+			Unit.OnRecover += HandleUnitRecover;
+			Unit.OnDisrupt += HandleUnitDisrupt;
 			Unit.OnRemove += HandleUnitRemove;
 			Unit.OnDestroy += HandleUnitDestroy;
 			Unit.OnCapture += HandleUnitCapture;
@@ -50,6 +58,16 @@ namespace PanzerBlitz
 		void HandleUnitLoad(object Sender, EventArgs E)
 		{
 			OnUnitLoad?.Invoke(Sender, E);
+		}
+
+		void HandleUnitFortify(object Sender, ValuedEventArgs<Unit> E)
+		{
+			OnUnitFortify?.Invoke(Sender, E);
+		}
+
+		void HandleUnitAbandon(object Sender, EventArgs E)
+		{
+			OnUnitAbandon?.Invoke(Sender, E);
 		}
 
 		void HandleUnitUnload(object Sender, ValuedEventArgs<Unit> E)
@@ -70,6 +88,16 @@ namespace PanzerBlitz
 		void HandleUnitFire(object Sender, EventArgs E)
 		{
 			OnUnitFire?.Invoke(Sender, E);
+		}
+
+		void HandleUnitRecover(object Sender, EventArgs E)
+		{
+			OnUnitRecover?.Invoke(Sender, E);
+		}
+
+		void HandleUnitDisrupt(object Sender, EventArgs E)
+		{
+			OnUnitDisrupt?.Invoke(Sender, E);
 		}
 
 		void HandleUnitRemove(object Sender, ValuedEventArgs<Tile> E)

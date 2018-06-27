@@ -62,8 +62,6 @@ unit-configuration-link:122mm-how-russian {
 unit-configuration-link:152mm-how-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.152mm-how }
-
-	int:introduce-year { 1943 }
 }
 unit-configuration-link:203mm-how-russian {
 	!faction:faction { factions.russian }

@@ -142,7 +142,7 @@ namespace PanzerBlitz
 				if (Unit.Moved || Unit.Fired || Unit.Interactions.Any(i => i.Master == Unit))
 					Transform.Scale(1 / 64f, 1 / 64f);
 
-				if (Unit.Interactions.Any(i => i.Master == Unit))
+				if (Unit.Interactions.Any(i => i.IsWork && i.Master == Unit))
 					WORKING_DISPLAY.Draw(Target, Transform);
 				else if (Unit.Moved && !Unit.Fired && Unit.RemainingMovement > 0)
 					MOVING_DISPLAY.Draw(Target, Transform);

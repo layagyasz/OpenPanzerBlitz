@@ -139,6 +139,16 @@ unit-configuration:type-93 {
 }
 unit-configuration:ho-ni-1 {
 	string:name { Ho-Ni 1 }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 5 }
+	byte:range { 8 }
+	byte:defense { 10 }
+	byte:movement { 8 }
+}
+unit-configuration:ho-ni-1-spa {
+	string:name { Ho-Ni 1 }
 	unit-class:unit-class { self-propelled-artillery }
 
 	weapon-class:weapon-class { high-explosive }
@@ -149,7 +159,7 @@ unit-configuration:ho-ni-1 {
 }
 unit-configuration:ho-ni-2 {
 	string:name { Ho-Ni 2 }
-	unit-class:unit-class { self-propelled-artillery }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 14 }
@@ -159,7 +169,7 @@ unit-configuration:ho-ni-2 {
 }
 unit-configuration:ho-ro {
 	string:name { Ho-Ro }
-	unit-class:unit-class { self-propelled-artillery }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 10 }

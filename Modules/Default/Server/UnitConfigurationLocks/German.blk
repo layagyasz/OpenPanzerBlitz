@@ -401,9 +401,9 @@ unit-configuration-lock:hummel {
 	}
 	float:rarity { 14.5 }
 }
-unit-configuration-lock:gw-1 {
+unit-configuration-lock:bison {
 	string[]:unit-configurations { 
-		string:_ { gw-1 }
+		string:_ { bison }
 	}
 	float:rarity { 18.8 }
 }
@@ -413,9 +413,9 @@ unit-configuration-lock:sig33-pzkw-ii {
 	}
 	float:rarity { 20.4 }
 }
-unit-configuration-lock:gw-38_m {
+unit-configuration-lock:grille {
 	string[]:unit-configurations { 
-		string:_ { gw-38_m }
+		string:_ { grille }
 	}
 	float:rarity { 15.4 }
 }

@@ -188,7 +188,7 @@ unit-render-details:scorpion {
 unit-render-details:calliope {
 	string:image-path { calliope.png }
 }
-unit-render-details:m-8-hmc-2 {
+unit-render-details:m-8-hmc-spa {
 	string:image-path { m-8-hmc.png }
 }
 unit-render-details:t-30 {

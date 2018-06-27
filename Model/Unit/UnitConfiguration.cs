@@ -404,6 +404,11 @@ namespace PanzerBlitz
 			return CanReveal;
 		}
 
+		public bool CanFortify()
+		{
+			return !IsEmplaceable() && !IsAircraft();
+		}
+
 		public bool HasUnlimitedMovement()
 		{
 			return Movement == byte.MaxValue;

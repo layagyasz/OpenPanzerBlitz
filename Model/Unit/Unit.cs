@@ -11,9 +11,13 @@ namespace PanzerBlitz
 	{
 		public EventHandler<EventArgs> OnLoad;
 		public EventHandler<ValuedEventArgs<Unit>> OnUnload;
+		public EventHandler<ValuedEventArgs<Unit>> OnFortify;
+		public EventHandler<EventArgs> OnAbandon;
 		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnConfigurationChange;
 		public EventHandler<MovementEventArgs> OnMove;
 		public EventHandler<EventArgs> OnFire;
+		public EventHandler<EventArgs> OnRecover;
+		public EventHandler<EventArgs> OnDisrupt;
 		public EventHandler<ValuedEventArgs<Tile>> OnRemove;
 		public EventHandler<EventArgs> OnDestroy;
 		public EventHandler<ValuedEventArgs<Army>> OnCapture;
@@ -121,7 +125,7 @@ namespace PanzerBlitz
 
 		public bool Covers(Unit Unit)
 		{
-			return HasInteraction<FortifyInteraction>(i => i.Master == Unit) != null;
+			return Unit != this && HasInteraction<FortifyInteraction>(i => i.Master == Unit) != null;
 		}
 
 		public bool IsCovered()
@@ -136,22 +140,24 @@ namespace PanzerBlitz
 					|| Direction == Direction.SOUTH) && Position.OnEdge(Direction);
 		}
 
-		public OrderInvalidReason CanEnter(Tile Tile, bool Terminal = false, bool IgnoreEnemyUnits = false)
+		public OrderInvalidReason CanEnter(
+			Tile Tile, bool Terminal = false, bool IgnoreEnemyUnits = false, bool IgnoreSelf = true)
 		{
 			if (!IgnoreEnemyUnits
 				&& !Configuration.IsAircraft()
 				&& Tile.Units.Any(
 					i => !i.Configuration.IsEmplaceable()
-					&& !i.Configuration.IsAircraft()
-					&& i.Army != Army && !i.IsCovered()))
+						&& !i.Configuration.IsAircraft()
+						&& i.Army != Army
+						&& !i.IsCovered()))
 				return OrderInvalidReason.TILE_ENEMY_OCCUPIED;
 			if (Configuration.IsStackUnique() && Tile.Units.Any(i => i != this && i.Configuration.IsStackUnique()))
 				return OrderInvalidReason.UNIT_UNIQUE;
 			if (Configuration.UnitClass == UnitClass.FORT && Tile.Rules.Watery)
 				return OrderInvalidReason.UNIT_EMPLACE_TERRAIN;
 			if (Terminal
-				&& Tile.GetStackSize() + GetStackSize() > Army.Configuration.Faction.StackLimit
-				&& !Tile.Units.Contains(this))
+				&& Tile.GetStackSize() + GetStackSize(IgnoreSelf) > Army.Configuration.Faction.StackLimit
+				&& (!IgnoreSelf || !Tile.Units.Contains(this)))
 				return OrderInvalidReason.UNIT_STACK_LIMIT;
 			return OrderInvalidReason.NONE;
 		}
@@ -160,6 +166,11 @@ namespace PanzerBlitz
 		{
 			if (Position == null || Fired || Status != UnitStatus.ACTIVE || Carrier != null)
 				return OrderInvalidReason.UNIT_NO_MOVE;
+			if (IsCovered())
+			{
+				var r = CanAbandon();
+				if (r != OrderInvalidReason.NONE) return r;
+			}
 			if (RemainingMovement > 0)
 			{
 				if (Combat)
@@ -237,12 +248,10 @@ namespace PanzerBlitz
 
 		public void Capture(Army Army)
 		{
-			Console.WriteLine(this);
 			if (Status != UnitStatus.DESTROYED && Status != UnitStatus.CAPTURED)
 			{
 				Status = UnitStatus.CAPTURED;
-				if (OnCapture != null) OnCapture(this, new ValuedEventArgs<Army>(Army));
-				CancelInteractions(null);
+				OnCapture?.Invoke(this, new ValuedEventArgs<Army>(Army));
 				Remove();
 			}
 		}
@@ -253,6 +262,7 @@ namespace PanzerBlitz
 			if (Passenger != null) Passenger.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
 			foreach (var unit in Position.Units.Where(i => Covers(i)).ToList())
 				unit.HandleCombatResult(CombatResult, AttackMethod, AttackingArmy);
+
 			switch (CombatResult)
 			{
 				case CombatResult.MISS:
@@ -263,17 +273,18 @@ namespace PanzerBlitz
 					else
 					{
 						Status = UnitStatus.DESTROYED;
-						if (OnDestroy != null) OnDestroy(this, EventArgs.Empty);
-						CancelInteractions(null);
+						OnDestroy?.Invoke(this, EventArgs.Empty);
 						Remove();
 					}
 					return;
 				case CombatResult.DAMAGE:
 					Status = UnitStatus.DAMAGED;
+					Remove();
 					return;
 				case CombatResult.DISRUPT:
 					Status = UnitStatus.DISRUPTED;
 					if (Configuration.UnloadsWhenDisrupted && Passenger != null) Unload(false);
+					OnDisrupt?.Invoke(this, EventArgs.Empty);
 					return;
 				case CombatResult.DOUBLE_DISRUPT:
 					if (Status == UnitStatus.DISRUPTED)
@@ -282,6 +293,7 @@ namespace PanzerBlitz
 					{
 						Status = UnitStatus.DISRUPTED;
 						if (Configuration.UnloadsWhenDisrupted && Passenger != null) Unload(false);
+						OnDisrupt?.Invoke(this, EventArgs.Empty);
 					}
 					return;
 			}
@@ -289,11 +301,12 @@ namespace PanzerBlitz
 
 		public void Remove()
 		{
+			CancelInteractions(null);
 			Position.Exit(this);
 			Position.UpdateControl();
 			var position = Position;
 			Position = null;
-			if (OnRemove != null) OnRemove(this, new ValuedEventArgs<Tile>(position));
+			OnRemove?.Invoke(this, new ValuedEventArgs<Tile>(position));
 		}
 
 		public void Place(Tile Tile, Path<Tile> Path = null)
@@ -304,11 +317,12 @@ namespace PanzerBlitz
 			Position.Enter(this);
 			Position.UpdateControl();
 
-			if (OnMove != null) OnMove(this, new MovementEventArgs(Tile, Path, Carrier));
+			OnMove?.Invoke(this, new MovementEventArgs(Tile, Path, Carrier));
 		}
 
 		public void MoveTo(Tile Tile, Path<Tile> Path)
 		{
+			Target = null;
 			CancelInteractions(i => i is FortifyInteraction);
 			if (Tile == Position && (Path == null || Path.Count < 2)) return;
 			foreach (Tile t in Path.Nodes) t.Control(this);
@@ -319,10 +333,7 @@ namespace PanzerBlitz
 				MovedMoreThanOneTile = Path.Count > 2 || Moved;
 				Moved = true;
 			}
-			else
-			{
-				RemainingMovement = 0;
-			}
+			else RemainingMovement = 0;
 			Place(Tile, Path);
 		}
 
@@ -374,15 +385,27 @@ namespace PanzerBlitz
 			}
 			if (Position != null)
 			{
-				var r = Passenger.CanEnter(Position);
+				var r = Passenger.CanEnter(Position, true, false, false);
 				if (r != OrderInvalidReason.NONE) return r;
-
-				if (Position.GetStackSize() + Passenger.Configuration.GetStackSize()
-					> Army.Configuration.Faction.StackLimit)
-					return OrderInvalidReason.UNIT_STACK_LIMIT;
 			}
 			if (MustMove()) return OrderInvalidReason.UNIT_MUST_MOVE;
 			return OrderInvalidReason.NONE;
+		}
+
+		public OrderInvalidReason CanFortify()
+		{
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Position == null)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (_Interactions.Count > 0) return OrderInvalidReason.UNIT_NO_FORTIFY;
+			return Configuration.CanFortify() ? OrderInvalidReason.NONE : OrderInvalidReason.UNIT_NO_FORTIFY;
+		}
+
+		public OrderInvalidReason CanAbandon()
+		{
+			if (Carrier != null || Status != UnitStatus.ACTIVE || Position == null)
+				return OrderInvalidReason.UNIT_NO_ACTION;
+			if (!IsCovered()) return OrderInvalidReason.ILLEGAL;
+			return CanEnter(Position, true, false, false);
 		}
 
 		public OrderInvalidReason CanClearMinefield()
@@ -438,16 +461,14 @@ namespace PanzerBlitz
 		public void Dismount(bool UseMovement)
 		{
 			_Dismounted = true;
-			if (OnConfigurationChange != null)
-				OnConfigurationChange(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration));
+			OnConfigurationChange?.Invoke(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration));
 			if (UseMovement) Halt();
 		}
 
 		public void Mount(bool UseMovement)
 		{
 			_Dismounted = false;
-			if (OnConfigurationChange != null)
-				OnConfigurationChange(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration.DismountAs));
+			OnConfigurationChange?.Invoke(this, new ValuedEventArgs<UnitConfiguration>(_BaseConfiguration.DismountAs));
 			if (UseMovement) Halt();
 		}
 
@@ -455,6 +476,8 @@ namespace PanzerBlitz
 		{
 			Passenger = Unit;
 			Unit.Carrier = this;
+			Passenger.Target = null;
+			Passenger.CancelInteractions(null);
 
 			if (UseMovement)
 			{
@@ -467,7 +490,7 @@ namespace PanzerBlitz
 				Passenger.Halt();
 			}
 
-			if (OnLoad != null) OnLoad(this, EventArgs.Empty);
+			OnLoad?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void Unload(bool UseMovement)
@@ -487,7 +510,21 @@ namespace PanzerBlitz
 			Passenger.Carrier = null;
 			Passenger = null;
 
-			if (OnUnload != null) OnUnload(this, new ValuedEventArgs<Unit>(passenger));
+			OnUnload?.Invoke(this, new ValuedEventArgs<Unit>(passenger));
+		}
+
+		public void Fortify(Unit Unit)
+		{
+			var interaction = new FortifyInteraction(this, Unit);
+			AddInteraction(interaction);
+			Unit.AddInteraction(interaction);
+			OnFortify?.Invoke(this, new ValuedEventArgs<Unit>(Unit));
+		}
+
+		public void Abandon()
+		{
+			CancelInteractions(i => i is FortifyInteraction);
+			OnAbandon?.Invoke(this, EventArgs.Empty);
 		}
 
 		public byte GetLoadCost(Unit Unit)
@@ -496,9 +533,9 @@ namespace PanzerBlitz
 			return (byte)((Configuration.Movement + 1) / 2);
 		}
 
-		public int GetStackSize()
+		public int GetStackSize(bool IgnoreSelf = true)
 		{
-			if (Carrier != null || HasInteraction<FortifyInteraction>(null) != null) return 0;
+			if (IgnoreSelf && (Carrier != null || HasInteraction<FortifyInteraction>(null) != null)) return 0;
 			return Configuration.GetStackSize();
 		}
 
@@ -663,8 +700,8 @@ namespace PanzerBlitz
 			Fired = true;
 			if (Target != Tile) Target = null;
 			if (Configuration.GetWeapon(UseSecondary).Ammunition > 0) UseAmmunition(UseSecondary);
-			CancelInteractions(i => !(i is FortifyInteraction));
-			if (OnFire != null) OnFire(this, EventArgs.Empty);
+			CancelInteractions(i => i.IsWork);
+			OnFire?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void Halt()
@@ -680,13 +717,11 @@ namespace PanzerBlitz
 			Moved = false;
 			MovedMoreThanOneTile = false;
 			RemainingMovement = Configuration.GetMaxMovement(Army.Match.Scenario.Environment);
-			if (Status == UnitStatus.DISRUPTED) Status = UnitStatus.ACTIVE;
-			if (Status == UnitStatus.DAMAGED && Position != null)
+			if (Status == UnitStatus.DISRUPTED)
 			{
-				Remove();
-				CancelInteractions(null);
+				Status = UnitStatus.ACTIVE;
+				OnRecover?.Invoke(this, EventArgs.Empty);
 			}
-
 			DoInteractions();
 		}
 

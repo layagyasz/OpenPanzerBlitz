@@ -409,6 +409,8 @@
     <Compile Include="Controller\Match\Subcontroller\ArtilleryController.cs" />
     <Compile Include="Model\Orders\Attack\TargetOrder.cs" />
     <Compile Include="Model\Interactions\FortifyInteraction.cs" />
+    <Compile Include="Model\Orders\Movement\FortifyOrder.cs" />
+    <Compile Include="Model\Orders\Movement\AbandonOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

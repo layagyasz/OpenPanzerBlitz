@@ -506,8 +506,6 @@ unit-configuration:sdkfz-251_1_ii {
 	byte:range { 8 }
 	byte:defense { 4 }
 	byte:movement { 10 }
-
-	bool:can-indirect-fire { true }
 }
 unit-configuration:sdkfz-251_2 {
 	string:name { SdKfz 251/2 }
@@ -613,8 +611,8 @@ unit-configuration:hummel {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
-unit-configuration:gw-1 {
-	string:name { GW 1 }
+unit-configuration:bison {
+	string:name { Bison }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -633,8 +631,8 @@ unit-configuration:sig33-pzkw-ii {
 	byte:defense { 6 }
 	byte:movement { 8 }
 }
-unit-configuration:gw-38_m {
-	string:name { GW 38(m) }
+unit-configuration:grille {
+	string:name { Grille }
 	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
@@ -746,8 +744,6 @@ unit-configuration:stupz-iv {
 	byte:range { 12 }
 	byte:defense { 12 }
 	byte:movement { 8 }
-
-	bool:can-indirect-fire { true }
 }
 unit-configuration:stupz-vi {
 	string:name { StuPz VI }
@@ -758,8 +754,6 @@ unit-configuration:stupz-vi {
 	byte:range { 12 }
 	byte:defense { 10 }
 	byte:movement { 6 }
-
-	bool:can-indirect-fire { true }
 }
 unit-configuration:flamingo {
 	string:name { Flamingo }

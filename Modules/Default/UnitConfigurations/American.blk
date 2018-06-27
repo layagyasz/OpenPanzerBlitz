@@ -258,15 +258,13 @@ unit-configuration:m-16 {
 }
 unit-configuration:m-8-hmc {
 	string:name { M-8 HMC }
-	unit-class:unit-class { self-propelled-artillery }
+	unit-class:unit-class { assault-gun }
 
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 5 }
 	byte:range { 8 }
 	byte:defense { 5 }
 	byte:movement { 11 }
-
-	bool:can-indirect-fire { false }
 }
 unit-configuration:m-21 {
 	string:name { M-21 }
@@ -682,7 +680,7 @@ unit-configuration:calliope {
 	byte:defense { 6 }
 	byte:movement { 7 }
 }
-unit-configuration:m-8-hmc-2 {
+unit-configuration:m-8-hmc-spa {
 	string:name { M-8 HMC }
 	unit-class:unit-class { self-propelled-artillery }
 

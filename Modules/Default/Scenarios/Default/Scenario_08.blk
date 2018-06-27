@@ -199,7 +199,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.gw-38_m }
+								!unit-configuration:unit-configuration { unit-configurations.grille }
 								int:count { 1 }
 							}
 							unit-count:_ {

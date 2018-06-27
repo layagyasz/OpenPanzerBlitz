@@ -43,6 +43,9 @@ unit-render-details:type-93 {
 unit-render-details:ho-ni-1 {
 	string:image-path { ho-ni-1.png }
 }
+unit-render-details:ho-ni-1-spa {
+	string:image-path { ho-ni-1.png }
+}
 unit-render-details:ho-ni-2 {
 	string:image-path { ho-ni-2.png }
 }

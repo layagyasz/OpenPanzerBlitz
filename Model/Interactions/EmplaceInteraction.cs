@@ -2,6 +2,14 @@ namespace PanzerBlitz
 {
 	public class EmplaceInteraction : InteractionBase
 	{
+		public override bool IsWork
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public int Turns { get; private set; }
 
 		public EmplaceInteraction(Unit Agent, Unit Object)

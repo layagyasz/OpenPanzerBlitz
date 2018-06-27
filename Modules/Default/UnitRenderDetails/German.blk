@@ -179,13 +179,13 @@ unit-render-details:sdkfz-135_1-lrs {
 unit-render-details:hummel {
 	string:image-path { hummel.png }
 }
-unit-render-details:gw-1 {
+unit-render-details:bison {
 	string:image-path { gw-1.png }
 }
 unit-render-details:sig33-pzkw-ii {
 	string:image-path { sig33-pzkw-ii.png }
 }
-unit-render-details:gw-38_m {
+unit-render-details:grille {
 	string:image-path { gw-38_m.png }
 }
 unit-render-details:ostwind {

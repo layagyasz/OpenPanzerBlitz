@@ -152,6 +152,7 @@ unit-configuration-lock:type-93 {
 unit-configuration-lock:ho-ni-1 {
 	string[]:unit-configurations { 
 		string:_ { ho-ni-1 }
+		string:_ { ho-ni-1-spa }
 	}
 	float:rarity { 19.3 }
 }

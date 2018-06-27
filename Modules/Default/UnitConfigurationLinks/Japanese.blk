@@ -123,6 +123,12 @@ unit-configuration-link:ho-ni-1 {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:ho-ni-1-spa {
+	!faction:faction { factions.japanese }
+	!unit-configuration:unit-configuration { unit-configurations.ho-ni-1-spa }
+
+	int:introduce-year { 1943 }
+}
 unit-configuration-link:ho-ni-2 {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.ho-ni-2 }

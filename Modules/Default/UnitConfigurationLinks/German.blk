@@ -429,9 +429,9 @@ unit-configuration-link:hummel {
 
 	int:introduce-year { 1943 }
 }
-unit-configuration-link:gw-1 {
+unit-configuration-link:bison {
 	!faction:faction { factions.german }
-	!unit-configuration:unit-configuration { unit-configurations.gw-1 }
+	!unit-configuration:unit-configuration { unit-configurations.bison }
 
 	int:introduce-year { 1940 }
 	int:obsolete-year { 1943 }
@@ -443,9 +443,9 @@ unit-configuration-link:sig33-pzkw-ii {
 	int:introduce-year { 1942 }
 	int:obsolete-year { 1943 }
 }
-unit-configuration-link:gw-38_m {
+unit-configuration-link:grille {
 	!faction:faction { factions.german }
-	!unit-configuration:unit-configuration { unit-configurations.gw-38_m }
+	!unit-configuration:unit-configuration { unit-configurations.grille }
 
 	int:introduce-year { 1943 }
 }

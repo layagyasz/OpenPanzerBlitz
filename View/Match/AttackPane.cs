@@ -68,7 +68,8 @@ namespace PanzerBlitz
 				{
 					_Description.Add(new Button("attack-factor-box")
 					{
-						DisplayedString = string.Format("{0} - {1}%", (CombatResult)i, Math.Round(p[i] * 100))
+						DisplayedString = string.Format(
+							"{0} - {1}%", ObjectDescriber.Describe((CombatResult)i), Math.Round(p[i] * 100))
 					});
 				}
 			}
@@ -93,7 +94,7 @@ namespace PanzerBlitz
 				DisplayedString = OddsCalculation.StackArmored ? "Armored Target" : "Unarmored Target"
 			});
 			foreach (OddsCalculationFactor o in OddsCalculation.OddsCalculationFactors)
-				_Description.Add(new Button("odds-factor-box") { DisplayedString = o.ToString() });
+				_Description.Add(new Button("odds-factor-box") { DisplayedString = ObjectDescriber.Describe(o) });
 		}
 
 		void DescribeAttackFactorCalculation(
@@ -111,7 +112,7 @@ namespace PanzerBlitz
 					Attacker.Attacker.Configuration.GetWeapon(Attacker.UseSecondaryWeapon).Attack)
 			});
 			foreach (AttackFactorCalculationFactor a in AttackFactorCalculation.Factors)
-				_Description.Add(new Button("attack-factor-box") { DisplayedString = a.ToString() });
+				_Description.Add(new Button("attack-factor-box") { DisplayedString = ObjectDescriber.Describe(a) });
 		}
 
 		string OddsString(OddsCalculation OddsCalculation)

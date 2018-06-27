@@ -130,12 +130,26 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.block }
+								!unit-configuration:unit-configuration { unit-configurations.fort-10 }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.a6-m2 }
-								int:count { 1 }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-41 }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-has-coordinate:matcher {
+						coordinate:coordinate { 4,11 }
+					}
+					unit-group:unit-group {
+						string:name { Test A2 }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-41 }
+								int:count { 3 }
 							}
 						}
 					}

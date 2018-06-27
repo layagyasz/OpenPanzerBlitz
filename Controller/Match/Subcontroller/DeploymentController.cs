@@ -24,7 +24,7 @@ namespace PanzerBlitz
 			_DeploymentPane = new DeploymentPane();
 			_DeploymentPane.OnDeploymentSelected += HandleDeploymentSelected;
 			_DeploymentMicrocontrollers.Clear();
-			foreach (Deployment d in _Controller.CurrentTurn.Army.Deployments.Where(i => !i.IsConfigured()))
+			foreach (Deployment d in _Controller.CurrentTurn.Army.Deployments)
 			{
 				DeploymentMicrocontroller c;
 				if (d is PositionalDeployment)
@@ -57,6 +57,16 @@ namespace PanzerBlitz
 		public override bool CanUnload()
 		{
 			return _DeploymentMicrocontrollers[_WorkingDeployment].CanUnload();
+		}
+
+		public override bool CanFortify()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanFortify();
+		}
+
+		public override bool CanAbandon()
+		{
+			return _DeploymentMicrocontrollers[_WorkingDeployment].CanAbandon();
 		}
 
 		public override bool CanDismount()

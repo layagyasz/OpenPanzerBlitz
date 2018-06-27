@@ -27,6 +27,16 @@ namespace PanzerBlitz
 			return _Controller.SelectedUnit.CanUnload(true) == OrderInvalidReason.NONE;
 		}
 
+		public override bool CanFortify()
+		{
+			return CanFortify(_Controller.SelectedUnit);
+		}
+
+		public override bool CanAbandon()
+		{
+			return new AbandonOrder(_Controller.SelectedUnit).Validate() == OrderInvalidReason.NONE;
+		}
+
 		public override bool CanDismount()
 		{
 			return _Controller.SelectedUnit.CanDismount() == OrderInvalidReason.NONE;
@@ -69,7 +79,11 @@ namespace PanzerBlitz
 			if (_Controller.SelectedUnit != null)
 			{
 				var order = new MovementOrder(_Controller.SelectedUnit, Tile, false);
-				if (_Controller.ExecuteOrderAndAlert(order)) SetMovementHighlight(_Controller.SelectedUnit);
+				if (_Controller.ExecuteOrderAndAlert(order))
+				{
+					SetMovementHighlight(_Controller.SelectedUnit);
+					_Controller.SelectUnit(_Controller.SelectedUnit);
+				}
 			}
 		}
 
@@ -84,7 +98,9 @@ namespace PanzerBlitz
 			if (Unit.Army == _Controller.CurrentTurn.Army
 				&& !Unit.Configuration.IsAircraft()
 				&& (Unit.CanMove(VehicleMovement, false) == OrderInvalidReason.NONE
-					|| Unit.CanUnload(true) == OrderInvalidReason.NONE))
+					|| Unit.CanUnload(true) == OrderInvalidReason.NONE
+					|| CanFortify(Unit)
+					|| Unit.CanAbandon() == OrderInvalidReason.NONE))
 			{
 				_Controller.SelectUnit(Unit);
 				SetMovementHighlight(Unit);
@@ -94,6 +110,11 @@ namespace PanzerBlitz
 		public override void HandleUnitRightClick(Unit Unit)
 		{
 			_Controller.Clear();
+		}
+
+		bool CanFortify(Unit Unit)
+		{
+			return new FortifyOrder(Unit).Validate() == OrderInvalidReason.NONE;
 		}
 
 		void SetMovementHighlight(Unit Unit)
@@ -120,8 +141,10 @@ namespace PanzerBlitz
 		{
 			switch (Key)
 			{
+				case Keyboard.Key.A: _Controller.AbandonUnit(); break;
 				case Keyboard.Key.D: _Controller.Dismount(); break;
 				case Keyboard.Key.E: _Controller.Evacuate(); break;
+				case Keyboard.Key.F: _Controller.FortifyUnit(); break;
 				case Keyboard.Key.I: _Controller.ClearMinefield(); break;
 				case Keyboard.Key.L: _Controller.LoadUnit(true); break;
 				case Keyboard.Key.M: _Controller.Mount(); break;

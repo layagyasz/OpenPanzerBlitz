@@ -5,6 +5,8 @@
 		public readonly Unit Agent;
 		public readonly Unit Object;
 
+		public abstract bool IsWork { get; }
+
 		public Unit Master
 		{
 			get

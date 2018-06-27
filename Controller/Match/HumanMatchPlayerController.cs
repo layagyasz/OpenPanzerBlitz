@@ -106,6 +106,8 @@ namespace PanzerBlitz
 			MatchScreen.LoadButton.OnClick +=
 				(sender, e) => LoadUnit(_CurrentTurn.TurnComponent != TurnComponent.DEPLOYMENT);
 			MatchScreen.UnloadButton.OnClick += (sender, e) => UnloadUnit();
+			MatchScreen.FortifyButton.OnClick += (sender, e) => FortifyUnit();
+			MatchScreen.AbandonButton.OnClick += (sender, e) => AbandonUnit();
 			MatchScreen.DismountButton.OnClick += (sender, e) => Dismount();
 			MatchScreen.MountButton.OnClick += (sender, e) => Mount();
 			MatchScreen.EvacuateButton.OnClick += (sender, e) => Evacuate();
@@ -117,6 +119,8 @@ namespace PanzerBlitz
 			{
 				{ MatchScreen.LoadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanLoad() },
 				{ MatchScreen.UnloadButton, () => _Controllers[_CurrentTurn.TurnComponent].CanUnload() },
+				{ MatchScreen.FortifyButton, () => _Controllers[_CurrentTurn.TurnComponent].CanFortify() },
+				{ MatchScreen.AbandonButton, () => _Controllers[_CurrentTurn.TurnComponent].CanAbandon() },
 				{ MatchScreen.DismountButton, () => _Controllers[_CurrentTurn.TurnComponent].CanDismount() },
 				{ MatchScreen.MountButton, () => _Controllers[_CurrentTurn.TurnComponent].CanMount() },
 				{ MatchScreen.EvacuateButton, () => _Controllers[_CurrentTurn.TurnComponent].CanEvacuate() },
@@ -552,6 +556,20 @@ namespace PanzerBlitz
 				UnHighlight();
 			}
 			else SelectUnit(SelectedUnit);
+		}
+
+		public void FortifyUnit()
+		{
+			if (SelectedUnit == null) return;
+			ExecuteOrderAndAlert(new FortifyOrder(SelectedUnit));
+			SelectUnit(SelectedUnit);
+		}
+
+		public void AbandonUnit()
+		{
+			if (SelectedUnit == null) return;
+			ExecuteOrderAndAlert(new AbandonOrder(SelectedUnit));
+			SelectUnit(SelectedUnit);
 		}
 
 		public void Mount()

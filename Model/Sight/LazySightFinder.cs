@@ -37,9 +37,13 @@ namespace PanzerBlitz
 		{
 			Relay.OnUnitMove += HandleMove;
 			Relay.OnUnitLoad += HandleLoad;
+			Relay.OnUnitFortify += HandleFortify;
+			Relay.OnUnitAbandon += HandleAbandon;
 			Relay.OnUnitUnload += HandleUnload;
+			Relay.OnUnitDisrupt += HandleDisrupt;
 			Relay.OnUnitRemove += HandleRemove;
 			Relay.OnUnitFire += HandleFire;
+			Relay.OnUnitRecover += HandleRecover;
 		}
 
 		void HandleFire(object Sender, EventArgs E)
@@ -60,6 +64,12 @@ namespace PanzerBlitz
 						new List<Tuple<Tile, TileSightLevel>>(),
 						delta));
 			}
+		}
+
+		void HandleRecover(object Sender, EventArgs E)
+		{
+			var unit = (Unit)Sender;
+			HandleMove(Sender, new MovementEventArgs(unit.Position, null, unit.Carrier));
 		}
 
 		void HandleMove(object Sender, MovementEventArgs E)
@@ -192,34 +202,98 @@ namespace PanzerBlitz
 			}
 		}
 
-		void HandleRemove(object Sender, ValuedEventArgs<Tile> E)
+		void HandleFortify(object Sender, ValuedEventArgs<Unit> E)
 		{
 			var unit = (Unit)Sender;
 			if (unit.Army == TrackingArmy)
 			{
-				var tileDeltas =
-				unit.GetFieldOfSight(unit.Configuration.SightRange, E.Value)
-					.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
-					.ToList();
-				HandleDeltas(tileDeltas);
-				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
-				unitDeltas.AddRange(UnitTracker.Remove(this, unit));
-				if (OnSightUpdated != null)
-				{
-					OnSightUpdated(
-						this,
-						new SightUpdatedEventArgs(unit, null, tileDeltas, unitDeltas));
-				}
-			}
-			else
-			{
-				var unitDeltas = UnitTracker.Remove(this, unit);
 				if (OnSightUpdated != null)
 				{
 					OnSightUpdated(
 						this,
 						new SightUpdatedEventArgs(
 							unit,
+							null,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							new List<Tuple<Unit, UnitVisibility>>()));
+				}
+			}
+			else
+			{
+				var unitOverride = _OverrideVisibleUnits.Contains(unit);
+				var fortOverride = _OverrideVisibleUnits.Contains(E.Value);
+
+				var unitDeltas = new List<Tuple<Unit, UnitVisibility>>();
+				if (unitOverride && !fortOverride)
+				{
+					_OverrideVisibleUnits.Add(E.Value);
+					unitDeltas.AddRange(UnitTracker.Update(this, E.Value));
+				}
+
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							unit,
+							null,
+							new List<Tuple<Tile, TileSightLevel>>(),
+							unitDeltas));
+				}
+			}
+		}
+
+		void HandleAbandon(object Sender, EventArgs E)
+		{
+			if (OnSightUpdated != null)
+			{
+				OnSightUpdated(
+					this,
+					new SightUpdatedEventArgs(
+						(Unit)Sender,
+						null,
+						new List<Tuple<Tile, TileSightLevel>>(),
+						new List<Tuple<Unit, UnitVisibility>>()));
+			}
+		}
+
+		void HandleDisrupt(object Sender, EventArgs E)
+		{
+			LoseSight((Unit)Sender, ((Unit)Sender).Position, false);
+		}
+
+		void HandleRemove(object Sender, ValuedEventArgs<Tile> E)
+		{
+			LoseSight((Unit)Sender, E.Value, true);
+		}
+
+		void LoseSight(Unit Unit, Tile Tile, bool RemoveUnit)
+		{
+			if (Unit.Army == TrackingArmy)
+			{
+				var tileDeltas =
+				Unit.GetFieldOfSight(Unit.Configuration.SightRange, Tile)
+					.Select(i => new Tuple<Tile, TileSightLevel>(i.Final, GetTileSightLevel(i.Final)))
+					.ToList();
+				HandleDeltas(tileDeltas);
+				var unitDeltas = UnitTracker.ComputeDelta(this, tileDeltas);
+				if (RemoveUnit) unitDeltas.AddRange(UnitTracker.Remove(this, Unit));
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(Unit, null, tileDeltas, unitDeltas));
+				}
+			}
+			else
+			{
+				var unitDeltas = RemoveUnit ? UnitTracker.Remove(this, Unit) : new List<Tuple<Unit, UnitVisibility>>();
+				if (OnSightUpdated != null)
+				{
+					OnSightUpdated(
+						this,
+						new SightUpdatedEventArgs(
+							Unit,
 							null,
 							new List<Tuple<Tile, TileSightLevel>>(),
 							unitDeltas));
