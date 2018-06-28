@@ -1,4 +1,4 @@
-﻿scenario:_ {
+scenario:_ {
 	string:name { Cruinchy: Bridgehead on the Somme }
 	byte[]:deployment-order { 0 1 }
 	byte[]:turn-order { 1 0 }
@@ -135,7 +135,7 @@
 								int:count { 5 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-221-west }
 								int:count { 2 }
 							}
 							unit-count:_ {

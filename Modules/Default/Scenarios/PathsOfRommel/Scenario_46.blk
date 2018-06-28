@@ -1,4 +1,4 @@
-﻿scenario:_ {
+scenario:_ {
 	string:name { Lille: Rommel Attacked }
 	byte[]:deployment-order { 1 0 }
 	byte[]:turn-order { 0 1 }
@@ -154,7 +154,7 @@
 								int:count { 2 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
+								!unit-configuration:unit-configuration { unit-configurations.sdkfz-221-west }
 								int:count { 2 }
 							}
 							unit-count:_ {

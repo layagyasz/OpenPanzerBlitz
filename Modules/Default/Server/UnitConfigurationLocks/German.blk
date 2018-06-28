@@ -183,6 +183,7 @@ unit-configuration-lock:truck-german {
 }
 unit-configuration-lock:motorcycle-german {
 	string[]:unit-configurations { 
+		string:_ { motorcycle-german-40 }
 		string:_ { motorcycle-german-40-west }
 		string:_ { motorcycle-german-42 }
 		string:_ { motorcycle-german-42-west }
@@ -236,6 +237,7 @@ unit-configuration-lock:kubelwagen {
 unit-configuration-lock:kfz-13 {
 	string[]:unit-configurations { 
 		string:_ { kfz-13 }
+		string:_ { kfz-13-west }
 	}
 	float:rarity { 16.5 }
 }
@@ -265,7 +267,8 @@ unit-configuration-lock:sdkfz-10_4 {
 }
 unit-configuration-lock:sdkfz-221 {
 	string[]:unit-configurations { 
-		string:_ { sdkfz-221 }
+		string:_ { sfkfz-221 }
+		string:_ { sdkfz-221-west }
 	}
 	float:rarity { 15.6 }
 }

@@ -58,6 +58,9 @@ unit-render-details:truck-german {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-2.png }
 }
+unit-render-details:motorcycle-german-40 {
+	string:image-path { motorcycle-2.png }
+}
 unit-render-details:motorcycle-german-40-west {
 	string:image-path { motorcycle-2.png }
 }
@@ -97,6 +100,9 @@ unit-render-details:kubelwagen {
 unit-render-details:kfz-13 {
 	string:image-path { kfz-13.png }
 }
+unit-render-details:kfz-13-west {
+	string:image-path { kfz-13.png }
+}
 unit-render-details:sdkfz-6_2 {
 	string:image-path { sdkfz-6_2.png }
 }
@@ -110,6 +116,9 @@ unit-render-details:sdkfz-10_4 {
 	string:image-path { sdkfz-10_4.png }
 }
 unit-render-details:sdkfz-221 {
+	string:image-path { sdkfz-221.png }
+}
+unit-render-details:sdkfz-221-west {
 	string:image-path { sdkfz-221.png }
 }
 unit-render-details:sdkfz-222 {

@@ -532,97 +532,131 @@ namespace PanzerBlitz
 
 		float GetPointValueInternal(bool HalfPriceTrucks)
 		{
-			if (SecondaryWeapon == default(Weapon)) return GetPointValueInternal(HalfPriceTrucks, PrimaryWeapon);
-			return GetPointValueInternal(HalfPriceTrucks, PrimaryWeapon)
-				+ GetPointValueInternal(HalfPriceTrucks, SecondaryWeapon);
+			float p = GetChassisPointValue();
+			if (PrimaryWeapon != default(Weapon)) p += GetWeaponPointValue(PrimaryWeapon);
+			if (SecondaryWeapon != default(Weapon)) p += GetWeaponPointValue(SecondaryWeapon);
+			return HalfPriceTrucks ? .5f * p : p;
 		}
 
-		float GetPointValueInternal(bool HalfPriceTrucks, Weapon Weapon)
+		float GetChassisPointValue()
+		{
+			float v = SpotRange > GetDefaultSpotRange() ? 5 : 0;
+			switch (UnitClass)
+			{
+				case UnitClass.TANK_DESTROYER:
+				case UnitClass.TANK:
+				case UnitClass.ASSAULT_GUN:
+				case UnitClass.FLAME_TANK:
+				case UnitClass.SELF_PROPELLED_ARTILLERY:
+				case UnitClass.RECONNAISSANCE_VEHICLE:
+				case UnitClass.TOWED_GUN:
+					return v + Defense + Movement;
+				case UnitClass.TRANSPORT:
+					if (IsVehicle && !IsArmored) return v + Defense + .5f * Movement;
+					return v + Defense + Movement;
+				case UnitClass.INFANTRY:
+					if (IsCommando) return v + Defense + 2 * Movement;
+					return v + Defense + Movement;
+				case UnitClass.CAVALRY:
+					return v + Defense + 1;
+				case UnitClass.COMMAND_POST:
+					return v + 1;
+				case UnitClass.AMPHIBIOUS_VEHICLE:
+					return v + Defense + 1.5f * Movement;
+				case UnitClass.ENGINEER_VEHICLE:
+					return v + Defense + 1.5f * Movement;
+				case UnitClass.BRIDGE:
+					return v + Defense;
+				case UnitClass.FORT:
+					return v + 10 + .5f * Defense;
+				case UnitClass.BLOCK:
+					return 12;
+				case UnitClass.MINEFIELD:
+					return 15;
+				case UnitClass.OBSERVATION_AIRCRAFT:
+					return v + 50;
+				case UnitClass.FIGHTER_BOMBER:
+					return v + 5;
+				default:
+					return v + Defense + Movement;
+			}
+		}
+
+		float GetWeaponPointValue(Weapon Weapon)
 		{
 			switch (UnitClass)
 			{
 				case UnitClass.TANK_DESTROYER:
 				case UnitClass.TANK:
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return Defense + Movement;
-					return Weapon.Attack + Weapon.Range + Defense + Movement;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.ASSAULT_GUN:
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
-							return .5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
-						return 1.5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+							return .5f * Weapon.Attack + .5f * Weapon.Range;
+						return 1.5f * Weapon.Attack + .5f * Weapon.Range;
 					}
-					return Weapon.Attack + Math.Min((int)Defense, 6) + Defense + Movement;
+					return Weapon.Attack + Math.Min((int)Weapon.Range, 6);
 				case UnitClass.FLAME_TANK:
-					return .5f * Weapon.Attack + Weapon.Range + Defense + Movement;
+					return .5f * Weapon.Attack + Weapon.Range;
 				case UnitClass.SELF_PROPELLED_ARTILLERY:
-					if (Weapon.Range > 16)
-						return Weapon.Attack + .25f * Weapon.Range + Defense + Movement;
-					return Weapon.Attack + 4 + Defense + Movement;
+					return Weapon.Attack + Math.Max(4, .25f * Weapon.Range);
 				case UnitClass.RECONNAISSANCE_VEHICLE:
-					float v = SpotRange > GetDefaultSpotRange() ? 5 : 0;
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
-							return v + .5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
-						return v + 1.5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+							return .5f * Weapon.Attack + .5f * Weapon.Range;
+						return 1.5f * Weapon.Attack + .5f * Weapon.Range;
 					}
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return v + Defense + Movement;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
 					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR)
-						return v + Weapon.Attack + Weapon.Range + Defense + Movement;
-					return v + Weapon.Attack + Math.Min((int)Weapon.Range, 6) + Defense + Movement;
+						return Weapon.Attack + Weapon.Range;
+					return Weapon.Attack + Math.Min((int)Weapon.Range, 6);
 				case UnitClass.TRANSPORT:
-					if (IsVehicle)
-					{
-						if (IsArmored) return Weapon.Attack + Weapon.Range + Defense + Movement;
-						return (HalfPriceTrucks ? .5f : 1)
-							* (Weapon.Attack + Weapon.Range + Defense + .5f * Movement);
-					}
-					return Weapon.Attack + Weapon.Range + Defense + Movement;
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.TOWED_GUN:
 					if (CanIndirectFire && Weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
-						return .5f * Weapon.Attack + .25f * Weapon.Range + Defense + Movement;
+						return .5f * Weapon.Attack + .25f * Weapon.Range;
 					if (CanAntiAircraft)
 					{
 						if (Weapon.WeaponClass == WeaponClass.INFANTRY)
-							return .5f * Weapon.Attack + .5f + Weapon.Range + Defense + Movement;
-						return Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+							return .5f * Weapon.Attack + .5f + Weapon.Range;
+						return Weapon.Attack + .5f * Weapon.Range;
 					}
 					if (Weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
-						return .5f * Weapon.Attack + Math.Min((int)Weapon.Range, 6) + Defense + Movement;
-					return .5f * Weapon.Attack + .5f * Weapon.Range + Defense + Movement;
+						return .5f * Weapon.Attack + Math.Min((int)Weapon.Range, 6);
+					return .5f * Weapon.Attack + .5f * Weapon.Range;
 				case UnitClass.INFANTRY:
-					if (IsEngineer) return 2 * Weapon.Attack + 1 + Defense + Movement;
-					if (IsCommando) return 2 * Weapon.Attack + 1 + Defense + 2 * Movement;
-					return Weapon.Attack + 1 + Defense + Movement;
+					if (IsEngineer) return 2 * Weapon.Attack + 1;
+					if (IsCommando) return 2 * Weapon.Attack + 1;
+					return Weapon.Attack + 1;
 				case UnitClass.CAVALRY:
-					return Weapon.Attack + 1 + Defense + 1;
+					return Weapon.Attack + 1;
 				case UnitClass.COMMAND_POST:
-					return 1;
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.AMPHIBIOUS_VEHICLE:
-					if (!CanOnlyCarryInfantry || Weapon.WeaponClass == WeaponClass.INFANTRY)
-						return Defense + 1.5f * Movement;
+					if (!CanOnlyCarryInfantry || Weapon.WeaponClass == WeaponClass.INFANTRY) return 0;
 					if (Weapon.WeaponClass == WeaponClass.HIGH_EXPLOSIVE)
-						return Weapon.Attack + Math.Min((int)Weapon.Range, 6) + Defense + 1.5f * Movement;
-					return Weapon.Attack + Weapon.Range + Defense + 1.5f * Movement;
+						return Weapon.Attack + Math.Min((int)Weapon.Range, 6);
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.ENGINEER_VEHICLE:
-					return Weapon.Attack + Weapon.Range + Defense + 1.5f * Movement;
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.BRIDGE:
 					return Defense;
 				case UnitClass.FORT:
-					return 10 + .5f * Defense;
+					return Weapon.Attack + Weapon.Range;
 				case UnitClass.BLOCK:
-					return 12;
+					return 0;
 				case UnitClass.MINEFIELD:
-					return 10 * Weapon.Attack + 15;
+					return 10 * Weapon.Attack;
 				case UnitClass.OBSERVATION_AIRCRAFT:
-					return 50;
 				case UnitClass.FIGHTER_BOMBER:
-					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return 5 + .5f * Weapon.Attack;
-					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 5 + 3 * Weapon.Attack;
-					return 5 + Weapon.Attack;
+					if (Weapon.WeaponClass == WeaponClass.INFANTRY) return .5f * Weapon.Attack;
+					if (Weapon.WeaponClass == WeaponClass.ANTI_ARMOR) return 3 * Weapon.Attack;
+					return Weapon.Attack;
 				default:
-					return Weapon.Attack + Weapon.Range + Defense + Movement;
+					return Weapon.Attack + Weapon.Range;
 			}
 		}
 

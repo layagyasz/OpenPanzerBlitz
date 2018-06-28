@@ -162,6 +162,20 @@ unit-configuration:truck-german {
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
 }
+unit-configuration:motorcycle-german-40 {
+	string:name { Motorcycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 12 }
+
+	bool:is-armored { false }
+	bool:can-overrun { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-40 }
+}
 unit-configuration:motorcycle-german-40-west {
 	string:name { Motorcycle }
 	unit-class:unit-class { reconnaissance-vehicle }
@@ -207,7 +221,7 @@ unit-configuration:motorcycle-german-42-west {
 	bool:can-double-range { true }
 }
 unit-configuration:sdkfz-8 {
-	string:name { SdKfz 8 Halftrack }
+	string:name { SdKfz 8 }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { na }
@@ -219,7 +233,7 @@ unit-configuration:sdkfz-8 {
 	bool:is-armored { true }
 }
 unit-configuration:sdkfz-10 {
-	string:name { SdKfz 10 Halftrack }
+	string:name { SdKfz 10 }
 	unit-class:unit-class { transport }
 
 	weapon-class:weapon-class { infantry }
@@ -321,6 +335,16 @@ unit-configuration:kfz-13 {
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+}
+unit-configuration:kfz-13-west {
+	string:name { Kfz 13 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 10 }
@@ -374,6 +398,16 @@ unit-configuration:sdkfz-10_4 {
 	bool:can-anti-aircraft { true }
 }
 unit-configuration:sdkfz-221 {
+	string:name { SdKfz 221 }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 8 }
+}
+unit-configuration:sdkfz-221-west {
 	string:name { SdKfz 221 }
 	unit-class:unit-class { reconnaissance-vehicle }
 

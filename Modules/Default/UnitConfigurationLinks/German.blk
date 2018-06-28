@@ -195,6 +195,14 @@ unit-configuration-link:truck-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.truck-german }
 }
+unit-configuration-link:motorcycle-german-40 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-40 }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+	front:front { east }
+}
 unit-configuration-link:motorcycle-german-40-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-40-west }
@@ -270,6 +278,13 @@ unit-configuration-link:kfz-13 {
 	!unit-configuration:unit-configuration { unit-configurations.kfz-13 }
 
 	int:obsolete-year { 1941 }
+	front:front { east }
+}
+unit-configuration-link:kfz-13-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.kfz-13 }
+
+	int:obsolete-year { 1941 }
 	front:front { west }
 }
 unit-configuration-link:sdkfz-6_2 {
@@ -298,6 +313,14 @@ unit-configuration-link:sdkfz-221 {
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
 
 	int:obsolete-year { 1944 }
+	front:front { east }
+}
+unit-configuration-link:sdkfz-221-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.sdkfz-221-west }
+
+	int:obsolete-year { 1944 }
+	front:front { west }
 }
 unit-configuration-link:sdkfz-222 {
 	!faction:faction { factions.german }
