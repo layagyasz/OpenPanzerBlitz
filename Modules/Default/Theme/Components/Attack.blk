@@ -1,6 +1,24 @@
 ﻿class:attack-pane {
 	!class:parent { pane }
 }
+class:attack-target-select {
+	!class:parent { select }
+	mode:default {
+		int:width { 256 }
+	}
+}
+class:attack-target-select-option {
+	!class:parent { select-option }
+	mode:default {
+		int:width { 256 }
+	}
+}
+class:attack-close-button {
+	!class:parent { square-button }
+	mode:default {
+		int[]:margin { 0 0 0 0 }
+	}
+}
 class:attack-display {
 	!class:parent { pane-display }
 }

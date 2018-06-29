@@ -18,6 +18,7 @@ namespace PanzerBlitz
 		public override void HandleUnitRightClick(Unit Unit)
 		{
 			if (_AttackBuilder != null) _AttackBuilder.RemoveAttacker(Unit);
+			if (_AttackBuilder.Attackers.Count() == 0) CloseWindow(null, EventArgs.Empty);
 		}
 
 		public override void HandleKeyPress(Keyboard.Key Key) { }
@@ -47,6 +48,7 @@ namespace PanzerBlitz
 
 					_AttackBuilder = attack;
 					var attackPane = new AttackPane(_AttackBuilder);
+					attackPane.OnClose = CloseWindow;
 					attackPane.OnAttackTargetChanged += ChangeAttackTarget;
 					attackPane.OnExecute += ExecuteAttack;
 
@@ -56,13 +58,15 @@ namespace PanzerBlitz
 			else _Controller.Alert(r);
 		}
 
-		void ExecuteAttack(object sender, EventArgs e)
+		void CloseWindow(object Sender, EventArgs E)
 		{
-			if (_Controller.ExecuteOrderAndAlert(_AttackBuilder))
-			{
-				_Controller.Clear();
-				_AttackBuilder = null;
-			}
+			_Controller.Clear();
+			_AttackBuilder = null;
+		}
+
+		void ExecuteAttack(object Sender, EventArgs E)
+		{
+			if (_Controller.ExecuteOrderAndAlert(_AttackBuilder)) CloseWindow(Sender, E);
 		}
 
 		void ChangeAttackTarget(object Sender, ValuedEventArgs<AttackTarget> E)

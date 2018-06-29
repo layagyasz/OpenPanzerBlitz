@@ -535,7 +535,7 @@ namespace PanzerBlitz
 			float p = GetChassisPointValue();
 			if (PrimaryWeapon != default(Weapon)) p += GetWeaponPointValue(PrimaryWeapon);
 			if (SecondaryWeapon != default(Weapon)) p += GetWeaponPointValue(SecondaryWeapon);
-			return HalfPriceTrucks ? .5f * p : p;
+			return UnitClass == UnitClass.TRANSPORT && IsVehicle && !IsArmored && HalfPriceTrucks ? .5f * p : p;
 		}
 
 		float GetChassisPointValue()

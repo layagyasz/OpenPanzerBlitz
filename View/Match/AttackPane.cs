@@ -11,11 +11,13 @@ namespace PanzerBlitz
 {
 	public class AttackPane : Pane
 	{
+		public EventHandler<EventArgs> OnClose;
 		public EventHandler<ValuedEventArgs<AttackTarget>> OnAttackTargetChanged;
 		public EventHandler<EventArgs> OnExecute;
 
+		Button _CloseButton = new Button("attack-close-button") { DisplayedString = "X" };
 		ScrollCollection<ClassedGuiItem> _Description = new ScrollCollection<ClassedGuiItem>("attack-display");
-		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("select");
+		Select<AttackTarget> _AttackTargetSelect = new Select<AttackTarget>("attack-target-select");
 		Button _OrderButton = new Button("large-button") { DisplayedString = "Engage" };
 
 		public readonly AttackOrder Attack;
@@ -26,9 +28,12 @@ namespace PanzerBlitz
 			this.Attack = Attack;
 			Attack.OnChanged += UpdateDescription;
 
+			_CloseButton.Position = new Vector2f(Size.X - _CloseButton.Size.X - LeftPadding.X * 2, 0);
+			_CloseButton.OnClick += HandleClose;
+
 			foreach (var target in Enum.GetValues(typeof(AttackTarget)).Cast<AttackTarget>())
 			{
-				_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("select-option")
+				_AttackTargetSelect.Add(new SelectionOption<AttackTarget>("attack-target-select-option")
 				{
 					DisplayedString = ObjectDescriber.Describe(target),
 					Value = target
@@ -39,11 +44,18 @@ namespace PanzerBlitz
 			_OrderButton.Position = new Vector2f(0, Size.Y - _OrderButton.Size.Y - 32);
 			_OrderButton.OnClick += (sender, e) => { if (OnExecute != null) OnExecute(this, EventArgs.Empty); };
 			_Description.Position = new Vector2f(0, _AttackTargetSelect.Size.Y + 24);
+
+			Add(_CloseButton);
 			Add(_Description);
 			Add(_AttackTargetSelect);
 			Add(_OrderButton);
 
 			UpdateDescription(null, EventArgs.Empty);
+		}
+
+		void HandleClose(object Sender, EventArgs E)
+		{
+			OnClose?.Invoke(this, EventArgs.Empty);
 		}
 
 		void UpdateDescription(object Sender, EventArgs E)

@@ -17,21 +17,23 @@ namespace PanzerBlitz
 			var context = (ScenarioBuilderContext)_Context;
 
 			var builder = context.ScenarioBuilder.Armies.First(i => !i.Validate());
+			var renderer =
+				new UnitConfigurationRenderer(
+					GameData.UnitConfigurationLinks.Values.Where(
+						i => builder.Parameters.Matches(i)).Select(i => i.UnitConfiguration),
+					GameData.UnitRenderDetails,
+					128,
+					1024,
+					ClassLibrary.Instance.GetFont("compacta"));
 			var screen =
 				new ArmyBuilderScreen(
 					ProgramContext.ScreenResolution,
 					GameData.UnitConfigurationLinks.Values,
 					builder.Parameters,
-					new UnitConfigurationRenderer(
-						GameData.UnitConfigurationLinks.Values.Where(
-							i => builder.Parameters.Matches(i)).Select(i => i.UnitConfiguration),
-						GameData.UnitRenderDetails,
-						128,
-						1024,
-						ClassLibrary.Instance.GetFont("compacta")));
+					renderer);
 			screen.OnMainMenuButtonClicked += HandleBack;
 
-			_Controller = new ArmyBuilderController(builder, screen);
+			_Controller = new ArmyBuilderController(builder, screen, renderer);
 			_Controller.OnFinished += HandleFinished;
 
 			return screen;

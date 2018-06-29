@@ -13,6 +13,7 @@ namespace PanzerBlitz
 	public class ArmyBuilderScreen : ScreenBase
 	{
 		public EventHandler OnFinished;
+		public EventHandler<ValuedEventArgs<UnitConfiguration>> OnUnitConfigurationRightClicked;
 
 		GuiContainer<Pod> _Pane = new GuiContainer<Pod>("army-builder-pane");
 
@@ -61,6 +62,7 @@ namespace PanzerBlitz
 				false);
 			_AvailableUnits.Position = new Vector2f(0, _UnitClassSelect.Position.Y + _UnitClassSelect.Size.Y + 16);
 			_AvailableUnits.OnUnitClicked += HandleAddUnit;
+			_AvailableUnits.OnUnitRightClicked += HandleUnitInfoRequested;
 
 			_PointTotalButton = new Button("army-builder-point-total");
 			_PointTotalButton.Position = new Vector2f(_AvailableUnits.Size.X + 16, header.Size.Y);
@@ -143,10 +145,23 @@ namespace PanzerBlitz
 			SetPointTotal(_PointTotal + E.Value.UnitConfiguration.GetPointValue(_Parameters.Faction.HalfPriceTrucks));
 		}
 
+		void HandleUnitInfoRequested(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
+		{
+			if (Keyboard.IsKeyPressed(Keyboard.Key.LShift) || Keyboard.IsKeyPressed(Keyboard.Key.RShift))
+				OnUnitConfigurationRightClicked?.Invoke(
+						Sender, new ValuedEventArgs<UnitConfiguration>(E.Value.UnitConfiguration));
+		}
+
 		void HandleRemoveUnit(object Sender, ValuedEventArgs<UnitConfigurationLink> E)
 		{
-			_SelectedUnits.Remove(E.Value);
-			SetPointTotal(_PointTotal - E.Value.UnitConfiguration.GetPointValue(_Parameters.Faction.HalfPriceTrucks));
+			if (Keyboard.IsKeyPressed(Keyboard.Key.LShift) || Keyboard.IsKeyPressed(Keyboard.Key.RShift))
+				HandleUnitInfoRequested(Sender, E);
+			else
+			{
+				_SelectedUnits.Remove(E.Value);
+				SetPointTotal(
+					_PointTotal - E.Value.UnitConfiguration.GetPointValue(_Parameters.Faction.HalfPriceTrucks));
+			}
 		}
 
 		void HandleFinished(object Sender, EventArgs E)

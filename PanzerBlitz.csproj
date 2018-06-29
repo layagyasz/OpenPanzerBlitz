@@ -411,6 +411,8 @@
     <Compile Include="Model\Interactions\FortifyInteraction.cs" />
     <Compile Include="Model\Orders\Movement\FortifyOrder.cs" />
     <Compile Include="Model\Orders\Movement\AbandonOrder.cs" />
+    <Compile Include="View\Unit\UnitInfoPaneBase.cs" />
+    <Compile Include="View\Unit\UnitConfigurationInfoPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

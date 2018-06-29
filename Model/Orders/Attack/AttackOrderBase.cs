@@ -30,6 +30,13 @@ namespace PanzerBlitz
 
 		readonly List<Tuple<Unit, CombatResult>> _Results = new List<Tuple<Unit, CombatResult>>();
 
+		public IEnumerable<SingleAttackOrder> Attackers
+		{
+			get
+			{
+				return _Attackers;
+			}
+		}
 		public IEnumerable<OddsCalculation> OddsCalculations
 		{
 			get

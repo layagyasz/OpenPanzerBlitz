@@ -10,6 +10,7 @@ namespace PanzerBlitz
 		Tile TargetTile { get; }
 		AttackMethod AttackMethod { get; }
 		AttackTarget Target { get; }
+		IEnumerable<SingleAttackOrder> Attackers { get; }
 		IEnumerable<OddsCalculation> OddsCalculations { get; }
 		CombatResultsTable CombatResultsTable { get; }
 
