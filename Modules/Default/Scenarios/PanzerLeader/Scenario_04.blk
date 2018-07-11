@@ -1,8 +1,10 @@
 ﻿scenario:_ {
 	string:name { St. Lo }
-	byte[]:deployment-order { 1 0 }
-	byte[]:turn-order { 0 1 }
-	byte:turns { 15 }
+	turn-configuration:turn-configuration {
+		byte:turns { 15 }
+		static-sequence:deployment-order { 1 0 }
+		static-sequence:turn-order { 0 1 }
+	}
 	!environment:environment { environments.summer-grassland }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

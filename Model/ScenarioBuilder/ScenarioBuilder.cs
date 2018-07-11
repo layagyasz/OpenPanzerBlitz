@@ -48,10 +48,14 @@ namespace PanzerBlitz
 		{
 			var armyConfigurations = _Armies.Select(i => i.BuildArmyConfiguration()).ToList();
 			return new Scenario(
+				"Custom Scenario",
 				armyConfigurations,
-				armyConfigurations,
-				armyConfigurations,
-				Parameters.Turns,
+				new TurnConfiguration(
+					Parameters.Turns,
+					new StaticSequence(
+						armyConfigurations.Count, Enumerable.Range(0, armyConfigurations.Count).Cast<byte>()),
+					new StaticSequence(
+						armyConfigurations.Count, Enumerable.Range(0, armyConfigurations.Count).Cast<byte>())),
 				Parameters.FogOfWar,
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(

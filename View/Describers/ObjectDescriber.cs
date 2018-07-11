@@ -14,6 +14,7 @@ namespace PanzerBlitz
 		{
 			if (Object is Enum) return Describe((Enum)Object);
 			if (Object is Unit) return Describe((Unit)Object);
+			if (Object is ArmyConfiguration) return Describe((ArmyConfiguration)Object);
 			return Object.ToString();
 		}
 
@@ -29,7 +30,12 @@ namespace PanzerBlitz
 
 		public static string Describe(Army Army)
 		{
-			return Describe(Army.Configuration.Faction);
+			return Describe(Army.Configuration);
+		}
+
+		public static string Describe(ArmyConfiguration ArmyConfiguration)
+		{
+			return Describe(ArmyConfiguration.Faction);
 		}
 
 		public static string Describe(Unit Unit)

@@ -1,8 +1,10 @@
 ﻿scenario:_ {
 	string:name { Naykkijarvi }
-	byte[]:deployment-order { 0 1 }
-	byte[]:turn-order { 1 0 }
-	byte:turns { 14 }
+	turn-configuration:turn-configuration {
+		byte:turns { 14 }
+		static-sequence:deployment-order { 0 1 }
+		static-sequence:turn-order { 1 0 }
+	}
 	!environment:environment { environments.winter-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

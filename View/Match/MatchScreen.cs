@@ -104,7 +104,7 @@ namespace PanzerBlitz
 				foreach (Unit u in a.Units) AddUnit(u);
 			}
 
-			for (int i = 0; i < Match.Scenario.Turns; ++i)
+			for (int i = 0; i < Match.Scenario.TurnConfiguration.Turns; ++i)
 				_TurnCounter.Add(new Checkbox("overlay-turn-counter-box") { Enabled = false });
 
 			_FinishButton.Position = Size - _FinishButton.Size - new Vector2f(32, 32);

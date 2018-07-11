@@ -14,17 +14,13 @@ namespace PanzerBlitz
 			ENVIRONMENT,
 			MAP_CONFIGURATION,
 			ARMY_CONFIGURATIONS,
-			DEPLOYMENT_ORDER,
-			TURN_ORDER,
-			TURNS,
+			TURN_CONFIGURATION,
 			FOG_OF_WAR
 		};
 
 		public readonly string Name;
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
-		public readonly List<ArmyConfiguration> DeploymentOrder;
-		public readonly List<ArmyConfiguration> TurnOrder;
-		public readonly byte Turns;
+		public readonly TurnConfiguration TurnConfiguration;
 		public bool FogOfWar { get; set; }
 		public readonly Environment Environment;
 		public readonly MapConfiguration MapConfiguration;
@@ -35,18 +31,16 @@ namespace PanzerBlitz
 		}
 
 		public Scenario(
+			string Name,
 			IEnumerable<ArmyConfiguration> ArmyConfigurations,
-			IEnumerable<ArmyConfiguration> DeploymentOrder,
-			IEnumerable<ArmyConfiguration> TurnOrder,
-			byte Turns,
+			TurnConfiguration TurnConfiguration,
 			bool FogOfWar,
 			Environment Environment,
 			MapConfiguration MapConfiguration)
 		{
+			this.Name = Name;
 			this.ArmyConfigurations = ArmyConfigurations.ToList();
-			this.DeploymentOrder = DeploymentOrder.ToList();
-			this.TurnOrder = TurnOrder.ToList();
-			this.Turns = Turns;
+			this.TurnConfiguration = TurnConfiguration;
 			this.FogOfWar = FogOfWar;
 			this.Environment = Environment;
 			this.MapConfiguration = MapConfiguration;
@@ -59,36 +53,28 @@ namespace PanzerBlitz
 			Name = (string)attributes[(int)Attribute.NAME];
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
-			var deploymentOrderIndices = (byte[])attributes[(int)Attribute.DEPLOYMENT_ORDER];
-			var turnOrderIndices = (byte[])attributes[(int)Attribute.TURN_ORDER];
-			Turns = (byte)attributes[(int)Attribute.TURNS];
+			TurnConfiguration = (TurnConfiguration)attributes[(int)Attribute.TURN_CONFIGURATION];
 			FogOfWar = (bool)(attributes[(int)Attribute.FOG_OF_WAR] ?? false);
-			DeploymentOrder = deploymentOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
-			TurnOrder = turnOrderIndices.Select(i => ArmyConfigurations[i]).ToList();
 
 			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];
 			MapConfiguration = (MapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
 		}
 
 		public Scenario(SerializationInputStream Stream)
-		{
-			Name = Stream.ReadString();
-			ArmyConfigurations = Stream.ReadEnumerable(i => new ArmyConfiguration(Stream)).ToList();
-			DeploymentOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
-			TurnOrder = Stream.ReadEnumerable(i => ArmyConfigurations[Stream.ReadByte()]).ToList();
-			Turns = Stream.ReadByte();
-			FogOfWar = Stream.ReadBoolean();
-			Environment = GameData.Environments[Stream.ReadString()];
-			MapConfiguration = (MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream);
-		}
+		: this(
+			Stream.ReadString(),
+			Stream.ReadEnumerable(i => new ArmyConfiguration(Stream)).ToList(),
+			new TurnConfiguration(Stream),
+			Stream.ReadBoolean(),
+			GameData.Environments[Stream.ReadString()],
+			(MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream))
+		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Name);
 			Stream.Write(ArmyConfigurations);
-			Stream.Write(DeploymentOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
-			Stream.Write(TurnOrder, i => Stream.Write((byte)ArmyConfigurations.IndexOf(i)));
-			Stream.Write(Turns);
+			Stream.Write(TurnConfiguration);
 			Stream.Write(FogOfWar);
 			Stream.Write(Environment.UniqueKey);
 			MapConfigurationSerializer.Instance.Serialize(MapConfiguration, Stream);
@@ -102,10 +88,9 @@ namespace PanzerBlitz
 		public Scenario MakeStatic(Random Random)
 		{
 			return new Scenario(
+				Name,
 				ArmyConfigurations,
-				DeploymentOrder,
-				TurnOrder,
-				Turns,
+				TurnConfiguration.MakeStatic(Random),
 				FogOfWar,
 				Environment,
 				MapConfiguration.MakeStatic(Random));

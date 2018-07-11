@@ -37,7 +37,9 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
-			int turn = Match.CurrentTurn.TurnNumber == 0 ? Match.Scenario.Turns + 1 : Match.CurrentTurn.TurnNumber;
+			int turn = Match.CurrentTurn.TurnNumber == 0
+							? Match.Scenario.TurnConfiguration.Turns + 1
+							: Match.CurrentTurn.TurnNumber;
 			return Objective.GetScore(ForArmy, Match, Cache) > 0 ? turn : int.MaxValue;
 		}
 

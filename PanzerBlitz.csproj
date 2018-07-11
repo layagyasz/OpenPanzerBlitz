@@ -413,6 +413,11 @@
     <Compile Include="Model\Orders\Movement\AbandonOrder.cs" />
     <Compile Include="View\Unit\UnitInfoPaneBase.cs" />
     <Compile Include="View\Unit\UnitConfigurationInfoPane.cs" />
+    <Compile Include="Model\TurnConfiguration.cs" />
+    <Compile Include="Model\Sequence\Sequence.cs" />
+    <Compile Include="Model\Sequence\StaticSequence.cs" />
+    <Compile Include="Model\Sequence\RandomSequence.cs" />
+    <Compile Include="Model\Sequence\SequenceSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -488,6 +493,7 @@
     <Folder Include="Modules\Default\Server\UnitConfigurationLocks\" />
     <Folder Include="Model\Sight\" />
     <Folder Include="Modules\Default\Scenarios\GirlsUndPanzer\" />
+    <Folder Include="Model\Sequence\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">

@@ -1,8 +1,10 @@
 ﻿scenario:_ {
 	string:name { Russian Rear Area Raid: White Russia }
-	byte[]:deployment-order { 1 0 }
-	byte[]:turn-order { 0 1 }
-	byte:turns { 10 }
+	turn-configuration:turn-configuration {
+		byte:turns { 10 }
+		static-sequence:deployment-order { 1 0 }
+		static-sequence:turn-order { 0 1 }
+	}
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

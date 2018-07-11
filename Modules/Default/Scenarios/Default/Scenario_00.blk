@@ -1,8 +1,10 @@
 ﻿scenario:_ {
 	string:name { Test Scenario }
-	byte[]:deployment-order { 1 0 }
-	byte[]:turn-order { 0 1 }
-	byte:turns { 3 }
+	turn-configuration:turn-configuration {
+		byte:turns { 3 }
+		static-sequence:deployment-order { 1 0 }
+		static-sequence:turn-order { 0 1 }
+	}
 	bool:fog-of-war { true }
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {

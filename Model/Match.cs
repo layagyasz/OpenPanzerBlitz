@@ -36,20 +36,14 @@ namespace PanzerBlitz
 			this.Scenario = Scenario;
 			Map = Scenario.MapConfiguration.GenerateMap(new Random(), Scenario.Environment, IdGenerator);
 
-			Armies = Scenario.TurnOrder.Select(
+			Armies = Scenario.ArmyConfigurations.Select(
 				i => new Army(
 					this,
 					new LazySightFinder(
 						Scenario.FogOfWar ? (UnitTracker)new FogOfWarUnitTracker() : new OmniscientUnitTracker()),
 					i,
 					IdGenerator)).ToList();
-			_TurnOrder = Scenario.DeploymentOrder.Select(
-				i => new Turn(0, new TurnInfo(
-					Armies.Find(j => j.Configuration == i), TurnComponent.DEPLOYMENT)))
-								 .Concat(Armies.Select(i => new Turn(0, new TurnInfo(i, TurnComponent.RESET))))
-								 .Concat(Enumerable.Repeat(StandardTurnOrder(Armies), Scenario.Turns)
-										 .SelectMany((i, j) => i.Select(k => new Turn((byte)(j + 1), k))))
-								 .GetEnumerator();
+			_TurnOrder = Scenario.TurnConfiguration.Materialize(new Random(), Armies).GetEnumerator();
 			Relay.Hook(this);
 
 			_OrderAutomater = OrderAutomater;
@@ -151,26 +145,6 @@ namespace PanzerBlitz
 				throw new Exception(string.Format("Tried to execute illegal order. {0} {1}", Order, Order.Validate()));
 
 			return OrderInvalidReason.NONE;
-		}
-
-		static IEnumerable<TurnInfo> StandardTurnOrder(IEnumerable<Army> Armies)
-		{
-			return Armies.SelectMany(i => TurnComponents().Select(j => new TurnInfo(i, j)));
-		}
-
-		static IEnumerable<TurnComponent> TurnComponents()
-		{
-			yield return TurnComponent.WAIT;
-			yield return TurnComponent.MINEFIELD_ATTACK;
-			yield return TurnComponent.ARTILLERY;
-			yield return TurnComponent.ATTACK;
-			yield return TurnComponent.AIRCRAFT;
-			yield return TurnComponent.ANTI_AIRCRAFT;
-			yield return TurnComponent.VEHICLE_COMBAT_MOVEMENT;
-			yield return TurnComponent.VEHICLE_MOVEMENT;
-			yield return TurnComponent.CLOSE_ASSAULT;
-			yield return TurnComponent.NON_VEHICLE_MOVEMENT;
-			yield return TurnComponent.RESET;
 		}
 
 		public override string ToString()

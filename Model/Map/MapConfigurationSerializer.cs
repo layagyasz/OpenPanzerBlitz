@@ -6,7 +6,7 @@ namespace PanzerBlitz
 	{
 		public static readonly MapConfigurationSerializer Instance = new MapConfigurationSerializer();
 
-		public MapConfigurationSerializer()
+		MapConfigurationSerializer()
 			: base(
 				typeof(BlankMapConfiguration),
 				typeof(BoardCompositeMapConfiguration),

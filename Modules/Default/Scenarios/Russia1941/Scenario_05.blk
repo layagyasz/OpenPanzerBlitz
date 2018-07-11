@@ -1,8 +1,10 @@
 ﻿scenario:_ {
 	string:name { First Encounter: T-34 }
-	byte[]:deployment-order { 1 0 }
-	byte[]:turn-order { 0 1 }
-	byte:turns { 5 }
+	turn-configuration:turn-configuration {
+		byte:turns { 5 }
+		static-sequence:deployment-order { 1 0 }
+		static-sequence:turn-order { 0 1 }
+	}
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

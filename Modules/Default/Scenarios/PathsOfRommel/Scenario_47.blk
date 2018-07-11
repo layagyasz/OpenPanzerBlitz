@@ -1,8 +1,10 @@
 scenario:_ {
 	string:name { Cruinchy: Bridgehead on the Somme }
-	byte[]:deployment-order { 0 1 }
-	byte[]:turn-order { 1 0 }
-	byte:turns { 10 }
+	turn-configuration:turn-configuration {
+		byte:turns { 10 }
+		static-sequence:deployment-order { 0 1 }
+		static-sequence:turn-order { 1 0 }
+	}
 	!environment:environment { environments.summer-grassland }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

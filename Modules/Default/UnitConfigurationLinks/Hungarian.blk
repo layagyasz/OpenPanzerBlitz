@@ -126,7 +126,7 @@ unit-configuration-link:nimrod {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.nimrod }
 
-	int:introduce-year { 1940 }
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:zrinyi-i {
 	!faction:faction { factions.hungarian }

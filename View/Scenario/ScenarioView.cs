@@ -54,10 +54,9 @@ namespace PanzerBlitz
 
 			_DetailDisplay.Clear();
 			AddDetail("Environment", ObjectDescriber.Describe(Scenario.Environment));
-			AddDetail("Turns", Scenario.Turns.ToString());
-			AddDetail(
-				"Deploy Order", Scenario.DeploymentOrder.Select(i => ObjectDescriber.Describe(i.Faction)).ToArray());
-			AddDetail("Turn Order", Scenario.TurnOrder.Select(i => ObjectDescriber.Describe(i.Faction)).ToArray());
+			AddDetail("Turns", Scenario.TurnConfiguration.Turns.ToString());
+			AddSequence("Deploy Order", Scenario.TurnConfiguration.DeploymentOrder, Scenario.ArmyConfigurations.ToArray());
+			AddSequence("Turn Order", Scenario.TurnConfiguration.TurnOrder, Scenario.ArmyConfigurations.ToArray());
 			AddDetail("Strength", Scenario.ArmyConfigurations.Select(i => DescribeStrength(i)).ToArray());
 		}
 
@@ -65,6 +64,15 @@ namespace PanzerBlitz
 		{
 			_DetailDisplay.Add(new Button("header-2") { DisplayedString = Attribute });
 			foreach (string value in Values) _DetailDisplay.Add(new Button("regular") { DisplayedString = value });
+		}
+
+		void AddSequence<T>(string SequenceName, Sequence Sequence, T[] Source)
+		{
+			if (Sequence is StaticSequence)
+				AddDetail(
+					SequenceName, Sequence.Get(null, 1).Select(i => ObjectDescriber.Describe(Source[i])).ToArray());
+			else if (Sequence is RandomSequence)
+				AddDetail(SequenceName, "Random");
 		}
 
 		string DescribeStrength(ArmyConfiguration Configuration)
