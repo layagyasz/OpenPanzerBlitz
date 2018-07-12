@@ -68,9 +68,9 @@ namespace PanzerBlitz
 			{
 				for (int j = 0; j < TurnOrder.Count; ++j)
 				{
-					foreach (var turnComponent in TurnComponents())
-						yield return new Turn((byte)(j + 1), new TurnInfo(playerOrder.Current, turnComponent));
 					playerOrder.MoveNext();
+					foreach (var turnComponent in TurnComponents())
+						yield return new Turn((byte)(i + 1), new TurnInfo(playerOrder.Current, turnComponent));
 				}
 			}
 		}

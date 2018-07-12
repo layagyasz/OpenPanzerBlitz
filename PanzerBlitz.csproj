@@ -494,6 +494,7 @@
     <Folder Include="Model\Sight\" />
     <Folder Include="Modules\Default\Scenarios\GirlsUndPanzer\" />
     <Folder Include="Model\Sequence\" />
+    <Folder Include="Modules\Default\Scenarios\GameStorm\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2480,6 +2481,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\Scenarios\GirlsUndPanzer\Gloriana.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\GameStorm\Scenario_03.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\Scenarios\GameStorm\Scenario_02.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
