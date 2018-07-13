@@ -2486,6 +2486,9 @@
     <None Include="Modules\Default\Scenarios\GameStorm\Scenario_03.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\Scenarios\GameStorm\Scenario_01.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Modules\Default\Scenarios\GameStorm\Scenario_02.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -11,9 +11,9 @@ namespace PanzerBlitz
 			return;
 		}
 
-		public bool AutomateTurn(Match Match, TurnInfo TurnInfo)
+		public bool AutomateTurn(Match Match, Turn Turn)
 		{
-			DoBufferedOrders(Match, TurnInfo);
+			DoBufferedOrders(Match, Turn.TurnInfo);
 			return false;
 		}
 

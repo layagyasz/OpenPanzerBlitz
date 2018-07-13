@@ -14,55 +14,55 @@ namespace PanzerBlitz
 		void HandleUnitMove(object Sender, MovementEventArgs E)
 		{
 			var unit = (Unit)Sender;
-			unit.Deployment?.EnterUnits(unit.Configuration.IsVehicle);
+			unit.Deployment?.EnterUnits(unit.Army.Match.CurrentTurn, unit.Configuration.IsVehicle);
 		}
 
-		public bool AutomateTurn(Match Match, TurnInfo TurnInfo)
+		public bool AutomateTurn(Match Match, Turn Turn)
 		{
-			Match.ExecuteOrder(new ResetOrder(TurnInfo.Army, TurnInfo.TurnComponent == TurnComponent.RESET));
+			Match.ExecuteOrder(new ResetOrder(Turn.TurnInfo.Army, Turn.TurnInfo.TurnComponent == TurnComponent.RESET));
 
-			_MultiTurnAutomater.AutomateTurn(Match, TurnInfo);
+			_MultiTurnAutomater.AutomateTurn(Match, Turn);
 
-			switch (TurnInfo.TurnComponent)
+			switch (Turn.TurnInfo.TurnComponent)
 			{
 				case TurnComponent.DEPLOYMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateDeployment());
+					Turn.TurnInfo.Army.Deployments.ForEach(i => i.AutomateDeployment());
 					return false;
 
 				case TurnComponent.MINEFIELD_ATTACK:
-					DoMinefieldAttacks(Match, TurnInfo.Army);
+					DoMinefieldAttacks(Match, Turn.TurnInfo.Army);
 					return true;
 				case TurnComponent.ARTILLERY:
-					return !TurnInfo.Army.Units.Any(
+					return !Turn.TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.INDIRECT_FIRE) == OrderInvalidReason.NONE);
 				case TurnComponent.ATTACK:
-					return !TurnInfo.Army.Units.Any(
+					return !Turn.TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.DIRECT_FIRE) == OrderInvalidReason.NONE);
 
 				case TurnComponent.AIRCRAFT:
-					return !TurnInfo.Army.Units.Any(
+					return !Turn.TurnInfo.Army.Units.Any(
 						i => i.Configuration.IsAircraft() && i.Status == UnitStatus.ACTIVE);
 				case TurnComponent.ANTI_AIRCRAFT:
-					return !TurnInfo.Army.Units.Any(
+					return !Turn.TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.ANTI_AIRCRAFT) == OrderInvalidReason.NONE)
-						|| !Match.Armies.Where(i => i.Configuration.Team != TurnInfo.Army.Configuration.Team)
+						|| !Match.Armies.Where(i => i.Configuration.Team != Turn.TurnInfo.Army.Configuration.Team)
 						.SelectMany(i => i.Units)
 						.Any(i => i.Configuration.IsAircraft() && i.Position != null);
 
 				case TurnComponent.VEHICLE_COMBAT_MOVEMENT:
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
+					return !Turn.TurnInfo.Army.Units.Any(i => i.CanMove(true, true) == OrderInvalidReason.NONE
 													&& i.CanAttack(AttackMethod.OVERRUN) == OrderInvalidReason.NONE);
 				case TurnComponent.VEHICLE_MOVEMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(true));
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(true));
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == OrderInvalidReason.NONE);
+					Turn.TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(Turn, true));
+					Turn.TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(true));
+					return !Turn.TurnInfo.Army.Units.Any(i => i.CanMove(true, false) == OrderInvalidReason.NONE);
 				case TurnComponent.CLOSE_ASSAULT:
-					return !TurnInfo.Army.Units.Any(
+					return !Turn.TurnInfo.Army.Units.Any(
 						i => i.CanAttack(AttackMethod.CLOSE_ASSAULT) == OrderInvalidReason.NONE);
 				case TurnComponent.NON_VEHICLE_MOVEMENT:
-					TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(false));
-					TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
-					return !TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
+					Turn.TurnInfo.Army.Deployments.ForEach(i => i.EnterUnits(Turn, false));
+					Turn.TurnInfo.Army.Deployments.ForEach(i => i.AutomateMovement(false));
+					return !Turn.TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
 
 				case TurnComponent.WAIT:
 					return !Match.Scenario.FogOfWar;

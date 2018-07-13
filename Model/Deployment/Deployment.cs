@@ -40,15 +40,11 @@ namespace PanzerBlitz
 		{
 			return false;
 		}
-		public virtual void EnterUnits(bool Vehicle)
-		{
-		}
-		public virtual void ReassessMatch()
-		{
-		}
-		public virtual void AutomateMovement(bool Vehicle)
-		{
-		}
+		public virtual void EnterUnits(Turn Turn, bool Vehicle) { }
+
+		public virtual void ReassessMatch() { }
+
+		public virtual void AutomateMovement(bool Vehicle) { }
 
 		public abstract bool IsConfigured();
 	}

@@ -1,203 +1,306 @@
 ﻿scenario:_ {
-	string:name { Meuse Bridge Battle }
+	string:name { Japanese Counterattack }
 	turn-configuration:turn-configuration {
-		byte:turns { 10 }
-		static-sequence:deployment-order { 1 0 }
+		byte:turns { 12 }
+		static-sequence:deployment-order { 0 1 }
 		static-sequence:turn-order { 1 0 }
 	}
 	!environment:environment { environments.summer-grassland }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {
 			board-configuration:_ {
-				string:board-path { Maps/board-d.map }
-				bool:invert { true }
+				string:board-path { Maps/board-e.map }
+				bool:invert { false }
 			}
 			board-configuration:_ {
-				string:board-path { Maps/board-j.map }
-				bool:invert { true }
+				string:board-path { Maps/board-l.map }
+				bool:invert { false }
+			}
+			board-configuration:_ {
+				string:board-path { Maps/board-f.map }
+				bool:invert { false }
 			}
 		}
 	}
 	army-configuration[]:army-configurations {
-		army-configuration:british {
-			!faction:faction { factions.british }
+		army-configuration:american {
+			!faction:faction { factions.american }
 			byte:team { 1 }
 			victory-condition:victory-condition {
 				var<>:objectives {
-					prevent-enemy-objective:prevent-enemy { }
-				}
-				objective-success-trigger[]:triggers {
-					objective-success-trigger:_ {
-						objective-success-level:success-level { victory }
-						int:threshold { 1 }
-						!var:objective { objectives.prevent-enemy }
-					}
-				}
-			}
-			var[]:deployment-configurations {
-				convoy-deployment-configuration:_ {
-					tile-has-coordinate:matcher {
-						coordinate:coordinate { 0,16 }
-					}
-					bool:is-strict-convoy { true }
-					unit-group:unit-group {
-						string:name { 29th Armored Bgde. }
-						unit-count[]:unit-counts {
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-3a3 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sherman-uk-a }
-								int:count { 6 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.firefly }
-								int:count { 6 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.humber-sc }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
-								int:count { 9 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.m-3 }
-								int:count { 9 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-british }
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.6pdr-at }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.76mm-mortar }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.bren }
-								int:count { 8 }
-							}
-						}
-					}
-				}
-			}
-		}
-		army-configuration:german {
-			!faction:faction { factions.german }
-			byte:team { 2 }
-			victory-condition:victory-condition {
-				var<>:objectives {
-					achieve-all:tiles-controlled {
-						tiles-controlled-objective:_ {
-							bool:friendly { true }
-							tile-has-coordinate:matcher {
-								coordinate:coordinate { 14,15 }
-							}
-						}
-						tiles-controlled-objective:_ {
-							bool:friendly { true }
-							tile-has-coordinate:matcher {
-								coordinate:coordinate { 15,15 }
-							}
-						}
-						tiles-controlled-objective:_ {
-							bool:friendly { true }
-							tile-has-coordinate:matcher {
-								coordinate:coordinate { 16,15 }
-							}
+					units-matched-objective:units-evacuated {
+						bool:friendly { true }
+						unit-has-evacuated:matcher {
+							direction:direction { east }
 						}
 					}
 				}
 				objective-success-trigger[]:triggers {
 					objective-success-trigger:_ {
-						objective-success-level:success-level { victory }
-						int:threshold { 1 }
-						!var:objective { objectives.tiles-controlled }
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 10 }
+						!var:objective { objectives.units-evacuated }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 30 }
+						!var:objective { objectives.units-evacuated }
 					}
 				}
 			}
 			var[]:deployment-configurations {
-				convoy-deployment-configuration:_ {
-					tile-has-coordinate:matcher {
-						coordinate:coordinate { 20,16 }
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 10,13 10,20 21,20 21,13 }
+						}
+						tile-has-path:_ {
+							tile-path-overlay:path { road }
+						}
 					}
-					bool:is-strict-convoy { true }
 					unit-group:unit-group {
-						string:name { Kampfgruppe Bremer }
+						string:name { 1st Marine Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-222 }
+								!unit-configuration:unit-configuration { 
+									unit-configurations.assault-platoon-american-44
+								}
+								int:count { 12 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
 								int:count { 3 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_1 }
+								!unit-configuration:unit-configuration { unit-configurations.76mm-at }
 								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.puma }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_3 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_2 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-10_4 }
-								int:count { 1 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { 
-									unit-configurations.rifle-platoon-german-42-west
-								}
-								int:count { 2 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
-								int:count { 4 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { 
-									unit-configurations.engineer-platoon-german-west 
-								}
-								int:count { 4 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.parachute-platoon-german }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.75mm-at }
-								int:count { 1 }
 							}
 							unit-count:_ {
 								!unit-configuration:unit-configuration { unit-configurations.105mm-how }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1-west }
-								int:count { 3 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
-								int:count { 5 }
-							}
-							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.sdkfz-8 }
+								!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
 								int:count { 1 }
 							}
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.truck-german }
+								!unit-configuration:unit-configuration { unit-configurations.m-4a2_75 }
 								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wolverine }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.lvt_a-2 }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.lvt_a-1 }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-8-jeep }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-american }
+								int:count { 8 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.m-3 }
+								int:count { 2 }
+							}
+						}
+					}
+				}
+				convoy-deployment-configuration:_ {
+					byte:entry-turn { 5 }
+					unit-group:unit-group {
+						string:name { Air Support }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.corsair-bombs }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.corsair-rockets }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+			}
+		}
+		army-configuration:japanese {
+			!faction:faction { factions.japanese }
+			byte:team { 2 }
+			victory-condition:victory-condition {
+				var<>:objectives {
+					units-matched-objective:units-destroyed {
+						bool:friendly { false }
+						unit-has-status:matcher {
+							unit-status:status { destroyed }
+						}
+					}
+				}
+				objective-success-trigger[]:triggers {
+					objective-success-trigger:_ {
+						objective-success-level:success-level { marginal-victory }
+						int:threshold { 15 }
+						!var:objective { objectives.units-destroyed }
+					}
+					objective-success-trigger:_ {
+						objective-success-level:success-level { decisive-victory }
+						int:threshold { 25 }
+						!var:objective { objectives.units-destroyed }
+					}
+				}
+			}
+			var[]:deployment-configurations {
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 0,0 20,0 20,33 0,33 }
+						}
+						tile-distance-from:_ {
+							byte:distance { 5 }
+							bool:atleast { true }
+							tile-has-unit:matcher {
+								unit-is-hostile:matcher {
+									byte:team { 2 }
+								}
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { Group A }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-39 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-41 }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.mg-platoon-japanese }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.47mm-at }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.70mm-how-company }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.75mm-how-mountain }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.150mm-mortar }
+								int:count { 1 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.wagon-japanese }
+								int:count { 3 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-matches-all:matcher {
+						tile-within:_ {
+							zone:zone { 23,24 23,32 27,32 27,24 }
+						}
+						tile-matches-any:_ {
+							tile-has-edge:_ {
+								tile-edge:edge { forest }
+							}
+							tile-has-edge:_ {
+								tile-edge:edge { town }
+							}
+							tile-has-base:_ {
+								tile-base:base { village }
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { Group B }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.assault-platoon-japanese }
+								int:count { 6 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.81mm-mortar }
+								int:count { 2 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.ha-go }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chi-ha }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.shinhoto-chi-ha }
+								int:count { 4 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chi-nu }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.chi-to }
+								int:count { 3 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.truck-japanese }
+								int:count { 8 }
+							}
+						}
+					}
+				}
+				positional-deployment-configuration:_ {
+					tile-not:matcher {
+						tile-matches-any:matcher {
+							tile-has-bridge:_ { }
+							tile-in-region:_ {
+								string:region-name { bucey }
+							}
+							tile-matches-all:_ {
+								tile-has-path:_ {
+									tile-path-overlay:path { road }
+								}
+								tile-within:_ {
+									zone:zone { 26,14 26,18 31,18 31,14 }
+								}
+							}
+						}
+					}
+					unit-group:unit-group {
+						string:name { Static Defenses }
+						unit-count[]:unit-counts {
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.block }
+								int:count { 5 }
+							}
+							unit-count:_ {
+								!unit-configuration:unit-configuration { unit-configurations.minefield }
+								int:count { 5 }
 							}
 						}
 					}

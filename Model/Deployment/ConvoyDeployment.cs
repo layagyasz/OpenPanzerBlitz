@@ -12,6 +12,7 @@ namespace PanzerBlitz
 		bool _StopAutomatedMovement;
 
 		public Tile EntryTile { get; private set; }
+
 		public override DeploymentConfiguration Configuration
 		{
 			get
@@ -71,12 +72,15 @@ namespace PanzerBlitz
 			}
 		}
 
-		public override void EnterUnits(bool Vehicle)
+		public override void EnterUnits(Turn Turn, bool Vehicle)
 		{
-			var unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
-			if (unit != null && unit.Configuration.IsVehicle == Vehicle)
+			if (Turn.TurnNumber >= DeploymentConfiguration.EntryTurn)
 			{
-				Army.Match.ExecuteOrder(new MovementDeployOrder(unit, EntryTile));
+				var unit = _ConvoyOrder.FirstOrDefault(i => i.Position == null && i.Status == UnitStatus.ACTIVE);
+				if (unit != null && unit.Configuration.IsVehicle == Vehicle)
+				{
+					Army.Match.ExecuteOrder(new MovementDeployOrder(unit, EntryTile));
+				}
 			}
 		}
 

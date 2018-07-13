@@ -21,7 +21,7 @@ namespace PanzerBlitz
 			if (Objective is TriggerObjective) return Describe((TriggerObjective)Objective);
 			if (Objective is UnitsMatchedObjective) return Describe((UnitsMatchedObjective)Objective);
 
-			return "";
+			return string.Empty;
 		}
 
 		public static string Describe(CompositeObjective Objective)
