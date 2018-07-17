@@ -197,6 +197,15 @@ unit-render-details:sig33-pzkw-ii {
 unit-render-details:grille {
 	string:image-path { gw-38_m.png }
 }
+unit-render-details:flakpanzer-i {
+	string:image-path { flakpanzer-i.png }
+}
+unit-render-details:gepard {
+	string:image-path { gepard.png }
+}
+unit-render-details:mobelwagen {
+	string:image-path { mobelwagen.png }
+}
 unit-render-details:ostwind {
 	string:image-path { ostwind.png }
 }
@@ -278,6 +287,12 @@ unit-render-details:pzkw-i-a {
 unit-render-details:pzkw-i-b {
 	string:image-path { pzkw-i.png }
 }
+unit-render-details:pzkw-i-c {
+	string:image-path { pzkw-i-c.png }
+}
+unit-render-details:pzkw-i-f {
+	string:image-path { pzkw-i-f.png }
+}
 unit-render-details:pzkw-ii-c {
 	string:image-path { pzkw-ii.png }
 }
@@ -286,6 +301,9 @@ unit-render-details:pzkw-ii-d {
 }
 unit-render-details:pzkw-ii-f {
 	string:image-path { pzkw-ii.png }
+}
+unit-render-details:pzkw-ii-j {
+	string:image-path { pzkw-ii-j.png }
 }
 unit-render-details:pzkw-iii-d {
 	string:image-path { pzkw-iii-early.png }

@@ -122,6 +122,7 @@ unit-configuration:nimrod {
 	byte:range { 12 }
 	byte:defense { 3 }
 	byte:movement { 6 }
+
 	bool:can-anti-aircraft { true }
 }
 unit-configuration:zrinyi-i {

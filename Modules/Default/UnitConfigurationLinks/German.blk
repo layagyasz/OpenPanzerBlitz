@@ -472,6 +472,25 @@ unit-configuration-link:grille {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:flakpanzer-i {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.flakpanzer-i }
+
+	int:introduce-year { 1941 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:gepard {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.gepard }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:mobelwagen {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.mobelwagen }
+
+	int:introduce-year { 1944 }
+}
 unit-configuration-link:ostwind {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ostwind }
@@ -633,6 +652,18 @@ unit-configuration-link:pzkw-i-b {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-b }
 }
+unit-configuration-link:pzkw-i-c {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-c }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:pzkw-i-f {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-f }
+
+	int:introduce-year { 1940 }
+}
 unit-configuration-link:pzkw-ii-c {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-c }
@@ -648,6 +679,12 @@ unit-configuration-link:pzkw-ii-f {
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-f }
 
 	int:introduce-year { 1941 }
+}
+unit-configuration-link:pzkw-ii-j {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-j }
+
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:pzkw-iii-d {
 	!faction:faction { factions.german }

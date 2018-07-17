@@ -675,6 +675,42 @@ unit-configuration:grille {
 	byte:defense { 5 }
 	byte:movement { 6 }
 }
+unit-configuration:flakpanzer-i {
+	string:name { Flakpanzer I }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 2 }
+	byte:movement { 10 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:gepard {
+	string:name { Gepard }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 4 }
+	byte:range { 10 }
+	byte:defense { 7 }
+	byte:movement { 8 }
+
+	bool:can-anti-aircraft { true }
+}
+unit-configuration:mobelwagen {
+	string:name { Mobelwagen }
+	unit-class:unit-class { assault-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 6 }
+	byte:range { 12 }
+	byte:defense { 6 }
+	byte:movement { 8 }
+
+	bool:can-anti-aircraft { true }
+}
 unit-configuration:ostwind {
 	string:name { Ostwind }
 	unit-class:unit-class { assault-gun }
@@ -949,6 +985,26 @@ unit-configuration:pzkw-i-b {
 	byte:defense { 2 }
 	byte:movement { 8 }
 }
+unit-configuration:pzkw-i-c {
+	string:name { PzKw I C }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 3 }
+	byte:range { 1 }
+	byte:defense { 3 }
+	byte:movement { 16 }
+}
+unit-configuration:pzkw-i-f {
+	string:name { PzKw I F }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 5 }
+}
 unit-configuration:pzkw-ii-c {
 	string:name { PzKw II C }
 	unit-class:unit-class { tank }
@@ -978,6 +1034,16 @@ unit-configuration:pzkw-ii-f {
 	byte:range { 2 }
 	byte:defense { 3 }
 	byte:movement { 10 }
+}
+unit-configuration:pzkw-ii-j {
+	string:name { PzKw II J }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { anti-armor }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 8 }
+	byte:movement { 6 }
 }
 unit-configuration:pzkw-iii-d {
 	string:name { PzKw III D }

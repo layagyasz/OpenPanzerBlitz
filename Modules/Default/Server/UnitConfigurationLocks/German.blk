@@ -422,6 +422,24 @@ unit-configuration-lock:grille {
 	}
 	float:rarity { 15.4 }
 }
+unit-configuration-lock:flakpanzer-i {
+	string[]:unit-configurations { 
+		string:_ { flakpanzer-i }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:gepard {
+	string[]:unit-configurations { 
+		string:_ { gepard }
+	}
+	float:rarity { 16.9 }
+}
+unit-configuration-lock:mobelwagen {
+	string[]:unit-configurations { 
+		string:_ { mobelwagen }
+	}
+	float:rarity { 16.1 }
+}
 unit-configuration-lock:ostwind {
 	string[]:unit-configurations { 
 		string:_ { ostwind }
@@ -584,6 +602,18 @@ unit-configuration-lock:pzkw-i-b {
 	}
 	float:rarity { 14.6 }
 }
+unit-configuration-lock:pzkw-i-c {
+	string[]:unit-configurations { 
+		string:_ { pzkw-i-c }
+	}
+	float:rarity { 18.7 }
+}
+unit-configuration-lock:pzkw-i-f {
+	string[]:unit-configurations { 
+		string:_ { pzkw-i-f }
+	}
+	float:rarity { 19.1 }
+}
 unit-configuration-lock:pzkw-ii-c {
 	string[]:unit-configurations { 
 		string:_ { pzkw-ii-c }
@@ -601,6 +631,12 @@ unit-configuration-lock:pzkw-ii-f {
 		string:_ { pzkw-ii-f }
 	}
 	float:rarity { 15.0 }
+}
+unit-configuration-lock:pzkw-ii-j {
+	string[]:unit-configurations { 
+		string:_ { pzkw-ii-j }
+	}
+	float:rarity { 19.5 }
 }
 unit-configuration-lock:pzkw-iii-d {
 	string[]:unit-configurations { 

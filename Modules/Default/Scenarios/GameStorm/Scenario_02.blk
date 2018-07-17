@@ -10,15 +10,15 @@
 		board-configuration[]:_ {
 			board-configuration:_ {
 				string:board-path { Maps/board-e.map }
-				bool:invert { false }
+				bool:invert { true }
 			}
 			board-configuration:_ {
 				string:board-path { Maps/board-l.map }
-				bool:invert { false }
+				bool:invert { true }
 			}
 			board-configuration:_ {
 				string:board-path { Maps/board-f.map }
-				bool:invert { false }
+				bool:invert { true }
 			}
 		}
 	}
@@ -52,7 +52,7 @@
 				positional-deployment-configuration:_ {
 					tile-matches-all:matcher {
 						tile-within:_ {
-							zone:zone { 10,13 10,20 21,20 21,13 }
+							zone:zone { 4,12 4,22 22,22 22,4 }
 						}
 						tile-has-path:_ {
 							tile-path-overlay:path { road }
@@ -222,7 +222,7 @@
 				positional-deployment-configuration:_ {
 					tile-matches-all:matcher {
 						tile-within:_ {
-							zone:zone { 23,24 23,32 27,32 27,24 }
+							zone:zone { 23,0 23,8 27,8 27,0 }
 						}
 						tile-matches-any:_ {
 							tile-has-edge:_ {
@@ -286,7 +286,7 @@
 									tile-path-overlay:path { road }
 								}
 								tile-within:_ {
-									zone:zone { 26,14 26,18 31,18 31,14 }
+									zone:zone { 26,9 26,13 31,13 31,9 }
 								}
 							}
 						}
