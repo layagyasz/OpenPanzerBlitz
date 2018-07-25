@@ -1132,7 +1132,7 @@ unit-configuration:pzkw-iv-e {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 5 }
 	byte:range { 8 }
-	byte:defense { 7 }
+	byte:defense { 5 }
 	byte:movement { 8 }
 }
 unit-configuration:pzkw-iv-g {

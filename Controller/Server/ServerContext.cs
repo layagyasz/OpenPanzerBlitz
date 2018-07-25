@@ -21,7 +21,8 @@ namespace PanzerBlitz
 				new PanzerBlitzServer(
 					"./Modules/" + GameData.LoadedModule + "/Server",
 					new RNGCryptoServiceProvider(),
-					new SqlDatabase("127.0.0.1", "_panzerblitzonline", "root", "panzerblitzonline"));
+					new InMemoryDatabase()
+					/* new SqlDatabase("127.0.0.1", "_panzerblitzonline", "root", "panzerblitzonline") */);
 			var server = new TCPServer(Port);
 			server.Start();
 			server.MessageAdapter = new NonMatchMessageSerializer();

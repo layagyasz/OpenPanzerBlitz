@@ -103,6 +103,9 @@ unit-render-details:40mm-aa {
 unit-render-details:75mm-aa {
 	string:image-path { anti-aircraft.png }
 }
+unit-render-details:3in-aa {
+	string:image-path { anti-aircraft.png }
+}
 unit-render-details:76_2mm-aa {
 	string:image-path { anti-aircraft.png }
 }
@@ -191,6 +194,9 @@ unit-render-details:210mm-how {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:18pdr-how {
+	string:image-path { artillery-heavy.png }
+}
+unit-render-details:18_25pdr-how {
 	string:image-path { artillery-heavy.png }
 }
 unit-render-details:25pdr-how {

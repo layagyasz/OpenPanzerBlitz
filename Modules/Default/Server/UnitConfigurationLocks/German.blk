@@ -267,7 +267,7 @@ unit-configuration-lock:sdkfz-10_4 {
 }
 unit-configuration-lock:sdkfz-221 {
 	string[]:unit-configurations { 
-		string:_ { sfkfz-221 }
+		string:_ { sdkfz-221 }
 		string:_ { sdkfz-221-west }
 	}
 	float:rarity { 15.6 }

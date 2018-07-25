@@ -28,8 +28,13 @@ namespace PanzerBlitz
 
 			UniqueId = Block.Name;
 			Rarity = (float)attributes[(int)Attribute.RARITY];
-			UnitConfigurations = ((List<string>)attributes[(int)Attribute.UNIT_CONFIGURATIONS])
-				.Select(i => GameData.UnitConfigurationLinks[i]).ToList();
+			UnitConfigurations = new List<UnitConfigurationLink>();
+			foreach (var link in (List<string>)attributes[(int)Attribute.UNIT_CONFIGURATIONS])
+			{
+				if (GameData.UnitConfigurationLinks.ContainsKey(link))
+					UnitConfigurations.Add(GameData.UnitConfigurationLinks[link]);
+				else Console.WriteLine("[WARNING]: Unable to find UnitConfigurationLink {0}", link);
+			}
 		}
 
 		public UnitConfigurationLock(SerializationInputStream Stream)

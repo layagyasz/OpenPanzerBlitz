@@ -2510,6 +2510,7 @@
     <None Include="Modules\Default\UnitSprites\mobelwagen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\Server\UnitConfigurationLocks\British.blk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

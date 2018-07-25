@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 using Cardamom.Utilities;
 
@@ -17,6 +18,8 @@ namespace PanzerBlitz
 		readonly TextInput _WidthInput = new TextInput("new-map-text-input");
 		readonly Checkbox _GenerateRandomCheckbox =
 			new Checkbox("new-map-checkbox") { DisplayedString = "Generate Random" };
+		readonly Select<MatchSetting> _MatchSettingsSelect =
+			new Select<MatchSetting>("new-map-parameters-section-select");
 		readonly Button _Error = new Button("new-map-error");
 		readonly Button _CancelButton = new Button("small-button") { DisplayedString = "Cancel" };
 		readonly Button _CreateButton = new Button("small-button") { DisplayedString = "Create" };
@@ -30,6 +33,14 @@ namespace PanzerBlitz
 			_CancelButton.OnClick += HandleCancelClicked;
 			_CreateButton.OnClick += HandleCreateClicked;
 
+			foreach (var matchSetting in GameData.MatchSettings.Values)
+				_MatchSettingsSelect.Add(
+					new SelectionOption<MatchSetting>("new-map-parameters-section-select-option")
+					{
+						Value = matchSetting,
+						DisplayedString = ObjectDescriber.Describe(matchSetting)
+					});
+
 			_Display.Add(new Button("new-map-header-1") { DisplayedString = "New Map" });
 			_Display.Add(new Button("new-map-header-2") { DisplayedString = "Height" });
 			_Display.Add(_HeightInput);
@@ -37,6 +48,7 @@ namespace PanzerBlitz
 			_Display.Add(_WidthInput);
 			_Display.Add(new Button("new-map-header-2") { DisplayedString = "Random Map Generation" });
 			_Display.Add(_GenerateRandomCheckbox);
+			_Display.Add(new GuiContainer<Pod>("new-map-parameters-section") { _MatchSettingsSelect });
 
 			Add(_Display);
 			Add(_CancelButton);
@@ -69,7 +81,7 @@ namespace PanzerBlitz
 
 				MapConfiguration configuration = null;
 				if (_GenerateRandomCheckbox.Value)
-					configuration = new RandomMapConfiguration(width, height, GameData.MatchSettings["italy-summer"]);
+					configuration = new RandomMapConfiguration(width, height, _MatchSettingsSelect.Value.Value);
 				else configuration = new BlankMapConfiguration(width, height);
 				if (OnCreate != null) OnCreate(this, new ValuedEventArgs<MapConfiguration>(configuration));
 

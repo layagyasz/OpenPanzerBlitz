@@ -250,7 +250,7 @@ unit-configuration-link:m-3-lee {
 	!unit-configuration:unit-configuration { unit-configurations.m-3-lee }
 
 	int:introduce-year { 1941 }
-	int:obsolete-year { 1943 }
+	int:obsolete-year { 1942 }
 }
 unit-configuration-link:m-4_105 {
 	!faction:faction { factions.american }

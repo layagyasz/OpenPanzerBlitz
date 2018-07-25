@@ -716,8 +716,8 @@ unit-configuration:sentinel {
 	byte:defense { 5 }
 	byte:movement { 10 }
 }
-unit-configuration:churchill-engineer {
-	string:name { Churchill Engineer }
+unit-configuration:churchill-bridgelayer {
+	string:name { Churchill Bridgelayer }
 	unit-class:unit-class { engineer-vehicle }
 
 	weapon-class:weapon-class { na }
@@ -746,7 +746,7 @@ unit-configuration:churchill-arv {
 	byte:defense { 10 }
 	byte:movement { 4 }
 }
-unit-configuration:scorpion-flail {
+unit-configuration:matilda-scorpion {
 	string:name { Scorpion }
 	unit-class:unit-class { engineer-vehicle }
 

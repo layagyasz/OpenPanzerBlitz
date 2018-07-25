@@ -408,6 +408,18 @@ unit-configuration:75mm-aa {
 
 	bool:can-anti-aircraft { true }
 }
+unit-configuration:3in-aa {
+	string:name { 3in }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 10 }
+	byte:range { 12 }
+	byte:defense { 1 }
+	byte:movement { 0 }
+
+	bool:can-anti-aircraft { true }
+}
 unit-configuration:76_2mm-aa {
 	string:name { 76.2mm }
 	unit-class:unit-class { towed-gun }
@@ -770,6 +782,18 @@ unit-configuration:18pdr-how {
 	weapon-class:weapon-class { high-explosive }
 	byte:attack { 26 }
 	byte:range { 30 }
+	byte:defense { 2 }
+	byte:movement { 0 }
+
+	bool:can-indirect-fire { true }
+}
+unit-configuration:18_25pdr-how {
+	string:name { 18_25pdr }
+	unit-class:unit-class { towed-gun }
+
+	weapon-class:weapon-class { high-explosive }
+	byte:attack { 32 }
+	byte:range { 32 }
 	byte:defense { 2 }
 	byte:movement { 0 }
 

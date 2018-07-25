@@ -212,7 +212,7 @@ unit-render-details:honey {
 unit-render-details:sentinel {
 	string:image-path { sentinel.png }
 }
-unit-render-details:churchill-engineer {
+unit-render-details:churchill-bridgelayer {
 	string:override-display-name { Churchill }
 	string:image-path { churchill-engineer.png }
 }
@@ -222,7 +222,7 @@ unit-render-details:centaur-arv {
 unit-render-details:churchill-arv {
 	string:image-path { churchill-arv.png }
 }
-unit-render-details:scorpion-flail {
+unit-render-details:matilda-scorpion {
 	string:image-path { scorpion-flail.png }
 }
 unit-render-details:typhoon-bombs {
