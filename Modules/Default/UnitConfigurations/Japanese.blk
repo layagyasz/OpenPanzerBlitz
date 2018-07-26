@@ -22,7 +22,7 @@ unit-configuration:mg-platoon-japanese {
 
 	bool:can-only-support-close-assault { true }
 }
-unit-configuration:rifle-platoon-japanese-39 {
+unit-configuration:rifle-platoon-japanese {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 

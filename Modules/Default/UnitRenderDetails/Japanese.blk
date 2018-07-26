@@ -6,7 +6,7 @@ unit-render-details:mg-platoon-japanese {
 	string:override-display-name { M-G }
 	string:image-path { mg-platoon.png }
 }
-unit-render-details:rifle-platoon-japanese-39 {
+unit-render-details:rifle-platoon-japanese {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }

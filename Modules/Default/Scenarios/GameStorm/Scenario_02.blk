@@ -177,7 +177,7 @@
 						string:name { Group A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-39 }
+								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese }
 								int:count { 6 }
 							}
 							unit-count:_ {

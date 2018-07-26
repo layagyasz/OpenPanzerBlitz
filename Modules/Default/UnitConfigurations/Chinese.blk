@@ -1,0 +1,98 @@
+﻿unit-configuration:engineer-platoon-chinese {
+	string:name { Engineer Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 1 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+
+	bool:is-engineer { true }
+}
+unit-configuration:hmg-platoon-chinese {
+	string:name { HMG Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 6 }
+	byte:range { 6 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+
+	bool:can-close-assault { false }
+}
+unit-configuration:rifle-platoon-chinese {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 1 }
+	byte:range { 2 }
+	byte:defense { 5 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-chinese-41 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:cavalry-chinese {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:truck-chinese {
+	string:name { Truck }
+	unit-class:unit-class { transport }
+
+	weapon-class:weapon-class { na }
+	byte:attack { 0 }
+	byte:range { 0 }
+	byte:defense { 1 }
+	byte:movement { 12 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:carden-loyd {
+	string:name { Carden-Loyd }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 1 }
+	byte:movement { 8 }
+}
+unit-configuration:vcl-lat {
+	string:name { VCL LAT }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 1 }
+	byte:movement { 9 }
+
+	!unit-movement-rules:movement-rules { unit-movement-rules.amphibious-vehicle }
+}
+unit-configuration:ctls-4ta {
+	string:name { CTLS-4TA }
+	unit-class:unit-class { tank }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 4 }
+	byte:range { 4 }
+	byte:defense { 3 }
+	byte:movement { 10 }
+}

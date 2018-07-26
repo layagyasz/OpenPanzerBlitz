@@ -96,7 +96,7 @@ unit-configuration-lock:mg-platoon-japanese {
 }
 unit-configuration-lock:rifle-platoon-japanese {
 	string[]:unit-configurations { 
-		string:_ { rifle-platoon-japanese-39 }
+		string:_ { rifle-platoon-japanese }
 		string:_ { rifle-platoon-japanese-41 }
 	}
 	float:rarity { 5.8 }

@@ -69,9 +69,9 @@ unit-configuration-link:mg-platoon-japanese {
 	!faction:faction { factions.japanese }
 	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-japanese }
 }
-unit-configuration-link:rifle-platoon-japanese-39 {
+unit-configuration-link:rifle-platoon-japanese {
 	!faction:faction { factions.japanese }
-	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese-39 }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-japanese }
 
 	int:obsolete-year { 1940 }
 }

@@ -33,6 +33,7 @@ namespace PanzerBlitz
 			CAN_PLACE_BRIDGES,
 			INNATELY_CLEARS_MINES,
 			IMMUNE_TO_MINES,
+			MINIMUM_INDIRECT_FIRE_RANGE,
 
 			IS_VEHICLE,
 			IS_ARMORED,
@@ -90,6 +91,7 @@ namespace PanzerBlitz
 		public readonly bool CanPlaceBridges;
 		public readonly bool InnatelyClearsMines;
 		public readonly bool ImmuneToMines;
+		public readonly byte MinimumIndirectFireRange;
 
 		public readonly bool IsVehicle;
 		public readonly bool IsArmored;
@@ -159,6 +161,7 @@ namespace PanzerBlitz
 			CanPlaceBridges = Stream.ReadBoolean();
 			InnatelyClearsMines = Stream.ReadBoolean();
 			ImmuneToMines = Stream.ReadBoolean();
+			MinimumIndirectFireRange = Stream.ReadByte();
 
 			IsVehicle = Stream.ReadBoolean();
 			IsArmored = Stream.ReadBoolean();
@@ -285,6 +288,11 @@ namespace PanzerBlitz
 			CanPlaceBridges = (bool)(attributes[(int)Attribute.CAN_PLACE_BRIDGES] ?? IsEngineer);
 			InnatelyClearsMines = (bool)(attributes[(int)Attribute.INNATELY_CLEARS_MINES] ?? false);
 			ImmuneToMines = (bool)(attributes[(int)Attribute.IMMUNE_TO_MINES] ?? (InnatelyClearsMines || IsAircraft()));
+			MinimumIndirectFireRange =
+				(byte)(attributes[(int)Attribute.MINIMUM_INDIRECT_FIRE_RANGE]
+					   ?? (UnitClass == UnitClass.TOWED_GUN || PrimaryWeapon.WeaponClass == WeaponClass.MORTAR
+						   ? (byte)1
+						   : (byte)((PrimaryWeapon.Range + 1) / 2)));
 
 			CanSpot = (bool)(attributes[(int)Attribute.CAN_SPOT] ?? GetDefaultCanSpot());
 			CanReveal = (bool)(attributes[(int)Attribute.CAN_REVEAL] ?? CanSpot && !IsAircraft());
@@ -439,8 +447,7 @@ namespace PanzerBlitz
 		{
 			var range = GetAdjustedRange(UseSecondaryWeapon);
 			if (LineOfSight.Range > range) return OrderInvalidReason.TARGET_OUT_OF_RANGE;
-			if (UnitClass != UnitClass.TOWED_GUN && LineOfSight.Range <= range / 2)
-				return OrderInvalidReason.TARGET_TOO_CLOSE;
+			if (LineOfSight.Range < MinimumIndirectFireRange) return OrderInvalidReason.TARGET_TOO_CLOSE;
 			if (!CanIndirectFire) return OrderInvalidReason.UNIT_NO_ATTACK;
 			return OrderInvalidReason.NONE;
 		}
@@ -682,6 +689,7 @@ namespace PanzerBlitz
 			Stream.Write(CanPlaceBridges);
 			Stream.Write(InnatelyClearsMines);
 			Stream.Write(ImmuneToMines);
+			Stream.Write(MinimumIndirectFireRange);
 
 			Stream.Write(IsVehicle);
 			Stream.Write(IsArmored);

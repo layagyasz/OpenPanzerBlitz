@@ -11,6 +11,11 @@
 		byte:stack-limit { 3 }
 		bool:half-price-trucks { true }
 	}
+	faction:chinese {
+		string:name { Chinese }
+		color[]:colors { 255,255,255 100,100,255 }
+		byte:stack-limit { 3 }
+	}
 	faction:finnish {
 		string:name { Finnish }
 		color[]:colors { 255,255,255 131,166,220 255,255,255 }
@@ -38,7 +43,7 @@
 	}
 	faction:japanese { 
 		string:name { Japanese }
-		color[]:colors { 117,132,161 201,192,186 }
+		color[]:colors { 215,188,56 201,200,195 }
 		byte:stack-limit { 3 }
 	}
 	faction:polish {

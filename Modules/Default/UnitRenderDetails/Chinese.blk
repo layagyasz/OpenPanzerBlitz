@@ -1,0 +1,33 @@
+﻿unit-render-details:engineer-platoon-chinese {
+	string:override-display-name { }
+	string:image-path { engineer-platoon.png }
+}
+unit-render-details:hmg-platoon-chinese {
+	string:override-display-name { HMG }
+	string:image-path { hmg-platoon.png }
+}
+unit-render-details:rifle-platoon-chinese {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-chinese-41 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:cavalry-chinese {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:truck-chinese {
+	string:override-display-name { TRUCK }
+	string:image-path { truck-12.png }
+}
+unit-render-details:carden-loyd {
+	string:image-path { carden-loyd.png }
+}
+unit-render-details:vcl-lat {
+	string:image-path { vcl-lat.png }
+}
+unit-render-details:ctls-4ta {
+	string:image-path { ctls-4ta.png }
+}

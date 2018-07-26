@@ -112,7 +112,12 @@ namespace PanzerBlitz
 			if (_UnitConfiguration.IsParatroop) AddAttribute("Paratroops");
 			if (_UnitConfiguration.IsCommando) AddAttribute("Commandos");
 			if (_UnitConfiguration.CanDirectFire) AddAttribute("Direct Fire");
-			if (_UnitConfiguration.CanIndirectFire) AddAttribute("Indirect Fire");
+			if (_UnitConfiguration.CanIndirectFire)
+			{
+				AddAttribute("Indirect Fire");
+				AddAttribute(
+					string.Format("Minimum Indirect Fire Range - {0}", _UnitConfiguration.MinimumIndirectFireRange));
+			}
 			if (_UnitConfiguration.CanOverrun) AddAttribute("Overrun");
 			if (_UnitConfiguration.CanOnlyOverrunUnarmored) AddAttribute("Overrun Un-armored");
 			if (_UnitConfiguration.CanCloseAssault) AddAttribute("Close Assault");
