@@ -7,6 +7,22 @@
 			!var:terrain-generator { terrain-generators.default }
 		}
 	}
+	match-setting:finland-summer {
+		!var:environment { environments.summer-steppe }
+		front:front { east }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.finnish }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
+	match-setting:finland-winter {
+		!var:environment { environments.winter-steppe }
+		front:front { east }
+		map-generator-configuration:map-generator {
+			!var:name-generator { name-generators.finnish }
+			!var:terrain-generator { terrain-generators.default }
+		}
+	}
 	match-setting:france-summer {
 		!var:environment { environments.summer-grassland }
 		front:front { west }

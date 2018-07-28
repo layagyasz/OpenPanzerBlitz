@@ -50,9 +50,9 @@ namespace PanzerBlitz
 			_Display.Add(_GenerateRandomCheckbox);
 			_Display.Add(new GuiContainer<Pod>("new-map-parameters-section") { _MatchSettingsSelect });
 
-			Add(_Display);
 			Add(_CancelButton);
 			Add(_CreateButton);
+			Add(_Display);
 		}
 
 		public void SetError(string Message)

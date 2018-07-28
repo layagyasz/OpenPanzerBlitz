@@ -194,3 +194,31 @@ unit-configuration-link:m-5-chinese {
 
 	int:introduce-year { 1942 }
 }
+unit-configuration-link:br-20-chinese {
+	!faction:faction { factions.chinese }
+	!unit-configuration:unit-configuration { unit-configurations.br-20 }
+}
+unit-configuration-link:cr-42-chinese {
+	!faction:faction { factions.chinese }
+	!unit-configuration:unit-configuration { unit-configurations.cr-42 }
+}
+unit-configuration-link:gladiator-chinese {
+	!faction:faction { factions.chinese }
+	!unit-configuration:unit-configuration { unit-configurations.gladiator }
+}
+unit-configuration-link:hs-123-chinese {
+	!faction:faction { factions.chinese }
+	!unit-configuration:unit-configuration { unit-configurations.hs-123 }
+}
+unit-configuration-link:b-25-mitchell-chinese {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.b-25-mitchell }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:p-38-lightning-chinese {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.p-38-lightning }
+
+	int:introduce-year { 1943 }
+}

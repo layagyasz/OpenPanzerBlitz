@@ -63,7 +63,7 @@
 						string:name { Test A }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+								!unit-configuration:unit-configuration { unit-configurations.sexton }
 								int:count { 1 }
 							}
 							unit-count:_ {

@@ -1,5 +1,6 @@
 ﻿name-generator<>:name-generators {
 	name-generator:chinese { Chinese.mkvc }
+	name-generator:finnish { Finnish.mkvc }
 	name-generator:french { French.mkvc }
 	name-generator:german { German.mkvc }
 	name-generator:hungarian { Hungarian.mkvc }

@@ -335,8 +335,6 @@ unit-configuration-link:br-20 {
 unit-configuration-link:cr-42-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.cr-42 }
-
-	int:introduce-year { 1939 }
 }
 unit-configuration-link:mc-202-a {
 	!faction:faction { factions.italian }
