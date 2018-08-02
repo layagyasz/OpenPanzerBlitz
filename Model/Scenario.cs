@@ -15,15 +15,16 @@ namespace PanzerBlitz
 			MAP_CONFIGURATION,
 			ARMY_CONFIGURATIONS,
 			TURN_CONFIGURATION,
-			FOG_OF_WAR
+			RULES
 		};
 
 		public readonly string Name;
 		public readonly List<ArmyConfiguration> ArmyConfigurations;
 		public readonly TurnConfiguration TurnConfiguration;
-		public bool FogOfWar { get; set; }
 		public readonly Environment Environment;
 		public readonly MapConfiguration MapConfiguration;
+
+		public ScenarioRules Rules { get; set; }
 
 		public IEnumerable<UnitConfiguration> UnitConfigurations
 		{
@@ -34,16 +35,16 @@ namespace PanzerBlitz
 			string Name,
 			IEnumerable<ArmyConfiguration> ArmyConfigurations,
 			TurnConfiguration TurnConfiguration,
-			bool FogOfWar,
 			Environment Environment,
-			MapConfiguration MapConfiguration)
+			MapConfiguration MapConfiguration,
+			ScenarioRules Rules)
 		{
 			this.Name = Name;
 			this.ArmyConfigurations = ArmyConfigurations.ToList();
 			this.TurnConfiguration = TurnConfiguration;
-			this.FogOfWar = FogOfWar;
 			this.Environment = Environment;
 			this.MapConfiguration = MapConfiguration;
+			this.Rules = Rules;
 		}
 
 		public Scenario(ParseBlock Block)
@@ -54,10 +55,9 @@ namespace PanzerBlitz
 			ArmyConfigurations = (List<ArmyConfiguration>)attributes[(int)Attribute.ARMY_CONFIGURATIONS];
 
 			TurnConfiguration = (TurnConfiguration)attributes[(int)Attribute.TURN_CONFIGURATION];
-			FogOfWar = (bool)(attributes[(int)Attribute.FOG_OF_WAR] ?? false);
-
 			Environment = (Environment)attributes[(int)Attribute.ENVIRONMENT];
 			MapConfiguration = (MapConfiguration)attributes[(int)Attribute.MAP_CONFIGURATION];
+			Rules = (ScenarioRules)(attributes[(int)Attribute.RULES] ?? default(ScenarioRules));
 		}
 
 		public Scenario(SerializationInputStream Stream)
@@ -65,9 +65,9 @@ namespace PanzerBlitz
 			Stream.ReadString(),
 			Stream.ReadEnumerable(i => new ArmyConfiguration(Stream)).ToList(),
 			new TurnConfiguration(Stream),
-			Stream.ReadBoolean(),
 			GameData.Environments[Stream.ReadString()],
-			(MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream))
+			(MapConfiguration)MapConfigurationSerializer.Instance.Deserialize(Stream),
+			new ScenarioRules(Stream))
 		{ }
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -75,14 +75,9 @@ namespace PanzerBlitz
 			Stream.Write(Name);
 			Stream.Write(ArmyConfigurations);
 			Stream.Write(TurnConfiguration);
-			Stream.Write(FogOfWar);
 			Stream.Write(Environment.UniqueKey);
 			MapConfigurationSerializer.Instance.Serialize(MapConfiguration, Stream);
-		}
-
-		public void SetFogOfWar(bool FogOfWar)
-		{
-			this.FogOfWar = FogOfWar;
+			Stream.Write(Rules);
 		}
 
 		public Scenario MakeStatic(Random Random)
@@ -91,9 +86,9 @@ namespace PanzerBlitz
 				Name,
 				ArmyConfigurations,
 				TurnConfiguration.MakeStatic(Random),
-				FogOfWar,
 				Environment,
-				MapConfiguration.MakeStatic(Random));
+				MapConfiguration.MakeStatic(Random),
+				Rules);
 		}
 	}
 }

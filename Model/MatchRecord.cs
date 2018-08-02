@@ -21,7 +21,7 @@ namespace PanzerBlitz
 		public MatchRecord(SerializationInputStream Stream)
 		{
 			var scenario = new Scenario(Stream);
-			scenario.FogOfWar = false;
+			scenario.Rules &= new ScenarioRules(false, true);
 			Match = new Match(scenario, null);
 			OrderSerializer = new OrderSerializer(Match);
 			Orders = Stream.ReadEnumerable(() => OrderSerializer.Deserialize(Stream)).ToList();

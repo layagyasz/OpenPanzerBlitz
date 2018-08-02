@@ -34,8 +34,8 @@ namespace PanzerBlitz
 			_LandingSelect.Add(EditButton);
 			_LandingSelect.Add(ScenarioBuilderButton);
 
-			_LandingSelect.Add(JoinServerButton);
-			_LandingSelect.Add(StartServerButton);
+			// _LandingSelect.Add(JoinServerButton);
+			// _LandingSelect.Add(StartServerButton);
 
 			_Items.Add(_LandingSelect);
 		}

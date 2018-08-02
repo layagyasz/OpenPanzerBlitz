@@ -56,10 +56,10 @@ namespace PanzerBlitz
 						armyConfigurations.Count, Enumerable.Range(0, armyConfigurations.Count).Cast<byte>()),
 					new StaticSequence(
 						armyConfigurations.Count, Enumerable.Range(0, armyConfigurations.Count).Cast<byte>())),
-				Parameters.FogOfWar,
 				Parameters.Setting.Environment,
 				new RandomMapConfiguration(
-					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting));
+					Parameters.MapSize.X, Parameters.MapSize.Y, Parameters.Setting),
+				new ScenarioRules(Parameters.FogOfWar, false));
 		}
 	}
 }

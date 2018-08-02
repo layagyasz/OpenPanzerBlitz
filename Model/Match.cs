@@ -40,7 +40,7 @@ namespace PanzerBlitz
 				i => new Army(
 					this,
 					new LazySightFinder(
-						Scenario.FogOfWar ? (UnitTracker)new FogOfWarUnitTracker() : new OmniscientUnitTracker()),
+						Scenario.Rules.FogOfWar ? (UnitTracker)new FogOfWarUnitTracker() : new OmniscientUnitTracker()),
 					i,
 					IdGenerator)).ToList();
 			_TurnOrder = Scenario.TurnConfiguration.Materialize(new Random(), Armies).GetEnumerator();

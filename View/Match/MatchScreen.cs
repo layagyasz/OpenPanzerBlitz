@@ -94,7 +94,7 @@ namespace PanzerBlitz
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
 			_FollowedArmies = new HashSet<Army>(FollowedArmies);
-			_FogOfWar = Match.Scenario.FogOfWar;
+			_FogOfWar = Match.Scenario.Rules.FogOfWar;
 			_FogOfWarHandler = _EventBuffer.Hook<SightUpdatedEventArgs>(HandleSightUpdated);
 
 			EventHandler<NewUnitEventArgs> addUnitHandler = _EventBuffer.Hook<NewUnitEventArgs>(AddUnit).Invoke;

@@ -65,7 +65,7 @@ namespace PanzerBlitz
 					return !Turn.TurnInfo.Army.Units.Any(i => i.CanMove(false, false) == OrderInvalidReason.NONE);
 
 				case TurnComponent.WAIT:
-					return !Match.Scenario.FogOfWar;
+					return !Match.Scenario.Rules.FogOfWar;
 				case TurnComponent.RESET:
 					return true;
 			}

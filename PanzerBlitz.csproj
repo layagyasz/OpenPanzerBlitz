@@ -418,6 +418,7 @@
     <Compile Include="Model\Sequence\StaticSequence.cs" />
     <Compile Include="Model\Sequence\RandomSequence.cs" />
     <Compile Include="Model\Sequence\SequenceSerializer.cs" />
+    <Compile Include="Model\ScenarioRules.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

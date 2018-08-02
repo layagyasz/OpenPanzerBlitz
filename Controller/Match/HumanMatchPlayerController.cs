@@ -254,7 +254,7 @@ namespace PanzerBlitz
 
 		public bool FilterVisible(Tile Tile)
 		{
-			if (!Match.GetScenario().FogOfWar) return true;
+			if (!Match.GetScenario().Rules.FogOfWar) return true;
 
 			if (Tile.Rules.Concealing || Tile.Rules.LowProfileConcealing)
 				return _CurrentTurn.Army.SightFinder.HasTileSightLevel(Tile, TileSightLevel.HARD_SPOTTED);
