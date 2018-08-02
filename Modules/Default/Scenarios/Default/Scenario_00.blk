@@ -5,7 +5,9 @@
 		static-sequence:deployment-order { 1 0 }
 		static-sequence:turn-order { 0 1 }
 	}
-	bool:fog-of-war { true }
+	scenario-rules:rules {
+		bool:fog-of-war { true }
+	}
 	!environment:environment { environments.summer-steppe }
 	map-configuration:map-configuration {
 		board-configuration[]:_ {

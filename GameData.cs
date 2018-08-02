@@ -155,6 +155,7 @@ namespace PanzerBlitz
 			Block.AddParser<RandomMapConfiguration>();
 			Block.AddParsers<Sequence>(SequenceSerializer.Instance.GetParsers());
 			Block.AddParser<TurnConfiguration>();
+			Block.AddParser<ScenarioRules>();
 			Block.AddParser<Scenario>();
 
 			Block.AddParser<FactionRenderDetails>(

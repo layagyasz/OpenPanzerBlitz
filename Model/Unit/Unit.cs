@@ -268,7 +268,9 @@ namespace PanzerBlitz
 				case CombatResult.MISS:
 					return;
 				case CombatResult.DESTROY:
-					if (AttackMethod == AttackMethod.CLOSE_ASSAULT && Configuration.CloseAssaultCapture)
+					if (Army.Match.Scenario.Rules.AllowCloseAssaultCapture
+						&& AttackMethod == AttackMethod.CLOSE_ASSAULT
+						&& Configuration.CloseAssaultCapture)
 						Capture(AttackingArmy);
 					else
 					{
