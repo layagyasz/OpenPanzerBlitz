@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { TEAM };
 
 		public readonly byte Team;
+
+		public override bool IsTransient { get; } = false;
 
 		public UnitIsHostile(byte Team)
 		{
@@ -25,19 +25,14 @@ namespace PanzerBlitz
 		public UnitIsHostile(SerializationInputStream Stream)
 			: this(Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Team);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			return Unit.Army.Configuration.Team != Team;
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			return Object.Army.Configuration.Team != Team;
 		}
 	}
 }

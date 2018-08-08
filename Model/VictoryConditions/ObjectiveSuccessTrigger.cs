@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -58,6 +59,14 @@ namespace PanzerBlitz
 		{
 			return Invert ? Objective.GetScore(ForArmy, Match, Cache) <= Threshold
 										 : Objective.GetScore(ForArmy, Match, Cache) >= Threshold;
+		}
+
+		public int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			var score = this.Objective.GetMaximumScore(Objective, ForArmy, Match);
+			if (score == null) return null;
+			if (Objective == this.Objective) return Math.Min(Threshold, (int)score);
+			return score;
 		}
 	}
 }

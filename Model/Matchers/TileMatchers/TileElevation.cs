@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -10,6 +8,8 @@ namespace PanzerBlitz
 
 		public readonly int Elevation;
 		public readonly bool Atleast;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileElevation(int Elevation, bool Atleast)
 		{
@@ -28,21 +28,16 @@ namespace PanzerBlitz
 		public TileElevation(SerializationInputStream Stream)
 			: this(Stream.ReadInt32(), Stream.ReadBoolean()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Elevation);
 			Stream.Write(Atleast);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			if (Tile == null) return false;
-			return Tile.Configuration.Elevation < Elevation ^ Atleast;
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Configuration.Elevation < Elevation ^ Atleast;
 		}
 	}
 }

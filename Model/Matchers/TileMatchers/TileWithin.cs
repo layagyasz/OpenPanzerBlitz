@@ -13,6 +13,8 @@ namespace PanzerBlitz
 
 		public readonly Polygon Zone;
 
+		public override bool IsTransient { get; } = false;
+
 		public TileWithin(Polygon Zone)
 		{
 			this.Zone = Zone;
@@ -28,20 +30,15 @@ namespace PanzerBlitz
 		public TileWithin(SerializationInputStream Stream)
 			: this(new Polygon(Stream)) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((Serializable)Zone);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			if (Tile == null) return false;
-			return Zone.ContainsPoint(new Vector2f(Tile.Coordinate.X, Tile.Coordinate.Y));
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Zone.ContainsPoint(new Vector2f(Object.Coordinate.X, Object.Coordinate.Y));
 		}
 	}
 }

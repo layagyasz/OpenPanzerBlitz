@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -50,11 +51,22 @@ namespace PanzerBlitz
 
 		public override int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)
 		{
+			return ScoreWithMatcher(Matcher.Matches, ForArmy, Match);
+		}
+
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			if (Objective != this) return null;
+			return ScoreWithMatcher(Matcher.MatchesTransient, ForArmy, Match);
+		}
+
+		int ScoreWithMatcher(Func<Unit, bool> Matcher, Army ForArmy, Match Match)
+		{
 			return (int)Match.Armies
-							.Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
-							.SelectMany(i => i.Units)
-							.Where(Matcher.Matches)
-							.Sum(i => CountPoints ? i.GetPointValue() * 100 : 1);
+				 .Where(i => Friendly == (i.Configuration.Team == ForArmy.Configuration.Team))
+				 .SelectMany(i => i.Units)
+				 .Where(Matcher)
+				 .Sum(i => CountPoints ? i.GetPointValue() * 100 : 1);
 		}
 
 		public override IEnumerable<Tile> GetTiles(Map Map)

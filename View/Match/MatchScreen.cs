@@ -224,7 +224,8 @@ namespace PanzerBlitz
 			}
 
 			_InfoDisplay.SetTurn(Turn);
-			_VictoryConditionDisplay.SetVictoryCondition(Turn.TurnInfo.Army.Configuration.VictoryCondition);
+			_VictoryConditionDisplay.SetVictoryCondition(
+				Turn.TurnInfo.Army.Configuration.VictoryCondition, Turn.TurnInfo.Army, Turn.TurnInfo.Army.Match);
 		}
 
 		public void SetActions(Func<Button, bool> Selector)

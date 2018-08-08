@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { COORDINATE }
 
 		public readonly Coordinate Coordinate;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileHasCoordinate(Coordinate Coordinate)
 		{
@@ -25,19 +25,15 @@ namespace PanzerBlitz
 		public TileHasCoordinate(SerializationInputStream Stream)
 			: this(new Coordinate(Stream)) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Coordinate);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			return Tile.Coordinate == Coordinate;
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Coordinate == Coordinate;
 		}
 	}
 }

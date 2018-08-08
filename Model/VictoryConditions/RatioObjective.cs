@@ -48,6 +48,12 @@ namespace PanzerBlitz
 			return Numerator.GetScore(ForArmy, Match, Cache) / Denominator.GetScore(ForArmy, Match, Cache);
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			if (Objective == this) Objective = Numerator;
+			return Numerator.GetMaximumScore(Objective, ForArmy, Match);
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Numerator.GetTiles(Map).Concat(Denominator.GetTiles(Map));

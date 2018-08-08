@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cardamom.Serialization;
@@ -54,6 +55,17 @@ namespace PanzerBlitz
 					result = t.SuccessLevel;
 			}
 			return result;
+		}
+
+		public int GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			int maxScore = 0;
+			foreach (var trigger in Triggers)
+			{
+				var score = trigger.GetMaximumScore(Objective, ForArmy, Match);
+				if (score != null) maxScore = Math.Max(maxScore, (int)score);
+			}
+			return maxScore;
 		}
 
 		public IEnumerable<Tile> GetTiles(Map Map)

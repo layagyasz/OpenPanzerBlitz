@@ -1,4 +1,6 @@
-﻿using Cardamom.Interface;
+﻿using System.Collections.Generic;
+
+using Cardamom.Interface;
 using Cardamom.Interface.Items;
 
 using SFML.Graphics;
@@ -18,23 +20,26 @@ namespace PanzerBlitz
 			}
 		}
 
-		public void SetVictoryCondition(VictoryCondition Condition)
+		public void SetVictoryCondition(VictoryCondition Condition, Army ForArmy, Match Match)
 		{
 			_Display.Clear();
-			foreach (ObjectiveSuccessTrigger trigger in Condition.Triggers)
+			foreach (var objective in Condition.Scorers)
 			{
 				_Display.Add(
 					new Button("victory-condition-header")
 					{
-						DisplayedString = ObjectDescriber.Describe(trigger.SuccessLevel)
+						DisplayedString =
+							string.Format(
+								"{0}/{1}",
+								objective.CalculateScore(ForArmy, Match, new Dictionary<Objective, int>()),
+								Condition.GetMaximumScore(objective, ForArmy, Match))
 					});
 				_Display.Add(
 					new Button("victory-condition-regular")
 					{
 						DisplayedString =
 							ObjectDescriber.Sentencify(
-								ObjectiveDescriber.Describe(
-									new TriggerObjective(trigger.Objective, trigger.Threshold, trigger.Invert)))
+								ObjectiveDescriber.RemoveScore(ObjectiveDescriber.Describe(objective)))
 					});
 			}
 		}

@@ -8,6 +8,7 @@ namespace PanzerBlitz
 	{
 		public abstract bool CanStopEarly();
 		public abstract int CalculateScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache);
+		public abstract int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match);
 		public abstract IEnumerable<Tile> GetTiles(Map Map);
 
 		public int GetScore(Army ForArmy, Match Match, Dictionary<Objective, int> Cache)

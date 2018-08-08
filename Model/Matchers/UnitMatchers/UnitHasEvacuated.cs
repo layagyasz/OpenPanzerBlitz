@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -10,6 +8,8 @@ namespace PanzerBlitz
 
 		public readonly Direction Direction;
 		public readonly Matcher<Tile> Matcher;
+
+		public override bool IsTransient { get; } = true;
 
 		public UnitHasEvacuated(Direction Direction, Matcher<Tile> Matcher)
 		{
@@ -29,21 +29,16 @@ namespace PanzerBlitz
 			: this((Direction)Stream.ReadByte(), (Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream))
 		{ }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Direction);
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			if (Unit.Evacuated == null) return false;
-			return Matcher.Matches(Unit.Evacuated) && Unit.Evacuated.OnEdge(Direction);
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			if (Object.Evacuated == null) return false;
+			return Matcher.Matches(Object.Evacuated) && Object.Evacuated.OnEdge(Direction);
 		}
 	}
 }

@@ -128,5 +128,10 @@ namespace PanzerBlitz
 		{
 			return Input.Replace("%score%", Value);
 		}
+
+		public static string RemoveScore(string Input)
+		{
+			return Input.Replace("%score%", "number of");
+		}
 	}
 }

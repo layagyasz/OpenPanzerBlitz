@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { UNIT_CONFIGURATION };
 
 		public readonly UnitConfiguration UnitConfiguration;
+
+		public override bool IsTransient { get; } = false;
 
 		public UnitHasConfiguration(UnitConfiguration UnitConfiguration)
 		{
@@ -25,19 +25,15 @@ namespace PanzerBlitz
 		public UnitHasConfiguration(SerializationInputStream Stream)
 			: this(GameData.UnitConfigurations[Stream.ReadString()]) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(UnitConfiguration.UniqueKey);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			return Unit.Configuration == UnitConfiguration;
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Configuration == UnitConfiguration;
 		}
 	}
 }

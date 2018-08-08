@@ -44,6 +44,13 @@ namespace PanzerBlitz
 			return Points * Objective.GetScore(ForArmy, Match, Cache);
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			if (Objective == this) Objective = this.Objective;
+			var score = this.Objective.GetMaximumScore(Objective, ForArmy, Match);
+			return score == null ? null : Points * score;
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Objective.GetTiles(Map);

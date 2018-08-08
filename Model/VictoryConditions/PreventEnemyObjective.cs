@@ -24,6 +24,11 @@ namespace PanzerBlitz
 						.All(i => i.GetObjectiveSuccessLevel() < ObjectiveSuccessLevel.VICTORY) ? 1 : 0;
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			return Objective == this ? (int?)1 : null;
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Enumerable.Empty<Tile>();

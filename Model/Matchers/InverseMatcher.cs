@@ -10,6 +10,14 @@ namespace PanzerBlitz
 
 		public readonly Matcher<T> Matcher;
 
+		public override bool IsTransient
+		{
+			get
+			{
+				return Matcher.IsTransient;
+			}
+		}
+
 		public InverseMatcher(Matcher<T> Matcher)
 		{
 			this.Matcher = Matcher;
@@ -25,17 +33,17 @@ namespace PanzerBlitz
 		public InverseMatcher(SerializationInputStream Stream)
 			: this((Matcher<T>)MatcherSerializer.Instance.Deserialize(Stream)) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
-		public bool Matches(T Object)
+		public override bool Matches(T Object)
 		{
 			return !Matcher.Matches(Object);
 		}
 
-		public IEnumerable<Matcher<T>> Flatten()
+		public override IEnumerable<Matcher<T>> Flatten()
 		{
 			yield return Matcher;
 		}

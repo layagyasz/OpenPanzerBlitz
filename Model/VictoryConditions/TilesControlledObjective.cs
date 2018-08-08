@@ -49,6 +49,11 @@ namespace PanzerBlitz
 				i => Friendly == (i.ControllingArmy == ForArmy) && Matcher.Matches(i));
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			return Objective == this ? (int?)Match.Map.TilesEnumerable.Count(Matcher.MatchesTransient) : null;
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Map.TilesEnumerable.Where(i => Matcher.Matches(i));

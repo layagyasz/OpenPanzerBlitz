@@ -57,6 +57,26 @@ namespace PanzerBlitz
 			}
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			if (Objective != this) return null;
+			switch (Direction)
+			{
+				case Direction.NORTH:
+				case Direction.NORTH_EAST:
+				case Direction.NORTH_WEST:
+				case Direction.SOUTH:
+				case Direction.SOUTH_EAST:
+				case Direction.SOUTH_WEST:
+					return Match.Map.Height;
+				case Direction.EAST:
+				case Direction.WEST:
+					return Match.Map.Width;
+				default:
+					throw new ArgumentException(string.Format("Direction not supported: {0}", Direction));
+			}
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Enumerable.Empty<Tile>();

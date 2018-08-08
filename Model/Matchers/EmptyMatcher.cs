@@ -6,22 +6,19 @@ namespace PanzerBlitz
 {
 	public class EmptyMatcher<T> : Matcher<T>
 	{
+		public override bool IsTransient { get; } = false;
+
 		public EmptyMatcher() { }
 
 		public EmptyMatcher(ParseBlock Block) { }
 
 		public EmptyMatcher(SerializationInputStream Stream) { }
 
-		public bool Matches(T Object)
+		public override bool Matches(T Object)
 		{
 			return true;
 		}
 
-		public IEnumerable<Matcher<T>> Flatten()
-		{
-			yield return this;
-		}
-
-		public void Serialize(SerializationOutputStream Stream) { }
+		public override void Serialize(SerializationOutputStream Stream) { }
 	}
 }

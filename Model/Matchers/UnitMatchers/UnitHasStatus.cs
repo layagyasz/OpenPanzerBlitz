@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { STATUS };
 
 		public readonly UnitStatus Status;
+
+		public override bool IsTransient { get; } = true;
 
 		public UnitHasStatus(UnitStatus Status)
 		{
@@ -25,19 +25,14 @@ namespace PanzerBlitz
 		public UnitHasStatus(SerializationInputStream Stream)
 			: this((UnitStatus)Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Status);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			return Unit.Status == Status;
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			return Object.Status == Status;
 		}
 	}
 }

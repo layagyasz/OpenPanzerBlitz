@@ -43,6 +43,13 @@ namespace PanzerBlitz
 			return Objective.GetScore(ForArmy, Match, Cache) > 0 ? turn : int.MaxValue;
 		}
 
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			return Objective == this
+				? Match.Scenario.TurnConfiguration.Turns
+				   : this.Objective.GetMaximumScore(Objective, ForArmy, Match);
+		}
+
 		public override IEnumerable<Tile> GetTiles(Map Map)
 		{
 			return Objective.GetTiles(Map);

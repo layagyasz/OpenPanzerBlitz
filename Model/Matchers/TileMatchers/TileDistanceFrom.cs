@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 using Cardamom.Graphing;
 using Cardamom.Serialization;
@@ -13,6 +12,14 @@ namespace PanzerBlitz
 		public readonly Matcher<Tile> Matcher;
 		public readonly byte Distance;
 		public readonly bool Atleast;
+
+		public override bool IsTransient
+		{
+			get
+			{
+				return Matcher.IsTransient;
+			}
+		}
 
 		public TileDistanceFrom(Matcher<Tile> Matcher, byte Distance, bool Atleast)
 		{
@@ -37,25 +44,20 @@ namespace PanzerBlitz
 				Stream.ReadBoolean())
 		{ }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 			Stream.Write(Distance);
 			Stream.Write(Atleast);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Tile)
 		{
 			if (Tile == null) return false;
 
 			return new Field<Tile>(Tile, Distance - (Atleast ? 1 : 0), (i, j) => 1)
 				.GetReachableNodes()
 				.Any(i => Matcher.Matches(i.Item1)) ^ Atleast;
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
 		}
 	}
 }

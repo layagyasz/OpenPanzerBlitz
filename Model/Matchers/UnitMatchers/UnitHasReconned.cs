@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { DIRECTION };
 
 		public readonly Direction Direction;
+
+		public override bool IsTransient { get; } = true;
 
 		public UnitHasReconned(Direction Direction)
 		{
@@ -25,19 +25,15 @@ namespace PanzerBlitz
 		public UnitHasReconned(SerializationInputStream Stream)
 					: this((Direction)Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Direction);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			return Unit.HasRecon(Direction);
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.HasRecon(Direction);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace PanzerBlitz
 {
@@ -21,7 +22,7 @@ namespace PanzerBlitz
 			if (Matcher is InverseMatcher<Tile>) return Describe((InverseMatcher<Tile>)Matcher);
 			if (Matcher is EmptyMatcher<Tile>) return Describe((EmptyMatcher<Tile>)Matcher);
 
-			return Describe(Matcher);
+			return string.Empty;
 		}
 
 		public static string Describe(TileDistanceFrom Matcher)
@@ -97,7 +98,7 @@ namespace PanzerBlitz
 			if (Matcher is InverseMatcher<Unit>) return Describe((InverseMatcher<Unit>)Matcher);
 			if (Matcher is EmptyMatcher<Unit>) return Describe((EmptyMatcher<Unit>)Matcher);
 
-			return Describe<Unit>(Matcher);
+			return string.Empty;
 		}
 
 		public static string Describe(UnitHasClass Matcher)
@@ -138,25 +139,37 @@ namespace PanzerBlitz
 			return "that are hostile";
 		}
 
-		public static string Describe<T>(Matcher<T> Matcher)
+		public static string Describe(CompositeMatcher<Unit> Matcher)
 		{
-			if (Matcher is Matcher<Tile>) return Describe((Matcher<Tile>)Matcher);
-			if (Matcher is Matcher<Unit>) return Describe((Matcher<Unit>)Matcher);
-
-			return "";
+			return Describe(Matcher, Describe);
 		}
 
-		public static string Describe<T>(CompositeMatcher<T> Matcher)
+		public static string Describe(CompositeMatcher<Tile> Matcher)
+		{
+			return Describe(Matcher, Describe);
+		}
+
+		public static string Describe<T>(CompositeMatcher<T> Matcher, Func<Matcher<T>, string> Describer)
 		{
 			return ObjectDescriber.Listify(
-				Matcher.Matchers.Select(Describe),
+				Matcher.Matchers.Select(Describer),
 				", ",
 				Matcher.Aggregator == Aggregators.AND ? ", and " : ", or ");
 		}
 
-		public static string Describe<T>(InverseMatcher<T> Matcher)
+		public static string Describe(InverseMatcher<Unit> Matcher)
 		{
-			return "not " + Describe(Matcher.Matcher);
+			return Describe(Matcher, Describe);
+		}
+
+		public static string Describe(InverseMatcher<Tile> Matcher)
+		{
+			return Describe(Matcher, Describe);
+		}
+
+		public static string Describe<T>(InverseMatcher<T> Matcher, Func<Matcher<T>, string> Describer)
+		{
+			return "not " + Describer(Matcher.Matcher);
 		}
 
 		public static string Describe<T>(EmptyMatcher<T> Matcher)

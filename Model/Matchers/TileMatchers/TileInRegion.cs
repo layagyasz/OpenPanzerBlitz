@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -10,6 +9,8 @@ namespace PanzerBlitz
 		enum Attribute { REGION_NAME }
 
 		public readonly string NormalizedRegionName;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileInRegion(string NormalizedRegionName)
 		{
@@ -26,20 +27,16 @@ namespace PanzerBlitz
 		public TileInRegion(SerializationInputStream Stream)
 			: this(Stream.ReadString()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(NormalizedRegionName);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			return Tile.Map.Regions.First(
-				i => NormalizedRegionName == i.Name.Replace(' ', '-').ToLower()).Contains(Tile);
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Map.Regions.First(
+				i => NormalizedRegionName == i.Name.Replace(' ', '-').ToLower()).Contains(Object);
 		}
 	}
 }

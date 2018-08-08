@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -8,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { BASE };
 
 		public readonly TileBase TileBase;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileHasBase(TileBase TileBase)
 		{
@@ -24,19 +25,15 @@ namespace PanzerBlitz
 		public TileHasBase(SerializationInputStream Stream)
 			: this((TileBase)Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)TileBase);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			return Tile.Configuration.TileBase == TileBase;
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Configuration.TileBase == TileBase;
 		}
 	}
 }

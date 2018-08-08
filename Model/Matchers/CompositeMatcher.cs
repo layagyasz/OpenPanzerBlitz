@@ -11,6 +11,14 @@ namespace PanzerBlitz
 		public readonly List<Matcher<T>> Matchers;
 		public readonly Func<bool, bool, bool> Aggregator;
 
+		public override bool IsTransient
+		{
+			get
+			{
+				return Matchers.Any(i => i.IsTransient);
+			}
+		}
+
 		public CompositeMatcher(IEnumerable<Matcher<T>> Matchers, Func<bool, bool, bool> Aggregator)
 		{
 			this.Matchers = Matchers.ToList();
@@ -29,19 +37,19 @@ namespace PanzerBlitz
 				Aggregators.AGGREGATORS[Stream.ReadByte()])
 		{ }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write(Matchers, i => MatcherSerializer.Instance.Serialize(i, Stream));
 			Stream.Write((byte)Array.IndexOf(Aggregators.AGGREGATORS, Aggregator));
 		}
 
-		public bool Matches(T Object)
+		public override bool Matches(T Object)
 		{
 			var seed = Matchers.First().Matches(Object);
 			return Matchers.Skip(1).Select(i => i.Matches(Object)).Aggregate(seed, Aggregator);
 		}
 
-		public IEnumerable<Matcher<T>> Flatten()
+		public override IEnumerable<Matcher<T>> Flatten()
 		{
 			return Matchers.SelectMany(i => i.Flatten());
 		}

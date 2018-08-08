@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -10,6 +9,8 @@ namespace PanzerBlitz
 		enum Attribute { PATH }
 
 		public readonly TilePathOverlay Path;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileHasPath(TilePathOverlay Path)
 		{
@@ -26,19 +27,15 @@ namespace PanzerBlitz
 		public TileHasPath(SerializationInputStream Stream)
 			: this((TilePathOverlay)Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Path);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			return Tile.Configuration.PathOverlays.Any(i => i == Path);
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Configuration.PathOverlays.Any(i => i == Path);
 		}
 	}
 }

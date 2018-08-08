@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Cardamom.Serialization;
 
@@ -52,6 +53,15 @@ namespace PanzerBlitz
 			bool t = Invert ? Objective.GetScore(ForArmy, Match, Cache) <= Threshold
 									   : Objective.GetScore(ForArmy, Match, Cache) >= Threshold;
 			return t ? 1 : 0;
+		}
+
+		public override int? GetMaximumScore(Objective Objective, Army ForArmy, Match Match)
+		{
+			if (Objective == this) return 1;
+			var score = this.Objective.GetMaximumScore(Objective, ForArmy, Match);
+			if (score == null) return null;
+			if (Objective == this.Objective) return Math.Min(Threshold, (int)score);
+			return score;
 		}
 
 		public override IEnumerable<Tile> GetTiles(Map Map)

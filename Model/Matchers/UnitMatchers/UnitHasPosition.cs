@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
@@ -9,6 +7,8 @@ namespace PanzerBlitz
 		enum Attribute { MATCHER }
 
 		public readonly Matcher<Tile> Matcher;
+
+		public override bool IsTransient { get; } = true;
 
 		public UnitHasPosition(Matcher<Tile> Matcher)
 		{
@@ -25,19 +25,15 @@ namespace PanzerBlitz
 		public UnitHasPosition(SerializationInputStream Stream)
 			: this((Matcher<Tile>)MatcherSerializer.Instance.Deserialize(Stream)) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			MatcherSerializer.Instance.Serialize(Matcher, Stream);
 		}
 
-		public bool Matches(Unit Unit)
+		public override bool Matches(Unit Object)
 		{
-			return Matcher.Matches(Unit.Position);
-		}
-
-		public IEnumerable<Matcher<Unit>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Matcher.Matches(Object.Position);
 		}
 	}
 }

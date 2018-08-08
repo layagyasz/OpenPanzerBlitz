@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 using Cardamom.Serialization;
 
@@ -10,6 +9,8 @@ namespace PanzerBlitz
 		enum Attribute { EDGE }
 
 		public readonly TileEdge Edge;
+
+		public override bool IsTransient { get; } = false;
 
 		public TileHasEdge(TileEdge Edge)
 		{
@@ -26,19 +27,15 @@ namespace PanzerBlitz
 		public TileHasEdge(SerializationInputStream Stream)
 			: this((TileEdge)Stream.ReadByte()) { }
 
-		public void Serialize(SerializationOutputStream Stream)
+		public override void Serialize(SerializationOutputStream Stream)
 		{
 			Stream.Write((byte)Edge);
 		}
 
-		public bool Matches(Tile Tile)
+		public override bool Matches(Tile Object)
 		{
-			return Tile.Configuration.Edges.Any(i => i == Edge);
-		}
-
-		public IEnumerable<Matcher<Tile>> Flatten()
-		{
-			yield return this;
+			if (Object == null) return false;
+			return Object.Configuration.Edges.Any(i => i == Edge);
 		}
 	}
 }
