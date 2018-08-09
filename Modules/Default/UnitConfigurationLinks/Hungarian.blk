@@ -140,6 +140,18 @@ unit-configuration-link:zrinyi-ii {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:hetzer-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.hetzer }
+
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:stug-iii-g-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
+
+	int:introduce-year { 1944 }
+}
 unit-configuration-link:toldi-i {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-i }
@@ -151,6 +163,31 @@ unit-configuration-link:toldi-ii {
 	!unit-configuration:unit-configuration { unit-configurations.toldi-ii }
 
 	int:introduce-year { 1940 }
+}
+unit-configuration-link:t-38-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.t-38 }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:hotchkiss-39-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.hotchkiss-39 }
+
+	int:introduce-year { 1942 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:pzkw-i-b-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-b }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:pzkw-38_t-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
+
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:turan-i {
 	!faction:faction { factions.hungarian }
@@ -170,11 +207,31 @@ unit-configuration-link:turan-iii {
 
 	int:introduce-year { 1944 }
 }
-unit-configuration-link:pzkw-38_t-hungarian {
+unit-configuration-link:pzkw-iii-n-hungarian {
 	!faction:faction { factions.hungarian }
-	!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:pzkw-iv-e-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-e }
+
+	int:introduce-year { 1942 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:pzkw-iv-g-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-g }
+
+	int:introduce-year { 1942 }
+	int:obsolete-year { 1943 }
+}
+unit-configuration-link:pzkw-iv-h-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
+
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:cr-42-hungarian {
 	!faction:faction { factions.hungarian }

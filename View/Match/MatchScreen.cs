@@ -90,9 +90,11 @@ namespace PanzerBlitz
 			: base(WindowSize, Match.Map, TileRenderer)
 		{
 			Match.OnStartPhase += _EventBuffer.Hook<StartTurnComponentEventArgs>(HandleNewTurn).Invoke;
+			Match.OnExecuteOrder += _EventBuffer.Hook<ExecuteOrderEventArgs>(HandleOrderExecuted).Invoke;
 
 			this.UnitRenderer = UnitRenderer;
 			this.FactionRenderer = FactionRenderer;
+
 			_FollowedArmies = new HashSet<Army>(FollowedArmies);
 			_FogOfWar = Match.Scenario.Rules.FogOfWar;
 			_FogOfWarHandler = _EventBuffer.Hook<SightUpdatedEventArgs>(HandleSightUpdated);
@@ -135,6 +137,27 @@ namespace PanzerBlitz
 			}
 		}
 
+		void HandleSightUpdated(object Sender, SightUpdatedEventArgs E)
+		{
+			_StackLayer.UpdateUnitVisibilities(E.Unit, E.Movement, E.UnitDeltas);
+			if (_FogOfWar)
+			{
+				foreach (var delta in E.TileDeltas)
+					MapView.Tiles[delta.Item1.Coordinate.X, delta.Item1.Coordinate.Y]
+						   .SetMask(FOG_OF_WAR_MASKS[FogIndex(delta.Item1, delta.Item2)]);
+			}
+		}
+
+		void HandleFinishClicked(object Sender, EventArgs E)
+		{
+			OnFinishClicked?.Invoke(this, E);
+		}
+
+		void HandleOrderExecuted(object Sender, ExecuteOrderEventArgs E)
+		{
+			SetVictoryConditions(E.Order.Army);
+		}
+
 		void SetSightFinder(SightFinder SightFinder)
 		{
 			if (_SightFinder != SightFinder)
@@ -161,17 +184,6 @@ namespace PanzerBlitz
 			{
 				foreach (TileView t in MapView.TilesEnumerable)
 					t.SetMask(FOG_OF_WAR_MASKS[FogIndex(t.Tile, SightFinder.GetTileSightLevel(t.Tile))]);
-			}
-		}
-
-		void HandleSightUpdated(object Sender, SightUpdatedEventArgs E)
-		{
-			_StackLayer.UpdateUnitVisibilities(E.Unit, E.Movement, E.UnitDeltas);
-			if (_FogOfWar)
-			{
-				foreach (var delta in E.TileDeltas)
-					MapView.Tiles[delta.Item1.Coordinate.X, delta.Item1.Coordinate.Y]
-						   .SetMask(FOG_OF_WAR_MASKS[FogIndex(delta.Item1, delta.Item2)]);
 			}
 		}
 
@@ -209,11 +221,6 @@ namespace PanzerBlitz
 			_InfoDisplay.SetViewItem(new FactionView(Faction, FactionRenderer, 80));
 		}
 
-		void HandleFinishClicked(object Sender, EventArgs E)
-		{
-			if (OnFinishClicked != null) OnFinishClicked(this, E);
-		}
-
 		public void SetTurn(Turn Turn)
 		{
 			int i = 0;
@@ -224,8 +231,13 @@ namespace PanzerBlitz
 			}
 
 			_InfoDisplay.SetTurn(Turn);
+			SetVictoryConditions(Turn.TurnInfo.Army);
+		}
+
+		void SetVictoryConditions(Army Army)
+		{
 			_VictoryConditionDisplay.SetVictoryCondition(
-				Turn.TurnInfo.Army.Configuration.VictoryCondition, Turn.TurnInfo.Army, Turn.TurnInfo.Army.Match);
+				Army.Configuration.VictoryCondition, Army, Army.Match);
 		}
 
 		public void SetActions(Func<Button, bool> Selector)

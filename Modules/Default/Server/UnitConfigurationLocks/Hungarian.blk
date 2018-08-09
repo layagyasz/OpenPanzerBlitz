@@ -162,6 +162,18 @@ unit-configuration-lock:zrinyi-ii {
 	}
 	float:rarity { 18.0 }
 }
+unit-configuration-lock:hetzer-hungarian {
+	string[]:unit-configurations { 
+		string:_ { hetzer-hungarian }
+	}
+	float:rarity { 17.8 }
+}
+unit-configuration-lock:stug-iii-g-hungarian {
+	string[]:unit-configurations { 
+		string:_ { stug-iii-g-hungarian }
+	}
+	float:rarity { 18.4 }
+}
 unit-configuration-lock:toldi-i {
 	string[]:unit-configurations { 
 		string:_ { toldi-i }
@@ -173,6 +185,30 @@ unit-configuration-lock:toldi-ii {
 		string:_ { toldi-ii }
 	}
 	float:rarity { 17.2 }
+}
+unit-configuration-lock:t-38-hungarian {
+	string[]:unit-configurations { 
+		string:_ { t-38-hungarian }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:hotchkiss-39-hungarian {
+	string[]:unit-configurations { 
+		string:_ { hotchkiss-39-hungarian }
+	}
+	float:rarity { 20.1 }
+}
+unit-configuration-lock:pzkw-i-b-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-i-b-hungarian }
+	}
+	float:rarity { 21.0 }
+}
+unit-configuration-lock:pzkw-38_t-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-38_t-hungarian }
+	}
+	float:rarity { 17.3 }
 }
 unit-configuration-lock:turan-i {
 	string[]:unit-configurations { 
@@ -192,9 +228,27 @@ unit-configuration-lock:turan-iii {
 	}
 	float:rarity { 24.0 }
 }
-unit-configuration-lock:pzkw-38_t-hungarian {
+unit-configuration-lock:pzkw-iii-n-hungarian {
 	string[]:unit-configurations { 
-		string:_ { pzkw-38_t-hungarian }
+		string:_ { pzkw-iii-n-hungarian }
 	}
-	float:rarity { 17.3 }
+	float:rarity { 19.5 }
+}
+unit-configuration-lock:pzkw-iv-e-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-e-hungarian }
+	}
+	float:rarity { 19.5 }
+}
+unit-configuration-lock:pzkw-iv-g-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-g-hungarian }
+	}
+	float:rarity { 20.7 }
+}
+unit-configuration-lock:pzkw-iv-h-hungarian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-h-hungarian }
+	}
+	float:rarity { 17.8 }
 }

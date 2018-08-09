@@ -138,6 +138,24 @@ unit-configuration-link:r-35_45 {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:pzkw-iii-n-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:pzkw-iv-g-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-g }
+
+	int:introduce-year { 1942 }
+}
+unit-configuration-link:pzkw-iv-h-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
+
+	int:introduce-year { 1944 }
+}
 unit-configuration-link:tacam-t-60 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.tacam-t-60 }
@@ -153,6 +171,12 @@ unit-configuration-link:tacam-r-2 {
 unit-configuration-link:maresal {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.maresal }
+
+	int:introduce-year { 1943 }
+}
+unit-configuration-link:stug-iii-g-romanian {
+	!faction:faction { factions.romanian }
+	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 
 	int:introduce-year { 1943 }
 }

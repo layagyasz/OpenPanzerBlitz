@@ -1,6 +1,8 @@
-﻿namespace PanzerBlitz
+﻿using System;
+
+namespace PanzerBlitz
 {
-	public class ExecuteOrderEventArgs
+	public class ExecuteOrderEventArgs : EventArgs
 	{
 		public readonly Order Order;
 

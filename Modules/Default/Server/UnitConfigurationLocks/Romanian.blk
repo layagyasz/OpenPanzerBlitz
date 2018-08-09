@@ -167,6 +167,24 @@ unit-configuration-lock:r-35_45 {
 	}
 	float:rarity { 19.0 }
 }
+unit-configuration-lock:pzkw-iii-n-romanian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iii-n-romanian }
+	}
+	float:rarity { 19.5 }
+}
+unit-configuration-lock:pzkw-iv-g-romanian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-g-romanian }
+	}
+	float:rarity { 20.5 }
+}
+unit-configuration-lock:pzkw-iv-h-romanian {
+	string[]:unit-configurations { 
+		string:_ { pzkw-iv-h-romanian }
+	}
+	float:rarity { 17.2 }
+}
 unit-configuration-lock:tacam-t-60 {
 	string[]:unit-configurations { 
 		string:_ { tacam-t-60 }
@@ -184,4 +202,10 @@ unit-configuration-lock:maresal {
 		string:_ { maresal }
 	}
 	float:rarity { 20.4 }
+}
+unit-configuration-lock:stug-iii-g-romanian {
+	string[]:unit-configurations { 
+		string:_ { stug-iii-g-romanian }
+	}
+	float:rarity { 17.2 }
 }
