@@ -327,7 +327,7 @@
     <Compile Include="View\Describers\ObjectDescriber.cs" />
     <Compile Include="View\Describers\ObjectiveDescriber.cs" />
     <Compile Include="View\Describers\MatcherDescriber.cs" />
-    <Compile Include="View\Match\VictoryConditionDisplay.cs" />
+    <Compile Include="View\Match\ObjectiveDisplay.cs" />
     <Compile Include="View\Unit\UnitConfigurationStackView.cs" />
     <Compile Include="View\Describers\DeploymentDescriber.cs" />
     <Compile Include="View\Scenario\ScenarioView.cs" />
@@ -419,6 +419,7 @@
     <Compile Include="Model\Sequence\RandomSequence.cs" />
     <Compile Include="Model\Sequence\SequenceSerializer.cs" />
     <Compile Include="Model\ScenarioRules.cs" />
+    <Compile Include="View\Match\VictoryConditionPane.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

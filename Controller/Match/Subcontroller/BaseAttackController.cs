@@ -44,8 +44,6 @@ namespace PanzerBlitz
 			{
 				if (attack != _AttackBuilder)
 				{
-					_Controller.Clear();
-
 					_AttackBuilder = attack;
 					var attackPane = new AttackPane(_AttackBuilder);
 					attackPane.OnClose = CloseWindow;

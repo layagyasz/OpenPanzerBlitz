@@ -8,9 +8,9 @@ using SFML.Window;
 
 namespace PanzerBlitz
 {
-	public class VictoryConditionDisplay : GuiItem
+	public class ObjectiveDisplay : GuiItem
 	{
-		readonly SingleColumnTable _Display = new SingleColumnTable("victory-condition-display");
+		readonly SingleColumnTable _Display = new SingleColumnTable("objective-display");
 
 		public override Vector2f Size
 		{
@@ -26,7 +26,7 @@ namespace PanzerBlitz
 			foreach (var objective in Condition.Scorers)
 			{
 				_Display.Add(
-					new Button("victory-condition-header")
+					new Button("objective-header")
 					{
 						DisplayedString =
 							string.Format(
@@ -35,7 +35,7 @@ namespace PanzerBlitz
 								Condition.GetMaximumScore(objective, ForArmy, Match))
 					});
 				_Display.Add(
-					new Button("victory-condition-regular")
+					new Button("objective-regular")
 					{
 						DisplayedString =
 							ObjectDescriber.Sentencify(

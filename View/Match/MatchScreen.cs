@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +50,7 @@ namespace PanzerBlitz
 		SightFinder _SightFinder;
 		Action<object, EventArgs> _FogOfWarHandler;
 
-		VictoryConditionDisplay _VictoryConditionDisplay = new VictoryConditionDisplay();
+		ObjectiveDisplay _VictoryConditionDisplay = new ObjectiveDisplay();
 		MatchInfoDisplay _InfoDisplay = new MatchInfoDisplay();
 		readonly StackLayer _StackLayer = new StackLayer();
 		readonly Button _FinishButton = new Button("large-button") { DisplayedString = "Next Phase" };
@@ -64,6 +64,7 @@ namespace PanzerBlitz
 				return _StackLayer.UnitViews;
 			}
 		}
+
 		public IEnumerable<Button> ActionButtons
 		{
 			get

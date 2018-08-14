@@ -93,22 +93,45 @@ class:overlay-working-box {
 		int[]:padding { 4 4 0 0 }
 	}
 }
-class:victory-condition-display {
+class:objective-display {
 	!class:parent { info-display }
 	mode:default {
 		int:height { 363 }
 	}
 }
-class:victory-condition-header {
+class:objective-header {
 	!class:parent { header-2 }
 	mode:default {
 		int:width { 272 }
 	}
 }
-class:victory-condition-regular {
+class:objective-regular {
 	!class:parent { regular }
 	mode:default {
 		int:height { 88 }
 		int:width { 272 }
+	}
+}
+class:victory-condition-pane {
+	!class:parent { pane }
+	mode:default {
+		int:height { 636 }
+		int:width { 548 }
+		color[]:background-color { #000000 #000000 #000000 #000000 }
+	}
+}
+class:victory-condition-display {
+	!class:parent { pane }
+	mode:default {
+		int:height { 604 }
+		int:width { 516 }
+		color[]:background-color { #00000000 #00000000 #00000000 #00000000 }
+		int[]:padding { 0 0 0 0 }
+	}
+}
+class:victory-condition-close-button {
+	!class:parent { square-button }
+	mode:default {
+		int[]:margin { 0 0 0 0 }
 	}
 }

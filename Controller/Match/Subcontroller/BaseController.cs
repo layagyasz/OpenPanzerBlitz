@@ -83,7 +83,6 @@ namespace PanzerBlitz
 
 		public void HandleUnitShiftRightClick(Unit Unit)
 		{
-			_Controller.Clear();
 			var pane = new UnitInfoPane(Unit, _Controller.UnitConfigurationRenderer);
 			pane.OnClose += (sender, e) => _Controller.Clear();
 			_Controller.SetPane(pane);

@@ -172,6 +172,7 @@ namespace PanzerBlitz
 
 		public void SetPane(Pane Pane)
 		{
+			Clear();
 			_Pane = Pane;
 			AddPane(Pane);
 		}
@@ -357,7 +358,6 @@ namespace PanzerBlitz
 			if (directions.Count == 1) ReconDirection(directions.First());
 			else if (directions.Count > 1)
 			{
-				Clear();
 				var pane = new SelectPane<Direction>("Recon", directions);
 				pane.OnItemSelected += ReconDirection;
 				SetPane(pane);
@@ -396,7 +396,6 @@ namespace PanzerBlitz
 			if (directions.Count == 1) EvacuateDirection(directions.First());
 			else if (directions.Count > 1)
 			{
-				Clear();
 				var pane = new SelectPane<Direction>("Evacuate", directions);
 				pane.OnItemSelected += EvacuateDirection;
 				SetPane(pane);
@@ -439,7 +438,6 @@ namespace PanzerBlitz
 				if (mines.Count() == 1) ClearMinefield(mines.First());
 				else if (mines.Count() > 1)
 				{
-					Clear();
 					var pane = new SelectPane<Unit>("Clear Minefield", mines);
 					pane.OnItemSelected += ClearMinefield;
 					SetPane(pane);
@@ -477,7 +475,6 @@ namespace PanzerBlitz
 			if (emplaceables.Count() == 1) Emplace(emplaceables.First());
 			else if (emplaceables.Count() > 1)
 			{
-				Clear();
 				var pane = new SelectPane<Unit>("Emplace Unit", emplaceables);
 				pane.OnItemSelected += Emplace;
 				SetPane(pane);
@@ -516,7 +513,6 @@ namespace PanzerBlitz
 			}
 			else if (canLoad.Count > 1)
 			{
-				Clear();
 				var pane = new SelectPane<Unit>("Load Unit", canLoad);
 				pane.OnItemSelected += LoadUnit;
 				SetPane(pane);
@@ -639,17 +635,37 @@ namespace PanzerBlitz
 			}
 		}
 
-		void OnKeyPressed(object sender, KeyPressedEventArgs E)
+		void OnKeyPressed(object Sender, KeyPressedEventArgs E)
 		{
 			TurnInfo phase = Match.GetTurn().TurnInfo;
 			if (AllowedArmies.Contains(phase.Army))
 			{
-				if (E.Key == Keyboard.Key.S) HighlightEnemyFieldOfSight(phase.Army.Configuration.Team);
-				else if (E.Key == Keyboard.Key.V) HighlightVictoryConditionField(phase.Army);
-				else if (E.Key == Keyboard.Key.Num1) HighlightScore(ScoreByThreat());
-				else if (E.Key == Keyboard.Key.Num2) HighlightScore(ScoreByPotential);
-				else if (E.Key == Keyboard.Key.Num3) HighlightScore(ScoreByFavorability());
-				else _Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+				switch (E.Key)
+				{
+					case Keyboard.Key.O:
+						var objectivePane = new VictoryConditionPane(phase.Army.Match, _MatchScreen.FactionRenderer);
+						objectivePane.OnClose += (sender, e) => Clear();
+						SetPane(objectivePane);
+						break;
+					case Keyboard.Key.S:
+						HighlightEnemyFieldOfSight(phase.Army.Configuration.Team);
+						break;
+					case Keyboard.Key.V:
+						HighlightVictoryConditionField(phase.Army);
+						break;
+					case Keyboard.Key.Num1:
+						HighlightScore(ScoreByThreat());
+						break;
+					case Keyboard.Key.Num2:
+						HighlightScore(ScoreByPotential);
+						break;
+					case Keyboard.Key.Num3:
+						HighlightScore(ScoreByFavorability());
+						break;
+					default:
+						_Controllers[phase.TurnComponent].HandleKeyPress(E.Key);
+						break;
+				}
 			}
 		}
 
