@@ -179,7 +179,7 @@ unit-configuration:turan-ii {
 	string:name { Turan II }
 	unit-class:unit-class { tank }
 
-	weapon-class:weapon-class { anti-armor }
+	weapon-class:weapon-class { high-explosive }
 	byte:attack { 5 }
 	byte:range { 8 }
 	byte:defense { 6 }

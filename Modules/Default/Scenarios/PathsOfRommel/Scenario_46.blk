@@ -138,7 +138,9 @@ scenario:_ {
 						string:name { 7th Panzer Div. }
 						unit-count[]:unit-counts {
 							unit-count:_ {
-								!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
+								!unit-configuration:unit-configuration {
+									unit-configurations.rifle-platoon-german-40-west
+								}
 								int:count { 9 }
 							}
 							unit-count:_ {

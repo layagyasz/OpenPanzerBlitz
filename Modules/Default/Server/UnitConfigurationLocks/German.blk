@@ -149,7 +149,9 @@ unit-configuration-lock:security-platoon-german {
 unit-configuration-lock:rifle-platoon-german {
 	string[]:unit-configurations { 
 		string:_ { rifle-platoon-german-39 }
+		string:_ { rifle-platoon-german-39-west }
 		string:_ { rifle-platoon-german-40 }
+		string:_ { rifle-platoon-german-40-west }
 		string:_ { rifle-platoon-german-42 }
 		string:_ { rifle-platoon-german-42-west }
 	}

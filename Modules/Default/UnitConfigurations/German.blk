@@ -1,4 +1,4 @@
-﻿unit-configuration:engineer-platoon-german {
+unit-configuration:engineer-platoon-german {
 	string:name { Engineer Platoon }
 	unit-class:unit-class { infantry }
 
@@ -60,11 +60,31 @@ unit-configuration:rifle-platoon-german-39 {
 
 	weapon-class:weapon-class { infantry }
 	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 6 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-german-39-west {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
 	byte:range { 2 }
 	byte:defense { 6 }
 	byte:movement { 1 }
 }
 unit-configuration:rifle-platoon-german-40 {
+	string:name { Rifle Platoon }
+	unit-class:unit-class { infantry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 8 }
+	byte:movement { 1 }
+}
+unit-configuration:rifle-platoon-german-40-west {
 	string:name { Rifle Platoon }
 	unit-class:unit-class { infantry }
 
@@ -188,7 +208,7 @@ unit-configuration:motorcycle-german-40-west {
 
 	bool:is-armored { false }
 	bool:can-overrun { false }
-	!unit-configuration:dismount-as { rifle-platoon-german-40 }
+	!unit-configuration:dismount-as { rifle-platoon-german-40-west }
 	bool:can-double-range { true }
 }
 unit-configuration:motorcycle-german-42 {

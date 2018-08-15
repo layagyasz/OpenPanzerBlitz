@@ -141,6 +141,14 @@ unit-configuration-link:rifle-platoon-german-39 {
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-39 }
 
 	int:obsolete-year { 1939 }
+	front:front { east }
+}
+unit-configuration-link:rifle-platoon-german-39-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-39-west }
+
+	int:obsolete-year { 1939 }
+	front:front { west }
 }
 unit-configuration-link:rifle-platoon-german-40 {
 	!faction:faction { factions.german }
@@ -148,6 +156,15 @@ unit-configuration-link:rifle-platoon-german-40 {
 
 	int:introduce-year { 1940 }
 	int:obsolete-year { 1941 }
+	front:front { east }
+}
+unit-configuration-link:rifle-platoon-german-40-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40-west }
+
+	int:introduce-year { 1940 }
+	int:obsolete-year { 1941 }
+	front:front { west }
 }
 unit-configuration-link:rifle-platoon-german-42 {
 	!faction:faction { factions.german }
@@ -727,7 +744,7 @@ unit-configuration-link:pzkw-iv-a {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-a }
 
-	int:obsolete-year { 1939 }
+	int:obsolete-year { 1941 }
 }
 unit-configuration-link:pzkw-iv-d {
 	!faction:faction { factions.german }

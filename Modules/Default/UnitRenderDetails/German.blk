@@ -22,7 +22,15 @@ unit-render-details:rifle-platoon-german-39 {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
+unit-render-details:rifle-platoon-german-39-west {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
 unit-render-details:rifle-platoon-german-40 {
+	string:override-display-name { RIFLE }
+	string:image-path { infantry-platoon.png }
+}
+unit-render-details:rifle-platoon-german-40-west {
 	string:override-display-name { RIFLE }
 	string:image-path { infantry-platoon.png }
 }
