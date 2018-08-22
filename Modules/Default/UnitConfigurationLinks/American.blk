@@ -5,30 +5,40 @@
 unit-configuration-link:37mm-at-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at-american }
-
-	int:introduce-year { 1940 }
 }
 unit-configuration-link:57mm-at-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.57mm-at }
 
-	int:introduce-year { 1942 }
+	int:introduce-year { 1941 }
 }
 unit-configuration-link:76mm-at-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.76mm-at }
 
-	int:introduce-year { 1944 }
+	int:introduce-year { 1942 }
 }
 unit-configuration-link:90mm-at-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.90mm-at }
 
-	int:introduce-year { 1941 }
+	int:introduce-year { 1944 }
+}
+unit-configuration-link:37mm-aa-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.37mm-aa }
+
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:40mm-aa-american {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
+
+	int:introduce-year { 1940 }
+}
+unit-configuration-link:76_2mm-aa-american {
+	!faction:faction { factions.american }
+	!unit-configuration:unit-configuration { unit-configurations.76_2mm-aa }
 }
 unit-configuration-link:75mm-how-company-american {
 	!faction:faction { factions.american }
@@ -387,7 +397,7 @@ unit-configuration-link:m-3-arv {
 	!unit-configuration:unit-configuration { unit-configurations.m-3-arv }
 
 	int:introduce-year { 1941 }
-	int:introduce-year { 1943 }
+	int:obsolete-year { 1943 }
 }
 unit-configuration-link:m-32-arv {
 	!faction:faction { factions.american }
@@ -411,7 +421,7 @@ unit-configuration-link:m-15-special {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.m-15-special }
 
-	int:introduce-year { 1943 }
+	int:introduce-year { 1944 }
 }
 unit-configuration-link:t-27 {
 	!faction:faction { factions.american }

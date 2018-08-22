@@ -140,6 +140,12 @@ unit-configuration-link:zrinyi-ii {
 
 	int:introduce-year { 1943 }
 }
+unit-configuration-link:marder-ii-hungarian {
+	!faction:faction { factions.hungarian }
+	!unit-configuration:unit-configuration { unit-configurations.marder-ii }
+
+	int:introduce-year { 1944 }
+}
 unit-configuration-link:hetzer-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.hetzer }

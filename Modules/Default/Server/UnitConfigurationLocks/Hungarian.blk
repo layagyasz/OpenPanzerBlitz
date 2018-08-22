@@ -162,6 +162,12 @@ unit-configuration-lock:zrinyi-ii {
 	}
 	float:rarity { 18.0 }
 }
+unit-configuration-lock:marder-ii-hungarian {
+	string[]:unit-configurations { 
+		string:_ { marder-ii-hungarian }
+	}
+	float:rarity { 21.7 }
+}
 unit-configuration-lock:hetzer-hungarian {
 	string[]:unit-configurations { 
 		string:_ { hetzer-hungarian }
