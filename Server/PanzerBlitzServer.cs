@@ -11,9 +11,9 @@ namespace PanzerBlitz
 		readonly RandomNumberGenerator _Rng;
 		readonly Database _Database;
 
-		public PanzerBlitzServer(string Path, RandomNumberGenerator Rng, Database Database)
+		public PanzerBlitzServer(RandomNumberGenerator Rng, Database Database)
 		{
-			_ServerData = new ServerData(Path);
+			_ServerData = new ServerData(GameData.UnitConfigurationLocks);
 			_Rng = Rng;
 			_Database = Database;
 		}

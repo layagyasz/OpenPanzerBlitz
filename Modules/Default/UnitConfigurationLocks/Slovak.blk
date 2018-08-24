@@ -1,0 +1,171 @@
+﻿unit-configuration-lock:wagon-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wagon-slovak }
+	}
+	float:rarity { 13.0 }
+}
+
+unit-configuration-lock:37mm-at-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-slovak }
+	}
+	float:rarity { 15.9 }
+}
+unit-configuration-lock:45mm-at-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.45mm-at-slovak }
+	}
+	float:rarity { 20.2 }
+}
+unit-configuration-lock:50mm-at-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.50mm-at-slovak }
+	}
+	float:rarity { 20.7 }
+}
+unit-configuration-lock:75mm-at-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-at-slovak }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:88mm-at-early-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.88mm-at-early-slovak }
+	}
+	float:rarity { 19.7 }
+}
+unit-configuration-lock:20mm-aa-early-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm-aa-early-slovak }
+	}
+	float:rarity { 16.2 }
+}
+unit-configuration-lock:75mm-how-company-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-company-slovak }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:100mm-how-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.100mm-how-slovak }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:105mm-how-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-slovak }
+	}
+	float:rarity { 18.8 }
+}
+unit-configuration-lock:150mm-how-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.150mm-how-slovak }
+	}
+	float:rarity { 17.0 }
+}
+unit-configuration-lock:81mm-mortar-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-slovak }
+	}
+	float:rarity { 15.7 }
+}
+unit-configuration-lock:engineer-platoon-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-slovak }
+	}
+	float:rarity { 15.1 }
+}
+unit-configuration-lock:mg-platoon-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.mg-platoon-slovak }
+	}
+	float:rarity { 14.1 }
+}
+unit-configuration-lock:rifle-platoon-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-slovak-39 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-slovak-40 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-slovak-41 }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:cavalry-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-slovak }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:truck-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.truck-slovak }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:praga-iv {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.praga-iv }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:bicycle-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-slovak }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:motorcycle-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-slovak }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:oa-27{
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.oa-27 }
+	}
+	float:rarity { 20.1 }
+}
+unit-configuration-lock:oa-30 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.oa-30 }
+	}
+	float:rarity { 18.3 }
+}
+unit-configuration-lock:tancik-33 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tancik-33 }
+	}
+	float:rarity { 17.9 }
+}
+unit-configuration-lock:pzkw-ii-d-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-ii-d-slovak }
+	}
+	float:rarity { 20.0 }
+}
+unit-configuration-lock:lt-34 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.lt-34 }
+	}
+	float:rarity { 18.4 }
+}
+unit-configuration-lock:lt-35 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.lt-35 }
+	}
+	float:rarity { 18.3 }
+}
+unit-configuration-lock:lt-38 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.lt-38 }
+	}
+	float:rarity { 17.8 }
+}
+unit-configuration-lock:marder-iii-slovak {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.marder-iii-slovak }
+	}
+	float:rarity { 19.8 }
+}

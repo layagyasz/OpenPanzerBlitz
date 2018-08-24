@@ -22,6 +22,7 @@ namespace PanzerBlitz
 			UNIT_CONFIGURATIONS,
 			UNIT_RENDER_DETAILS,
 			UNIT_CONFIGURATION_LINKS,
+			UNIT_CONFIGURATION_LOCKS,
 			SCENARIOS,
 			TILE_COMPONENT_RULES,
 			ENVIRONMENTS,
@@ -44,6 +45,7 @@ namespace PanzerBlitz
 		public static Dictionary<string, UnitConfiguration> UnitConfigurations;
 		public static Dictionary<string, UnitRenderDetails> UnitRenderDetails;
 		public static Dictionary<string, UnitConfigurationLink> UnitConfigurationLinks;
+		public static Dictionary<string, UnitConfigurationLock> UnitConfigurationLocks;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
 		public static Dictionary<string, MarkovGenerator<char>> NameGenerators;
@@ -89,6 +91,11 @@ namespace PanzerBlitz
 					Directory.EnumerateFiles(path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
 						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
+					"unit-configuration-lock<>",
+					"unit-configuration-locks",
+					Directory.EnumerateFiles(path + "/UnitConfigurationLocks", "*", SearchOption.AllDirectories)
+					.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
 					"unit-render-details<>",
 					"unit-render-details",
 					Directory.EnumerateFiles(path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
@@ -128,6 +135,7 @@ namespace PanzerBlitz
 			Block.AddParser<Faction>();
 			Block.AddParser<UnitConfiguration>();
 			Block.AddParser<UnitConfigurationLink>();
+			Block.AddParser<UnitConfigurationLock>();
 			Block.AddParser<Direction>();
 			Block.AddParser<TerrainAttribute>();
 			Block.AddParser<TileComponentRules>();
@@ -181,6 +189,8 @@ namespace PanzerBlitz
 			UnitConfigurations = (Dictionary<string, UnitConfiguration>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
 			UnitConfigurationLinks =
 				(Dictionary<string, UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
+			UnitConfigurationLocks =
+				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
@@ -279,6 +289,8 @@ namespace PanzerBlitz
 					new UnitRenderDetails(i, Path + "/UnitSprites/"))).ToDictionary(i => i.Key, i => i.Value);
 			UnitConfigurationLinks =
 				Stream.ReadEnumerable(i => new UnitConfigurationLink(i)).ToDictionary(i => i.UniqueKey);
+			UnitConfigurationLocks =
+				Stream.ReadEnumerable(i => new UnitConfigurationLock(i)).ToDictionary(i => i.UniqueKey);
 			Scenarios = Stream.ReadEnumerable(i => new Scenario(i)).ToList();
 			TileRenderers = Stream.ReadEnumerable(i => new TileRenderer(i)).ToDictionary(i => i.UniqueKey);
 			NameGenerators = Stream.ReadEnumerable(
@@ -310,6 +322,7 @@ namespace PanzerBlitz
 				Stream.Write(i.Value);
 			});
 			Stream.Write(UnitConfigurationLinks.Values);
+			Stream.Write(UnitConfigurationLocks.Values);
 			Stream.Write(Scenarios);
 			Stream.Write(TileRenderers, i => Stream.Write(i.Value));
 			Stream.Write(NameGenerators, i => { Stream.Write(i.Key); Stream.Write(i.Value, false, true); });

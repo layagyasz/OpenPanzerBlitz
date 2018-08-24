@@ -1,0 +1,266 @@
+﻿unit-configuration-lock:37mm-at-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-japanese }
+	}
+	float:rarity { 11.5 }
+}
+unit-configuration-lock:47mm-at-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.47mm-at-japanese }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:20mm-aa-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm-aa-japanese }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:20mm_2-aa-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm_2-aa-japanese }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:75mm-aa-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-aa-japanese }
+	}
+	float:rarity { 13.0 }
+}
+unit-configuration-lock:70mm-how-company-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.70mm-how-company-japanese}
+	}
+	float:rarity { 9.3 }
+}
+unit-configuration-lock:75mm-how-mountain-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-mountain-japanese }
+	}
+	float:rarity { 12.6 }
+}
+unit-configuration-lock:75mm-how-long-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-long-japanese }
+	}
+	float:rarity { 12.0 }
+}
+unit-configuration-lock:105mm-how-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-japanese }
+	}
+	float:rarity { 13.5 }
+}
+unit-configuration-lock:150mm-how-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.150mm-how-japanese }
+	}
+	float:rarity { 14.8 }
+}
+unit-configuration-lock:81mm-mortar-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-japanese }
+	}
+	float:rarity { 9.3 }
+}
+unit-configuration-lock:90mm-mortar-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.90mm-mortar-japanese }
+	}
+	float:rarity { 14.8 }
+}
+unit-configuration-lock:120mm-mortar-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.120mm-mortar-japanese }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:150mm-mortar-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.150mm-mortar-japanese }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:engineer-platoon-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-japanese }
+	}
+	float:rarity { 8.6 }
+}
+unit-configuration-lock:mg-platoon-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.mg-platoon-japanese }
+	}
+	float:rarity { 7.2 }
+}
+unit-configuration-lock:rifle-platoon-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-japanese }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-japanese-41 }
+	}
+	float:rarity { 5.8 }
+}
+unit-configuration-lock:assault-platoon-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.assault-platoon-japanese }
+	}
+	float:rarity { 12.2 }
+}
+unit-configuration-lock:cavalry-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-japanese }
+	}
+	float:rarity { 8.9 }
+}
+unit-configuration-lock:wagon-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wagon-japanese }
+	}
+	float:rarity { 8.0 }
+}
+unit-configuration-lock:truck-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.truck-japanese }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:bicycle-japanese {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-japanese }
+	}
+	float:rarity { 9.5 }
+}
+unit-configuration-lock:ho-ki {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ho-ki }
+	}
+	float:rarity { 21.4 }
+}
+unit-configuration-lock:type-92 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.type-92 }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:type-93 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.type-93 }
+	}
+	float:rarity { 21.7 }
+}
+unit-configuration-lock:ho-ni-1 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ho-ni-1 }
+		!unit-configuration-link:_ { unit-configuration-links.ho-ni-1-spa }
+	}
+	float:rarity { 19.3 }
+}
+unit-configuration-lock:ho-ni-2 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ho-ni-2 }
+	}
+	float:rarity { 18.2 }
+}
+unit-configuration-lock:ho-ro {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ho-ro }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:ho-ni-3 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ho-ni-3 }
+	}
+	float:rarity { 18.5 }
+}
+unit-configuration-lock:ss-ki {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ss-ki }
+	}
+	float:rarity { 19.8 }
+}
+unit-configuration-lock:tk {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tk }
+	}
+	float:rarity { 14.3 }
+}
+unit-configuration-lock:ke-ni {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ke-ni }
+	}
+	float:rarity { 17.3 }
+}
+unit-configuration-lock:ha-go-early {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ha-go-early }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:ha-go {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ha-go }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:otsu {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.otsu }
+	}
+	float:rarity { 15.3 }
+}
+unit-configuration-lock:chi-ha {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.chi-ha }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:shinhoto-chi-ha {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.shinhoto-chi-ha }
+	}
+	float:rarity { 14.1 }
+}
+unit-configuration-lock:te-ke {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.te-ke }
+	}
+	float:rarity { 14.7 }
+}
+unit-configuration-lock:chi-he {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.chi-he }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:chi-nu {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.chi-nu }
+	}
+	float:rarity { 16.7 }
+}
+unit-configuration-lock:chi-to {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.chi-to }
+	}
+	float:rarity { 23.0 }
+}
+unit-configuration-lock:ss-ki-engineer {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ss-ki-engineer }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:ka-mi {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ka-mi }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:ka-chi {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ka-chi }
+	}
+	float:rarity { 19.8 }
+}

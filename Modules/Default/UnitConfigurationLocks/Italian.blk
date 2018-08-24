@@ -1,0 +1,327 @@
+﻿unit-configuration-lock:wagon-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wagon-italian }
+		!unit-configuration-link:_ { unit-configuration-links.limber-italian }
+	}
+	float:rarity { 11.1 }
+}
+unit-configuration-lock:37mm-at-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-italian }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:47mm-at-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.47mm-at-italian }
+	}
+	float:rarity { 12.4 }
+}
+unit-configuration-lock:75mm-at-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-at-italian }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:90mm-at-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.90mm-at-italian }
+	}
+	float:rarity { 14.9 }
+}
+unit-configuration-lock:20mm-aa-early-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm-aa-early-italian }
+	}
+	float:rarity { 13.9 }
+}
+unit-configuration-lock:20mm-aa-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm-aa-italian }
+	}
+	float:rarity { 14.9 }
+}
+unit-configuration-lock:75mm-aa-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-aa-italian }
+	}
+	float:rarity { 16.2 }
+}
+unit-configuration-lock:65mm-how-company-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.65mm-how-company-italian }
+	}
+	float:rarity { 14.5 }
+}
+unit-configuration-lock:75mm-how-company-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-company-italian }
+	}
+	float:rarity { 13.5 }
+}
+unit-configuration-lock:75mm-how-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-italian }
+	}
+	float:rarity { 11.5 }
+}
+unit-configuration-lock:100mm-how-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.100mm-how-italian }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:105mm-how-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-italian }
+	}
+	float:rarity { 14.1 }
+}
+unit-configuration-lock:149mm-how-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.149mm-how-italian }
+	}
+	float:rarity { 13.4 }
+}
+unit-configuration-lock:81mm-mortar-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-italian }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:engineer-platoon-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-italian }
+	}
+	float:rarity { 11.6 }
+}
+unit-configuration-lock:mg-platoon-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.mg-platoon-italian }
+		!unit-configuration-link:_ { unit-configuration-links.mg-platoon-italian-west }
+	}
+	float:rarity { 8.8 }
+}
+unit-configuration-lock:rifle-platoon-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-italian-39 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-italian-39-west }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-italian-41 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-italian-41-west }
+	}
+	float:rarity { 7.6 }
+}
+unit-configuration-lock:bersaglieri-platoon {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bersaglieri-platoon }
+		!unit-configuration-link:_ { unit-configuration-links.bersaglieri-platoon-west }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:alpini-platoon {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.alpini-platoon }
+		!unit-configuration-link:_ { unit-configuration-links.alpini-platoon-west }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:parachute-platoon-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.parachute-platoon-italian }
+		!unit-configuration-link:_ { unit-configuration-links.parachute-platoon-italian-west }
+	}
+	float:rarity { 12.1 }
+}
+unit-configuration-lock:cavalry-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-italian }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:truck-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.truck-italian }
+	}
+	float:rarity { 7.7 }
+}
+unit-configuration-lock:tl-37 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tl-37 }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:breda-32 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.breda-32 }
+	}
+	float:rarity { 13.6 }
+}
+unit-configuration-lock:motorcycle-italian {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-italian }
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-italian-west }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:65_17 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.65_17 }
+	}
+	float:rarity { 18.8 }
+}
+unit-configuration-lock:76_30 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.76_30 }
+	}
+	float:rarity { 20.2 }
+}
+unit-configuration-lock:100_17 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.100_17 }
+	}
+	float:rarity { 19.7 }
+}
+unit-configuration-lock:milmart {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.milmart }
+	}
+	float:rarity { 21.2 }
+}
+unit-configuration-lock:ab-40 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ab-40 }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:ab-41 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ab-41 }
+	}
+	float:rarity { 15.9 }
+}
+unit-configuration-lock:lince {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.lince }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:ab-43 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ab-43 }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:sahariana-42 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sahariana-42 }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:desertica-43 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.desertica-43 }
+	}
+	float:rarity { 19.8 }
+}
+unit-configuration-lock:47_32 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.47_32 }
+	}
+	float:rarity { 20.0 }
+}
+unit-configuration-lock:semovente-105_25 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-105_25 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:semovente-75_18 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-75_18 }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:semovente-75_34 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-75_34 }
+	}
+	float:rarity { 16.9 }
+}
+unit-configuration-lock:semovente-47_32 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-47_32 }
+	}
+	float:rarity { 15.9 }
+}
+unit-configuration-lock:semovente-75_46 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-75_46 }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:semovente-90_53 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.semovente-90_53 }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:l-3-fiamme {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.l-3-fiamme }
+	}
+	float:rarity { 22.0 }
+}
+unit-configuration-lock:fiat-3000-21 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.fiat-3000-21 }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:leggero-3 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.leggero-3 }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:leggero-6 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.leggero-6 }
+	}
+	float:rarity { 15.9 }
+}
+unit-configuration-lock:fiat-3000-30 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.fiat-3000-30 }
+	}
+	float:rarity { 18.3 }
+}
+unit-configuration-lock:medio-11_39 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.medio-11_39 }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:medio-13_40 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.medio-13_40 }
+	}
+	float:rarity { 13.0 }
+}
+unit-configuration-lock:medio-14_41 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.medio-14_41 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:medio-15_42 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.medio-15_42 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:pesante-40 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pesante-40 }
+	}
+	float:rarity { 17.3 }
+}

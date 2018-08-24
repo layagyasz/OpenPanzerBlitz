@@ -19,7 +19,6 @@ namespace PanzerBlitz
 		{
 			var pbServer =
 				new PanzerBlitzServer(
-					"./Modules/" + GameData.LoadedModule + "/Server",
 					new RNGCryptoServiceProvider(),
 					new InMemoryDatabase()
 					/* new SqlDatabase("127.0.0.1", "_panzerblitzonline", "root", "panzerblitzonline") */);

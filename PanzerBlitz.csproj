@@ -197,7 +197,6 @@
     <Compile Include="Model\Map\TileComponentRules.cs" />
     <Compile Include="Model\Map\TileRulesCalculator.cs" />
     <Compile Include="Model\Map\TilePathOverlay.cs" />
-    <Compile Include="Server\UnitConfigurationLock.cs" />
     <Compile Include="IdGenerator.cs" />
     <Compile Include="Server\UnitConfigurationPack.cs" />
     <Compile Include="Server\ServerData.cs" />
@@ -420,6 +419,7 @@
     <Compile Include="Model\Sequence\SequenceSerializer.cs" />
     <Compile Include="Model\ScenarioRules.cs" />
     <Compile Include="View\Match\VictoryConditionPane.cs" />
+    <Compile Include="Model\Unit\UnitConfigurationLock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -492,11 +492,11 @@
     <Folder Include="Model\Map\Generation\" />
     <Folder Include="AI\" />
     <Folder Include="Modules\Default\Scenarios\PathsOfRommel\" />
-    <Folder Include="Modules\Default\Server\UnitConfigurationLocks\" />
     <Folder Include="Model\Sight\" />
     <Folder Include="Modules\Default\Scenarios\GirlsUndPanzer\" />
     <Folder Include="Model\Sequence\" />
     <Folder Include="Modules\Default\Scenarios\GameStorm\" />
+    <Folder Include="Modules\Default\UnitConfigurationLocks\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2359,33 +2359,6 @@
     <None Include="Modules\Default\Scenarios\PathsOfRommel\Scenario_47.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\German.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Russian.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Japanese.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Polish.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Finnish.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Slovak.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Romanian.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Hungarian.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\Italian.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Modules\Default\NameGenerators\Polish.mkvc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2512,7 +2485,6 @@
     <None Include="Modules\Default\UnitSprites\mobelwagen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\British.blk" />
     <None Include="Modules\Default\FactionSymbols\chinese-symbol.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2540,7 +2512,35 @@
     <None Include="Modules\Default\NameGenerators\Finnish.mkvc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\Server\UnitConfigurationLocks\American.blk">
+    <None Include="Modules\Default\UnitConfigurationLocks\American.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\British.blk" />
+    <None Include="Modules\Default\UnitConfigurationLocks\Finnish.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\German.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Hungarian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Italian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Japanese.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Polish.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Romanian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Russian.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\UnitConfigurationLocks\Slovak.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

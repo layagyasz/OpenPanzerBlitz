@@ -1,0 +1,780 @@
+﻿unit-configuration-lock:wagon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wagon-german }
+		!unit-configuration-link:_ { unit-configuration-links.limber-german }
+	}
+	float:rarity { 5.6 }
+}
+unit-configuration-lock:28mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.28mm-at-german }
+	}
+	float:rarity { 12.6 }
+}
+unit-configuration-lock:37mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-german }
+	}
+	float:rarity { 9.7 }
+}
+unit-configuration-lock:47mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.47mm-at-german }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:50mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.50mm-at-german }
+	}
+	float:rarity { 10.8 }
+}
+unit-configuration-lock:75mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-at-german }
+	}
+	float:rarity { 9.5 }
+}
+unit-configuration-lock:88mm-at-early-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.88mm-at-early-german }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:88mm-at-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.88mm-at-german }
+	}
+	float:rarity { 13.0 }
+}
+unit-configuration-lock:20mm-aa-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm-aa-german }
+	}
+	float:rarity { 10.2 }
+}
+unit-configuration-lock:20mm_4-aa-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.20mm_4-aa-german }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:37mm-aa-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-aa-german }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:75mm-how-company-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-company-german }
+	}
+	float:rarity { 10.3 }
+}
+unit-configuration-lock:75mm-how-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-german }
+	}
+	float:rarity { 16.7 }
+}
+unit-configuration-lock:100mm-how-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.100mm-how-german }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:105mm-how-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-german }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:150mm-how-company-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.150mm-how-company-german }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:150mm-how-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.150mm-how-german }
+	}
+	float:rarity { 10.7 }
+}
+unit-configuration-lock:170mm-how-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.170mm-how-german }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:81mm-mortar-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-german }
+	}
+	float:rarity { 8.8 }
+}
+unit-configuration-lock:120mm-mortar-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.120mm-mortar-german }
+	}
+	float:rarity { 11.9 }
+}
+unit-configuration-lock:nebelwerfer-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.nebelwerfer-german }
+	}
+	float:rarity { 11.0 }
+}
+
+unit-configuration-lock:engineer-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-german }
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-german-west }
+	}
+	float:rarity { 8.0 }
+}
+unit-configuration-lock:hmg-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.hmg-platoon-german }
+	}
+	float:rarity { 6.8 }
+}
+unit-configuration-lock:security-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.security-platoon-german }
+		!unit-configuration-link:_ { unit-configuration-links.security-platoon-german-west }
+	}
+	float:rarity { 10.0 }
+}
+unit-configuration-lock:rifle-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-39 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-39-west }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-40 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-40-west }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-42 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-german-42-west }
+	}
+	float:rarity { 5.4 }
+}
+unit-configuration-lock:smg-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.smg-platoon-german }
+		!unit-configuration-link:_ { unit-configuration-links.smg-platoon-german-west }
+	}
+	float:rarity { 10.0 }
+}
+unit-configuration-lock:parachute-platoon-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.parachute-platoon-german }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:cavalry-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german }
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-west }
+	}
+	float:rarity { 9.0 }
+}
+unit-configuration-lock:truck-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.truck-german }
+	}
+	float:rarity { 6.6 }
+}
+unit-configuration-lock:motorcycle-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-german-40 }
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-german-40-west }
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-german-42 }
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-german-42-west }
+	}
+	float:rarity { 10.2 }
+}
+unit-configuration-lock:sdkfz-8 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-8 }
+	}
+	float:rarity { 12.0 }
+}
+unit-configuration-lock:sdkfz-10 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-10 }
+	}
+	float:rarity { 10.4 }
+}
+unit-configuration-lock:sdkfz-251 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251 }
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251-west }
+	}
+	float:rarity { 10.6 }
+}
+unit-configuration-lock:sdkfz-250_1 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_1 }
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_1-west }
+	}
+	float:rarity { 12.1 }
+}
+unit-configuration-lock:sdkfz-250_10 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_10 }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:sdkfz-251_10 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_10 }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:kubelwagen {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.kubelwagen }
+	}
+	float:rarity { 9.4 }
+}
+unit-configuration-lock:kfz-13 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.kfz-13 }
+		!unit-configuration-link:_ { unit-configuration-links.kfz-13-west }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:sdkfz-6_2 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-6_2 }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:sdkfz-7_1 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-7_1 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:sdkfz-8-at {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-8-at }
+	}
+	float:rarity { 20.7 }
+}
+unit-configuration-lock:sdkfz-10_4 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-10_4 }
+	}
+	float:rarity { 13.6 }
+}
+unit-configuration-lock:sdkfz-221 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-221 }
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-221-west }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:sdkfz-222 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-222 }
+	}
+	float:rarity { 14.0 }
+}
+unit-configuration-lock:sdkfz-231_6 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-231_6 }
+	}
+	float:rarity { 17.1 }
+}
+unit-configuration-lock:sdkfz-231_8 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-231_8 }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:sdkfz-233 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-233 }
+	}
+	float:rarity { 17.1 }
+}
+unit-configuration-lock:sdkfz-234_1 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-234_1 }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:sdkfz-234_3 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-234_3 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:puma {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.puma }
+	}
+	float:rarity { 17.3 }
+}
+unit-configuration-lock:sdkfz-234_4 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-234_4 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:sdkfz-250_7 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_7 }
+	}
+	float:rarity { 18.0 }
+}
+unit-configuration-lock:sdkfz-250_8 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_8 }
+	}
+	float:rarity { 17.9 }
+}
+unit-configuration-lock:sdkfz-250_9 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-250_9 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:sdkfz-251_1_ii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_1_ii }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:sdkfz-251_2 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_2 }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:sdkfz-251_9 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_9 }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:sdkfz-251_16 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_16 }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:sdkfz-251_17 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_17 }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:sdkfz-251_21 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_21 }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:sdkfz-251_22 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-251_22 }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:maultier {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.maultier }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:wespe {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wespe }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:sdkfz-135_1-lrs {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sdkfz-135_1-lrs }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:hummel {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.hummel }
+	}
+	float:rarity { 14.5 }
+}
+unit-configuration-lock:bison {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bison }
+	}
+	float:rarity { 18.8 }
+}
+unit-configuration-lock:sig33-pzkw-ii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.sig33-pzkw-ii }
+	}
+	float:rarity { 20.4 }
+}
+unit-configuration-lock:grille {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.grille }
+	}
+	float:rarity { 15.4 }
+}
+unit-configuration-lock:flakpanzer-i {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.flakpanzer-i }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:gepard {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.gepard }
+	}
+	float:rarity { 16.9 }
+}
+unit-configuration-lock:mobelwagen {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.mobelwagen }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:ostwind {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ostwind }
+	}
+	float:rarity { 18.5 }
+}
+unit-configuration-lock:wirbelwind {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wirbelwind }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:stuh-42 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.stuh-42 }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:diana {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.diana }
+	}
+	float:rarity { 20.8 }
+}
+unit-configuration-lock:marder-i {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.marder-i }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:marder-ii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.marder-ii }
+	}
+	float:rarity { 14.7 }
+}
+unit-configuration-lock:marder-iii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.marder-iii }
+	}
+	float:rarity { 13.2 }
+}
+unit-configuration-lock:stug-iii-b {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.stug-iii-b }
+	}
+	float:rarity { 15.8 }
+}
+unit-configuration-lock:stug-iii-g {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.stug-iii-g }
+	}
+	float:rarity { 11.0 }
+}
+unit-configuration-lock:stupz-iv {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.stupz-iv }
+	}
+	float:rarity { 15.7 }
+}
+unit-configuration-lock:stupz-vi {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.stupz-vi }
+	}
+	float:rarity { 19.8 }
+}
+unit-configuration-lock:flamingo {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.flamingo }
+	}
+	float:rarity { 16.7 }
+}
+unit-configuration-lock:hetzer {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.hetzer }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:ferdinand {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.ferdinand }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:elefant {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.elefant }
+	}
+	float:rarity { 18.4 }
+}
+unit-configuration-lock:nashorn {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.nashorn }
+	}
+	float:rarity { 15.1 }
+}
+unit-configuration-lock:pzjg-1 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzjg-1 }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:jgdpz-iv_48 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.jgdpz-iv_48 }
+	}
+	float:rarity { 14.4 }
+}
+unit-configuration-lock:jgdpz-iv_70 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.jgdpz-iv_70 }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:flammpanzer-38_t {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.flammpanzer-38_t }
+	}
+	float:rarity { 19.7 }
+}
+unit-configuration-lock:jagdpanther {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.jagdpanther }
+	}
+	float:rarity { 15.3 }
+}
+unit-configuration-lock:jagdtiger {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.jagdtiger }
+	}
+	float:rarity { 17.7 }
+}
+unit-configuration-lock:lynx {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.lynx }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:pzkw-35_t {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-35_t }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:pzkw-38_t {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-38_t }
+	}
+	float:rarity { 13.5 }
+}
+unit-configuration-lock:pzkw-i-a {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-i-a }
+	}
+	float:rarity { 14.3 }
+}
+unit-configuration-lock:pzkw-i-b {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-i-b }
+	}
+	float:rarity { 14.6 }
+}
+unit-configuration-lock:pzkw-i-c {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-i-c }
+	}
+	float:rarity { 18.7 }
+}
+unit-configuration-lock:pzkw-i-f {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-i-f }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:pzkw-ii-c {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-ii-c }
+	}
+	float:rarity { 13.9 }
+}
+unit-configuration-lock:pzkw-ii-d {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-ii-d }
+	}
+	float:rarity { 18.6 }
+}
+unit-configuration-lock:pzkw-ii-f {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-ii-f }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:pzkw-ii-j {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-ii-j }
+	}
+	float:rarity { 19.5 }
+}
+unit-configuration-lock:pzkw-iii-d {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iii-d }
+	}
+	float:rarity { 19.1 }
+}
+unit-configuration-lock:pzkw-iii-f {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iii-f }
+	}
+	float:rarity { 14.9 }
+}
+unit-configuration-lock:pzkw-iii-g {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iii-g }
+	}
+	float:rarity { 14.8 }
+}
+unit-configuration-lock:pzkw-iii-j {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iii-j }
+	}
+	float:rarity { 13.4 }
+}
+unit-configuration-lock:pzkw-iii-n {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iii-n }
+	}
+	float:rarity { 14.7 }
+}
+unit-configuration-lock:flammpanzer-iii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.flammpanzer-iii }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:pzkw-iv-a {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-a }
+	}
+	float:rarity { 18.9 }
+}
+unit-configuration-lock:pzkw-iv-d {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-d }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:pzkw-iv-e {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-e }
+	}
+	float:rarity { 16.3 }
+}
+unit-configuration-lock:pzkw-iv-g {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-g }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:pzkw-iv-h {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-h }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:pzkw-iv-j {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.pzkw-iv-j }
+	}
+	float:rarity { 12.4 }
+}
+unit-configuration-lock:panther-a {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.panther-a }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:panther-g {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.panther-g }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:porsche-tiger {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.porsche-tiger }
+	}
+	float:rarity { 20.7 }
+}
+unit-configuration-lock:tiger-i {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tiger-i }
+	}
+	float:rarity { 13.6 }
+}
+unit-configuration-lock:tiger-ii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tiger-ii }
+	}
+	float:rarity { 15.1 }
+}
+unit-configuration-lock:maus {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.maus }
+	}
+	float:rarity { 23.0 }
+}
+unit-configuration-lock:bgpz-i {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bgpz-i }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:bgpz-38 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bgpz-38 }
+	}
+	float:rarity { 16.6 }
+}
+unit-configuration-lock:bgpz-iii {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bgpz-iii }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:bgpz-iv {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bgpz-iv }
+	}
+	float:rarity { 19.6 }
+}
+unit-configuration-lock:bgpz-v {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bgpz-v }
+	}
+	float:rarity { 15.6 }
+}

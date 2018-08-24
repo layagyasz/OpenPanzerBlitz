@@ -1,0 +1,472 @@
+﻿unit-configuration-lock:50cal-mg-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.50cal-mg-american }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:37mm-at-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-american }
+	}
+	float:rarity { 9.8 }
+}
+unit-configuration-lock:57mm-at-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.57mm-at-american }
+	}
+	float:rarity { 10.1 }
+}
+unit-configuration-lock:76mm-at-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.76mm-at-american }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:90mm-at-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.90mm-at-american }
+	}
+	float:rarity { 20.0 }
+}
+unit-configuration-lock:37mm-aa-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.37mm-aa-american }
+	}
+	float:rarity { 11.2 }
+}
+unit-configuration-lock:40mm-aa-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.40mm-aa-american }
+	}
+	float:rarity { 9.7 }
+}
+unit-configuration-lock:76_2mm-aa-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.76_2mm-aa-american }
+	}
+	float:rarity { 14.3 }
+}
+unit-configuration-lock:75mm-how-company-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-company-american }
+	}
+	float:rarity { 14.2 }
+}
+unit-configuration-lock:75mm-how-allied-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-allied-american }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:105mm-how-company-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-company-american }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:105mm-how-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-american }
+	}
+	float:rarity { 10.7 }
+}
+unit-configuration-lock:155mm-how-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.155mm-how-american }
+	}
+	float:rarity { 10.5 }
+}
+unit-configuration-lock:4_5in-how-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.4_5in-how-american }
+	}
+	float:rarity { 15.3 }
+}
+unit-configuration-lock:8in-how-allied-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.8in-how-allied-american }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:long-tom-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.long-tom-american }
+	}
+	float:rarity { 13.1 }
+}
+unit-configuration-lock:81mm-mortar-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-american }
+	}
+	float:rarity { 10.5 }
+}
+unit-configuration-lock:107mm-mortar-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.107mm-mortar-american }
+	}
+	float:rarity { 12.2 }
+}
+
+unit-configuration-lock:engineer-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-american }
+	}
+	float:rarity { 10.3 }
+}
+unit-configuration-lock:scout-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.scout-platoon-american }
+	}
+	float:rarity { 11.3 }
+}
+unit-configuration-lock:mg-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.mg-platoon-american }
+	}
+	float:rarity { 9.3 }
+}
+unit-configuration-lock:rifle-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-american }
+	}
+	float:rarity { 7.6 }
+}
+unit-configuration-lock:airborne-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.airborne-platoon-american }
+	}
+	float:rarity { 11.3 }
+}
+unit-configuration-lock:armored-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.armored-platoon-american }
+	}
+	float:rarity { 11.2 }
+}
+unit-configuration-lock:ranger-platoon-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.ranger-platoon-american }
+	}
+	float:rarity { 14.0 }
+}
+unit-configuration-lock:assault-platoon-american-43 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.assault-platoon-american-41 }
+		!unit-configuration-link:_ { unit-configuration-links.assault-platoon-american-43 }
+		!unit-configuration-link:_ { unit-configuration-links.assault-platoon-american-44 }
+	}
+	float:rarity { 11.1 }
+}
+unit-configuration-lock:truck-american {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.truck-american }
+	}
+	float:rarity { 5.6 }
+}
+unit-configuration-lock:m-3-scout {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3-scout }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:m-4-hst {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4-hst }
+	}
+	float:rarity { 11.7 }
+}
+unit-configuration-lock:jeep {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.jeep }
+	}
+	float:rarity { 5.2 }
+}
+unit-configuration-lock:m-8-jeep {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-8-jeep }
+	}
+	float:rarity { 11.4 }
+}
+unit-configuration-lock:m-3 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3 }
+	}
+	float:rarity { 8.6 }
+}
+unit-configuration-lock:m-20 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-20 }
+	}
+	float:rarity { 12.1 }
+}
+unit-configuration-lock:m-6-gmc {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-6-gmc }
+	}
+	float:rarity { 11.6 }
+}
+unit-configuration-lock:greyhound {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.greyhound }
+	}
+	float:rarity { 10.9 }
+}
+unit-configuration-lock:m-13-aa {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-13-aa }
+	}
+	float:rarity { 13.9 }
+}
+unit-configuration-lock:m-15 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-15 }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:m-16 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-16 }
+	}
+	float:rarity { 12.2 }
+}
+unit-configuration-lock:m-8-hmc {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-8-hmc }
+		!unit-configuration-link:_ { unit-configuration-links.m-8-hmc-spa }
+	}
+	float:rarity { 13.2 }
+}
+unit-configuration-lock:m-21 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-21 }
+	}
+	float:rarity { 17.2 }
+}
+unit-configuration-lock:priest {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.priest }
+	}
+	float:rarity { 12.0 }
+}
+unit-configuration-lock:m-12 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-12 }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:m4-poa-cws-h1 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m4-poa-cws-h1 }
+	}
+	float:rarity { 16.5 }
+}
+unit-configuration-lock:m-3a1-satan {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3a1-satan }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:m-3a1 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3a1 }
+	}
+	float:rarity { 12.8 }
+}
+unit-configuration-lock:m-3-lee {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3-lee }
+	}
+	float:rarity { 12.3 }
+}
+unit-configuration-lock:m-4_105 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4_105 }
+	}
+	float:rarity { 13.3 }
+}
+unit-configuration-lock:wolverine {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.wolverine }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:hellcat {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.hellcat }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:jackson {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.jackson }
+	}
+	float:rarity { 13.2 }
+}
+unit-configuration-lock:m-5 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-5 }
+	}
+	float:rarity { 10.9 }
+}
+unit-configuration-lock:m-4_75 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4_75 }
+	}
+	float:rarity { 11.0 }
+}
+unit-configuration-lock:m-4_76 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4_76 }
+	}
+	float:rarity { 13.3 }
+}
+unit-configuration-lock:chaffee {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.chaffee }
+	}
+	float:rarity { 11.8 }
+}
+unit-configuration-lock:m-4a3e2_75 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4a3e2_75 }
+	}
+	float:rarity { 17.0 }
+}
+unit-configuration-lock:m-4a3e2_76 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4a3e2_76 }
+	}
+	float:rarity { 17.7 }
+}
+unit-configuration-lock:pershing {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.pershing }
+	}
+	float:rarity { 12.9 }
+}
+unit-configuration-lock:m-2a4 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-2a4 }
+	}
+	float:rarity { 18.4 }
+}
+unit-configuration-lock:m-4a2_75 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4a2_75 }
+	}
+	float:rarity { 10.8 }
+}
+unit-configuration-lock:m-4a2_76 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-4a2_76 }
+	}
+	float:rarity { 11.4 }
+}
+unit-configuration-lock:sherman-crab {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.sherman-crab }
+	}
+	float:rarity { 19.6 }
+}
+unit-configuration-lock:lvt-1 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.lvt-1 }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:lvt_a-1 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.lvt_a-1 }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:lvt_a-2 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.lvt_a-2 }
+	}
+	float:rarity { 12.5 }
+}
+unit-configuration-lock:lvt-4 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.lvt-4 }
+	}
+	float:rarity { 11.0 }
+}
+unit-configuration-lock:lvt_a-4 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.lvt_a-4 }
+	}
+	float:rarity { 13.1 }
+}
+unit-configuration-lock:dukw {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.dukw }
+	}
+	float:rarity { 9.6 }
+}
+unit-configuration-lock:d-8 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.d-8 }
+	}
+	float:rarity { 8.2 }
+}
+unit-configuration-lock:m-3-arv {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3-arv }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:m-32-arv {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-32-arv }
+	}
+	float:rarity { 13.4 }
+} 
+unit-configuration-lock:t-28e1 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.t-28e1 }
+	}
+	float:rarity { 17.7 }
+}
+unit-configuration-lock:t-19 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.t-19 }
+	}
+	float:rarity { 15.7 }
+}
+unit-configuration-lock:m-15-special {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-15-special }
+	}
+	float:rarity { 18.8 }
+}
+unit-configuration-lock:t-27 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.t-27 }
+	}
+	float:rarity { 23.0 }
+}
+unit-configuration-lock:scorpion {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.scorpion }
+	}
+	float:rarity { 14.0 }
+}
+unit-configuration-lock:calliope {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.calliope }
+	}
+	float:rarity { 16.4 }
+}
+unit-configuration-lock:t-30 {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.t-30 }
+	}
+	float:rarity { 15.0 }
+}
+unit-configuration-lock:m-3-gmc {
+	unit-configuration-link[]:unit-configurations {
+		!unit-configuration-link:_ { unit-configuration-links.m-3-gmc }
+	}
+	float:rarity { 12.9 }
+}

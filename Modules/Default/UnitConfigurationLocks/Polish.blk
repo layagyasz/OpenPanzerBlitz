@@ -1,0 +1,229 @@
+﻿unit-configuration-lock:wagon-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wagon-polish }
+	}
+	float:rarity { 8.9 }
+}
+unit-configuration-lock:wz-30-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wz-30-polish }
+	}
+	float:rarity { 10.7 }
+}
+unit-configuration-lock:37mm-at-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.37mm-at-polish }
+	}
+	float:rarity { 13.8 }
+}
+unit-configuration-lock:40mm-aa-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.40mm-aa-polish }
+	}
+	float:rarity { 15.5 }
+}
+unit-configuration-lock:75mm-aa-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-aa-polish }
+	}
+	float:rarity { 18.3 }
+}
+unit-configuration-lock:65mm-how-company-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.65mm-how-company-polish }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:75mm-how-company-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-company-polish }
+	}
+	float:rarity { 13.6 }
+}
+unit-configuration-lock:75mm-how-long-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.75mm-how-long-polish }
+	}
+	float:rarity { 15.2 }
+}
+unit-configuration-lock:76_2mm-how-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.76_2mm-how-polish }
+	}
+	float:rarity { 17.4 }
+}
+unit-configuration-lock:100mm-how-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.100mm-how-polish }
+	}
+	float:rarity { 13.7 }
+}
+unit-configuration-lock:105mm-how-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.105mm-how-polish }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:120mm-how-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.120mm-how-polish }
+	}
+	float:rarity { 18.6 }
+}
+unit-configuration-lock:155mm-how-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.155mm-how-polish }
+	}
+	float:rarity { 15.6 }
+}
+unit-configuration-lock:81mm-mortar-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.81mm-mortar-polish }
+	}
+	float:rarity { 13.1 }
+}
+unit-configuration-lock:120mm-mortar-early-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.120mm-mortar-early-polish }
+	}
+	float:rarity { 16.1 }
+}
+unit-configuration-lock:engineer-platoon-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.engineer-platoon-polish }
+	}
+	float:rarity { 11.0 }
+}
+unit-configuration-lock:rifle-platoon-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-polish-39 }
+		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-polish-41 }
+	}
+	float:rarity { 8.3 }
+}
+unit-configuration-lock:mountain-platoon-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.mountain-platoon-polish }
+	}
+	float:rarity { 12.7 }
+}
+unit-configuration-lock:cavalry-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-polish }
+	}
+	float:rarity { 10.2 }
+}
+unit-configuration-lock:truck-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.truck-polish }
+	}
+	float:rarity { 13.0 }
+}
+unit-configuration-lock:c2p {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.c2p }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:c4p {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.c4p }
+	}
+	float:rarity { 15.4 }
+}
+unit-configuration-lock:c7p {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.c7p }
+	}
+	float:rarity { 16.8 }
+}
+unit-configuration-lock:motorcycle-polish {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.motorcycle-polish }
+	}
+	float:rarity { 18.0 }
+}
+unit-configuration-lock:peugeot {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.peugeot }
+	}
+	float:rarity { 19.8 }
+}
+unit-configuration-lock:wz-28 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wz-28 }
+	}
+	float:rarity { 17.5 }
+}
+unit-configuration-lock:wz-29 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wz-29 }
+	}
+	float:rarity { 20.7 }
+}
+unit-configuration-lock:wz-34-infantry {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wz-34-infantry }
+	}
+	float:rarity { 18.5 }
+}
+unit-configuration-lock:wz-34-he {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.wz-34-he }
+	}
+	float:rarity { 18.5 }
+}
+unit-configuration-lock:tk-3 {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tk-3 }
+	}
+	float:rarity { 15.9 }
+}
+unit-configuration-lock:tks {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.tks }
+	}
+	float:rarity { 16.0 }
+}
+unit-configuration-lock:7tp-infantry {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.7tp-infantry }
+	}
+	float:rarity { 19.4 }
+}
+unit-configuration-lock:7tp-at {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.7tp-at }
+	}
+	float:rarity { 17.0 }
+}
+unit-configuration-lock:4tp {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.4tp }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:10tp {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.10tp }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:14tp {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.14tp }
+	}
+	float:rarity { 24.0 }
+}
+unit-configuration-lock:vau-33-infantry {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.vau-33-infantry }
+	}
+	float:rarity { 23.0 }
+}
+unit-configuration-lock:vau-33-at {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.vau-33-at }
+	}
+	float:rarity { 23.0 }
+}

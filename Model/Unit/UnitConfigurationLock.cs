@@ -10,14 +10,14 @@ namespace PanzerBlitz
 	{
 		enum Attribute { UNIT_CONFIGURATIONS, RARITY }
 
-		public readonly string UniqueId;
+		public readonly string UniqueKey;
 		public readonly float Rarity;
 		public readonly List<UnitConfigurationLink> UnitConfigurations;
 
 		public UnitConfigurationLock(
-			string UniqueId, float Rarity, IEnumerable<UnitConfigurationLink> UnitConfigurations)
+			string UniqueKey, float Rarity, IEnumerable<UnitConfigurationLink> UnitConfigurations)
 		{
-			this.UniqueId = UniqueId;
+			this.UniqueKey = UniqueKey;
 			this.Rarity = Rarity;
 			this.UnitConfigurations = UnitConfigurations.ToList();
 		}
@@ -26,15 +26,9 @@ namespace PanzerBlitz
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
-			UniqueId = Block.Name;
+			UniqueKey = Block.Name;
 			Rarity = (float)attributes[(int)Attribute.RARITY];
-			UnitConfigurations = new List<UnitConfigurationLink>();
-			foreach (var link in (List<string>)attributes[(int)Attribute.UNIT_CONFIGURATIONS])
-			{
-				if (GameData.UnitConfigurationLinks.ContainsKey(link))
-					UnitConfigurations.Add(GameData.UnitConfigurationLinks[link]);
-				else Console.WriteLine("[WARNING]: Unable to find UnitConfigurationLink {0}", link);
-			}
+			UnitConfigurations = (List<UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATIONS];
 		}
 
 		public UnitConfigurationLock(SerializationInputStream Stream)
@@ -46,7 +40,7 @@ namespace PanzerBlitz
 
 		public void Serialize(SerializationOutputStream Stream)
 		{
-			Stream.Write(UniqueId);
+			Stream.Write(UniqueKey);
 			Stream.Write(Rarity);
 			Stream.Write(UnitConfigurations, i => Stream.Write(i.UniqueKey));
 		}
@@ -63,7 +57,7 @@ namespace PanzerBlitz
 
 		public override string ToString()
 		{
-			return string.Format("[UnitConfigurationLock: UniqueId={0}]", UniqueId);
+			return string.Format("[UnitConfigurationLock: UniqueKey={0}]", UniqueKey);
 		}
 	}
 }
