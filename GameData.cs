@@ -23,6 +23,7 @@ namespace PanzerBlitz
 			UNIT_RENDER_DETAILS,
 			UNIT_CONFIGURATION_LINKS,
 			UNIT_CONFIGURATION_LOCKS,
+			FORMATION_TEMPLATES,
 			SCENARIOS,
 			TILE_COMPONENT_RULES,
 			ENVIRONMENTS,
@@ -94,7 +95,12 @@ namespace PanzerBlitz
 					"unit-configuration-lock<>",
 					"unit-configuration-locks",
 					Directory.EnumerateFiles(path + "/UnitConfigurationLocks", "*", SearchOption.AllDirectories)
-					.SelectMany(i => ParseBlock.FromFile(i).Break())),
+						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+				new ParseBlock(
+					"var<>",
+					"formation-templates",
+					Directory.EnumerateFiles(path + "/FormationTemplates", "*", SearchOption.AllDirectories)
+						.SelectMany(i => ParseBlock.FromFile(i).Break())),
 				new ParseBlock(
 					"unit-render-details<>",
 					"unit-render-details",
@@ -136,6 +142,9 @@ namespace PanzerBlitz
 			Block.AddParser<UnitConfiguration>();
 			Block.AddParser<UnitConfigurationLink>();
 			Block.AddParser<UnitConfigurationLock>();
+			Block.AddParser<CompositeFormationTemplate>();
+			Block.AddParser<AtomicFormationTemplate>();
+			Block.AddParser<FormationTemplateAtom>();
 			Block.AddParser<Direction>();
 			Block.AddParser<TerrainAttribute>();
 			Block.AddParser<TileComponentRules>();

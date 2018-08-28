@@ -279,8 +279,6 @@
     <Compile Include="Model\Unit\UnitClass.cs" />
     <Compile Include="Model\Unit\UnitConfiguration.cs" />
     <Compile Include="Model\Unit\UnitConfigurationLink.cs" />
-    <Compile Include="Model\Unit\UnitCount.cs" />
-    <Compile Include="Model\Unit\UnitGroup.cs" />
     <Compile Include="Model\Unit\UnitMovementRules.cs" />
     <Compile Include="Model\Unit\UnitStatus.cs" />
     <Compile Include="Model\Unit\WeaponClass.cs" />
@@ -420,6 +418,15 @@
     <Compile Include="Model\ScenarioRules.cs" />
     <Compile Include="View\Match\VictoryConditionPane.cs" />
     <Compile Include="Model\Unit\UnitConfigurationLock.cs" />
+    <Compile Include="Model\Formation\Formation.cs" />
+    <Compile Include="Model\Formation\FormationTemplate.cs" />
+    <Compile Include="Model\Formation\FormationTemplateAtom.cs" />
+    <Compile Include="Model\Formation\CompositeFormationTemplate.cs" />
+    <Compile Include="Model\Formation\AtomicFormationTemplate.cs" />
+    <Compile Include="Model\Formation\LinkingFormationTemplate.cs" />
+    <Compile Include="Model\Formation\UnitGroup.cs" />
+    <Compile Include="Model\Formation\UnitCount.cs" />
+    <Compile Include="Model\Formation\CompositeFormation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -497,6 +504,8 @@
     <Folder Include="Model\Sequence\" />
     <Folder Include="Modules\Default\Scenarios\GameStorm\" />
     <Folder Include="Modules\Default\UnitConfigurationLocks\" />
+    <Folder Include="Model\Formation\" />
+    <Folder Include="Modules\Default\FormationTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Code\ROTNS\Cardamom\Cardamom.csproj">
@@ -2541,6 +2550,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitConfigurationLocks\Slovak.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FormationTemplates\German.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -5,11 +5,11 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitGroup : Serializable
+	public class UnitGroup : Formation, Serializable
 	{
 		enum Attribute { NAME, UNIT_COUNTS }
 
-		public readonly string Name;
+		public string Name { get; }
 
 		List<UnitCount> _UnitCounts;
 
@@ -55,6 +55,11 @@ namespace PanzerBlitz
 		public IEnumerable<Unit> GenerateUnits(Army Army, IdGenerator IdGenerator)
 		{
 			return UnitConfigurations.Select(i => new Unit(Army, i, IdGenerator));
+		}
+
+		public IEnumerable<UnitCount> Flatten()
+		{
+			return _UnitCounts;
 		}
 	}
 }
