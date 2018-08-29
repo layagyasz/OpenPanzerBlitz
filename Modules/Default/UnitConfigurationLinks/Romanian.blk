@@ -15,19 +15,25 @@ unit-configuration-link:50mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:75mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:76_2mm-at-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:20mm-aa-early-romanian {
 	!faction:faction { factions.romanian }
@@ -69,7 +75,9 @@ unit-configuration-link:120mm-mortar-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 
 unit-configuration-link:engineer-platoon-romanian {
@@ -84,13 +92,17 @@ unit-configuration-link:rifle-platoon-romanian-39 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-romanian-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-romanian-41 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-romanian-41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:mountain-platoon-romanian {
 	!faction:faction { factions.romanian }
@@ -108,19 +120,25 @@ unit-configuration-link:motorcycle-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-romanian }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:malaxa {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.malaxa }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:r-1 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.r-1 }
 
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:r-2 {
 	!faction:faction { factions.romanian }
@@ -130,65 +148,87 @@ unit-configuration-link:renault-35-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.renault-35 }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:r-35_45 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.r-35_45 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-iii-n-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iv-g-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-g }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iv-h-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:tacam-t-60 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.tacam-t-60 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:tacam-r-2 {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.tacam-r-2 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:maresal {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.maresal }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:stug-iii-g-romanian {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:iar-81-a {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.iar-81-a }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:iar-81-c {
 	!faction:faction { factions.romanian }
 	!unit-configuration:unit-configuration { unit-configurations.iar-81-c }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }

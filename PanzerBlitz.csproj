@@ -423,10 +423,12 @@
     <Compile Include="Model\Formation\FormationTemplateAtom.cs" />
     <Compile Include="Model\Formation\CompositeFormationTemplate.cs" />
     <Compile Include="Model\Formation\AtomicFormationTemplate.cs" />
-    <Compile Include="Model\Formation\LinkingFormationTemplate.cs" />
+    <Compile Include="Model\Formation\ReplicatingFormationTemplate.cs" />
     <Compile Include="Model\Formation\UnitGroup.cs" />
     <Compile Include="Model\Formation\UnitCount.cs" />
     <Compile Include="Model\Formation\CompositeFormation.cs" />
+    <Compile Include="Model\Unit\UnitConstraints.cs" />
+    <Compile Include="Model\Formation\FilteringFormationTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2074,6 +2076,9 @@
     <None Include="Modules\Default\UnitConfigurationLinks\British.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Modules\Default\UnitConfigurationLinks\Chinese.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Modules\Default\UnitConfigurationLinks\Hungarian.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2513,9 +2518,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\UnitRenderDetails\Chinese.blk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Modules\Default\UnitConfigurationLinks\Chinese.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\NameGenerators\Finnish.mkvc">

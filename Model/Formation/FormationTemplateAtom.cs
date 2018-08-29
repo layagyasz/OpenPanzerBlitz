@@ -24,14 +24,21 @@ namespace PanzerBlitz
 		public FormationTemplateAtom(ParseBlock Block)
 			: this(Block.BreakToList<UnitConfigurationLock>()) { }
 
-		public IEnumerable<Formation> Generate(Random Random)
+		public bool Matches(ArmyParameters Parameters)
+		{
+			return UnitConfigurationLocks.Any(i => i.UnitConfigurations.Any(Parameters.Matches));
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
 		{
 			yield return new UnitGroup(
 				string.Empty,
 				new List<UnitCount>
 				{
 					new UnitCount(
-						UnitConfigurationLocks[Random.NextDouble()].UnitConfigurations.First().UnitConfiguration,
+						UnitConfigurationLocks[Random.NextDouble()].UnitConfigurations
+							.First(Parameters.Matches)
+							.UnitConfiguration,
 						1)
 				});
 		}

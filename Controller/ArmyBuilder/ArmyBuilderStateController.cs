@@ -19,8 +19,9 @@ namespace PanzerBlitz
 			var builder = context.ScenarioBuilder.Armies.First(i => !i.Validate());
 			var renderer =
 				new UnitConfigurationRenderer(
-					GameData.UnitConfigurationLinks.Values.Where(
-						i => builder.Parameters.Matches(i)).Select(i => i.UnitConfiguration),
+					GameData.UnitConfigurationLinks.Values
+						.Where(builder.Parameters.Matches)
+						.Select(i => i.UnitConfiguration),
 					GameData.UnitRenderDetails,
 					128,
 					1024,

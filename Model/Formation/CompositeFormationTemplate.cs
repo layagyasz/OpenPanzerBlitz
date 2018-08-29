@@ -21,9 +21,16 @@ namespace PanzerBlitz
 		public CompositeFormationTemplate(ParseBlock Block)
 			: this(Block.BreakToList<FormationTemplate>()) { }
 
-		public IEnumerable<Formation> Generate(Random Random)
+		public bool Matches(ArmyParameters Parameters)
 		{
-			yield return new CompositeFormation(string.Empty, Subtemplates.SelectMany(i => i.Generate(Random)));
+			return true;
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		{
+			yield return new CompositeFormation(
+				string.Empty,
+				Subtemplates.Where(i => i.Matches(Parameters)).SelectMany(i => i.Generate(Random, Parameters)));
 		}
 
 		static double HarmonicAverage(IEnumerable<double> Values)

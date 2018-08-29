@@ -140,10 +140,13 @@ namespace PanzerBlitz
 			Block.AddParser<UnitMovementRules>();
 			Block.AddParser<Faction>();
 			Block.AddParser<UnitConfiguration>();
+			Block.AddParser<UnitConstraints>();
 			Block.AddParser<UnitConfigurationLink>();
 			Block.AddParser<UnitConfigurationLock>();
 			Block.AddParser<CompositeFormationTemplate>();
 			Block.AddParser<AtomicFormationTemplate>();
+			Block.AddParser<ReplicatingFormationTemplate>();
+			Block.AddParser<FilteringFormationTemplate>();
 			Block.AddParser<FormationTemplateAtom>();
 			Block.AddParser<Direction>();
 			Block.AddParser<TerrainAttribute>();

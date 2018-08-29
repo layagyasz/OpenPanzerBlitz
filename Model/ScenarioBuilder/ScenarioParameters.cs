@@ -40,12 +40,16 @@ namespace PanzerBlitz
 			FogOfWar = Parameters.FogOfWar;
 		}
 
-		public bool Matches(UnitConfigurationLink Link)
+		public bool Matches(UnitConstraints Constraints)
 		{
-			if (Setting.Front != Front.ALL && Link.Front != Front.ALL && Setting.Front != Link.Front) return false;
-			if (Link.IntroduceYear > 0 && Year < Link.IntroduceYear) return false;
-			if (Link.ObsoleteYear > 0 && Year > Link.ObsoleteYear) return false;
-			if (Link.Environments != null && !Link.Environments.Contains(Setting.Environment)) return false;
+			if (Setting.Front != Front.ALL && Constraints.Front != Front.ALL && Setting.Front != Constraints.Front)
+				return false;
+			if (Constraints.IntroduceYear > 0 && Year < Constraints.IntroduceYear)
+				return false;
+			if (Constraints.ObsoleteYear > 0 && Year > Constraints.ObsoleteYear)
+				return false;
+			if (Constraints.Environments.Count > 0 && !Constraints.Environments.Contains(Setting.Environment))
+				return false;
 			return true;
 		}
 

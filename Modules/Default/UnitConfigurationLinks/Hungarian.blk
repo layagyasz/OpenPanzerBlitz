@@ -15,25 +15,33 @@ unit-configuration-link:40mm-at-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.40mm-at }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:47mm-at-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:50mm-at-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:75mm-at-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:40mm-aa-hungarian {
 	!faction:faction { factions.hungarian }
@@ -80,13 +88,17 @@ unit-configuration-link:rifle-platoon-hungarian-39 {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-hungarian-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-hungarian-41 {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-hungarian-41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:mountain-platoon-hungarian {
 	!faction:faction { factions.hungarian }
@@ -104,19 +116,25 @@ unit-configuration-link:bicycle-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.bicycle-hungarian }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:motorcycle-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-hungarian }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:csaba {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.csaba }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:leggero-3-hungarian {
 	!faction:faction { factions.hungarian }
@@ -126,118 +144,156 @@ unit-configuration-link:nimrod {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.nimrod }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:zrinyi-i {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.zrinyi-i }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:zrinyi-ii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.zrinyi-ii }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:marder-ii-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.marder-ii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:hetzer-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.hetzer }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:stug-iii-g-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:toldi-i {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-i }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:toldi-ii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.toldi-ii }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:t-38-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.t-38 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:hotchkiss-39-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.hotchkiss-39 }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-i-b-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-b }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-38_t-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-38_t }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:turan-i {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.turan-i }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:turan-ii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.turan-ii }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:turan-iii {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.turan-iii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:pzkw-iii-n-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iv-e-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-e }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-iv-g-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-g }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-iv-h-hungarian {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:cr-42-hungarian {
 	!faction:faction { factions.hungarian }
@@ -247,5 +303,7 @@ unit-configuration-link:ca-135 {
 	!faction:faction { factions.hungarian }
 	!unit-configuration:unit-configuration { unit-configurations.ca-135 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }

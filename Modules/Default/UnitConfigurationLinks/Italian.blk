@@ -68,77 +68,101 @@ unit-configuration-link:mg-platoon-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-italian }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:mg-platoon-italian-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.mg-platoon-italian-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:rifle-platoon-italian-39 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-italian-39 }
 
-	int:obsolete-year { 1940 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-platoon-italian-39-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-italian-39-west }
 
-	int:obsolete-year { 1940 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+		front:front { west }
+	}
 }
 unit-configuration-link:rifle-platoon-italian-41 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-italian-41 }
 
-	int:introduce-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-platoon-italian-41-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-italian-41-west }
 
-	int:introduce-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:bersaglieri-platoon {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.bersaglieri-platoon }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:bersaglieri-platoon-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.bersaglieri-platoon-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:alpini-platoon {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.alpini-platoon }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:alpini-platoon-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.alpini-platoon-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:parachute-platoon-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.parachute-platoon-italian }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:parachute-platoon-italian-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.parachute-platoon-italian }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:cavalry-italian {
 	!faction:faction { factions.italian }
@@ -164,76 +188,100 @@ unit-configuration-link:motorcycle-italian {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-italian }
 
-	int:introduce-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:motorcycle-italian-west {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-italian-west }
 
-	int:introduce-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:65_17 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.65_17 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:76_30 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.76_30 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:100_17 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.100_17 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:milmart {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.milmart }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:ab-40 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.ab-40 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:ab-41 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.ab-41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:lince {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.lince }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:ab-43 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.ab-43 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sahariana-42 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.sahariana-42 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:desertica-43 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.desertica-43 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:47_32 {
 	!faction:faction { factions.italian }
@@ -243,38 +291,50 @@ unit-configuration-link:semovente-105_25 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-105_25 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:semovente-75_18 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-75_18 }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:semovente-75_34 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-75_34 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:semovente-47_32 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-47_32 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:semovente-75_46 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-75_46 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:semovente-90_53 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.semovente-90_53 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:l-3-fiamme {
 	!faction:faction { factions.italian }
@@ -292,7 +352,9 @@ unit-configuration-link:leggero-6 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.leggero-6 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:fiat-3000-30 {
 	!faction:faction { factions.italian }
@@ -302,31 +364,41 @@ unit-configuration-link:medio-11_39 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.medio-11_39 }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:medio-13_40 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.medio-13_40 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:medio-14_41 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.medio-14_41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:medio-15_42 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.medio-15_42 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pesante-40 {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.pesante-40 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:br-20 {
 	!faction:faction { factions.italian }
@@ -340,11 +412,15 @@ unit-configuration-link:mc-202-a {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.mc-202-a }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:mc-202-i {
 	!faction:faction { factions.italian }
 	!unit-configuration:unit-configuration { unit-configurations.mc-202-i }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }

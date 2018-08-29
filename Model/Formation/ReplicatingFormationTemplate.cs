@@ -6,7 +6,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class LinkingFormationTemplate : FormationTemplate
+	public class ReplicatingFormationTemplate : FormationTemplate
 	{
 		enum Attribute { TEMPLATE, COUNT };
 
@@ -21,13 +21,13 @@ namespace PanzerBlitz
 			}
 		}
 
-		public LinkingFormationTemplate(FormationTemplate Template, int Count)
+		public ReplicatingFormationTemplate(FormationTemplate Template, int Count)
 		{
 			this.Template = Template;
 			this.Count = Count;
 		}
 
-		public LinkingFormationTemplate(ParseBlock Block)
+		public ReplicatingFormationTemplate(ParseBlock Block)
 		{
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
@@ -35,9 +35,14 @@ namespace PanzerBlitz
 			Count = (int)(attributes[(int)Attribute.COUNT] ?? 1);
 		}
 
-		public IEnumerable<Formation> Generate(Random Random)
+		public bool Matches(ArmyParameters Parameters)
 		{
-			return Enumerable.Repeat(Template.Generate(Random), Count).SelectMany(i => i);
+			return Template.Matches(Parameters);
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		{
+			return Enumerable.Repeat(Template.Generate(Random, Parameters), Count).SelectMany(i => i);
 		}
 	}
 }

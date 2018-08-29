@@ -1,33 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Cardamom.Serialization;
+﻿using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
 	public class UnitConfigurationLink : Serializable
 	{
-		enum Attribute { FACTION, UNIT_CONFIGURATION, INTRODUCE_YEAR, OBSOLETE_YEAR, FRONT, ENVIRONMENTS };
+		enum Attribute { FACTION, UNIT_CONFIGURATION, CONSTRAINTS };
 
 		public readonly string UniqueKey;
 		public readonly Faction Faction;
 		public readonly UnitConfiguration UnitConfiguration;
-		public readonly int IntroduceYear;
-		public readonly int ObsoleteYear;
-		public readonly Front Front;
-		public readonly List<Environment> Environments;
+		public readonly UnitConstraints Constraints;
 
 		public UnitConfigurationLink(SerializationInputStream Stream)
 		{
 			UniqueKey = Stream.ReadString();
 			Faction = Stream.ReadObject(i => new Faction(i), false, true);
 			UnitConfiguration = Stream.ReadObject(i => new UnitConfiguration(i), false, true);
-			IntroduceYear = Stream.ReadInt32();
-			ObsoleteYear = Stream.ReadInt32();
-			Front = (Front)Stream.ReadByte();
-			if (Stream.ReadBoolean())
-				Environments = Stream.ReadEnumerable(
-					i => Stream.ReadObject(j => new Environment(j), false, true)).ToList();
+			Constraints = new UnitConstraints(Stream);
 		}
 
 		public UnitConfigurationLink(ParseBlock Block)
@@ -37,10 +26,7 @@ namespace PanzerBlitz
 			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
-			IntroduceYear = (int)(attributes[(int)Attribute.INTRODUCE_YEAR] ?? 0);
-			ObsoleteYear = (int)(attributes[(int)Attribute.OBSOLETE_YEAR] ?? 0);
-			Front = (Front)(attributes[(int)Attribute.FRONT] ?? Front.ALL);
-			Environments = (List<Environment>)attributes[(int)Attribute.ENVIRONMENTS];
+			Constraints = (UnitConstraints)(attributes[(int)Attribute.CONSTRAINTS] ?? default(UnitConstraints));
 		}
 
 		public void Serialize(SerializationOutputStream Stream)
@@ -48,11 +34,7 @@ namespace PanzerBlitz
 			Stream.Write(UniqueKey);
 			Stream.Write(Faction, false, true);
 			Stream.Write(UnitConfiguration, false, true);
-			Stream.Write(IntroduceYear);
-			Stream.Write(ObsoleteYear);
-			Stream.Write((byte)Front);
-			Stream.Write(Environments != null);
-			if (Environments != null) Stream.Write(Environments, i => Stream.Write(i, false, true));
+			Stream.Write(Constraints);
 		}
 	}
 }

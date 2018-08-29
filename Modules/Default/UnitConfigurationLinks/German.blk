@@ -11,7 +11,9 @@ unit-configuration-link:28mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.28mm-at }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:37mm-at-german {
 	!faction:faction { factions.german }
@@ -21,31 +23,41 @@ unit-configuration-link:47mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.47mm-at }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:50mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.50mm-at }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:75mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.75mm-at }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:88mm-at-early-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.88mm-at-early }
 
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:88mm-at-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.88mm-at }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:20mm-aa-german {
 	!faction:faction { factions.german }
@@ -55,7 +67,9 @@ unit-configuration-link:20mm_4-aa-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.20mm_4-aa }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:37mm-aa-german {
 	!faction:faction { factions.german }
@@ -89,7 +103,9 @@ unit-configuration-link:170mm-how-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.170mm-how }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:81mm-mortar-german {
 	!faction:faction { factions.german }
@@ -99,26 +115,34 @@ unit-configuration-link:120mm-mortar-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-german }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:nebelwerfer-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.nebelwerfer }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 
 unit-configuration-link:engineer-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:engineer-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-german-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:hmg-platoon-german {
 	!faction:faction { factions.german }
@@ -128,69 +152,89 @@ unit-configuration-link:security-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.security-platoon-german }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:security-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.security-platoon-german-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:rifle-platoon-german-39 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-39 }
 
-	int:obsolete-year { 1939 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:obsolete-year { 1939 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-platoon-german-39-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-39-west }
 
-	int:obsolete-year { 1939 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:obsolete-year { 1939 }
+		front:front { west }
+	}
 }
 unit-configuration-link:rifle-platoon-german-40 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40 }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-platoon-german-40-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-40-west }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:rifle-platoon-german-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42 }
 
-	int:introduce-year { 1942 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-platoon-german-42-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-german-42-west }
 
-	int:introduce-year { 1942 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { west }
+	}
 }
 unit-configuration-link:smg-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:smg-platoon-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.smg-platoon-german-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:parachute-platoon-german {
 	!faction:faction { factions.german }
@@ -200,13 +244,17 @@ unit-configuration-link:cavalry-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-german }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:cavalry-german-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:truck-german {
 	!faction:faction { factions.german }
@@ -216,31 +264,39 @@ unit-configuration-link:motorcycle-german-40 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-40 }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:motorcycle-german-40-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-40-west }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:motorcycle-german-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-42 }
 
-	int:introduce-year { 1942 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { east }
+	}
 }
 unit-configuration-link:motorcycle-german-42-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-german-42-west }
 
-	int:introduce-year { 1942 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { west }
+	}
 }
 unit-configuration-link:sdkfz-8 {
 	!faction:faction { factions.german }
@@ -254,33 +310,43 @@ unit-configuration-link:sdkfz-251 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251 }
 
-	front:front { east }
+	unit-constraints:constraints {
+		front:front { east }
+	}
 }
 unit-configuration-link:sdkfz-251-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251-west }
 
-	front:front { west }
+	unit-constraints:constraints {
+		front:front { west }
+	}
 }
 unit-configuration-link:sdkfz-250_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1 }
 
-	int:introduce-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:sdkfz-250_1-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_1-west }
 
-	int:introduce-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:sdkfz-250_10 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_10 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-251_10 {
 	!faction:faction { factions.german }
@@ -294,15 +360,19 @@ unit-configuration-link:kfz-13 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.kfz-13 }
 
-	int:obsolete-year { 1941 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+		front:front { east }
+	}
 }
 unit-configuration-link:kfz-13-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.kfz-13 }
 
-	int:obsolete-year { 1941 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+		front:front { west }
+	}
 }
 unit-configuration-link:sdkfz-6_2 {
 	!faction:faction { factions.german }
@@ -312,14 +382,18 @@ unit-configuration-link:sdkfz-7_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-7_1 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:sdkfz-8-at {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-8-at }
 
-	int:introduce-year { 1939 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:sdkfz-10_4 {
 	!faction:faction { factions.german }
@@ -329,87 +403,115 @@ unit-configuration-link:sdkfz-221 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-221 }
 
-	int:obsolete-year { 1944 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+		front:front { east }
+	}
 }
 unit-configuration-link:sdkfz-221-west {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-221-west }
 
-	int:obsolete-year { 1944 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+		front:front { west }
+	}
 }
 unit-configuration-link:sdkfz-222 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-222 }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:sdkfz-231_6 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_6 }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-231_8 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-231_8 }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-233 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-233 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:sdkfz-234_1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_1 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sdkfz-234_3 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_3 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:puma {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.puma }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sdkfz-234_4 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-234_4 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:sdkfz-250_7 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_7 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-250_8 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_8 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-250_9 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-250_9 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sdkfz-251_1_ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_1_ii }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sdkfz-251_2 {
 	!faction:faction { factions.german }
@@ -419,243 +521,321 @@ unit-configuration-link:sdkfz-251_9 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_9 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:sdkfz-251_16 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_16 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sdkfz-251_17 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_17 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:sdkfz-251_21 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_21 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:sdkfz-251_22 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-251_22 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:maultier {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.maultier }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:wespe {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.wespe }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:sdkfz-135_1-lrs {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sdkfz-135_1-lrs }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:hummel {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hummel }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:bison {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bison }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:sig33-pzkw-ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.sig33-pzkw-ii }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:grille {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.grille }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:flakpanzer-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.flakpanzer-i }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:gepard {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.gepard }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:mobelwagen {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.mobelwagen }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:ostwind {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ostwind }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:wirbelwind {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.wirbelwind }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:stuh-42 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stuh-42 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:diana {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.diana }
 
-	int:introduce-year { 1942 }
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:marder-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.marder-i }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:marder-ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.marder-ii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:marder-iii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.marder-iii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:stug-iii-b {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-b }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:stug-iii-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stug-iii-g }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:stupz-iv {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stupz-iv }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:stupz-vi {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.stupz-vi }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:flamingo {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.flamingo }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:hetzer {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hetzer }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:ferdinand {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ferdinand }
 
-	int:introduce-year { 1943 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:elefant {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.elefant }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:nashorn {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.nashorn }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pzjg-1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzjg-1 }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:jgdpz-iv_48 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv_48 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:jgdpz-iv_70 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jgdpz-iv_70 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:flammpanzer-38_t {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.flammpanzer-38_t }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:jagdpanther {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jagdpanther }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:jagdtiger {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.jagdtiger }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:lynx {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.lynx }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-35_t {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-35_t }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:pzkw-38_t {
 	!faction:faction { factions.german }
@@ -673,13 +853,17 @@ unit-configuration-link:pzkw-i-c {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-c }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-i-f {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-i-f }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:pzkw-ii-c {
 	!faction:faction { factions.german }
@@ -689,19 +873,25 @@ unit-configuration-link:pzkw-ii-d {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-d }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:pzkw-ii-f {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-f }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:pzkw-ii-j {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-ii-j }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iii-d {
 	!faction:faction { factions.german }
@@ -711,146 +901,192 @@ unit-configuration-link:pzkw-iii-f {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-f }
 
-	int:introduce-year { 1939 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iii-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-g }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iii-j {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-j }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-iii-n {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iii-n }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:flammpanzer-iii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.flammpanzer-iii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iv-a {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-a }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:pzkw-iv-d {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-d }
 
-	int:introduce-year { 1939 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:pzkw-iv-e {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-e }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:pzkw-iv-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-g }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:pzkw-iv-h {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-h }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:pzkw-iv-j {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.pzkw-iv-j }
 
-	int:introduce-year { 1944 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+		front:front { west }
+	}
 }
 unit-configuration-link:panther-a {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.panther-a }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:panther-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.panther-g }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:porsche-tiger {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.porsche-tiger }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:tiger-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.tiger-i }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:tiger-ii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.tiger-ii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:maus {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.maus }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:bgpz-i {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bgpz-i }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:bgpz-38 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bgpz-38 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:bgpz-iii {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bgpz-iii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:bgpz-iv {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bgpz-iv }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:bgpz-v {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.bgpz-v }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:fw-190 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.fw-190 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:ju-87-b-early {
 	!faction:faction { factions.german }
@@ -864,7 +1100,9 @@ unit-configuration-link:ju-87-g {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ju-87-g }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:hs-123 {
 	!faction:faction { factions.german }
@@ -878,31 +1116,41 @@ unit-configuration-link:hs-129_r1 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hs-129_r1 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:hs-129_r2-early {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2-early }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:hs-129_r2 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:hs-129_r2-late {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.hs-129_r2-late }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:ju-88 {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.ju-88 }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:ju-52 {
 	!faction:faction { factions.german }

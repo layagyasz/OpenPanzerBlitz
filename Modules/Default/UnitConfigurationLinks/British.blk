@@ -2,7 +2,9 @@
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.25mm-at }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:2pdr-at-british {
 	!faction:faction { factions.british }
@@ -12,31 +14,41 @@ unit-configuration-link:6pdr-at-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.6pdr-at }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:17pdr-at-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.17pdr-at }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:20mm-aa-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.20mm-aa }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:40mm-aa-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.40mm-aa }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:3in-aa-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.3in-aa }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:75mm-how-allied-british {
 	!faction:faction { factions.british }
@@ -54,37 +66,49 @@ unit-configuration-link:25pdr-how-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.25pdr-how }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:25pdr-short-how-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.25pdr-short-how }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:4_5in-how-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.4_5in-how }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:5_5in-how-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.5_5in-how }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:7_2in-how-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.7_2in-how }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:8in-how-allied-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.8in-how-allied }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:76mm-mortar-british {
 	!faction:faction { factions.british }
@@ -94,26 +118,34 @@ unit-configuration-link:107mm-mortar-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:land-mattress-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.land-mattress }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 
 unit-configuration-link:engineer-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british }
 
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:engineer-platoon-british-44 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.engineer-platoon-british-44 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:scout-platoon-british {
 	!faction:faction { factions.british }
@@ -127,32 +159,42 @@ unit-configuration-link:rifle-platoon-british-39 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-british-40 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-40 }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:rifle-platoon-british-44 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-british-44 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:parachute-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.parachute-platoon-british }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:commando-platoon-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.commando-platoon-british }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:truck-british {
 	!faction:faction { factions.british }
@@ -166,7 +208,9 @@ unit-configuration-link:jeep-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.jeep }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:bren {
 	!faction:faction { factions.british }
@@ -180,43 +224,57 @@ unit-configuration-link:kangaroo {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.kangaroo }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:valentine-bridgelayer {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-bridgelayer }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:humber-sc {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.humber-sc }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:daimler {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.daimler }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:aec-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.aec-ii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:aec-iii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.aec-iii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:recon-hq {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.recon-hq }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:lanchester {
 	!faction:faction { factions.british }
@@ -226,13 +284,17 @@ unit-configuration-link:rolls-royce {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.rolls-royce }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:crocodile {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.crocodile }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:wasp {
 	!faction:faction { factions.british }
@@ -242,319 +304,423 @@ unit-configuration-link:badger {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.badger }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:frog {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.frog }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:crusader-aa {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.crusader-aa }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:skink {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.skink }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:mk-vi-b {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.mk-vi-b }
 
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:matilda-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda-ii }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:cruiser-i {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cruiser-i }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:cruiser-i-cs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cruiser-i-cs }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:cruiser-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cruiser-ii }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:cruiser-ii-cs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cruiser-ii-cs }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:matilda {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:cruiser-iv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cruiser-iv }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:archer {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.archer }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:wolverine-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.wolverine }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:achilles {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.achilles }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:cromwell-cs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cromwell-cs }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:churchill-viii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-viii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:sexton {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.sexton }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:bishop {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.bishop }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:priest-british {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.priest }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:m-3a3 {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.m-3a3 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sherman-uk {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.sherman-uk }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:sherman-uk-a {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.sherman-uk-a }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:firefly {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.firefly }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:cromwell-iv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.cromwell-iv }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:comet {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.comet }
 
-	int:introduce-year { 1945 }
+	unit-constraints:constraints {
+		int:introduce-year { 1945 }
+	}
 }
 unit-configuration-link:challenger {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.challenger }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:churchill-iii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-iii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:churchill-vii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-vii }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:churchill-iv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-iv }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:matilda-cs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda-cs }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:crusader-ii-cs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.crusader-ii-cs }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:crusader-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.crusader-ii }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:crusader-iii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.crusader-iii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:valentine-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-ii }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:valentine-iii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-iii }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:valentine-viii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-viii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:valentine-ix {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.valentine-ix }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:matilda-baron {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda-baron }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:grant {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.grant }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:ram-i {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.ram-i }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:ram-ii {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.ram-ii }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:tetrarch {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.tetrarch }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:honey {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.honey }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:sentinel {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.sentinel }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:churchill-bridgelayer {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-bridgelayer }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:centaur-arv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.centaur-arv }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:churchill-arv {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.churchill-arv }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:matilda-scorpion {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.matilda-scorpion }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:typhoon-bombs {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.typhoon-bombs }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:typhoon-rockets {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.typhoon-rockets }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:kittyhawk {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.kittyhawk }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:blenheim {
 	!faction:faction { factions.british }
@@ -576,5 +742,7 @@ unit-configuration-link:halifax {
 	!faction:faction { factions.british }
 	!unit-configuration:unit-configuration { unit-configurations.halifax }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }

@@ -15,7 +15,9 @@ unit-configuration-link:37mm-at-american-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.37mm-at-american }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:45mm-at-early-chinese {
 	!faction:faction { factions.chinese }
@@ -65,7 +67,9 @@ unit-configuration-link:107m-mortar-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.107mm-mortar }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:150mm-mortar-chinese {
 	!faction:faction { factions.chinese }
@@ -84,13 +88,17 @@ unit-configuration-link:rifle-platoon-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-chinese }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-chinese-41 {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-chinese-41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:cavalry-chinese {
 	!faction:faction { factions.chinese }
@@ -128,7 +136,9 @@ unit-configuration-link:ctls-4ta {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.ctls-4ta }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:ft-17-chinese {
 	!faction:faction { factions.chinese }
@@ -174,25 +184,33 @@ unit-configuration-link:m-4a2_75-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.m-4a2_75 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:m-4a2_76-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.m-4a2_76 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:m-3a3-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.m-3a3 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:m-5-chinese {
 	!faction:faction { factions.chinese }
 	!unit-configuration:unit-configuration { unit-configurations.m-5 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:br-20-chinese {
 	!faction:faction { factions.chinese }
@@ -214,11 +232,15 @@ unit-configuration-link:b-25-mitchell-chinese {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.b-25-mitchell }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:p-38-lightning-chinese {
 	!faction:faction { factions.american }
 	!unit-configuration:unit-configuration { unit-configurations.p-38-lightning }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }

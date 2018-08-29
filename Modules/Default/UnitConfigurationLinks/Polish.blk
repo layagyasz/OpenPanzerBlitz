@@ -59,7 +59,9 @@ unit-configuration-link:120mm-mortar-early-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-early }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 
 unit-configuration-link:engineer-platoon-polish {
@@ -70,13 +72,17 @@ unit-configuration-link:rifle-platoon-polish-39 {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-polish-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-polish-41 {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-polish-41 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:mountain-platoon-polish {
 	!faction:faction { factions.polish }
@@ -102,13 +108,17 @@ unit-configuration-link:c7p {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.c7p }
 
-	int:obsolete-year { 1939 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1939 }
+	}
 }
 unit-configuration-link:motorcycle-polish {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-polish }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:peugeot {
 	!faction:faction { factions.polish }
@@ -170,13 +180,17 @@ unit-configuration-link:p-7 {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.p-7 }
 
-	int:obsolete-year { 1939 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1939 }
+	}
 }
 unit-configuration-link:p-11 {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.p-11 }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:karas {
 	!faction:faction { factions.polish }
@@ -186,5 +200,7 @@ unit-configuration-link:p-37-b {
 	!faction:faction { factions.polish }
 	!unit-configuration:unit-configuration { unit-configurations.p-37-b }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }

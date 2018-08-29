@@ -7,7 +7,9 @@ unit-configuration-link:25mm-at-french {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.25mm-at }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:47mm-at-french {
 	!faction:faction { factions.french }
@@ -66,13 +68,17 @@ unit-configuration-link:rifle-platoon-french-39 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:rifle-platoon-french-40 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-platoon-french-40 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:foreign-legion-platoon {
 	!faction:faction { factions.french }
@@ -90,13 +96,17 @@ unit-configuration-link:bicycle-french {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.bicycle-french }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:motorcycle-french {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-french }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:chenillette {
 	!faction:faction { factions.french }
@@ -150,7 +160,9 @@ unit-configuration-link:laffly-tcc {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.laffly-tcc }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:37-r {
 	!faction:faction { factions.french }
@@ -192,7 +204,9 @@ unit-configuration-link:hotchkiss-39 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.hotchkiss-39 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:renault-35 {
 	!faction:faction { factions.french }
@@ -202,7 +216,9 @@ unit-configuration-link:renault-40 {
 	!faction:faction { factions.french }
 	!unit-configuration:unit-configuration { unit-configurations.renault-40 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:somua-35 {
 	!faction:faction { factions.french }

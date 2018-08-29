@@ -19,25 +19,33 @@ unit-configuration-link:57mm-at-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.57mm-at }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:76_2mm-at-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.76_2mm-at }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:85mm-at-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.85mm-at }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:100mm-at-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.100mm-at }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:37mm-aa-russian {
 	!faction:faction { factions.russian }
@@ -79,13 +87,17 @@ unit-configuration-link:120mm-mortar-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.120mm-mortar-russian }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:160mm-mortar-russian {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.160mm-mortar }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 
 unit-configuration-link:engineer-company {
@@ -100,145 +112,185 @@ unit-configuration-link:rifle-company-39 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-39 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:ski-company-39 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ski-company-39 }
 
-	int:obsolete-year { 1940 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:rifle-company-41 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-41 }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:ski-company-41 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ski-company-41 }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1941 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1941 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:rifle-company-42 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-42 }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:ski-company-42 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ski-company-42 }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1942 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1942 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:rifle-company-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-43 }
 
-	int:introduce-year { 1943 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+		front:front { east }
+	}
 }
 unit-configuration-link:rifle-company-43-west {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rifle-company-43-west }
 
-	int:introduce-year { 1943 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+		front:front { west }
+	}
 }
 unit-configuration-link:guards-company-41 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.guards-company-41 }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:guards-company-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.guards-company-43 }
 
-	int:introduce-year { 1943 }
-	front:front { east }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+		front:front { east }
+	}
 }
 unit-configuration-link:guards-company-43-west {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.guards-company-43-west }
 
-	int:introduce-year { 1943 }
-	front:front { west }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+		front:front { west }
+	}
 }
 unit-configuration-link:smg-company-40 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.smg-company-40 }
 
-	int:introduce-year { 1940 }
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:smg-company-41 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.smg-company-41 }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:smg-company-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.smg-company-43 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:cavalry-russian-39 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-russian-39 }
 
-	int:introduce-year { 1939 }
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:cavalry-russian-41 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-russian-41 }
 
-	int:introduce-year { 1941 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:cavalry-russian-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.cavalry-russian-43 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:motorcycle-russian-39 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-russian-39 }
 
-	int:introduce-year { 1939 }
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:motorcycle-russian-42 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-russian-42 }
 
-	int:introduce-year { 1942 }
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:motorcycle-russian-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.motorcycle-russian-43 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:tractor {
 	!faction:faction { factions.russian }
@@ -252,59 +304,73 @@ unit-configuration-link:t-27-tractor {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-27-tractor }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:nkl-6 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.nkl-6 }
 
-	int:obsolete-year { 1940 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:nkl-6-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.nkl-6-a }
 
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:nkl-16 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.nkl-16 }
 
-	int:introduce-year { 1941 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:nkl-26 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.nkl-26 }
 
-	int:introduce-year { 1942 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:asd-400 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.asd-400 }
 
-	int:introduce-year { 1942 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:rf-8 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.rf-8 }
 
-	int:introduce-year { 1942 }
-	environment[]:environments {
-		!environment:_ { environments.winter-steppe }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		environment[]:environments {
+			!environment:_ { environments.winter-steppe }
+		}
 	}
 }
 unit-configuration-link:m-2 {
@@ -315,7 +381,9 @@ unit-configuration-link:zis-42 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.zis-42 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:t-20 {
 	!faction:faction { factions.russian }
@@ -325,13 +393,17 @@ unit-configuration-link:ba-10-infantry {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-10-infantry }
 
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:ba-10-at {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-10-at }
 
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:ba-20 {
 	!faction:faction { factions.russian }
@@ -341,31 +413,41 @@ unit-configuration-link:ba-32-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-32-a }
 
-	int:obsolete-year { 1942 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1942 }
+	}
 }
 unit-configuration-link:ba-64-b {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ba-64-b }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:su-57 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-57 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:zis-43 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.zis-43 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:gaz-aa {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.gaz-aa }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:yag-10 {
 	!faction:faction { factions.russian }
@@ -379,19 +461,25 @@ unit-configuration-link:t-38 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-38 }
 
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:t-38-m2 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-38-m2 }
 
-	int:obsolete-year { 1943 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1943 }
+	}
 }
 unit-configuration-link:t-40 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-40 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:at-26 {
 	!faction:faction { factions.russian }
@@ -405,7 +493,9 @@ unit-configuration-link:t-28-e {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-28-e }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:bt-7-a {
 	!faction:faction { factions.russian }
@@ -415,109 +505,145 @@ unit-configuration-link:t-35 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-35 }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:t-100 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-100 }
 
-	int:obsolete-year { 1941 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1941 }
+	}
 }
 unit-configuration-link:su-122 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-122 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:su-152 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-152 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:isu-152 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.isu-152 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:kv-2 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-2 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:m-8-rocket {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.m-8-rocket }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:m-13 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.m-13 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:m-31 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.m-31 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:ot-133 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ot-133 }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:ot-34 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ot-34 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:ot-34_85 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.ot-34_85 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:kv-8 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-8 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:su-76 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-76 }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:su-85 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-85 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:t-44 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-44 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:su-100 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-100 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:isu-122 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.isu-122 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:t-26-b {
 	!faction:faction { factions.russian }
@@ -535,25 +661,33 @@ unit-configuration-link:t-46 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-46 }
 
-	int:obsolete-year { 1940 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1940 }
+	}
 }
 unit-configuration-link:t-50 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-50 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:t-60-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-60-a }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:t-70-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-70-a }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:bt-5 {
 	!faction:faction { factions.russian }
@@ -567,113 +701,151 @@ unit-configuration-link:kv-1-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-1-a }
 
-	int:introduce-year { 1939 }
+	unit-constraints:constraints {
+		int:introduce-year { 1939 }
+	}
 }
 unit-configuration-link:kv-1-c {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-1-c }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:kv-1-s {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-1-s }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:kv-85 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-85 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:t-34-a {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-34-a }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:t-34-c {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-34-c }
 
-	int:introduce-year { 1942 }
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+	}
 }
 unit-configuration-link:t-34_85 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-34_85 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:is-2 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.is-2 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:is-3 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.is-3 }
 
-	int:introduce-year { 1943 }
+	unit-constraints:constraints {
+		int:introduce-year { 1943 }
+	}
 }
 unit-configuration-link:t-34-t {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.t-34-t }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:kv-1-t {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.kv-1-t }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:il-2-bombs {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.il-2-bombs }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:il-2-rockets {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.il-2-rockets }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
 unit-configuration-link:su-2-bombs {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-2-bombs }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:su-2-rockets {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.su-2-rockets }
 
-	int:obsolete-year { 1944 }
+	unit-constraints:constraints {
+		int:obsolete-year { 1944 }
+	}
 }
 unit-configuration-link:yak-1-bombs {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.yak-1-bombs }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:yak-1-rockets {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.yak-1-rockets }
 
-	int:introduce-year { 1940 }
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+	}
 }
 unit-configuration-link:il-10 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.il-10 }
 
-	int:introduce-year { 1944 }
+	unit-constraints:constraints {
+		int:introduce-year { 1944 }
+	}
 }
 unit-configuration-link:pe-2 {
 	!faction:faction { factions.russian }
 	!unit-configuration:unit-configuration { unit-configurations.pe-2 }
 
-	int:introduce-year { 1941 }
+	unit-constraints:constraints {
+		int:introduce-year { 1941 }
+	}
 }
