@@ -22,5 +22,16 @@ namespace PanzerBlitz
 				.GroupBy(i => i.UnitConfiguration)
 				.Select(i => new UnitCount(i.Key, i.Sum(j => j.Count)));
 		}
+
+		public string ToString(int Depth)
+		{
+			string separator = "\n".PadRight(Depth + 2);
+			return separator + string.Join(separator, Subformations.Select(i => i.ToString(Depth + 1)));
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[CompositeFormation: Name={0}]{1}", Name, ToString(0));
+		}
 	}
 }

@@ -6,5 +6,6 @@ namespace PanzerBlitz
 	{
 		string Name { get; }
 		IEnumerable<UnitCount> Flatten();
+		string ToString(int Depth);
 	}
 }

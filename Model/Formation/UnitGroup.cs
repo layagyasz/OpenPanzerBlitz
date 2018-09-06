@@ -61,5 +61,16 @@ namespace PanzerBlitz
 		{
 			return _UnitCounts;
 		}
+
+		public string ToString(int Depth)
+		{
+			string separator = "\n".PadRight(Depth + 2);
+			return separator + string.Join(separator, _UnitCounts.Select(i => i.ToString()));
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[UnitGroup: Name={0}]{1}", Name, ToString(0));
+		}
 	}
 }

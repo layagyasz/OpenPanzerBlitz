@@ -6,13 +6,21 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class UnitConfigurationLock : Serializable
+	public class UnitConfigurationLock : FormationTemplate, Serializable
 	{
 		enum Attribute { UNIT_CONFIGURATIONS, RARITY }
 
 		public readonly string UniqueKey;
 		public readonly float Rarity;
 		public readonly List<UnitConfigurationLink> UnitConfigurations;
+
+		public double ExpectedValue
+		{
+			get
+			{
+				return GetValue();
+			}
+		}
 
 		public UnitConfigurationLock(
 			string UniqueKey, float Rarity, IEnumerable<UnitConfigurationLink> UnitConfigurations)
@@ -53,6 +61,21 @@ namespace PanzerBlitz
 		public double GetValue()
 		{
 			return Math.Pow(2, Rarity);
+		}
+
+		public bool Matches(ArmyParameters Parameters)
+		{
+			return UnitConfigurations.Any(Parameters.Matches);
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		{
+			yield return new UnitGroup(
+				string.Empty,
+				new List<UnitCount>
+				{
+					new UnitCount(UnitConfigurations.First(Parameters.Matches).UnitConfiguration, 1)
+				});
 		}
 
 		public override string ToString()

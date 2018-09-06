@@ -47,6 +47,7 @@ namespace PanzerBlitz
 		public static Dictionary<string, UnitRenderDetails> UnitRenderDetails;
 		public static Dictionary<string, UnitConfigurationLink> UnitConfigurationLinks;
 		public static Dictionary<string, UnitConfigurationLock> UnitConfigurationLocks;
+		public static Dictionary<string, FormationTemplate> FormationTemplates;
 		public static List<Scenario> Scenarios;
 		public static Dictionary<string, TileRenderer> TileRenderers;
 		public static Dictionary<string, MarkovGenerator<char>> NameGenerators;
@@ -83,36 +84,41 @@ namespace PanzerBlitz
 				new ParseBlock(
 					"unit-configuration<>",
 					"unit-configurations",
-					Directory.EnumerateFiles(path + "/UnitConfigurations", "*", SearchOption.AllDirectories)
-						.OrderBy(i => i)
-						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+					LoadDirectory(path + "/UnitConfigurations")),
 				new ParseBlock(
 					"unit-configuration-link<>",
 					"unit-configuration-links",
-					Directory.EnumerateFiles(path + "/UnitConfigurationLinks", "*", SearchOption.AllDirectories)
-						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+					LoadDirectory(path + "/UnitConfigurationLinks")),
 				new ParseBlock(
 					"unit-configuration-lock<>",
 					"unit-configuration-locks",
-					Directory.EnumerateFiles(path + "/UnitConfigurationLocks", "*", SearchOption.AllDirectories)
-						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+					LoadDirectory(path + "/UnitConfigurationLocks")),
 				new ParseBlock(
-					"var<>",
+					"formation-template<>",
 					"formation-templates",
-					Directory.EnumerateFiles(path + "/FormationTemplates", "*", SearchOption.AllDirectories)
-						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+					LoadDirectory(path + "/FormationTemplates")),
 				new ParseBlock(
 					"unit-render-details<>",
 					"unit-render-details",
-					Directory.EnumerateFiles(path + "/UnitRenderDetails", "*", SearchOption.AllDirectories)
-						.SelectMany(i => ParseBlock.FromFile(i).Break())),
+					LoadDirectory(path + "/UnitRenderDetails")),
 				new ParseBlock(
 					"scenario[]",
 					"scenarios",
-					Directory.EnumerateFiles(path + "/Scenarios", "*", SearchOption.AllDirectories)
-						.Select(i => ParseBlock.FromFile(i)))
+					LoadDirectory(path + "/Scenarios"))
 			});
 			Load(path, block);
+		}
+
+		static IEnumerable<ParseBlock> LoadDirectory(string Path)
+		{
+			return new ParseBlock(
+				string.Join(
+					string.Empty,
+					Directory
+						.EnumerateFiles(Path, "*", SearchOption.AllDirectories)
+						.OrderBy(i => i)
+						.Select(File.ReadAllText)))
+					.Break();
 		}
 
 		static void Load(string Path, ParseBlock Block)
@@ -143,11 +149,12 @@ namespace PanzerBlitz
 			Block.AddParser<UnitConstraints>();
 			Block.AddParser<UnitConfigurationLink>();
 			Block.AddParser<UnitConfigurationLock>();
+			Block.AddParser<FormationTemplate>("formation-template", i => null);
 			Block.AddParser<CompositeFormationTemplate>();
 			Block.AddParser<AtomicFormationTemplate>();
 			Block.AddParser<ReplicatingFormationTemplate>();
 			Block.AddParser<FilteringFormationTemplate>();
-			Block.AddParser<FormationTemplateAtom>();
+			Block.AddParser<SelectingFormationTemplate>();
 			Block.AddParser<Direction>();
 			Block.AddParser<TerrainAttribute>();
 			Block.AddParser<TileComponentRules>();
@@ -203,6 +210,7 @@ namespace PanzerBlitz
 				(Dictionary<string, UnitConfigurationLink>)attributes[(int)Attribute.UNIT_CONFIGURATION_LINKS];
 			UnitConfigurationLocks =
 				(Dictionary<string, UnitConfigurationLock>)attributes[(int)Attribute.UNIT_CONFIGURATION_LOCKS];
+			FormationTemplates = (Dictionary<string, FormationTemplate>)attributes[(int)Attribute.FORMATION_TEMPLATES];
 			UnitRenderDetails = (Dictionary<string, UnitRenderDetails>)attributes[(int)Attribute.UNIT_RENDER_DETAILS];
 			Scenarios = (List<Scenario>)attributes[(int)Attribute.SCENARIOS];
 			TileRenderers = (Dictionary<string, TileRenderer>)attributes[(int)Attribute.TILE_RENDERERS];
@@ -261,6 +269,19 @@ namespace PanzerBlitz
 						Console.WriteLine(new HexDumpWriter(16).Write(m.GetBuffer()));
 					}
 				}
+			}
+
+			Random random = new Random();
+			ArmyParameters parameters =
+				new ArmyParameters(
+					Factions["german"],
+					0,
+					0,
+					new ScenarioParameters(1940, MatchSettings["russia-winter"], 0, new Coordinate(0, 0), false));
+			foreach (var template in FormationTemplates.Values)
+			{
+				Console.WriteLine("Template");
+				Console.WriteLine(string.Join("\n", template.Generate(random, parameters).Select(i => i.ToString())));
 			}
 		}
 

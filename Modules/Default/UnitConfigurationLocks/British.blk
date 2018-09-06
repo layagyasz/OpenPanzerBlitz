@@ -36,7 +36,7 @@ unit-configuration-lock:40mm-aa-british {
 }
 unit-configuration-lock:3in-aa-british {
 	unit-configuration-link[]:unit-configurations {
-		!unit-configuration-link:_ { unit-configuration-links.3in-how-british }
+		!unit-configuration-link:_ { unit-configuration-links.3in-aa-british }
 	}
 	float:rarity { 14.9 }
 }
@@ -132,7 +132,7 @@ unit-configuration-lock:mg-platoon-british {
 	}
 	float:rarity { 10.9 }
 }
-unit-configuration-lock:rifle-platoon-british-39 {
+unit-configuration-lock:rifle-platoon-british {
 	unit-configuration-link[]:unit-configurations {
 		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-british-39 }
 		!unit-configuration-link:_ { unit-configuration-links.rifle-platoon-british-40 }

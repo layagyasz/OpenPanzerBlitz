@@ -1,0 +1,18 @@
+﻿selecting-formation-template:rifle-company {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		selecting-formation-template:template {
+			!var:_ { unit-configuration-locks.rifle-platoon-american }
+			!var:_ { unit-configuration-locks.rifle-platoon-british }
+			!var:_ { unit-configuration-locks.rifle-platoon-finnish }
+			!var:_ { unit-configuration-locks.rifle-platoon-german }
+			!var:_ { unit-configuration-locks.rifle-platoon-hungarian }
+			!var:_ { unit-configuration-locks.rifle-platoon-italian }
+			!var:_ { unit-configuration-locks.rifle-platoon-japanese }
+			!var:_ { unit-configuration-locks.rifle-platoon-polish }
+			!var:_ { unit-configuration-locks.rifle-platoon-romanian }
+			!var:_ { unit-configuration-locks.rifle-platoon-slovak }
+		}
+	}
+	!var:_ { unit-configuration-locks.rifle-company }
+}

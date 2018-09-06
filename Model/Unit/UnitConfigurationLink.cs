@@ -26,7 +26,7 @@ namespace PanzerBlitz
 			UniqueKey = Block.Name;
 			Faction = (Faction)attributes[(int)Attribute.FACTION];
 			UnitConfiguration = (UnitConfiguration)attributes[(int)Attribute.UNIT_CONFIGURATION];
-			Constraints = (UnitConstraints)(attributes[(int)Attribute.CONSTRAINTS] ?? default(UnitConstraints));
+			Constraints = (UnitConstraints)(attributes[(int)Attribute.CONSTRAINTS] ?? new UnitConstraints());
 		}
 
 		public void Serialize(SerializationOutputStream Stream)

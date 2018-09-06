@@ -1,1 +1,40 @@
-﻿
+﻿replicating-formation-template:medium-battery-german {
+	int:count { 2 }
+	!var:template { unit-configuration-locks.105mm-how-german }
+}
+replicating-formation-template:heavy-battery-german {
+	int:count { 2 }
+	!var:template { unit-configuration-locks.150mm-how-german }
+}
+atomic-formation-template:infantry-battalion-german {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { rifle-company }
+	}
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { unit-configuration-locks.hmg-platoon-german }
+	}
+	!var:template { unit-configuration-locks.81mm-mortar-german }
+}
+atomic-formation-template:artillery-regiment {
+	selecting-formation-template:_ {
+		composite-formation-template:_ {
+			replicating-formation-template:_ {
+				int:count { 3 }
+				!var:template { medium-battery-german }
+			}
+			!var:template { heavy-battery-german }
+		}
+		composite-formation-template:_ {
+			replicating-formation-template:_ {
+				int:count { 4 }
+				!var:template { medium-battery-german }
+			}
+		}
+	}
+	replicating-formation-template:_ {
+		int:count { 8 }
+		!var:template { unit-configuration-locks.wagon-german }
+	}
+}

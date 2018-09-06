@@ -5,7 +5,7 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public struct UnitConstraints : Serializable
+	public class UnitConstraints : Serializable
 	{
 		enum Attribute { INTRODUCE_YEAR, OBSOLETE_YEAR, FRONT, ENVIRONMENTS };
 
@@ -13,6 +13,14 @@ namespace PanzerBlitz
 		public readonly int ObsoleteYear;
 		public readonly Front Front;
 		public readonly List<Environment> Environments;
+
+		public UnitConstraints()
+		{
+			IntroduceYear = 0;
+			ObsoleteYear = 0;
+			Front = Front.ALL;
+			Environments = new List<Environment>();
+		}
 
 		public UnitConstraints(ParseBlock Block)
 		{
@@ -38,7 +46,6 @@ namespace PanzerBlitz
 			Stream.Write(IntroduceYear);
 			Stream.Write(ObsoleteYear);
 			Stream.Write((byte)Front);
-			Stream.Write(Environments != null);
 			Stream.Write(Environments, i => Stream.Write(i, false, true));
 		}
 	}

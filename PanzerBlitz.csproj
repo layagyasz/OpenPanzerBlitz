@@ -417,10 +417,9 @@
     <Compile Include="Model\Sequence\SequenceSerializer.cs" />
     <Compile Include="Model\ScenarioRules.cs" />
     <Compile Include="View\Match\VictoryConditionPane.cs" />
-    <Compile Include="Model\Unit\UnitConfigurationLock.cs" />
     <Compile Include="Model\Formation\Formation.cs" />
     <Compile Include="Model\Formation\FormationTemplate.cs" />
-    <Compile Include="Model\Formation\FormationTemplateAtom.cs" />
+    <Compile Include="Model\Formation\SelectingFormationTemplate.cs" />
     <Compile Include="Model\Formation\CompositeFormationTemplate.cs" />
     <Compile Include="Model\Formation\AtomicFormationTemplate.cs" />
     <Compile Include="Model\Formation\ReplicatingFormationTemplate.cs" />
@@ -429,6 +428,7 @@
     <Compile Include="Model\Formation\CompositeFormation.cs" />
     <Compile Include="Model\Unit\UnitConstraints.cs" />
     <Compile Include="Model\Formation\FilteringFormationTemplate.cs" />
+    <Compile Include="Model\Formation\UnitConfigurationLock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -2526,7 +2526,9 @@
     <None Include="Modules\Default\UnitConfigurationLocks\American.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Modules\Default\UnitConfigurationLocks\British.blk" />
+    <None Include="Modules\Default\UnitConfigurationLocks\British.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Modules\Default\UnitConfigurationLocks\Finnish.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2555,6 +2557,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Modules\Default\FormationTemplates\German.blk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Default\FormationTemplates\_Common.blk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

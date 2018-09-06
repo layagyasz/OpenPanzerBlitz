@@ -31,5 +31,10 @@ namespace PanzerBlitz
 			Stream.Write(UnitConfiguration.UniqueKey);
 			Stream.Write(Count);
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[UnitCount: Count={0}, UnitConfiguration={1}]", Count, UnitConfiguration.UniqueKey);
+		}
 	}
 }
