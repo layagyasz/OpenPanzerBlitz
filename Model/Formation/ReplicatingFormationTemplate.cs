@@ -14,14 +14,6 @@ namespace PanzerBlitz
 		public readonly int Count;
 		public readonly bool Regenerate;
 
-		public double ExpectedValue
-		{
-			get
-			{
-				return Count * Template.ExpectedValue;
-			}
-		}
-
 		public ReplicatingFormationTemplate(FormationTemplate Template, int Count, bool Regenerate)
 		{
 			this.Template = Template;
@@ -38,15 +30,20 @@ namespace PanzerBlitz
 			Regenerate = (bool)(attributes[(int)Attribute.REGENERATE] ?? false);
 		}
 
-		public bool Matches(ArmyParameters Parameters)
+		public double GetExpectedValue(FormationParameters Parameters)
+		{
+			return Count * Template.GetExpectedValue(Parameters);
+		}
+
+		public bool Matches(FormationParameters Parameters)
 		{
 			return Template.Matches(Parameters);
 		}
 
-		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		public IEnumerable<Formation> Generate(Random Random, FormationParameters Parameters)
 		{
 			if (Regenerate) return Enumerable.Repeat(Template, Count).SelectMany(i => i.Generate(Random, Parameters));
-			return Enumerable.Repeat(Template.Generate(Random, Parameters), Count).SelectMany(i => i);
+			return Enumerable.Repeat(Template.Generate(Random, Parameters).ToList(), Count).SelectMany(i => i);
 		}
 	}
 }

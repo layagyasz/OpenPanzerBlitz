@@ -149,9 +149,11 @@ namespace PanzerBlitz
 			Block.AddParser<UnitConstraints>();
 			Block.AddParser<UnitConfigurationLink>();
 			Block.AddParser<UnitConfigurationLock>();
+			Block.AddParser<FormationFeature>();
 			Block.AddParser<FormationTemplate>("formation-template", i => null);
 			Block.AddParser<CompositeFormationTemplate>();
 			Block.AddParser<AtomicFormationTemplate>();
+			Block.AddParser<ParameterizingFormationTemplate>();
 			Block.AddParser<ReplicatingFormationTemplate>();
 			Block.AddParser<FilteringFormationTemplate>();
 			Block.AddParser<SelectingFormationTemplate>();
@@ -271,8 +273,8 @@ namespace PanzerBlitz
 				}
 			}
 
-			Random random = new Random();
-			ArmyParameters parameters =
+			var random = new Random();
+			var parameters =
 				new ArmyParameters(
 					Factions["german"],
 					0,
@@ -280,8 +282,10 @@ namespace PanzerBlitz
 					new ScenarioParameters(1940, MatchSettings["russia-winter"], 0, new Coordinate(0, 0), false));
 			foreach (var template in FormationTemplates.Values)
 			{
-				Console.WriteLine("Template");
-				Console.WriteLine(string.Join("\n", template.Generate(random, parameters).Select(i => i.ToString())));
+				Console.WriteLine(
+					string.Join(
+						"\n",
+						template.Generate(random, new FormationParameters(parameters)).Select(i => i.ToString())));
 			}
 		}
 

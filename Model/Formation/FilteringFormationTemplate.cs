@@ -6,25 +6,20 @@ using Cardamom.Serialization;
 
 namespace PanzerBlitz
 {
-	public class FilteringFormationTemplate
+	public class FilteringFormationTemplate : FormationTemplate
 	{
-		enum Attribute { TEMPLATE, CONSTRAINTS };
+		enum Attribute { TEMPLATE, CONSTRAINTS, FEATURES };
 
 		public readonly FormationTemplate Template;
 		public readonly UnitConstraints Constraints;
+		public readonly List<FormationFeature> Features;
 
-		public double ExpectedValue
-		{
-			get
-			{
-				return Template.ExpectedValue;
-			}
-		}
-
-		public FilteringFormationTemplate(FormationTemplate Template, UnitConstraints Constraints)
+		public FilteringFormationTemplate(
+			FormationTemplate Template, UnitConstraints Constraints, IEnumerable<FormationFeature> Features)
 		{
 			this.Template = Template;
 			this.Constraints = Constraints;
+			this.Features = Features.ToList();
 		}
 
 		public FilteringFormationTemplate(ParseBlock Block)
@@ -32,15 +27,23 @@ namespace PanzerBlitz
 			var attributes = Block.BreakToAttributes<object>(typeof(Attribute));
 
 			Template = (FormationTemplate)attributes[(int)Attribute.TEMPLATE];
-			Constraints = (UnitConstraints)attributes[(int)Attribute.CONSTRAINTS];
+			Constraints = (UnitConstraints)(attributes[(int)Attribute.CONSTRAINTS] ?? new UnitConstraints());
+			Features = (List<FormationFeature>)(attributes[(int)Attribute.FEATURES] ?? new List<FormationFeature>());
 		}
 
-		public bool Matches(ArmyParameters Parameters)
+		public double GetExpectedValue(FormationParameters Parameters)
 		{
-			return Parameters.Parameters.Matches(Constraints) && Template.Matches(Parameters);
+			return Template.GetExpectedValue(Parameters);
 		}
 
-		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		public bool Matches(FormationParameters Parameters)
+		{
+			return Parameters.Matches(Constraints)
+							 && (Features.Count == 0 || Features.Any(i => Parameters.Features[(int)i]))
+							 && Template.Matches(Parameters);
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, FormationParameters Parameters)
 		{
 			return Template.Generate(Random, Parameters);
 		}

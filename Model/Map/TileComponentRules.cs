@@ -72,8 +72,7 @@ namespace PanzerBlitz
 			this.Concealing = Concealing;
 			this.LowProfileConcealing = LowProfileConcealing;
 
-			_TerrainAttributes = new bool[Enum.GetValues(typeof(TerrainAttribute)).Length];
-			foreach (TerrainAttribute attribute in TerrainAttributes) _TerrainAttributes[(int)attribute] = true;
+			_TerrainAttributes = Utils.ToArray(TerrainAttributes);
 		}
 
 		public TileComponentRules(SerializationInputStream Stream)

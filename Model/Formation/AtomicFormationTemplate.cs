@@ -10,23 +10,25 @@ namespace PanzerBlitz
 	{
 		public readonly List<FormationTemplate> Atoms;
 
-		public double ExpectedValue { get; }
-
 		public AtomicFormationTemplate(IEnumerable<FormationTemplate> Atoms)
 		{
 			this.Atoms = Atoms.ToList();
-			ExpectedValue = Atoms.Sum(i => i.ExpectedValue);
 		}
 
 		public AtomicFormationTemplate(ParseBlock Block)
 			: this(Block.BreakToList<FormationTemplate>()) { }
 
-		public bool Matches(ArmyParameters Parameters)
+		public double GetExpectedValue(FormationParameters Parameters)
 		{
-			return true;
+			return Atoms.Sum(i => i.GetExpectedValue(Parameters));
 		}
 
-		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		public bool Matches(FormationParameters Parameters)
+		{
+			return Atoms.Any(i => i.Matches(Parameters));
+		}
+
+		public IEnumerable<Formation> Generate(Random Random, FormationParameters Parameters)
 		{
 			yield return new UnitGroup(
 				string.Empty,

@@ -429,6 +429,10 @@
     <Compile Include="Model\Unit\UnitConstraints.cs" />
     <Compile Include="Model\Formation\FilteringFormationTemplate.cs" />
     <Compile Include="Model\Formation\UnitConfigurationLock.cs" />
+    <Compile Include="Model\Formation\FormationParameters.cs" />
+    <Compile Include="Model\Formation\FormationFeature.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Model\Formation\ParameterizingFormationTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

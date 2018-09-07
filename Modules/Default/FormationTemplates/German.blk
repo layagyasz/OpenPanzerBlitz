@@ -1,10 +1,24 @@
-﻿replicating-formation-template:medium-battery-german {
-	int:count { 2 }
-	!var:template { unit-configuration-locks.105mm-how-german }
-}
-replicating-formation-template:heavy-battery-german {
-	int:count { 2 }
-	!var:template { unit-configuration-locks.150mm-how-german }
+﻿selecting-formation-template:artillery-battalion-german {
+	composite-formation-template:_ {
+		replicating-formation-template:_ {
+			int:count { 2 }
+			composite-formation-template:template {
+				!var:_ { unit-configuration-locks.105mm-how-german }
+				!var:_ { transport }
+			}
+		}
+		composite-formation-template:template {
+			!var:_ { unit-configuration-locks.150mm-how-german }
+			!var:_ { transport }
+		}
+	}
+	replicating-formation-template:_ {
+		int:count { 3 }
+		composite-formation-template:template {
+			!var:_ { unit-configuration-locks.105mm-how-german }
+			!var:_ { transport }
+		}
+	}
 }
 atomic-formation-template:infantry-battalion-german {
 	replicating-formation-template:_ {
@@ -13,28 +27,43 @@ atomic-formation-template:infantry-battalion-german {
 	}
 	replicating-formation-template:_ {
 		int:count { 3 }
-		!var:template { unit-configuration-locks.hmg-platoon-german }
+		!var:template { mg }
 	}
-	!var:template { unit-configuration-locks.81mm-mortar-german }
+	!var:template { light-mortar }
 }
-atomic-formation-template:artillery-regiment {
-	selecting-formation-template:_ {
-		composite-formation-template:_ {
-			replicating-formation-template:_ {
-				int:count { 3 }
-				!var:template { medium-battery-german }
-			}
-			!var:template { heavy-battery-german }
-		}
-		composite-formation-template:_ {
-			replicating-formation-template:_ {
-				int:count { 4 }
-				!var:template { medium-battery-german }
-			}
-		}
-	}
+atomic-formation-template:engineer-battalion-german {
 	replicating-formation-template:_ {
-		int:count { 8 }
-		!var:template { unit-configuration-locks.wagon-german }
+		int:count { 3 }
+		!var:template { engineer-company }
+	}
+}
+composite-formation-template:infantry-regiment-german {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { infantry-battalion-german }
+	}
+}
+atomic-formation-template:artillery-regiment-german {
+	replicating-formation-template:_ {
+		int:count { 2 }
+		!var:template { artillery-battalion-german }
+	}
+}
+composite-formation-template:infantry-division-german {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { infantry-regiment-german }
+	}
+	parameterizing-formation-template:_ {
+		formation-feature[]:features {
+			formation-feature:_ { horse-drawn }
+		}
+		!var:template { artillery-regiment-german }
+	}
+	parameterizing-formation-template:_ {
+		formation-feature[]:features {
+			formation-feature:_ { motorized }
+		}
+		!var:template { engineer-battalion-german }
 	}
 }

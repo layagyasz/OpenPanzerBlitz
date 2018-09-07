@@ -5,8 +5,8 @@ namespace PanzerBlitz
 {
 	public interface FormationTemplate
 	{
-		double ExpectedValue { get; }
-		bool Matches(ArmyParameters Parameters);
-		IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters);
+		double GetExpectedValue(FormationParameters Parameters);
+		bool Matches(FormationParameters Parameters);
+		IEnumerable<Formation> Generate(Random Random, FormationParameters Parameters);
 	}
 }

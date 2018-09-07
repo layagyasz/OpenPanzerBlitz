@@ -11,31 +11,32 @@ namespace PanzerBlitz
 	{
 		public readonly List<FormationTemplate> Subtemplates;
 
-		public double ExpectedValue { get; }
-
 		public SelectingFormationTemplate(IEnumerable<FormationTemplate> Subtemplates)
 		{
 			this.Subtemplates = Subtemplates.ToList();
-			ExpectedValue = HarmonicAverage(Subtemplates.Select(i => i.ExpectedValue));
 		}
 
 		public SelectingFormationTemplate(ParseBlock Block)
 			: this(Block.BreakToList<FormationTemplate>()) { }
 
-		public bool Matches(ArmyParameters Parameters)
+		public double GetExpectedValue(FormationParameters Parameters)
+		{
+			return HarmonicAverage(
+				Subtemplates.Where(i => i.Matches(Parameters)).Select(i => i.GetExpectedValue(Parameters)));
+		}
+
+		public bool Matches(FormationParameters Parameters)
 		{
 			return Subtemplates.Any(i => i.Matches(Parameters));
 		}
 
-		public IEnumerable<Formation> Generate(Random Random, ArmyParameters Parameters)
+		public IEnumerable<Formation> Generate(Random Random, FormationParameters Parameters)
 		{
 			WeightedVector<FormationTemplate> choices = new WeightedVector<FormationTemplate>();
 			foreach (var template in Subtemplates.Where(i => i.Matches(Parameters)))
-			{
-				Console.WriteLine(1 / template.ExpectedValue);
-				choices.Add(1 / template.ExpectedValue, template);
-			}
-			return choices[Random.NextDouble()].Generate(Random, Parameters);
+				choices.Add(1 / template.GetExpectedValue(Parameters), template);
+			if (choices.Length > 0) return choices[Random.NextDouble()].Generate(Random, Parameters);
+			return Enumerable.Empty<Formation>();
 		}
 
 		static double HarmonicAverage(IEnumerable<double> Values)
