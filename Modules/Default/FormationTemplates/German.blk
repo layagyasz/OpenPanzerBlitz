@@ -1,4 +1,18 @@
-﻿selecting-formation-template:artillery-battalion-german {
+﻿replicating-formation-template:recon-company-german {
+	int:count { 3 }
+	selecting-formation-template:template {
+		!var:_ { unit-configuration-locks.bicycle-german }
+		!var:_ { unit-configuration-locks.cavalry-german }
+	}
+}
+composite-formation-template:regimental-artillery-german {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { light-battalion-gun }
+	}
+	!var:_ { heavy-battalion-gun }
+}
+selecting-formation-template:artillery-battalion-german {
 	composite-formation-template:_ {
 		replicating-formation-template:_ {
 			int:count { 2 }
@@ -31,6 +45,21 @@ atomic-formation-template:infantry-battalion-german {
 	}
 	!var:template { light-mortar }
 }
+atomic-formation-template:recon-battalion-german {
+	!var:_ { light-at }
+	!var:_ { light-battalion-gun }
+	replicating-formation-template:_ {
+		int:count { 2 }
+		bool:regenerate { true }
+		!var:template { recon-company-german }
+	}
+}
+atomic-formation-template:light-at-battalion-german {
+	replicating-formation-template:_ {
+		int:count { 3 }
+		!var:template { light-at-company }
+	}
+}
 atomic-formation-template:engineer-battalion-german {
 	replicating-formation-template:_ {
 		int:count { 3 }
@@ -38,6 +67,22 @@ atomic-formation-template:engineer-battalion-german {
 	}
 }
 composite-formation-template:infantry-regiment-german {
+	atomic-formation-template:_ {
+		!var:_ { engineer }
+		!var:_ { unit-configuration-locks.cavalry-german }
+		parameterizing-formation-template:_ {
+			formation-feature[]:features {
+				formation-feature:_ { horse-drawn }
+			}
+			!var:template { regimental-artillery-german }
+		}
+		parameterizing-formation-template:_ {
+			formation-feature[]:features {
+				formation-feature:_ { motorized }
+			}
+			!var:template { light-at-company }
+		}
+	}
 	replicating-formation-template:_ {
 		int:count { 3 }
 		!var:template { infantry-battalion-german }
@@ -53,6 +98,18 @@ composite-formation-template:infantry-division-german {
 	replicating-formation-template:_ {
 		int:count { 3 }
 		!var:template { infantry-regiment-german }
+	}
+	parameterizing-formation-template:_ {
+		formation-feature[]:features {
+			formation-feature:_ { motorized }
+		}
+		!var:template { recon-battalion-german }
+	}
+	parameterizing-formation-template:_ {
+		formation-feature[]:features {
+			formation-feature:_ { motorized }
+		}
+		!var:template { light-at-battalion-german }
 	}
 	parameterizing-formation-template:_ {
 		formation-feature[]:features {

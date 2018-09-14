@@ -1,4 +1,4 @@
-﻿selecting-formation-template:transport {
+﻿switching-formation-template:transport {
 	filtering-formation-template:_ {
 		formation-feature[]:features {
 			formation-feature:_ { horse-drawn }
@@ -33,11 +33,12 @@
 			!var:_ { unit-configuration-locks.truck-slovak }
 		}
 	}
+	binding-formation-template:_ { }
 }
 selecting-formation-template:rifle-company {
 	replicating-formation-template:_ {
 		int:count { 3 }
-		composite-formation-template:template {
+		binding-formation-template:template {
 			selecting-formation-template: {
 				!var:_ { unit-configuration-locks.rifle-platoon-american }
 				!var:_ { unit-configuration-locks.rifle-platoon-british }
@@ -53,31 +54,32 @@ selecting-formation-template:rifle-company {
 			!var:_ { transport }
 		}
 	}
-	composite-formation-template:_ {
+	binding-formation-template:_ {
 		!var:_ { unit-configuration-locks.rifle-company }
 		!var:_ { transport }
 	}
 }
+binding-formation-template:engineer {
+	selecting-formation-template: {
+		!var:_ { unit-configuration-locks.engineer-platoon-american }
+		!var:_ { unit-configuration-locks.engineer-platoon-british }
+		!var:_ { unit-configuration-locks.engineer-platoon-finnish }
+		!var:_ { unit-configuration-locks.engineer-platoon-german }
+		!var:_ { unit-configuration-locks.engineer-platoon-hungarian }
+		!var:_ { unit-configuration-locks.engineer-platoon-italian }
+		!var:_ { unit-configuration-locks.engineer-platoon-japanese }
+		!var:_ { unit-configuration-locks.engineer-platoon-polish }
+		!var:_ { unit-configuration-locks.engineer-platoon-romanian }
+		!var:_ { unit-configuration-locks.engineer-platoon-slovak }
+	}
+	!var:_ { transport }
+}
 selecting-formation-template:engineer-company {
 	replicating-formation-template:_ {
 		int:count { 3 }
-		composite-formation-template:template {
-			selecting-formation-template: {
-				!var:_ { unit-configuration-locks.engineer-platoon-american }
-				!var:_ { unit-configuration-locks.engineer-platoon-british }
-				!var:_ { unit-configuration-locks.engineer-platoon-finnish }
-				!var:_ { unit-configuration-locks.engineer-platoon-german }
-				!var:_ { unit-configuration-locks.engineer-platoon-hungarian }
-				!var:_ { unit-configuration-locks.engineer-platoon-italian }
-				!var:_ { unit-configuration-locks.engineer-platoon-japanese }
-				!var:_ { unit-configuration-locks.engineer-platoon-polish }
-				!var:_ { unit-configuration-locks.engineer-platoon-romanian }
-				!var:_ { unit-configuration-locks.engineer-platoon-slovak }
-			}
-			!var:_ { transport }
-		}
+		!var:template { engineer }
 	}
-	composite-formation-template:_ {
+	binding-formation-template:_ {
 		!var:_ { unit-configuration-locks.engineer-company }
 		!var:_ { transport }
 	}
@@ -111,6 +113,28 @@ composite-formation-template:light-mortar {
 		!var:_ { unit-configuration-locks.81mm-mortar-romanian }
 		!var:_ { unit-configuration-locks.82mm-mortar-russian }
 		!var:_ { unit-configuration-locks.81mm-mortar-slovak }
+	}
+	!var:_ { transport }
+}
+binding-formation-template:light-at {
+	selecting-formation-template:_ {
+		!var:_ { unit-configuration-locks.37mm-at-german }
+	}
+	!var:_ { transport }
+}
+replicating-formation-template:light-at-company {
+	int:count { 3 }
+	!var:template { light-at }
+}
+binding-formation-template:light-battalion-gun {
+	selecting-formation-template:_ {
+		!var:_ { unit-configuration-locks.75mm-how-company-german }
+	}
+	!var:_ { transport }
+}
+binding-formation-template:heavy-battalion-gun {
+	selecting-formation-template:_ {
+		!var:_ { unit-configuration-locks.150mm-how-company-german }
 	}
 	!var:_ { transport }
 }

@@ -433,6 +433,8 @@
     <Compile Include="Model\Formation\FormationFeature.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Model\Formation\ParameterizingFormationTemplate.cs" />
+    <Compile Include="Model\Formation\BindingFormationTemplate.cs" />
+    <Compile Include="Model\Formation\SwitchingFormationTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

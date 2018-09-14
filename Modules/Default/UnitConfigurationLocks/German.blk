@@ -172,8 +172,10 @@ unit-configuration-lock:parachute-platoon-german {
 }
 unit-configuration-lock:cavalry-german {
 	unit-configuration-link[]:unit-configurations { 
-		!unit-configuration-link:_ { unit-configuration-links.cavalry-german }
-		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-west }
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-40 }
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-40-west }
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-42 }
+		!unit-configuration-link:_ { unit-configuration-links.cavalry-german-42-west }
 	}
 	float:rarity { 9.0 }
 }
@@ -182,6 +184,15 @@ unit-configuration-lock:truck-german {
 		!unit-configuration-link:_ { unit-configuration-links.truck-german }
 	}
 	float:rarity { 6.6 }
+}
+unit-configuration-lock:bicycle-german {
+	unit-configuration-link[]:unit-configurations { 
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-german-40 }
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-german-40-west }
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-german-42 }
+		!unit-configuration-link:_ { unit-configuration-links.bicycle-german-42-west }
+	}
+	float:rarity { 10.7 }
 }
 unit-configuration-lock:motorcycle-german {
 	unit-configuration-link[]:unit-configurations { 

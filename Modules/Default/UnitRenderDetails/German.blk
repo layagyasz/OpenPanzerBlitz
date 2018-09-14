@@ -54,17 +54,37 @@ unit-render-details:parachute-platoon-german {
 	string:override-display-name { PARACHUTE }
 	string:image-path { airborne-platoon.png }
 }
-unit-render-details:cavalry-german {
+unit-render-details:cavalry-german-40 {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry-2.png }
 }
-unit-render-details:cavalry-german-west {
+unit-render-details:cavalry-german-40-west {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:cavalry-german-42 {
+	string:override-display-name { CAVALRY }
+	string:image-path { cavalry-2.png }
+}
+unit-render-details:cavalry-german-42-west {
 	string:override-display-name { CAVALRY }
 	string:image-path { cavalry-2.png }
 }
 unit-render-details:truck-german {
 	string:override-display-name { TRUCK }
 	string:image-path { truck-2.png }
+}
+unit-render-details:bicycle-german-40 {
+	string:image-path { bicycle.png }
+}
+unit-render-details:bicycle-german-40-west {
+	string:image-path { bicycle.png }
+}
+unit-render-details:bicycle-german-42 {
+	string:image-path { bicycle.png }
+}
+unit-render-details:bicycle-german-42-west {
+	string:image-path { bicycle.png }
 }
 unit-render-details:motorcycle-german-40 {
 	string:image-path { motorcycle-2.png }

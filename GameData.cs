@@ -153,10 +153,12 @@ namespace PanzerBlitz
 			Block.AddParser<FormationTemplate>("formation-template", i => null);
 			Block.AddParser<CompositeFormationTemplate>();
 			Block.AddParser<AtomicFormationTemplate>();
+			Block.AddParser<BindingFormationTemplate>();
+			Block.AddParser<FilteringFormationTemplate>();
 			Block.AddParser<ParameterizingFormationTemplate>();
 			Block.AddParser<ReplicatingFormationTemplate>();
-			Block.AddParser<FilteringFormationTemplate>();
 			Block.AddParser<SelectingFormationTemplate>();
+			Block.AddParser<SwitchingFormationTemplate>();
 			Block.AddParser<Direction>();
 			Block.AddParser<TerrainAttribute>();
 			Block.AddParser<TileComponentRules>();

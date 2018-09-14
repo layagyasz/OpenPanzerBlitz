@@ -148,7 +148,29 @@ unit-configuration:parachute-platoon-german {
 
 	bool:is-paratroop { true }
 }
-unit-configuration:cavalry-german {
+unit-configuration:cavalry-german-40 {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+}
+unit-configuration:cavalry-german-40-west {
+	string:name { Cavalry }
+	unit-class:unit-class { cavalry }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 3 }
+
+	bool:can-double-range { true }
+}
+unit-configuration:cavalry-german-42 {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
@@ -158,12 +180,12 @@ unit-configuration:cavalry-german {
 	byte:defense { 2 }
 	byte:movement { 3 }
 }
-unit-configuration:cavalry-german-west {
+unit-configuration:cavalry-german-42-west {
 	string:name { Cavalry }
 	unit-class:unit-class { cavalry }
 
 	weapon-class:weapon-class { infantry }
-	byte:attack { 2 }
+	byte:attack { 3 }
 	byte:range { 2 }
 	byte:defense { 2 }
 	byte:movement { 3 }
@@ -181,6 +203,68 @@ unit-configuration:truck-german {
 	byte:movement { 12 }
 
 	!unit-movement-rules:movement-rules { unit-movement-rules.truck }
+}
+unit-configuration:bicycle-german-40 {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-40 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+}
+unit-configuration:bicycle-german-40-west {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-40-west }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+	bool:can-double-range { true }
+}
+unit-configuration:bicycle-german-42 {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 4 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-42 }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+}
+unit-configuration:bicycle-german-42-west {
+	string:name { Bicycle }
+	unit-class:unit-class { reconnaissance-vehicle }
+
+	weapon-class:weapon-class { infantry }
+	byte:attack { 2 }
+	byte:range { 2 }
+	byte:defense { 2 }
+	byte:movement { 2 }
+
+	bool:is-vehicle { false }
+	bool:can-remount { false }
+	!unit-configuration:dismount-as { rifle-platoon-german-42-west }
+	!unit-movement-rules:movement-rules { unit-movement-rules.bicycle }
+	bool:can-double-range { true }
 }
 unit-configuration:motorcycle-german-40 {
 	string:name { Motorcycle }

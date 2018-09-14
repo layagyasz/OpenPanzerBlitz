@@ -240,25 +240,85 @@ unit-configuration-link:parachute-platoon-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.parachute-platoon-german }
 }
-unit-configuration-link:cavalry-german {
+unit-configuration-link:cavalry-german-40 {
 	!faction:faction { factions.german }
-	!unit-configuration:unit-configuration { unit-configurations.cavalry-german }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-40 }
 
 	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
 		front:front { east }
 	}
 }
-unit-configuration-link:cavalry-german-west {
+unit-configuration-link:cavalry-german-40-west {
 	!faction:faction { factions.german }
-	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-west }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-40-west }
 
 	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { west }
+	}
+}
+unit-configuration-link:cavalry-german-42 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-42 }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { east }
+	}
+}
+unit-configuration-link:cavalry-german-42-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.cavalry-german-42-west }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
 		front:front { west }
 	}
 }
 unit-configuration-link:truck-german {
 	!faction:faction { factions.german }
 	!unit-configuration:unit-configuration { unit-configurations.truck-german }
+}
+unit-configuration-link:bicycle-german-40 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-german-40 }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { east }
+	}
+}
+unit-configuration-link:bicycle-german-40-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-german-40-west }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1940 }
+		int:obsolete-year { 1941 }
+		front:front { west }
+	}
+}
+unit-configuration-link:bicycle-german-42 {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-german-42 }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { east }
+	}
+}
+unit-configuration-link:bicycle-german-42-west {
+	!faction:faction { factions.german }
+	!unit-configuration:unit-configuration { unit-configurations.bicycle-german-42-west }
+
+	unit-constraints:constraints {
+		int:introduce-year { 1942 }
+		front:front { west }
+	}
 }
 unit-configuration-link:motorcycle-german-40 {
 	!faction:faction { factions.german }
